@@ -95,7 +95,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Ricty Diminished Discord" :slant normal :weight bold :height 120 :width normal)))))
+ '(default ((t (:family "Noto Sans Mono CJK JP" :slant normal :weight normal :height 102 :width normal :foundry "GOOG")))))
 
 (set-fontset-font t 'japanese-jisx0208 (font-spec :family "ヒラギノ角ゴ ProN W6"))
 
@@ -984,3 +984,5 @@
   (package-refresh-contents)
   (package-install 'org-plus-contrib))
 (require 'org)
+
+;; テスト
