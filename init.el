@@ -985,4 +985,28 @@
   (package-install 'org-plus-contrib))
 (require 'org)
 
-;; テスト
+;; Python開発環境
+;; 補完
+ (jedi:setup)
+  (define-key jedi-mode-map (kbd "<C-tab>") nil) ;;C-tabはウィンドウの移動に用いる
+  (setq jedi:complete-on-dot t)
+  (setq ac-sources
+    (delete 'ac-source-words-in-same-mode-buffers ac-sources)) ;;jediの補完候補だけでいい
+  (add-to-list 'ac-sources 'ac-source-filename)
+  (add-to-list 'ac-sources 'ac-source-jedi-direct)
+  (define-key python-mode-map "\C-ct" 'jedi:goto-definition)
+  (define-key python-mode-map "\C-cb" 'jedi:goto-definition-pop-marker)
+  (define-key python-mode-map "\C-cr" 'helm-jedi-related-names)
+
+;; 整形
+(require 'py-autopep8)
+(setq py-autopep8-options '("--max-line-length=200"))
+(setq flycheck-flake8-maximum-line-length 200)
+(py-autopep8-enable-on-save)
+
+;; flymake
+(flymake-mode t)
+;;errorやwarningを表示する
+(require 'flymake-python-pyflakes)
+(flymake-python-pyflakes-load)
+
