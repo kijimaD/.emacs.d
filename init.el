@@ -961,10 +961,10 @@
 ;セッションの永続化
 ;; (psession-mode 1)
 
-;; ;; 非アクティブウィンドウの背景色を設定
-;; (require 'hiwin)
-;; (hiwin-activate)
-;; (set-face-background 'hiwin-face "gray80")
+;; 非アクティブウィンドウの背景色を設定
+(require 'hiwin)
+(hiwin-activate)
+(set-face-background 'hiwin-face "gray20")
 
 ;; tabサイズ
 (setq default-tab-width 4)
@@ -1033,3 +1033,6 @@
 ;;; 分割した画面間をShift+矢印で移動
 (setq windmove-wrap-around t)
 (windmove-default-keybindings)
+
+;; 今いるウィンドウでバッファを開く
+(global-set-key (kbd "C-x C-b") 'ibuffer)

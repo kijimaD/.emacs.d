@@ -2,44 +2,248 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Sat Nov 16 19:54:23 2019
+;; Created Sun Nov 17 02:08:47 2019
 ;; Desktop file format version 208
 ;; Emacs version 25.2.2
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (24015 54623 960157 697000) (desktop . "208") "kijima@kijima-Prime-and-Diginnos" nil nil ((((font-backend xft x) (font . "-GOOG-Noto Sans Mono CJK JP-normal-normal-normal-*-27-*-*-*-*-0-iso10646-1") (font-parameter) (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (horizontal-scroll-bars) (foreground-color . "#DCDCCC") (background-color . "#3F3F3F") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 0) (right-fringe . 0) (scroll-bar-foreground) (scroll-bar-background) (menu-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 0) (scroll-bar-height . 0) (alpha) (fullscreen . maximized) (display-type . color) (background-mode . dark) (cursor-color . "white") (sticky) (environment) (ccc-frame-cursor-color . "white") (ccc-frame-foreground-color . "#DCDCCC") (ccc-frame-background-color . "#3F3F3F") (mf-restore-width . 134) (mf-restore-height . 30) (mf-restore-top . 0) (mf-restore-left . 1600) (mf-maximized . t) (frameset--id . "AAC5-1592-DB1F-7EB8") (frameset--mini t . t) (height . 62) (width . 114) (modeline . t) (minibuffer . t) (unsplittable) (left . 0) (top . 0) (icon-name) (visibility . t) (display . ":0") (explicit-name)) ((min-height . 8) (min-width . 10) (min-height-ignore . 4) (min-width-ignore . 6) (min-height-safe . 2) (min-width-safe . 2) (min-pixel-height . 320) (min-pixel-width . 140) (min-pixel-height-ignore . 160) (min-pixel-width-ignore . 84) (min-pixel-height-safe . 80) (min-pixel-width-safe . 28)) vc (pixel-width . 1600) (pixel-height . 2474) (total-width . 114) (total-height . 61) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 1600) (pixel-height . 1230) (total-width . 114) (total-height . 30) (normal-height . 0.5) (normal-width . 1.0) (buffer "init.el" (selected) (hscroll . 0) (fringes 0 0 nil) (margins 4) (scroll-bars nil 0 t nil 0 t) (vscroll . 0) (dedicated) (point . 32432) (start . 31859))) (leaf (last . t) (pixel-width . 1600) (pixel-height . 1244) (total-width . 114) (total-height . 31) (normal-height . 0.5) (normal-width . 1.0) (buffer "roguelike.py" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins 3) (scroll-bars nil 0 t nil 0 t) (vscroll . 0) (dedicated) (point . 17311) (start . 17009)))))])
+(setq desktop-saved-frameset [frameset 1 (24016 11551 502963 89000) (desktop . "208") "kijima@kijima-Prime-and-Diginnos" nil nil ((((font-backend xft x) (font . "-PfEd-Ricty Diminished Discord-normal-normal-normal-*-24-*-*-*-*-0-iso10646-1") (font-parameter . "Ricty Diminished Discord") (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (horizontal-scroll-bars) (foreground-color . "#DCDCCC") (background-color . "#3F3F3F") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 0) (right-fringe . 0) (scroll-bar-foreground) (scroll-bar-background) (menu-bar-lines . 1) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 0) (scroll-bar-height . 0) (alpha) (fullscreen) (display-type . color) (background-mode . dark) (cursor-color . "white") (visibility . t) (sticky) (ccc-frame-cursor-color . "white") (ccc-frame-foreground-color . "#DCDCCC") (ccc-frame-background-color . "#3F3F3F") (frameset--id . "C644-E107-A49E-01E7") (frameset--mini t) (modeline . t) (minibuffer . t) (unsplittable) (icon-name) (display . ":0") (explicit-name) (mf-restore-width . 426) (mf-restore-height . 59) (mf-restore-top . 0) (mf-restore-left . 1600) (mf-maximized . t) (height . 57) (width . 213) (left . 2560) (top . 0)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 4) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 108) (min-pixel-width . 120) (min-pixel-height-ignore . 54) (min-pixel-width-ignore . 48) (min-pixel-height-safe . 27) (min-pixel-width-safe . 24)) leaf (pixel-width . 2556) (pixel-height . 1512) (total-width . 213) (total-height . 56) (normal-height . 1.0) (normal-width . 1.0) (buffer ".profile" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins 2) (scroll-bars nil 0 t nil 0 t) (vscroll . 0) (dedicated) (point . 837) (start . 1))) (((font-backend xft x) (font . "-PfEd-Ricty Diminished Discord-normal-normal-normal-*-24-*-*-*-*-0-iso10646-1") (font-parameter . "Ricty Diminished Discord") (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (horizontal-scroll-bars) (foreground-color . "#DCDCCC") (background-color . "#3F3F3F") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 0) (right-fringe . 0) (scroll-bar-foreground) (scroll-bar-background) (menu-bar-lines . 1) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 0) (scroll-bar-height . 0) (alpha) (fullscreen . maximized) (display-type . color) (background-mode . dark) (cursor-color . "white") (environment) (sticky) (ccc-frame-cursor-color . "white") (ccc-frame-foreground-color . "#DCDCCC") (ccc-frame-background-color . "#3F3F3F") (mf-restore-width . 134) (mf-restore-height . 30) (mf-restore-top . 0) (mf-restore-left . 1600) (mf-maximized . t) (frameset--id . "AAC5-1592-DB1F-7EB8") (frameset--mini t . t) (modeline . t) (minibuffer . t) (unsplittable) (icon-name) (display . ":0") (explicit-name) (visibility . t) (height . 58) (width . 426) (left . 0) (top . 0)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 3) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 108) (min-pixel-width . 120) (min-pixel-height-ignore . 54) (min-pixel-width-ignore . 36) (min-pixel-height-safe . 27) (min-pixel-width-safe . 24)) leaf (pixel-width . 5120) (pixel-height . 1549) (total-width . 427) (total-height . 57) (normal-height . 1.0) (normal-width . 1.0) (buffer ".bash" (selected) (hscroll . 0) (fringes 0 0 nil) (margins 1) (scroll-bars nil 0 t nil 0 t) (vscroll . 0) (dedicated) (point . 1) (start . 1))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
-(setq search-ring '("rogu" "font" "init" ".ema" "wet"))
+(setq search-ring '("profi" "nam" "R" "org-mode" "sha" "self" "slf" "set_text" "all" "prepare" "len" "message" "window" "Title" "DEFAULT" "screen.blit"))
 (setq regexp-search-ring nil)
 (setq register-alist nil)
-(setq file-name-history '("~/.emacs.d/" "~/junk/" "~/.emacs.d" "~/" "~/.w3m/" "~/.emacs"))
+(setq file-name-history '("~/.bash" "~/" "~/.bashrc" "~/bash/autorun-pytest.sh" "~/bash/" "~/bash/autorun-pytest" "~/bash" "~/junk/2019-11-16-193558.org" "~/junk/" "~/roguelike/data/" "~/roguelike/src/" "~/roguelike/" "~/roguelike/tests/unit/" "~/.emacs.d/" "~/.emacs.d" "~/.w3m/" "~/.emacs"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 208
+  "/home/kijima/.profile"
+  ".profile"
+  'sh-mode
+  '(linum-mode global-auto-revert-mode auto-complete-mode)
+  837
+  '(809 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix))
+  '((mark-ring (1 837 808))))
+
+(desktop-create-buffer 208
+  "/home/kijima/.bash"
+  ".bash"
+  'sh-mode
+  '(linum-mode global-auto-revert-mode auto-complete-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/kijima/junk/2019-11-16-193558.org"
+  "2019-11-16-193558.org"
+  'org-mode
+  '(linum-mode global-auto-revert-mode org-indent-mode)
+  458
+  '(432 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring (488 369 202 289 290 129 234 171 138 1 234 227 290 202 368 488))))
+
+(desktop-create-buffer 208
+  nil
+  "kijima"
+  'dired-mode
+  '(linum-mode global-auto-revert-mode)
+  1734
+  '(2212 nil)
+  t
+  '("/home/kijima/")
+  nil
+  '((mark-ring (1080))))
+
+(desktop-create-buffer 208
+  "/home/kijima/.bashrc"
+  ".bashrc"
+  'sh-mode
+  '(linum-mode global-auto-revert-mode auto-complete-mode)
+  3771
+  '(3771 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix))
+  '((mark-ring (146))))
+
+(desktop-create-buffer 208
+  "/home/kijima/bash/autorun-pytest.sh"
+  "autorun-pytest.sh"
+  'sh-mode
+  '(linum-mode global-auto-revert-mode auto-complete-mode)
+  88
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "bash"
+  'dired-mode
+  '(linum-mode global-auto-revert-mode)
+  179
+  '(nil nil)
+  t
+  '("/home/kijima/bash/")
+  nil
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/kijima/roguelike/tests/unit/test_msg_engine.py"
+  "test_msg_engine.py"
+  'python-mode
+  '(linum-mode auto-revert-mode global-auto-revert-mode auto-complete-mode flycheck-mode)
+  1911
+  '(941 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring (882 1323 2063 1346 1912 807 2435 130 129 119 2757 277 2757 129 449 1787))))
+
 (desktop-create-buffer 208
   "/home/kijima/roguelike/src/roguelike/roguelike.py"
   "roguelike.py"
   'python-mode
   '(linum-mode auto-revert-mode global-auto-revert-mode auto-complete-mode flycheck-mode)
-  17311
-  '(816 nil)
+  11088
+  '(11432 nil)
   nil
   nil
   '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . utf-8-unix))
-  '((mark-ring (1041 816 17082 17311))))
+  '((mark-ring (11353 11347 250 1113 5069 11030 5069 5849 5818 13985 7992 7875 10417 11030 176 11088))))
 
 (desktop-create-buffer 208
-  "/home/kijima/.emacs.d/init.el"
-  "init.el"
-  'emacs-lisp-mode
-  '(eldoc-mode linum-mode auto-revert-mode global-auto-revert-mode auto-complete-mode paredit-mode elisp-slime-nav-mode flycheck-mode)
-  32432
-  '(32326 nil)
+  nil
+  "junk"
+  'dired-mode
+  '(linum-mode global-auto-revert-mode)
+  248
+  '(nil nil)
+  t
+  '("/home/kijima/junk/")
+  nil
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/kijima/roguelike/data/scenario_data.xml"
+  "scenario_data.xml"
+  'nxml-mode
+  '(linum-mode auto-revert-mode global-auto-revert-mode)
+  1
+  '(65 nil)
   nil
   nil
   '((buffer-file-coding-system . utf-8-unix))
-  '((mark-ring (32327 32344 32327 32430 32327 32162 32162 31657 31644 6528 23 6588 32155 32155 32327 32314))))
+  '((mark-ring (83))))
+
+(desktop-create-buffer 208
+  "/home/kijima/roguelike/tests/unit/test_game.py"
+  "test_game.py"
+  'python-mode
+  '(linum-mode auto-revert-mode global-auto-revert-mode auto-complete-mode flycheck-mode)
+  917
+  '(917 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "unit"
+  'dired-mode
+  '(linum-mode global-auto-revert-mode)
+  370
+  '(nil nil)
+  t
+  '("/home/kijima/roguelike/tests/unit/")
+  nil
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "tests"
+  'dired-mode
+  '(linum-mode global-auto-revert-mode)
+  476
+  '(nil nil)
+  t
+  '("/home/kijima/roguelike/tests/")
+  nil
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "func"
+  'dired-mode
+  '(linum-mode global-auto-revert-mode)
+  141
+  '(nil nil)
+  t
+  '("/home/kijima/roguelike/tests/func/")
+  nil
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "roguelike"
+  'dired-mode
+  '(linum-mode global-auto-revert-mode)
+  669
+  '(nil nil)
+  t
+  '("/home/kijima/roguelike/")
+  nil
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "src"
+  'dired-mode
+  '(linum-mode global-auto-revert-mode)
+  135
+  '(nil nil)
+  t
+  '("/home/kijima/roguelike/src/")
+  nil
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "data"
+  'dired-mode
+  '(linum-mode global-auto-revert-mode)
+  136
+  '(nil nil)
+  t
+  '("/home/kijima/roguelike/data/")
+  nil
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/kijima/roguelike/tests/unit/test_title.py"
+  "test_title.py"
+  'python-mode
+  '(linum-mode auto-revert-mode global-auto-revert-mode auto-complete-mode flycheck-mode)
+  232
+  '(232 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
 
 (desktop-create-buffer 208
   nil
@@ -51,66 +255,6 @@
   t
   '("/home/kijima/roguelike/src/roguelike/")
   nil
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "src"
-  'dired-mode
-  '(linum-mode global-auto-revert-mode)
-  185
-  '(nil nil)
-  t
-  '("/home/kijima/roguelike/src/")
-  nil
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "roguelike"
-  'dired-mode
-  '(linum-mode global-auto-revert-mode)
-  615
-  '(nil nil)
-  t
-  '("/home/kijima/roguelike/")
-  nil
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "kijima"
-  'dired-mode
-  '(linum-mode global-auto-revert-mode)
-  2212
-  '(1080 nil)
-  t
-  '("/home/kijima/")
-  nil
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "junk"
-  'dired-mode
-  '(linum-mode global-auto-revert-mode)
-  128
-  '(nil nil)
-  t
-  '("/home/kijima/junk/")
-  nil
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/home/kijima/junk/2019-11-16-193558.md"
-  "2019-11-16-193558.md"
-  'fundamental-mode
-  '(linum-mode global-auto-revert-mode)
-  130
-  '(1 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -130,24 +274,12 @@
   ".emacs"
   'emacs-lisp-mode
   '(eldoc-mode linum-mode global-auto-revert-mode auto-complete-mode paredit-mode elisp-slime-nav-mode flycheck-mode)
-  5437
+  6317
   '(1 nil)
   nil
   nil
   '((buffer-file-coding-system . utf-8-unix))
-  '((mark-ring (1 26426 26298 1 26298))))
-
-(desktop-create-buffer 208
-  "/home/kijima/.bashrc"
-  ".bashrc"
-  'sh-mode
-  '(linum-mode global-auto-revert-mode auto-complete-mode)
-  146
-  '(nil nil)
-  nil
-  nil
-  '((buffer-file-coding-system . undecided-unix))
-  '((mark-ring nil)))
+  '((mark-ring (1 27323 27195 1 27195))))
 
 (desktop-create-buffer 208
   nil
