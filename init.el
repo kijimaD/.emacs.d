@@ -245,7 +245,7 @@
 
 ;;; org-mode
 ;; org-modeの初期化
-;; (require 'org-install)
+(require 'org-install)
 ;; キーバインドの設定
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
@@ -1010,3 +1010,26 @@
 (require 'flymake-python-pyflakes)
 (flymake-python-pyflakes-load)
 
+
+;;; 画面分割==
+(defun split-n (n)
+  "現在のウィンドウをn等分する関数"
+  (interactive "p") ; コマンドとして呼ぶときは前置引数を取る
+  (if (= n 2)
+      (progn
+	(split-window-horizontally)
+	(other-window 2))
+    (progn
+      (split-window-horizontally (/ (window-width) n))
+      (other-window 1)
+      (split-n (- n 1)))))
+(defun other-window-or-split ()
+  "windowがひとつのときは画面を3分割し、そうでなければとなりのwindowにカーソルを移す"
+  (interactive)
+  (if (one-window-p)
+      (split-n 3))
+  (other-window 1))
+(global-set-key (kbd "C-t") 'other-window-or-split) ;; C-t に割り当て
+;;; 分割した画面間をShift+矢印で移動
+(setq windmove-wrap-around t)
+(windmove-default-keybindings)
