@@ -1,0 +1,14 @@
+find |xargs grep "¤À"
+ls
+javac Calc.java ; java Calc
+cd java
+cd 
+cd java
+javac Calc.java ; java Calc
+javac Calc.java ; java Calc
+javac Calc.java ; java Calc
+javac Calc.java ; java Calc
+足すと12引くと8
+足すと12引くと8: command not found
+javac Calc.java ; java Calc
+javac Calc.java ; java Calc

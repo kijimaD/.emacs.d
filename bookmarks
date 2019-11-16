@@ -1,0 +1,62 @@
+;;;; Emacs Bookmark Format Version 1 ;;;;
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("SANKEI"
+ (filename . "~/SANKEI/")
+ (front-context-string . "Sankei2017111423")
+ (rear-context-string . "16 11月 14 23:23 ")
+ (position . 828))
+("hanoi.el.gz"
+ (filename . "/usr/share/emacs/24.5/lisp/play/hanoi.el.gz")
+ (front-context-string . "  \"The Towers of")
+ (rear-context-string . "group hanoi nil\n")
+ (position . 2902))
+("forward-paragraph"
+ (filename . "/usr/share/emacs/24.5/lisp/textmodes/paragraphs.el.gz")
+ (front-context-string . "(defun forward-p")
+ (rear-context-string . "ble 'booleanp)\n\n")
+ (position . 8486))
+("forward-sentence"
+ (filename . "/usr/share/emacs/24.5/lisp/textmodes/paragraphs.el.gz")
+ (front-context-string . "(defun forward-s")
+ (rear-context-string . "aph-text))))))\n\n")
+ (position . 17099))
+("Yahoo! JAPAN"
+ (front-context-string . "                ")
+ (rear-context-string . "      ヘルプ      \n")
+ (position . 182)
+ (filename . #1="http://www.yahoo.co.jp/")
+ (url . #1#)
+ (handler . bookmark-w3m-bookmark-jump))
+("google-translate-default-ui.el"
+ (filename . "~/.emacs.d/elpa/google-translate-0.10.4/google-translate-default-ui.el")
+ (front-context-string . "(defcustom googl")
+ (rear-context-string . "up 'processes)\n\n")
+ (position . 5101))
+("SKK_code"
+ (filename . "~/.emacs.d/elpa/ddskk-20161005.453/skk.el")
+ (front-context-string . ";; skk.el --- Da")
+ (rear-context-string)
+ (position . 1))
+("html_template"
+ (filename . "~/org/public/template.org")
+ (front-context-string . "#+TITLE: HOTO\n[[")
+ (rear-context-string)
+ (position . 1))
+("index.org"
+ (filename . "~/org/index.org")
+ (front-context-string . "* 自主執筆用---------")
+ (rear-context-string)
+ (position . 1))
+("tetris_code"
+ (filename . "/usr/share/emacs/24.5/lisp/play/tetris.el.gz")
+ (front-context-string . "(defun tetris ()")
+ (rear-context-string . "\n;;;###autoload\n")
+ (position . 17757))
+("count-words_code"
+ (filename . "/usr/share/emacs/24.5/lisp/simple.el.gz")
+ (front-context-string . "(defun count-wor")
+ (rear-context-string . " start end))))\n\n")
+ (position . 44268))
+)

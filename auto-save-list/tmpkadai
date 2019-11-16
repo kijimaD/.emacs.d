@@ -1,0 +1,15 @@
+ Move to the session you want to recover,
+ then type C-c C-c to select it.
+
+ You can also delete some of these files;
+ type d on a line to mark that file for deletion.
+
+  /home/daigo/.emacs.d/auto-save-list:
+  wildcard .saves-*
+  -rw-rw-r-- 1 daigo daigo 794  4月 29 07:36 .saves-1836-daigo-FMVDG4N0E1~
+  -rw-rw-r-- 1 daigo daigo   0  4月 25 08:35 .saves-1922-daigo-FMVDG4N0E1~
+  -rw-r--r-- 1 daigo daigo 546  2月 11 22:44 .saves-17013-daigo-NV53A~
+  -rw-r--r-- 1 daigo daigo 172  2月 10 12:37 .saves-2409-daigo-NV53A~
+  -rw-r--r-- 1 daigo daigo  70  2月 10 07:52 .saves-2476-daigo-NV53A~
+  -rw-r--r-- 1 daigo daigo 172  2月 10 02:25 .saves-4167-daigo-NV53A~
+  -rw-r--r-- 1 daigo daigo 218  2月  8 22:53 .saves-5934-daigo-NV53A~

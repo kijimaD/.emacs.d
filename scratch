@@ -1,0 +1,306 @@
+
+(menu-bar-mode 1)
+;;; (float-time)
+; (cl-loop)
+;; (expt 2 2)
+;; (collect)
+;; (mod 200 2000.0)
+;; (hanoi-move-period 1.0)
+;; (setq hanoi-move-period 1)aaa
+ d
+;; (hanoi 54)aaaaaaaasafasaaaa
+aafaaafas¤¢¤¢¤¢¤¢
+;; (setq show-trailing-whitesaaapace nil)
+;; unwindfor
+;; (length (format "%d" (max 0 (1- 10))))
+;; (if 3 4 2),
+;; (max 2 2);; (zerop 0)
+
+fj;lasdÍý¤ÎÃæ¤ð¥¤¥ó¥É¤ÎµíÆý¤È¸Æ¤Ð¤ì¤ë¤â¤Î¤Ë´Ø¤·¤Æ¤Ï¡¢»ä¤Ï¤Þ¤Ã¤¿¤¯¤·¤é¤Ê¤«¤Ã¤¿
+
+¤Î¤Ç¤¹¤¦¤´¤¯ÆÃ¼ìÊÑ´¹¤¬¤¢¤ë¤Î¤Ç¤¹¤¬¡¢¤ï¤¿¤·¤¬fj
+
+;; (insert-char)
+;; (insert 43)
+
+;; (insert ?\n)
+;; (delete-char -1)
+
+;; (defun hanoi-0 (rings from to work start-time)
+;;   (if (null rings)
+;;     (hanoi-0 (cdr rings) work to from
+;; 	     (hanoi-move-ring (car rings) from to
+;; 			      (hanoi-0 (cdr rings) from work to start-time)))))
+
+;; (defun hanoi-n (bits rings from to work start-time)
+;;   (cond ((null rings)
+;; 	 (hanoi-sit-for 0)
+;; 	 start-time)
+;; 	((zerop (car bits))
+;; 	 (hanoi-insert-rings (car rings) from)
+;; 	 (hanoi-0) (cdr rings) work to from
+;; 	 (hanoi-move-ring (car rings) from to
+;; 			  (hanoi-n (cdr bits) (cdr rings) from work to
+;; 				   start-time))))
+;;   (t
+;;    (hanoi-insert-ring (car rings) to)
+;;    (hanoi-n (cdr bits) (cdr rings) work to from start-time)))
+
+;; (defun hanoi-n (bits rings from to work start-time)
+;;   (cond ((null rings)
+;; 	 (hanoi-sit-for 0)
+;; 	 start-time)
+;; 	((zerop (car bits))
+;; 	 (hanoi-insert-ring (car rings) from)
+;; 	 (hanoi-0) (cdr rings) work to from
+;; 	 (hanoi-move-ring (car rings) from to
+;; 			  (hanoi-n (cdr bits) (cdr rings) from work to
+;; 				   start-time))))
+;;   (t
+;;    (hanoi-insert-ring (car rings) to)
+;;    (hanoi-n (cdr bits) (cdr rings) work to from start-time)))
+
+;; (defun hanoi-insert-ring (ring pole)
+;;   (cl-decf (car pole) baseward-step)
+;;   (let ((str (car ring))
+;; 	(start (- (car pole ) (* (/ (cdr  ring) 2) fly-step))))
+;;     (setcar ring (car pole))
+;;     (cl-loop for pos upfrom start by fly-step
+;; 	     for i below (cdr ring) do
+;; 	     (subst-char-in-region pos (1+ pos) (char-after pos) (aref str i))
+;; 	     (set-text-properties pos (1+ pos) (text-properties-at i str)))
+;;     (hanoi-goto-char (car pole))))
+
+;; (defun hanoi-goto-char (pos)
+;;   (goto-char (if (or hanoi-horizontal-flag (<= (window-start) pos))
+;; 		 pos
+;; 	       (+ (window-start) (% (- pos fly-row-start) baseward-step)))))
+
+;; (defun hanoi-insert-ring (ring pole)
+;;   (cl-decf (car pole) baseward-step)
+;;   (let ((str (car ring))
+;; 	(start (- (car pole) (* (/ (cdr ring) 2) fly-step))))
+;;     (setcar ring (car pole))
+;;     (cl-oop for pos upfrom start by fly-step
+;; 	    for i below (cdr ring) do
+;; 	    (subst-char-in-region pos (1+ pos) (char-after pos) (aref str i))
+;; 	    (set-text-properties pos (1+ pos) (text-properties-at i str)))
+;;     (hanoi-goto-char (car pole))))
+
+;; (defun hanoi-sit-for (seconds)
+;;   (unless (sit-for seconds)
+;;     (signal 'quit '("I can tell you've had enough"))))
+
+;; (defun hanoi-ring-to-pos (ring pos)
+;;   (unless (= (car ring) pos)
+;;     (let* ((start (- (car ring) (* (/ (cdr ring) 2) fly-step)))
+;; 	   (new-start (- pos (- (car ring) start))))
+;;       (if hanoi-horizontal-flag
+;; 	  (cl-loop for i below (cdr ring)
+;; 		   for j = (if (< new-start start) i (- (cdr ring) i 1))
+;; 		   for old-pos = (+ start (* j fly-step))
+;; 		   for new-pos = (+ new-start (* j fly-step)) do
+;; 		   (transpose-regions old-pos (1+ old-pos)
+;; 				      new-pos (1+ new-pos)))))))
+
+;; (loop for i from 1 to 5
+;;       collect i)
+;; (loop for i from 1 to 6
+;;       collect i)
+;; (loop for i from 1 to 6
+;;       collect i)
+
+;; (loop for i from 1 to 50
+;;       do (princ (collect (* i i))))
+
+;; (loop for x in '(3 9 6)
+;;       do (princ x))
+
+;; (loop for x in '(3 9 6)
+;;       do (princ x))
+
+;; (loop for (x . y) in '((1 . 2) (3 . 4) (5 . 6))
+;;       collect (+ x y))
+
+;; (loop for buf in (buffer-list)
+;;       collect (buffer-name buf))	
+
+;; (loop for buf in (buffer-list)
+;;       collect (buffer-name buf))
+
+;; (loop for buf in (buffer-list)
+;;       collect (buffer-name buf))
+
+;; (loop for buf in (buffer-list)
+;;       collect (buffer-name buf))
+
+
+
+
+;; (loop for buf in (buffer-list)
+;;       collect buffer-name buf)
+(buffer-list)
+
+(loop for i from 1 to 5 collect i)	; => (1 2 3 4 5)
+
+(loop for i from 1 to 5 collect i)	; => (1 2 3 4 5)
+
+(loop for buf in (buffer-list)
+      collect (buffer-name buf))	; => ("*scratch*" "2017-08-12-103144.el" "index.org" "tetris.el.gz" " *Minibuf-1*" "tetris-scores" "*Tetris*" "*Help*" "*Apropos*" "*Hanoi*" "*gud*" "*Buffer List*" "*Customize Group: Hanoi*" ".conkyrc" "2017-08-28-225444.org" "*org2blog/wp-wordpress*<9>" "junk" "2017-08-28-190120.org" "2017-08-16-120755.org" "*org2blog/wp-wordpress*<8>" "*org2blog/wp-wordpress*<6>" "*org2blog/wp-wordpress*<7>" "*org2blog/wp-wordpress*<5>" "2017-05-04-012212.el" "2017-05-04-061315.el" "hanoi.el.gz" "*org2blog/wp-wordpress*<4>" "*org2blog/wp-wordpress*<3>" "*org2blog/wp-wordpress*<2>" "*Customize Group: Org2blog/Wp*" ".emacs" "*org2blog/wp-wordpress*" "Scratch" " *Minibuf-0*" "*Messages*" " *code-conversion-work*" " *Echo Area 0*" " *Echo Area 1*" " *migemo*" " *command symbols*" " *function symbols*" " *variable symbols*" " *face symbols*" " *other symbols*" " *server*" "*Completions*" " *Custom-Work*" " widget-choose" "*Bookmark List*" " *lispxmp tmp*" " *Metahelp*" "*vc*" " *code-converting-work*" "*Google Translate*" "*Disabled Command*" "*input/output of *" "*threads of *" "*breakpoints of *" " *partial-output-*" "*Backtrace*")
+(buffer-list)				; => (#<buffer *scratch*> #<buffer 2017-08-12-103144.el> #<buffer index.org> #<buffer tetris.el.gz> #<buffer  *Minibuf-1*> #<buffer tetris-scores> #<buffer *Tetris*> #<buffer *Help*> #<buffer *Apropos*> #<buffer *Hanoi*> #<buffer *gud*> #<buffer *Buffer List*> #<buffer *Customize Group: Hanoi*> #<buffer .conkyrc> #<buffer 2017-08-28-225444.org> #<buffer *org2blog/wp-wordpress*<9>> #<buffer junk> #<buffer 2017-08-28-190120.org> #<buffer 2017-08-16-120755.org> #<buffer *org2blog/wp-wordpress*<8>> #<buffer *org2blog/wp-wordpress*<6>> #<buffer *org2blog/wp-wordpress*<7>> #<buffer *org2blog/wp-wordpress*<5>> #<buffer 2017-05-04-012212.el> #<buffer 2017-05-04-061315.el> #<buffer hanoi.el.gz> #<buffer *org2blog/wp-wordpress*<4>> #<buffer *org2blog/wp-wordpress*<3>> #<buffer *org2blog/wp-wordpress*<2>> #<buffer *Customize Group: Org2blog/Wp*> #<buffer .emacs> #<buffer *org2blog/wp-wordpress*> #<buffer Scratch> #<buffer  *Minibuf-0*> #<buffer *Messages*> #<buffer  *code-conversion-work*> #<buffer  *Echo Area 0*> #<buffer  *Echo Area 1*> #<buffer  *migemo*> #<buffer  *command symbols*> #<buffer  *function symbols*> #<buffer  *variable symbols*> #<buffer  *face symbols*> #<buffer  *other symbols*> #<buffer  *server*> #<buffer *Completions*> #<buffer  *Custom-Work*> #<buffer  widget-choose> #<buffer *Bookmark List*> #<buffer  *lispxmp tmp*> #<buffer  *Metahelp*> #<buffer *vc*> #<buffer  *code-converting-work*> #<buffer *Google Translate*> #<buffer *Disabled Command*> #<buffer *input/output of *> #<buffer *threads of *> #<buffer *breakpoints of *> #<buffer  *partial-output-*> #<buffer *Backtrace*>)
+
+(loop for buf in (buffer-list)
+      collect (buffer-name buf))	; => ("*scratch*" "2017-08-12-103144.el" "index.org" "tetris.el.gz" " *Minibuf-1*" "tetris-scores" "*Tetris*" "*Help*" "*Apropos*" "*Hanoi*" "*gud*" "*Buffer List*" "*Customize Group: Hanoi*" ".conkyrc" "2017-08-28-225444.org" "*org2blog/wp-wordpress*<9>" "junk" "2017-08-28-190120.org" "2017-08-16-120755.org" "*org2blog/wp-wordpress*<8>" "*org2blog/wp-wordpress*<6>" "*org2blog/wp-wordpress*<7>" "*org2blog/wp-wordpress*<5>" "2017-05-04-012212.el" "2017-05-04-061315.el" "hanoi.el.gz" "*org2blog/wp-wordpress*<4>" "*org2blog/wp-wordpress*<3>" "*org2blog/wp-wordpress*<2>" "*Customize Group: Org2blog/Wp*" ".emacs" "*org2blog/wp-wordpress*" "Scratch" " *Minibuf-0*" "*Messages*" " *code-conversion-work*" " *Echo Area 0*" " *Echo Area 1*" " *migemo*" " *command symbols*" " *function symbols*" " *variable symbols*" " *face symbols*" " *other symbols*" " *server*" "*Completions*" " *Custom-Work*" " widget-choose" "*Bookmark List*" " *lispxmp tmp*" " *Metahelp*" "*vc*" " *code-converting-work*" "*Google Translate*" "*Disabled Command*" "*input/output of *" "*threads of *" "*breakpoints of *" " *partial-output-*" "*Backtrace*")
+
+(loop for i from 1 to 5 collect i)	; => (1 2 3 4 5)
+(loop for i from 1 below 5 collect i)	; => (1 2 3 4)
+(loop for i from 1 below 5 collect i)	; => (1 2 3 4)
+(loop for i from 1 below 5 by 2 collect i) ; => (1 3)
+
+(loop for i from 1 downto -3 collect i)	; => (1 0 -1 -2 -3)
+
+(loop for i from 1 above -3 collect i)	; => (1 0 -1 -2)
+
+(loop for i from 1 downto -3 by 2 collect i) ; => (1 -1 -3)
+
+(loop for i from 1 above -3 by 2 collect i) ; => (1 -1)
+
+(with-output-to-string
+  (loop repeat 3 do (princ "foo")))	; => "foofoofoo"
+(with-output-to-string 2)		; => ""
+(with-output-to-string
+  (loop repeat 3 do (princ "foo")))
+
+(with-output-to-string
+  (loop repeat 3 do (princ "foo")))	; => "foofoofoo"
+
+(with-output-to-string
+  (loop repeat 3 do (princ "foo")))	; => "foofoofoo"
+
+;; (loop while (not (eobp))
+;;       do (forward-line 1))		; => nil
+
+
+(with-output-to-string
+  (loop repeat 3 do (princ "foo")))	; => "foofoofoo"
+
+;; (loop while (not (eobp))
+;;       do (forward-line 1))
+;; (loop while (not (eobp))
+;;       do (forward-line 1))
+;; (loop while (not (eobp))
+;;       do (forward-line 1))
+
+;; ;; (loop until (eobp)
+;; ;;       do (forward-line 1))
+;; (loop until (eobp)
+;;       do (forward-line 1))
+
+;; ;; (save-excursion
+;; ;;   (goto-char (point-min))
+;; ;;   (loop until (eobp)
+;; ;; 	collect (thing-at-point 'line)
+;; ;; 	do (forward-line)))
+;; (save-excursion
+;;   (goto-char (point-min))
+;;   (loop until (eobp)
+;; 	collect (thing-at-point 'line)
+;; 	do (forward-line)))
+;; (save-excursion
+;;   (goto-char (point-min))
+;;   (loop until (eobp)
+;; 	collect (thing-at-point 'line)
+;; 	do (forward-line)))
+;; (thing-at-point a)
+
+;; (save-excursion
+;;   (goto-char (point-min))
+;;   (loop until (eobp)
+;; 	collect (thing-at-point 'line)
+;; 	do (forward-line)))
+
+
+
+;; (loop for x in '(1 2 3) collect (list x (* x x))) ; => 
+
+(with-output-to-string
+  (loop repeat 3 do (princ "foo")))	; => "foofoofoo"
+
+(with-output-to-string
+  (loop repeat 3 do (princ "foo")))	; => "foofoofoo"
+
+(with-output-to-string
+  (loop repeat 3 do (princ "foo")))	; => "foofoofoo"
+
+;; (loop while (not (eobp))
+;;       do (forward-line 1))		; => nil
+;; (loop while (not (eobp))
+;;       do (forward-line 1))
+
+;; (loop until (eobp)
+;;       do (forward-line 1))		; => 
+
+;; (save-excursion
+;;   (goto-char (point-min))
+;;   (loop until (eobp)
+;; 	collect (thing-at-point 'line)
+;; 	do (forward-line 1)))		; => 
+;; (save-excursion
+;;   (goto-char (point-min))
+;;   (loop until (eobp)
+;; 	collect (thing-at-point 'line)
+;; 	do (forward-line 1)))		; => 
+
+;; (save-excursion
+;;   (goto-char (point-min))
+;;   (loop until (eobp)
+;; 	collect (thing-at-point 'line)
+;; 	do (forward-line 1)))
+
+(loop for x in '(1 2 3) collect (list x (* x x))) ; => ((1 1) (2 4) (3 9))
+(loop for x in '(1 2 3) append (list x (* x x))) ; => (1 1 2 4 3 9)
+
+
+
+
+(set-window-start (selected-window) 4)
+(logand)
+
+
+(defun fact (x)
+  "³¬¾è"
+  (if (zerop x) 1
+    (* x (fact (1- x)))))
+(defun test (x)
+  (let ((value (+ (fact x) 10)))
+    (message "%d! + 10 = %d" x value)))
+
+(float-time)				; => 1504017298.436277
+
+(hanoi-unix)
+(tetris)
+(hanoi)
+(org-pomodoro)
+(org-agenda-maybe-redo)
+(recenter-top-bottom)
+¥¿¥¤¥Þ¡¼¤È»È¤¦:::(auto-revert-mode t)
+(setq timer (run-with-idle-timer 300 t
+				 (lambda () (recenter-top-bottom))))
+
+(org-pomodoro)
+(org-pomodoro-extend-last-clock)
+(org-pomodoro-long-break-finished)
+
+(org-pomodoro-short-break-finished)
+(org-pomodoro-killed)
+(org-pomodoro-finished)
+(org-pomodoro-notify "a" "a")
+(org-pomodoro-reset)
+(org-pomodoro-start :pomodoro)
+(org-pomodoro-set :pomodoro)
+
+(linum-mode)
+(menu-bar-mode)
+
+
+sudo mirakurun config tuners

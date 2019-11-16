@@ -1,0 +1,1 @@
+(define-package "fcitx" "20170914.200" "Make fcitx better in Emacs" 'nil :commit "095332fbeb994c908c533fe2ad068c0728211c3d" :keywords '("extensions") :authors '(("Junpeng Qiu" . "qjpchmail@gmail.com")) :maintainer '("Junpeng Qiu" . "qjpchmail@gmail.com") :url "https://github.com/cute-jumper/fcitx.el")

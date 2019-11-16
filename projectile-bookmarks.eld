@@ -1,0 +1,1 @@
+("~/junk/" "~/org/" "~/" "~/bash/" "~/chinachu/" "~/.emacs.d/" "~/document/" "~/tmp/RailsApp/" "~/tmp/hoge/" "~/ruby/" "~/tmp/myblog/")
