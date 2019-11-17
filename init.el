@@ -964,7 +964,7 @@
 ;; 非アクティブウィンドウの背景色を設定
 (require 'hiwin)
 (hiwin-activate)
-(set-face-background 'hiwin-face "gray20")
+(set-face-background 'hiwin-face "gray80")
 
 ;; tabサイズ
 (setq default-tab-width 4)
@@ -987,16 +987,18 @@
 
 ;; Python開発環境
 ;; 補完
- (jedi:setup)
-  (define-key jedi-mode-map (kbd "<C-tab>") nil) ;;C-tabはウィンドウの移動に用いる
-  (setq jedi:complete-on-dot t)
-  (setq ac-sources
-    (delete 'ac-source-words-in-same-mode-buffers ac-sources)) ;;jediの補完候補だけでいい
-  (add-to-list 'ac-sources 'ac-source-filename)
-  (add-to-list 'ac-sources 'ac-source-jedi-direct)
-  (define-key python-mode-map "\C-ct" 'jedi:goto-definition)
-  (define-key python-mode-map "\C-cb" 'jedi:goto-definition-pop-marker)
-  (define-key python-mode-map "\C-cr" 'helm-jedi-related-names)
+;;(add-hook 'python-mode-hook 'jedi:setup)
+;;(setq jedi:complete-on-dot t)
+ ;; (jedi:setup)
+ ;;  (define-key jedi-mode-map (kbd "<C-tab>") nil) ;;C-tabはウィンドウの移動に用いる
+ ;;  (setq jedi:complete-on-dot t)
+ ;;  (setq ac-sources
+ ;;    (delete 'ac-source-words-in-same-mode-buffers ac-sources)) ;;jediの補完候補だけでいい
+ ;;  (add-to-list 'ac-sources 'ac-source-filename)
+ ;;  (add-to-list 'ac-sources 'ac-source-jedi-direct)
+ ;;  (define-key python-mode-map "\C-ct" 'jedi:goto-definition)
+ ;;  (define-key python-mode-map "\C-cb" 'jedi:goto-definition-pop-marker)
+ ;;  (define-key python-mode-map "\C-cr" 'helm-jedi-related-names)
 
 ;; 整形
 (require 'py-autopep8)
