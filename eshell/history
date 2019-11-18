@@ -12,3 +12,6 @@ javac Calc.java ; java Calc
 足すと12引くと8: command not found
 javac Calc.java ; java Calc
 javac Calc.java ; java Calc
+cd
+cd roguelike/tests/unit
+autorun_pytest.py ~/roguelike/src pytest py

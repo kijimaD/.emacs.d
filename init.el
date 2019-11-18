@@ -7,7 +7,7 @@
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
    ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
- '(custom-enabled-themes (quote (adwaita)))
+ '(custom-enabled-themes (quote (tango-dark)))
  '(custom-safe-themes
    (quote
 	("67e998c3c23fe24ed0fb92b9de75011b92f35d3e89344157ae0d544d50a63a72" "5cd0afd0ca01648e1fff95a7a7f8abec925bd654915153fb39ee8e72a8b56a1f" "06ffa2bf4e891580bfe6a5ce68d0909ed9c4278e5234ede6b3ba459ef35d9a1b" "dd4db38519d2ad7eb9e2f30bc03fba61a7af49a185edfd44e020aa5345e3dca7" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "62c80c6889010c3f0656e81ae201754058fd44743076f8dc56c595c2b9b5e298" "e1994cf306356e4358af96735930e73eadbaf95349db14db6d9539923b225565" "357d5abe6f693f2875bb3113f5c031b7031f21717e8078f90d9d9bc3a14bcbd8" "e8825f26af32403c5ad8bc983f8610a4a4786eb55e3a363fa9acb48e0677fe7e" "cdd26fa6a8c6706c9009db659d2dffd7f4b0350f9cc94e5df657fa295fffec71" "18a33cdb764e4baf99b23dcd5abdbf1249670d412c6d3a8092ae1a7b211613d5" "fe243221e262fe5144e89bb5025e7848cd9fb857ff5b2d8447d115e58fede8f7" "66881e95c0eda61d34aa7f08ebacf03319d37fe202d68ecf6a1dbfd49d664bc3" "b9293d120377ede424a1af1e564ba69aafa85e0e9fd19cf89b4e15f8ee42a8bb" "28ec8ccf6190f6a73812df9bc91df54ce1d6132f18b4c8fcc85d45298569eb53" "3eb93cd9a0da0f3e86b5d932ac0e3b5f0f50de7a0b805d4eb1f67782e9eb67a4" "251348dcb797a6ea63bbfe3be4951728e085ac08eee83def071e4d2e3211acc3" "6db9acac88c82f69296751e6c6d808736d6ff251dcb34a1381be86efc14fef54" "64ca5a1381fa96cb86fd6c6b4d75b66dc9c4e0fc1288ee7d914ab8d2638e23a9" "721bb3cb432bb6be7c58be27d583814e9c56806c06b4077797074b009f322509" "946e871c780b159c4bb9f580537e5d2f7dba1411143194447604ecbaf01bd90c" "ace9f12e0c00f983068910d9025eefeb5ea7a711e774ee8bb2af5f7376018ad2" "55d31108a7dc4a268a1432cd60a7558824223684afecefa6fae327212c40f8d3" default)))
@@ -25,6 +25,9 @@
 	 ("#F771AC" . 85)
 	 ("#eee8d5" . 100))))
  '(line-number-mode nil)
+ '(nrepl-message-colors
+   (quote
+	("#336c6c" "#205070" "#0f2050" "#806080" "#401440" "#6c1f1c" "#6b400c" "#23733c")))
  '(org-agenda-files
    (quote
 	("/home/daigo3/org/art.org" "/home/daigo3/org/book.org" "/home/daigo3/org/bousai.org" "/home/daigo3/org/chinese.org" "/home/daigo3/org/chinese_learn.org" "/home/daigo3/org/config.org" "/home/daigo3/org/data.org" "/home/daigo3/org/diary.org" "/home/daigo3/org/eng_portfolio.org" "/home/daigo3/org/entertainment.org" "/home/daigo3/org/gasyuku.org" "/home/daigo3/org/gomi.org" "/home/daigo3/org/gorakumath.org" "/home/daigo3/org/ibunkarikai.org" "/home/daigo3/org/index.org" "/home/daigo3/org/info.org" "/home/daigo3/org/jikanwari.org" "/home/daigo3/org/jikanwari2.org" "/home/daigo3/org/jinsei_to_deai.org" "/home/daigo3/org/jisinkazan.org" "/home/daigo3/org/kadai.jpn.org" "/home/daigo3/org/keikaku.org" "/home/daigo3/org/kyarikoi.org" "/home/daigo3/org/labor.org" "/home/daigo3/org/memo.org" "/home/daigo3/org/mokuhyo.org" "/home/daigo3/org/other.org" "/home/daigo3/org/other2.org" "/home/daigo3/org/reg.org" "/home/daigo3/org/roudouhou.org" "/home/daigo3/org/ryuugaku.org" "/home/daigo3/org/schedule.org" "/home/daigo3/org/speech_bukai.org" "/home/daigo3/org/taiiku.org" "/home/daigo3/org/think.org" "/home/daigo3/org/trip.org" "/home/daigo3/org/web.org" "/home/daigo3/org/writer.org")))
@@ -54,7 +57,8 @@
  '(org2blog/wp-show-post-in-browser nil)
  '(package-selected-packages
    (quote
-	(org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
+	(jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
+ '(pdf-view-midnight-colors (quote ("#232333" . "#c7c7c7")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(tool-bar-mode nil)
@@ -95,7 +99,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Noto Sans Mono CJK JP" :slant normal :weight normal :height 102 :width normal :foundry "GOOG")))))
+ '(default ((t (:family "Ricty Diminished Discord" :slant normal :weight normal :height 90 :width normal :foundry "PfEd")))))
 
 (set-fontset-font t 'japanese-jisx0208 (font-spec :family "ヒラギノ角ゴ ProN W6"))
 
@@ -418,11 +422,6 @@
 ;; (setq skk-dcomp-multiple-activate t) ; 動的補完の複数候補表示
 ;; (setq skk-dcomp-multiple-rows 10)	 ; 動的補完の候補表示件数
 
-;;折り返されないのをどうにかしたいのですが。
-
-
-
-
 ;;パッケージの追加を楽にする==================
 (package-initialize)
 (add-to-list 'package-archives '("melpa"."http://melpa.org/packages/") t)
@@ -466,101 +465,6 @@
 (setq global-hl-line-timer
       (run-with-idle-timer 0.03 t 'global-hl-line-timer-function))
 (cancel-timer global-hl-line-timer)
-
-;; ;; マクロ===============
-;; ;;作家バッファオープン
-
-;; ;;縦割バッファ
-;; (fset 'split_y
-;;       (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ("3" 0 "%d")) arg)))
-
-
-;; ;; ライターバッファ
-;; (defun display_writer ()
-;;   "Open buffer for writing."
-;;   (interactive)
-;;   (save-restriction
-;;   (save-excursion
-;;     (toggle-frame-maximized)
-;;     (split-window-right)
-;;     (find-file "~/org/book5.org" t)
-;;     (other-window 1)
-;;     (split-window-below)
-;;     (find-file "~/org/public/index.org" t)
-;;     (other-window 1)
-;;     (find-file "~/org/public/template.org" t)
-;;     (read-only-mode)
-;;     )))
-
-;; ;; プロジェクトバッファ
-;; (defun display_projects ()
-;;   "Open inbox.org and daily-projects.org."
-;;   (interactive)
-;;   (save-restriction
-;;   (save-excursion
-;;     ;; (toggle-frame-maximized)
-;;     (split-window-right)
-;;     (find-file "~/org/inbox.org" t)
-;;     (other-window 1)
-;;     (find-file "~/org/daily-projects.org" t)
-;;     )))
-
-;; (defun display_projects2 ()
-;;   "Open inbox.org and daily-projects.org.2"
-;;   (interactive)
-;;   (save-restriction
-;;   (save-excursion
-;;     (split-window-right)
-;;     (find-file "~/org/inbox.org" t)
-;;     (other-window 1)
-;;         (find-file "~/org/daily-projects.org" t)
-;;     )))
-
-;; ;; 設定バッファ
-;; (defun display_option ()
-;;   "*Open scratch and .emacs."
-;;   (interactive)
-;;   (save-restriction
-;;   (save-excursion
-;;     (toggle-frame-maximized)
-;;     (split-window-right)
-;;     (switch-to-buffer "*scratch*" nil (quote force-same-window))
-;;     (other-window 1)
-;;     (find-file "~/.emacs" t))))
-
-;; ;; lisp用バッファ
-;; (defun display_scratch ()
-;;   "*Open scratch "
-;;   (interactive)
-;;   (save-restriction
-;;   (save-excursion
-;;     ;; (toggle-frame-maximized)
-;;     ;; (split-window-right)
-;;     (switch-to-buffer "*scratch*" nil (quote force-same-window)))))
-;;     ;; (other-window 1)
-;;     ;; (switch-to-buffer "*scratch*" nil (quote force-same-window)))))
-
-;; ;; index.orgバッファ(f7でバインド)
-;; (defun display_index ()
-;;   "*Open index.org "
-;;   (interactive)
-;;   (save-restriction
-;;   (save-excursion    
-;;     (find-file "~/org/index.org" t))))
-
-;; (global-set-key (kbd "<f7>") 'display_index)
-
-;; 雑多メモ系を開く
-;; (defun display_zatta ()
-;;   "Open zatta."
-;;   (interactive)
-;;   (save-restriction
-;;   (save-excursion
-;;     (toggle-frame-maximized)
-;;     (split-window-right)
-;;     (find-file "~/org/book3.org" t)
-;;     (other-window 1)
-;;     (find-file "~/org/other4.org" t))))
 
 ;; 日本語インフォ===========
 ;; (add-to-list 'Info-directory-list "~/info/")
@@ -610,8 +514,6 @@
 (org2blog/wp-login)
 (org2blog/wp-new-entry)
 )
-
-
 
 ;; 自動保存 auto-save-buffers-enhanced ====
 (require 'auto-save-buffers-enhanced)
@@ -695,10 +597,10 @@
 ;; (require 'anything-config)
 ;; (add-to-list 'anything-sources 'anything-c-source-emacs-commands)
 
-;; ;; ;; col-highlight.el-現在行をハイライトする
+;; col-highlight.el-現在行をハイライトする
 ;; (require 'col-highlight)
 ;; ;; ;; 1.常にハイライト
-;; ;; ;; (column-highlight-mode t)
+;; ;; (column-highlight-mode t)
 ;; ;; ;; 2.アイドル時にハイライト
 ;; (toggle-highlight-column-when-idle 1)
 ;; (col-highlight-set-interval 6)
@@ -772,85 +674,6 @@
      (if asciip "ja" "en")
      string)))
 (global-set-key (kbd "C-c t") 'google-translate-enja-or-jaen)
-
-
-;; ;; Perl デバッガの設定
-;; (autoload 'perl-debug "perl-debug" nil t)
-;; (autoload 'perl-debug-lint "perl-debug" nil t)
-
-;; ;; Ruby デバッガの設定
-;; (autoload 'rubydb "rubydb3x"
-;;   "run rubydb on program file in buffer *gud-file*.
-;; the directory containing file becomes the initial working directory
-;; and source-file directory for your debugger." t)
-
-;;; debug-print
-;; (require 'debug-print)
-;; (debug-print-init)
-;; (define-key global-map (kbd "C-x C-e") 'debug-print-eval-last-sexp)
-
-
-;; (require 'trace)
-
-
-;;;; FIXME trace-functionの結果をorg-modeで表示する設定
-;; (defadvice trace-function-internal (before trace-org-mode (function buffer &rest _) activate)
-;;   "view-modeのままでも書き込みできるようにする"
-;;   (with-current-buffer (get-buffer-create (or buffer trace-buffer))
-;;     (set (make-local-variable 'inhibit-read-only) t)))
-
-;;; display
-;; (defun display-buffer-trace-output (buffer alist)
-;;   "*trace-output*をorg-mode/view-modeで先程のトレース結果を画面上部で表示"
-;;   (let (display-buffer-alist) (display-buffer buffer))
-;;   (with-selected-window (get-buffer-window buffer)
-;;     (org-mode)
-;;     (org-hide-block-all)
-;;     (view-mode 1)
-;;     (org-overview)
-;;     (ignore-errors
-;;       (goto-char (point-max))
-;;       (call-interactively 'previous-line) ;avoid warning
-;;       (org-show-subtree)
-;;       (recenter 0))
-;;     (selected-window)))
-
-;; (add-to-list 'display-buffer-alist
-;;              `(,(rx (or "*trace-output"))
-;;                display-buffer-trace-output))
-
-;;; 連続したトレースをまとめて表示する==========
-;; (defvar trace-entry-last-time (float-time))
-
-;; (defvar trace-session-duration 2
-;;   "ひとまとまりのtraceを表示する時間単位")
-
-;; (defadvice trace-entry-message (after add-time-and-backtrace (function &rest _) activate)
-;;   "trace結果をorg形式に整形"
-;;   (let ((btbuf (generate-new-buffer " trace-backtrace"))
-;;         (bt (with-output-to-string (backtrace))))
-;;     (with-current-buffer btbuf
-;;       (insert bt)
-;;       (goto-char 1))
-;;     (setq ad-return-value
-;;          (format "%s** %s\n[[elisp:(view-buffer \"%s\")]]\n%s\n"
-;;                  (if (<= trace-session-duration (- (float-time) trace-entry-last-time))
-;;                      (format "* Session %s\n" (format-time-string "%X"))
-;;                    "")
-;;                  function
-;;                  ;; (with-output-to-string (backtrace))
-;;                  (buffer-name btbuf)
-;;                  ad-return-value)))
-;;   (setq trace-entry-last-time (float-time)))
-;; (setq trace-separator "\n")
-
-;; (defun org-ctrl-c-ctrl-c-hook--trace-pp-sexp ()
-;;   (when (and (string= "*trace-output*" (buffer-name))
-;;              (string-match "^[|0-9]+ " (thing-at-point 'line)))
-;;     (pp-display-expression (read (concat "(" (thing-at-point 'line) ")"))
-;;                            "*pp*")
-;;     t))
-;; (add-hook 'org-ctrl-c-ctrl-c-hook 'org-ctrl-c-ctrl-c-hook--trace-pp-sexp)
 
 ;;; 関数トレース==========
 ;; (require 'cl-lib)
@@ -945,26 +768,26 @@
 ;; (setq history-length t)
 ;; (add-hook 'after-init-hook 'session-initialize))
 
-;; ;;; 文字数モードライン表示
-;; (defun count-lines-and-chars ()
-;;   (if mark-active
-;;       (format "[%dL%dw%dc]"
-;;               (count-lines (region-beginning) (region-end))
-;;               (how-many "[^ 	
-;; ]+" (region-beginning) (region-end))
-;; ;              (how-many "\\w+" (region-beginning) (region-end))
-;;               (- (region-end) (region-beginning)))
-;;     ""))
-;; (add-to-list 'default-mode-line-format
-;;              '(:eval (count-lines-and-chars)))
+;;; 文字数モードライン表示
+(defun count-lines-and-chars ()
+  (if mark-active
+      (format "[%dL%dw%dc]"
+              (count-lines (region-beginning) (region-end))
+              (how-many "[^ 	
+]+" (region-beginning) (region-end))
+;              (how-many "\\w+" (region-beginning) (region-end))
+              (- (region-end) (region-beginning)))
+    ""))
+(add-to-list 'default-mode-line-format
+             '(:eval (count-lines-and-chars)))
 
 ;セッションの永続化
-;; (psession-mode 1)
+(psession-mode 1)
 
 ;; 非アクティブウィンドウの背景色を設定
 (require 'hiwin)
 (hiwin-activate)
-(set-face-background 'hiwin-face "gray80")
+(set-face-background 'hiwin-face "gray40")
 
 ;; tabサイズ
 (setq default-tab-width 4)
@@ -987,24 +810,27 @@
 
 ;; Python開発環境
 ;; 補完
-;;(add-hook 'python-mode-hook 'jedi:setup)
-;;(setq jedi:complete-on-dot t)
- ;; (jedi:setup)
- ;;  (define-key jedi-mode-map (kbd "<C-tab>") nil) ;;C-tabはウィンドウの移動に用いる
- ;;  (setq jedi:complete-on-dot t)
- ;;  (setq ac-sources
- ;;    (delete 'ac-source-words-in-same-mode-buffers ac-sources)) ;;jediの補完候補だけでいい
- ;;  (add-to-list 'ac-sources 'ac-source-filename)
- ;;  (add-to-list 'ac-sources 'ac-source-jedi-direct)
- ;;  (define-key python-mode-map "\C-ct" 'jedi:goto-definition)
- ;;  (define-key python-mode-map "\C-cb" 'jedi:goto-definition-pop-marker)
- ;;  (define-key python-mode-map "\C-cr" 'helm-jedi-related-names)
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)
+ (jedi:setup)
+  (define-key jedi-mode-map (kbd "<C-tab>") nil) ;;C-tabはウィンドウの移動に用いる
+  (setq jedi:complete-on-dot t)
+  (setq ac-sources
+    (delete 'ac-source-words-in-same-mode-buffers ac-sources)) ;;jediの補完候補だけでいい
+  (add-to-list 'ac-sources 'ac-source-filename)
+  (add-to-list 'ac-sources 'ac-source-jedi-direct)
+  ;; (define-key python-mode-map "\C-ct" 'jedi:goto-definition)
+  ;; (define-key python-mode-map "\C-cb" 'jedi:goto-definition-pop-marker)
+  ;; (define-key python-mode-map "\C-cr" 'helm-jedi-related-names)
 
 ;; 整形
 (require 'py-autopep8)
 (setq py-autopep8-options '("--max-line-length=200"))
 (setq flycheck-flake8-maximum-line-length 200)
 (py-autopep8-enable-on-save)
+;; 保存時にバッファ全体を自動整形する
+(add-hook 'before-save-hook 'py-autopep8-before-save)
+
 
 ;; flymake
 (flymake-mode t)
