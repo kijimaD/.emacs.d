@@ -57,7 +57,7 @@
  '(org2blog/wp-show-post-in-browser nil)
  '(package-selected-packages
    (quote
-	(jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
+	(markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
  '(pdf-view-midnight-colors (quote ("#232333" . "#c7c7c7")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -101,8 +101,7 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Ricty Diminished Discord" :slant normal :weight normal :height 90 :width normal :foundry "PfEd")))))
 
-(set-fontset-font t 'japanese-jisx0208 (font-spec :family "ヒラギノ角ゴ ProN W6"))
-
+(set-fontset-font t 'japanese-jisx0208 (font-spec :family "Ricty Diminished Discord"))
 
 ;; (setq dired-default-file-coding-system 'utf-8-unix)
 ;; (setq default-buffer-file-coding-system 'utf-8-unix)
@@ -156,8 +155,8 @@
 (icomplete-mode 1)
 
 ;; インフォバッファの移動をページアップ、ページダウンで行えるように
-(global-set-key [next] 'Info-history-back)
-(global-set-key [prior] 'Info-history-forward)
+;; (global-set-key [next] 'Info-history-back)
+;; (global-set-key [prior] 'Info-history-forward)
 
 ;; yesかnoではなく、yかnかで答えられるようにする
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -590,7 +589,7 @@
 
 ;; flycheck
 ;; (add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
-;; (add-hook 'python-mode-hook 'flycheck-mode)
+(add-hook 'python-mode-hook 'flycheck-mode)
 
 ;; anything.elを追加する
 ;; (require 'anything-startup)
@@ -823,21 +822,24 @@
   ;; (define-key python-mode-map "\C-cb" 'jedi:goto-definition-pop-marker)
   ;; (define-key python-mode-map "\C-cr" 'helm-jedi-related-names)
 
-;; 整形
+;; 整形…起動時に読み込めてない気がする
 (require 'py-autopep8)
 (setq py-autopep8-options '("--max-line-length=200"))
 (setq flycheck-flake8-maximum-line-length 200)
 (py-autopep8-enable-on-save)
 ;; 保存時にバッファ全体を自動整形する
 (add-hook 'before-save-hook 'py-autopep8-before-save)
-
+(add-hook 'python-mode-hook
+	  '(lambda()
+	     (setq indent-tabs-mode nil)
+	     (setq indent-level 4)
+	     (setq python-indent 4)))
 
 ;; flymake
 (flymake-mode t)
 ;;errorやwarningを表示する
 (require 'flymake-python-pyflakes)
 (flymake-python-pyflakes-load)
-
 
 ;;; 画面分割==
 (defun split-n (n)
@@ -864,3 +866,46 @@
 
 ;; 今いるウィンドウでバッファを開く
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+
+(defun revert-buffer-no-confirm (&optional force-reverting)
+  "Interactive call to revert-buffer. Ignoring the auto-save
+ file and not requesting for confirmation. When the current buffer
+ is modified, the command refuses to revert it, unless you specify
+ the optional argument: force-reverting to true."
+  (interactive "P")
+  ;;(message "force-reverting value is %s" force-reverting)
+  (if (or force-reverting (not (buffer-modified-p)))
+      (revert-buffer :ignore-auto :noconfirm)
+    (error "The buffer has been modified")))
+
+(global-set-key (kbd "<f5>") 'revert-buffer-no-confirm)
+
+;;++++++++++++++++++++++++;; 
+;; markdown-mode settings ;;
+;;++++++++++++++++++++++++;;
+(use-package markdown-mode
+         :commands (markdown-mode gfm-mode)
+         :mode (("\\.md\\'" . gfm-mode)
+            ("\\.markdown\\'" . gfm-mode))
+         :config
+         (setq
+          markdown-command "github-markup"
+          markdown-command-needs-filename t
+          markdown-content-type "application/xhtml+xml"
+          markdown-css-paths '("https://cdn.jsdelivr.net/npm/github-markdown-css/github-markdown.min.css")
+          markdown-xhtml-header-content "
+<style>
+body {
+  box-sizing: border-box;
+  max-width: 740px;
+  width: 100%;
+  margin: 40px auto;
+  padding: 0 10px;
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('markdown-body');
+});
+</script>
+" ))

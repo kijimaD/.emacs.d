@@ -2,11 +2,11 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("SANKEI"
- (filename . "~/SANKEI/")
- (front-context-string . "Sankei2017111423")
- (rear-context-string . "16 11月 14 23:23 ")
- (position . 828))
+(("aliens.py"
+ (filename . "/usr/local/lib/python2.7/dist-packages/pygame/examples/aliens.py")
+ (front-context-string . "\n\ndef load_image")
+ (rear-context-string . "th(__file__))[0]")
+ (position . 602))
 ("hanoi.el.gz"
  (filename . "/usr/share/emacs/24.5/lisp/play/hanoi.el.gz")
  (front-context-string . "  \"The Towers of")
