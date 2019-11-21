@@ -48,8 +48,8 @@
    "#+DATE: %s
 #+OPTIONS: toc:nil num:nil todo:nil pri:nil tags:nil ^:nil \\n:t
 #+CATEGORY: %s
-#+TAGS: 
-#+DESCRIPTION: 
+#+TAGS:
+#+DESCRIPTION:
 #+TITLE: %s
 
 ")
@@ -380,7 +380,7 @@
 ;;      )
 
 ;; 閉じカッコを自動的に
-;; (setq skk-auto-insert-paren t)		  
+;; (setq skk-auto-insert-paren t)
 
 ;; 送り仮名が厳密に正しい候補を優先して表示
 ;; (setq skk-henkan-strict-okuri-precedence t)
@@ -488,31 +488,16 @@
 (require 'org2blog-autoloads)
 
 (defun org2blog_new ()
-(setq org2blog/wp-blog-alist 
-       '(("wordpress" 
-	  :url "http://new.a9ne.com/xmlrpc.php" ;;xmlrcp.phpのURL
-          :username "kijima"  
-          :password "wvk9anqqaazz" 
+(setq org2blog/wp-blog-alist
+       '(("wordpress"
+		  :url "http://test.com/xmlrpc.php" ;;xmlrcp.phpのURL
+          :username "user"
+          :password "password"
           :default-title "" ;; デフォルトタイトル
           :default-categories nil ;; カテゴリを指定
           :tags-as-categories nil))) ;; タグを指定
 (org2blog/wp-login)
-(org2blog/wp-new-entry)
-)
-
-
-(defun org2blog_a9ne ()
-(setq org2blog/wp-blog-alist 
-       '(("wordpress" 
-	  :url "http://a9ne.com/xmlrpc.php" ;;xmlrcp.phpのURL
-          :username "kijima"  
-          :password "11qqaazz" 
-          :default-title "" ;; デフォルトタイトル
-          :default-categories nil ;; カテゴリを指定
-          :tags-as-categories nil)));; タグを指定
-(org2blog/wp-login)
-(org2blog/wp-new-entry)
-)
+(org2blog/wp-new-entry))
 
 ;; 自動保存 auto-save-buffers-enhanced ====
 (require 'auto-save-buffers-enhanced)
@@ -565,14 +550,6 @@
 
 ;; ediffを１ウィンドウで表示
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-
-;; 空白
-;; (global-set-key [hiragana-katakana] '
-;; 		(lambda (&optional arg)
-;; 		  "Keyboard macro."
-;; 		  (interactive "p")
-;; 		  (kmacro-exec-ring-item
-;; 		   (quote(" " 0 "%d"))arg)))
 
 ;; 自動最大化
 (require 'maxframe)
@@ -772,7 +749,7 @@
   (if mark-active
       (format "[%dL%dw%dc]"
               (count-lines (region-beginning) (region-end))
-              (how-many "[^ 	
+              (how-many "[^
 ]+" (region-beginning) (region-end))
 ;              (how-many "\\w+" (region-beginning) (region-end))
               (- (region-end) (region-beginning)))
@@ -880,7 +857,7 @@
 
 (global-set-key (kbd "<f5>") 'revert-buffer-no-confirm)
 
-;;++++++++++++++++++++++++;; 
+;;++++++++++++++++++++++++;;
 ;; markdown-mode settings ;;
 ;;++++++++++++++++++++++++;;
 (use-package markdown-mode
@@ -909,3 +886,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 " ))
+
+;; 空白を自動削除(どうして今までなかったのか)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
