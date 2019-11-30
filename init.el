@@ -505,8 +505,8 @@
 ;; 変更があったら自動で更新
 (global-auto-revert-mode 1)
 
-;;; 1秒後に保存
-(setq auto-save-buffers-enhanced-interval 1)
+;;; 5秒後に保存
+(setq auto-save-buffers-enhanced-interval 5)
 ;;; 特定のファイルのみ有効にする
 (setq auto-save-buffers-enhanced-include-regexps '(".+")) ;全ファイル
 ;; not-save-fileと.ignoreは除外する
@@ -789,7 +789,7 @@
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)
  (jedi:setup)
-  (define-key jedi-mode-map (kbd "<C-tab>") nil) ;;C-tabはウィンドウの移動に用いる
+  ;; (define-key jedi-mode-map (kbd "<C-tab>") nil) ;;C-tabはウィンドウの移動に用いる
   (setq jedi:complete-on-dot t)
   (setq ac-sources
     (delete 'ac-source-words-in-same-mode-buffers ac-sources)) ;;jediの補完候補だけでいい
@@ -799,7 +799,7 @@
   ;; (define-key python-mode-map "\C-cb" 'jedi:goto-definition-pop-marker)
   ;; (define-key python-mode-map "\C-cr" 'helm-jedi-related-names)
 
-;; 整形…起動時に読み込めてない気がする
+;; 整形
 (require 'py-autopep8)
 (setq py-autopep8-options '("--max-line-length=200"))
 (setq flycheck-flake8-maximum-line-length 200)
@@ -857,35 +857,28 @@
 
 (global-set-key (kbd "<f5>") 'revert-buffer-no-confirm)
 
-;;++++++++++++++++++++++++;;
-;; markdown-mode settings ;;
-;;++++++++++++++++++++++++;;
-(use-package markdown-mode
-         :commands (markdown-mode gfm-mode)
-         :mode (("\\.md\\'" . gfm-mode)
-            ("\\.markdown\\'" . gfm-mode))
-         :config
-         (setq
-          markdown-command "github-markup"
-          markdown-command-needs-filename t
-          markdown-content-type "application/xhtml+xml"
-          markdown-css-paths '("https://cdn.jsdelivr.net/npm/github-markdown-css/github-markdown.min.css")
-          markdown-xhtml-header-content "
-<style>
-body {
-  box-sizing: border-box;
-  max-width: 740px;
-  width: 100%;
-  margin: 40px auto;
-  padding: 0 10px;
-}
-</style>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  document.body.classList.add('markdown-body');
-});
-</script>
-" ))
-
 ;; 空白を自動削除(どうして今までなかったのか)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;; edit server 起動
+;; (when (require 'edit-server nil t)
+;;   (setq edit-server-new-frame nil)
+;;   (setq edit-server-url-major-mode-alist
+;;         '(("wiki\\.a9ne\\.com" . markdown-mode)))
+;;   (edit-server-start))
+
+
+;; migemo
+(when (and (executable-find "cmigemo")
+           (require 'migemo nil t))
+  (setq migemo-options '("-q" "--emacs"))
+
+  (setq migemo-user-dictionary nil)
+  (setq migemo-regex-dictionary nil)
+  (setq migemo-coding-system 'utf-8-unix)
+  (load-library "migemo")
+  (migemo-init)
+)
+(setq migemo-command "cmigemo")
+
+(setq migemo-dictionary "/usr/share/cmigemo/utf-8/migemo-dict")
