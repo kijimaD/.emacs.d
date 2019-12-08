@@ -16,3 +16,4 @@ cd
 cd roguelike/tests/unit
 autorun_pytest.py ~/roguelike/src pytest py
 python
+python3 tkinter.py
