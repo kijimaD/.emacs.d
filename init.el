@@ -57,7 +57,7 @@
  '(org2blog/wp-show-post-in-browser nil)
  '(package-selected-packages
    (quote
-	(django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
+	(dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
  '(pdf-view-midnight-colors (quote ("#232333" . "#c7c7c7")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -99,24 +99,25 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Cica" :slant normal :weight normal :height 80 :width normal :foundry "TMNM")))))
+ '(default ((t (:family "Fira Code" :slant normal :weight regular :height 70 :width normal :foundry "DS  ")))))
 
-;; (set-fontset-font t 'japanese-jisx0208 (font-spec :family "Ricty Diminished Discord"))
+;; (set-fontset-font t 'japanese-jisx0208 (font-spec :family "Takao Pゴシック"))
+(set-fontset-font t 'japanese-jisx0208 (font-spec :family "Noto Sans CJK JP"))
 
 ;; (setq dired-default-file-coding-system 'utf-8-unix)
 ;; (setq default-buffer-file-coding-system 'utf-8-unix)
 ;; (set-buffer-file-coding-system 'utf-8-unix)
-;; (set-terminal-coding-system 'utf-8-unix)
-;; (set-keyboard-coding-system 'utf-8-unix)
+;; (set-terminal-coding-system 'utf-8-unix);; (set-keyboard-coding-system 'utf-8-unix)
 ;; (set-clipboard-coding-system 'utf-8-unix)
 
 ;; (set-default-coding-systems 'utf-8-unix)
 ;; (setq locale-coding-system 'utf-8)
 
+;; リスケール
+(add-to-list 'face-font-rescale-alist '(".*Takao P.*" . 0.9))
+(add-to-list 'face-font-rescale-alist '(".*Noto Sans CJK.*" . 0.85))
 
 ;; 全般的 ==================================================
-
-;;; カスタムテーマをロードする。後ろに置くと動作するので、ロードが二度手間になってるのが気になるが、まあいいだろう・・・。
 ;; (setq custom-theme-directory "~/.emacs.d/elpa/zenburn-theme-2.1/")
 ;; (load-theme 'zenburn t)
 
@@ -630,7 +631,7 @@
 ;; 使い捨てのファイルを開く
 (require 'open-junk-file)
 ;; ファイル名入力時に ~/junk/-年-月-日-時-秒.が出てくる
-(setq open-junk-file-format "~/junk/%Y-%m-%d-%H%M%S.")
+(setq open-junk-file-format "~/Dropbox/junk/%Y-%m-%d-%H%M%S.")
 (global-set-key (kbd "C-x C-z") 'open-junk-file)
 
 ;; 自動コンパイルを無効にするファイル名の正規表現
@@ -939,5 +940,15 @@
 '(("php"    . "\\.phtml\\'")
   ("blade"  . "\\.blade\\.")))
 
-; django-modeでC-t(グローバルでバッファ移動)を無効化する
-(define-key django-mode-map (kbd "C-t") nil)
+; django-modeのC-tキーバインドを無効化する
+(eval-after-load "django-mode"
+  '(progn
+	 (define-key django-mode-map (kbd "C-t") nil)
+	 ))
+;; (define-key django-mode-map (kbd "C-t") nil)
+
+;; edit with Emacs(Firefox)
+(require 'edit-server)
+(edit-server-start)
+(setq edit-server-new-frame nil)
+;; ほぼdokuwikiで使用するので、モードをフックしたい

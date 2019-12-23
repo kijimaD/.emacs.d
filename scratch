@@ -1,6 +1,8 @@
 
 (menu-bar-mode 1)
 (menu-bar-mode 0)
+(font-family-list)
+(setq evel-expression-print-level nil)
 ;;; (float-time)
 ; (cl-loop)
 ;; (expt 2 2)
