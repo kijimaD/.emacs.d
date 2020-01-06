@@ -900,16 +900,15 @@
 
 (global-set-key (kbd "<f5>") 'revert-buffer-no-confirm)
 
-;; 空白を自動削除(どうして今までなかったのか)
+;; 空白を自動削除
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;; edit server 起動
-;; (when (require 'edit-server nil t)
-;;   (setq edit-server-new-frame nil)
-;;   (setq edit-server-url-major-mode-alist
-;;         '(("wiki\\.a9ne\\.com" . markdown-mode)))
-;;   (edit-server-start))
-
+; edit server起動(firefox)
+(when (require 'edit-server nil t)
+  (setq edit-server-new-frame nil)
+  (setq edit-server-url-major-mode-alist
+        '(("wiki\\.a9ne\\.com" . dokuwiki-mode)))
+  (edit-server-start))
 
 ;; migemo
 (when (and (executable-find "cmigemo")
@@ -925,8 +924,7 @@
 (setq migemo-command "cmigemo")
 (setq migemo-dictionary "/usr/share/cmigemo/utf-8/migemo-dict")
 
-; web-mode
-
+;; web-mode
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
@@ -945,10 +943,3 @@
   '(progn
 	 (define-key django-mode-map (kbd "C-t") nil)
 	 ))
-;; (define-key django-mode-map (kbd "C-t") nil)
-
-;; edit with Emacs(Firefox)
-(require 'edit-server)
-(edit-server-start)
-(setq edit-server-new-frame nil)
-;; ほぼdokuwikiで使用するので、モードをフックしたい
