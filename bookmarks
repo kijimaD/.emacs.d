@@ -50,7 +50,7 @@
  (rear-context-string)
  (position . 1))
 ("tetris_code"
- (filename . "/usr/share/emacs/24.5/lisp/play/tetris.el.gz")
+ (filename . "/usr/share/emacs/25.2/lisp/play")
  (front-context-string . "(defun tetris ()")
  (rear-context-string . "\n;;;###autoload\n")
  (position . 17757))

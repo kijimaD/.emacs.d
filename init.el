@@ -10,27 +10,27 @@
  '(custom-enabled-themes (quote (tango-dark)))
  '(custom-safe-themes
    (quote
-	("67e998c3c23fe24ed0fb92b9de75011b92f35d3e89344157ae0d544d50a63a72" "5cd0afd0ca01648e1fff95a7a7f8abec925bd654915153fb39ee8e72a8b56a1f" "06ffa2bf4e891580bfe6a5ce68d0909ed9c4278e5234ede6b3ba459ef35d9a1b" "dd4db38519d2ad7eb9e2f30bc03fba61a7af49a185edfd44e020aa5345e3dca7" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "62c80c6889010c3f0656e81ae201754058fd44743076f8dc56c595c2b9b5e298" "e1994cf306356e4358af96735930e73eadbaf95349db14db6d9539923b225565" "357d5abe6f693f2875bb3113f5c031b7031f21717e8078f90d9d9bc3a14bcbd8" "e8825f26af32403c5ad8bc983f8610a4a4786eb55e3a363fa9acb48e0677fe7e" "cdd26fa6a8c6706c9009db659d2dffd7f4b0350f9cc94e5df657fa295fffec71" "18a33cdb764e4baf99b23dcd5abdbf1249670d412c6d3a8092ae1a7b211613d5" "fe243221e262fe5144e89bb5025e7848cd9fb857ff5b2d8447d115e58fede8f7" "66881e95c0eda61d34aa7f08ebacf03319d37fe202d68ecf6a1dbfd49d664bc3" "b9293d120377ede424a1af1e564ba69aafa85e0e9fd19cf89b4e15f8ee42a8bb" "28ec8ccf6190f6a73812df9bc91df54ce1d6132f18b4c8fcc85d45298569eb53" "3eb93cd9a0da0f3e86b5d932ac0e3b5f0f50de7a0b805d4eb1f67782e9eb67a4" "251348dcb797a6ea63bbfe3be4951728e085ac08eee83def071e4d2e3211acc3" "6db9acac88c82f69296751e6c6d808736d6ff251dcb34a1381be86efc14fef54" "64ca5a1381fa96cb86fd6c6b4d75b66dc9c4e0fc1288ee7d914ab8d2638e23a9" "721bb3cb432bb6be7c58be27d583814e9c56806c06b4077797074b009f322509" "946e871c780b159c4bb9f580537e5d2f7dba1411143194447604ecbaf01bd90c" "ace9f12e0c00f983068910d9025eefeb5ea7a711e774ee8bb2af5f7376018ad2" "55d31108a7dc4a268a1432cd60a7558824223684afecefa6fae327212c40f8d3" default)))
+    ("67e998c3c23fe24ed0fb92b9de75011b92f35d3e89344157ae0d544d50a63a72" "5cd0afd0ca01648e1fff95a7a7f8abec925bd654915153fb39ee8e72a8b56a1f" "06ffa2bf4e891580bfe6a5ce68d0909ed9c4278e5234ede6b3ba459ef35d9a1b" "dd4db38519d2ad7eb9e2f30bc03fba61a7af49a185edfd44e020aa5345e3dca7" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "62c80c6889010c3f0656e81ae201754058fd44743076f8dc56c595c2b9b5e298" "e1994cf306356e4358af96735930e73eadbaf95349db14db6d9539923b225565" "357d5abe6f693f2875bb3113f5c031b7031f21717e8078f90d9d9bc3a14bcbd8" "e8825f26af32403c5ad8bc983f8610a4a4786eb55e3a363fa9acb48e0677fe7e" "cdd26fa6a8c6706c9009db659d2dffd7f4b0350f9cc94e5df657fa295fffec71" "18a33cdb764e4baf99b23dcd5abdbf1249670d412c6d3a8092ae1a7b211613d5" "fe243221e262fe5144e89bb5025e7848cd9fb857ff5b2d8447d115e58fede8f7" "66881e95c0eda61d34aa7f08ebacf03319d37fe202d68ecf6a1dbfd49d664bc3" "b9293d120377ede424a1af1e564ba69aafa85e0e9fd19cf89b4e15f8ee42a8bb" "28ec8ccf6190f6a73812df9bc91df54ce1d6132f18b4c8fcc85d45298569eb53" "3eb93cd9a0da0f3e86b5d932ac0e3b5f0f50de7a0b805d4eb1f67782e9eb67a4" "251348dcb797a6ea63bbfe3be4951728e085ac08eee83def071e4d2e3211acc3" "6db9acac88c82f69296751e6c6d808736d6ff251dcb34a1381be86efc14fef54" "64ca5a1381fa96cb86fd6c6b4d75b66dc9c4e0fc1288ee7d914ab8d2638e23a9" "721bb3cb432bb6be7c58be27d583814e9c56806c06b4077797074b009f322509" "946e871c780b159c4bb9f580537e5d2f7dba1411143194447604ecbaf01bd90c" "ace9f12e0c00f983068910d9025eefeb5ea7a711e774ee8bb2af5f7376018ad2" "55d31108a7dc4a268a1432cd60a7558824223684afecefa6fae327212c40f8d3" default)))
  '(fci-rule-color "#2e2e2e")
  '(fringe-mode 0 nil (fringe))
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
  '(highlight-tail-colors
    (quote
-	(("#eee8d5" . 0)
-	 ("#B4C342" . 20)
-	 ("#69CABF" . 30)
-	 ("#69B7F0" . 50)
-	 ("#DEB542" . 60)
-	 ("#F2804F" . 70)
-	 ("#F771AC" . 85)
-	 ("#eee8d5" . 100))))
+    (("#eee8d5" . 0)
+     ("#B4C342" . 20)
+     ("#69CABF" . 30)
+     ("#69B7F0" . 50)
+     ("#DEB542" . 60)
+     ("#F2804F" . 70)
+     ("#F771AC" . 85)
+     ("#eee8d5" . 100))))
  '(line-number-mode nil)
  '(nrepl-message-colors
    (quote
-	("#336c6c" "#205070" "#0f2050" "#806080" "#401440" "#6c1f1c" "#6b400c" "#23733c")))
+    ("#336c6c" "#205070" "#0f2050" "#806080" "#401440" "#6c1f1c" "#6b400c" "#23733c")))
  '(org-agenda-files
    (quote
-	("/home/daigo3/org/art.org" "/home/daigo3/org/book.org" "/home/daigo3/org/bousai.org" "/home/daigo3/org/chinese.org" "/home/daigo3/org/chinese_learn.org" "/home/daigo3/org/config.org" "/home/daigo3/org/data.org" "/home/daigo3/org/diary.org" "/home/daigo3/org/eng_portfolio.org" "/home/daigo3/org/entertainment.org" "/home/daigo3/org/gasyuku.org" "/home/daigo3/org/gomi.org" "/home/daigo3/org/gorakumath.org" "/home/daigo3/org/ibunkarikai.org" "/home/daigo3/org/index.org" "/home/daigo3/org/info.org" "/home/daigo3/org/jikanwari.org" "/home/daigo3/org/jikanwari2.org" "/home/daigo3/org/jinsei_to_deai.org" "/home/daigo3/org/jisinkazan.org" "/home/daigo3/org/kadai.jpn.org" "/home/daigo3/org/keikaku.org" "/home/daigo3/org/kyarikoi.org" "/home/daigo3/org/labor.org" "/home/daigo3/org/memo.org" "/home/daigo3/org/mokuhyo.org" "/home/daigo3/org/other.org" "/home/daigo3/org/other2.org" "/home/daigo3/org/reg.org" "/home/daigo3/org/roudouhou.org" "/home/daigo3/org/ryuugaku.org" "/home/daigo3/org/schedule.org" "/home/daigo3/org/speech_bukai.org" "/home/daigo3/org/taiiku.org" "/home/daigo3/org/think.org" "/home/daigo3/org/trip.org" "/home/daigo3/org/web.org" "/home/daigo3/org/writer.org")))
+    ("/home/daigo3/org/art.org" "/home/daigo3/org/book.org" "/home/daigo3/org/bousai.org" "/home/daigo3/org/chinese.org" "/home/daigo3/org/chinese_learn.org" "/home/daigo3/org/config.org" "/home/daigo3/org/data.org" "/home/daigo3/org/diary.org" "/home/daigo3/org/eng_portfolio.org" "/home/daigo3/org/entertainment.org" "/home/daigo3/org/gasyuku.org" "/home/daigo3/org/gomi.org" "/home/daigo3/org/gorakumath.org" "/home/daigo3/org/ibunkarikai.org" "/home/daigo3/org/index.org" "/home/daigo3/org/info.org" "/home/daigo3/org/jikanwari.org" "/home/daigo3/org/jikanwari2.org" "/home/daigo3/org/jinsei_to_deai.org" "/home/daigo3/org/jisinkazan.org" "/home/daigo3/org/kadai.jpn.org" "/home/daigo3/org/keikaku.org" "/home/daigo3/org/kyarikoi.org" "/home/daigo3/org/labor.org" "/home/daigo3/org/memo.org" "/home/daigo3/org/mokuhyo.org" "/home/daigo3/org/other.org" "/home/daigo3/org/other2.org" "/home/daigo3/org/reg.org" "/home/daigo3/org/roudouhou.org" "/home/daigo3/org/ryuugaku.org" "/home/daigo3/org/schedule.org" "/home/daigo3/org/speech_bukai.org" "/home/daigo3/org/taiiku.org" "/home/daigo3/org/think.org" "/home/daigo3/org/trip.org" "/home/daigo3/org/web.org" "/home/daigo3/org/writer.org")))
  '(org-log-into-drawer nil)
  '(org-pomodoro-expiry-time 120000)
  '(org-pomodoro-finished-sound
@@ -57,7 +57,7 @@
  '(org2blog/wp-show-post-in-browser nil)
  '(package-selected-packages
    (quote
-	(dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
+    (dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
  '(pdf-view-midnight-colors (quote ("#232333" . "#c7c7c7")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -66,33 +66,34 @@
  '(vc-annotate-background "#3b3b3b")
  '(vc-annotate-color-map
    (quote
-	((20 . "#dd5542")
-	 (40 . "#CC5542")
-	 (60 . "#fb8512")
-	 (80 . "#baba36")
-	 (100 . "#bdbc61")
-	 (120 . "#7d7c61")
-	 (140 . "#6abd50")
-	 (160 . "#6aaf50")
-	 (180 . "#6aa350")
-	 (200 . "#6a9550")
-	 (220 . "#6a8550")
-	 (240 . "#6a7550")
-	 (260 . "#9b55c3")
-	 (280 . "#6CA0A3")
-	 (300 . "#528fd1")
-	 (320 . "#5180b3")
-	 (340 . "#6380b3")
-	 (360 . "#DC8CC3"))))
+    ((20 . "#dd5542")
+     (40 . "#CC5542")
+     (60 . "#fb8512")
+     (80 . "#baba36")
+     (100 . "#bdbc61")
+     (120 . "#7d7c61")
+     (140 . "#6abd50")
+     (160 . "#6aaf50")
+     (180 . "#6aa350")
+     (200 . "#6a9550")
+     (220 . "#6a8550")
+     (240 . "#6a7550")
+     (260 . "#9b55c3")
+     (280 . "#6CA0A3")
+     (300 . "#528fd1")
+     (320 . "#5180b3")
+     (340 . "#6380b3")
+     (360 . "#DC8CC3"))))
  '(vc-annotate-very-old-color "#DC8CC3")
+ '(wc-goal-modeline-format "WC[%C%c/%tc]")
  '(when
-	  (or
-	   (not
-		(boundp
-		 (quote ansi-term-color-vector)))
-	   (not
-		(facep
-		 (aref ansi-term-color-vector 0))))))
+      (or
+       (not
+	(boundp
+	 (quote ansi-term-color-vector)))
+       (not
+	(facep
+	 (aref ansi-term-color-vector 0))))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -206,7 +207,7 @@
 (global-set-key (kbd "[") 'skeleton-pair-insert-maybe)
 (global-set-key (kbd "\"") 'skeleton-pair-insert-maybe)
 (global-set-key (kbd "<") 'skeleton-pair-insert-maybe)
-(global-set-key (kbd "'") 'skeleton-pair-insert-maybe)
+;; (global-set-key (kbd "'") 'skeleton-pair-insert-maybe)
 (setq skeleton-pair 1)
 
 ;;インデント
@@ -797,8 +798,8 @@
 ;              (how-many "\\w+" (region-beginning) (region-end))
               (- (region-end) (region-beginning)))
     ""))
-(add-to-list 'default-mode-line-format
-             '(:eval (count-lines-and-chars)))
+;; (add-to-list 'default-mode-line-format
+;;              '(:eval (count-lines-and-chars)))
 
 ;セッションの永続化
 (psession-mode 1)
@@ -903,12 +904,13 @@
 ;; 空白を自動削除
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-; edit server起動(firefox)
+; edit server起動(Firefox)
 (when (require 'edit-server nil t)
   (setq edit-server-new-frame nil)
   (setq edit-server-url-major-mode-alist
         '(("wiki\\.a9ne\\.com" . dokuwiki-mode)))
   (edit-server-start))
+(add-hook 'edit-server-start-hook 'wc-goal-mode)
 
 ;; migemo
 (when (and (executable-find "cmigemo")

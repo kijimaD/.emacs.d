@@ -1,4 +1,3 @@
-
 (menu-bar-mode 1)
 (menu-bar-mode 0)
 (font-family-list)
@@ -10,7 +9,8 @@
 ;; (mod 200 2000.0)
 ;; (hanoi-move-period 1.0)
 ;; (setq hanoi-move-period 1)aaa
- d
+(tetris)
+(life 1)
 ;; (hanoi 54)aaaaaaaasafasaaaa
 aafaaafas¤¢¤¢¤¢¤¢
 ;; (setq show-trailing-whitesaaapace nil)
@@ -137,7 +137,7 @@ fj;lasdÍý¤ÎÃæ¤ð¥¤¥ó¥É¤ÎµíÆý¤È¸Æ¤Ð¤ì¤ë¤â¤Î¤Ë�
 ;; (loop for buf in (buffer-list)
 ;;       collect (buffer-name buf))
 
-
+q
 
 
 ;; (loop for buf in (buffer-list)
@@ -307,3 +307,9 @@ fj;lasdÍý¤ÎÃæ¤ð¥¤¥ó¥É¤ÎµíÆý¤È¸Æ¤Ð¤ì¤ë¤â¤Î¤Ë�
 
 
 sudo mirakurun config tuners
+
+(cons 'foo ())
+(setq foo-flag nil)
+(let ((map (make-sparse-keymap 'tetris-mode-map)))
+  (define-key map "n" 'tetris-start-game)
+  )
