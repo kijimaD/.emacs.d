@@ -313,3 +313,328 @@ sudo mirakurun config tuners
 (let ((map (make-sparse-keymap 'tetris-mode-map)))
   (define-key map "n" 'tetris-start-game)
   )
+
+(symbol-function 'car)
+(fset 'first 'car)
+(fset 'erste 'first)
+(erste '(1 2 3))
+'(1 2 3)
+
+((lambda (arg) (erste arg))
+ '(1 2 3))
+(funcall (lambda (arg) (erste arg))
+	 '(1 2 3))
+(let ((arg '(1 2 3))) (erste arg))
+(let ((arg '(1 2 3))) (erste arg))
+(defmacro cadr (x)
+  (list 'car (list 'cdr x)))
+(cadr (assq 'handler '(1 2)))
+(special-form-p 'or)
+(special-form-p 'and)
+(special-form-p 'defconst)
+(and)
+(quote (+ 1 2))
+(+ 1 2)
+(quote foo)
+foo
+'foo
+foo
+'(2 3 4)
+(2 3 4)
+['foo]
+foo
+['foo]
+[(quote foo)]
+''foo
+(quote foo)
+'''foo
+(quote (quote foo))
+'(+)
+(+)
+(+ 2 3)
+5
+`(a list of (+ 2 3) elements)
+(a list of (+ 2 3) elements)
+`(a list of ,(+ 2 3) elements)
+(a list of 5 elements)
+
+`(1 2 (3 ,(+ 4 5)))
+(1 2 (3 9))
+(setq some-list '(2 3))
+(2 3)
+(cons 1 (append some-list '(4) some-list))
+(1 2 3 4 2 3)
+`(1 ,@some-list 4 ,@some-list)
+(1 2 3 4 2 3)
+
+(setq list '(hack foo bar))
+(hack foo bar)
+(cons 'use
+ (cons 'the
+       (cons 'words (append (cdr list) '(as elements)))))
+(use the words foo bar as elements)
+
+`(use the words ,@(cdr list) as el)
+
+(setq foo 'bar)
+bar
+(eval 'foo)				;evalが引数barを受け取る
+bar
+
+(setq bar 'baz)
+baz
+(eval foo)				;evalがfooの値である、引数barを受け取る。2段階！
+baz
+
+(interactive)
+(if rstart
+    (setq rend (max rstart rend))
+  (if (and (called-interactively-p 'interactive)
+	   transient-mark-mode mark-active)
+      (setq rstart (region-beginning)
+	    rend (region-end))
+    (setq rstart (point-min)
+	  rend (point-max))))
+(let ((wcount (funcall wc-goal-count-words-function rstart rend))
+      (lcount (funcall wc-goal-count-lines-function rstart rend))
+      (ccount (funcall wc-goal-count-chars-function rstart rend)))
+  (when (called-interactively-p 'interactive)
+    (message "%d line%s, %d word%s, %d char%s"
+	     lcount
+	     (if (= lcount 1) "" "s")
+	     wcount
+	     (if (= wcount 1) "" "s")
+	     ccount
+	     (if (= ccount 1) "" "s")))
+  (if field
+      (nth field (list lcount wcount ccount))
+    (list lcount wcount ccount)))
+
+;; p.95
+;; ペアとしての線分と点
+
+(defun make-segment(start-point end-point)
+  (cons start-point end-point))
+
+(defun start-segment(segment)
+  "始点を返す"
+  (car segment))
+
+(defun end-segment(segment)
+  (cdr segment))
+
+(defun make-point(x y)
+  (cons x y))
+
+(defun x-point(point)
+  "x座標を返す"
+  (car point))
+
+(defun y-point(point)
+  (cdr point))
+
+;; 座標計算
+
+(defun add-point(start end)
+  (make-point(+ (x-point start) (x-point end))
+			 (+ (y-point start) (y-point end))))
+
+(defun midpoint-segment(segment)
+  (let ((start-point start-segment(segment))
+		(end-point end-segmnet(segment)))
+	(/ (add-point (start-point end-point)) 2)))
+
+;; 問題ドメイン
+
+(defun point1()
+  (make-point 2 3))
+(defun point2()
+  (make-point 1 1))
+(defun segment1(point1 point2)
+  (make-segment(point1 point2)))
+
+(print-point(point1))
+
+;; チェック
+
+(defun x-point(x)
+  (car x))
+
+(defun y-point(y)
+  (cdr y))
+
+(defun print-point(p)
+  "for check"
+  (message (x-point p))
+  (message (y-point p))
+  )
+
+;; 希望的思考
+(x1 y1)は始点
+(x2 y2)は終点
+((start) (end))は線分
+((x1 y1) + (x2 y2)) / 2 = (mid-x mid-y)
+
+(defun a(x . y)
+  ()
+  )
+(defun b())
+(a 1 2 3 4)
+
+(defun scale-list(items factor)
+  (if (null items)
+	  nil
+	(cons (* (car items) factor)
+		  (scale-list (cdr items)
+					  factor))))
+(scale-list (list 1 2 3 4 5) 10)
+
+(defun square-list (items)
+  (if (null items)
+	  nil
+	(cons (* (car items) (car items))
+			 (square-list (cdr items)))))
+(square-list (list 1 2 3 4 5))
+(defun square-list (items)
+  (mapcar (lambda (x) (* x x))
+	   items))
+
+(defun scale-list (items factor)
+  (mapcar (lambda (x) (* x factor))
+	   items))
+(scale-list (list 1 2 3 4 5) 5)
+
+(for-each (lambda (x)
+			(newline)
+			(display x))
+		  (list 57 321 88))
+
+(defun for-each(list)
+  (mapcar (lambda (x) (message x))
+		  list)
+  )
+
+(cons (list 1 2) (list 3 4))
+
+(defun x()
+  (list 1 2 3))
+
+(defun y()
+  (list 4 5 6))
+(append (x) (y))
+(cons (x) (y))
+(list (x) (y))
+
+(defin (make-sum a1 a2)
+  (cond ((=number? a1 0) a2)
+	((=number? a2 0) a1)
+	((and (number? a1) (number? a2))
+	 (+ a1 a2))
+	(else (list '+ a1 a2))))
+
+(define (=number? exp num  ))
+
+(define (make-product m1 m2)
+  (cond ((or (=number? m1 0) (=number? m2 0)) 0)
+	((=number? m1 1) m2)
+	((=number? m2 1) m1)
+	((and (number? m1) (number? m2)) (* m1 m2))
+	(else (list '* m1 m2))))
+
+(deriv '(+ x 3) 'x)
+(deriv '(* x y) 'x)
+
+(evaluate '(add 1 2 ) nil)
+(evaluutea)
+
+(define (probe name connector)
+  (define (print-probe value)
+    (newline) (display "probe: ") (display name)
+    (display ' = ') (display value))
+  (define (process-new-value)
+    (print-probe (get-value connector)))
+  (define (process-forget-value) (print-probe "?"))
+  (define (me request)
+    (cond ((eq? request 'I-have-a-value) (process-new-value))
+	  ((eq? request 'I-lost-my-value) (process-forget-value))
+	  (else (error "Unknown request: PROBE" request))))
+  (connect connector me)
+  me)
+
+(define (make-connector)
+  (let ((value false) (informant false) (constraints '()))
+    (define (set-my-value newval setter)
+      (cond ((not (has-value? me))
+	     (set! value newval)
+	     (set! informant setter)
+	     (for-each-except setter
+			      inform-about-value
+			      constraints))
+	    ((not (= value newval))
+	     (error "Contradiction" (list value newval)))
+	    (else 'ignored)))
+    (define (forget-my-value retractor)
+      (if (eq? retractor informant)
+	  (begin (set! informant false)
+		 (for-each-except retractor
+				  'ignored))
+	(define (connect new-constraint)
+	  (if (not (memq new-constraint constraints))
+	      (set! constraints
+		    (cons new-constraint constraints)))
+	  (if (has-value? me)
+	      (inform-about-value new-constraint))
+	  'done)
+	(define (me request)
+	  (cond ((eq? request 'has-value?)
+		 (if informant true false))
+		((eq? request 'value) value)
+		((eq? request 'set-value!) set-my-value)
+		((eq? request 'forget) forget-my-value)
+		((eq? request 'connect) connect)
+		(else (error "Unknown operation: CONNECTOR" request))))
+	me))))
+
+(define (eval-if exp env)
+  (if (true? (eval (if-predicate exp) env))
+      (eval (if-consequent exp) env)
+    (eval (if-alternative exp) env)))
+
+(define (begin? exp) (tagged-list? exp 'begin))
+(define (begin-actions exp) (cdr exp))
+(define (last-exp? seq) (null? (cdr seq)))
+(define (first-exp seq) (car seq))
+(define (rest-exps seq) (cdr seq))
+
+(define (primitive-procedure? proc)
+  (tagged-list? proc 'primitive))
+(define (primitive-implementation proc) (cadr proc))
+
+(define the-global-environment (setup-environment))
+(driver-loop)
+
+(define (append x y)
+  (if null? x)
+  y
+  (cons (car x) append(cdr x) hyhhy
+
+	))
+
+(define (analyze-assignment exp)
+  (let ((var (assignment-variable exp))
+		(vproc (analyze (assgnment-value exp))))
+	(lambda (env succeed fail)
+	  (vproc env
+			 (lambda (val fail2)
+			   (let ((old-value
+					  (loopup-varible-value var env)))
+				 (set-variable-value! var val env)
+				 (succeed 'ok
+						  (lambda ()
+							(set-variable-value!
+							 var old-value env)
+							(fail2)))))
+			 fail))))
+(rule (wheel ?person)
+	  (and (supervisor ?middle-manager ?person)
+		   (supervisor ?x ?middle-manager)))

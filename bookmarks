@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("aliens.py"
+(("junk"
+ (filename . "~/Dropbox/junk/")
+ (front-context-string . " 2019-12-28-1626")
+ (rear-context-string . " 98 12月 30 12:20")
+ (position . 1355))
+("aliens.py"
  (filename . "/usr/local/lib/python2.7/dist-packages/pygame/examples/aliens.py")
  (front-context-string . "\n\ndef load_image")
  (rear-context-string . "th(__file__))[0]")

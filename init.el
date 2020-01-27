@@ -57,7 +57,7 @@
  '(org2blog/wp-show-post-in-browser nil)
  '(package-selected-packages
    (quote
-    (dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
+    (org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
  '(pdf-view-midnight-colors (quote ("#232333" . "#c7c7c7")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -100,10 +100,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Fira Code" :slant normal :weight regular :height 70 :width normal :foundry "DS  ")))))
+ '(default ((t (:family "源ノ角ゴシック Code JP" :slant normal :weight bold :height 64 :width normal :foundry "ADBO")))))
 
 ;; (set-fontset-font t 'japanese-jisx0208 (font-spec :family "Takao Pゴシック"))
-(set-fontset-font t 'japanese-jisx0208 (font-spec :family "Noto Sans CJK JP"))
+;; (set-fontset-font t
+;; 		  'japanese-jisx0208
+;; 		  (font-spec :family "Noto Sans CJK JP"))
 
 ;; (setq dired-default-file-coding-system 'utf-8-unix)
 ;; (setq default-buffer-file-coding-system 'utf-8-unix)
@@ -114,7 +116,7 @@
 ;; (set-default-coding-systems 'utf-8-unix)
 ;; (setq locale-coding-system 'utf-8)
 
-;; リスケール
+;; 日本語と欧文フォントでサイズが違うのでリスケール
 (add-to-list 'face-font-rescale-alist '(".*Takao P.*" . 0.9))
 (add-to-list 'face-font-rescale-alist '(".*Noto Sans CJK.*" . 0.85))
 
@@ -936,6 +938,7 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.txt\\'" . dokuwiki-mode))
 (setq web-mode-engines-alist
 '(("php"    . "\\.phtml\\'")
   ("blade"  . "\\.blade\\.")))
@@ -943,5 +946,21 @@
 ; django-modeのC-tキーバインドを無効化する
 (eval-after-load "django-mode"
   '(progn
-	 (define-key django-mode-map (kbd "C-t") nil)
+     (define-key django-mode-map (kbd "C-t") nil)
 	 ))
+
+; org-modeで日誌バッファ作成とかぶるので無効化
+(define-key org-mode-map (kbd "C-c C-j") nil)
+(define-key org-mode-map (kbd "<S-left>") nil)
+(define-key org-mode-map (kbd "<S-right>") nil)
+
+;; 日誌
+(require 'org-journal)
+(setq org-journal-date-format "%x")
+(setq org-journal-time-format "<%Y-%m-%d %R> ")
+(setq org-journal-file-format "%Y%m%d.org")
+(setq org-journal-dir "~/Dropbox/repo/diary/org-journal")
+
+;; SSH
+(require 'tramp)
+(setq tramp-default-method "ssh")

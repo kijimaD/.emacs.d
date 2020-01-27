@@ -1,0 +1,422 @@
+[[http://melpa.org/#/org-journal][file:http://melpa.org/packages/org-journal-badge.svg]] [[http://stable.melpa.org/#/org-journal][file:http://stable.melpa.org/packages/org-journal-badge.svg]] [[contributors][file:https://img.shields.io/github/contributors/bastibe/org-journal.svg]] [[license][file:https://img.shields.io/github/license/bastibe/org-journal.svg]]
+
+#+CAPTION: The org-journal logo
+[[./org-journal.svg]]
+
+* org-journal
+
+  Adapted from https://www.emacswiki.org/emacs/PersonalDiary
+
+  Functions to maintain a simple personal diary / journal using in Emacs.
+
+  Feel free to use, modify and improve the code!
+  — mtvoid, bastibe
+
+[[open-issues][file:https://img.shields.io/github/issues/bastibe/org-journal.svg]] [[closed-issues][file:https://img.shields.io/github/issues-closed/bastibe/org-journal.svg]] [[open-pull-requests][file:https://img.shields.io/github/issues-pr/bastibe/org-journal.svg]] [[closed-pull-requests][file:https://img.shields.io/github/issues-pr-closed/bastibe/org-journal.svg]]
+
+** Synopsis
+
+=org-journal= maintains a set of files, depending on the value of
+=org-journal-file-type=, a file represents a day, week, month or year. When
+=org-journal-file-type= is set to ='daily=, each file represent a day. In case
+=org-journal-file-type= is set to ='weekly=, a file represents a week,
+etc. Convenient bindings allow the creation of journal records in the current
+daily, weekly, monthly or yearly file and search within all records or
+specified time intervals. All records can be browsed and searched from the
+Emacs Calendar for convenience. All entries in a specified TODO state will be
+carried over to the next day, see =org-journal-carryover-items=. Optionally,
+the journal entry can be encrypted, so can the file, see
+=org-journal-enable-encryption= and =org-journal-encrypt-journal=,
+respectively.
+
+Every journal entry must have a *CREATED* property when using yearly, monthly
+and weekly journal files. This property is added by =org-journal-new-entry=
+automatically.
+
+An example of a daily file (it will actually look a lot nicer, depending on
+your org-mode
+settings):
+
+#+BEGIN_SRC org
+  * Tuesday, 06/04/13
+  ** 10:28 Company meeting
+  Endless discussions about projects. Not much progress
+
+  ** 11:33 Work on org-journal
+  For the longest time, I wanted to have a cool diary app on my
+  computer. However, I simply lacked the right tool for that job. After
+  many hours of searching, I finally found PersonalDiary on EmacsWiki.
+  PersonalDiary is a very simple diary system based on the emacs
+  calendar. It works pretty well, but I don't really like that it only
+  uses unstructured text.
+
+  Thus, I spent the last two hours making that diary use org-mode
+  and represent every entry as an org-mode headline. Very cool!
+
+  ** 15:33 Work on org-journal
+  Now my journal automatically creates the right headlines (adds the
+  current time stamp if on the current day, does not add a time stamp
+  for any other day). Additionally, it automatically collapses the
+  headlines in the org-file to the right level (shows everything if in
+  view mode, shows only headlines in new-entry-mode). Emacs and elisp
+  are really cool!
+
+  ** 16:40 Work on org-journal
+  I uploaded my journal mode to marmalade and Github! Awesome!
+
+  ** TODO teach org-journal how to brew coffee
+#+END_SRC
+
+An example of a weekly/monthly/yearly journal file, see also
+=org-journal-file-type=.
+
+#+BEGIN_SRC
+  * Tuesday, 06/04/13
+    :PROPERTIES:
+    :CREATED:  20130604
+    :END:
+  ** 10:28 Company meeting
+  ...
+
+  ** 11:33 Work on org-journal
+  ...
+
+  ** 15:33 Work on org-journal
+  ...
+
+  ** 16:40 Work on org-journal
+  ...
+
+  * Wednesday, 06/05/13
+    :PROPERTIES:
+    :CREATED:  20130605
+    :END:
+  ** 10:28 A new day
+  ...
+
+  ** 11:33 Work is almost over
+  ...
+
+  ** TODO teach org-journal how to brew coffee
+#+END_SRC
+
+** Installation
+
+=org-journal= is available through [[http://marmalade-repo.org/][marmalade]], [[http://melpa.milkbox.net/][melpa]] and [[http://melpa-stable.milkbox.net/][melpa-stable]]. So installation
+should be trivial:
+
+#+BEGIN_EXAMPLE
+    M-x package-install org-journal
+#+END_EXAMPLE
+
+Then add =(require 'org-journal)= to your =.emacs=.
+
+** Quickstart
+
+Doing =M-x org-journal-new-entry= (or =C-c C-j=) will immediately create a journal
+directory in the default path (customized using the =org-journal-dir= variable), open or
+create a file in =org-journal-mode=, and insert a template for a new journal entry.
+
+The same command with a prefix argument (=C-u C-c C-j=) will do everything mentioned while
+skipping entry creation, which is useful for looking at the current journal file.
+
+** Basic Usage
+
+Bindings available in =org-journal-mode=:
+
+- =C-c C-f= - go to the next journal file.
+
+- =C-c C-b= - go to the previous journal file.
+
+- =C-c C-j= - insert a new entry into the current journal file (creates the file if not
+  present).
+
+- =C-c C-s= - search the journal for a string.
+
+All journal entries are registered in the Emacs Calendar. To see available journal
+entries do =M-x calendar=. Bindings available in the =calendar-mode=:
+
+- =j= - view an entry in a new buffer.
+
+- =C-j= - view an entry but do not switch to it.
+
+- =i j= - add a new entry into the day's file (creates the file if not present).
+
+- =f w= - search in all entries of the current week.
+
+- =f m= - search in all entries of the current month.
+
+- =f y= - search in all entries of the current year.
+
+- =f f= - search in all entries of all time.
+
+- =f F= - search in all entries in the future.
+
+- =[= - go to previous day with journal entries.
+
+- =]= - go to next day with journal entries.
+
+** Setup and customization
+
+The following variables can be customized through =M-x customize=, or configured programmatically in your =.init.el=.
+When configuring manually, the use of =customize-set-variable= is advised over =setq=, since =org-journal= has customization hooks that update auxiliary variables which might not be picked up if set via =setq=.
+
+See below for an example.
+
+*** Journal Directory and Files
+
+Customization options related to journal directory and files:
+
+- =org-journal-dir= - the journal path. Tweaking this variable will also update
+  =auto-mode-alist= to ensure journal files are opened in =org-journal-mode=.
+
+- =org-journal-file-format= - format string for journal file names (may contain directories relative to =org-journal-dir=).
+
+- =org-journal-find-file= - a function to use when opening a journal file. By default it
+  opens a window using =find-file-other-window=. Set this to =find-file= if you don't want
+  org-journal to split your window.
+
+- =org-extend-today-until= - a number that indicates the hour of
+  /your/ end of the day. If you create a new entry with
+  =org-journal-new-entry= earlier than this time, the journal entry
+  will go into the previous day's journal.
+
+- =org-journal-file-type= - the journal file type either 'daily (default),
+  'weekly, 'monthly or 'yearly.
+
+*** Journal File Content
+
+Customization options related to the journal file contents:
+
+- =org-journal-date-format= - date format =org-journal= uses when showing a date within a journal
+  and search results page. If set to a function, it is evaluated and inserted. This can be used to
+  insert, e.g. some text on a newly created journal file.
+
+  #+BEGIN_SRC emacs-lisp
+  (defun org-journal-date-format-func (time)
+    "Custom function to insert journal date header.
+
+    When buffer is empty prepend a header in front the entry header."
+    (concat (when (= (buffer-size) 0)
+              (concat
+               (pcase org-journal-file-type
+                 (`daily "#+TITLE: Daily Journal")
+                 (`weekly "#+TITLE: Weekly Journal")
+                 (`monthly "#+TITLE: Monthly Journal")
+                 (`yearly "#+TITLE: Yearly Journal"))))
+            org-journal-date-prefix
+            (format-time-string "%A, %x" time)))
+
+  (setq org-journal-date-format 'org-journal-date-format-func)
+  #+END_SRC
+
+- =org-journal-date-prefix= - this string will prefix the date at the top of a journal file.
+
+- =org-journal-time-format= - a timestamp format that will prefix every entry within a daily journal
+  file.
+
+- =org-journal-time-prefix= - a string that will prefix every entry within a daily journal file.
+
+*** An example setup
+
+A very basic example of customization.
+
+#+BEGIN_SRC emacs-lisp
+(customize-set-variable 'org-journal-dir "~/org/journal/")
+(customize-set-variable 'org-journal-date-format "%A, %d %B %Y")
+(require 'org-journal)
+#+END_SRC
+
+For users of =use-package=, this setup could look like the following:
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-journal
+  :ensure t
+  :defer t
+  :custom
+  (org-journal-dir "~/org/journal/")
+  (org-journal-date-format "%A, %d %B %Y"))
+#+END_SRC
+
+** Advanced Usage
+*** Searching the Journal
+
+=org-journal= has two searching options: the usual =org-mode= agenda search and the
+built-in plain text search. The former can become slow with bigger journals, so the
+built-in search is a recommended option.
+
+To use the agenda search, you can add all journal entries to your org-agenda by adding
+=org-journal-dir= to =org-agenda-files= and setting =org-agenda-file-regexp= to include
+files matching your =org-journal-file-pattern=.
+
+#+BEGIN_SRC emacs-lisp
+  ;; When =org-journal-file-pattern= has the default value, this would be the regex.
+  (setq org-agenda-file-regexp "\\`\\\([^.].*\\.org\\\|[0-9]\\\{8\\\}\\\(\\.gpg\\\)?\\\)\\'")
+  (add-to-list 'org-agenda-files org-journal-dir)
+#+END_SRC
+
+However, this can become /very/ slow if you have many journal entries. As a compromize,
+you can set =org-journal-enable-agenda-integration= to =t=, which automatically adds the
+current and all future journal entries to the agenda. This is enough to get an overview
+over current and future tasks.
+
+The built-in search is available through the following function: =org-journal-search=
+(=C-c C-s= in =org-journal-mode=). By default, it will ask for the time interval to search
+within (accepting the =org-read-date= format such as "-1y" or "-1m") and the string to
+search for. Given a prefix argument (=C-u org-journal-search=), it will go through the
+whole journal.
+
+The order of the search results (ascending or descending by date) can be customized using
+the =org-journal-search-results-order-by= variable.
+
+Search is also available through the Emacs Calendar as described in "Basic Usage".
+
+*** Carry Over
+
+By default, =org-journal= will try to /carry over/ previous day TODO-marked
+items whenever a new journal file is created. The older journal entry will be
+/moved/ (i.e., deleted and reinserted) to the current day's file.
+
+This feature is controlled through the =org-journal-carryover-items=
+variable. To disable this feature set =org-journal-carryover-items= to an
+empty string =""=. Any [[http://orgmode.org/manual/Matching-tags-and-properties.html][agenda tags view match string]], tags, properties, and
+todo states are allowed. By default this is ~TODO=”TODO”~. Which will
+match TODO items.
+
+*** Encryption
+
+The journal entry can be encrypted using =org-crypt=, to enable it set
+~org-journal-enable-encryption~ to =t=.
+
+You can also encrypt the journal files itself by setting the variable
+~org-journal-encrypt-journal~ to =t=. =org-journal= will always search for
+journal files with the =.gpg= extension, and highlights them in the calendar,
+etc., regardless of the value of ~org-journal-encrypt-journal~.
+See the info page =(info "(epa)Encrypting/decrypting gpg files")= for more
+information about gpg encryption in Emacs.
+
+*** Agenda and Scheduling
+
+An easy way of keeping track of appointments or future TODOs is to simply create a journal
+entry in the future. Such entries will automatically get a timestamp and show up in the
+current day's journal entry once you reach that day.
+
+- if =org-journal-enable-agenda-integration= is =t=, org-journal will automatically add
+  the current and all future journal entries to =org-agenda-files=.
+
+There are a few helper functions to deal with such scheduled entries:
+
+- =org-journal-new-scheduled-entry= - prompts for a date, and creates a new journal entry
+  on that date with its timestamp set to the date. By default, this is a TODO entry. Set
+  the prefix to avoid the TODO.
+
+- =org-journal-schedule-view= - creates a read-only overview of scheduled entries.
+
+**** iCalendar export
+
+You can export your scheduled entries to an iCalendar file, and subscribe to that file in
+your calendar application. You need to enable the agenda integration for this to work. I
+also recommend you set the following values before exporting:
+
+#+begin_src elisp
+(setq org-journal-enable-agenda-integration t
+      org-icalendar-store-UID t
+      org-icalendar-include-todo "all"
+      org-icalendar-combined-agenda-file "~/path/to/org-journal.ics")
+#+end_src
+
+With this done, you can export your agenda, including your scheduled entries, with =(org-icalendar-combine-agenda-files)=.
+
+*** Journal Capture Template
+
+You can configure a capture template in order to integrate =org-journal= with =org-capture=,
+as in the following example:
+
+#+BEGIN_SRC emacs-lisp
+  (defun org-journal-find-location ()
+    ;; Open today's journal, but specify a non-nil prefix argument in order to
+    ;; inhibit inserting the heading; org-capture will insert the heading.
+    (org-journal-new-entry t)
+    ;; Position point on the journal's top-level heading so that org-capture
+    ;; will add the new entry as a child entry.
+    (goto-char (point-min)))
+
+  (setq org-capture-templates '(("j" "Journal entry" entry (function org-journal-find-location)
+                                 "* %(format-time-string org-journal-time-format)%^{Title}\n%i%?")))
+#+END_SRC
+
+*** Caching of journal dates
+Since version 2.0.0 a cache has been added to speed up calendar
+operations. This should drastically improve the performance when using
+encrypted journal files, see =org-journal-encrypt-journal=.
+
+The caching functionality can be enabled by settings
+=org-journal-enable-cache= to =t=. The cache can be reset by calling
+=org-journal-invalidate-cache=.
+
+** FAQ
+
+*** Can I use weekly/monthly/yearly journal entries instead of daily ones?
+
+Yes, see =org-journal-file-type=.
+
+*** Can I have multiple journals?
+
+At the moment, this is not possible. But it should be possible to switch the
+value of =org-journal-directory= using a custom function or directory local
+variables.
+
+*** Can I use org-journal with Spacemacs?
+
+Yes you can!
+
+- To use =org-journal= with Spacemacs from the =master= branch, you must do this:
+
+  1. =git clone https://github.com/borgnix/spacemacs-journal.git ~/.emacs.d/private/journal=
+  2. add it to your =~/.spacemacs=. You will need to add =journal= to the
+     existing =dotspacemacs-configuration-layers= list in this file.
+
+  The manual of the journal layer can be found at https://github.com/borgnix/spacemacs-journal
+
+- If you use Spacemacs from the =develop= branch you can enable =org-journal= by
+  setting =org-enable-org-journal-support= to =t=, see [[https://github.com/syl20bnr/spacemacs/tree/develop/layers/+emacs/org#org-journal-support][Spacemacs org-journal support]].
+
+*** Some key-bindings in org-journal overwrite org-mode key bindings
+
+Major modes are supposed to only use key bindings of the form =C-c C-?=, where =?= can be any letter. With org-mode already using most interesting keys, collisions are inevitable. Currently, org-journal overwrites
+- =C-c C-s= (=org-schedule=) with =org-journal-search=
+- =C-c C-f= (=org-forward-heading-same-level=) with =org-journal-open-next-entry=
+- =C-c C-b= (=org-backward-heading-same-level=) with =org-journal-open-previous-entry=
+- =C-c C-j= (=org-goto=) with =org-journal-new-entry=
+However, this is Emacs, and if you don't like a key binding, change it!
+
+*** Opening journal entries from the calendar are not editable
+
+Old entries are opened in =view-mode=, which has convenient key bindings for browsing files. Most notably, you can quickly close =view-mode= buffers with =q=, scroll them with the =SPC= and =DEL=, or quit =view-mode= with =e=.
+
+*** Can I insert some text on a newly created journal file?
+
+Yes, you can write a custom function and assign it =org-journal-date-format=.
+
+
+** Convenient =org-journal= Snippet Extensions
+
+*** Kill journal buffer after saving buffer (By [[https://github.com/dhruvparamhans][@dhruvparamhans]])
+#+BEGIN_SRC emacs-lisp
+(defun org-journal-save-entry-and-exit()
+  "Simple convenience function.
+  Saves the buffer of the current day's entry and kills the window
+  Similar to org-capture like behavior"
+  (interactive)
+  (save-buffer)
+  (kill-buffer-and-window))
+(define-key org-journal-mode-map (kbd "C-x C-s") 'org-journal-save-entry-and-exit)
+#+END_SRC
+
+** Contributors
+
+See [[file:CONTRIBUTORS][CONTRIBUTORS]].
+
+** Changelog
+
+See [[file:CHANGELOG][CHANGELOG]].

@@ -22,7 +22,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Change Log:
-;; 
+;;
 ;; 2.1 Get rid of compilation warnings
 ;; 2.0 Name change from wc-mode to wc-goal-mode
 ;; 1.3 Goal functions now perform reset by default
@@ -136,7 +136,7 @@ It will looks something like WC[742+360/1100] in the modeline.
 RSTART and REND."
               (- rend rstart))))
 
-(defvar wc-goal-count-words-function
+(defvar wc-goal-count-words-function	;rstartとrendの間の文字数を数える関数
   (function (lambda (rstart rend)
               "Count the words specified by the region bounded by
 RSTART and REND."
@@ -247,9 +247,11 @@ it is in Transient Mark mode.  If that is the case, then the
 function operates over the marked region.  Otherwise, it will
 operate over the entire buffer.
 "
+  ;; rstart、rendはどういう意味？->point-min,point-maxが入る！
+
   (interactive)
   (if rstart
-      (setq rend (max rstart rend))
+      (setq rend (max rstart rend))	; maxはどこから出てきた？
     (if (and (called-interactively-p 'interactive)
              transient-mark-mode mark-active)
         (setq rstart (region-beginning)
@@ -259,7 +261,7 @@ operate over the entire buffer.
   (let ((wcount (funcall wc-goal-count-words-function rstart rend))
         (lcount (funcall wc-goal-count-lines-function rstart rend))
         (ccount (funcall wc-goal-count-chars-function rstart rend)))
-    (when (called-interactively-p 'interactive) 
+    (when (called-interactively-p 'interactive)
       (message "%d line%s, %d word%s, %d char%s"
                lcount
                (if (= lcount 1) "" "s")
@@ -325,4 +327,3 @@ value is non-nil."
 (provide 'wc-goal-mode)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; wc-goal-mode.el ends here
-
