@@ -1,8 +1,18 @@
-;;;; Emacs Bookmark Format Version 1 ;;;;
+;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8 -*- 
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("junk"
+(("org.el"
+ (filename . "~/.emacs.d/elpa/org-plus-contrib-20181105/org.el")
+ (front-context-string . "(define-derived-")
+ (rear-context-string . "\n;;;###autoload\n")
+ (position . 216263))
+("dokuwiki-mode.el"
+ (filename . "~/.emacs.d/elpa/dokuwiki-mode-20170223.1301/dokuwiki-mode.el")
+ (front-context-string . "  \"Major mode fo")
+ (rear-context-string . "mode \"DokuWiki\"\n")
+ (position . 6672))
+("junk"
  (filename . "~/Dropbox/junk/")
  (front-context-string . " 2019-12-28-1626")
  (rear-context-string . " 98 12月 30 12:20")
