@@ -767,50 +767,190 @@ baz
 		 (when (eq major-mode 'dokuwiki-mode) (dokuwiki-outline-magic-hook))))
 	 ))
 
-(defun dokuwiki-outline-magic-hook()
-  (set (make-local-variable 'outline-promotion-headings)
-	   '(("======" . 1) ("=====" . 2)))
-  (set (make-local-variable 'outline-cycle-emulate-tab) t))
+(defun dokuwiki-insert-base (before after)
+  "Insert markup to make a region or word bold.
+If there is an active region, make the region bold.  If the point
+is at a non-bold word, make the word bold.  If the point is at a
+bold word or phrase, remove the bold markup.  Otherwise, simply
+insert bold delimiters and place the point in between them."
+    (if (use-region-p)
+        ;; Active region
+        (let ((bounds (markdown-unwrap-things-in-region
+                       (region-beginning) (region-end)
+                       markdown-regex-bold 2 4)))
+          (markdown-wrap-or-insert before after nil (car bounds) (cdr bounds)))
+      ;; Bold markup removal, bold word at point, or empty markup insertion
+      (if (thing-at-point-looking-at markdown-regex-bold)
+          (markdown-unwrap-thing-at-point nil 2 4)
+        (markdown-wrap-or-insert before after 'word nil nil))))
 
-(define-derived-mode dokuwiki-mode text-mode "Dokuwiki"
-  (set (make-local-variable 'font-lock-defaults)
-	   '(dokuwiki-font-lock-keywords
-		 nil nil ((?_ . "w")) nil))
-  (set (make-local-variable 'outline-regexp) dokuwiki-outline-regexp)
-  (set (make-local-variable 'outline-level) 'dokuwiki-outline-level)
-  (outline-minor-mode 1)
+(defun dokuwiki-insert-bold ()
+  (interactive)
+  (dokuwiki-insert-base "**" "**")
   )
-(provide 'dokuwiki-mode)
 
-(defun dokuwiki-code-block-search (limit)
-  (if (not (looking-at "[-*]"))
-	  (re-search-forward ".*$" limit t)))
-
-(defvar dokuwiki-outline-regexp " ?\\(=\\{2,6\\}\\)"
-  "Regexp which indicates headline in DokuWiki.
-See also `outline-regexp'.")
-
-(defvar dokuwiki-outline-regexp-bol "^=+"
-  "Regexp to match Org headlines.
-This is similar to `org-outline-regexp' but additionally makes
-sure that we are at the beginning of the line.")
+(defun dokuwiki-insert-deleteline ()
+  (interactive)
+  (dokuwiki-insert-base "<del>" "</del>")
+  )
 
 
+(defun markdown-remove-header ()
+  "Remove header markup if point is at a header.
+Return bounds of remaining header text if a header was removed
+and nil otherwise."
+  (interactive "*")
+  (or (markdown-unwrap-thing-at-point markdown-regex-header-atx 0 2)
+      (markdown-unwrap-thing-at-point markdown-regex-header-setext 0 1)))
 
-;; " ?\\(=\\{2,6\\}\\)"
 
-(defun dokuwiki-outline-level ()
-(save-excursion
-(when (looking-at outline-regexp)
-	(let ((const 7)
-		  (headline (match-string 1)))
-	  (- const (length headline))
-	  (y-or-n-p (format "%s" headline))
-	  ))))
 
-(outline-level)
-(dokuwiki-outline-level)
-(markdown-outline-level)
-(setq-local outline-level #'markdown-outline-level)
-(setq edebug-trace t)
-(match-string 2)
+
+(defun markdown-insert-list-item (&optional arg)
+  "Insert a new list item.
+If the point is inside unordered list, insert a bullet mark.  If
+the point is inside ordered list, insert the next number followed
+by a period.  Use the previous list item to determine the amount
+of whitespace to place before and after list markers.
+
+With a \\[universal-argument] prefix (i.e., when ARG is (4)),
+decrease the indentation by one level.
+
+With two \\[universal-argument] prefixes (i.e., when ARG is (16)),
+increase the indentation by one level."
+  (interactive "p")
+  (let (bounds cur-indent marker indent new-indent new-loc)
+    (save-match-data
+      ;; Look for a list item on current or previous non-blank line
+      (save-excursion
+        (while (and (not (setq bounds (markdown-cur-list-item-bounds)))
+                    (not (bobp))
+                    (markdown-cur-line-blank-p))
+          (forward-line -1)))
+      (when bounds
+        (cond ((save-excursion
+                 (skip-chars-backward " \t")
+                 (looking-at-p markdown-regex-list))
+               (beginning-of-line)
+               (insert "\n")
+               (forward-line -1))
+              ((not (markdown-cur-line-blank-p))
+               (newline)))
+        (setq new-loc (point)))
+      ;; Look ahead for a list item on next non-blank line
+      (unless bounds
+        (save-excursion
+          (while (and (null bounds)
+                      (not (eobp))
+                      (markdown-cur-line-blank-p))
+            (forward-line)
+            (setq bounds (markdown-cur-list-item-bounds))))
+        (when bounds
+          (setq new-loc (point))
+          (unless (markdown-cur-line-blank-p)
+            (newline))))
+      (if (not bounds)
+          ;; When not in a list, start a new unordered one
+          (progn
+            (unless (markdown-cur-line-blank-p)
+              (insert "\n"))
+            (insert markdown-unordered-list-item-prefix))
+        ;; Compute indentation and marker for new list item
+        (setq cur-indent (nth 2 bounds))
+        (setq marker (nth 4 bounds))
+        ;; If current item is a GFM checkbox, insert new unchecked checkbox.
+        (when (nth 5 bounds)
+          (setq marker
+                (concat marker
+                        (replace-regexp-in-string "[Xx]" " " (nth 5 bounds)))))
+        (cond
+         ;; Dedent: decrement indentation, find previous marker.
+         ((= arg 4)
+          (setq indent (max (- cur-indent 4) 0))
+          (let ((prev-bounds
+                 (save-excursion
+                   (goto-char (nth 0 bounds))
+                   (when (markdown-up-list)
+                     (markdown-cur-list-item-bounds)))))
+            (when prev-bounds
+              (setq marker (nth 4 prev-bounds)))))
+         ;; Indent: increment indentation by 4, use same marker.
+         ((= arg 16) (setq indent (+ cur-indent 4)))
+         ;; Same level: keep current indentation and marker.
+         (t (setq indent cur-indent)))
+        (setq new-indent (make-string indent 32))
+        (goto-char new-loc)
+        (cond
+         ;; Ordered list
+         ((string-match-p "[0-9]" marker)
+          (if (= arg 16) ;; starting a new column indented one more level
+              (insert (concat new-indent "1. "))
+            ;; Don't use previous match-data
+            (set-match-data nil)
+            ;; travel up to the last item and pick the correct number.  If
+            ;; the argument was nil, "new-indent = cur-indent" is the same,
+            ;; so we don't need special treatment. Neat.
+            (save-excursion
+              (while (and (not (looking-at (concat new-indent "\\([0-9]+\\)\\(\\.[ \t]*\\)")))
+                          (>= (forward-line -1) 0))))
+            (let* ((old-prefix (match-string 1))
+                   (old-spacing (match-string 2))
+                   (new-prefix (if old-prefix
+                                   (int-to-string (1+ (string-to-number old-prefix)))
+                                 "1"))
+                   (space-adjust (- (length old-prefix) (length new-prefix)))
+                   (new-spacing (if (and (match-string 2)
+                                         (not (string-match-p "\t" old-spacing))
+                                         (< space-adjust 0)
+                                         (> space-adjust (- 1 (length (match-string 2)))))
+                                    (substring (match-string 2) 0 space-adjust)
+                                  (or old-spacing ". "))))
+              (insert (concat new-indent new-prefix new-spacing)))))
+         ;; Unordered list, GFM task list, or ordered list with hash mark
+         ((string-match-p "[\\*\\+-]\\|#\\." marker)
+          (insert new-indent marker))))
+      ;; Propertize the newly inserted list item now
+      (markdown-syntax-propertize-list-items (point-at-bol) (point-at-eol)))))
+
+(defun dokuwiki-insert-list ()
+  (interactive)
+  (let (mark search-limit-point)
+;; 数字付か否か判別
+;; インデント保持
+;; リスト中か否か判断
+;; 改行＋リストかリストのみか判断
+  ;;   (beginning-of-line)
+  ;;   (insert "\n")
+  ;;   (forward-line -1)
+  ;; (not (dokuwiki-cur-line-blank-p))
+    ;; (newline))
+
+    ;; TODO: 前に*があると直前が#でも*になる問題。
+    (save-excursion
+      (progn
+	(end-of-line)
+	(setq search-limit-point (point))
+      ))
+    (save-excursion
+      (if (dokuwiki-cur-line-blank-p)
+	  (forward-line -1))
+      (beginning-of-line)
+      (if (search-forward "  #" search-limit-point t)
+	     (setq mark "  # ")
+	     (setq mark "  * ")))
+
+  (progn
+    (unless (dokuwiki-cur-line-blank-p)
+      (insert "\n"))
+    (insert mark))))
+
+;; 判別して挿入するマークを変えたい。
+
+(not (dokuwiki-cur-line-blank-p))
+(dokuwiki-cur-line-blank-p)
+(dokuwiki-insert-list)
+\naaa
+(markdown-unwrap-things-in-region (region-begining) (region-end)
+								  markdown-regex-bold 2 4)
+(null 0)
+(bounds-of-thing-at-point)
