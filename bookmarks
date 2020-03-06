@@ -1,8 +1,13 @@
-;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8 -*- 
+;;;; Emacs Bookmark Format Version 1 ;;;;
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("org.el"
+(("include"
+ (filename . "/usr/include/")
+ (front-context-string . "GL\n  drwxr-xr-x ")
+ (rear-context-string . "96 12月  6 22:02 ")
+ (position . 170))
+("org.el"
  (filename . "~/.emacs.d/elpa/org-plus-contrib-20181105/org.el")
  (front-context-string . "(define-derived-")
  (rear-context-string . "\n;;;###autoload\n")

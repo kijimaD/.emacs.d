@@ -1,812 +1,10 @@
 (menu-bar-mode 1)
 (menu-bar-mode 0)
 (font-family-list)
-(setq evel-expression-print-level nil)
-;;; (float-time)
-; (cl-loop)
-;; (expt 2 2)
-;; (collect)
-;; (mod 200 2000.0)
-;; (hanoi-move-period 1.0)
-;; (setq hanoi-move-period 1)aaa
-(tetris)
-(life 1)
-;; (hanoi 54)aaaaaaaasafasaaaa
-aafaaafas¤¢¤¢¤¢¤¢
-;; (setq show-trailing-whitesaaapace nil)
-;; unwindfor
-;; (length (format "%d" (max 0 (1- 10))))
-;; (if 3 4 2),
-;; (max 2 2);; (zerop 0)
 
-fj;lasdÍý¤ÎÃæ¤ð¥¤¥ó¥É¤ÎµíÆý¤È¸Æ¤Ð¤ì¤ë¤â¤Î¤Ë´Ø¤·¤Æ¤Ï¡¢»ä¤Ï¤Þ¤Ã¤¿¤¯¤·¤é¤Ê¤«¤Ã¤¿
-
-¤Î¤Ç¤¹¤¦¤´¤¯ÆÃ¼ìÊÑ´¹¤¬¤¢¤ë¤Î¤Ç¤¹¤¬¡¢¤ï¤¿¤·¤¬fj
-
-;; (insert-char)
-;; (insert 43)
-
-;; (insert ?\n)
-;; (delete-char -1)
-
-;; (defun hanoi-0 (rings from to work start-time)
-;;   (if (null rings)
-;;     (hanoi-0 (cdr rings) work to from
-;; 	     (hanoi-move-ring (car rings) from to
-;; 			      (hanoi-0 (cdr rings) from work to start-time)))))
-
-;; (defun hanoi-n (bits rings from to work start-time)
-;;   (cond ((null rings)
-;; 	 (hanoi-sit-for 0)
-;; 	 start-time)
-;; 	((zerop (car bits))
-;; 	 (hanoi-insert-rings (car rings) from)
-;; 	 (hanoi-0) (cdr rings) work to from
-;; 	 (hanoi-move-ring (car rings) from to
-;; 			  (hanoi-n (cdr bits) (cdr rings) from work to
-;; 				   start-time))))
-;;   (t
-;;    (hanoi-insert-ring (car rings) to)
-;;    (hanoi-n (cdr bits) (cdr rings) work to from start-time)))
-
-;; (defun hanoi-n (bits rings from to work start-time)
-;;   (cond ((null rings)
-;; 	 (hanoi-sit-for 0)
-;; 	 start-time)
-;; 	((zerop (car bits))
-;; 	 (hanoi-insert-ring (car rings) from)
-;; 	 (hanoi-0) (cdr rings) work to from
-;; 	 (hanoi-move-ring (car rings) from to
-;; 			  (hanoi-n (cdr bits) (cdr rings) from work to
-;; 				   start-time))))
-;;   (t
-;;    (hanoi-insert-ring (car rings) to)
-;;    (hanoi-n (cdr bits) (cdr rings) work to from start-time)))
-
-;; (defun hanoi-insert-ring (ring pole)
-;;   (cl-decf (car pole) baseward-step)
-;;   (let ((str (car ring))
-;; 	(start (- (car pole ) (* (/ (cdr  ring) 2) fly-step))))
-;;     (setcar ring (car pole))
-;;     (cl-loop for pos upfrom start by fly-step
-;; 	     for i below (cdr ring) do
-;; 	     (subst-char-in-region pos (1+ pos) (char-after pos) (aref str i))
-;; 	     (set-text-properties pos (1+ pos) (text-properties-at i str)))
-;;     (hanoi-goto-char (car pole))))
-
-;; (defun hanoi-goto-char (pos)
-;;   (goto-char (if (or hanoi-horizontal-flag (<= (window-start) pos))
-;; 		 pos
-;; 	       (+ (window-start) (% (- pos fly-row-start) baseward-step)))))
-
-;; (defun hanoi-insert-ring (ring pole)
-;;   (cl-decf (car pole) baseward-step)
-;;   (let ((str (car ring))
-;; 	(start (- (car pole) (* (/ (cdr ring) 2) fly-step))))
-;;     (setcar ring (car pole))
-;;     (cl-oop for pos upfrom start by fly-step
-;; 	    for i below (cdr ring) do
-;; 	    (subst-char-in-region pos (1+ pos) (char-after pos) (aref str i))
-;; 	    (set-text-properties pos (1+ pos) (text-properties-at i str)))
-;;     (hanoi-goto-char (car pole))))
-
-;; (defun hanoi-sit-for (seconds)
-;;   (unless (sit-for seconds)
-;;     (signal 'quit '("I can tell you've had enough"))))
-
-;; (defun hanoi-ring-to-pos (ring pos)
-;;   (unless (= (car ring) pos)
-;;     (let* ((start (- (car ring) (* (/ (cdr ring) 2) fly-step)))
-;; 	   (new-start (- pos (- (car ring) start))))
-;;       (if hanoi-horizontal-flag
-;; 	  (cl-loop for i below (cdr ring)
-;; 		   for j = (if (< new-start start) i (- (cdr ring) i 1))
-;; 		   for old-pos = (+ start (* j fly-step))
-;; 		   for new-pos = (+ new-start (* j fly-step)) do
-;; 		   (transpose-regions old-pos (1+ old-pos)
-;; 				      new-pos (1+ new-pos)))))))
-
-;; (loop for i from 1 to 5
-;;       collect i)
-;; (loop for i from 1 to 6
-;;       collect i)
-;; (loop for i from 1 to 6
-;;       collect i)
-
-;; (loop for i from 1 to 50
-;;       do (princ (collect (* i i))))
-
-;; (loop for x in '(3 9 6)
-;;       do (princ x))
-
-;; (loop for x in '(3 9 6)
-;;       do (princ x))
-
-;; (loop for (x . y) in '((1 . 2) (3 . 4) (5 . 6))
-;;       collect (+ x y))
-
-;; (loop for buf in (buffer-list)
-;;       collect (buffer-name buf))
-
-;; (loop for buf in (buffer-list)
-;;       collect (buffer-name buf))
-
-;; (loop for buf in (buffer-list)
-;;       collect (buffer-name buf))
-
-;; (loop for buf in (buffer-list)
-;;       collect (buffer-name buf))
-
-q
-
-
-;; (loop for buf in (buffer-list)
-;;       collect buffer-name buf)
-(buffer-list)
-
-(loop for i from 1 to 5 collect i)	; => (1 2 3 4 5)
-
-(loop for i from 1 to 5 collect i)	; => (1 2 3 4 5)
-
-(loop for buf in (buffer-list)
-      collect (buffer-name buf))	; => ("*scratch*" "2017-08-12-103144.el" "index.org" "tetris.el.gz" " *Minibuf-1*" "tetris-scores" "*Tetris*" "*Help*" "*Apropos*" "*Hanoi*" "*gud*" "*Buffer List*" "*Customize Group: Hanoi*" ".conkyrc" "2017-08-28-225444.org" "*org2blog/wp-wordpress*<9>" "junk" "2017-08-28-190120.org" "2017-08-16-120755.org" "*org2blog/wp-wordpress*<8>" "*org2blog/wp-wordpress*<6>" "*org2blog/wp-wordpress*<7>" "*org2blog/wp-wordpress*<5>" "2017-05-04-012212.el" "2017-05-04-061315.el" "hanoi.el.gz" "*org2blog/wp-wordpress*<4>" "*org2blog/wp-wordpress*<3>" "*org2blog/wp-wordpress*<2>" "*Customize Group: Org2blog/Wp*" ".emacs" "*org2blog/wp-wordpress*" "Scratch" " *Minibuf-0*" "*Messages*" " *code-conversion-work*" " *Echo Area 0*" " *Echo Area 1*" " *migemo*" " *command symbols*" " *function symbols*" " *variable symbols*" " *face symbols*" " *other symbols*" " *server*" "*Completions*" " *Custom-Work*" " widget-choose" "*Bookmark List*" " *lispxmp tmp*" " *Metahelp*" "*vc*" " *code-converting-work*" "*Google Translate*" "*Disabled Command*" "*input/output of *" "*threads of *" "*breakpoints of *" " *partial-output-*" "*Backtrace*")
-(buffer-list)				; => (#<buffer *scratch*> #<buffer 2017-08-12-103144.el> #<buffer index.org> #<buffer tetris.el.gz> #<buffer  *Minibuf-1*> #<buffer tetris-scores> #<buffer *Tetris*> #<buffer *Help*> #<buffer *Apropos*> #<buffer *Hanoi*> #<buffer *gud*> #<buffer *Buffer List*> #<buffer *Customize Group: Hanoi*> #<buffer .conkyrc> #<buffer 2017-08-28-225444.org> #<buffer *org2blog/wp-wordpress*<9>> #<buffer junk> #<buffer 2017-08-28-190120.org> #<buffer 2017-08-16-120755.org> #<buffer *org2blog/wp-wordpress*<8>> #<buffer *org2blog/wp-wordpress*<6>> #<buffer *org2blog/wp-wordpress*<7>> #<buffer *org2blog/wp-wordpress*<5>> #<buffer 2017-05-04-012212.el> #<buffer 2017-05-04-061315.el> #<buffer hanoi.el.gz> #<buffer *org2blog/wp-wordpress*<4>> #<buffer *org2blog/wp-wordpress*<3>> #<buffer *org2blog/wp-wordpress*<2>> #<buffer *Customize Group: Org2blog/Wp*> #<buffer .emacs> #<buffer *org2blog/wp-wordpress*> #<buffer Scratch> #<buffer  *Minibuf-0*> #<buffer *Messages*> #<buffer  *code-conversion-work*> #<buffer  *Echo Area 0*> #<buffer  *Echo Area 1*> #<buffer  *migemo*> #<buffer  *command symbols*> #<buffer  *function symbols*> #<buffer  *variable symbols*> #<buffer  *face symbols*> #<buffer  *other symbols*> #<buffer  *server*> #<buffer *Completions*> #<buffer  *Custom-Work*> #<buffer  widget-choose> #<buffer *Bookmark List*> #<buffer  *lispxmp tmp*> #<buffer  *Metahelp*> #<buffer *vc*> #<buffer  *code-converting-work*> #<buffer *Google Translate*> #<buffer *Disabled Command*> #<buffer *input/output of *> #<buffer *threads of *> #<buffer *breakpoints of *> #<buffer  *partial-output-*> #<buffer *Backtrace*>)
-
-(loop for buf in (buffer-list)
-      collect (buffer-name buf))	; => ("*scratch*" "2017-08-12-103144.el" "index.org" "tetris.el.gz" " *Minibuf-1*" "tetris-scores" "*Tetris*" "*Help*" "*Apropos*" "*Hanoi*" "*gud*" "*Buffer List*" "*Customize Group: Hanoi*" ".conkyrc" "2017-08-28-225444.org" "*org2blog/wp-wordpress*<9>" "junk" "2017-08-28-190120.org" "2017-08-16-120755.org" "*org2blog/wp-wordpress*<8>" "*org2blog/wp-wordpress*<6>" "*org2blog/wp-wordpress*<7>" "*org2blog/wp-wordpress*<5>" "2017-05-04-012212.el" "2017-05-04-061315.el" "hanoi.el.gz" "*org2blog/wp-wordpress*<4>" "*org2blog/wp-wordpress*<3>" "*org2blog/wp-wordpress*<2>" "*Customize Group: Org2blog/Wp*" ".emacs" "*org2blog/wp-wordpress*" "Scratch" " *Minibuf-0*" "*Messages*" " *code-conversion-work*" " *Echo Area 0*" " *Echo Area 1*" " *migemo*" " *command symbols*" " *function symbols*" " *variable symbols*" " *face symbols*" " *other symbols*" " *server*" "*Completions*" " *Custom-Work*" " widget-choose" "*Bookmark List*" " *lispxmp tmp*" " *Metahelp*" "*vc*" " *code-converting-work*" "*Google Translate*" "*Disabled Command*" "*input/output of *" "*threads of *" "*breakpoints of *" " *partial-output-*" "*Backtrace*")
-
-(loop for i from 1 to 5 collect i)	; => (1 2 3 4 5)
-(loop for i from 1 below 5 collect i)	; => (1 2 3 4)
-(loop for i from 1 below 5 collect i)	; => (1 2 3 4)
-(loop for i from 1 below 5 by 2 collect i) ; => (1 3)
-
-(loop for i from 1 downto -3 collect i)	; => (1 0 -1 -2 -3)
-
-(loop for i from 1 above -3 collect i)	; => (1 0 -1 -2)
-
-(loop for i from 1 downto -3 by 2 collect i) ; => (1 -1 -3)
-
-(loop for i from 1 above -3 by 2 collect i) ; => (1 -1)
-
-(with-output-to-string
-  (loop repeat 3 do (princ "foo")))	; => "foofoofoo"
-(with-output-to-string 2)		; => ""
-(with-output-to-string
-  (loop repeat 3 do (princ "foo")))
-
-(with-output-to-string
-  (loop repeat 3 do (princ "foo")))	; => "foofoofoo"
-
-(with-output-to-string
-  (loop repeat 3 do (princ "foo")))	; => "foofoofoo"
-
-;; (loop while (not (eobp))
-;;       do (forward-line 1))		; => nil
-
-
-(with-output-to-string
-  (loop repeat 3 do (princ "foo")))	; => "foofoofoo"
-
-;; (loop while (not (eobp))
-;;       do (forward-line 1))
-;; (loop while (not (eobp))
-;;       do (forward-line 1))
-;; (loop while (not (eobp))
-;;       do (forward-line 1))
-
-;; ;; (loop until (eobp)
-;; ;;       do (forward-line 1))
-;; (loop until (eobp)
-;;       do (forward-line 1))
-
-;; ;; (save-excursion
-;; ;;   (goto-char (point-min))
-;; ;;   (loop until (eobp)
-;; ;; 	collect (thing-at-point 'line)
-;; ;; 	do (forward-line)))
-;; (save-excursion
-;;   (goto-char (point-min))
-;;   (loop until (eobp)
-;; 	collect (thing-at-point 'line)
-;; 	do (forward-line)))
-;; (save-excursion
-;;   (goto-char (point-min))
-;;   (loop until (eobp)
-;; 	collect (thing-at-point 'line)
-;; 	do (forward-line)))
-;; (thing-at-point a)
-
-;; (save-excursion
-;;   (goto-char (point-min))
-;;   (loop until (eobp)
-;; 	collect (thing-at-point 'line)
-;; 	do (forward-line)))
-
-
-
-;; (loop for x in '(1 2 3) collect (list x (* x x))) ; =>
-
-(with-output-to-string
-  (loop repeat 3 do (princ "foo")))	; => "foofoofoo"
-
-(with-output-to-string
-  (loop repeat 3 do (princ "foo")))	; => "foofoofoo"
-
-(with-output-to-string
-  (loop repeat 3 do (princ "foo")))	; => "foofoofoo"
-
-;; (loop while (not (eobp))
-;;       do (forward-line 1))		; => nil
-;; (loop while (not (eobp))
-;;       do (forward-line 1))
-
-;; (loop until (eobp)
-;;       do (forward-line 1))		; =>
-
-;; (save-excursion
-;;   (goto-char (point-min))
-;;   (loop until (eobp)
-;; 	collect (thing-at-point 'line)
-;; 	do (forward-line 1)))		; =>
-;; (save-excursion
-;;   (goto-char (point-min))
-;;   (loop until (eobp)
-;; 	collect (thing-at-point 'line)
-;; 	do (forward-line 1)))		; =>
-
-;; (save-excursion
-;;   (goto-char (point-min))
-;;   (loop until (eobp)
-;; 	collect (thing-at-point 'line)
-;; 	do (forward-line 1)))
-
-(loop for x in '(1 2 3) collect (list x (* x x))) ; => ((1 1) (2 4) (3 9))
-(loop for x in '(1 2 3) append (list x (* x x))) ; => (1 1 2 4 3 9)
-
-
-
-
-(set-window-start (selected-window) 4)
-(logand)
-
-
-(defun fact (x)
-  "³¬¾è"
-  (if (zerop x) 1
-    (* x (fact (1- x)))))
-(defun test (x)
-  (let ((value (+ (fact x) 10)))
-    (message "%d! + 10 = %d" x value)))
-
-(float-time)				; => 1504017298.436277
-
-(hanoi-unix)
-(tetris)
-(hanoi)
-(org-pomodoro)
-(org-agenda-maybe-redo)
-(recenter-top-bottom)
-¥¿¥¤¥Þ¡¼¤È»È¤¦:::(auto-revert-mode t)
-(setq timer (run-with-idle-timer 300 t
-				 (lambda () (recenter-top-bottom))))
-
-(org-pomodoro)
-(org-pomodoro-extend-last-clock)
-(org-pomodoro-long-break-finished)
-
-(org-pomodoro-short-break-finished)
-(org-pomodoro-killed)
-(org-pomodoro-finished)
-(org-pomodoro-notify "a" "a")
-(org-pomodoro-reset)
-(org-pomodoro-start :pomodoro)
-(org-pomodoro-set :pomodoro)
-
-(linum-mode)
-(menu-bar-mode)
-
-
-sudo mirakurun config tuners
-
-(cons 'foo ())
-(setq foo-flag nil)
-(let ((map (make-sparse-keymap 'tetris-mode-map)))
-  (define-key map "n" 'tetris-start-game)
-  )
-
-(symbol-function 'car)
-(fset 'first 'car)
-(fset 'erste 'first)
-(erste '(1 2 3))
-'(1 2 3)
-
-((lambda (arg) (erste arg))
- '(1 2 3))
-(funcall (lambda (arg) (erste arg))
-	 '(1 2 3))
-(let ((arg '(1 2 3))) (erste arg))
-(let ((arg '(1 2 3))) (erste arg))
-(defmacro cadr (x)
-  (list 'car (list 'cdr x)))
-(cadr (assq 'handler '(1 2)))
-(special-form-p 'or)
-(special-form-p 'and)
-(special-form-p 'defconst)
-(and)
-(quote (+ 1 2))
-(+ 1 2)
-(quote foo)
-foo
-'foo
-foo
-'(2 3 4)
-(2 3 4)
-['foo]
-foo
-['foo]
-[(quote foo)]
-''foo
-(quote foo)
-'''foo
-(quote (quote foo))
-'(+)
-(+)
-(+ 2 3)
-5
-`(a list of (+ 2 3) elements)
-(a list of (+ 2 3) elements)
-`(a list of ,(+ 2 3) elements)
-(a list of 5 elements)
-
-`(1 2 (3 ,(+ 4 5)))
-(1 2 (3 9))
-(setq some-list '(2 3))
-(2 3)
-(cons 1 (append some-list '(4) some-list))
-(1 2 3 4 2 3)
-`(1 ,@some-list 4 ,@some-list)
-(1 2 3 4 2 3)
-
-(setq list '(hack foo bar))
-(hack foo bar)
-(cons 'use
- (cons 'the
-       (cons 'words (append (cdr list) '(as elements)))))
-(use the words foo bar as elements)
-
-`(use the words ,@(cdr list) as el)
-
-(setq foo 'bar)
-bar
-(eval 'foo)				;evalが引数barを受け取る
-bar
-
-(setq bar 'baz)
-baz
-(eval foo)				;evalがfooの値である、引数barを受け取る。2段階！
-baz
-
-(interactive)
-(if rstart
-    (setq rend (max rstart rend))
-  (if (and (called-interactively-p 'interactive)
-	   transient-mark-mode mark-active)
-      (setq rstart (region-beginning)
-	    rend (region-end))
-    (setq rstart (point-min)
-	  rend (point-max))))
-(let ((wcount (funcall wc-goal-count-words-function rstart rend))
-      (lcount (funcall wc-goal-count-lines-function rstart rend))
-      (ccount (funcall wc-goal-count-chars-function rstart rend)))
-  (when (called-interactively-p 'interactive)
-    (message "%d line%s, %d word%s, %d char%s"
-	     lcount
-	     (if (= lcount 1) "" "s")
-	     wcount
-	     (if (= wcount 1) "" "s")
-	     ccount
-	     (if (= ccount 1) "" "s")))
-  (if field
-      (nth field (list lcount wcount ccount))
-    (list lcount wcount ccount)))
-
-;; p.95
-;; ペアとしての線分と点
-
-(defun make-segment(start-point end-point)
-  (cons start-point end-point))
-
-(defun start-segment(segment)
-  "始点を返す"
-  (car segment))
-
-(defun end-segment(segment)
-  (cdr segment))
-
-(defun make-point(x y)
-  (cons x y))
-
-(defun x-point(point)
-  "x座標を返す"
-  (car point))
-
-(defun y-point(point)
-  (cdr point))
-
-;; 座標計算
-
-(defun add-point(start end)
-  (make-point(+ (x-point start) (x-point end))
-			 (+ (y-point start) (y-point end))))
-
-(defun midpoint-segment(segment)
-  (let ((start-point start-segment(segment))
-		(end-point end-segmnet(segment)))
-	(/ (add-point (start-point end-point)) 2)))
-
-;; 問題ドメイン
-
-(defun point1()
-  (make-point 2 3))
-(defun point2()
-  (make-point 1 1))
-(defun segment1(point1 point2)
-  (make-segment(point1 point2)))
-
-(print-point(point1))
-
-;; チェック
-
-(defun x-point(x)
-  (car x))
-
-(defun y-point(y)
-  (cdr y))
-
-(defun print-point(p)
-  "for check"
-  (message (x-point p))
-  (message (y-point p))
-  )
-
-;; 希望的思考
-(x1 y1)は始点
-(x2 y2)は終点
-((start) (end))は線分
-((x1 y1) + (x2 y2)) / 2 = (mid-x mid-y)
-
-(defun a(x . y)
-  ()
-  )
-(defun b())
-(a 1 2 3 4)
-
-(defun scale-list(items factor)
-  (if (null items)
-	  nil
-	(cons (* (car items) factor)
-		  (scale-list (cdr items)
-					  factor))))
-(scale-list (list 1 2 3 4 5) 10)
-
-(defun square-list (items)
-  (if (null items)
-	  nil
-	(cons (* (car items) (car items))
-			 (square-list (cdr items)))))
-(square-list (list 1 2 3 4 5))
-(defun square-list (items)
-  (mapcar (lambda (x) (* x x))
-	   items))
-
-(defun scale-list (items factor)
-  (mapcar (lambda (x) (* x factor))
-	   items))
-(scale-list (list 1 2 3 4 5) 5)
-
-(for-each (lambda (x)
-			(newline)
-			(display x))
-		  (list 57 321 88))
-
-(defun for-each(list)
-  (mapcar (lambda (x) (message x))
-		  list)
-  )
-
-(cons (list 1 2) (list 3 4))
-
-(defun x()
-  (list 1 2 3))
-
-(defun y()
-  (list 4 5 6))
-(append (x) (y))
-(cons (x) (y))
-(list (x) (y))
-
-(defin (make-sum a1 a2)
-  (cond ((=number? a1 0) a2)
-	((=number? a2 0) a1)
-	((and (number? a1) (number? a2))
-	 (+ a1 a2))
-	(else (list '+ a1 a2))))
-
-(define (=number? exp num  ))
-
-(define (make-product m1 m2)
-  (cond ((or (=number? m1 0) (=number? m2 0)) 0)
-	((=number? m1 1) m2)
-	((=number? m2 1) m1)
-	((and (number? m1) (number? m2)) (* m1 m2))
-	(else (list '* m1 m2))))
-
-(deriv '(+ x 3) 'x)
-(deriv '(* x y) 'x)
-
-(evaluate '(add 1 2 ) nil)
-(evaluutea)
-
-(define (probe name connector)
-  (define (print-probe value)
-    (newline) (display "probe: ") (display name)
-    (display ' = ') (display value))
-  (define (process-new-value)
-    (print-probe (get-value connector)))
-  (define (process-forget-value) (print-probe "?"))
-  (define (me request)
-    (cond ((eq? request 'I-have-a-value) (process-new-value))
-	  ((eq? request 'I-lost-my-value) (process-forget-value))
-	  (else (error "Unknown request: PROBE" request))))
-  (connect connector me)
-  me)
-
-(define (make-connector)
-  (let ((value false) (informant false) (constraints '()))
-    (define (set-my-value newval setter)
-      (cond ((not (has-value? me))
-	     (set! value newval)
-	     (set! informant setter)
-	     (for-each-except setter
-			      inform-about-value
-			      constraints))
-	    ((not (= value newval))
-	     (error "Contradiction" (list value newval)))
-	    (else 'ignored)))
-    (define (forget-my-value retractor)
-      (if (eq? retractor informant)
-	  (begin (set! informant false)
-		 (for-each-except retractor
-				  'ignored))
-	(define (connect new-constraint)
-	  (if (not (memq new-constraint constraints))
-	      (set! constraints
-		    (cons new-constraint constraints)))
-	  (if (has-value? me)
-	      (inform-about-value new-constraint))
-	  'done)
-	(define (me request)
-	  (cond ((eq? request 'has-value?)
-		 (if informant true false))
-		((eq? request 'value) value)
-		((eq? request 'set-value!) set-my-value)
-		((eq? request 'forget) forget-my-value)
-		((eq? request 'connect) connect)
-		(else (error "Unknown operation: CONNECTOR" request))))
-	me))))
-
-(define (eval-if exp env)
-  (if (true? (eval (if-predicate exp) env))
-      (eval (if-consequent exp) env)
-    (eval (if-alternative exp) env)))
-
-(define (begin? exp) (tagged-list? exp 'begin))
-(define (begin-actions exp) (cdr exp))
-(define (last-exp? seq) (null? (cdr seq)))
-(define (first-exp seq) (car seq))
-(define (rest-exps seq) (cdr seq))
-
-(define (primitive-procedure? proc)
-  (tagged-list? proc 'primitive))
-(define (primitive-implementation proc) (cadr proc))
-
-(define the-global-environment (setup-environment))
-(driver-loop)
-
-(define (append x y)
-  (if null? x)
-  y
-  (cons (car x) append(cdr x) hyhhy
-
-	))
-
-(define (analyze-assignment exp)
-  (let ((var (assignment-variable exp))
-		(vproc (analyze (assgnment-value exp))))
-	(lambda (env succeed fail)
-	  (vproc env
-			 (lambda (val fail2)
-			   (let ((old-value
-					  (loopup-varible-value var env)))
-				 (set-variable-value! var val env)
-				 (succeed 'ok
-						  (lambda ()
-							(set-variable-value!
-							 var old-value env)
-							(fail2)))))
-			 fail))))
-(rule (wheel ?person)
-	  (and (supervisor ?middle-manager ?person)
-		   (supervisor ?x ?middle-manager)))
-
-(defun dokuwiki-insert-header)
-(looking-at )
-
-(defun dokuwiki-code-block-search (limit)
-  (if (not (looking-at "[-*]"))
-	  (re-search-forward ".*$" limit t)))
-
-(defun dokuwiki-outline-level ()
-  (when (looking-atj outline-regexp)
-	(let ((const 7)
-		  (headline (match-string 1)))
-	  (- const (length headline)))))
-
-(eval-after-loada "outline-magic"
-				  '(progn
-					 (define-key dokuwiki-mode-map (kbd "TAB") 'outline-cycle)
-					 (define-key dokuwiki-mode-map (kbd "<S-tab>")
-					   '(lambda () (interactive) (outline-cycle '(4))))
-					 (define-key dokuwiki-mode-map (kbd "<M-S-right>") 'outline-demote)
-					 (define-key dokuwiki-mode-map (kbd "<M-S-left>") 'outline-promote)
-					 (define-key dokuwiki-mode-map (kbd "<M-up>") 'outline-move-subtree-up)
-					 (define-key dokuwiki-mode-map (kbd "<M-down>") 'outline-move-subtree-down)
-					 (add-hook 'dokuwiki-mode-hook 'dokuwiki-outline-magic-hook)
-					 (dolist (buf (buffer-list))
-					   (with-current-buffer buf
-						 (when (eq major-mode 'dokuwiki-mode) (dokuwiki-outline-magic-hook))))))
-
-(defun dokuwiki-outline-magic-hook ()
-  (set (make-local-variable 'outline-promotion-headings)
-	   '(("======" . 1) ("=====" . 2) ("====" . 3) ("===" . 4) ("==" . 5)))
-  (set (make-local-variable 'outline-cycle-emulate-tab) t))
-
-;;;###autoload
-(define-derived-mode dokuwiki-mode text-mode "DokuWiki"
-  (set (make-local-variable 'font-lock-defaults)
-	   '(dokuwiki-font-lock-keywords
-		 nil nil ((?_ . "w")) nil))
-  (set (make-local-variable 'outline-regexp) dokuwiki-outline-regexp)
-  (set (make-local-variable 'outline-level) 'dokuwiki-outline-level)
-  (outline-minor-mode 1))
-
-(provide 'dokuwiki-mode)
-
-(defface dokuwiki-headline-5 '((t (:inherit outline-5)))
-  :group 'dokuwiki)
-(defface dokuwiki-headline-5 '((t (:inherit outline-4)))
-  :group 'dokuwiki))
-
-(defface dokuwiki-headline-5 '((t (:inherit outline-5)))
-  "dokuwiki face for level 5 headline."
-  :group 'dokuwiki)
-
-(defface dokuwiki-link '((t (:inherit font-lock-variable-name-face)))
-  :group 'dokuwiki)
-
-(defface '((t (:inherit link)))
-  :goh)
-
-(defface dokuwiki-mode '((t (:inherit font-lock-variable-name-face)))
-  :group 'dokuwiki)
-
-(defface dokuwiki-table '((t (:inherit font-lock-function-name-face)))
-  :group 'dokuwiki)
-
-(defface dokuwiki-table '((t (:inherit font-lock-function-name-face)))
-  :group 'dokuwiki)
-)
-
-(defface dokuwiki-smiley '((t (:inherit font-lock-constant-face)))
-  :group 'dokuwiki)
-
-(defface dokuwiki-smiley '((t (:inherit font-lock-constant-face)))
-  "dokuwiki face for smilley.")
-
-(defvar dokuwiki-font-lock-keywords
-  `(
-	;; bold
-	("\\*\\*.+?\\*\\*" (0 'bold apeend))
-	("\\.+?\\" . (0 'underline append))
-	("__+?\__") .  (0 'underline append)
-	("''\\(.+?\\)''" (0 'dokuwiki-code append) (1 'dokuwiki-box append))
-	("%%.+?%%" (0 'dokuwiki-code t))
-	("((.+?))" (0 'dokuwiki-footnote))
-	(" ?======.+======[ \t]*$" (0 'dokuwiki-headline-1))
-	(" ?=====.+=====[ \t]*$" (0 'dokuwiki-headline-2))
-	("\\[\\[[^|]+?\\(?:\\(|\\)\\(.*?\\)\\)?\\]\\]"
-	 (0 'dokuwiki-link) (1 'dokuwiki-code t t)
-	 (2 'font-lock-string-face t t) (2 'underline append t))
-	("https?://\\(\\([-_.!~*'(a-zA-Z0-9;?:@&=+$,%#)]+\\)/?\\)+" (0 'dokuwiki-link))
-	("{{[^|]+?\\(|\\(.*?\\)\\)?}}"
-	 (0 'dokuwiki-image t)
-	 (1 'dokuwiki-code t t) (2 'font-lock-string-face t t))
-	("^[ ^t]*[|^].*$" (0 'dokuwiki-table))
-	("\\\\\\\\\\\$-+" (0 'dokuwiki-code t))
-	("^\\(?: \\{2\\}\\|[\t]\\)[ \t]*" "\\([-*]\\).*$" nil nil (1 'dokuwiki-list))
-	("^\\(?: \\{2\\}\\|[\t]\\)[ \t]*" dokuwiki-code-block-search
-	 nil nil (0 'dokuwiki-code t))
-	,@(mapcar $'(lambda (smiley)
-				  (list (concat "\\W\\(" (regexp-quote smiley) "\\)\\W")
-						1 'dokuwiki-smiley))
-			  dokuwiki-smiley-list))
-  )
-
-(defun dokuwiki-code-block-search (limit)
-  (if (not (looking-at "[-*]"))
-	  (re-search-forward ".*$" limit t)))
-
-(defun dokuwiki-outline-level ()
-  (when (looking-at outline-regexp)
-	(let ((const 7)
-		  (headline (match-string 1)))
-	  (- const (length headline)))))
-
-(eval-after-load "outline-magic"
-  '(progn
-	 (define-key dokuwiki-mode-map (kbd "TAB") 'outline-cycle)
-	 (define-key dokuwiki-mode-map (kbd "<S-tab>")
-	   '(lambda() (interactive) (outline-cycle '(4))))
-	 (define-key dokuwiki-mode-map (kbd "<M-S-right>") 'outline-demote)
-	 (define-key dokuwiki-mode-map (kbd "<M-S-left>") 'outline-promote)
-	 (define-key dokuwiki-mode-map (kbd "<M-up>") 'outline-move-subtree-up)
-	 (define-key dokuwiki-mode-map (kbd "<M-down>") 'outline-move-subtree-down)
-	 (add-hook 'dokuwiki-mode-hook 'dokuwiki-outline-magic-hook)
-	 (dolist (buf (buffer-list))
-	   (with-current-buffer buf
-		 (when (eq major-mode 'dokuwiki-mode) (dokuwiki-outline-magic-hook))))
-	 ))
-
-(defun dokuwiki-insert-base (before after)
-  "Insert markup to make a region or word bold.
-If there is an active region, make the region bold.  If the point
-is at a non-bold word, make the word bold.  If the point is at a
-bold word or phrase, remove the bold markup.  Otherwise, simply
-insert bold delimiters and place the point in between them."
-    (if (use-region-p)
-        ;; Active region
-        (let ((bounds (markdown-unwrap-things-in-region
-                       (region-beginning) (region-end)
-                       markdown-regex-bold 2 4)))
-          (markdown-wrap-or-insert before after nil (car bounds) (cdr bounds)))
-      ;; Bold markup removal, bold word at point, or empty markup insertion
-      (if (thing-at-point-looking-at markdown-regex-bold)
-          (markdown-unwrap-thing-at-point nil 2 4)
-        (markdown-wrap-or-insert before after 'word nil nil))))
-
-(defun dokuwiki-insert-bold ()
-  (interactive)
-  (dokuwiki-insert-base "**" "**")
-  )
-
-(defun dokuwiki-insert-deleteline ()
-  (interactive)
-  (dokuwiki-insert-base "<del>" "</del>")
-  )
-
-
-(defun markdown-remove-header ()
-  "Remove header markup if point is at a header.
-Return bounds of remaining header text if a header was removed
-and nil otherwise."
-  (interactive "*")
-  (or (markdown-unwrap-thing-at-point markdown-regex-header-atx 0 2)
-      (markdown-unwrap-thing-at-point markdown-regex-header-setext 0 1)))
-
-
-
-
-(defun markdown-insert-list-item (&optional arg)
+;; ===========================
+;; インデント保持はされてるけど、リストマークが保持されていない。*になる。なんで。書いてあるのと違う...記法が微妙に違うためか。
+(defun dokuwiki-insert-list (&optional arg)
   "Insert a new list item.
 If the point is inside unordered list, insert a bullet mark.  If
 the point is inside ordered list, insert the next number followed
@@ -822,34 +20,39 @@ increase the indentation by one level."
   (let (bounds cur-indent marker indent new-indent new-loc)
     (save-match-data
       ;; Look for a list item on current or previous non-blank line
+	  ;; 各種代入
       (save-excursion
-        (while (and (not (setq bounds (markdown-cur-list-item-bounds)))
+        (while (and (not (setq bounds (markdown-cur-list-item-bounds))) ; boundsはlist-itemの各種情報、現在行で
                     (not (bobp))
                     (markdown-cur-line-blank-p))
-          (forward-line -1)))
-      (when bounds
+          (forward-line -1))) ; 辿って、一番最後に使われたmarkerがあると止まる
+	  
+      (when bounds ; boundsがあるとき...
         (cond ((save-excursion
-                 (skip-chars-backward " \t")
-                 (looking-at-p markdown-regex-list))
+                 (skip-chars-backward " \t") ; インデントを飛ばして移動
+                 (looking-at-p markdown-regex-list)) ; listをサーチ
                (beginning-of-line)
                (insert "\n")
-               (forward-line -1))
-              ((not (markdown-cur-line-blank-p))
+               (forward-line -1)) ; カーソルを戻すバージョン？
+              ((not (markdown-cur-line-blank-p)) ; 空白でないときはnewline？(違いがわからなん)
                (newline)))
         (setq new-loc (point)))
+	  
+	  ;; 次の非空白行のリストでboundsを定義する
       ;; Look ahead for a list item on next non-blank line
       (unless bounds
         (save-excursion
           (while (and (null bounds)
-                      (not (eobp))
-                      (markdown-cur-line-blank-p))
-            (forward-line)
-            (setq bounds (markdown-cur-list-item-bounds))))
+                      (not (eobp)) ; バッファの最後ではない
+                      (markdown-cur-line-blank-p)) ; 空行である
+            (forward-line)				; 次の行に進む…*while内。
+            (setq bounds (markdown-cur-list-item-bounds)))) ; boundsが定義されると抜ける
         (when bounds
           (setq new-loc (point))
-          (unless (markdown-cur-line-blank-p)
+          (unless (markdown-cur-line-blank-p) ; 空白でないとき、新しい行。
             (newline))))
-      (if (not bounds)
+	  
+      (if (not bounds) ; boundsがないとき。インデントなどがあり大きくなっている。ここじゃないときはインデント使わないってことだよな…。new-locがあるので、上のwhenかunlessのどちらかは確実に評価されることになる。3つは背反ではない。
           ;; When not in a list, start a new unordered one
           (progn
             (unless (markdown-cur-line-blank-p)
@@ -857,100 +60,55 @@ increase the indentation by one level."
             (insert markdown-unordered-list-item-prefix))
         ;; Compute indentation and marker for new list item
         (setq cur-indent (nth 2 bounds))
-        (setq marker (nth 4 bounds))
-        ;; If current item is a GFM checkbox, insert new unchecked checkbox.
+        (setq marker (nth 4 bounds))	; markerは何？ -- * とか + とかか。マーク。
         (when (nth 5 bounds)
           (setq marker
                 (concat marker
                         (replace-regexp-in-string "[Xx]" " " (nth 5 bounds)))))
+		
+        ;; If current item is a GFM checkbox, insert new unchecked checkbox.
         (cond
          ;; Dedent: decrement indentation, find previous marker.
-         ((= arg 4)
+         ((= arg 4) ; argいつ出てきたよ
           (setq indent (max (- cur-indent 4) 0))
-          (let ((prev-bounds
+          (let ((prev-bounds ; 結局何が定義されてる？...移動したあとのbounds
                  (save-excursion
-                   (goto-char (nth 0 bounds))
-                   (when (markdown-up-list)
+                   (goto-char (nth 0 bounds)) ; カーソルをn文字移動
+                   (when (markdown-up-list) ; カッコの最初に移動
                      (markdown-cur-list-item-bounds)))))
             (when prev-bounds
               (setq marker (nth 4 prev-bounds)))))
+		 
          ;; Indent: increment indentation by 4, use same marker.
          ((= arg 16) (setq indent (+ cur-indent 4)))
+		 
          ;; Same level: keep current indentation and marker.
          (t (setq indent cur-indent)))
-        (setq new-indent (make-string indent 32))
+		
+        (setq new-indent (make-string indent 32)) ; レベルに応じたインデント数で空白を作る
         (goto-char new-loc)
         (cond
-         ;; Ordered list
-         ((string-match-p "[0-9]" marker)
-          (if (= arg 16) ;; starting a new column indented one more level
-              (insert (concat new-indent "1. "))
-            ;; Don't use previous match-data
-            (set-match-data nil)
-            ;; travel up to the last item and pick the correct number.  If
-            ;; the argument was nil, "new-indent = cur-indent" is the same,
-            ;; so we don't need special treatment. Neat.
-            (save-excursion
-              (while (and (not (looking-at (concat new-indent "\\([0-9]+\\)\\(\\.[ \t]*\\)")))
-                          (>= (forward-line -1) 0))))
-            (let* ((old-prefix (match-string 1))
-                   (old-spacing (match-string 2))
-                   (new-prefix (if old-prefix
-                                   (int-to-string (1+ (string-to-number old-prefix)))
-                                 "1"))
-                   (space-adjust (- (length old-prefix) (length new-prefix)))
-                   (new-spacing (if (and (match-string 2)
-                                         (not (string-match-p "\t" old-spacing))
-                                         (< space-adjust 0)
-                                         (> space-adjust (- 1 (length (match-string 2)))))
-                                    (substring (match-string 2) 0 space-adjust)
-                                  (or old-spacing ". "))))
-              (insert (concat new-indent new-prefix new-spacing)))))
          ;; Unordered list, GFM task list, or ordered list with hash mark
          ((string-match-p "[\\*\\+-]\\|#\\." marker)
           (insert new-indent marker))))
       ;; Propertize the newly inserted list item now
-      (markdown-syntax-propertize-list-items (point-at-bol) (point-at-eol)))))
+      (markdown-syntax-propertize-list-items (point-at-bol) (point-at-eol))
+	  )
+	)
+  )
 
-(defun dokuwiki-insert-list ()
-  (interactive)
-  (let (mark search-limit-point)
-;; 数字付か否か判別
-;; インデント保持
-;; リスト中か否か判断
-;; 改行＋リストかリストのみか判断
-  ;;   (beginning-of-line)
-  ;;   (insert "\n")
-  ;;   (forward-line -1)
-  ;; (not (dokuwiki-cur-line-blank-p))
-    ;; (newline))
+(skip-chars-backward " \t")
+(concat "a" "a")
+(setq indent (length (match-string-no-properties 1)))
+(make-string indent 30)
 
-    ;; TODO: 前に*があると直前が#でも*になる問題。
-    (save-excursion
-      (progn
-	(end-of-line)
-	(setq search-limit-point (point))
-      ))
-    (save-excursion
-      (if (dokuwiki-cur-line-blank-p)
-	  (forward-line -1))
-      (beginning-of-line)
-      (if (search-forward "  #" search-limit-point t)
-	     (setq mark "  # ")
-	     (setq mark "  * ")))
+(markdown-cur-list-item-bounds)
+(make-string 4 32)
+(car (get-text-property (point-at-bol) 'markdown-list-item))
 
-  (progn
-    (unless (dokuwiki-cur-line-blank-p)
-      (insert "\n"))
-    (insert mark))))
+(defun abc ()
+  (skip-chars-backward " \t"))
+(insert "\n")
+(newline)
 
-;; 判別して挿入するマークを変えたい。
-
-(not (dokuwiki-cur-line-blank-p))
-(dokuwiki-cur-line-blank-p)
-(dokuwiki-insert-list)
-\naaa
-(markdown-unwrap-things-in-region (region-begining) (region-end)
-								  markdown-regex-bold 2 4)
-(null 0)
-(bounds-of-thing-at-point)
+(setq bounds (markdown-cur-list-item-boudnds))
