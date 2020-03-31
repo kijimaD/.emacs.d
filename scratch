@@ -52,7 +52,7 @@ increase the indentation by one level."
           (unless (markdown-cur-line-blank-p) ; 空白でないとき、新しい行。
             (newline))))
 	  
-      (if (not bounds) ; boundsがないとき。インデントなどがあり大きくなっている。ここじゃないときはインデント使わないってことだよな…。new-locがあるので、上のwhenかunlessのどちらかは確実に評価されることになる。3つは背反ではない。
+      (if (not bounds) ; boundsがないとき。インデントなどがあり大きくなっている。ここじゃないときはインデント使わないってことだよな…。new-locがあるので、上のwhenかunlessのどちらかは確実に評価されることになる。
           ;; When not in a list, start a new unordered one
           (progn
             (unless (markdown-cur-line-blank-p)
@@ -68,17 +68,7 @@ increase the indentation by one level."
 		
         ;; If current item is a GFM checkbox, insert new unchecked checkbox.
         (cond
-         ;; Dedent: decrement indentation, find previous marker.
-         ((= arg 4) ; argいつ出てきたよ
-          (setq indent (max (- cur-indent 4) 0))
-          (let ((prev-bounds ; 結局何が定義されてる？...移動したあとのbounds
-                 (save-excursion
-                   (goto-char (nth 0 bounds)) ; カーソルをn文字移動
-                   (when (markdown-up-list) ; カッコの最初に移動
-                     (markdown-cur-list-item-bounds)))))
-            (when prev-bounds
-              (setq marker (nth 4 prev-bounds)))))
-		 
+		
          ;; Indent: increment indentation by 4, use same marker.
          ((= arg 16) (setq indent (+ cur-indent 4)))
 		 
@@ -90,7 +80,7 @@ increase the indentation by one level."
         (cond
          ;; Unordered list, GFM task list, or ordered list with hash mark
          ((string-match-p "[\\*\\+-]\\|#\\." marker)
-          (insert new-indent marker))))
+          (insert new-indent marker)))) ; マークがあってない。どれも*になる…。→markdownと文法が異なるから？でも同じのでやってもできず。
       ;; Propertize the newly inserted list item now
       (markdown-syntax-propertize-list-items (point-at-bol) (point-at-eol))
 	  )
@@ -112,3 +102,13 @@ increase the indentation by one level."
 (newline)
 
 (setq bounds (markdown-cur-list-item-boudnds))
+
+(car (get-text-property (point-at-bol) 'markdown-list-item))
+
+(car (get-text-property (point-at-bol) "m"))
+(text-properties-at 3)
+
+
+(car (get-text-property (point-at-bol) 'markdown-list-item))
+(markdown-search-backward-baseline)
+
