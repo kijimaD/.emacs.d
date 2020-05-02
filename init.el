@@ -973,7 +973,7 @@
 (set-frame-parameter nil 'alpha 94)
 
 ;; ;; Gitの差分情報を表示する
-(global-git-gutter+-mode)
+;; (global-git-gutter+-mode)
 
 ;; 変更があったら自動で更新
 (global-auto-revert-mode 1)
@@ -999,3 +999,22 @@
           (goto-char (mark))
           (isearch-repeat-forward)))
     ad-do-it))
+
+(defun read-down ()
+  (interactive)
+  (next-line)
+  (recenter))
+
+(global-set-key [down] 'read-down)
+(global-set-key [down-mouse-5] 'read-down)
+
+(defun read-up ()
+  (interactive)
+  (previous-line)
+  (recenter))
+
+(global-set-key [up] 'read-up)
+(global-set-key [down-mouse-4] 'read-up)
+
+(global-set-key [insert] 'eijiro-at-point)
+(put 'upcase-region 'disabled nil)

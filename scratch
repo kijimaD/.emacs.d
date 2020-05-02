@@ -34,7 +34,7 @@ increase the indentation by one level."
                (beginning-of-line)
                (insert "\n")
                (forward-line -1)) ; カーソルを戻すバージョン？
-              ((not (markdown-cur-line-blank-p)) ; 空白でないときはnewline？(違いがわからなん)
+              ((not (markdown-cur-line-blank-p)) ; 空白でないときはnewline？(違いがわからん)
                (newline)))
         (setq new-loc (point)))
 	  

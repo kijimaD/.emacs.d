@@ -4,7 +4,6 @@
 
 ;; Author: Tsunenobu Kai <kai2nenobu@gmail.com>
 ;; URL: https://github.com/kai2nenobu/emacs-dokuwiki-mode
-;; Package-Version: 20170223.1301
 ;; Version: 0.1.1
 ;; Keywords: hypermedia text DokuWiki
 
@@ -42,6 +41,29 @@
     (define-key map (kbd "C-c C-b") 'outline-backward-same-level)
     (define-key map (kbd "C-c C-u") 'outline-up-heading)
     (define-key map (kbd "C-c C-@") 'outline-mark-subtree)
+    (define-key map (kbd "C-c C-t 1") 'dokuwiki-insert-header-1)
+    (define-key map (kbd "C-c C-t 2") 'dokuwiki-insert-header-2)
+    (define-key map (kbd "C-c C-t 3") 'dokuwiki-insert-header-3)
+    (define-key map (kbd "C-c C-t 4") 'dokuwiki-insert-header-4)
+    (define-key map (kbd "C-c C-t 5") 'dokuwiki-insert-header-5)
+    (define-key map (kbd "C-c C-t 6") 'dokuwiki-insert-header-6)
+    (define-key map (kbd "C-c C-t 8") 'dokuwiki-insert-header-current-level)
+    (define-key map (kbd "C-c C-t 9") 'dokuwiki-insert-header-down-level)
+    (define-key map (kbd "C-c C-t 0") 'dokuwiki-insert-header-up-level)
+    (define-key map (kbd "C-c C-t b") 'dokuwiki-insert-bold)
+    (define-key map (kbd "C-c C-t i") 'dokuwiki-insert-italic)
+    (define-key map (kbd "C-c C-t u") 'dokuwiki-insert-underline)
+    (define-key map (kbd "C-c C-t d") 'dokuwiki-insert-deleteline)
+    (define-key map (kbd "C-c C-t m") 'dokuwiki-insert-code)
+    (define-key map (kbd "C-c C-t c") 'dokuwiki-insert-code-block)
+    (define-key map (kbd "C-c C-t o") 'dokuwiki-insert-code-file)
+    (define-key map (kbd "C-c C-t l") 'dokuwiki-insert-link)
+    (define-key map (kbd "C-c C-t f") 'dokuwiki-insert-footnote)
+    (define-key map (kbd "M-RET") 'dokuwiki-insert-list)
+    (define-key map (kbd "C-c C-t -") 'dokuwiki-insert-number-list)
+    (define-key map (kbd "C-c C-t q") 'dokuwiki-insert-quote)
+    (define-key map (kbd "C-c C-t r") 'dokuwiki-insert-rss)
+    (define-key map (kbd "C-c C-t h") 'dokuwiki-insert-hr)
     map)
   "Keymap for the `dokuwiki-mode'.")
 
@@ -53,6 +75,10 @@
 (defvar dokuwiki-outline-regexp " ?\\(=\\{2,6\\}\\)"
   "Regexp which indicates headline in DokuWiki.
 See also `outline-regexp'.")
+
+(defvar dokuwiki-regex-blank-line
+  "^[[:blank:]]*$"
+  "Regular expression that matches a blank line.")
 
 ;;;; Faces
 (defface dokuwiki-box '((t (:box t)))
@@ -155,6 +181,178 @@ See also `outline-regexp'.")
              dokuwiki-smiley-list)
    ))
 
+(defcustom dokuwiki-ordered-list-item-prefix "  * "
+  "String inserted before unordered list items."
+  :group 'dokuwiki
+  :type 'string
+  )
+
+; -----------
+
+(eval-and-compile
+  (defconst dokuwiki-rx-constituents
+    `((newline . ,(rx "\n"))
+      (indent . ,(rx (or (repeat 4 " ") "\t")))
+      (block-end . ,(rx (and (or (one-or-more (zero-or-more blank) "\n") line-end))))
+      (numeral . ,(rx (and (one-or-more (any "0-9#")) ".")))
+      (bullet . ,(rx (any "*+:-")))
+      (list-marker . ,(rx (any "*+:-"))))
+    "Markdown-specific sexps for `markdown-rx'")
+
+  (defun dokuwiki-rx-to-string (form &optional no-group)
+    "Markdown mode specialized `rx-to-string' function.
+This variant supports named Markdown expressions in FORM.
+NO-GROUP non-nil means don't put shy groups around the result."
+    (let ((rx-constituents (append dokuwiki-rx-constituents rx-constituents)))
+      (rx-to-string form no-group)))
+
+  (defmacro dokuwiki-rx (&rest regexps)
+    "Markdown mode specialized rx macro.
+This variant of `rx' supports common Markdown named REGEXPS."
+    (cond ((null regexps)
+           (error "No regexp"))
+          ((cdr regexps)
+           (dokuwiki-rx-to-string `(and ,@regexps) t))
+          (t
+           (dokuwiki-rx-to-string (car regexps) t)))))
+
+; -----------
+
+(defconst dokuwiki-regex-list
+  (dokuwiki-rx line-start
+               ;; 1. Leading whitespace
+               (group (* blank))
+               ;; 2. List marker: a numeral, bullet, or colon
+               (group list-marker)
+               ;; 3. Trailing whitespace
+               (group (+ blank)))
+  "Regular expression for matching list items.")
+
+(defun dokuwiki-cur-list-item-end (level)
+  "Move to end of list item with pre-marker indentation LEVEL.
+Return the point at the end when a list item was found at the
+original point.  If the point is not in a list item, do nothing."
+  (let (indent)
+    (forward-line)
+    (setq indent (current-indentation))
+    (while
+        (cond
+         ;; Stop at end of the buffer.
+         ((eobp) nil)
+         ;; Continue while indentation is the same or greater
+         ((>= indent level) t)
+         ;; Continue if the current line is blank
+         ((looking-at markdown-regex-blank-line) t)
+         ;; Stop if current indentation is less than list item
+         ;; and the previous line was blank.
+         ((and (< indent level)
+               (markdown-prev-line-blank))
+          nil)
+         ;; Stop at a new list items of the same or lesser
+         ;; indentation, headings, and horizontal rules.
+         ((looking-at (concat "\\(?:" markdown-regex-list
+                              "\\)"))
+          nil)
+         ;; Otherwise, continue.
+         (t t))
+      (forward-line)
+      (setq indent (current-indentation)))
+    ;; Don't skip over whitespace for empty list items (marker and
+    ;; whitespace only), just move to end of whitespace.
+    (if (save-excursion
+          (beginning-of-line)
+          (looking-at (concat markdown-regex-list "[ \t]*$")))
+        (goto-char (match-end 3))
+      (skip-chars-backward " \t\n"))
+    (end-of-line)
+    (point)))
+
+(defun dokuwiki--cur-list-item-bounds ()
+  "Return a list describing the list item at point.
+Assumes that match data is set for `markdown-regex-list'.  See the
+documentation for `markdown-cur-list-item-bounds' for the format of
+the returned list."
+  (save-excursion
+    (let* ((begin (match-beginning 0))
+           (indent (length (match-string-no-properties 1)))
+           (nonlist-indent (- (match-end 3) (match-beginning 0)))
+           (marker (buffer-substring-no-properties
+                    (match-beginning 2) (match-end 3)))
+           (checkbox (match-string-no-properties 4))
+           (match (butlast (match-data t)))
+           (end (dokuwiki-cur-list-item-end nonlist-indent)))
+	  (list begin end indent nonlist-indent marker checkbox match))))
+
+(defun dokuwiki-syntax-propertize-list-items (start end)
+  "Propertize list items from START to END.
+Stores nested list item information in the `dokuwiki-list-item'
+text property to make later syntax analysis easier.  The value of
+this property is a list with elements of the form (begin . end)
+giving the bounds of the current and parent list items."
+  (save-excursion
+    (goto-char start)
+    (let (bounds level pre-regexp)
+      ;; Find a baseline point with zero list indentation
+      (markdown-search-backward-baseline)
+      ;; Search for all list items between baseline and END
+      (while (and (< (point) end)
+                  (re-search-forward dokuwiki-regex-list end 'limit))
+        ;; Level of list nesting
+        (setq level (length bounds))
+        ;; Pre blocks need to be indented one level past the list level
+        (setq pre-regexp (format "^\\(    \\|\t\\)\\{%d\\}" (1+ level)))
+        (beginning-of-line)
+        (cond
+         ;; Reset at headings, horizontal rules, and top-level blank lines.
+         ;; Propertize baseline when in range.
+         ((markdown-new-baseline)
+          (setq bounds nil))
+         ;; Make sure this is not a line from a pre block
+         ((looking-at-p pre-regexp))
+         ;; If not, then update levels and propertize list item when in range.
+         (t
+          (let* ((indent (current-indentation))
+                 (cur-bounds (dokuwiki--cur-list-item-bounds))
+                 (first (cl-first cur-bounds))
+                 (last (cl-second cur-bounds))
+                 (marker (cl-fifth cur-bounds)))
+            (setq bounds (markdown--append-list-item-bounds
+                          marker indent cur-bounds bounds))
+          (when (and (<= start (point)) (<= (point) end))
+            (put-text-property first last 'dokuwiki-list-item bounds)))))
+        (end-of-line)))))
+
+(defun dokuwiki-cur-list-item-bounds ()
+  "Return bounds for list item at point.
+Return a list of the following form:
+
+    (begin end indent nonlist-indent marker checkbox match)
+
+The named components are:
+
+  - begin: Position of beginning of list item, including leading indentation.
+  - end: Position of the end of the list item, including list item text.
+  - indent: Number of characters of indentation before list marker (an integer).
+  - nonlist-indent: Number characters of indentation, list
+    marker, and whitespace following list marker (an integer).
+  - marker: String containing the list marker and following whitespace
+            (e.g., \"- \" or \"* \").
+  - checkbox: String containing the GFM checkbox portion, if any,
+    including any trailing whitespace before the text
+    begins (e.g., \"[x] \").
+  - match: match data for markdown-regex-list
+
+As an example, for the following unordered list item
+
+   - item
+
+the returned list would be
+
+    (1 14 3 5 \"- \" nil (1 6 1 4 4 5 5 6))
+
+If the point is not inside a list item, return nil."
+  (car (get-text-property (point-at-bol) 'dokuwiki-list-item)))
+
 (defun dokuwiki-code-block-search (limit)
   (if (not (looking-at "[-*]"))
       (re-search-forward ".*$" limit t)))
@@ -166,6 +364,14 @@ See also `outline-level'."
     (let ((const 7)
           (headline (match-string 1)))
       (- const (length headline)))))
+
+(defun dokuwiki-outline-level-for-insert-header ()
+  "Return outline level. "
+(save-excursion
+   (end-of-line)
+   (if (re-search-backward "^=+" nil t)
+       (- (match-end 0) (match-beginning 0))
+     0)))
 
 ;;;; Work with `outline-magic'
 (eval-after-load "outline-magic"
@@ -189,6 +395,294 @@ See also `outline-level'."
   (set (make-local-variable 'outline-promotion-headings)
        '(("======" . 1) ("=====" . 2) ("====" . 3) ("===" . 4) ("==" . 5)))
   (set (make-local-variable 'outline-cycle-emulate-tab) t))
+
+(defun dokuwiki-insert-header (&optional level text setext)
+  "This code is derived from markdown-insert-header in markdown-mode.el
+  "
+  (interactive "p\nsHeader text: ")
+  (setq level (min (max (or level 1) 1) (if setext 2 6)))
+  ;; Determine header text if not given
+  (when (null text)
+    (if (use-region-p)
+        ;; Active region
+        (setq text (delete-and-extract-region (region-beginning) (region-end)))
+      ;; No active region
+      (setq text (delete-and-extract-region
+                  (line-beginning-position) (line-end-position)))
+      (when (and setext (string-match-p "^[ \t]*$" text))
+        (setq text (read-string "Header text: "))))
+    (setq text (dokuwiki-compress-whitespace-string text)))
+  ;; Insertion with given text
+  (dokuwiki-ensure-blank-line-before)
+  (let (hdr)
+    (cond (setext
+           (setq hdr (make-string (string-width text) (if (= level 2) ?- ?=)))
+           (insert text "\n" hdr))
+          (t
+           (setq hdr (make-string level ?=))
+           (insert hdr " " text)
+           (insert " " hdr))))
+  (dokuwiki-ensure-blank-line-after)
+  ;; Leave point at end of text
+  (cond (setext
+         (backward-char (1+ (string-width text))))
+        (
+         (backward-char (1+ level)))))
+
+(defun dokuwiki-insert-header-1 ()
+(interactive)
+(dokuwiki-insert-header 1))
+
+(defun dokuwiki-insert-header-2 ()
+(interactive)
+(dokuwiki-insert-header 2))
+
+(defun dokuwiki-insert-header-3 ()
+(interactive)
+(dokuwiki-insert-header 3))
+
+(defun dokuwiki-insert-header-4 ()
+(interactive)
+(dokuwiki-insert-header 4))
+
+(defun dokuwiki-insert-header-5 ()
+(interactive)
+(dokuwiki-insert-header 5))
+
+(defun dokuwiki-insert-header-6 ()
+(interactive)
+(dokuwiki-insert-header 6))
+
+(defun dokuwiki-insert-header-current-level ()
+  (interactive)
+  (let ((current-level (dokuwiki-outline-level-for-insert-header)))
+    (if (= current-level 0) (dokuwiki-insert-header 6)
+      (dokuwiki-insert-header current-level))))
+
+(defun dokuwiki-insert-header-up-level ()
+  (interactive)
+  (let ((current-level (dokuwiki-outline-level-for-insert-header)))
+    (if (= current-level 0) (dokuwiki-insert-header 6)
+      (dokuwiki-insert-header (+ current-level 1)))))
+
+(defun dokuwiki-insert-header-down-level ()
+  (interactive)
+  (let ((current-level (dokuwiki-outline-level-for-insert-header)))
+    (if (= current-level 0) (dokuwiki-insert-header 6)
+    (dokuwiki-insert-header (- current-level 1)))))
+
+(defun dokuwiki-insert-base (before after)
+  (dokuwiki-wrap-or-insert before after 'word nil nil))
+
+(defun dokuwiki-insert-bold ()
+  (interactive)
+  (dokuwiki-insert-base "**" "**"))
+
+(defun dokuwiki-insert-italic ()
+  (interactive)
+  (dokuwiki-insert-base "//" "//"))
+
+(defun dokuwiki-insert-underline ()
+  (interactive)
+  (dokuwiki-insert-base "__" "__"))
+
+(defun dokuwiki-insert-code ()
+  (interactive)
+  (dokuwiki-insert-base "''" "''"))
+
+(defun dokuwiki-insert-code-block ()
+  (interactive)
+  (dokuwiki-insert-base "<code>\n" "\n</code>"))
+
+(defun dokuwiki-insert-code-file ()
+  (interactive)
+  (dokuwiki-insert-base "<file lang file>\n" "\n</file>"))
+
+(defun dokuwiki-insert-deleteline ()
+  (interactive)
+  (dokuwiki-insert-base "<del>" "</del>"))
+
+(defun dokuwiki-insert-link ()
+  (interactive)
+  (dokuwiki-insert-base "[[" "]]"))
+
+(defun dokuwiki-insert-footnote ()
+  (interactive)
+  (dokuwiki-insert-base "((" "))"))
+
+(defun dokuwiki-insert-number-list ()
+  (interactive)
+  (dokuwiki-insert-base "  - " ""))
+
+(defun dokuwiki-insert-list (&optional arg)
+  "Insert a new list item.
+If the point is inside unordered list, insert a bullet mark.  If
+the point is inside ordered list, insert the next number followed
+by a period.  Use the previous list item to determine the amount
+of whitespace to place before and after list markers.
+
+With a \\[universal-argument] prefix (i.e., when ARG is (4)),
+decrease the indentation by one level.
+
+With two \\[universal-argument] prefixes (i.e., when ARG is (16)),
+increase the indentation by one level."
+  (interactive "p")
+  (let (bounds cur-indent marker indent new-indent new-loc)
+    (save-match-data
+      ;; Look for a list item on current or previous non-blank line
+      (save-excursion
+        (dokuwiki-syntax-propertize-list-items (point-at-bol) (point-at-eol)) ; TODO: tmp
+        (while (and (not (setq bounds (dokuwiki-cur-list-item-bounds)))
+                    (not (bobp))
+                    (dokuwiki-cur-line-blank-p))
+          (forward-line -1)))
+
+	  (message "bounds:%s" bounds)
+	  ;; Exists a list
+      (when bounds
+        (cond ((save-excursion
+                 (skip-chars-backward " \t")
+                 (looking-at-p dokuwiki-regex-list))
+               (beginning-of-line)
+               (insert "\n")
+               (forward-line -1))
+              ((not (dokuwiki-cur-line-blank-p))
+               (newline)))
+        (setq new-loc (point)))
+
+      ;; Look ahead for a list item on next non-blank line
+      (unless bounds
+        (save-excursion
+          (while (and (null bounds)
+                      (not (eobp))
+                      (dokuwiki-cur-line-blank-p))
+            (forward-line)
+            (setq bounds (dokuwiki-cur-list-item-bounds))))
+        (when bounds
+          (setq new-loc (point))
+          (unless (dokuwiki-cur-line-blank-p)
+            (newline))))
+
+      (if (not bounds)
+		  ;; When not in a list, start a new ordered one(*)
+          (progn
+            (unless (dokuwiki-cur-line-blank-p)
+              (insert "\n"))
+            (insert dokuwiki-ordered-list-item-prefix))
+        ;; Compute indentation and marker for new list item
+        (setq cur-indent (nth 2 bounds))
+        (setq marker (nth 4 bounds))
+        (when (nth 5 bounds)
+          (setq marker
+                (concat marker
+                        (replace-regexp-in-string "[Xx]" " " (nth 5 bounds)))))
+        (cond
+		 ;; Dedent: decrement indentation, find previous marker.
+         ((= arg 4)
+          (setq indent (max (- cur-indent 4) 0))
+          (let ((prev-bounds
+                 (save-excursion
+                   (goto-char (nth 0 bounds))
+                   (when (markdown-up-list)
+                     (dokuwiki-cur-list-item-bounds)))))
+            (when prev-bounds
+              (setq marker (nth 4 prev-bounds)))))
+         ;; Indent: increment indentation by 4, use same marker.
+         ((= arg 16) (setq indent (+ cur-indent 4)))
+         ;; Same level: keep current indentation and marker.
+         (t (setq indent cur-indent)))
+        (setq new-indent (make-string indent 32))
+        (goto-char new-loc)
+
+        (if (string-match-p "[\\*\\-]" marker)
+			;; Ordered list
+			(insert new-indent marker)))
+      ;; Propertize the newly inserted list item now
+      (dokuwiki-syntax-propertize-list-items (point-at-bol) (point-at-eol))
+	  )))
+
+(defun dokuwiki-insert-quote ()
+  (interactive)
+  (dokuwiki-insert-base "> " ""))
+
+(defun dokuwiki-insert-rss ()
+  (interactive)
+  (dokuwiki-insert-base "{{rss>" " 10 author date 1h}}"))
+
+(defun dokuwiki-insert-hr ()
+  (interactive)
+  (when (looking-at-p "------")
+    (delete-region (match-beginning 0) (match-end 0)))
+  (insert "------")
+  (beginning-of-line))
+
+;;; Tools for insert -----------------------------------------------------------
+
+(defun dokuwiki-cur-line-blank-p ()
+  "Return t if the current line is blank and nil otherwise."
+  (save-excursion
+    (beginning-of-line)
+    (looking-at-p dokuwiki-regex-blank-line)))
+
+(defun dokuwiki-compress-whitespace-string (str)
+   "Compress whitespace in STR and return result.
+Leading and trailing whitespace is removed.  Sequences of multiple
+spaces, tabs, and newlines are replaced with single spaces. Derived from dokuwiki.el"
+  (replace-regexp-in-string "\\(^[ \t\n]+\\|[ \t\n]+$\\)" ""
+				     (replace-regexp-in-string "[ \t\n]+" " " str)))
+
+(defun dokuwiki-ensure-blank-line-before ()
+  "If previous line is not already blank, insert a blank line before point."
+  (unless (bolp) (insert "\n"))
+  (unless (or (bobp) (looking-back "\n\\s-*\n" nil)) (insert "\n")))
+
+(defun dokuwiki-ensure-blank-line-after ()
+  "If following line is not already blank, insert a blank line after point.
+Return the point where it was originally."
+  (save-excursion
+    (unless (eolp) (insert "\n"))
+    (unless (or (eobp) (looking-at-p "\n\\s-*\n")) (insert "\n"))))
+
+(defun dokuwiki-wrap-or-insert (s1 s2 &optional thing beg end)
+  "Insert the strings S1 and S2, wrapping around region or THING.
+If a region is specified by the optional BEG and END arguments,
+wrap the strings S1 and S2 around that region.
+If there is an active region, wrap the strings S1 and S2 around
+the region.  If there is not an active region but the point is at
+THING, wrap that thing (which defaults to word).  Otherwise, just
+insert S1 and S2 and place the point in between.  Return the
+bounds of the entire wrapped string, or nil if nothing was wrapped
+and S1 and S2 were only inserted."
+  (let (a b bounds new-point)
+    (cond
+     ;; Given region
+     ((and beg end)
+      (setq a beg
+            b end
+            new-point (+ (point) (length s1))))
+     ;; Active region
+     ((use-region-p)
+      (setq a (region-beginning)
+            b (region-end)
+            new-point (+ (point) (length s1))))
+     ;; Thing (word) at point
+     ((setq bounds (bounds-of-thing-at-point (or thing 'word)))
+      (setq a (car bounds)
+            b (cdr bounds)
+            new-point (+ (point) (length s1))))
+     ;; No active region and no word
+     (t
+      (setq a (point)
+            b (point))))
+    (goto-char b)
+    (insert s2)
+    (goto-char a)
+    (insert s1)
+    (when new-point (goto-char new-point))
+    (if (= a b)
+        nil
+      (setq b (+ b (length s1) (length s2)))
+      (cons a b))))
 
 ;;;###autoload
 (define-derived-mode dokuwiki-mode text-mode "DokuWiki"
