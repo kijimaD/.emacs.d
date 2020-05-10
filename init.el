@@ -1018,3 +1018,10 @@
 
 (global-set-key [insert] 'eijiro-at-point)
 (put 'upcase-region 'disabled nil)
+
+(define-key w3m-mode-map (kbd "<up>") nil)
+(define-key w3m-mode-map (kbd "<down>") nil)
+(define-key w3m-mode-map (kbd "<left>") nil)
+(define-key w3m-mode-map (kbd "<right>") nil)
+
+(setq w3m-default-display-inline-images t)
