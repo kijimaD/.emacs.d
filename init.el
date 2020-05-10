@@ -1016,6 +1016,8 @@
 (global-set-key [up] 'read-up)
 (global-set-key [down-mouse-4] 'read-up)
 
+(setq load-path (cons "~/.emacs.d/elisp/eijiro.el/" load-path))
+(require 'eijiro)
 (global-set-key [insert] 'eijiro-at-point)
 (put 'upcase-region 'disabled nil)
 
