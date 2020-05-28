@@ -1027,6 +1027,7 @@
 (define-key w3m-mode-map (kbd "<left>") nil)
 (define-key w3m-mode-map (kbd "<right>") nil)
 (define-key w3m-mode-map (kbd "C-t") nil)
+(define-key dired-mode-map (kbd "C-t") nil)
 
 (setq w3m-default-display-inline-images t)
 
