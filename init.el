@@ -958,7 +958,7 @@
 (setq org-journal-date-format "%x")
 (setq org-journal-time-format "<%Y-%m-%d %R> ")
 (setq org-journal-file-format "%Y%m%d.org")
-(setq org-journal-dir "~/Dropbox/repo/diary/org-journal")
+(setq org-journal-dir "~/Dropbox/documents/diary/org-journal")
 
 ;; SSH
 (require 'tramp)
@@ -1017,6 +1017,7 @@
 (global-set-key [down-mouse-4] 'read-up)
 
 (setq load-path (cons "~/.emacs.d/elisp/eijiro.el/" load-path))
+(setq eijiro-directory "~/mysync/cs-doc")
 (require 'eijiro)
 (global-set-key [insert] 'eijiro-at-point)
 (put 'upcase-region 'disabled nil)
