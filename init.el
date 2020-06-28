@@ -57,7 +57,7 @@
  '(org2blog/wp-show-post-in-browser nil)
  '(package-selected-packages
    (quote
-    (ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
+    (company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
  '(pdf-view-midnight-colors (quote ("#232333" . "#c7c7c7")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -778,16 +778,16 @@
 ;; ;====================================
 ;; ;Emacsを終了してもファイルを編集してた位置や
 ;; ;minibuffer への入力内容を覚えててくれます。
-;; (when (require 'session nil t)
-;; (setq session-initialize '(de-saveplace session keys menus places)
-;;       session-globals-include '((kill-ring 50)
-;;                                 (session-file-alist 500 t)
-;;                                 (file-name-history 10000)))
-;; ;; これがないと file-name-history に500個保存する前に max-string に達する
-;; (setq session-globals-max-string 100000000)
+(when (require 'session nil t)
+(setq session-initialize '(de-saveplace session keys menus places)
+      session-globals-include '((kill-ring 50)
+                                (session-file-alist 500 t)
+                                (file-name-history 10000)))
+;; これがないと file-name-history に500個保存する前に max-string に達する
+(setq session-globals-max-string 100000000)
 ;; ;; デフォルトでは30!
-;; (setq history-length t)
-;; (add-hook 'after-init-hook 'session-initialize))
+(setq history-length t)
+(add-hook 'after-init-hook 'session-initialize))
 
 ;;; 文字数モードライン表示
 (defun count-lines-and-chars ()
@@ -808,7 +808,7 @@
 ;; 非アクティブウィンドウの背景色を設定
 (require 'hiwin)
 (hiwin-activate)
-(set-face-background 'hiwin-face "gray40")
+(set-face-background 'hiwin-face "gray20")
 
 ;; tabサイズ
 (setq default-tab-width 4)
@@ -1060,3 +1060,38 @@
     (add-to-list 'tags-table-list d)
     (setq tags-file-name d) ))
 (global-set-key [f6] 'compile-ctags)
+
+;; 新しいフレームを開いたときの文字サイズを調整する
+(setq default-frame-alist
+      (append '((font . "源ノ角ゴシック Code JP-8"))
+              default-frame-alist))
+
+;; 自動補完
+(require 'ruby-electric)
+(add-hook 'ruby-mode-hook '(lambda ()
+          (ruby-electric-mode t)))
+
+;; 補完機能
+;; robe-modeの有効化とcompanyとの連携
+(add-hook 'ruby-mode-hook 'robe-mode)
+(autoload 'robe-mode "robe" "Code navigation, documentation lookup and completion for Ruby" t nil)
+(eval-after-load 'company
+  '(push 'company-robe company-backends))
+
+(add-hook 'ruby-mode-hook (lambda()
+      (company-mode)
+      (setq company-auto-expand t)
+      (setq company-transformers '(company-sort-by-backend-importance)) ;; ソート順
+      (setq company-idle-delay 0) ; 遅延なしにすぐ表示
+      (setq company-minimum-prefix-length 1) ; 何文字打つと補完動作を行うか設定
+      (setq company-selection-wrap-around t) ; 候補の最後の次は先頭に戻る
+      (setq completion-ignore-case t)
+      (setq company-dabbrev-downcase nil)
+      (global-set-key (kbd "C-M-i") 'company-complete)
+      ;; C-n, C-pで補完候補を次/前の候補を選択
+      (define-key company-active-map (kbd "C-n") 'company-select-next)
+      (define-key company-active-map (kbd "C-p") 'company-select-previous)
+      (define-key company-active-map (kbd "C-s") 'company-filter-candidates) ;; C-sで絞り込む
+      (define-key company-active-map [tab] 'company-complete-selection) ;; TABで候補を設定
+      (define-key emacs-lisp-mode-map (kbd "C-M-i") 'company-complete) ;; 各種メジャーモードでも C-M-iで company-modeの補完を使う
+      ))
