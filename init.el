@@ -574,7 +574,7 @@
 (set-language-environment "Japanese")
 (setq default-input-method "japanese-mozc")
 
-(global-set-key (kbd "C-w") 'mozc-mode)
+;; (global-set-key (kbd "C-w") 'mozc-mode)
 
 ;; (add-hook 'org-mode-hook 'mozc-mode)
 
@@ -1095,3 +1095,21 @@
       (define-key company-active-map [tab] 'company-complete-selection) ;; TABで候補を設定
       (define-key emacs-lisp-mode-map (kbd "C-M-i") 'company-complete) ;; 各種メジャーモードでも C-M-iで company-modeの補完を使う
       ))
+
+;; companyの色
+(set-face-attribute 'company-tooltip nil
+                    :foreground "black" :background "lightgrey")
+(set-face-attribute 'company-tooltip-common nil
+                    :foreground "black" :background "lightgrey")
+(set-face-attribute 'company-tooltip-common-selection nil
+                    :foreground "white" :background "steelblue")
+(set-face-attribute 'company-tooltip-selection nil
+                    :foreground "black" :background "steelblue")
+(set-face-attribute 'company-preview-common nil
+                    :background nil :foreground "lightgrey" :underline t)
+(set-face-attribute 'company-scrollbar-fg nil
+                    :background "orange")
+(set-face-attribute 'company-scrollbar-bg nil
+                    :background "gray40")
+
+(define-key robe-mode-map (kbd "M-.") nil)
