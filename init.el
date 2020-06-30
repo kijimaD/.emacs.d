@@ -1061,10 +1061,10 @@
     (setq tags-file-name d) ))
 (global-set-key [f6] 'compile-ctags)
 
-;; 新しいフレームを開いたときの文字サイズを調整する
-(setq default-frame-alist
-      (append '((font . "源ノ角ゴシック Code JP-8"))
-              default-frame-alist))
+;; ;; 新しいフレームを開いたときの文字サイズを調整する
+;; (setq default-frame-alist
+;;       (append '((font . "源ノ角ゴシック Code JP-8"))
+;;               default-frame-alist))
 
 ;; 自動補完
 (require 'ruby-electric)
@@ -1073,6 +1073,8 @@
 
 ;; 補完機能
 ;; robe-modeの有効化とcompanyとの連携
+(require 'robe)
+(require 'company)
 (add-hook 'ruby-mode-hook 'robe-mode)
 (autoload 'robe-mode "robe" "Code navigation, documentation lookup and completion for Ruby" t nil)
 (eval-after-load 'company
