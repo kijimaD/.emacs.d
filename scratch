@@ -26,7 +26,7 @@ increase the indentation by one level."
                     (not (bobp))
                     (markdown-cur-line-blank-p))
           (forward-line -1))) ; 辿って、一番最後に使われたmarkerがあると止まる
-	  
+
       (when bounds ; boundsがあるとき...
         (cond ((save-excursion
                  (skip-chars-backward " \t") ; インデントを飛ばして移動
@@ -37,7 +37,7 @@ increase the indentation by one level."
               ((not (markdown-cur-line-blank-p)) ; 空白でないときはnewline？(違いがわからん)
                (newline)))
         (setq new-loc (point)))
-	  
+
 	  ;; 次の非空白行のリストでboundsを定義する
       ;; Look ahead for a list item on next non-blank line
       (unless bounds
@@ -51,7 +51,7 @@ increase the indentation by one level."
           (setq new-loc (point))
           (unless (markdown-cur-line-blank-p) ; 空白でないとき、新しい行。
             (newline))))
-	  
+
       (if (not bounds) ; boundsがないとき。インデントなどがあり大きくなっている。ここじゃないときはインデント使わないってことだよな…。new-locがあるので、上のwhenかunlessのどちらかは確実に評価されることになる。
           ;; When not in a list, start a new unordered one
           (progn
@@ -65,16 +65,16 @@ increase the indentation by one level."
           (setq marker
                 (concat marker
                         (replace-regexp-in-string "[Xx]" " " (nth 5 bounds)))))
-		
+
         ;; If current item is a GFM checkbox, insert new unchecked checkbox.
         (cond
-		
+
          ;; Indent: increment indentation by 4, use same marker.
          ((= arg 16) (setq indent (+ cur-indent 4)))
-		 
+
          ;; Same level: keep current indentation and marker.
          (t (setq indent cur-indent)))
-		
+
         (setq new-indent (make-string indent 32)) ; レベルに応じたインデント数で空白を作る
         (goto-char new-loc)
         (cond
@@ -111,4 +111,3 @@ increase the indentation by one level."
 
 (car (get-text-property (point-at-bol) 'markdown-list-item))
 (markdown-search-backward-baseline)
-

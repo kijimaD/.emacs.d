@@ -31,3 +31,5 @@ ruby 2020-05-08-024854.rb
 irb
 ls
 irb
+cd ..
+rails console --sandbox

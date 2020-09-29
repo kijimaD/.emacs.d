@@ -57,7 +57,7 @@
  '(org2blog/wp-show-post-in-browser nil)
  '(package-selected-packages
    (quote
-    (company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
+    (tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
  '(pdf-view-midnight-colors (quote ("#232333" . "#c7c7c7")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -1115,3 +1115,29 @@
                     :background "gray40")
 
 (define-key robe-mode-map (kbd "M-.") nil)
+
+;; 履歴保存
+(savehist-mode 1)
+;;; 永続化する変数を新たに追加する
+(push 'compile-command savehist-additional-variables)
+;;; 永続化しないミニバッファ履歴の変数を追加する
+(push 'command-history savehist-ignored-variables)
+
+; ahs-modeのキーバインドを無効化する
+(define-key auto-highlight-symbol-mode-map (kbd "M-<right>") nil)
+(define-key auto-highlight-symbol-mode-map (kbd "M-<up>") 'ahs-backward)
+(define-key auto-highlight-symbol-mode-map (kbd "M-<left>") nil)
+(define-key auto-highlight-symbol-mode-map (kbd "M-<down>") 'ahs-forward)
+
+;; Tab
+(require 'tabbar)
+(tabbar-mode 1)
+;; タブ上でマウスホイール操作無効
+(tabbar-mwheel-mode -1)
+;; グループ化しない
+(setq tabbar-buffer-groups-function nil)
+;; 画像を使わないことで軽量化する
+(setq tabbar-use-images nil)
+;; キーに割り当てる
+(global-set-key (kbd "M-<right>") 'tabbar-forward-tab)
+(global-set-key (kbd "M-<left>") 'tabbar-backward-tab)
