@@ -33,3 +33,10 @@ ls
 irb
 cd ..
 rails console --sandbox
+fa
+emacs
+python
+ls
+cd
+ls
+emacs --debub-init
