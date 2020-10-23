@@ -57,7 +57,7 @@
  '(org2blog/wp-show-post-in-browser nil)
  '(package-selected-packages
    (quote
-    (tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
+    (rspec-mode tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
  '(pdf-view-midnight-colors (quote ("#232333" . "#c7c7c7")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -100,9 +100,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "源ノ角ゴシック Code JP" :slant normal :weight bold :height 64 :width normal :foundry "ADBO")))))
+ '(default ((t (:family "Menlo" :slant normal :weight normal :height 74 :width normal :foundry "PfEd")))))
 
-;; (set-fontset-font t 'japanese-jisx0208 (font-spec :family "Takao Pゴシック"))
+(set-fontset-font t 'japanese-jisx0208 (font-spec :family "ヒラギノ 角ゴ ProN"))
 ;; (set-fontset-font t
 ;; 		  'japanese-jisx0208
 ;; 		  (font-spec :family "Noto Sans CJK JP"))
@@ -256,9 +256,9 @@
 ;; org-modeの初期化
 (require 'org-install)
 ;; キーバインドの設定
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
-(define-key global-map "\C-cr" 'org-remember)
+;; (define-key global-map "\C-cl" 'org-store-link)
+;; (define-key global-map "\C-ca" 'org-agenda)
+;; (define-key global-map "\C-cr" 'org-remember)
 
 ;; 拡張子がorgのファイルを開いた時，自動的にorg-modeにする
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
@@ -318,10 +318,10 @@
 (setq org-agenda-files '("~/org/inbox.org" "~/org/daily-projects.org" "~/junk/2018-11-06-225709log.org"))
 ;;; C-c a aでagendaのメニューを表示する
 ;;; agendaには、習慣・スケジュール・TODOを表示させる
-(global-set-key (kbd "C-c a") 'org-agenda)
-(setq org-agenda-custom-commands
-      '(("a" "Agenda and all TODO's"
-         ((tags "project-CLOCK=>\"<today>\"|repeatable") (agenda "") (alltodo)))))
+;; (global-set-key (kbd "C-c a") 'org-agenda)
+;; (setq org-agenda-custom-commands
+;;       '(("a" "Agenda and all TODO's"
+;;          ((tags "project-CLOCK=>\"<today>\"|repeatable") (agenda "") (alltodo)))))
 ;;; <f6>で直接org習慣仕事術用agendaを起動させる
 ;; (defun org-agenda-default ()
 ;;   (interactive)
@@ -806,9 +806,9 @@
 (psession-mode 1)
 
 ;; 非アクティブウィンドウの背景色を設定
-(require 'hiwin)
-(hiwin-activate)
-(set-face-background 'hiwin-face "gray20")
+;; (require 'hiwin)
+;; (hiwin-activate)
+;; (set-face-background 'hiwin-face "gray20")
 
 ;; tabサイズ
 (setq default-tab-width 4)
@@ -1129,15 +1129,22 @@
 (define-key auto-highlight-symbol-mode-map (kbd "M-<left>") nil)
 (define-key auto-highlight-symbol-mode-map (kbd "M-<down>") 'ahs-forward)
 
-;; Tab
-(require 'tabbar)
-(tabbar-mode 1)
-;; タブ上でマウスホイール操作無効
-(tabbar-mwheel-mode -1)
-;; グループ化しない
-(setq tabbar-buffer-groups-function nil)
-;; 画像を使わないことで軽量化する
-(setq tabbar-use-images nil)
-;; キーに割り当てる
-(global-set-key (kbd "M-<right>") 'tabbar-forward-tab)
-(global-set-key (kbd "M-<left>") 'tabbar-backward-tab)
+;; ;; Tab
+;; (require 'tabbar)
+;; (tabbar-mode 1)
+;; ;; タブ上でマウスホイール操作無効
+;; (tabbar-mwheel-mode -1)
+;; ;; グループ化しない
+;; (setq tabbar-buffer-groups-function nil)
+;; ;; 画像を使わないことで軽量化する
+;; (setq tabbar-use-images nil)
+;; ;; キーに割り当てる
+;; (global-set-key (kbd "M-<right>") 'tabbar-forward-tab)
+;; (global-set-key (kbd "M-<left>") 'tabbar-backward-tab)
+
+(require 'rspec-mode)
+(autoload 'rspec-mode "rspec-mode")
+(add-hook 'ruby-mode-hook 'rspec-mode)
+
+(add-to-list 'default-frame-alist
+               (cons 'font "Menlo:pixelsize=20"))

@@ -33,3 +33,27 @@ ls
 irb
 cd ..
 rails console --sandbox
+rails db:reset
+rails generate migration add_remember_digest_to_users remember_digest:string
+rails db:migrate
+rails db:reset
+rails generate integration_test users_edit
+rails db:migrate
+bundle install
+rails db:migrate:reset
+rails db:seed
+rails db:seed
+bundle install
+  Password: digital
+  Password: digital
+bundle install
+rails console
+rails generate integration_test users_index
+rails generate migration add_admin_to_users admin:boolean
+rails db:migarate
+rails db:migrate
+user = User.first
+rails c
+rails c --sandbox
+rails db:migrate:reset
+rails db:seed
