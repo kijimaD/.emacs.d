@@ -1,1 +1,1 @@
-("~/junk/" "~/org/" "~/" "~/bash/" "~/chinachu/" "~/.emacs.d/" "~/document/" "~/tmp/RailsApp/" "~/tmp/hoge/" "~/ruby/" "~/tmp/myblog/")
+("~/Project/Cataclysm-DDA/" "~/Project/rails_tutorial/" "~/Project/railstest/" "~/Project/ban-ban-don/" "~/Project/alexand/" "~/Dropbox/pages/" "~/Project/fullstack-react-code-master/voting_app/" "~/.emacs.d/" "~/Project/rspec_tutorial/" "~/Project/rails/" "~/" "~/Dropbox/junk/" "~/bash/" "~/ruby/")

@@ -44,8 +44,8 @@ rails db:migrate:reset
 rails db:seed
 rails db:seed
 bundle install
-  Password: digital
-  Password: digital
+Password: digital
+Password: digital
 bundle install
 rails console
 rails generate integration_test users_index
@@ -57,3 +57,6 @@ rails c
 rails c --sandbox
 rails db:migrate:reset
 rails db:seed
+pry
+ri i
+ri -i

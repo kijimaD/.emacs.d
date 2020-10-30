@@ -30,7 +30,7 @@
     ("#336c6c" "#205070" "#0f2050" "#806080" "#401440" "#6c1f1c" "#6b400c" "#23733c")))
  '(org-agenda-files
    (quote
-    ("/home/daigo3/org/art.org" "/home/daigo3/org/book.org" "/home/daigo3/org/bousai.org" "/home/daigo3/org/chinese.org" "/home/daigo3/org/chinese_learn.org" "/home/daigo3/org/config.org" "/home/daigo3/org/data.org" "/home/daigo3/org/diary.org" "/home/daigo3/org/eng_portfolio.org" "/home/daigo3/org/entertainment.org" "/home/daigo3/org/gasyuku.org" "/home/daigo3/org/gomi.org" "/home/daigo3/org/gorakumath.org" "/home/daigo3/org/ibunkarikai.org" "/home/daigo3/org/index.org" "/home/daigo3/org/info.org" "/home/daigo3/org/jikanwari.org" "/home/daigo3/org/jikanwari2.org" "/home/daigo3/org/jinsei_to_deai.org" "/home/daigo3/org/jisinkazan.org" "/home/daigo3/org/kadai.jpn.org" "/home/daigo3/org/keikaku.org" "/home/daigo3/org/kyarikoi.org" "/home/daigo3/org/labor.org" "/home/daigo3/org/memo.org" "/home/daigo3/org/mokuhyo.org" "/home/daigo3/org/other.org" "/home/daigo3/org/other2.org" "/home/daigo3/org/reg.org" "/home/daigo3/org/roudouhou.org" "/home/daigo3/org/ryuugaku.org" "/home/daigo3/org/schedule.org" "/home/daigo3/org/speech_bukai.org" "/home/daigo3/org/taiiku.org" "/home/daigo3/org/think.org" "/home/daigo3/org/trip.org" "/home/daigo3/org/web.org" "/home/daigo3/org/writer.org")))
+    ("")))
  '(org-log-into-drawer nil)
  '(org-pomodoro-expiry-time 120000)
  '(org-pomodoro-finished-sound
@@ -57,7 +57,7 @@
  '(org2blog/wp-show-post-in-browser nil)
  '(package-selected-packages
    (quote
-    (rspec-mode tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
+    (bm window-numbering ddskk-posframe rspec-mode tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
  '(pdf-view-midnight-colors (quote ("#232333" . "#c7c7c7")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -315,7 +315,7 @@
 ;;; inbox.orgのサンプルにあわせ、今日から30日分の予定を表示させる
 (setq org-agenda-span 30)
 ;;; org-agendaで扱うorgファイルたち
-(setq org-agenda-files '("~/org/inbox.org" "~/org/daily-projects.org" "~/junk/2018-11-06-225709log.org"))
+(setq org-agenda-files '(""))
 ;;; C-c a aでagendaのメニューを表示する
 ;;; agendaには、習慣・スケジュール・TODOを表示させる
 ;; (global-set-key (kbd "C-c a") 'org-agenda)
@@ -327,13 +327,6 @@
 ;;   (interactive)
 ;;   (org-agenda nil "a"))
 ;; (global-set-key (kbd "<f6>") 'org-agenda-default)
-
-;;メール===========================
-(setq user-mail-address "")
-(setq user-full-name "kijima")
-(setq smtpmail-smtp-server "smtp.gmail.com")
-(setq mail-user-agent 'message-user-agent)
-(setq message-send-mail-function 'message-smtpmail-send-it)
 
 ;;Perl=============================
 ;;perlファイルにcperlモードを使うための設定
@@ -437,7 +430,7 @@
 (setq ace-jump-word-mode-use-query-char nil)
 (setq ace-jump-mode-move-keys
 (append "asdfghjkl;:]qwertyuiop@zxcvbnm,." nil))
-(global-set-key (kbd "C-o") 'ace-jump-word-mode)
+;; (global-set-key (kbd "C-o") 'ace-jump-word-mode)
 (global-set-key (kbd "C-M-;") 'ace-jump-line-mode)
 
 ;;HELM====================================
@@ -532,20 +525,20 @@
 (rainbow-delimiters-mode t)
 
 ;; WordPressをorg-modeで
-(setq load-path (cons "~/.emacs.d/lisp/org2blog/" load-path))
-(require 'org2blog-autoloads)
+;; (setq load-path (cons "~/.emacs.d/lisp/org2blog/" load-path))
+;; (require 'org2blog-autoloads)
 
-(defun org2blog_new ()
-(setq org2blog/wp-blog-alist
-       '(("wordpress"
-		  :url "http://test.com/xmlrpc.php" ;;xmlrcp.phpのURL
-          :username "user"
-          :password "password"
-          :default-title "" ;; デフォルトタイトル
-          :default-categories nil ;; カテゴリを指定
-          :tags-as-categories nil))) ;; タグを指定
-(org2blog/wp-login)
-(org2blog/wp-new-entry))
+;; (defun org2blog_new ()
+;; (setq org2blog/wp-blog-alist
+;;        '(("wordpress"
+;; 		  :url "http://test.com/xmlrpc.php" ;;xmlrcp.phpのURL
+;;           :username "user"
+;;           :password "password"
+;;           :default-title "" ;; デフォルトタイトル
+;;           :default-categories nil ;; カテゴリを指定
+;;           :tags-as-categories nil))) ;; タグを指定
+;; (org2blog/wp-login)
+;; (org2blog/wp-new-entry))
 
 ;; 自動保存 auto-save-buffers-enhanced ====
 (require 'auto-save-buffers-enhanced)
@@ -575,7 +568,6 @@
 (setq default-input-method "japanese-mozc")
 
 ;; (global-set-key (kbd "C-w") 'mozc-mode)
-
 ;; (add-hook 'org-mode-hook 'mozc-mode)
 
 (require 'mozc-popup)
@@ -665,37 +657,6 @@
 
 (require 'org-pomodoro)
 
-;;; google翻訳
-(require 'google-translate)
-(defvar google-translate-english-chars "[:ascii:]’“”–"
-  "これらの文字が含まれているときは英語とみなす")
-(defun google-translate-enja-or-jaen (&optional string)
-  "regionか、現在のセンテンスを言語自動判別でGoogle翻訳する。"
-  (interactive)
-  (setq string
-        (cond ((stringp string) string)
-              (current-prefix-arg
-               (read-string "Google Translate: "))
-              ((use-region-p)
-               (buffer-substring (region-beginning) (region-end)))
-              (t
-               (save-excursion
-                 (let (s)
-                   (forward-char 1)
-                   (backward-sentence)
-                   (setq s (point))
-                   (forward-sentence)
-                   (buffer-substring s (point)))))))
-  (let* ((asciip (string-match
-                  (format "\\`[%s]+\\'" google-translate-english-chars)
-                  string)))
-    (run-at-time 0.1 nil 'deactivate-mark)
-    (google-translate-translate
-     (if asciip "en" "ja")
-     (if asciip "ja" "en")
-     string)))
-(global-set-key (kbd "C-c t") 'google-translate-enja-or-jaen)
-
 ;;; 関数トレース==========
 ;; (require 'cl-lib)
 ;; (defun current-defun ()
@@ -736,10 +697,10 @@
 		) auto-insert-alist))
 
 ;;; ruby_on_railsモード
-;; (require 'projectile)
-;; (projectile-global-mode)
-;; (require 'projectile-rails)
-;; (add-hook 'projectile-mode-hook 'projectile-rails-on)
+(require 'projectile)
+(projectile-global-mode)
+(require 'projectile-rails)
+(add-hook 'projectile-mode-hook 'projectile-rails-on)
 
 ;;; いちいち出るメッセージを出さないように
 (defun ask-user-about-supersession-threat (fn)
@@ -881,13 +842,24 @@
   (if (one-window-p)
       (split-n 4))
   (other-window 1))
-(global-set-key (kbd "C-t") 'other-window-or-split) ;; C-t に割り当て
+(global-set-key (kbd "C-t") 'other-window-or-split)
+
 ;;; 分割した画面間をShift+矢印で移動
 (setq windmove-wrap-around t)
 (windmove-default-keybindings)
 
-;; 今いるウィンドウでhelmミニを開く
+;; helmキーバインド
 (global-set-key (kbd "C-x C-b") 'helm-mini)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-c h") 'helm-semantic-or-imenu)
+(global-set-key (kbd "C-c f") 'helm-find)
+(setq helm-semantic-fuzzy-match t
+      helm-imenu-fuzzy-match    t)
+ (setq helm-surfraw-default-browser-function 'browse-url-generic
+      browse-url-generic-program "google-chrome")
+
 
 (defun revert-buffer-no-confirm (&optional force-reverting)
   "Interactive call to revert-buffer. Ignoring the auto-save
@@ -958,7 +930,7 @@
 (setq org-journal-date-format "%x")
 (setq org-journal-time-format "<%Y-%m-%d %R> ")
 (setq org-journal-file-format "%Y%m%d.org")
-(setq org-journal-dir "~/Dropbox/documents/diary/org-journal")
+(setq org-journal-dir "~/Dropbox/junk/diary/org-journal")
 
 ;; SSH
 (require 'tramp)
@@ -1142,9 +1114,26 @@
 ;; (global-set-key (kbd "M-<right>") 'tabbar-forward-tab)
 ;; (global-set-key (kbd "M-<left>") 'tabbar-backward-tab)
 
-(require 'rspec-mode)
-(autoload 'rspec-mode "rspec-mode")
-(add-hook 'ruby-mode-hook 'rspec-mode)
+;; (require 'rspec-mode)
+;; (autoload 'rspec-mode "rspec-mode")
+;; (add-hook 'ruby-mode-hook 'rspec-mode)
 
-(add-to-list 'default-frame-alist
-               (cons 'font "Menlo:pixelsize=20"))
+(global-set-key (kbd "C-o") 'other-frame)
+
+(window-numbering-mode 1)
+(setq-default bm-buffer-persistence nil)
+(setq bm-restore-repository-on-load t)
+(require 'bm)
+(add-hook 'find-file-hook 'bm-buffer-restore)
+(add-hook 'kill-buffer-hook 'bm-buffer-save)
+(add-hook 'after-save-hook 'bm-buffer-save)
+(add-hook 'after-revert-hook 'bm-buffer-restore)
+(add-hook 'vc-before-checkin-hook 'bm-buffer-save)
+(add-hook 'kill-emacs-hook '(lambda nil
+                              (bm-buffer-save-all)
+                              (bm-repository-save)))
+(global-set-key (kbd "M-SPC") 'bm-toggle)
+(global-set-key (kbd "M-[") 'bm-previous)
+(global-set-key (kbd "M-]") 'bm-next)
+
+;; Macでの設定…フォントとディレクトリ(Dropboxの調整)。
