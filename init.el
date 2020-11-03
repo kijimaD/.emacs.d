@@ -128,9 +128,13 @@
   (setq ruby-insert-encoding-magic-comment nil)
   (setq ctags-auto-update-mode nil)
   (setq public-directory "dropbox")
+  (setq my-migemo-command "/usr/local/bin/cmigemo")
+  (setq my-migemo-dictionary "/usr/local/Cellar/cmigemo/HEAD-5c014a8/share/migemo/utf-8/migemo-dict")
   )
 (when (eq system-type 'gnu/linux)
   (setq public-directory "Dropbox")
+  (setq my-migemo-command "cmigemo")
+  (setq my-migemo-dictionary "/usr/share/cmigemo/utf-8/migemo-dict")
   )
 
 ;; キーボード入れ替えーーバックスペースをC-hで。
@@ -903,9 +907,9 @@
 ;; migemo
 (when (and (executable-find "cmigemo")
            (require 'migemo nil t))
-  (setq migemo-command "cmigemo")
+  (setq migemo-command my-migemo-command)
   (setq migemo-options '("-q" "--emacs"))
-  (setq migemo-dictionary "/usr/share/cmigemo/utf-8/migemo-dict")
+  (setq migemo-dictionary my-migemo-dictionary)
   (setq migemo-user-dictionary nil)
   (setq migemo-regex-dictionary nil)
   (setq migemo-coding-system 'utf-8-unix)
