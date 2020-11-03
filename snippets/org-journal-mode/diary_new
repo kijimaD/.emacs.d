@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: diary_first
+# key: diary, first
+# --
+
+* Goals
+** ${1:task} <${2:content}>
+
+** ${3:task} <${4:content}>
+
+** ${5:task} <${6:content}>

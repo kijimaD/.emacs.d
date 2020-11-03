@@ -30,7 +30,7 @@
     ("#336c6c" "#205070" "#0f2050" "#806080" "#401440" "#6c1f1c" "#6b400c" "#23733c")))
  '(org-agenda-files
    (quote
-    ("")))
+    ("/home/daigo3/org/art.org" "/home/daigo3/org/book.org" "/home/daigo3/org/bousai.org" "/home/daigo3/org/chinese.org" "/home/daigo3/org/chinese_learn.org" "/home/daigo3/org/config.org" "/home/daigo3/org/data.org" "/home/daigo3/org/diary.org" "/home/daigo3/org/eng_portfolio.org" "/home/daigo3/org/entertainment.org" "/home/daigo3/org/gasyuku.org" "/home/daigo3/org/gomi.org" "/home/daigo3/org/gorakumath.org" "/home/daigo3/org/ibunkarikai.org" "/home/daigo3/org/index.org" "/home/daigo3/org/info.org" "/home/daigo3/org/jikanwari.org" "/home/daigo3/org/jikanwari2.org" "/home/daigo3/org/jinsei_to_deai.org" "/home/daigo3/org/jisinkazan.org" "/home/daigo3/org/kadai.jpn.org" "/home/daigo3/org/keikaku.org" "/home/daigo3/org/kyarikoi.org" "/home/daigo3/org/labor.org" "/home/daigo3/org/memo.org" "/home/daigo3/org/mokuhyo.org" "/home/daigo3/org/other.org" "/home/daigo3/org/other2.org" "/home/daigo3/org/reg.org" "/home/daigo3/org/roudouhou.org" "/home/daigo3/org/ryuugaku.org" "/home/daigo3/org/schedule.org" "/home/daigo3/org/speech_bukai.org" "/home/daigo3/org/taiiku.org" "/home/daigo3/org/think.org" "/home/daigo3/org/trip.org" "/home/daigo3/org/web.org" "/home/daigo3/org/writer.org")))
  '(org-log-into-drawer nil)
  '(org-pomodoro-expiry-time 120000)
  '(org-pomodoro-finished-sound
@@ -57,7 +57,7 @@
  '(org2blog/wp-show-post-in-browser nil)
  '(package-selected-packages
    (quote
-    (bm window-numbering ddskk-posframe rspec-mode tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
+    (yatemplate atomic-chrome quickrun bm window-numbering ddskk-posframe rspec-mode tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
  '(pdf-view-midnight-colors (quote ("#232333" . "#c7c7c7")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -689,12 +689,24 @@
 (auto-insert-mode)
 (setq auto-insert-directory "~/.emacs.d/insert/")
 ;; (define-auto-insert "\\.rb$" "ruby-template.rb")
+;; (define-auto-insert "\\.md$" "markdown-template.rb")
 (setq auto-insert-alist
       (append '(
 		("\\.rb$" . "ruby-template.rb")
 		("\\.js$" . "js-template.js")
 		("\\.org$" . "org-template.org")
+		("\\.md$" . "markdown-template.md")
 		) auto-insert-alist))
+
+(yatemplate-fill-alist)
+(auto-insert-mode 1)
+(yas-global-mode 1)
+(setq yas-prompt-functions '(yas-ido-prompt))
+
+(define-key yas-minor-mode-map (kbd "C-x y i") 'yas-insert-snippet)
+(define-key yas-minor-mode-map (kbd "C-x y n") 'yas-new-snippet)
+(define-key yas-minor-mode-map (kbd "C-x y v") 'yas-visit-snippet-file)
+(add-hook 'markdown-mode-hook 'yas-insert-snippet)
 
 ;;; ruby_on_railsモード
 (require 'projectile)
@@ -924,6 +936,8 @@
 (define-key org-mode-map (kbd "C-c C-j") nil)
 (define-key org-mode-map (kbd "<S-left>") nil)
 (define-key org-mode-map (kbd "<S-right>") nil)
+(define-key org-mode-map (kbd "<S-up>") nil)
+(define-key org-mode-map (kbd "<S-down>") nil)
 
 ;; 日誌
 (require 'org-journal)
@@ -1137,3 +1151,14 @@
 (global-set-key (kbd "M-]") 'bm-next)
 
 ;; Macでの設定…フォントとディレクトリ(Dropboxの調整)。
+
+(require 'quickrun)
+(global-set-key (kbd "<f7>") 'quickrun)
+(atomic-chrome-start-server)
+
+;; pry
+(require 'inf-ruby)
+(setq inf-ruby-default-implementation "pry")
+(setq inf-ruby-eval-binding "Pry.toplevel_binding")
+;; riなどのエスケープシーケンスを処理し、色付けする
+(add-hook 'inf-ruby-mode-hook 'ansi-color-for-comint-mode-on)

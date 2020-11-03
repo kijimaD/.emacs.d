@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: diary_last
+# key: diary, last
+# --
+
+* Look-back
+** Points
+- Work: ${1:0-100}
+- Condition: ${2:0-100}
+** Done
+${3:done}
+** Comment
+${4:comment}
