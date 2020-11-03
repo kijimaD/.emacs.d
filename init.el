@@ -120,9 +120,12 @@
 (add-to-list 'face-font-rescale-alist '(".*Takao P.*" . 0.9))
 (add-to-list 'face-font-rescale-alist '(".*Noto Sans CJK.*" . 0.85))
 
+;; linuxとmacの使い分け
+
+(setq public-direcotry "dropbox")
+(setq public-direcotry "Dropbox")
+
 ;; 全般的 ==================================================
-;; (setq custom-theme-directory "~/.emacs.d/elpa/zenburn-theme-2.1/")
-;; (load-theme 'zenburn t)
 
 ;; キーボード入れ替えーーバックスペースをC-hで。
 (keyboard-translate ?\C-h ?\C-?)
@@ -763,15 +766,15 @@
 (add-hook 'after-init-hook 'session-initialize))
 
 ;;; 文字数モードライン表示
-(defun count-lines-and-chars ()
-  (if mark-active
-      (format "[%dL%dw%dc]"
-              (count-lines (region-beginning) (region-end))
-              (how-many "[^
-]+" (region-beginning) (region-end))
-;              (how-many "\\w+" (region-beginning) (region-end))
-              (- (region-end) (region-beginning)))
-    ""))
+;; (defun count-lines-and-chars ()
+;;   (if mark-active
+;;       (format "[%dL%dw%dc]"
+;;               (count-lines (region-beginning) (region-end))
+;;               (how-many "[^
+;; ]+" (region-beginning) (region-end))
+;; ;              (how-many "\\w+" (region-beginning) (region-end))
+;;               (- (region-end) (region-beginning)))
+;;     ""))
 ;; (add-to-list 'default-mode-line-format
 ;;              '(:eval (count-lines-and-chars)))
 
@@ -852,7 +855,7 @@
   "windowがひとつのときは画面を3分割し、そうでなければとなりのwindowにカーソルを移す"
   (interactive)
   (if (one-window-p)
-      (split-n 4))
+      (split-n 3))
   (other-window 1))
 (global-set-key (kbd "C-t") 'other-window-or-split)
 
@@ -888,14 +891,6 @@
 
 ;; 空白を自動削除
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-; edit server起動(Firefox)
-(when (require 'edit-server nil t)
-  (setq edit-server-new-frame nil)
-  (setq edit-server-url-major-mode-alist
-        '(("wiki\\.a9ne\\.com" . dokuwiki-mode)))
-  (edit-server-start))
-(add-hook 'edit-server-start-hook 'wc-goal-mode)
 
 ;; migemo
 (when (and (executable-find "cmigemo")
@@ -1008,15 +1003,15 @@
 (global-set-key [insert] 'eijiro-at-point)
 (put 'upcase-region 'disabled nil)
 
-(require 'w3m)
-(define-key w3m-mode-map (kbd "<up>") nil)
-(define-key w3m-mode-map (kbd "<down>") nil)
-(define-key w3m-mode-map (kbd "<left>") nil)
-(define-key w3m-mode-map (kbd "<right>") nil)
-(define-key w3m-mode-map (kbd "C-t") nil)
-(define-key dired-mode-map (kbd "C-t") nil)
+;; (require 'w3m)
+;; (define-key w3m-mode-map (kbd "<up>") nil)
+;; (define-key w3m-mode-map (kbd "<down>") nil)
+;; (define-key w3m-mode-map (kbd "<left>") nil)
+;; (define-key w3m-mode-map (kbd "<right>") nil)
+;; (define-key w3m-mode-map (kbd "C-t") nil)
+;; (define-key dired-mode-map (kbd "C-t") nil)
 
-(setq w3m-default-display-inline-images t)
+;; (setq w3m-default-display-inline-images t)
 
 (require 'auto-highlight-symbol)
 (global-auto-highlight-symbol-mode t)
@@ -1034,8 +1029,6 @@
 (add-hook 'c-mode-common-hook  'turn-on-ctags-auto-update-mode)
 (add-hook 'ruby-mode-hook  'turn-on-ctags-auto-update-mode)
 (add-hook 'emacs-lisp-mode-hook  'turn-on-ctags-auto-update-mode)
-
-(server-start)
 
 (defun compile-ctags (dir)
   "compile ctags for the current project"
@@ -1115,23 +1108,6 @@
 (define-key auto-highlight-symbol-mode-map (kbd "M-<left>") nil)
 (define-key auto-highlight-symbol-mode-map (kbd "M-<down>") 'ahs-forward)
 
-;; ;; Tab
-;; (require 'tabbar)
-;; (tabbar-mode 1)
-;; ;; タブ上でマウスホイール操作無効
-;; (tabbar-mwheel-mode -1)
-;; ;; グループ化しない
-;; (setq tabbar-buffer-groups-function nil)
-;; ;; 画像を使わないことで軽量化する
-;; (setq tabbar-use-images nil)
-;; ;; キーに割り当てる
-;; (global-set-key (kbd "M-<right>") 'tabbar-forward-tab)
-;; (global-set-key (kbd "M-<left>") 'tabbar-backward-tab)
-
-;; (require 'rspec-mode)
-;; (autoload 'rspec-mode "rspec-mode")
-;; (add-hook 'ruby-mode-hook 'rspec-mode)
-
 (global-set-key (kbd "C-o") 'other-frame)
 
 (window-numbering-mode 1)
@@ -1150,8 +1126,6 @@
 (global-set-key (kbd "M-[") 'bm-previous)
 (global-set-key (kbd "M-]") 'bm-next)
 
-;; Macでの設定…フォントとディレクトリ(Dropboxの調整)。
-
 (require 'quickrun)
 (global-set-key (kbd "<f7>") 'quickrun)
 (atomic-chrome-start-server)
@@ -1162,3 +1136,15 @@
 (setq inf-ruby-eval-binding "Pry.toplevel_binding")
 ;; riなどのエスケープシーケンスを処理し、色付けする
 (add-hook 'inf-ruby-mode-hook 'ansi-color-for-comint-mode-on)
+
+;; Mac用(day job用)設定
+(when (eq system-type 'darwin)
+  (setq ns-command-modifier (quote meta))
+  (setq ns-alternate-modifier (quote super))
+  (setq ruby-insert-encoding-magic-comment nil)
+  (setq ctags-auto-update-mode nil)
+  )
+(when (eq system-type 'gnu/linux)
+  )
+
+(server-start)
