@@ -57,7 +57,7 @@
  '(org2blog/wp-show-post-in-browser nil)
  '(package-selected-packages
    (quote
-    (yatemplate atomic-chrome quickrun bm window-numbering ddskk-posframe rspec-mode tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
+    (slim-mode exec-path-from-shell migemo yatemplate atomic-chrome quickrun bm window-numbering ddskk-posframe rspec-mode tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
  '(pdf-view-midnight-colors (quote ("#232333" . "#c7c7c7")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -120,12 +120,18 @@
 (add-to-list 'face-font-rescale-alist '(".*Takao P.*" . 0.9))
 (add-to-list 'face-font-rescale-alist '(".*Noto Sans CJK.*" . 0.85))
 
-;; linuxとmacの使い分け
-
-(setq public-direcotry "dropbox")
-(setq public-direcotry "Dropbox")
-
-;; 全般的 ==================================================
+;; ==================================================
+;; Mac用(day job用)設定
+(when (eq system-type 'darwin)
+  (setq ns-command-modifier (quote meta))
+  (setq ns-alternate-modifier (quote super))
+  (setq ruby-insert-encoding-magic-comment nil)
+  (setq ctags-auto-update-mode nil)
+  (setq public-directory "dropbox")
+  )
+(when (eq system-type 'gnu/linux)
+  (setq public-directory "Dropbox")
+  )
 
 ;; キーボード入れ替えーーバックスペースをC-hで。
 (keyboard-translate ?\C-h ?\C-?)
@@ -250,13 +256,11 @@
 (setq inhibit-splash-screen t)
 
 ;;orgモード======================
+
 ;; load-pathへの追加
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
 (add-to-list 'load-path "~/.emacs.d/elisp")
-;; (add-to-list 'load-path "~/.emacs.d/elpa/org-20161118")
 
-;;; org-mode
-;; org-modeの初期化
 (require 'org-install)
 ;; キーバインドの設定
 ;; (define-key global-map "\C-cl" 'org-store-link)
@@ -628,7 +632,8 @@
 ;; 使い捨てのファイルを開く
 (require 'open-junk-file)
 ;; ファイル名入力時に ~/junk/-年-月-日-時-秒.が出てくる
-(setq open-junk-file-format "~/Dropbox/junk/%Y-%m-%d-%H%M%S.")
+
+(setq open-junk-file-format (concat "~/" public-directory "/junk/%Y-%m-%d-%H%M%S."))
 (global-set-key (kbd "C-x C-z") 'open-junk-file)
 
 ;; 自動コンパイルを無効にするファイル名の正規表現
@@ -892,19 +897,21 @@
 ;; 空白を自動削除
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+;; 環境変数を読み込む
+(exec-path-from-shell-initialize)
+
 ;; migemo
 (when (and (executable-find "cmigemo")
            (require 'migemo nil t))
+  (setq migemo-command "cmigemo")
   (setq migemo-options '("-q" "--emacs"))
-
+  (setq migemo-dictionary "/usr/share/cmigemo/utf-8/migemo-dict")
   (setq migemo-user-dictionary nil)
   (setq migemo-regex-dictionary nil)
   (setq migemo-coding-system 'utf-8-unix)
   (load-library "migemo")
   (migemo-init)
 )
-(setq migemo-command "cmigemo")
-(setq migemo-dictionary "/usr/share/cmigemo/utf-8/migemo-dict")
 
 ;; web-mode
 (require 'web-mode)
@@ -939,7 +946,7 @@
 (setq org-journal-date-format "%x")
 (setq org-journal-time-format "<%Y-%m-%d %R> ")
 (setq org-journal-file-format "%Y%m%d.org")
-(setq org-journal-dir "~/Dropbox/junk/diary/org-journal")
+(setq org-journal-dir (concat "~/" public-directory "/junk/diary/org-journal"))
 
 ;; SSH
 (require 'tramp)
@@ -1002,16 +1009,6 @@
 (require 'eijiro)
 (global-set-key [insert] 'eijiro-at-point)
 (put 'upcase-region 'disabled nil)
-
-;; (require 'w3m)
-;; (define-key w3m-mode-map (kbd "<up>") nil)
-;; (define-key w3m-mode-map (kbd "<down>") nil)
-;; (define-key w3m-mode-map (kbd "<left>") nil)
-;; (define-key w3m-mode-map (kbd "<right>") nil)
-;; (define-key w3m-mode-map (kbd "C-t") nil)
-;; (define-key dired-mode-map (kbd "C-t") nil)
-
-;; (setq w3m-default-display-inline-images t)
 
 (require 'auto-highlight-symbol)
 (global-auto-highlight-symbol-mode t)
@@ -1122,7 +1119,7 @@
 (add-hook 'kill-emacs-hook '(lambda nil
                               (bm-buffer-save-all)
                               (bm-repository-save)))
-(global-set-key (kbd "M-SPC") 'bm-toggle)
+(global-set-key (kbd "C-M-SPC") 'bm-toggle)
 (global-set-key (kbd "M-[") 'bm-previous)
 (global-set-key (kbd "M-]") 'bm-next)
 
@@ -1137,14 +1134,9 @@
 ;; riなどのエスケープシーケンスを処理し、色付けする
 (add-hook 'inf-ruby-mode-hook 'ansi-color-for-comint-mode-on)
 
-;; Mac用(day job用)設定
-(when (eq system-type 'darwin)
-  (setq ns-command-modifier (quote meta))
-  (setq ns-alternate-modifier (quote super))
-  (setq ruby-insert-encoding-magic-comment nil)
-  (setq ctags-auto-update-mode nil)
-  )
-(when (eq system-type 'gnu/linux)
-  )
+;; slim
+(unless (package-installed-p 'slim-mode)
+  (package-refresh-contents) (package-install 'slim-mode))
+(add-to-list 'auto-mode-alist '("\\.slim?\\'" . slim-mode))
 
 (server-start)
