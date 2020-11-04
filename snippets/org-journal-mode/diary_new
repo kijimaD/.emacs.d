@@ -3,9 +3,20 @@
 # key: diary, first
 # --
 
-* Goals
-** ${1:task} <${2:content}>
+* Tasks
+** ${1:task}
 
-** ${3:task} <${4:content}>
+** ${2:task}
 
-** ${5:task} <${6:content}>
+** ${3:task}
+** Diary <100 words>
+** Code reading
+
+* 日報
+*今日学んだこと*
+
+
+*今後に活かしたいこと*
+
+
+*今日感じたこと(所感)*

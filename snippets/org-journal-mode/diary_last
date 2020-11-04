@@ -3,11 +3,11 @@
 # key: diary, last
 # --
 
-* Look-back
+* Look-backs
 ** Points
 - Work: ${1:0-100}
 - Condition: ${2:0-100}
-** Done
-${3:done}
 ** Comment
 ${4:comment}
+** 今日の思い出
+${5:remind}
