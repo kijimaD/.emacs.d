@@ -1,22 +1,24 @@
 # -*- mode: snippet -*-
 # name: diary_first
-# key: diary, first
+# key: first
 # --
 
 * Tasks
 ** ${1:task}
-
+$0
 ** ${2:task}
 
 ** ${3:task}
+** コードレビュー
 ** Diary <100 words>
 ** Code reading
+** 今日のメソッド
 
 * 日報
-*今日学んだこと*
+*⭕今日学んだこと*
 
 
-*今後に活かしたいこと*
+*⭕今後に活かしたいこと*
 
 
-*今日感じたこと(所感)*
+*⭕今日感じたこと(所感)*

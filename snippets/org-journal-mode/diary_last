@@ -1,13 +1,13 @@
 # -*- mode: snippet -*-
 # name: diary_last
-# key: diary, last
+# key: last
 # --
 
 * Look-backs
 ** Points
-- Work: ${1:0-100}
-- Condition: ${2:0-100}
+- Work: ${1:0-100} -> ${2:reason}
+- Condition: ${3:0-100} -> ${4:reason}
 ** Comment
-${4:comment}
+${5:comment}
 ** 今日の思い出
-${5:remind}
+${6:remind}
