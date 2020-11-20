@@ -720,10 +720,12 @@
 (add-hook 'markdown-mode-hook 'yas-insert-snippet)
 
 ;;; ruby_on_railsモード
-;; (require 'projectile)
-;; (projectile-global-mode)
+(require 'projectile)
+(projectile-global-mode)
 (require 'projectile-rails)
+(projectile-rails-global-mode)
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
+(define-key projectile-rails-mode-map (kbd "C-c r") 'projectile-rails-command-map)
 
 ;;; いちいち出るメッセージを出さないように
 (defun ask-user-about-supersession-threat (fn)
