@@ -960,6 +960,7 @@
 (setq org-journal-time-format "%R\n")
 (setq org-journal-file-format "%Y%m%d.org")
 (setq org-journal-dir (concat "~/" public-directory "/junk/diary/org-journal"))
+(setq org-journal-find-file 'find-file) ;; 1画面で表示
 
 ;; SSH
 (require 'tramp)
