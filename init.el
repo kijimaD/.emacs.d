@@ -137,9 +137,6 @@
 ;;ワードカウントをC-x p に割当
 (global-set-key "\C-xp" 'count-words)
 
-;;; M-jをanythingに割当
-(global-set-key "\M-j" 'anything)
-
 ;;; homeキーをpop-tag-mark(戻る)に割当
 (global-set-key [home] 'pop-tag-mark)
 
@@ -868,12 +865,16 @@
   (other-window 1))
 (global-set-key (kbd "C-t") 'other-window-or-split)
 
+(global-set-key (kbd "M-<left>") 'previous-buffer)
+(global-set-key (kbd "M-<right>") 'next-buffer)
+
 ;;; 分割した画面間をShift+矢印で移動
 (setq windmove-wrap-around t)
 (windmove-default-keybindings)
 
 ;; helmキーバインド
 (global-set-key (kbd "C-x C-b") 'helm-mini)
+(global-set-key "\M-j" 'helm-mini)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
@@ -981,8 +982,6 @@
 (helm-gtags-mode t)
 (setq helm-gtags-auto-update t)
 (require 'gtags)
-
-(global-set-key "\C-xrl" 'anything-bookmarks)
 
 (require 'smooth-scroll)
 (smooth-scroll-mode 0)
