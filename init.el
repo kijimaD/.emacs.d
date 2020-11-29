@@ -945,7 +945,6 @@
 (define-key org-mode-map (kbd "<S-right>") nil)
 (define-key org-mode-map (kbd "<S-up>") nil)
 (define-key org-mode-map (kbd "<S-down>") nil)
-(setq org-startup-folded 'showall)
 
 (org-babel-do-load-languages 'org-babel-load-languages
     '(
@@ -956,11 +955,14 @@
 
 ;; 日誌
 (require 'org-journal)
-(setq org-journal-date-format "%Y-%m-%d, %A")
-(setq org-journal-time-format "%R\n")
+(setq org-journal-date-format "%Y-%m-%d")
+(setq org-journal-time-format "%R ")
 (setq org-journal-file-format "%Y%m%d.org")
 (setq org-journal-dir (concat "~/" public-directory "/junk/diary/org-journal"))
 (setq org-journal-find-file 'find-file) ;; 1画面で表示
+(setq org-journal-hide-entries-p nil)
+
+(setq org-startup-folded 'showeverything)
 
 ;; SSH
 (require 'tramp)
