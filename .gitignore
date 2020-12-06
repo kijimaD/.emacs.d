@@ -1,1 +1,7 @@
 *.emacs.desktop.lock
+elisp-objects/
+.cache/
+
+/history
+/TAGS
+/network-security.data
