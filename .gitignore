@@ -5,3 +5,7 @@ elisp-objects/
 /history
 /TAGS
 /network-security.data
+/session.*
+/ac-comphist.dat
+/projectile-bookmarks.eld
+/recentf
