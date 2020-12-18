@@ -57,7 +57,7 @@
  '(org2blog/wp-show-post-in-browser nil)
  '(package-selected-packages
    (quote
-    (dired-single list-packages-ext ag which-key devdocs ob-elixir slim-mode exec-path-from-shell migemo yatemplate atomic-chrome quickrun bm window-numbering ddskk-posframe rspec-mode tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
+    (powerline npm-mode outline-magic dired-single list-packages-ext ag which-key devdocs ob-elixir slim-mode exec-path-from-shell migemo yatemplate atomic-chrome quickrun bm window-numbering ddskk-posframe rspec-mode tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
  '(pdf-view-midnight-colors (quote ("#232333" . "#c7c7c7")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -100,7 +100,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Menlo" :slant normal :weight normal :height 74 :width normal :foundry "PfEd")))))
+ '(default ((t (:family "Menlo" :slant normal :weight normal :height 90 :width normal :foundry "PfEd")))))
 
 (set-fontset-font t 'japanese-jisx0208 (font-spec :family "ヒラギノ 角ゴ ProN"))
 ;; (set-fontset-font t
@@ -242,9 +242,10 @@
 (setq backup-inhibited t)
 (setq make-backup-files nil)
 (setq auto-save-default nil)
+(setq create-lockfiles nil)
 
 ;;終了時にオートセーブファイルを削除
-(setq delete-auto-save-files t)
+;; (setq delete-auto-save-files t)
 
 ;;; 右から左に読む言語に対応させないことで描画高速化
 (setq-default bidi-display-reordering nil)
@@ -571,7 +572,7 @@
 (set-language-environment "Japanese")
 (setq default-input-method "japanese-mozc")
 
-;; (global-set-key (kbd "C-w") 'mozc-mode)
+(global-set-key (kbd "C-.") 'toggle-input-method)
 ;; (add-hook 'org-mode-hook 'mozc-mode)
 
 (require 'mozc-popup)
@@ -688,8 +689,13 @@
 ;; (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)
 
 ;;; powerline モードラインをかっこよく、だがpomodoroタイマーが表示されなくなる。
-;; (require 'powerline)
-;; (powerline-nano-theme)
+(require 'powerline)
+(powerline-default-theme)
+
+(set-face-attribute 'powerline-active1 nil
+                    :foreground "blue"
+                    :background "#fff"
+                    :inherit 'mode-line)
 
 ;;; テンプレート自動挿入
 (auto-insert-mode)
@@ -1148,6 +1154,17 @@
 
 (global-set-key (kbd "<f2>") 'devdocs-search)
 
+(defun my-line ()
+  (interactive)
+  (open-line 1)
+  (newline)
+  (indent-for-tab-command)
+)
+
+(global-set-key (kbd "C-<return>") 'my-line)
+(global-set-key (kbd "C-j") 'ace-jump-mode)
+(global-set-key (kbd "M-j") 'ace-jump-mode-pop-mark)
+
 ;; pry
 (require 'inf-ruby)
 (setq inf-ruby-default-implementation "pry")
@@ -1187,5 +1204,13 @@
 ;; server
 (server-start)
 
+(require 'npm-mode)
+
 (custom-set-faces
  '(default ((t (:family "Menlo" :slant normal :weight normal :height 74 :width normal :foundry "PfEd")))))
+
+(add-hook 'input-method-activate-hook
+          (lambda() (set-cursor-color "Orange")))
+(add-hook 'input-method-inactivate-hook
+          (lambda() (set-cursor-color "GreenYellow")))
+(setq default-input-method "japanese-mozc")
