@@ -3,10 +3,18 @@
 
 (setq url-cookie-storage
  '((".google.com"
-  [url-cookie "NID" "204=jN5gX5SX0IUZUF4OlC0scQmWOsAAQjbfKJAI7llL0hc_iKzigyjvkpNXLk2hbGzJULOja5O1yA9DT3naNgc-KFnr4XJDV2DtfA8H5Yuj3moJ_kt7QSzSxl5NreQqPIXFNRGe8zCYBWvx4c47X3Z_w3KdGBY053AuFXYF912hVEY" "Sat, 17-Apr-2021 12:36:47 GMT" "/" ".google.com" nil]))
+  [url-cookie "NID" "204=jN5gX5SX0IUZUF4OlC0scQmWOsAAQjbfKJAI7llL0hc_iKzigyjvkpNXLk2hbGzJULOja5O1yA9DT3naNgc-KFnr4XJDV2DtfA8H5Yuj3moJ_kt7QSzSxl5NreQqPIXFNRGe8zCYBWvx4c47X3Z_w3KdGBY053AuFXYF912hVEY" "Sat, 17-Apr-2021 12:36:47 GMT" "/" ".google.com" nil])
+ (".yahoo.co.jp"
+  [url-cookie "B" "fqgiqmhftpk3o&b=3&s=lb" "Mon, 19-Dec-2022 15:53:28 GMT" "/" ".yahoo.co.jp" nil]))
 )
 (setq url-cookie-secure-storage
- 'nil)
+ '(("ja.wikipedia.org"
+  [url-cookie "WMF-Last-Access" "19-Dec-2020" "Wed, 20 Jan 2021 00:00:00 GMT" "/" "ja.wikipedia.org" t])
+ (".wikipedia.org"
+  [url-cookie "WMF-Last-Access-Global" "19-Dec-2020" "Wed, 20 Jan 2021 00:00:00 GMT" "/" ".wikipedia.org" t])
+ (".yahoo.co.jp"
+  [url-cookie "XB" "fqgiqmhftpk3o&b=3&s=lb" "Mon, 19-Dec-2022 15:53:28 GMT" "/" ".yahoo.co.jp" t]))
+)
 
 ;; Local Variables:
 ;; version-control: never
