@@ -57,7 +57,7 @@
  '(org2blog/wp-show-post-in-browser nil)
  '(package-selected-packages
    (quote
-    (back-button powerline npm-mode outline-magic dired-single list-packages-ext ag which-key devdocs ob-elixir slim-mode exec-path-from-shell migemo yatemplate atomic-chrome quickrun bm window-numbering ddskk-posframe rspec-mode tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
+    (rjsx-mode back-button powerline npm-mode outline-magic dired-single list-packages-ext ag which-key devdocs ob-elixir slim-mode exec-path-from-shell migemo yatemplate atomic-chrome quickrun bm window-numbering ddskk-posframe rspec-mode tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
  '(pdf-view-midnight-colors (quote ("#232333" . "#c7c7c7")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -798,11 +798,6 @@
 ;セッションの永続化
 (psession-mode 1)
 
-;; 非アクティブウィンドウの背景色を設定
-;; (require 'hiwin)
-;; (hiwin-activate)
-;; (set-face-background 'hiwin-face "gray20")
-
 ;; tabサイズ
 (setq default-tab-width 4)
 
@@ -989,9 +984,6 @@
 (setq dokuwiki-xml-rpc-url "https://wiki.a9ne.com/lib/exe/xmlrpc.php")
 (setq dokuwiki-login-user-name "kijima")
 
-;; 半透明化する
-(set-frame-parameter nil 'alpha 94)
-
 ;; ;; Gitの差分情報を表示する
 ;; (global-git-gutter+-mode)
 
@@ -1017,22 +1009,6 @@
           (goto-char (mark))
           (isearch-repeat-forward)))
     ad-do-it))
-
-(defun read-down ()
-  (interactive)
-  (next-line)
-  (recenter))
-
-(global-set-key [down] 'read-down)
-(global-set-key [down-mouse-5] 'read-down)
-
-(defun read-up ()
-  (interactive)
-  (previous-line)
-  (recenter))
-
-(global-set-key [up] 'read-up)
-(global-set-key [down-mouse-4] 'read-up)
 
 (setq load-path (cons "~/.emacs.d/elisp/eijiro.el/" load-path))
 (setq eijiro-directory "~/mysync/cs-doc")
@@ -1210,9 +1186,9 @@
 (require 'npm-mode)
 
 (add-hook 'input-method-activate-hook
-          (lambda() (set-cursor-color "Orange")))
+          (lambda() (set-cursor-color "Green")))
 (add-hook 'input-method-inactivate-hook
-          (lambda() (set-cursor-color "GreenYellow")))
+          (lambda() (set-cursor-color "magenta")))
 (setq default-input-method "japanese-mozc")
 
 (back-button-mode 1)
@@ -1221,3 +1197,20 @@
   (exchange-point-and-mark)
   (deactivate-mark))
 (global-set-key (kbd "C-x C-x") 'my-exchange-point-and-mark)
+
+(defface hlline-face
+  '((((class color)
+      (background dark))
+     (:background "black"))
+    (((class color)
+      (background light))
+     (:background "ForestGreen"))
+    (t
+    ()))
+"*Face used by hl-line.")
+(setq hl-line-face 'hlline-face)
+(global-hl-line-mode)
+
+(delete-selection-mode t)
+(global-set-key (kbd "M-n") (lambda () (interactive) (scroll-up 1)))
+(global-set-key (kbd "M-p") (lambda () (interactive) (scroll-down 1)))
