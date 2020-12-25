@@ -526,8 +526,17 @@
 ;; (unless (server-running-p)
 ;;   (server-start))
 
-;; 色付け
+;; 括弧に色付け
 (rainbow-delimiters-mode t)
+(require 'cl-lib)
+(require 'color)
+(cl-loop
+ for index from 1 to rainbow-delimiters-max-face-count
+ do
+ (let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
+   (cl-callf color-saturate-name (face-foreground face) 30)))
+
+(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiter-mode)
 
 ;; WordPressをorg-modeで
 ;; (setq load-path (cons "~/.emacs.d/lisp/org2blog/" load-path))
@@ -572,7 +581,7 @@
 (set-language-environment "Japanese")
 (setq default-input-method "japanese-mozc")
 
-(global-set-key (kbd "C-<henkan>") 'toggle-input-method)
+(global-set-key (kbd "C-SPC") 'toggle-input-method)
 ;; (add-hook 'org-mode-hook 'mozc-mode)
 
 (require 'mozc-popup)
@@ -741,28 +750,6 @@
 (defun ask-user-about-lock (file opponent)
   "always grab lock"
   t)
-
-;; ;; 音出す============================
-;; ;;; ファイルを開くときの効果音
-;; (defun find-file-hook--sound ()
-;;   (sound-wav-play
-;;    (expand-file-name
-;;     "~/sound/Typewriter_Sound_FXs/Antique_Typewriter_Sound_FXs/Paper_load.wav")))
-;; (add-hook 'find-file-hook 'find-file-hook--sound)
-
-;; ;;; キーを叩くたびに音を出す(うるさいので注意(笑))
-;; (defun post-command-hook--sound ()
-;;   (ignore-errors
-;;     (sound-wav-play
-;;      (expand-file-name
-;;       (cl-case last-command-event
-;;         (?\s "~/sound/Typewriter_Sound_FXs/Typewriter_Sound_FXs/Spacebar.wav")
-;;         ('backspace "~/sound/Typewriter_Sound_FXs/Typewriter_Sound_FXs/Backspace.wav")
-;;         ((?\C-m 'return) "~/sound/Typewriter_Sound_FXs/Typewriter_Sound_FXs/Return.wav")
-;;         ;; やかましいので2回に1回のペースで鳴らすか
-;;         (t (when (zerop (random 2))
-;;              "~/sound/Typewriter_Sound_FXs/Typewriter_Sound_FXs/1_click.wav")))))))
-;; (add-hook 'post-command-hook 'post-command-hook--sound)
 
 (prefer-coding-system 'utf-8)
 
@@ -956,6 +943,8 @@
 (define-key org-mode-map (kbd "<S-right>") nil)
 (define-key org-mode-map (kbd "<S-up>") nil)
 (define-key org-mode-map (kbd "<S-down>") nil)
+(define-key org-mode-map (kbd "M-<left>") nil)
+(define-key org-mode-map (kbd "M-<right>") nil)
 
 (org-babel-do-load-languages 'org-babel-load-languages
     '(
@@ -1214,3 +1203,17 @@
 (delete-selection-mode t)
 (global-set-key (kbd "M-n") (lambda () (interactive) (scroll-up 1)))
 (global-set-key (kbd "M-p") (lambda () (interactive) (scroll-down 1)))
+
+(defun current-path ()
+  (interactive)
+  (let ((file-path buffer-file-name)
+        (dir-path default-directory))
+    (cond (file-path
+           (kill-new (expand-file-name file-path))
+           (message "Add Kill Ring: %s" (expand-file-name file-path)))
+          (dir-path
+           (kill-new (expand-file-name dir-path))
+           (message "Add Kill Ring: %s" (expand-file-name dir-path)))
+          (t
+           (error-message-string "Fail to get path name.")
+           ))))

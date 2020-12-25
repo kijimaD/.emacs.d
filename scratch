@@ -25,3 +25,14 @@
   #'(lambda (x) (+ x n)))
 (setq add2 (make-adder 2))
 (funcall add2 5)
+
+(defvar bm-show-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "RET") 'bm-show-goto-bookmark)
+    (define-key map (kbd "SPC") 'bm-show-bookmark)
+    (define-key map (kbd "M-n") 'bm-show-next)
+    (define-key map (kbd "M-p") 'bm-show-prev)
+    (define-key map "q"         'bm-show-quit-window)
+    (define-key map (kbd "C-c C-c")   'bm-show)
+    map)
+  "Keymap for `bm-show-mode'.")
