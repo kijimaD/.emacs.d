@@ -1,8 +1,13 @@
-;;;; Emacs Bookmark Format Version 1 ;;;;
+;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8 -*- 
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("include"
+(("Project"
+ (filename . "~/Project/")
+ (front-context-string . "Cataclysm-DDA\n  ")
+ (rear-context-string . "96 10月 28 00:13 ")
+ (position . 183))
+("include"
  (filename . "/usr/include/")
  (front-context-string . "GL\n  drwxr-xr-x ")
  (rear-context-string . "96 12月  6 22:02 ")
