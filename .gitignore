@@ -1,9 +1,10 @@
 *.emacs.desktop.lock
 elisp-objects/
 .cache/
+auto-save-list/
 
-/history
 /TAGS
+/history
 /network-security.data
 /session.*
 /ac-comphist.dat

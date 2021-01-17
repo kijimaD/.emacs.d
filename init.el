@@ -57,7 +57,7 @@
  '(org2blog/wp-show-post-in-browser nil)
  '(package-selected-packages
    (quote
-    (rjsx-mode back-button powerline npm-mode outline-magic dired-single list-packages-ext ag which-key devdocs ob-elixir slim-mode exec-path-from-shell migemo yatemplate atomic-chrome quickrun bm window-numbering ddskk-posframe rspec-mode tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
+    (diminish rjsx-mode back-button powerline npm-mode outline-magic dired-single list-packages-ext ag which-key devdocs ob-elixir slim-mode exec-path-from-shell migemo yatemplate atomic-chrome quickrun bm window-numbering ddskk-posframe rspec-mode tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
  '(pdf-view-midnight-colors (quote ("#232333" . "#c7c7c7")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -481,7 +481,7 @@
           'spacemacs//helm-hide-minibuffer-maybe)
 
 (setq helm-autoresize-max-height 0)
-(setq helm-autoresize-min-height 20)
+(setq helm-autoresize-min-height 40)
 (helm-autoresize-mode 1)
 
 (helm-mode 1)
@@ -700,10 +700,10 @@
 ;;; powerline モードラインをかっこよく、だがpomodoroタイマーが表示されなくなる。
 (require 'powerline)
 (powerline-default-theme)
-
+;; (powerline-center-theme)
 (set-face-attribute 'powerline-active1 nil
-                    :foreground "blue"
-                    :background "#fff"
+                    :foreground "white"
+                    :background "purple"
                     :inherit 'mode-line)
 
 ;;; テンプレート自動挿入
@@ -868,6 +868,7 @@
 
 ;; helmキーバインド
 (global-set-key (kbd "C-x C-b") 'helm-mini)
+(global-set-key (kbd "C-x C-r") 'helm-recentf)
 (global-set-key "\M-j" 'helm-mini)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
@@ -1243,5 +1244,27 @@
 
 (setq ring-bell-function 'ignore)
 
-(custom-set-faces
- '(default ((t (:family "Menlo" :slant normal :weight normal :height 100 :width normal :foundry "PfEd")))))
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
+;; モードラインからマイナーモードを消す
+;; (describe-minor-mode-from-indicator) で調べる。
+(setq my-hidden-minor-modes
+      '(undo-tree-mode
+        eldoc-mode
+        auto-complete-mode
+        magit-auto-revert-mode
+        abbrev-mode
+        helm-mode
+	projectile-mode
+	projectile-rails-mode
+	yas-minor-mode
+	which-key-mode
+	back-button-mode
+	auto-highlight-symbol-mode
+	ctags-auto-update-mode
+	))
+
+(mapc (lambda (mode)
+	(setq minor-mode-alist
+	      (cons (list mode "") (assq-delete-all mode minor-mode-alist))))
+      my-hidden-minor-modes)
