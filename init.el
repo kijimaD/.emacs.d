@@ -182,7 +182,7 @@
 
 ;; モードライン ====
 ;;行番号を表示
-(global-linum-mode t)
+;; (global-linum-mode t)
 
 ;;列番号を表示
 ;;(column-number-mode 1)
@@ -697,13 +697,18 @@
 ;; (require 'elisp-slime-nav)
 ;; (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)
 
-;;; powerline モードラインをかっこよく、だがpomodoroタイマーが表示されなくなる。
 (require 'powerline)
 (powerline-default-theme)
 ;; (powerline-center-theme)
+
 (set-face-attribute 'powerline-active1 nil
                     :foreground "white"
                     :background "purple"
+                    :inherit 'mode-line)
+
+(set-face-attribute 'powerline-active0 nil
+                    :foreground "black"
+                    :background "green"
                     :inherit 'mode-line)
 
 ;;; テンプレート自動挿入
@@ -981,10 +986,10 @@
 ;; 変更があったら自動で更新
 (global-auto-revert-mode 1)
 
+(require 'gtags)
 (require 'helm-gtags)
 (helm-gtags-mode t)
 (setq helm-gtags-auto-update t)
-(require 'gtags)
 
 (require 'smooth-scroll)
 (smooth-scroll-mode 0)
@@ -1018,21 +1023,21 @@
 
 ;;; 注意！exuberant-ctagsを指定する必要がある
 ;;; Emacs標準のctagsでは動作しない！！
-(setq ctags-update-command "/usr/bin/ctags")
+;; (setq ctags-update-command "/usr/bin/ctags")
 ;;; 使う言語で有効にしよう
-(add-hook 'c-mode-common-hook  'turn-on-ctags-auto-update-mode)
-(add-hook 'ruby-mode-hook  'turn-on-ctags-auto-update-mode)
-(add-hook 'emacs-lisp-mode-hook  'turn-on-ctags-auto-update-mode)
+;; (add-hook 'c-mode-common-hook  'turn-on-ctags-auto-update-mode)
+;; (add-hook 'ruby-mode-hook  'turn-on-ctags-auto-update-mode)
+;; (add-hook 'emacs-lisp-mode-hook  'turn-on-ctags-auto-update-mode)
 
-(defun compile-ctags (dir)
-  "compile ctags for the current project"
-  (interactive "D[ctags] project root ? ")
-  (let ((d (expand-file-name dir)))
-    (cd d)
-    (compile "ctags -e -R --exclude='*.elc' --exclude='.git'")
-    (add-to-list 'tags-table-list d)
-    (setq tags-file-name d) ))
-(global-set-key [f6] 'compile-ctags)
+;; (defun compile-ctags (dir)
+;;   "compile ctags for the current project"
+;;   (interactive "D[ctags] project root ? ")
+;;   (let ((d (expand-file-name dir)))
+;;     (cd d)
+;;     (compile "ctags -e -R --exclude='*.elc' --exclude='.git'")
+;;     (add-to-list 'tags-table-list d)
+;;     (setq tags-file-name d) ))
+;; (global-set-key [f6] 'compile-ctags)
 
 ;; 自動補完
 (require 'ruby-electric)
@@ -1255,6 +1260,7 @@
         magit-auto-revert-mode
         abbrev-mode
         helm-mode
+	helm-gtags-mode
 	projectile-mode
 	projectile-rails-mode
 	yas-minor-mode
