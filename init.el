@@ -703,12 +703,12 @@
 
 (set-face-attribute 'powerline-active1 nil
                     :foreground "white"
-                    :background "purple"
+                    :background "darkViolet"
                     :inherit 'mode-line)
 
 (set-face-attribute 'powerline-active0 nil
                     :foreground "black"
-                    :background "green"
+                    :background "limegreen"
                     :inherit 'mode-line)
 
 ;;; テンプレート自動挿入
@@ -1254,20 +1254,27 @@
 ;; モードラインからマイナーモードを消す
 ;; (describe-minor-mode-from-indicator) で調べる。
 (setq my-hidden-minor-modes
-      '(undo-tree-mode
-        eldoc-mode
-        auto-complete-mode
-        magit-auto-revert-mode
+      '(
         abbrev-mode
+	auto-complete-mode
+	auto-highlight-symbol-mode
+	auto-revert-mode
+	back-button-mode
+	company-mode
+	ctags-auto-update-mode
+        eldoc-mode
+	flycheck-mode
         helm-mode
 	helm-gtags-mode
+        magit-auto-revert-mode
 	projectile-mode
 	projectile-rails-mode
-	yas-minor-mode
+	robe-mode
+	ruby-electric-mode
+	rubocop-mode
 	which-key-mode
-	back-button-mode
-	auto-highlight-symbol-mode
-	ctags-auto-update-mode
+	yas-minor-mode
+	undo-tree-mode
 	))
 
 (mapc (lambda (mode)
