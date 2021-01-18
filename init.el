@@ -981,7 +981,7 @@
 (setq dokuwiki-login-user-name "kijima")
 
 ;; ;; Gitの差分情報を表示する
-;; (global-git-gutter+-mode)
+(global-git-gutter+-mode 1)
 
 ;; 変更があったら自動で更新
 (global-auto-revert-mode 1)
