@@ -155,8 +155,7 @@
 ;; 		  (kmacro-exec-ring-item
 ;; 		   (quote(" " 0 "%d"))arg)))
 
-;; マクロをキーボードに割り当て。参考になりそう。
-(global-set-key [hiragana-katakana] 'open-junk-file)
+
 
 ;; 移動を楽にする
 (windmove-default-keybindings)
@@ -164,15 +163,10 @@
 ;; 補完可能なものを随時表示
 (icomplete-mode 1)
 
-;; インフォバッファの移動をページアップ、ページダウンで行えるように
-;; (global-set-key [next] 'Info-history-back)
-;; (global-set-key [prior] 'Info-history-forward)
-
 ;; yesかnoではなく、yかnかで答えられるようにする
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;; 一度にラインキル
-;; (setq kill-whole-line t)
+;; 外観 ====
 
 ;; *scratch*で最初に描画されるメッセージを消す
 (setq initial-scratch-message "")
@@ -180,20 +174,6 @@
 ;;; メニューバーを消す
 (menu-bar-mode 0)
 
-;; モードライン ====
-;;行番号を表示
-;; (global-linum-mode t)
-
-;;列番号を表示
-;;(column-number-mode 1)
-
-;;モードラインに日付時間を表示
-(setq display-time-string-forms
-      '((format "%s/%s/%s(%s) %s:%s" year month day dayname 24-hours minutes)
-        load
-        (if mail " Mail" "")))
-
-;; 外観 ====
 ;;カーソルのある列をハイライト
 (global-hl-line-mode t)
 
@@ -250,8 +230,7 @@
 ;; splash screenを無効にする
 (setq inhibit-splash-screen t)
 
-
-;;orgモード======================
+;;orgモード ====
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
 (add-to-list 'load-path "~/.emacs.d/elisp")
 (require 'org-install)
@@ -282,11 +261,11 @@
          (setq truncate-lines nil))))
 
 
-;;パッケージの追加を楽にする==================
+;;パッケージの追加を楽にする ====
 (package-initialize)
 (add-to-list 'package-archives '("melpa"."http://melpa.org/packages/") t)
 
-;;ace-jump-mode(移動方法の変更)==============
+;;ace-jump-mode ====
 (require 'ace-jump-mode)
 (setq ace-jump-mode-gray-background nil)
 (setq ace-jump-word-mode-use-query-char nil)
@@ -295,7 +274,7 @@
 ;; (global-set-key (kbd "C-o") 'ace-jump-word-mode)
 (global-set-key (kbd "C-M-;") 'ace-jump-line-mode)
 
-;;HELM====================================
+;;HELM ====
 (package-initialize)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
@@ -343,16 +322,7 @@
 
 (helm-mode 1)
 
-;SKK======================================
-(add-hook 'dired-load-hook
-          (lambda ()
-            (load "dired-x")
-            (global-set-key "\C-j" 'mozc-mode)
-            ))
-;; (setq skk-nicola-lshift-keys '(" "))
-;; (setq skk-nicola-rshift-keys '([henkan]))
-
-;;軽量化=================================
+;;軽量化 =================================
 ;;行番号の表示
 (setq linum-delay t)
 (defadvice linum-schedule (around my-linum-schedule () activate)
@@ -368,21 +338,6 @@
       (run-with-idle-timer 0.03 t 'global-hl-line-timer-function))
 (cancel-timer global-hl-line-timer)
 
-;; 日本語インフォ===========
-;; (add-to-list 'Info-directory-list "~/info/")
-;; (defun Info-find-node--info-ja (orig-fn filename &rest args)
-;;   (apply orig-fn
-;; 	 (pcase filename
-;; 	   ("emacs" "emacs245-ja")
-;; 	   (t filename))
-;; 	 args))
-;; (advice-add 'Info-find-node :around 'Info-find-node--info-ja)
-
-;; Emacs server起動======
-;; (require 'server)
-;; (unless (server-running-p)
-;;   (server-start))
-
 ;; 括弧に色付け
 (rainbow-delimiters-mode t)
 (require 'cl-lib)
@@ -394,22 +349,6 @@
    (cl-callf color-saturate-name (face-foreground face) 30)))
 
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiter-mode)
-
-;; WordPressをorg-modeで
-;; (setq load-path (cons "~/.emacs.d/lisp/org2blog/" load-path))
-;; (require 'org2blog-autoloads)
-
-;; (defun org2blog_new ()
-;; (setq org2blog/wp-blog-alist
-;;        '(("wordpress"
-;; 		  :url "http://test.com/xmlrpc.php" ;;xmlrcp.phpのURL
-;;           :username "user"
-;;           :password "password"
-;;           :default-title "" ;; デフォルトタイトル
-;;           :default-categories nil ;; カテゴリを指定
-;;           :tags-as-categories nil))) ;; タグを指定
-;; (org2blog/wp-login)
-;; (org2blog/wp-new-entry))
 
 ;; 自動保存 auto-save-buffers-enhanced ====
 (require 'auto-save-buffers-enhanced)
@@ -439,7 +378,6 @@
 (setq default-input-method "japanese-mozc")
 
 (global-set-key (kbd "C-SPC") 'toggle-input-method)
-;; (add-hook 'org-mode-hook 'mozc-mode)
 
 (require 'mozc-popup)
 (setq mozc-candidate-style 'popup)
@@ -449,12 +387,6 @@
 ;; 文字コード
 (prefer-coding-system 'utf-8)
 (set-language-environment 'utf-8)
-
-;; 自動補完
-;; (require 'auto-complete-config)
-;; (require 'auto-complete)
-;; (setq ac-auto-start t)
-;; (ac-config-default)
 
 ;; ediffを１ウィンドウで表示
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
@@ -466,32 +398,8 @@
 (require 'fish-mode)
 
 ;; flycheck
-;; (add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
+(add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
 (add-hook 'python-mode-hook 'flycheck-mode)
-
-;; anything.elを追加する
-;; (require 'anything-startup)
-;; (require 'anything-config)
-;; (add-to-list 'anything-sources 'anything-c-source-emacs-commands)
-
-;; col-highlight.el-現在行をハイライトする
-;; (require 'col-highlight)
-;; ;; ;; 1.常にハイライト
-;; ;; (column-highlight-mode t)
-;; ;; ;; 2.アイドル時にハイライト
-;; (toggle-highlight-column-when-idle 1)
-;; (col-highlight-set-interval 6)
-
-;; バッファ中のelisp評価-lispxmp
-;; (require 'lispxmp)
-;; (define-key emacs-lisp-mode-map (kbd "C-c C-d") 'lispxmp)
-
-;; 使い捨てのファイルを開く
-(require 'open-junk-file)
-;; ファイル名入力時に ~/junk/-年-月-日-時-秒.が出てくる
-
-(setq open-junk-file-format (concat "~/" public-directory "/junk/%Y-%m-%d-%H%M%S."))
-(global-set-key (kbd "C-x C-z") 'open-junk-file)
 
 ;; 自動コンパイルを無効にするファイル名の正規表現
 ;; (setq auto-async-byte-compile-exclude-files-regexp "/junk/")
@@ -519,33 +427,6 @@
 ;; (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
 ;; (add-hook 'lisp-mode-hook 'enable-paredit-mode)
 ;; (add-hook 'ielm-mode-hook 'enable-paredit-mode)
-
-(require 'org-pomodoro)
-(global-set-key [insert] 'org-pomodoro)
-
-;;; 関数トレース==========
-;; (require 'cl-lib)
-;; (defun current-defun ()
-;;   (save-excursion
-;;     (beginning-of-defun)
-;;     (forward-char 1)
-;;     (forward-sexp 2)
-;;     (symbol-at-point)))
-;; (defun eval-defun-or-trace-function (arg)
-;;   "C-M-xにtrace-functionの機能をつける"
-;;   (interactive "p")
-;;   (cl-case arg
-;;     (64 (untrace-function (current-defun))
-;;         (message "untrace-function: %s" (current-defun)))
-;;     (16 (trace-function (current-defun))
-;;         (message "trace-function: %s" (current-defun)))
-;;     (4 (eval-defun t))
-;;     (t (eval-defun nil))))
-;; (define-key emacs-lisp-mode-map (kbd "C-M-x") 'eval-defun-or-trace-function)
-
-;;; elisp-slime-nav シンボルの定義場所への移動
-;; (require 'elisp-slime-nav)
-;; (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)
 
 (require 'powerline)
 (powerline-default-theme)
@@ -584,7 +465,6 @@
 (define-key yas-minor-mode-map (kbd "C-x y v") 'yas-visit-snippet-file)
 (add-hook 'markdown-mode-hook 'yas-insert-snippet)
 
-
 (require 'projectile)
 (projectile-global-mode)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
@@ -608,11 +488,7 @@
 
 (prefer-coding-system 'utf-8)
 
-;; ;====================================
-;; ; セッション
-;; ;====================================
-;; ;Emacsを終了してもファイルを編集してた位置や
-;; ;minibuffer への入力内容を覚えててくれます。
+;; Emacsを終了してもファイルを編集してた位置やminibuffer への入力内容を覚えててくれます。 ====
 (when (require 'session nil t)
 (setq session-initialize '(de-saveplace session keys menus places)
       session-globals-include '((kill-ring 50)
@@ -620,22 +496,9 @@
                                 (file-name-history 10000)))
 ;; これがないと file-name-history に500個保存する前に max-string に達する
 (setq session-globals-max-string 100000000)
-;; ;; デフォルトでは30!
+;; ;; デフォルトでは30
 (setq history-length t)
 (add-hook 'after-init-hook 'session-initialize))
-
-;;; 文字数モードライン表示
-;; (defun count-lines-and-chars ()
-;;   (if mark-active
-;;       (format "[%dL%dw%dc]"
-;;               (count-lines (region-beginning) (region-end))
-;;               (how-many "[^
-;; ]+" (region-beginning) (region-end))
-;; ;              (how-many "\\w+" (region-beginning) (region-end))
-;;               (- (region-end) (region-beginning)))
-;;     ""))
-;; (add-to-list 'default-mode-line-format
-;;              '(:eval (count-lines-and-chars)))
 
 ;セッションの永続化
 (psession-mode 1)
@@ -659,59 +522,18 @@
   (package-install 'org-plus-contrib))
 (require 'org)
 
-;; Python開発環境
-;; 補完
+;; Python開発環境 ====
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)
 (jedi:setup)
-  ;; (define-key jedi-mode-map (kbd "<C-tab>") nil) ;;C-tabはウィンドウの移動に用いる
-  (setq jedi:complete-on-dot t)
-  (setq ac-sources
-    (delete 'ac-source-words-in-same-mode-buffers ac-sources)) ;;jediの補完候補だけでいい
-  (add-to-list 'ac-sources 'ac-source-filename)
-  (add-to-list 'ac-sources 'ac-source-jedi-direct)
-  ;; (define-key python-mode-map "\C-ct" 'jedi:goto-definition)
-  ;; (define-key python-mode-map "\C-cb" 'jedi:goto-definition-pop-marker)
-  ;; (define-key python-mode-map "\C-cr" 'helm-jedi-related-names)
+;; (define-key jedi-mode-map (kbd "<C-tab>") nil) ;;C-tabはウィンドウの移動に用いる
+(setq jedi:complete-on-dot t)
+(setq ac-sources
+      (delete 'ac-source-words-in-same-mode-buffers ac-sources)) ;;jediの補完候補だけでいい
+(add-to-list 'ac-sources 'ac-source-filename)
+(add-to-list 'ac-sources 'ac-source-jedi-direct)
 
-;; ;; 整形
-;; (require 'py-autopep8)
-;; (setq py-autopep8-options '("--max-line-length=200"))
-;; (setq flycheck-flake8-maximum-line-length 200)
-;; (py-autopep8-enable-on-save)
-;; ;; 保存時にバッファ全体を自動整形する
-;; ;; (add-hook 'before-save-hook 'py-autopep8-before-save)
-;; (add-hook 'python-mode-hook
-;; 	  '(lambda()
-;; 	     (setq indent-tabs-mode nil)
-;; 	     (setq indent-level 4)
-;; 	     (setq python-indent 4)))
-
-;; ;; flymake
-;; (flymake-mode t)
-;; ;;errorやwarningを表示する
-;; (require 'flymake-python-pyflakes)
-;; (flymake-python-pyflakes-load)
-
-;;; 画面分割==
-(defun split-n (n)
-  "現在のウィンドウをn等分する関数"
-  (interactive "p") ; コマンドとして呼ぶときは前置引数を取る
-  (if (= n 2)
-      (progn
-	(split-window-horizontally)
-	(other-window 2))
-    (progn
-      (split-window-horizontally (/ (window-width) n))
-      (other-window 1)
-      (split-n (- n 1)))))
-(defun other-window-or-split ()
-  "windowがひとつのときは画面を3分割し、そうでなければとなりのwindowにカーソルを移す"
-  (interactive)
-  (if (one-window-p)
-      (split-n 3))
-  (other-window 1))
-(global-set-key (kbd "C-t") 'other-window-or-split)
+(global-set-key (kbd "C-t") 'other-window)
 (global-set-key (kbd "C-o") 'other-frame)
 
 (global-set-key (kbd "M-<left>") 'previous-buffer)
@@ -810,39 +632,36 @@
         (ruby . t)
         (emacs-lisp . t)))
 
-;; 日誌
+;; 日誌 ====
 (require 'org-journal)
 (setq org-journal-date-format "%Y-%m-%d")
 (setq org-journal-time-format "%R ")
 (setq org-journal-file-format "%Y%m%d.org")
 (setq org-journal-dir (concat "~/" public-directory "/junk/diary/org-journal"))
-(setq org-journal-find-file 'find-file) ;; 1画面で表示
+(setq org-journal-find-file 'find-file)
 (setq org-journal-hide-entries-p nil)
-
 (setq org-startup-folded 'showeverything)
 
-;; SSH
+;; 使い捨てのファイルを開く ====
+(require 'open-junk-file)
+(setq open-junk-file-format (concat "~/" public-directory "/junk/%Y-%m-%d-%H%M%S."))
+(global-set-key (kbd "C-x C-z") 'open-junk-file)
+(global-set-key [hiragana-katakana] 'open-junk-file)
+
+;; SSH ====
 (require 'tramp)
 (setq tramp-default-method "ssh")
 
-(require 'xml-rpc)
-(defvar *dokuwiki-xml-rpc-url* "https://wiki.a9ne.com/lib/exe/xmlrpc.php")
-(setq dokuwiki-xml-rpc-url "https://wiki.a9ne.com/lib/exe/xmlrpc.php")
-(setq dokuwiki-login-user-name "kijima")
-
-;; ;; Gitの差分情報を表示する
+;; Gitの差分情報を表示する ====
 (global-git-gutter+-mode 1)
 
-;; 変更があったら自動で更新
+;; 変更があったら自動で更新 ====
 (global-auto-revert-mode 1)
 
 (require 'gtags)
 (require 'helm-gtags)
 (helm-gtags-mode t)
 (setq helm-gtags-auto-update t)
-
-(require 'smooth-scroll)
-(smooth-scroll-mode 0)
 
 (defadvice isearch-mode (around isearch-mode-default-string (forward &optional regexp op-fun recursive-edit word-p) activate)
   (if (and transient-mark-mode mark-active (not (eq (mark) (point))))
@@ -856,12 +675,6 @@
           (isearch-repeat-forward)))
     ad-do-it))
 
-(setq load-path (cons "~/.emacs.d/elisp/eijiro.el/" load-path))
-(setq eijiro-directory "~/mysync/cs-doc")
-(require 'eijiro)
-;; (global-set-key [insert] 'eijiro-at-point)
-(put 'upcase-region 'disabled nil)
-
 (require 'auto-highlight-symbol)
 (global-auto-highlight-symbol-mode t)
 
@@ -870,24 +683,6 @@
 (add-hook 'ruby-mode-hook 'flycheck-mode)
 (require 'rubocop)
 (add-hook 'ruby-mode-hook 'rubocop-mode)
-
-;;; 注意！exuberant-ctagsを指定する必要がある
-;;; Emacs標準のctagsでは動作しない！！
-;; (setq ctags-update-command "/usr/bin/ctags")
-;;; 使う言語で有効にしよう
-;; (add-hook 'c-mode-common-hook  'turn-on-ctags-auto-update-mode)
-;; (add-hook 'ruby-mode-hook  'turn-on-ctags-auto-update-mode)
-;; (add-hook 'emacs-lisp-mode-hook  'turn-on-ctags-auto-update-mode)
-
-;; (defun compile-ctags (dir)
-;;   "compile ctags for the current project"
-;;   (interactive "D[ctags] project root ? ")
-;;   (let ((d (expand-file-name dir)))
-;;     (cd d)
-;;     (compile "ctags -e -R --exclude='*.elc' --exclude='.git'")
-;;     (add-to-list 'tags-table-list d)
-;;     (setq tags-file-name d) ))
-;; (global-set-key [f6] 'compile-ctags)
 
 ;; 自動補完
 (require 'ruby-electric)
@@ -980,6 +775,9 @@
 (define-key auto-highlight-symbol-mode-map (kbd "M-<down>") 'ahs-forward)
 
 (window-numbering-mode 1)
+
+
+;; bm ====
 (setq-default bm-buffer-persistence nil)
 (setq bm-restore-repository-on-load t)
 (require 'bm)
@@ -994,6 +792,9 @@
 (global-set-key (kbd "C-M-SPC") 'bm-toggle)
 (global-set-key (kbd "M-[") 'bm-previous)
 (global-set-key (kbd "M-]") 'bm-next)
+
+
+;; quickrun ====
 
 (require 'quickrun)
 (global-set-key (kbd "<f7>") 'quickrun)
@@ -1125,6 +926,7 @@
 	which-key-mode
 	yas-minor-mode
 	undo-tree-mode
+	git-gutter+-mode
 	))
 
 (mapc (lambda (mode)
