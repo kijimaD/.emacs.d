@@ -57,7 +57,7 @@
  '(org2blog/wp-show-post-in-browser nil)
  '(package-selected-packages
    (quote
-    (diminish rjsx-mode back-button powerline npm-mode outline-magic dired-single list-packages-ext ag which-key devdocs ob-elixir slim-mode exec-path-from-shell migemo yatemplate atomic-chrome quickrun bm window-numbering ddskk-posframe rspec-mode tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
+    (rinari helm-flyspell diminish rjsx-mode back-button powerline npm-mode outline-magic dired-single list-packages-ext ag which-key devdocs ob-elixir slim-mode exec-path-from-shell migemo yatemplate atomic-chrome quickrun bm window-numbering ddskk-posframe rspec-mode tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
  '(pdf-view-midnight-colors (quote ("#232333" . "#c7c7c7")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -397,10 +397,6 @@
 ;; fish
 (require 'fish-mode)
 
-;; flycheck
-(add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
-(add-hook 'python-mode-hook 'flycheck-mode)
-
 ;; 自動コンパイルを無効にするファイル名の正規表現
 ;; (setq auto-async-byte-compile-exclude-files-regexp "/junk/")
 ;; (add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
@@ -646,7 +642,6 @@
 (require 'open-junk-file)
 (setq open-junk-file-format (concat "~/" public-directory "/junk/%Y-%m-%d-%H%M%S."))
 (global-set-key (kbd "C-x C-z") 'open-junk-file)
-(global-set-key [hiragana-katakana] 'open-junk-file)
 
 ;; SSH ====
 (require 'tramp)
@@ -661,7 +656,7 @@
 (require 'gtags)
 (require 'helm-gtags)
 (helm-gtags-mode t)
-(setq helm-gtags-auto-update t)
+;; (setq helm-gtags-auto-update t)
 
 (defadvice isearch-mode (around isearch-mode-default-string (forward &optional regexp op-fun recursive-edit word-p) activate)
   (if (and transient-mark-mode mark-active (not (eq (mark) (point))))
@@ -679,10 +674,62 @@
 (global-auto-highlight-symbol-mode t)
 
 (require 'flycheck)
-(setq flycheck-check-syntax-automatically '(mode-enabled save))
+(add-hook 'prog-mode-hook 'flyspell-mode)
+
+(add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
+(add-hook 'python-mode-hook 'flycheck-mode)
 (add-hook 'ruby-mode-hook 'flycheck-mode)
+
+;; 自動起動
+(setq flycheck-check-syntax-automatically
+  '(save idle-change mode-enabled))
+
+;; コード変更後、3秒後にチェックする
+(setq flycheck-idle-change-delay 3)
+
+;; Rails ====
+;; flycheck と rubocop を連携させる
 (require 'rubocop)
 (add-hook 'ruby-mode-hook 'rubocop-mode)
+(add-hook 'ruby-mode-hook
+  '(lambda ()
+    (setq flycheck-checker 'ruby-rubocop)))
+;; See: https://qiita.com/watson1978/items/debafdfc49511fb173e9
+;; 独自に checker を定義する（お好みで）
+(flycheck-define-checker ruby-rubocop
+"A Ruby syntax and style checker using the RuboCop tool."
+  :command ("rubocop" "--format" "emacs"
+    (config-file "--config" flycheck-rubocoprc) source)
+  :error-patterns
+    ((warning line-start
+      (file-name) ":" line ":" column ": " (or "C" "W") ": " (message) line-end)
+    (error line-start
+          (file-name) ":" line ":" column ": " (or "E" "F") ": " (message) line-end))
+  :modes (ruby-mode motion-mode))
+
+
+;; JavaScript ====
+;; See: https://qiita.com/kwappa/items/6bde1fe2bbeedc85023e
+;; .js, .jsx を web-mode で開く
+(add-to-list 'auto-mode-alist '("\\.js[x]?$" . web-mode))
+
+;; .js でも JSX 編集モードに
+(defvar web-mode-content-types-alist
+  '(("jsx" . "\\.js[x]?\\'")))
+
+;; コメントアウトの設定
+(add-hook 'web-mode-hook
+  '(lambda ()
+     (add-to-list 'web-mode-comment-formats '("jsx" . "//" ))))
+
+;; ESlint ====
+;; eslint 用の linter を登録
+(flycheck-add-mode 'javascript-eslint 'web-mode)
+
+;; 作業している project の node-module をみて、適切に
+;; linter の設定を読み込む
+(eval-after-load 'web-mode
+  '(add-hook 'web-mode-hook #'add-node-modules-path))
 
 ;; 自動補完
 (require 'ruby-electric)
@@ -933,3 +980,13 @@
 	(setq minor-mode-alist
 	      (cons (list mode "") (assq-delete-all mode minor-mode-alist))))
       my-hidden-minor-modes)
+
+(require 'rinari)
+(add-hook 'ruby-mode-hook 'rinari-minor-mode)
+
+;; rspec-mode 用の snippet を認識させる
+(eval-after-load 'rspec-mode
+  '(rspec-install-snippets))
+
+(setq dumb-jump-mode t)
+(global-set-key [hiragana-katakana] 'dumb-jump-go)
