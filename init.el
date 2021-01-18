@@ -206,9 +206,6 @@
 ;;なんだっけ・
 (setq x-select-enable-primary t)
 
-;; スクリーンの最大化
-;; (set-frame-parameter nil 'fullscreen 'maximized)
-
 ;;括弧の補完
 (global-set-key (kbd "(") 'skeleton-pair-insert-maybe)
 (global-set-key (kbd "{") 'skeleton-pair-insert-maybe)
@@ -245,25 +242,19 @@
 (setq create-lockfiles nil)
 
 ;;終了時にオートセーブファイルを削除
-;; (setq delete-auto-save-files t)
+(setq delete-auto-save-files t)
 
-;;; 右から左に読む言語に対応させないことで描画高速化
+;; 右から左に読む言語に対応させないことで描画高速化
 (setq-default bidi-display-reordering nil)
 
-;;; splash screenを無効にする
+;; splash screenを無効にする
 (setq inhibit-splash-screen t)
 
-;;orgモード======================
 
-;; load-pathへの追加
+;;orgモード======================
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
 (add-to-list 'load-path "~/.emacs.d/elisp")
-
 (require 'org-install)
-;; キーバインドの設定
-;; (define-key global-map "\C-cl" 'org-store-link)
-;; (define-key global-map "\C-ca" 'org-agenda)
-;; (define-key global-map "\C-cr" 'org-remember)
 
 ;; 拡張子がorgのファイルを開いた時，自動的にorg-modeにする
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
@@ -290,140 +281,6 @@
         (t
          (setq truncate-lines nil))))
 
-;; ;; org-modeでwc-modeをつかう(語数)
-;; (add-hook 'org2blog/wp-mode-hook 'wc-goal-mode)
-;; (setq wc-goal-modeline-format "WC[%C%c/%tc]")
-
-;; 引き出しオフ!!
-(setq org-clock-into-drawer nil)
-
-;; マーク
-(global-set-key (kbd "<f5>")
-		'org-mark-ring-push)
-(global-set-key (kbd "C-<f5>")
-		'org-mark-ring-goto)
-
-;;===アジェンダ=====================
-;;アジェンダ表示の対象ファイル
-(setq org-agenda-files (list org-directory))
-
-;;アジェンダ表示で下線を用いる
-(add-hook 'org-agenda-mode-hook '(lambda()(hl-line-mode 1)))
-(setq hl-line-face 'underline)
-
-;;標準の祝日を利用しない
-(setq calender-holidays nil)
-
-;; (require 'org)
-;;; 時刻の記録をagendaに表示させる
-(setq org-agenda-start-with-log-mode t)
-;;; inbox.orgのサンプルにあわせ、今日から30日分の予定を表示させる
-(setq org-agenda-span 30)
-;;; org-agendaで扱うorgファイルたち
-(setq org-agenda-files '(""))
-;;; C-c a aでagendaのメニューを表示する
-;;; agendaには、習慣・スケジュール・TODOを表示させる
-;; (global-set-key (kbd "C-c a") 'org-agenda)
-;; (setq org-agenda-custom-commands
-;;       '(("a" "Agenda and all TODO's"
-;;          ((tags "project-CLOCK=>\"<today>\"|repeatable") (agenda "") (alltodo)))))
-;;; <f6>で直接org習慣仕事術用agendaを起動させる
-;; (defun org-agenda-default ()
-;;   (interactive)
-;;   (org-agenda nil "a"))
-;; (global-set-key (kbd "<f6>") 'org-agenda-default)
-
-;;Perl=============================
-;;perlファイルにcperlモードを使うための設定
-;;関数定義を置き換える:
-(fset 'perl-mode 'cperl-mode)
-
-;;もしくはエイリアス(?)を使用する
-(defalias 'perl-mode 'cperl-mode)
-
-;;ハイライト表示をグローバルに表示する
-;; (global-font-lock-mode t)
-
-;;perlファイルのためにcperl-modeを自動的にロードする
-;; (fset 'perl-mode 'cperl-mode)
-
-;;ファイルを読み込んだ時にトップレベルのノードのみを表示する
-;; (add-hook 'cperl-mode-hook 'hide-body)
-
-;;cperlでのOutlineマイナーモード
-;; (add-hook 'cperl-mode-hook 'outline-minor-mode)
-
-;;アウトラインコマンドへの接頭辞をC-c @からC-c C-oに変更する。
-(setq outline-minor-mode-prefix "\C-co")
-
-;; 括弧補完
-(setq cperl-electric-parens t)
-
-;; SKK+azikを使う=============================
-;; 起動については後ろのHELMの項目にあるので注意。			     ;(setq skk-use-azik t)
-
-;; (require 'skk-autoloads)
-;; (global-set-key "\C-x\C-j" 'skk-mode)
-;; (global-set-key "\C-xj" 'skk-auto-fill-mode)
-
-;; 親指シフト
-;; (setq skk-use-kana-keyboard t)
-;; (setq skk-kanagaki-keyboard-type 'omelet-jis)
-
-;; (setq skk-preload t)
-;; SKKの変換方法
-;; (setq skk-sticky-key [henkan])
-
-;; 辞書の設定
-;; (setq skk-large-jisyo "~/.emacs.d/share/skk/SKK-JISYO.L")
-;; (setq skk-extra-jisyo-file-list
-;;      (list '("~/.emacs.d/share/skk/SKK-JISYO.geo"
-;; 	      "~/.emacs.d/share/skk/SKK-JISYO.jinmei"
-;; 	      "~/.emacs.d/share/skk/SKK-JISYO.propernoun"
-;; 	      "~/.emacs.d/share/skk/SKK-JISYO.station"))
-;;      )
-
-;; 閉じカッコを自動的に
-;; (setq skk-auto-insert-paren t)
-
-;; 送り仮名が厳密に正しい候補を優先して表示
-;; (setq skk-henkan-strict-okuri-precedence t)
-
-;; 漢字登録時、送り仮名が厳密に正しいかチェック
-;; (setq skk-check-okurigana-on-touroku t)
-
-;; 変換時に注釈を表示する
-;; (setq skk-show-annotation t)
-;; (setq skk-annotation-delay 0.5)
-
-;; 100分放置すると個人辞書が自動的に保存される設定
-;; (defvar skk-auto-save-jisyo-interval 6000)
-;; (defun skk-auto-save-jisyo () (skk-save-jisyo))
-;; (run-with-idle-timer skk-auto-save-jisyo-interval
-;; 		     skk-auto-save-jisyo-interval
-;; 		     'skk-auto-save-jisyo)
-
-;; 候補表示
-;; (setq skk-show-inline t)
-
-;; 変換候補の表示位置1
-;; (setq skk-show-tooltip t)						  ; ;;変換候補の表示位置2
-;; (setq skk-show-candidates-always-pop-to-buffer t)                      ; ;;変換候補の表示位置3
-;;(setq skk-henkan-show-candidates-rows 2) ; 候補表示件数を2列に
-
-;; 動的候補表示
-
-;; (setq skk-dcomp-activate nil)
-
-;; (setq skk-dcomp-activate
-;;      #'(lambda ()
-;; 	  (and
-;; 	   window-system
-;; 	   (or (eolp)
-;; 	       (looking-at "[ \t]+$")))))
-
-;; (setq skk-dcomp-multiple-activate t) ; 動的補完の複数候補表示
-;; (setq skk-dcomp-multiple-rows 10)	 ; 動的補完の候補表示件数
 
 ;;パッケージの追加を楽にする==================
 (package-initialize)
@@ -601,13 +458,6 @@
 
 ;; ediffを１ウィンドウで表示
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-
-;; 自動最大化
-(require 'maxframe)
-
-;;; マルチモニターのときはメインモニターの幅を設定する
-;; (setq mf-max-width 2560)
-;; (add-hook 'window-setup-hook 'maximize-frame t)
 
 ;; twitterモード
 (require 'twittering-mode)
