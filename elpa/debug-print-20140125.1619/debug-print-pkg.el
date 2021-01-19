@@ -1,1 +1,0 @@
-(define-package "debug-print" "20140125.1619" "A nice printf debugging environment by the way Gauche do" '((emacs "24")) :commit "d817fd9ea2d3f8d2c1ace4d8af155684f3a99dc5" :url "https://github.com/kenoss/debug-print" :keywords '("extensions" "lisp" "tools" "maint"))
