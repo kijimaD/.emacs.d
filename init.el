@@ -340,6 +340,7 @@
 (cancel-timer global-hl-line-timer)
 
 ;; 括弧に色付け
+(require 'rainbow-delimiters)
 (rainbow-delimiters-mode t)
 (require 'cl-lib)
 (require 'color)
@@ -349,7 +350,7 @@
  (let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
    (cl-callf color-saturate-name (face-foreground face) 30)))
 
-(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiter-mode)
+(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
 
 ;; 自動保存 auto-save-buffers-enhanced ====
 (require 'auto-save-buffers-enhanced)
@@ -674,7 +675,6 @@
 (require 'auto-highlight-symbol)
 (global-auto-highlight-symbol-mode t)
 
-(require 'flycheck)
 (add-hook 'prog-mode-hook 'flyspell-mode)
 
 ;; ispell の後継である aspell を使う。
@@ -687,7 +687,7 @@
   ispell-extra-args
   '("--sug-mode=ultra" "--lang=en_US" "--run-together" "--run-together-limit=5" "--run-together-min=2"))
 
-
+(require 'flycheck)
 (add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
 (add-hook 'python-mode-hook 'flycheck-mode)
 (add-hook 'ruby-mode-hook 'flycheck-mode)
@@ -719,6 +719,33 @@
           (file-name) ":" line ":" column ": " (or "E" "F") ": " (message) line-end))
   :modes (ruby-mode motion-mode))
 
+;; ESlint ====
+(eval-after-load 'flycheck
+  '(custom-set-variables
+    '(flycheck-disabled-checkers '(javascript-jshint javascript-jscs))
+    ))
+;; eslint 用の linter を登録
+(flycheck-add-mode 'javascript-eslint 'web-mode)
+
+;; 作業している project の node-module をみて、適切に
+;; linter の設定を読み込む
+(eval-after-load 'web-mode
+  '(add-hook 'web-mode-hook #'add-node-modules-path))
+(add-hook 'web-mode 'flycheck-mode)
+
+;; 実行: M-x eslint-fix-file
+(defun eslint-fix-file ()
+  (interactive)
+  (call-process-shell-command
+   (mapconcat 'shell-quote-argument
+          (list "eslint" "--fix" (buffer-file-name)) " ") nil 0))
+
+;; 実行後、buffer を revert する
+;; 実行: M-x eslint-fix-file-and-revert
+(defun eslint-fix-file-and-revert ()
+  (interactive)
+  (eslint-fix-file)
+  (revert-buffer t t))
 
 ;; JavaScript ====
 ;; See: https://qiita.com/kwappa/items/6bde1fe2bbeedc85023e
@@ -733,21 +760,6 @@
 (add-hook 'web-mode-hook
   '(lambda ()
      (add-to-list 'web-mode-comment-formats '("jsx" . "//" ))))
-
-;; ESlint ====
-;; eslint 用の linter を登録
-(flycheck-add-mode 'javascript-eslint 'web-mode)
-
-;; 作業している project の node-module をみて、適切に
-;; linter の設定を読み込む
-
-(eval-after-load 'web-mode
-  '(add-hook 'web-mode-hook #'add-node-modules-path))
-
-(eval-after-load 'flycheck
-  '(custom-set-variables
-    '(flycheck-disabled-checkers '(javascript-jshint javascript-jscs))
-    ))
 
 ;; 自動補完
 (require 'ruby-electric)
@@ -966,8 +978,6 @@
            ))))
 
 (setq ring-bell-function 'ignore)
-
-(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 ;; モードラインからマイナーモードを消す
 ;; (describe-minor-mode-from-indicator) で調べる。
