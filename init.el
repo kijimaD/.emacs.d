@@ -651,6 +651,8 @@
 
 ;; Gitの差分情報を表示する ====
 (global-git-gutter+-mode 1)
+;; modify された箇所で実行すると、diff を inline で見ることができる
+(global-set-key (kbd "C-c C-v") 'git-gutter+-show-hunk-inline-at-point)
 
 ;; 変更があったら自動で更新 ====
 (global-auto-revert-mode 1)
@@ -688,6 +690,9 @@
   '("--sug-mode=ultra" "--lang=en_US" "--run-together" "--run-together-limit=5" "--run-together-min=2"))
 
 (require 'flycheck)
+(setq flycheck-indication-mode 'right-fringe)
+(add-hook 'flycheck-mode-hook #'flycheck-set-indication-mode)
+
 (add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
 (add-hook 'python-mode-hook 'flycheck-mode)
 (add-hook 'ruby-mode-hook 'flycheck-mode)
@@ -699,7 +704,7 @@
 ;; コード変更後、3秒後にチェックする
 (setq flycheck-idle-change-delay 3)
 
-;; Rails ====
+;; 文法 ====
 ;; flycheck と rubocop を連携させる
 (require 'rubocop)
 (add-hook 'ruby-mode-hook 'rubocop-mode)
@@ -718,6 +723,13 @@
     (error line-start
           (file-name) ":" line ":" column ": " (or "E" "F") ": " (message) line-end))
   :modes (ruby-mode motion-mode))
+
+(require 'rinari)
+(add-hook 'ruby-mode-hook 'rinari-minor-mode)
+
+;; rspec-mode 用の snippet を認識させる
+(eval-after-load 'rspec-mode
+  '(rspec-install-snippets))
 
 ;; ESlint ====
 (eval-after-load 'flycheck
@@ -991,7 +1003,6 @@
 	company-mode
 	ctags-auto-update-mode
         eldoc-mode
-	flycheck-mode
         helm-mode
 	helm-gtags-mode
         magit-auto-revert-mode
@@ -1004,19 +1015,13 @@
 	yas-minor-mode
 	undo-tree-mode
 	git-gutter+-mode
+	flyspell-mode
 	))
 
 (mapc (lambda (mode)
 	(setq minor-mode-alist
 	      (cons (list mode "") (assq-delete-all mode minor-mode-alist))))
       my-hidden-minor-modes)
-
-(require 'rinari)
-(add-hook 'ruby-mode-hook 'rinari-minor-mode)
-
-;; rspec-mode 用の snippet を認識させる
-(eval-after-load 'rspec-mode
-  '(rspec-install-snippets))
 
 (setq dumb-jump-mode t)
 (global-set-key [hiragana-katakana] 'dumb-jump-go)
