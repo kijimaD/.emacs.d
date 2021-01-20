@@ -293,8 +293,8 @@
 (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB work in terminal
 (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
 
-(when (executable-find "curl")
-  (setq helm-google-suggest-use-curl-p t))
+;; (when (executable-find "curl")
+;;   (setq helm-google-suggest-use-curl-p t))
 
 (setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
       helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
@@ -657,7 +657,6 @@
 ;; 変更があったら自動で更新 ====
 (global-auto-revert-mode 1)
 
-(require 'gtags)
 (require 'helm-gtags)
 (helm-gtags-mode t)
 ;; (setq helm-gtags-auto-update t)
@@ -743,7 +742,7 @@
 ;; linter の設定を読み込む
 (eval-after-load 'web-mode
   '(add-hook 'web-mode-hook #'add-node-modules-path))
-(add-hook 'web-mode 'flycheck-mode)
+(add-hook 'web-mode-hook 'flycheck-mode)
 
 ;; 実行: M-x eslint-fix-file
 (defun eslint-fix-file ()
