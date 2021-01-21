@@ -90,11 +90,11 @@
  '(when
       (or
        (not
-	(boundp
-	 (quote ansi-term-color-vector)))
+        (boundp
+         (quote ansi-term-color-vector)))
        (not
-	(facep
-	 (aref ansi-term-color-vector 0))))))
+        (facep
+         (aref ansi-term-color-vector 0))))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -105,8 +105,8 @@
 
 (set-fontset-font t 'japanese-jisx0208 (font-spec :family "ヒラギノ 角ゴ ProN"))
 ;; (set-fontset-font t
-;; 		  'japanese-jisx0208
-;; 		  (font-spec :family "Noto Sans CJK JP"))
+;;   'japanese-jisx0208
+;;   (font-spec :family "Noto Sans CJK JP"))
 
 ;; (setq dired-default-file-coding-system 'utf-8-unix)
 ;; (setq default-buffer-file-coding-system 'utf-8-unix)
@@ -148,15 +148,6 @@
 
 ;; aproposをdeleteキーに割当
 (global-set-key [delete] 'apropos)
-
-;; (global-set-key "\C-j" '
-;; 		(lambda (&optional arg)
-;; 		  "Keyboard macro."
-;; 		  (interactive "p")
-;; 		  (kmacro-exec-ring-item
-;; 		   (quote(" " 0 "%d"))arg)))
-
-
 
 ;; 移動を楽にする
 (windmove-default-keybindings)
@@ -271,7 +262,7 @@
 (setq ace-jump-mode-gray-background nil)
 (setq ace-jump-word-mode-use-query-char nil)
 (setq ace-jump-mode-move-keys
-(append "asdfghjkl;:]qwertyuiop@zxcvbnm,." nil))
+      (append "asdfghjkl;:]qwertyuiop@zxcvbnm,." nil))
 ;; (global-set-key (kbd "C-o") 'ace-jump-word-mode)
 (global-set-key (kbd "C-M-;") 'ace-jump-line-mode)
 
@@ -428,17 +419,16 @@
 
 (require 'powerline)
 (powerline-default-theme)
-;; (powerline-center-theme)
 
 (set-face-attribute 'powerline-active1 nil
                     :foreground "white"
                     :background "darkViolet"
                     :inherit 'mode-line)
 
-(set-face-attribute 'powerline-active0 nil
-                    :foreground "black"
-                    :background "limegreen"
-                    :inherit 'mode-line)
+;; (set-face-attribute 'powerline-active0 nil
+;;                     :foreground "black"
+;;                     :background "limegreen"
+;;                     :inherit 'mode-line)
 
 ;;; テンプレート自動挿入
 (auto-insert-mode)
@@ -447,11 +437,11 @@
 ;; (define-auto-insert "\\.md$" "markdown-template.rb")
 (setq auto-insert-alist
       (append '(
-		("\\.rb$" . "ruby-template.rb")
-		("\\.js$" . "js-template.js")
-		("\\.org$" . "org-template.org")
-		("\\.md$" . "markdown-template.md")
-		) auto-insert-alist))
+                ("\\.rb$" . "ruby-template.rb")
+                ("\\.js$" . "js-template.js")
+                ("\\.org$" . "org-template.org")
+                ("\\.md$" . "markdown-template.md")
+                ) auto-insert-alist))
 
 (yatemplate-fill-alist)
 (auto-insert-mode 1)
@@ -488,17 +478,17 @@
 
 ;; Emacsを終了してもファイルを編集してた位置やminibuffer への入力内容を覚えててくれます。 ====
 (when (require 'session nil t)
-(setq session-initialize '(de-saveplace session keys menus places)
-      session-globals-include '((kill-ring 50)
-                                (session-file-alist 500 t)
-                                (file-name-history 10000)))
-;; これがないと file-name-history に500個保存する前に max-string に達する
-(setq session-globals-max-string 100000000)
-;; ;; デフォルトでは30
-(setq history-length t)
-(add-hook 'after-init-hook 'session-initialize))
+  (setq session-initialize '(de-saveplace session keys menus places)
+        session-globals-include '((kill-ring 50)
+                                  (session-file-alist 500 t)
+                                  (file-name-history 10000)))
+  ;; これがないと file-name-history に500個保存する前に max-string に達する
+  (setq session-globals-max-string 100000000)
+  ;; ;; デフォルトでは30
+  (setq history-length t)
+  (add-hook 'after-init-hook 'session-initialize))
 
-;セッションの永続化
+;;セッションの永続化
 (psession-mode 1)
 
 ;; tabサイズ
@@ -508,11 +498,11 @@
 (setq frame-title-format "%f")
 
 (require 'package)
- (setq package-archives
-    '(("elpy" . "https://jorgenschaefer.github.io/packages/")
-      ("melpa" . "https://melpa.org/packages/")
-      ("gnu" . "https://elpa.gnu.org/packages/")
-      ("org" . "http://orgmode.org/elpa/")))
+(setq package-archives
+      '(("elpy" . "https://jorgenschaefer.github.io/packages/")
+        ("melpa" . "https://melpa.org/packages/")
+        ("gnu" . "https://elpa.gnu.org/packages/")
+        ("org" . "http://orgmode.org/elpa/")))
 (package-initialize)
 
 (unless (package-installed-p 'org-plus-contrib)
@@ -537,7 +527,7 @@
 (global-set-key (kbd "M-<left>") 'previous-buffer)
 (global-set-key (kbd "M-<right>") 'next-buffer)
 
-;;; 分割した画面間をShift+矢印で移動
+;; 分割した画面間をShift+矢印で移動
 (setq windmove-wrap-around t)
 (windmove-default-keybindings)
 
@@ -552,7 +542,7 @@
 (global-set-key (kbd "C-c f") 'helm-find)
 (setq helm-semantic-fuzzy-match t
       helm-imenu-fuzzy-match    t)
- (setq helm-surfraw-default-browser-function 'browse-url-generic
+(setq helm-surfraw-default-browser-function 'browse-url-generic
       browse-url-generic-program "google-chrome")
 
 
@@ -576,6 +566,7 @@
 (exec-path-from-shell-initialize)
 
 ;; migemo
+(require 'migemo)
 (when (and (executable-find "cmigemo")
            (require 'migemo nil t))
   (setq migemo-command my-migemo-command)
@@ -586,7 +577,7 @@
   (setq migemo-coding-system 'utf-8-unix)
   (load-library "migemo")
   (migemo-init)
-)
+  )
 
 ;; web-mode
 (require 'web-mode)
@@ -597,13 +588,13 @@
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . dokuwiki-mode))
 (setq web-mode-engines-alist
-'(("php"    . "\\.phtml\\'")
-  ("blade"  . "\\.blade\\.")))
+      '(("php"    . "\\.phtml\\'")
+        ("blade"  . "\\.blade\\.")))
 
-; django-modeのC-tキーバインドを無効化する
+;; django-modeのC-tキーバインドを無効化する
 (eval-after-load "django-mode"
   '(progn
      (define-key django-mode-map (kbd "C-t") nil)
@@ -614,7 +605,7 @@
      (define-key dired-mode-map (kbd "C-t") nil)
      ))
 
-; org-modeで日誌バッファ作成とかぶるので無効化
+;; org-modeで日誌バッファ作成とかぶるので無効化
 (define-key org-mode-map (kbd "C-c C-j") nil)
 (define-key org-mode-map (kbd "<S-left>") nil)
 (define-key org-mode-map (kbd "<S-right>") nil)
@@ -624,11 +615,11 @@
 (define-key org-mode-map (kbd "M-<right>") nil)
 
 (org-babel-do-load-languages 'org-babel-load-languages
-    '(
-        (shell . t)
-        (python . t)
-        (ruby . t)
-        (emacs-lisp . t)))
+                             '(
+                               (shell . t)
+                               (python . t)
+                               (ruby . t)
+                               (emacs-lisp . t)))
 
 ;; 日誌 ====
 (require 'org-journal)
@@ -685,8 +676,8 @@
 (eval-after-load "ispell"
   '(add-to-list 'ispell-skip-region-alist '("[^\000-\377]+")))
 (setq ispell-program-name "aspell"
-  ispell-extra-args
-  '("--sug-mode=ultra" "--lang=en_US" "--run-together" "--run-together-limit=5" "--run-together-min=2"))
+      ispell-extra-args
+      '("--sug-mode=ultra" "--lang=en_US" "--run-together" "--run-together-limit=5" "--run-together-min=2"))
 
 (require 'flycheck)
 (setq flycheck-indication-mode 'right-fringe)
@@ -698,7 +689,7 @@
 
 ;; 自動起動
 (setq flycheck-check-syntax-automatically
-  '(save idle-change mode-enabled))
+      '(save idle-change mode-enabled))
 
 ;; コード変更後、3秒後にチェックする
 (setq flycheck-idle-change-delay 3)
@@ -708,18 +699,18 @@
 (require 'rubocop)
 (add-hook 'ruby-mode-hook 'rubocop-mode)
 (add-hook 'ruby-mode-hook
-  '(lambda ()
-    (setq flycheck-checker 'ruby-rubocop)))
+          '(lambda ()
+             (setq flycheck-checker 'ruby-rubocop)))
 ;; See: https://qiita.com/watson1978/items/debafdfc49511fb173e9
 ;; 独自に checker を定義する（お好みで）
 (flycheck-define-checker ruby-rubocop
-"A Ruby syntax and style checker using the RuboCop tool."
+  "A Ruby syntax and style checker using the RuboCop tool."
   :command ("rubocop" "--format" "emacs"
-    (config-file "--config" flycheck-rubocoprc) source)
+            (config-file "--config" flycheck-rubocoprc) source)
   :error-patterns
-    ((warning line-start
-      (file-name) ":" line ":" column ": " (or "C" "W") ": " (message) line-end)
-    (error line-start
+  ((warning line-start
+            (file-name) ":" line ":" column ": " (or "C" "W") ": " (message) line-end)
+   (error line-start
           (file-name) ":" line ":" column ": " (or "E" "F") ": " (message) line-end))
   :modes (ruby-mode motion-mode))
 
@@ -727,6 +718,7 @@
 (add-hook 'ruby-mode-hook 'rinari-minor-mode)
 
 ;; rspec-mode 用の snippet を認識させる
+(require 'rspec-mode)
 (eval-after-load 'rspec-mode
   '(rspec-install-snippets))
 
@@ -742,14 +734,40 @@
 ;; linter の設定を読み込む
 (eval-after-load 'web-mode
   '(add-hook 'web-mode-hook #'add-node-modules-path))
+(eval-after-load 'web-mode
+  '(add-hook 'rjsx-mode-hook #'add-node-modules-path))
 (add-hook 'web-mode-hook 'flycheck-mode)
+(add-hook 'rjsx-mode-hook 'flycheck-mode)
+
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  (setq web-mode-attr-indent-offset 2)
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-sql-indent-offset 2)
+  (setq indent-tabs-mode nil)
+  (setq tab-width 2)
+
+  (setq web-mode-attr-indent-offset nil)
+  (setq web-mode-enable-auto-closing t)
+  (setq web-mode-enable-auto-pairing t)
+  (setq web-mode-auto-close-style 2)
+  (setq web-mode-tag-auto-close-style 2)
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq indent-tabs-mode nil)
+  (setq tab-width 2)
+  )
+(add-hook 'web-mode-hook 'my-web-mode-hook)
 
 ;; 実行: M-x eslint-fix-file
 (defun eslint-fix-file ()
   (interactive)
   (call-process-shell-command
    (mapconcat 'shell-quote-argument
-          (list "eslint" "--fix" (buffer-file-name)) " ") nil 0))
+              (list "eslint" "--fix" (buffer-file-name)) " ") nil 0))
 
 ;; 実行後、buffer を revert する
 ;; 実行: M-x eslint-fix-file-and-revert
@@ -769,13 +787,13 @@
 
 ;; コメントアウトの設定
 (add-hook 'web-mode-hook
-  '(lambda ()
-     (add-to-list 'web-mode-comment-formats '("jsx" . "//" ))))
+          '(lambda ()
+             (add-to-list 'web-mode-comment-formats '("jsx" . "//" ))))
 
 ;; 自動補完
 (require 'ruby-electric)
 (add-hook 'ruby-mode-hook '(lambda ()
-          (ruby-electric-mode t)))
+                             (ruby-electric-mode t)))
 
 ;; 補完機能
 ;; robe-modeの有効化とcompanyとの連携
@@ -789,22 +807,22 @@
   '(push 'company-robe company-backends))
 
 (add-hook 'ruby-mode-hook (lambda()
-      (company-mode)
-      (setq company-auto-expand t)
-      (setq company-transformers '(company-sort-by-backend-importance)) ;; ソート順
-      (setq company-idle-delay 0) ; 遅延なしにすぐ表示
-      (setq company-minimum-prefix-length 1) ; 何文字打つと補完動作を行うか設定
-      (setq company-selection-wrap-around t) ; 候補の最後の次は先頭に戻る
-      (setq completion-ignore-case t)
-      (setq company-dabbrev-downcase nil)
-      (global-set-key (kbd "C-M-i") 'company-complete)
-      ;; C-n, C-pで補完候補を次/前の候補を選択
-      (define-key company-active-map (kbd "C-n") 'company-select-next)
-      (define-key company-active-map (kbd "C-p") 'company-select-previous)
-      (define-key company-active-map (kbd "C-s") 'company-filter-candidates) ;; C-sで絞り込む
-      (define-key company-active-map [tab] 'company-complete-selection) ;; TABで候補を設定
-      (define-key emacs-lisp-mode-map (kbd "C-M-i") 'company-complete) ;; 各種メジャーモードでも C-M-iで company-modeの補完を使う
-      ))
+                            (company-mode)
+                            (setq company-auto-expand t)
+                            (setq company-transformers '(company-sort-by-backend-importance)) ;; ソート順
+                            (setq company-idle-delay 0) ; 遅延なしにすぐ表示
+                            (setq company-minimum-prefix-length 1) ; 何文字打つと補完動作を行うか設定
+                            (setq company-selection-wrap-around t) ; 候補の最後の次は先頭に戻る
+                            (setq completion-ignore-case t)
+                            (setq company-dabbrev-downcase nil)
+                            (global-set-key (kbd "C-M-i") 'company-complete)
+                            ;; C-n, C-pで補完候補を次/前の候補を選択
+                            (define-key company-active-map (kbd "C-n") 'company-select-next)
+                            (define-key company-active-map (kbd "C-p") 'company-select-previous)
+                            (define-key company-active-map (kbd "C-s") 'company-filter-candidates) ;; C-sで絞り込む
+                            (define-key company-active-map [tab] 'company-complete-selection) ;; TABで候補を設定
+                            (define-key emacs-lisp-mode-map (kbd "C-M-i") 'company-complete) ;; 各種メジャーモードでも C-M-iで company-modeの補完を使う
+                            ))
 
 ;; companyの色
 (set-face-attribute 'company-tooltip nil
@@ -858,7 +876,7 @@
 ;;; 永続化しないミニバッファ履歴の変数を追加する
 (push 'command-history savehist-ignored-variables)
 
-; ahs-modeのキーバインドを無効化する
+;; ahs-modeのキーバインドを無効化する
 (define-key auto-highlight-symbol-mode-map (kbd "M-<right>") nil)
 (define-key auto-highlight-symbol-mode-map (kbd "M-<up>") 'ahs-backward)
 (define-key auto-highlight-symbol-mode-map (kbd "M-<left>") nil)
@@ -897,7 +915,7 @@
   (open-line 1)
   (newline)
   (indent-for-tab-command)
-)
+  )
 
 (global-set-key (kbd "C-<return>") 'my-line)
 (global-set-key (kbd "C-j") 'ace-jump-mode)
@@ -965,8 +983,8 @@
       (background light))
      (:background "ForestGreen"))
     (t
-    ()))
-"*Face used by hl-line.")
+     ()))
+  "*Face used by hl-line.")
 (setq hl-line-face 'hlline-face)
 (global-hl-line-mode)
 
@@ -995,32 +1013,62 @@
 (setq my-hidden-minor-modes
       '(
         abbrev-mode
-	auto-complete-mode
-	auto-highlight-symbol-mode
-	auto-revert-mode
-	back-button-mode
-	company-mode
-	ctags-auto-update-mode
+        auto-complete-mode
+        auto-highlight-symbol-mode
+        auto-revert-mode
+        back-button-mode
+        company-mode
+        ctags-auto-update-mode
         eldoc-mode
         helm-mode
-	helm-gtags-mode
+        helm-gtags-mode
         magit-auto-revert-mode
-	projectile-mode
-	projectile-rails-mode
-	robe-mode
-	ruby-electric-mode
-	rubocop-mode
-	which-key-mode
-	yas-minor-mode
-	undo-tree-mode
-	git-gutter+-mode
-	flyspell-mode
-	))
+        projectile-mode
+        projectile-rails-mode
+        robe-mode
+        ruby-electric-mode
+        rubocop-mode
+        which-key-mode
+        yas-minor-mode
+        undo-tree-mode
+        git-gutter+-mode
+        flyspell-mode
+        ))
 
 (mapc (lambda (mode)
-	(setq minor-mode-alist
-	      (cons (list mode "") (assq-delete-all mode minor-mode-alist))))
+        (setq minor-mode-alist
+              (cons (list mode "") (assq-delete-all mode minor-mode-alist))))
       my-hidden-minor-modes)
 
 (setq dumb-jump-mode t)
 (global-set-key [hiragana-katakana] 'dumb-jump-go)
+
+(require 'whitespace)
+;; 空白
+(set-face-foreground 'whitespace-space nil)
+(set-face-background 'whitespace-space "gray33")
+;; ファイル先頭と末尾の空行
+(set-face-background 'whitespace-empty "gray33")
+;; タブ
+(set-face-foreground 'whitespace-tab nil)
+(set-face-background 'whitespace-tab "gray33")
+;; ???
+(set-face-background 'whitespace-trailing "gray33")
+(set-face-background 'whitespace-hspace "gray33")
+(setq whitespace-style '(face           ; faceで可視化
+                         trailing       ; 行末
+                         tabs           ; タブ
+                         empty          ; 先頭/末尾の空行
+                         spaces         ; 空白
+                         ;; space-mark     ; 表示のマッピング
+                         tab-mark))
+;; スペースは全角のみを可視化
+(setq whitespace-space-regexp "\\(\u3000+\\)")
+;; タブの表示を変更
+(setq whitespace-display-mappings
+      '((tab-mark ?\t [?\xBB ?\t])))
+(global-whitespace-mode 1)
+
+(add-hook 'emacs-lisp-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode nil)))
