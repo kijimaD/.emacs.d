@@ -1072,3 +1072,20 @@
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)))
+
+;; macの設定
+(require 'rbenv)
+(global-rbenv-mode)
+(setq rbenv-installation-dir "~/.rbenv")
+(setenv "PATH" (concat (expand-file-name "~/.rbenv/shims:") (getenv "PATH")))
+
+(defun flycheck-finish-checker-process
+    (checker exit-status files output callback cwd)
+)
+
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+)
+(add-hook 'web-mode-hook  'my-web-mode-hook)
