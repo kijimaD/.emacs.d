@@ -782,7 +782,7 @@
 (add-to-list 'auto-mode-alist '("\\.js[x]?$" . web-mode))
 
 ;; .js でも JSX 編集モードに
-(defvar web-mode-content-types-alist
+(setq web-mode-content-types-alist
   '(("jsx" . "\\.js[x]?\\'")))
 
 ;; コメントアウトの設定
