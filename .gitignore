@@ -2,7 +2,10 @@
 elisp-objects/
 .cache/
 auto-save-list/
+transient/
+var/pcache/
 
+/scratch
 /TAGS
 /history
 /network-security.data
