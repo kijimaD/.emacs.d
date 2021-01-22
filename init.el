@@ -58,7 +58,7 @@
  '(org2blog/wp-show-post-in-browser nil)
  '(package-selected-packages
    (quote
-    (rbenv add-node-modules-path rinari helm-flyspell diminish rjsx-mode back-button powerline npm-mode outline-magic dired-single list-packages-ext ag which-key devdocs ob-elixir slim-mode exec-path-from-shell migemo yatemplate atomic-chrome quickrun bm window-numbering ddskk-posframe rspec-mode tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
+    (easy-kill-extras easy-kill command-log-mode rbenv add-node-modules-path rinari helm-flyspell diminish rjsx-mode back-button powerline npm-mode outline-magic dired-single list-packages-ext ag which-key devdocs ob-elixir slim-mode exec-path-from-shell migemo yatemplate atomic-chrome quickrun bm window-numbering ddskk-posframe rspec-mode tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
  '(pdf-view-midnight-colors (quote ("#232333" . "#c7c7c7")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -703,7 +703,7 @@
           '(lambda ()
              (setq flycheck-checker 'ruby-rubocop)))
 ;; See: https://qiita.com/watson1978/items/debafdfc49511fb173e9
-;; 独自に checker を定義する（お好みで） …これはなぜかMacでうまく動かない…なので代わりにrubyのほうを使うが、railsの文法を読んでくれないので困ったことになる。
+;; 独自に checker を定義する（お好みで）
 (flycheck-define-checker ruby-rubocop
   "A Ruby syntax and style checker using the RuboCop tool."
   :command ("rubocop" "--format" "emacs"
@@ -963,7 +963,7 @@
           (lambda() (set-cursor-color "magenta")))
 (setq default-input-method "japanese-mozc")
 
-(back-button-mode 1)
+;; (back-button-mode 1)
 (defun my-exchange-point-and-mark ()
   (interactive)
   (exchange-point-and-mark)
@@ -1073,3 +1073,49 @@
 ;; (global-rbenv-mode)
 ;; (setq rbenv-installation-dir "~/.rbenv")
 ;; (setenv "PATH" (concat (expand-file-name "~/.rbenv/shims:") (getenv "PATH")))
+
+;; easy-kill-extras
+;; Upgrade `mark-word' and `mark-sexp' with easy-mark
+;; equivalents.
+(global-set-key (kbd "M-@") 'easy-mark-word)
+(global-set-key (kbd "C-M-@") 'easy-mark-sexp)
+
+;; `easy-mark-to-char' or `easy-mark-up-to-char' could be a good
+;; replacement for `zap-to-char'.
+(global-set-key [remap zap-to-char] 'easy-mark-to-char)
+
+;; Integrate `expand-region' functionality with easy-kill
+(define-key easy-kill-base-map (kbd "o") 'easy-kill-er-expand)
+(define-key easy-kill-base-map (kbd "i") 'easy-kill-er-unexpand)
+
+;; Add the following tuples to `easy-kill-alist', preferrably by
+;; using `customize-variable'.
+(add-to-list 'easy-kill-alist '(?^ backward-line-edge ""))
+(add-to-list 'easy-kill-alist '(?$ forward-line-edge ""))
+(add-to-list 'easy-kill-alist '(?b buffer ""))
+(add-to-list 'easy-kill-alist '(?< buffer-before-point ""))
+(add-to-list 'easy-kill-alist '(?> buffer-after-point ""))
+(add-to-list 'easy-kill-alist '(?f string-to-char-forward ""))
+(add-to-list 'easy-kill-alist '(?F string-up-to-char-forward ""))
+(add-to-list 'easy-kill-alist '(?t string-to-char-backward ""))
+(add-to-list 'easy-kill-alist '(?T string-up-to-char-backward ""))
+
+(define-key mc/keymap (kbd "C-. M-C-f") 'mc/mark-next-sexps)
+(define-key mc/keymap (kbd "C-. M-C-b") 'mc/mark-previous-sexps)
+(define-key mc/keymap (kbd "C-. <") 'mc/mark-all-above)
+(define-key mc/keymap (kbd "C-. >") 'mc/mark-all-below)
+
+(define-key mc/keymap (kbd "C-. C-d") 'mc/remove-current-cursor)
+(define-key mc/keymap (kbd "C-. C-k") 'mc/remove-cursors-at-eol)
+(define-key mc/keymap (kbd "C-. d")   'mc/remove-duplicated-cursors)
+(define-key mc/keymap (kbd "C-. C-o") 'mc/remove-cursors-on-blank-lines)
+
+(define-key mc/keymap (kbd "C-. C-.") 'mc/freeze-fake-cursors-dwim)
+
+(define-key mc/keymap (kbd "C-. .")   'mc/move-to-column)
+(define-key mc/keymap (kbd "C-. =")   'mc/compare-chars)
+
+;; Emacs 24.4+ comes with rectangle-mark-mode.
+(define-key rectangle-mark-mode-map (kbd "C-. C-,") 'mc/rect-rectangle-to-multiple-cursors)
+
+(define-key cua--rectangle-keymap   (kbd "C-. C-,") 'mc/cua-rectangle-to-multiple-cursors)
