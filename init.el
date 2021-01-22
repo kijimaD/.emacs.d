@@ -698,21 +698,22 @@
 ;; flycheck と rubocop を連携させる
 (require 'rubocop)
 (add-hook 'ruby-mode-hook 'rubocop-mode)
-(add-hook 'ruby-mode-hook
-          '(lambda ()
-             (setq flycheck-checker 'ruby-rubocop)))
+
+;; (add-hook 'ruby-mode-hook
+;;           '(lambda ()
+;;              (setq flycheck-checker 'ruby-rubocop)))
 ;; See: https://qiita.com/watson1978/items/debafdfc49511fb173e9
 ;; 独自に checker を定義する（お好みで）
-(flycheck-define-checker ruby-rubocop
-  "A Ruby syntax and style checker using the RuboCop tool."
-  :command ("rubocop" "--format" "emacs"
-            (config-file "--config" flycheck-rubocoprc) source)
-  :error-patterns
-  ((warning line-start
-            (file-name) ":" line ":" column ": " (or "C" "W") ": " (message) line-end)
-   (error line-start
-          (file-name) ":" line ":" column ": " (or "E" "F") ": " (message) line-end))
-  :modes (ruby-mode motion-mode))
+;; (flycheck-define-checker ruby-rubocop
+;;   "A Ruby syntax and style checker using the RuboCop tool."
+;;   :command ("rubocop" "--format" "emacs"
+;;             (config-file "--config" flycheck-rubocoprc) source)
+;;   :error-patterns
+;;   ((warning line-start
+;;             (file-name) ":" line ":" column ": " (or "C" "W") ": " (message) line-end)
+;;    (error line-start
+;;           (file-name) ":" line ":" column ": " (or "E" "F") ": " (message) line-end))
+;;   :modes (ruby-mode motion-mode))
 
 (require 'rinari)
 (add-hook 'ruby-mode-hook 'rinari-minor-mode)
@@ -753,13 +754,7 @@
   (setq web-mode-enable-auto-closing t)
   (setq web-mode-enable-auto-pairing t)
   (setq web-mode-auto-close-style 2)
-  (setq web-mode-tag-auto-close-style 2)
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  (setq indent-tabs-mode nil)
-  (setq tab-width 2)
-  )
+  (setq web-mode-tag-auto-close-style 2))
 (add-hook 'web-mode-hook 'my-web-mode-hook)
 
 ;; 実行: M-x eslint-fix-file
@@ -1074,18 +1069,7 @@
             (setq indent-tabs-mode nil)))
 
 ;; macの設定
-(require 'rbenv)
-(global-rbenv-mode)
-(setq rbenv-installation-dir "~/.rbenv")
-(setenv "PATH" (concat (expand-file-name "~/.rbenv/shims:") (getenv "PATH")))
-
-(defun flycheck-finish-checker-process
-    (checker exit-status files output callback cwd)
-)
-
-(defun my-web-mode-hook ()
-  "Hooks for Web mode."
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-)
-(add-hook 'web-mode-hook  'my-web-mode-hook)
+;; (require 'rbenv)
+;; (global-rbenv-mode)
+;; (setq rbenv-installation-dir "~/.rbenv")
+;; (setenv "PATH" (concat (expand-file-name "~/.rbenv/shims:") (getenv "PATH")))
