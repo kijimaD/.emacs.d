@@ -58,7 +58,7 @@
  '(org2blog/wp-show-post-in-browser nil)
  '(package-selected-packages
    (quote
-    (add-node-modules-path rinari helm-flyspell diminish rjsx-mode back-button powerline npm-mode outline-magic dired-single list-packages-ext ag which-key devdocs ob-elixir slim-mode exec-path-from-shell migemo yatemplate atomic-chrome quickrun bm window-numbering ddskk-posframe rspec-mode tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
+    (rbenv add-node-modules-path rinari helm-flyspell diminish rjsx-mode back-button powerline npm-mode outline-magic dired-single list-packages-ext ag which-key devdocs ob-elixir slim-mode exec-path-from-shell migemo yatemplate atomic-chrome quickrun bm window-numbering ddskk-posframe rspec-mode tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
  '(pdf-view-midnight-colors (quote ("#232333" . "#c7c7c7")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -699,21 +699,21 @@
 (require 'rubocop)
 (add-hook 'ruby-mode-hook 'rubocop-mode)
 
-;; (add-hook 'ruby-mode-hook
-;;           '(lambda ()
-;;              (setq flycheck-checker 'ruby-rubocop)))
+(add-hook 'ruby-mode-hook
+          '(lambda ()
+             (setq flycheck-checker 'ruby-rubocop)))
 ;; See: https://qiita.com/watson1978/items/debafdfc49511fb173e9
-;; 独自に checker を定義する（お好みで）
-;; (flycheck-define-checker ruby-rubocop
-;;   "A Ruby syntax and style checker using the RuboCop tool."
-;;   :command ("rubocop" "--format" "emacs"
-;;             (config-file "--config" flycheck-rubocoprc) source)
-;;   :error-patterns
-;;   ((warning line-start
-;;             (file-name) ":" line ":" column ": " (or "C" "W") ": " (message) line-end)
-;;    (error line-start
-;;           (file-name) ":" line ":" column ": " (or "E" "F") ": " (message) line-end))
-;;   :modes (ruby-mode motion-mode))
+;; 独自に checker を定義する（お好みで） …これはなぜかMacでうまく動かない…なので代わりにrubyのほうを使うが、railsの文法を読んでくれないので困ったことになる。
+(flycheck-define-checker ruby-rubocop
+  "A Ruby syntax and style checker using the RuboCop tool."
+  :command ("rubocop" "--format" "emacs"
+            (config-file "--config" flycheck-rubocoprc) source)
+  :error-patterns
+  ((warning line-start
+            (file-name) ":" line ":" column ": " (or "C" "W") ": " (message) line-end)
+   (error line-start
+          (file-name) ":" line ":" column ": " (or "E" "F") ": " (message) line-end))
+  :modes (ruby-mode motion-mode))
 
 (require 'rinari)
 (add-hook 'ruby-mode-hook 'rinari-minor-mode)
