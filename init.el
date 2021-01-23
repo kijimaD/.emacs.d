@@ -7,6 +7,7 @@
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
    ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
+ '(back-button-local-keystrokes nil)
  '(company-quickhelp-color-background "#4F4F4F")
  '(company-quickhelp-color-foreground "#DCDCCC")
  '(custom-enabled-themes (quote (tango-dark)))
@@ -16,6 +17,7 @@
  '(fci-rule-color "#2e2e2e")
  '(flycheck-disabled-checkers (quote (javascript-jshint javascript-jscs)))
  '(fringe-mode 0 nil (fringe))
+ '(global-command-log-mode t)
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
  '(highlight-tail-colors
    (quote
@@ -58,7 +60,7 @@
  '(org2blog/wp-show-post-in-browser nil)
  '(package-selected-packages
    (quote
-    (easy-kill-extras easy-kill command-log-mode rbenv add-node-modules-path rinari helm-flyspell diminish rjsx-mode back-button powerline npm-mode outline-magic dired-single list-packages-ext ag which-key devdocs ob-elixir slim-mode exec-path-from-shell migemo yatemplate atomic-chrome quickrun bm window-numbering ddskk-posframe rspec-mode tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
+    (avy easy-kill-extras easy-kill command-log-mode rbenv add-node-modules-path rinari helm-flyspell diminish rjsx-mode back-button powerline npm-mode outline-magic dired-single list-packages-ext ag which-key devdocs ob-elixir slim-mode exec-path-from-shell migemo yatemplate atomic-chrome quickrun bm window-numbering ddskk-posframe rspec-mode tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
  '(pdf-view-midnight-colors (quote ("#232333" . "#c7c7c7")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -540,6 +542,7 @@
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-c h") 'helm-semantic-or-imenu)
 (global-set-key (kbd "C-c f") 'helm-find)
+(global-set-key (kbd "C-c i") 'helm-imenu)
 (setq helm-semantic-fuzzy-match t
       helm-imenu-fuzzy-match    t)
 (setq helm-surfraw-default-browser-function 'browse-url-generic
@@ -912,9 +915,9 @@
   (indent-for-tab-command)
   )
 
+(require 'avy)
 (global-set-key (kbd "C-<return>") 'my-line)
-(global-set-key (kbd "C-j") 'ace-jump-mode)
-(global-set-key (kbd "M-j") 'ace-jump-mode-pop-mark)
+(global-set-key (kbd "C-j") 'avy-goto-char-timer)
 
 ;; pry
 (require 'inf-ruby)
@@ -963,7 +966,8 @@
           (lambda() (set-cursor-color "magenta")))
 (setq default-input-method "japanese-mozc")
 
-;; (back-button-mode 1)
+(back-button-mode 1)
+
 (defun my-exchange-point-and-mark ()
   (interactive)
   (exchange-point-and-mark)
@@ -1074,6 +1078,7 @@
 ;; (setq rbenv-installation-dir "~/.rbenv")
 ;; (setenv "PATH" (concat (expand-file-name "~/.rbenv/shims:") (getenv "PATH")))
 
+(require 'easy-kill-extras)
 ;; easy-kill-extras
 ;; Upgrade `mark-word' and `mark-sexp' with easy-mark
 ;; equivalents.
@@ -1117,5 +1122,8 @@
 
 ;; Emacs 24.4+ comes with rectangle-mark-mode.
 (define-key rectangle-mark-mode-map (kbd "C-. C-,") 'mc/rect-rectangle-to-multiple-cursors)
-
 (define-key cua--rectangle-keymap   (kbd "C-. C-,") 'mc/cua-rectangle-to-multiple-cursors)
+
+;; log-mode
+(require 'command-log-mode)
+(global-command-log-mode)
