@@ -47,17 +47,6 @@
    "~/.emacs.d/elpa/org-pomodoro-20161119.226/resources/tick.wav")
  '(org-pomodoro-ticking-sound-states (quote (:pomodoro :short-break :long-break)))
  '(org-startup-indented t)
- '(org2blog/wp-buffer-template
-   "#+DATE: %s
-#+OPTIONS: toc:nil num:nil todo:nil pri:nil tags:nil ^:nil \\n:t
-#+CATEGORY: %s
-#+TAGS:
-#+DESCRIPTION:
-#+TITLE: %s
-
-")
- '(org2blog/wp-default-categories nil)
- '(org2blog/wp-show-post-in-browser nil)
  '(package-selected-packages
    (quote
     (avy easy-kill-extras easy-kill command-log-mode rbenv add-node-modules-path rinari helm-flyspell diminish rjsx-mode back-button powerline npm-mode outline-magic dired-single list-packages-ext ag which-key devdocs ob-elixir slim-mode exec-path-from-shell migemo yatemplate atomic-chrome quickrun bm window-numbering ddskk-posframe rspec-mode tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
@@ -88,7 +77,6 @@
      (340 . "#6380b3")
      (360 . "#DC8CC3"))))
  '(vc-annotate-very-old-color "#DC8CC3")
- '(wc-goal-modeline-format "WC[%C%c/%tc]")
  '(when
       (or
        (not
@@ -106,20 +94,10 @@
  '(default ((t (:family "Menlo" :slant normal :weight normal :height 90 :width normal :foundry "PfEd")))))
 
 (set-fontset-font t 'japanese-jisx0208 (font-spec :family "ヒラギノ 角ゴ ProN"))
-;; (set-fontset-font t
-;;   'japanese-jisx0208
-;;   (font-spec :family "Noto Sans CJK JP"))
-
-;; (setq dired-default-file-coding-system 'utf-8-unix)
-;; (setq default-buffer-file-coding-system 'utf-8-unix)
-;; (set-buffer-file-coding-system 'utf-8-unix)
-;; (set-terminal-coding-system 'utf-8-unix);; (set-keyboard-coding-system 'utf-8-unix)
-;; (set-clipboard-coding-system 'utf-8-unix)
-
-;; (set-default-coding-systems 'utf-8-unix)
-;; (setq locale-coding-system 'utf-8)
 
 ;; ==================================================
+
+
 ;; Mac用(day job用)設定
 (when (eq system-type 'darwin)
   (setq ns-command-modifier (quote meta))
@@ -1112,24 +1090,9 @@
 (add-to-list 'easy-kill-alist '(?t string-to-char-backward ""))
 (add-to-list 'easy-kill-alist '(?T string-up-to-char-backward ""))
 
-(define-key mc/keymap (kbd "C-. M-C-f") 'mc/mark-next-sexps)
-(define-key mc/keymap (kbd "C-. M-C-b") 'mc/mark-previous-sexps)
-(define-key mc/keymap (kbd "C-. <") 'mc/mark-all-above)
-(define-key mc/keymap (kbd "C-. >") 'mc/mark-all-below)
-
-(define-key mc/keymap (kbd "C-. C-d") 'mc/remove-current-cursor)
-(define-key mc/keymap (kbd "C-. C-k") 'mc/remove-cursors-at-eol)
-(define-key mc/keymap (kbd "C-. d")   'mc/remove-duplicated-cursors)
-(define-key mc/keymap (kbd "C-. C-o") 'mc/remove-cursors-on-blank-lines)
-
-(define-key mc/keymap (kbd "C-. C-.") 'mc/freeze-fake-cursors-dwim)
-
-(define-key mc/keymap (kbd "C-. .")   'mc/move-to-column)
-(define-key mc/keymap (kbd "C-. =")   'mc/compare-chars)
-
 ;; Emacs 24.4+ comes with rectangle-mark-mode.
 (define-key rectangle-mark-mode-map (kbd "C-. C-,") 'mc/rect-rectangle-to-multiple-cursors)
-(define-key cua--rectangle-keymap   (kbd "C-. C-,") 'mc/cua-rectangle-to-multiple-cursors)
+;; (define-key cua--rectangle-keymap   (kbd "C-. C-,") 'mc/cua-rectangle-to-multiple-cursors)
 
 ;; log-mode
 (require 'command-log-mode)
