@@ -974,6 +974,12 @@
   (deactivate-mark))
 (global-set-key (kbd "C-x C-x") 'my-exchange-point-and-mark)
 
+(defun my-kill-word ()
+  (interactive)
+  (easy-mark-word 0)
+  (backward-delete-char 1))
+(global-set-key (kbd "M-d") 'my-kill-word)
+
 (defface hlline-face
   '((((class color)
       (background dark))
@@ -1078,6 +1084,7 @@
 ;; (setq rbenv-installation-dir "~/.rbenv")
 ;; (setenv "PATH" (concat (expand-file-name "~/.rbenv/shims:") (getenv "PATH")))
 
+(require 'easy-kill)
 (require 'easy-kill-extras)
 ;; easy-kill-extras
 ;; Upgrade `mark-word' and `mark-sexp' with easy-mark
