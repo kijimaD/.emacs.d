@@ -372,3 +372,14 @@
 (setq clm/log-command-exceptions*
       '(mozc-handle-event self-insert-command))
 
+;; chrome edit ================
+(edit-server-start)
+(setq edit-server-new-frame-alist
+      '((name . "Edit with Emacs FRAME")
+        (top . 200)
+        (left . 200)
+        (width . 80)
+        (height . 25)
+        (minibuffer . t)
+        (menu-bar-lines . t)
+        (window-system . x)))
