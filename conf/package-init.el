@@ -12,8 +12,8 @@
 ;; 自動保存 auto-save-buffers-enhanced
 (require 'auto-save-buffers-enhanced)
 
-;; 3秒後に保存
-(setq auto-save-buffers-enhanced-interval 3)
+;; 2秒後に保存
+(setq auto-save-buffers-enhanced-interval 2)
 
 ;; 特定のファイルのみ有効にする
 (setq auto-save-buffers-enhanced-include-regexps '(".+")) ;全ファイル
@@ -128,7 +128,6 @@
 (setq my-hidden-minor-modes
       '(
         abbrev-mode
-        auto-complete-mode
         auto-highlight-symbol-mode
         auto-revert-mode
         back-button-mode
@@ -148,6 +147,8 @@
         undo-tree-mode
         git-gutter+-mode
         flyspell-mode
+        command-log-mode
+        global-whitespace-mode
         ))
 (mapc (lambda (mode)
         (setq minor-mode-alist
@@ -300,8 +301,8 @@
 (setq flycheck-check-syntax-automatically
       '(save idle-change mode-enabled))
 
-;; コード変更後、3秒後にチェックする
-(setq flycheck-idle-change-delay 3)
+;; コード変更後、2秒後にチェックする
+(setq flycheck-idle-change-delay 2)
 
 ;; ヘルプ ================
 (which-key-mode)
@@ -329,7 +330,7 @@
 
 ;; 定義元ジャンプ ================
 (setq dumb-jump-mode t)
-(global-set-key [hiragana-katakana] 'dumb-jump-go)
+;; (global-set-key [hiragana-katakana] 'dumb-jump-go)
 
 ;; easy-kill ================
 (require 'easy-kill)
@@ -367,3 +368,7 @@
 ;; log-mode ================
 (require 'command-log-mode)
 (global-command-log-mode)
+
+(setq clm/log-command-exceptions*
+      '(mozc-handle-event self-insert-command))
+

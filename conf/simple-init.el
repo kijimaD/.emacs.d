@@ -111,9 +111,6 @@
 
 ;; コーディング ================
 
-;; 補完可能なものを随時表示
-(icomplete-mode 1)
-
 ;; クリップボードと同期
 (setq x-select-enable-primary t)
 
