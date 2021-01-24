@@ -58,3 +58,8 @@
 (require 'helm-gtags)
 (helm-gtags-mode t)
 ;; (setq helm-gtags-auto-update t)
+
+;; grep ================
+(require 'helm-git-grep)
+
+(global-set-key (kbd "C-x C-g") 'helm-git-grep)
