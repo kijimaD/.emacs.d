@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: describe
+# key: describe
+# --
+describe '${1:describe}' do
+  it '${2:it}' do
+    $0
+    expect()
+  end
+end
