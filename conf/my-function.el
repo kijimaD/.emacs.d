@@ -53,3 +53,13 @@
   (funcall #'isearch-done nopush edit)
   (when isearch-other-end (goto-char isearch-other-end)))
 (define-key isearch-mode-map (kbd "C-<return>")'my-isearch-done-opposite)
+
+;; 短距離ジャンプ
+;; 絶対2ストロークなので意外と旨味はない…微調整が必要。
+;; - これだけ使用キーをいじる
+;; - 範囲設定を変数化
+(defun my-avy-jump-short ()
+  (interactive)
+  (avy-jump avy-goto-word-0-regexp :beg (- (point) 200) :end (+ (point) 200))
+)
+(global-set-key (kbd "C-M-j") 'my-avy-jump-short)

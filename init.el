@@ -49,7 +49,7 @@
  '(org-startup-indented t)
  '(package-selected-packages
    (quote
-    (edit-server helm-git-grep avy easy-kill-extras easy-kill command-log-mode rbenv add-node-modules-path rinari helm-flyspell diminish rjsx-mode back-button powerline npm-mode outline-magic dired-single list-packages-ext ag which-key devdocs ob-elixir slim-mode exec-path-from-shell migemo yatemplate atomic-chrome quickrun bm window-numbering ddskk-posframe rspec-mode tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
+    (rvm edit-server helm-git-grep avy easy-kill-extras easy-kill command-log-mode rbenv add-node-modules-path rinari helm-flyspell diminish rjsx-mode back-button powerline npm-mode outline-magic dired-single list-packages-ext ag which-key devdocs ob-elixir slim-mode exec-path-from-shell migemo yatemplate atomic-chrome quickrun bm window-numbering ddskk-posframe rspec-mode tabbar company robe ctags-update rubocop auto-highlight-symbol ruby-electric smooth-scrolling auto-complete-exuberant-ctags helm-gtags git-gutter-fringe+ dokuwiki org-journal-list org-journal dumb-jump dokuwiki-mode django-mode company-jedi markdown-mode jedi org-plus-contrib elscreen hiwin org org-brain zenburn-theme web-mode wc-goal-mode w3m typing twittering-mode summarye speed-type sound-wav solarized-theme smooth-scroll rainbow-delimiters psession projectile-rails powerline-evil pomodoro perl-completion paredit package-utils org-pomodoro open-junk-file noctilux-theme mozc-popup mozc-im maxframe magit lispxmp jdee helm-migemo helm grandshell-theme google-translate github-theme forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme eww-lnum espresso-theme elisp-slime-nav eldoc-extension eclipse-theme debug-print ddskk col-highlight chess autumn-light-theme auto-save-buffers-enhanced auto-install auto-complete anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme ace-jump-mode 2048-game)))
  '(pdf-view-midnight-colors (quote ("#232333" . "#c7c7c7")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -158,3 +158,35 @@
 
 ;; 最後に読み込まないと、適応されないものがある ================
 (prefer-coding-system 'utf-8)
+
+;; モードラインからマイナーモードを消す
+;; (describe-minor-mode-from-indicator) で調べる。
+(setq my-hidden-minor-modes
+      '(
+        abbrev-mode
+        auto-highlight-symbol-mode
+        auto-revert-mode
+        back-button-mode
+        company-mode
+        ctags-auto-update-mode
+        eldoc-mode
+        helm-mode
+        helm-gtags-mode
+        magit-auto-revert-mode
+        projectile-mode
+        projectile-rails-mode
+        robe-mode
+        ruby-electric-mode
+        rubocop-mode
+        which-key-mode
+        yas-minor-mode
+        undo-tree-mode
+        git-gutter+-mode
+        flyspell-mode
+        command-log-mode
+        global-whitespace-mode
+        ))
+(mapc (lambda (mode)
+        (setq minor-mode-alist
+              (cons (list mode "") (assq-delete-all mode minor-mode-alist))))
+      my-hidden-minor-modes)

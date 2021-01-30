@@ -7,6 +7,11 @@
 ;; Rspecの実行結果をスクロールして出力する
 (setq compilation-scroll-output t)
 
+;; Dockerのときの設定。プロジェクトごとに設定したいが…
+;; (setq rspec-use-docker-when-possible 1)
+;; (setq rspec-docker-container "web")
+;; (setq rspec-docker-cwd "")
+
 ;; シンタックスチェック ================
 ;; flycheck と rubocop を連携させる
 (require 'rubocop)
@@ -136,3 +141,6 @@
 ;; (global-rbenv-mode)
 ;; (setq rbenv-installation-dir "~/.rbenv")
 ;; (setenv "PATH" (concat (expand-file-name "~/.rbenv/shims:") (getenv "PATH")))
+
+;; マジックコメントを挿入しない
+(setq ruby-insert-encoding-magic-comment nil)

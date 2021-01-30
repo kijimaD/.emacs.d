@@ -123,38 +123,6 @@
                     :background "limegreen"
                     :inherit 'mode-line)
 
-;; モードラインからマイナーモードを消す
-;; (describe-minor-mode-from-indicator) で調べる。
-(setq my-hidden-minor-modes
-      '(
-        abbrev-mode
-        auto-highlight-symbol-mode
-        auto-revert-mode
-        back-button-mode
-        company-mode
-        ctags-auto-update-mode
-        eldoc-mode
-        helm-mode
-        helm-gtags-mode
-        magit-auto-revert-mode
-        projectile-mode
-        projectile-rails-mode
-        robe-mode
-        ruby-electric-mode
-        rubocop-mode
-        which-key-mode
-        yas-minor-mode
-        undo-tree-mode
-        git-gutter+-mode
-        flyspell-mode
-        command-log-mode
-        global-whitespace-mode
-        ))
-(mapc (lambda (mode)
-        (setq minor-mode-alist
-              (cons (list mode "") (assq-delete-all mode minor-mode-alist))))
-      my-hidden-minor-modes)
-
 ;; window移動 ================
 ;; 分割した画面間をShift+矢印で移動
 (setq windmove-wrap-around t)
@@ -274,18 +242,19 @@
 (require 'tramp)
 (setq tramp-default-method "ssh")
 
-(add-hook 'prog-mode-hook 'flyspell-mode)
-
 ;; スペルチェック ================
+;; (add-hook 'prog-mode-hook 'flyspell-mode)
+
 ;; ispell の後継である aspell を使う。
 ;; CamelCase でもいい感じに spellcheck してくれる設定を追加
 ;; See: https://stackoverflow.com/a/24878128/8888451
-(setq-default ispell-program-name "aspell")
-(eval-after-load "ispell"
-  '(add-to-list 'ispell-skip-region-alist '("[^\000-\377]+")))
-(setq ispell-program-name "aspell"
-      ispell-extra-args
-      '("--sug-mode=ultra" "--lang=en_US" "--run-together" "--run-together-limit=5" "--run-together-min=2"))
+
+;; (setq-default ispell-program-name "aspell")
+;; (eval-after-load "ispell"
+;;   '(add-to-list 'ispell-skip-region-alist '("[^\000-\377]+")))
+;; (setq ispell-program-name "aspell"
+;;       ispell-extra-args
+;;       '("--sug-mode=ultra" "--lang=en_US" "--run-together" "--run-together-limit=5" "--run-together-min=2"))
 
 ;; シンタックスチェック ================
 
