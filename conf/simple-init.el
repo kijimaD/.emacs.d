@@ -50,8 +50,6 @@
 ;; yesかnoではなく、yかnかで答えられるようにする
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-(global-set-key [delete] 'apropos)
-
 ;;括弧の補完
 (global-set-key (kbd "(") 'skeleton-pair-insert-maybe)
 (global-set-key (kbd "{") 'skeleton-pair-insert-maybe)

@@ -44,7 +44,7 @@
   (interactive)
   (org-clock-out)
   (org-clock-in))
-(define-key org-mode-map (kbd "<henkan>") 'my-clock)
+(define-key org-mode-map (kbd "<menu>") 'my-clock)
 
 ;; i-searchで逆側にカーソルをセットする
 (defun my-isearch-done-opposite (&optional nopush edit)

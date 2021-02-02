@@ -123,6 +123,7 @@
                     :background "limegreen"
                     :inherit 'mode-line)
 
+(nyan-mode)
 ;; window移動 ================
 ;; 分割した画面間をShift+矢印で移動
 (setq windmove-wrap-around t)
@@ -352,3 +353,18 @@
         (minibuffer . t)
         (menu-bar-lines . t)
         (window-system . x)))
+
+;; RSS ================
+
+(setq elfeed-feeds
+      '(
+        ;; programming
+        ("https://news.ycombinator.com/rss" hacker)
+        ("https://www.heise.de/developer/rss/news-atom.xml" heise)
+        ("https://www.reddit.com/r/emacs.rss" emacs)))
+
+;; Google検索 ================
+(require 'google-this)
+(google-this-mode 1)
+(global-set-key (kbd "<insert>") 'google-this)
+(setq google-this-location-suffix "co.jp")

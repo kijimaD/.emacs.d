@@ -42,12 +42,13 @@
 ;; キーバインド ================
 (global-set-key (kbd "C-x C-b") 'helm-mini)
 (global-set-key (kbd "C-x C-r") 'helm-recentf)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-c h") 'helm-semantic-or-imenu)
+(global-set-key (kbd "C-c h") 'helm-man-woman)
 (global-set-key (kbd "C-c f") 'helm-find)
 (global-set-key (kbd "C-c i") 'helm-imenu)
+(global-set-key [delete] 'helm-apropos)
 (setq helm-semantic-fuzzy-match t
       helm-imenu-fuzzy-match    t)
 (setq helm-surfraw-default-browser-function 'browse-url-generic
