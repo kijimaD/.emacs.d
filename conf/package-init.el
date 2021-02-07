@@ -55,12 +55,11 @@
 
 (require 'auto-highlight-symbol)
 (global-auto-highlight-symbol-mode t)
+(ahs-set-idle-interval 0.2)
 
 ;; ahs-modeのキーバインドを無効化する
 (define-key auto-highlight-symbol-mode-map (kbd "M-<right>") nil)
-(define-key auto-highlight-symbol-mode-map (kbd "M-<up>") 'ahs-backward)
 (define-key auto-highlight-symbol-mode-map (kbd "M-<left>") nil)
-(define-key auto-highlight-symbol-mode-map (kbd "M-<down>") 'ahs-forward)
 
 ;; スペース可視化
 (require 'whitespace)
