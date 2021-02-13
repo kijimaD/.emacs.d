@@ -14,7 +14,7 @@
 (menu-bar-mode 0)
 
 ;;カーソルのある列をハイライト
-(global-hl-line-mode t)
+(global-hl-line-mode 0)
 
 ;;対応する括弧をハイライト
 (show-paren-mode t)

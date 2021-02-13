@@ -55,11 +55,15 @@
 
 (require 'auto-highlight-symbol)
 (global-auto-highlight-symbol-mode t)
-(ahs-set-idle-interval 0.2)
+(ahs-set-idle-interval 0.4)
 
 ;; ahs-modeのキーバインドを無効化する
 (define-key auto-highlight-symbol-mode-map (kbd "M-<right>") nil)
 (define-key auto-highlight-symbol-mode-map (kbd "M-<left>") nil)
+
+;; インデント可視化
+(require 'highlight-indent-guides)
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 
 ;; スペース可視化
 (require 'whitespace)
