@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: describe
-# key: describe
+# key: de
 # --
 describe '${1:describe}' do
   it '${2:it}' do

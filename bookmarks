@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("2021"
+(("snippets"
+ (filename . "~/.emacs.d/snippets/")
+ (front-context-string . "markdown-mode\n  ")
+ (rear-context-string . "96 11月 28 22:06 ")
+ (position . 236))
+("2021"
  (filename . "~/Project/portfolio/content/posts/2021/")
  (front-context-string)
  (rear-context-string . " 0  1月  8 00:47 ")
