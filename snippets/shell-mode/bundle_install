@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: bundle_install
+# key: bi
+# --
+bundle install && rails db:migrate

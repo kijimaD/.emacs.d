@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: msl
+# key: source_location
+# --
+method(:${1:count}).source_location

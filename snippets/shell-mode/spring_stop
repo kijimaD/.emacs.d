@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: spring_stop
+# key: ss
+# --
+spring stop && spring server
