@@ -1,10 +1,11 @@
 # -*- mode: snippet -*-
-# name: describe
+# name: describe_my
 # key: de
 # --
-describe '${1:describe}' do
+describe '$0${1:describe}' do
   it '${2:it}' do
-    $0
-    expect()
+    ${3:model} = create(:$3)
+    p $3.$1
+    expect($3.$1)
   end
 end

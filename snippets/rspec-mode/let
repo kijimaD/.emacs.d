@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: let
+# name: let_my
 # key: le
 # --
 let(:${1:model}) { create(:$1) }

@@ -51,6 +51,17 @@
 (require 'company)
 (global-company-mode)
 
+;; (global-set-key (kbd "C-c y") 'company-yasnippet)
+(add-hook 'ruby-mode-hook
+          (lambda ()
+            (set (make-local-variable 'company-backends)
+                 '((company-dabbrev-code company-yasnippet)))))
+
+(add-hook 'inf-ruby-mode-hook
+          (lambda ()
+            (set (make-local-variable 'company-backends)
+                 '((company-dabbrev-code company-yasnippet)))))
+
 (add-hook 'ruby-mode-hook 'robe-mode)
 (autoload 'robe-mode "robe" "Code navigation, documentation lookup and completion for Ruby" t nil)
 (eval-after-load 'company
@@ -94,7 +105,7 @@
 
 (setq company-transformers '(company-sort-by-backend-importance)) ;; ソート順
 (setq company-idle-delay 0) ; デフォルトは0.5
-(setq company-minimum-prefix-length 3) ; デフォルトは4
+(setq company-minimum-prefix-length 1) ; デフォルトは4
 (setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
 (setq completion-ignore-case t)
 (setq company-dabbrev-downcase nil)

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: factory_create_my
+# key: fc
+# --
+${1:model} = create(:$1)

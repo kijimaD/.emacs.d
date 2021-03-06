@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 # name: rspec
-# key: rsp
+# key: rs
 # --
 COVERAGE=true bundle exec rspec spec/${1:file}.rb && open coverage/index.html
