@@ -33,6 +33,7 @@
 (require 'scroll-bar)
 (scroll-bar-mode 0)
 (show-paren-mode t)
+(require 'tool-bar)
 (tool-bar-mode 0)
 (tooltip-mode 0)
 
