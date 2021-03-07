@@ -6,6 +6,7 @@ transient/
 var/pcache/
 elpa/archives/
 eshell/
+private/
 
 /scratch
 /TAGS
