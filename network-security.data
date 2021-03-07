@@ -1,4 +1,0 @@
-(
- (:id "sha1:682ec80a96740f3e3e11414c24a9a9053b7d968d" :fingerprint "sha1:40:a9:66:3a:a8:21:53:4a:a7:33:11:ec:76:9d:1b:9e:ee:bf:da:b1" :host "www.wiki.a9ne.com:443" :conditions (:no-host-match))
- (:id "sha1:85457c729378cc93c732b6a3941c8e4f9c2e60f3" :fingerprint "sha1:ab:a6:d7:6a:b3:d3:63:fa:19:0d:65:41:60:23:6e:ef:d3:2a:46:dc" :host "marmalade-repo.org:443" :conditions (:expired :unknown-ca :invalid))
-)
