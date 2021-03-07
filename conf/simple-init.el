@@ -30,6 +30,12 @@
 
 (setq ring-bell-function 'ignore)
 
+(require 'scroll-bar)
+(scroll-bar-mode 0)
+(show-paren-mode t)
+(tool-bar-mode 0)
+(tooltip-mode 0)
+
 ;; キーバインド ================
 
 (global-set-key (kbd "M-n") (lambda () (interactive) (scroll-up 1)))
