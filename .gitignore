@@ -5,6 +5,7 @@ auto-save-list/
 transient/
 var/pcache/
 elpa/archives/
+eshell/
 
 /scratch
 /TAGS
