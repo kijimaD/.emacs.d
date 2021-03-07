@@ -111,6 +111,7 @@
 (load "web-mode-init")
 (load "org-init")
 (load "helm-init")
+(load "theme-init")
 (load "my-function")
 
 ;; Mac用(day job用)設定
