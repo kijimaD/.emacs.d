@@ -4,6 +4,7 @@ elisp-objects/
 auto-save-list/
 transient/
 var/pcache/
+elpa/archives/
 
 /scratch
 /TAGS
