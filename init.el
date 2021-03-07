@@ -102,7 +102,7 @@
 
 ;; ==================================================
 
-(add-to-list 'load-path "~/.emacs.d/conf")
+(add-to-list 'load-path (expand-file-name "conf" user-emacs-directory))
 (load "font-init")
 (load "simple-init")
 (load "package-init")
