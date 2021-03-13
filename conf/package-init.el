@@ -376,3 +376,14 @@
 (require 'define-word)
 (global-set-key (kbd "<end>") 'define-word-at-point)
 (global-set-key (kbd "<henkan>") 'define-word-at-point)
+
+;; eww ================
+;; 改行するようにする
+(defun shr-insert-document--for-eww (&rest them)
+  (let ((shr-width 70)) (apply them)))
+(defun eww-display-html--fill-column (&rest them)
+  (advice-add 'shr-insert-document :around 'shr-insert-document--for-eww)
+  (unwind-protect
+      (apply them)
+    (advice-remove 'shr-insert-document 'shr-insert-document--for-eww)))
+(advice-add 'eww-display-html :around 'eww-display-html--fill-column)
