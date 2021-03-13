@@ -371,3 +371,8 @@
 (google-this-mode 1)
 (global-set-key (kbd "<insert>") 'google-this)
 (setq google-this-location-suffix "co.jp")
+
+;; 辞書 ================
+(require 'define-word)
+(global-set-key (kbd "<end>") 'define-word-at-point)
+(global-set-key (kbd "<henkan>") 'define-word-at-point)
