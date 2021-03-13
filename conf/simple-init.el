@@ -42,9 +42,6 @@
 (global-set-key (kbd "M-n") (lambda () (interactive) (scroll-up 1)))
 (global-set-key (kbd "M-p") (lambda () (interactive) (scroll-down 1)))
 
-;; endキーをaproposに割当
-(global-set-key [end] 'helm-apropos)
-
 ;; キーボード入れ替えーーバックスペースをC-hで。
 (keyboard-translate ?\C-h ?\C-?)
 

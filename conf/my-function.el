@@ -63,3 +63,16 @@
   (avy-jump avy-goto-word-0-regexp :beg (- (point) 200) :end (+ (point) 200))
 )
 (global-set-key (kbd "C-M-j") 'my-avy-jump-short)
+
+(defun my-next-line ()
+  (interactive)
+  (next-line)
+  (recenter))
+
+(defun my-previous-line ()
+  (interactive)
+  (previous-line)
+  (recenter))
+
+(global-set-key (kbd "<up>") 'my-previous-line)
+(global-set-key (kbd "<down>") 'my-next-line)
