@@ -76,3 +76,15 @@
 
 (global-set-key (kbd "<up>") 'my-previous-line)
 (global-set-key (kbd "<down>") 'my-next-line)
+
+(eval-after-load "eww"
+  '(progn
+     (define-key eww-mode-map (kbd "<mouse-1>") 'my-next-line)
+     (define-key eww-mode-map (kbd "<mouse-2>") 'define-word-at-point)
+     (define-key eww-mode-map (kbd "<mouse-3>") 'my-previous-line)
+     (define-key eww-mode-map (kbd "<mouse-8>") 'backward-word)
+     (define-key eww-mode-map (kbd "<mouse-9>") 'forward-word)))
+
+;; マウス左クリック無効化
+(dolist (k '([mouse-1] [down-mouse-1] [drag-mouse-1] [double-mouse-1] [triple-mouse-1]))
+  (global-unset-key k))
