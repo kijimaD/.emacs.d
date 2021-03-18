@@ -387,3 +387,24 @@
       (apply them)
     (advice-remove 'shr-insert-document 'shr-insert-document--for-eww)))
 (advice-add 'eww-display-html :around 'eww-display-html--fill-column)
+
+;; 校正ツール ================
+
+(flycheck-define-checker textlint
+  "A linter for Markdown."
+  :command ("textlint" "--format" "unix" source)
+  :error-patterns
+  ((warning line-start (file-name) ":" line ":" column ": "
+     (id (one-or-more (not (any " "))))
+     (message (one-or-more not-newline)
+       (zero-or-more "\n" (any " ") (one-or-more not-newline)))
+     line-end))
+  :modes (text-mode markdown-mode gfm-mode))
+
+(add-hook 'markdown-mode-hook
+          '(lambda ()
+             (setq flycheck-checker 'textlint)
+             (flycheck-mode 1)))
+
+(with-eval-after-load 'markdown-mode
+  (add-hook 'markdown-mode-hook #'add-node-modules-path))
