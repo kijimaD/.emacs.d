@@ -2,13 +2,20 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("snippets"
+(("Handbook | GitLab"
+ (front-context-string . "Location: https:")
+ (rear-context-string)
+ (position . 1)
+ (filename . #1="https://about.gitlab.com/handbook/")
+ (url . #1#)
+ (handler . bookmark-w3m-bookmark-jump))
+("snippets"
  (filename . "~/.emacs.d/snippets/")
  (front-context-string . "markdown-mode\n  ")
  (rear-context-string . "96 11月 28 22:06 ")
  (position . 236))
 ("2021"
- (filename . "~/Project/portfolio/content/posts/2021/")
+ (filename . "~/Project/blog_gatsby/content/posts/2021/")
  (front-context-string)
  (rear-context-string . " 0  1月  8 00:47 ")
  (position . 307))

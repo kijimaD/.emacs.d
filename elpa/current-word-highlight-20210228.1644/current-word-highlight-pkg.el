@@ -1,0 +1,2 @@
+;;; -*- no-byte-compile: t -*-
+(define-package "current-word-highlight" "20210228.1644" "Highlight the current word minor mode" 'nil :commit "1d185f88ffe8d5ddc788772c40d37cf7e99a03ba" :authors '(("Kijima Daigo" . "norimaking777@gmail.com")) :maintainer '("Kijima Daigo" . "norimaking777@gmail.com") :keywords '("highlight" "face" "convenience" "word") :url "https://github.com/kijimaD/current-word-highlight")
