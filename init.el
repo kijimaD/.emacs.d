@@ -164,8 +164,19 @@
 (setq open-junk-file-format (concat "~/" public-directory "/junk/%Y-%m-%d-%H%M%S."))
 (global-set-key (kbd "C-x C-z") 'open-junk-file)
 
-;; 最後に読み込まないと、適応されないものがある ================
-(prefer-coding-system 'utf-8)
+;; 文字コード ================
+;;ターミナルの文字コード
+(set-terminal-coding-system 'utf-8)
+;;キーボードから入力される文字コード
+(set-keyboard-coding-system 'utf-8)
+;;ファイルのバッファのデフォルト文字コード
+(set-buffer-file-coding-system 'utf-8)
+;;バッファのプロセスの文字コード
+(setq default-buffer-file-coding-system 'utf-8)
+;;ファイルの文字コード
+(setq file-name-coding-system 'utf-8)
+;;新規作成ファイルの文字コード
+(set-default-coding-systems 'utf-8)
 
 ;; モードラインからマイナーモードを消す
 ;; (describe-minor-mode-from-indicator) で調べる。
