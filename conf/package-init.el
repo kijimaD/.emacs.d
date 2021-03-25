@@ -408,3 +408,7 @@
 
 (with-eval-after-load 'markdown-mode
   (add-hook 'markdown-mode-hook #'add-node-modules-path))
+
+;; git ================
+(with-eval-after-load 'magit
+  (require 'forge))
