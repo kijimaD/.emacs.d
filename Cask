@@ -90,6 +90,7 @@
 (depends-on "mozc-popup")
 (depends-on "multiple-cursors")
 (depends-on "multiple-cursors")
+(depends-on "multiple-cursors")
 (depends-on "nadvice")
 (depends-on "noctilux-theme")
 (depends-on "npm-mode")
