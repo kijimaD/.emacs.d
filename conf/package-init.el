@@ -166,6 +166,9 @@
 (back-button-mode 1)
 
 ;; バージョン管理 ================
+(with-eval-after-load 'magit
+  (require 'ghub)
+  (require 'forge))
 (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
 
@@ -408,7 +411,3 @@
 
 (with-eval-after-load 'markdown-mode
   (add-hook 'markdown-mode-hook #'add-node-modules-path))
-
-;; git ================
-(with-eval-after-load 'magit
-  (require 'forge))
