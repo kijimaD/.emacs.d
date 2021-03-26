@@ -167,7 +167,6 @@
 
 ;; バージョン管理 ================
 (with-eval-after-load 'magit
-  (require 'ghub)
   (require 'forge))
 (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)

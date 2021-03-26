@@ -210,3 +210,20 @@
         (setq minor-mode-alist
               (cons (list mode "") (assq-delete-all mode minor-mode-alist))))
       my-hidden-minor-modes)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (tango-dark)))
+ '(flycheck-disabled-checkers (quote (javascript-jshint javascript-jscs)))
+ '(package-selected-packages
+   (quote
+    (forge magit treeview treepy ghub+ current-word-highlight uuidgen markdown-preview-mode magit-popup zenburn-theme yatemplate window-numbering which-key web-mode wc-goal-mode w3m typing twittering-mode tabbar summarye speed-type sound-wav solarized-theme smooth-scrolling smooth-scroll slim-mode rvm ruby-electric rubocop rspec-mode robe rjsx-mode rinari rbenv rainbow-delimiters quickrun psession projectile-rails powerline-evil pomodoro perl-completion pdf-tools paredit package-utils package-lint-flymake outline-magic org-pomodoro org-plus-contrib org-journal-list org-journal org-brain open-junk-file ob-elixir nyan-mode npm-mode noctilux-theme nadvice mozc-popup mozc-im migemo maxframe markdown-mode lispxmp jedi jdee idle-highlight-mode hiwin highlight-indent-guides helpful helm-gtags helm-git-grep helm-company grandshell-theme google-translate google-this github-theme git-gutter-fringe+ gist forest-blue-theme flatland-theme fish-mode firecode-theme fcitx farmhouse-theme exec-path-from-shell eww-lnum espresso-theme elscreen elm-mode elisp-slime-nav elfeed eldoc-extension edit-server eclipse-theme easy-kill-extras dumb-jump dokuwiki-mode dokuwiki django-mode dired-single diminish devdocs define-word debug-print ddskk ctags-update command-log-mode col-highlight chess bm back-button avy autumn-light-theme auto-save-buffers-enhanced auto-install auto-highlight-symbol auto-complete-exuberant-ctags atomic-chrome anzu anything-project anti-zenburn-theme ample-zen-theme ample-theme ag afternoon-theme add-node-modules-path ace-jump-mode 2048-game))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

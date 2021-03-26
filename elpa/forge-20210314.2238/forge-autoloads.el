@@ -219,7 +219,7 @@ heavy development.
 
 \(fn)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "forge-commands" '("forge-")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "forge-commands" '(#("forge-" 0 6 (fontified nil)))))
 
 ;;;***
 
