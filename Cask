@@ -168,7 +168,7 @@
 ;; (depends-on "rspec-mode")
 (depends-on "rubocop")
 ;; (depends-on "ruby-compilation")
-;; (depends-on "ruby-electric")
+(depends-on "ruby-electric")
 (depends-on "s")
 (depends-on "seq")
 (depends-on "slim-mode")
