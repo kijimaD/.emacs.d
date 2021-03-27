@@ -12,7 +12,7 @@
 (load "org-init")
 (load "helm-init")
 (load "theme-init")
-(load "my-function")
+(load "my-function-init")
 
 ;; Mac用(day job用)設定
 (when (eq system-type 'darwin)
