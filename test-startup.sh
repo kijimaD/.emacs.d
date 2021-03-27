@@ -3,9 +3,7 @@
 
 git clone https://github.com/cask/cask ~/.cask
 PATH="$HOME/.cask/bin:$PATH"
-cask upgrade
 
-ls
 cask install
 
 echo "Attempting startup..."
