@@ -15,38 +15,8 @@
 (load "theme-init")
 (load "my-function-init")
 
-;; Mac用(day job用)設定
-(when (eq system-type 'darwin)
-  (setq ns-command-modifier (quote meta))
-  (setq ns-alternate-modifier (quote super))
-  (setq ruby-insert-encoding-magic-comment nil)
-  (setq ctags-auto-update-mode nil)
-  (setq public-directory "dropbox")
-  (setq my-migemo-command "/usr/local/bin/cmigemo")
-  (setq my-migemo-dictionary "/usr/local/Cellar/cmigemo/HEAD-5c014a8/share/migemo/utf-8/migemo-dict")
-  )
-(when (eq system-type 'gnu/linux)
-  (setq public-directory "Dropbox")
-  (setq my-migemo-command "cmigemo")
-  (setq my-migemo-dictionary "/usr/share/cmigemo/utf-8/migemo-dict")
-  )
-
 ;; 環境変数を読み込む
 (exec-path-from-shell-initialize)
-
-;; 文字コード ================
-;;ターミナルの文字コード
-(set-terminal-coding-system 'utf-8)
-;;キーボードから入力される文字コード
-(set-keyboard-coding-system 'utf-8)
-;;ファイルのバッファのデフォルト文字コード
-(set-buffer-file-coding-system 'utf-8)
-;;バッファのプロセスの文字コード
-(setq default-buffer-file-coding-system 'utf-8)
-;;ファイルの文字コード
-(setq file-name-coding-system 'utf-8)
-;;新規作成ファイルの文字コード
-(set-default-coding-systems 'utf-8)
 
 ;; モードラインからマイナーモードを消す
 ;; (describe-minor-mode-from-indicator) で調べる。
