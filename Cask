@@ -3,6 +3,10 @@
 (source melpa)
 (source marmalade)
 
+;; Caution packages: Causing errors in CI
+;; (depends-on "rspec-mode")
+;; (depends-on "rinari")
+
 ;; Install Packages
 (depends-on "ace-jump-mode")
 (depends-on "add-node-modules-path")
@@ -162,10 +166,8 @@
 (depends-on "rbenv")
 (depends-on "reformatter")
 (depends-on "restart-emacs")
-;; (depends-on "rinari")
 (depends-on "rjsx-mode")
 (depends-on "robe")
-;; (depends-on "rspec-mode")
 (depends-on "rubocop")
 (depends-on "ruby-compilation")
 (depends-on "ruby-electric")
