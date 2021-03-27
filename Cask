@@ -184,6 +184,7 @@
 (depends-on "sound-wav")
 (depends-on "speed-type")
 (depends-on "sql-indent")
+(depends-on "sqlup-mode")
 (depends-on "tabbar")
 (depends-on "tablist")
 (depends-on "transient")
