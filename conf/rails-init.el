@@ -33,8 +33,8 @@
           (file-name) ":" line ":" column ": " (or "E" "F") ": " (message) line-end))
   :modes (ruby-mode motion-mode))
 
-(require 'rinari)
-(add-hook 'ruby-mode-hook 'rinari-minor-mode)
+;; (require 'rinari)
+;; (add-hook 'ruby-mode-hook 'rinari-minor-mode)
 
 ;; rspec-mode 用の snippet を認識させる
 (require 'rspec-mode)
