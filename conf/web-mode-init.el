@@ -23,7 +23,7 @@
 
 ;; .js でも JSX 編集モードに
 (setq web-mode-content-types-alist
-  '(("jsx" . "\\.js[x]?\\'")))
+      '(("jsx" . "\\.js[x]?\\'")))
 
 ;; JSシンタックスチェック ================
 ;; ESlint
