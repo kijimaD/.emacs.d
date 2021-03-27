@@ -149,11 +149,8 @@
   (package-refresh-contents) (package-install 'slim-mode))
 (add-to-list 'auto-mode-alist '("\\.slim?\\'" . slim-mode))
 
-;; Macの設定 ================
-;; (require 'rbenv)
-;; (global-rbenv-mode)
-;; (setq rbenv-installation-dir "~/.rbenv")
-;; (setenv "PATH" (concat (expand-file-name "~/.rbenv/shims:") (getenv "PATH")))
+;; yaml-mode ================
+(add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
 
 ;; マジックコメントを挿入しない
 (setq ruby-insert-encoding-magic-comment nil)

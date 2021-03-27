@@ -23,7 +23,7 @@
 
 ;; .js でも JSX 編集モードに
 (setq web-mode-content-types-alist
-  '(("jsx" . "\\.js[x]?\\'")))
+      '(("jsx" . "\\.js[x]?\\'")))
 
 ;; JSシンタックスチェック ================
 ;; ESlint
@@ -74,3 +74,19 @@
   (setq web-mode-auto-close-style 2)
   (setq web-mode-tag-auto-close-style 2))
 (add-hook 'web-mode-hook 'my-web-mode-hook)
+
+;; SQL ================
+(add-hook 'ejc-sql-minor-mode-hook
+          (lambda ()
+            (ejc-eldoc-setup)))
+
+;; コマンドを大文字にする
+(add-hook 'sql-mode-hook 'sqlup-mode)
+(add-hook 'sql-interactive-mode-hook 'sqlup-mode)
+(global-set-key (kbd "C-c u") 'sqlup-capitalize-keywords-in-region)
+
+;; 結果を折り返さないようにする
+(add-hook 'sql-interactive-mode-hook
+          '(lambda()
+             (setq truncate-lines t
+                   truncate-partial-width-windows t)))

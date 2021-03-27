@@ -6,6 +6,7 @@
 
 ;; org-modeでの強調表示を可能にする
 (add-hook 'org-mode-hook 'turn-on-font-lock)
+(add-hook 'org-mode-hook 'current-word-highlight-mode)
 
 ;; 見出しの余分な*を消す
 (setq org-hide-leading-stars t)
@@ -43,3 +44,18 @@
                                (python . t)
                                (ruby . t)
                                (emacs-lisp . t)))
+
+;; 日誌 ================
+(require 'org-journal)
+(setq org-journal-date-format "%Y-%m-%d")
+(setq org-journal-time-format "%R ")
+(setq org-journal-file-format "%Y%m%d.org")
+(setq org-journal-dir (concat "~/" public-directory "/junk/diary/org-journal"))
+(setq org-journal-find-file 'find-file)
+(setq org-journal-hide-entries-p nil)
+(setq org-startup-folded 'showeverything)
+
+;; 使い捨てのファイルを開く ================
+(require 'open-junk-file)
+(setq open-junk-file-format (concat "~/" public-directory "/junk/%Y-%m-%d-%H%M%S."))
+(global-set-key (kbd "C-x C-z") 'open-junk-file)

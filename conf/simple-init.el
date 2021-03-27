@@ -115,6 +115,9 @@
 
 ;; コーディング ================
 
+;; オートインデントでスペースを使う
+(setq-default indent-tabs-mode nil)
+
 ;; クリップボードと同期
 (setq x-select-enable-primary t)
 
