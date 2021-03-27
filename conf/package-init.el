@@ -166,7 +166,9 @@
 (back-button-mode 1)
 
 ;; バージョン管理 ================
-(require 'magit)
+;; (with-eval-after-load 'magit
+;;   (require 'forge))
+;; (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; Gitの差分情報を表示する
@@ -408,7 +410,3 @@
 
 (with-eval-after-load 'markdown-mode
   (add-hook 'markdown-mode-hook #'add-node-modules-path))
-
-;; git ================
-(with-eval-after-load 'magit
-  (require 'forge))

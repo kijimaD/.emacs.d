@@ -1,6 +1,7 @@
 *.emacs.desktop.lock
 elisp-objects/
 .cache/
+.cask/
 auto-save-list/
 transient/
 var/pcache/
@@ -8,6 +9,7 @@ elpa/archives/
 eshell/
 private/
 url/cache/
+elpa/
 
 /scratch
 /TAGS
@@ -18,3 +20,4 @@ url/cache/
 /projectile-bookmarks.eld
 /recentf
 /forge-database.sqlite
+/async-bytecomp.log

@@ -1,6 +1,11 @@
 #!/bin/sh -e
 # From https://github.com/purcell/emacs.d
 
+git clone https://github.com/cask/cask ~/.cask
+PATH="$HOME/.cask/bin:$PATH"
+
+cask install
+
 echo "Attempting startup..."
 ${EMACS:=emacs} -nw --batch \
                 --eval '(let ((debug-on-error t)
