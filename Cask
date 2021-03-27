@@ -157,7 +157,7 @@
 (depends-on "psession")
 ;; (depends-on "python-environment")
 ;; (depends-on "quickrun")
-;; (depends-on "rainbow-delimiters")
+(depends-on "rainbow-delimiters")
 ;; (depends-on "rake")
 ;; (depends-on "rbenv")
 ;; (depends-on "reformatter")
