@@ -4,7 +4,8 @@
 git clone https://github.com/cask/cask ~/.cask
 PATH="$HOME/.cask/bin:$PATH"
 cask upgrade
-cd ~/.emacs.d
+
+ls
 cask install
 
 echo "Attempting startup..."
