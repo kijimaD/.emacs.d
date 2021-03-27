@@ -12,3 +12,10 @@
 ;; (setq ns-command-modifier (quote meta))
 ;; (setq ns-alternate-modifier (quote super))
 ;; (setq ctags-auto-update-mode nil)
+
+(sql-connection-alist
+   '(("local"
+      (sql-product 'mysql)
+      (sql-user "root")
+      (sql-server "127.0.0.1")
+      (sql-database "local_development"))))
