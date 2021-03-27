@@ -164,7 +164,7 @@
 ;; (depends-on "restart-emacs")
 ;; (depends-on "rinari")
 ;; (depends-on "rjsx-mode")
-;; (depends-on "robe")
+(depends-on "robe")
 ;; (depends-on "rspec-mode")
 (depends-on "rubocop")
 ;; (depends-on "ruby-compilation")
