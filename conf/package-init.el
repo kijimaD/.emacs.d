@@ -6,7 +6,6 @@
         ("melpa" . "https://melpa.org/packages/")
         ("gnu" . "https://elpa.gnu.org/packages/")
         ("org" . "http://orgmode.org/elpa/")))
-(package-initialize)
 
 ;; セッション保存 ================
 ;; 自動保存 auto-save-buffers-enhanced

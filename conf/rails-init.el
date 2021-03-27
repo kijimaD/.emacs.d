@@ -149,6 +149,9 @@
   (package-refresh-contents) (package-install 'slim-mode))
 (add-to-list 'auto-mode-alist '("\\.slim?\\'" . slim-mode))
 
+;; yaml-mode ================
+(add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
+
 ;; Macの設定 ================
 ;; (require 'rbenv)
 ;; (global-rbenv-mode)

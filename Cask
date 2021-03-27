@@ -198,6 +198,7 @@
 (depends-on "window-numbering")
 (depends-on "with-editor")
 (depends-on "xml-rpc")
+(depends-on "yaml-mode")
 (depends-on "yasnippet")
 (depends-on "yatemplate")
 (depends-on "zenburn-theme")
