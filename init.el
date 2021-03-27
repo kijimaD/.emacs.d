@@ -13,6 +13,7 @@
 (load "helm-init")
 (load "theme-init")
 (load "my-function-init")
+(ignore-errors (load "local-init"))
 
 ;; Mac用(day job用)設定
 (when (eq system-type 'darwin)

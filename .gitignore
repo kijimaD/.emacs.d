@@ -21,3 +21,4 @@ elpa/
 /recentf
 /forge-database.sqlite
 /async-bytecomp.log
+/conf/local-init.el
