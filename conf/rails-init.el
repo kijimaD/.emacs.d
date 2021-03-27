@@ -37,9 +37,9 @@
 ;; (add-hook 'ruby-mode-hook 'rinari-minor-mode)
 
 ;; rspec-mode 用の snippet を認識させる
-(require 'rspec-mode)
-(eval-after-load 'rspec-mode
-  '(rspec-install-snippets))
+;; (require 'rspec-mode)
+;; (eval-after-load 'rspec-mode
+;;   '(rspec-install-snippets))
 
 ;; 補完 ================
 (require 'ruby-electric)
