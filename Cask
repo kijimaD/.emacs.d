@@ -166,7 +166,7 @@
 ;; (depends-on "rjsx-mode")
 ;; (depends-on "robe")
 ;; (depends-on "rspec-mode")
-;; (depends-on "rubocop")
+(depends-on "rubocop")
 ;; (depends-on "ruby-compilation")
 ;; (depends-on "ruby-electric")
 (depends-on "s")
