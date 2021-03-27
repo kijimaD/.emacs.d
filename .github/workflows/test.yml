@@ -14,9 +14,6 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         emacs_version:
-          - 26.1
-          - 26.2
-          - 26.3
           - 27.1
           - snapshot
         include:
