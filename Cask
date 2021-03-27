@@ -162,7 +162,7 @@
 (depends-on "rbenv")
 (depends-on "reformatter")
 (depends-on "restart-emacs")
-(depends-on "rinari")
+;; (depends-on "rinari")
 (depends-on "rjsx-mode")
 (depends-on "robe")
 ;; (depends-on "rspec-mode")

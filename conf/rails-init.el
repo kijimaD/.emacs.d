@@ -33,13 +33,16 @@
           (file-name) ":" line ":" column ": " (or "E" "F") ": " (message) line-end))
   :modes (ruby-mode motion-mode))
 
-;; (require 'rinari)
-;; (add-hook 'ruby-mode-hook 'rinari-minor-mode)
+;; rinari
+(when (require 'rinari nil 'noerror)
+  (require 'rinari)
+  (add-hook 'ruby-mode-hook 'rinari-minor-mode))
 
 ;; rspec-mode 用の snippet を認識させる
-;; (require 'rspec-mode)
-;; (eval-after-load 'rspec-mode
-;;   '(rspec-install-snippets))
+(when (require 'rinari nil 'noerror)
+  (require 'rspec-mode)
+  (eval-after-load 'rspec-mode
+    '(rspec-install-snippets)))
 
 ;; 補完 ================
 (require 'ruby-electric)
