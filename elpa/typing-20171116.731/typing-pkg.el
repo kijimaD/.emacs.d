@@ -1,1 +1,0 @@
-(define-package "typing" "20171116.731" "The Typing Of Emacs" 'nil :commit "1ada06484695b8959f4a7c41cacf7f78c2aad998" :keywords '("games") :authors '(("Alex Schroeder" . "alex@gnu.org")) :maintainer '("Alex Schroeder" . "alex@gnu.org") :url "http://www.emacswiki.org/emacs/TypingOfEmacs")

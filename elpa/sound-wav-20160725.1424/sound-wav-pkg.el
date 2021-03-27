@@ -1,1 +1,0 @@
-(define-package "sound-wav" "20160725.1424" "Play wav file" '((deferred "0.3.1") (cl-lib "0.5")) :commit "406868043761524118c27b1207be0f8bbda8798e" :authors '(("Syohei YOSHIDA" . "syohex@gmail.com")) :maintainer '("Syohei YOSHIDA" . "syohex@gmail.com") :url "https://github.com/syohex/emacs-sound-wav")
