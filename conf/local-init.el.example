@@ -1,0 +1,3 @@
+(setq public-directory "Dropbox")
+(setq my-migemo-command "cmigemo")
+(setq my-migemo-dictionary "/usr/local/Cellar/cmigemo/HEAD-5c014a8/share/migemo/utf-8/migemo-dict")

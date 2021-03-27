@@ -3,6 +3,7 @@
   (cask-initialize))
 
 (add-to-list 'load-path (expand-file-name "conf" user-emacs-directory))
+(ignore-errors (load "local-init"))
 (load "font-init")
 (load "simple-init")
 (load "package-init")
@@ -13,7 +14,6 @@
 (load "helm-init")
 (load "theme-init")
 (load "my-function-init")
-(ignore-errors (load "local-init"))
 
 ;; Mac用(day job用)設定
 (when (eq system-type 'darwin)
@@ -33,37 +33,6 @@
 
 ;; 環境変数を読み込む
 (exec-path-from-shell-initialize)
-
-;; 端末依存で使う変数(my-migemo-command, public-directory)を必要とするものが残っているためとりあえずここに書く.
-
-;; インクリメンタルサーチ ================
-(require 'migemo)
-(when (and (executable-find "cmigemo")
-           (require 'migemo nil t))
-  (setq migemo-command my-migemo-command)
-  (setq migemo-options '("-q" "--emacs"))
-  (setq migemo-dictionary my-migemo-dictionary)
-  (setq migemo-user-dictionary nil)
-  (setq migemo-regex-dictionary nil)
-  (setq migemo-coding-system 'utf-8-unix)
-  (load-library "migemo")
-  (migemo-init)
-  )
-
-;; 日誌 ================
-(require 'org-journal)
-(setq org-journal-date-format "%Y-%m-%d")
-(setq org-journal-time-format "%R ")
-(setq org-journal-file-format "%Y%m%d.org")
-(setq org-journal-dir (concat "~/" public-directory "/junk/diary/org-journal"))
-(setq org-journal-find-file 'find-file)
-(setq org-journal-hide-entries-p nil)
-(setq org-startup-folded 'showeverything)
-
-;; 使い捨てのファイルを開く ================
-(require 'open-junk-file)
-(setq open-junk-file-format (concat "~/" public-directory "/junk/%Y-%m-%d-%H%M%S."))
-(global-set-key (kbd "C-x C-z") 'open-junk-file)
 
 ;; 文字コード ================
 ;;ターミナルの文字コード

@@ -164,6 +164,20 @@
 
 (back-button-mode 1)
 
+;; インクリメンタルサーチ ================
+(require 'migemo)
+(when (and (executable-find "cmigemo")
+           (require 'migemo nil t))
+  (setq migemo-command my-migemo-command)
+  (setq migemo-options '("-q" "--emacs"))
+  (setq migemo-dictionary my-migemo-dictionary)
+  (setq migemo-user-dictionary nil)
+  (setq migemo-regex-dictionary nil)
+  (setq migemo-coding-system 'utf-8-unix)
+  (load-library "migemo")
+  (migemo-init)
+  )
+
 ;; バージョン管理 ================
 ;; (with-eval-after-load 'magit
 ;;   (require 'forge))
