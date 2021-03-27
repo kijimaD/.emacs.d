@@ -166,9 +166,9 @@
 (back-button-mode 1)
 
 ;; バージョン管理 ================
-(with-eval-after-load 'magit
-  (require 'forge))
-(require 'magit)
+;; (with-eval-after-load 'magit
+;;   (require 'forge))
+;; (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; Gitの差分情報を表示する

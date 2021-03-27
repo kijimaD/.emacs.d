@@ -1,4 +1,6 @@
-(require 'cask "~/.cask/cask.el")
+(when (or (require 'cask "~/.cask/cask.el" t)
+      (require 'cask nil t))
+  (cask-initialize))
 
 (add-to-list 'load-path (expand-file-name "conf" user-emacs-directory))
 (load "font-init")
@@ -109,7 +111,7 @@
               (cons (list mode "") (assq-delete-all mode minor-mode-alist))))
       my-hidden-minor-modes)
 
-;; customが書き込まれないようにする
+;; ;; customが書き込まれないようにする
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (when (file-exists-p custom-file)
   (load custom-file))

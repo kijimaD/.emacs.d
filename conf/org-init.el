@@ -1,11 +1,4 @@
 ;; org-mode ================
-(add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
-(add-to-list 'load-path "~/.emacs.d/elisp")
-(require 'org-install)
-
-(unless (package-installed-p 'org-plus-contrib)
-  (package-refresh-contents)
-  (package-install 'org-plus-contrib))
 (require 'org)
 
 ;; 拡張子がorgのファイルを開いた時，自動的にorg-modeにする
