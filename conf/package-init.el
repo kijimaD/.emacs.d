@@ -404,6 +404,8 @@
 (advice-add 'eww-display-html :around 'eww-display-html--fill-column)
 
 ;; 校正ツール ================
+(require 'markdown-mode)
+(define-key markdown-mode-map (kbd "C-c C-j") nil)
 
 (flycheck-define-checker textlint
   "A linter for Markdown."
