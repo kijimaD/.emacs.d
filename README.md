@@ -18,14 +18,16 @@ sudo apt-get install emacs-mozc cmigemo
 ## emacs27
 
 ```
-sudo add-apt-repository --remove ppa:kelleyk/emacs
+sudo add-apt-repository ppa:kelleyk/emacs
+sudo apt update
 sudo apt --purge remove emacs27
 sudo apt --purge remove emacs
+sudo apt --purge remove emacs-gtk
 sudo apt --purge remove emacs-common
 sudo apt --fix-broken install
 sudo apt autoremove
 sudo apt install emacs27
-emacs --version
+emacs --version # 27
 ```
 
 ## connect sql
