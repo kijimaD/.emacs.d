@@ -30,10 +30,10 @@ emacs --version
 
 ## connect sql
 
-M-x `customize-variable` RET `sql-connection-alist` RET ...
-M-x `sql-connect`
-open buffer...
-M-x `sql-mode`
-M-x `sql-set-sqli-buffer` RET
-`sql-send-buffer` (`C-c C-b`)
-`sqlup-capitalize-keywords-in-region` (`C-c u`)
+0. M-x `customize-variable` RET `sql-connection-alist` RET ...
+0. M-x `sql-connect`
+0. open buffer...
+0. M-x `sql-mode`
+0. M-x `sql-set-sqli-buffer` RET
+0. `sql-send-buffer` (`C-c C-b`)
+0. `sqlup-capitalize-keywords-in-region` (`C-c u`)
