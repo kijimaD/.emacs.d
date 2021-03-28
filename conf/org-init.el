@@ -56,7 +56,7 @@
 (setq org-journal-file-format "%Y%m%d.md")
 (setq org-journal-date-prefix "# ")
 (setq org-journal-time-prefix "## ")
-(define-derived-mode org-journal-mode markdown-mode (run-mode-hook))
+(add-to-list 'magic-mode-alist '(org-journal-is-journal . markdown-mode))
 
 ;; 使い捨てのファイルを開く ================
 (require 'open-junk-file)
