@@ -81,6 +81,7 @@
 (depends-on "flycheck")
 (depends-on "flycheck-cask")
 (depends-on "forest-blue-theme")
+(depends-on "forge")
 (depends-on "fringe-helper")
 (depends-on "gh")
 (depends-on "gist")
