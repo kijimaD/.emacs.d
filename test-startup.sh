@@ -5,6 +5,7 @@ git clone https://github.com/cask/cask ~/.cask
 PATH="$HOME/.cask/bin:$PATH"
 
 cask install
+cask install
 
 echo "Attempting startup..."
 ${EMACS:=emacs} -nw --batch \
