@@ -179,10 +179,11 @@
   )
 
 ;; バージョン管理 ================
-;; (with-eval-after-load 'magit
-;;   (require 'forge))
-;; (require 'magit)
+(require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
+
+(with-eval-after-load 'magit
+  (require 'forge))
 
 ;; Gitの差分情報を表示する
 (global-git-gutter+-mode 1)
