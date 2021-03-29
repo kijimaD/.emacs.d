@@ -89,6 +89,7 @@
 (depends-on "git-gutter+")
 (depends-on "git-gutter-fringe+")
 (depends-on "github-theme")
+(depends-on "github-review")
 (depends-on "gntp")
 (depends-on "google-this")
 (depends-on "google-translate")
