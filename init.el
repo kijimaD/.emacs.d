@@ -3,8 +3,8 @@
   (cask-initialize))
 
 (add-to-list 'load-path (expand-file-name "conf" user-emacs-directory))
-(ignore-errors (load "local-init-example")
-               (load "local-init"))
+(ignore-errors (load "local-init")
+               (load "local-init-example"))
 (load "font-init")
 (load "simple-init")
 (load "package-init")

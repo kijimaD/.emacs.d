@@ -86,5 +86,5 @@
      (define-key eww-mode-map (kbd "<mouse-9>") 'forward-word)))
 
 ;; マウス左クリック無効化
-(dolist (k '([mouse-1] [down-mouse-1] [drag-mouse-1] [double-mouse-1] [triple-mouse-1]))
-  (global-unset-key k))
+;; (dolist (k '([mouse-1] [down-mouse-1] [drag-mouse-1] [double-mouse-1] [triple-mouse-1]))
+;;   (global-unset-key k))
