@@ -110,21 +110,6 @@
 (setq hl-line-face 'hlline-face)
 (global-hl-line-mode)
 
-;; モードライン
-(require 'powerline)
-(powerline-default-theme)
-
-;; なぜかMacではset-face-attributeでの表示がおかしくなる…
-(set-face-attribute 'powerline-active1 nil
-                    :foreground "white"
-                    :background "darkViolet"
-                    :inherit 'mode-line)
-
-(set-face-attribute 'powerline-active0 nil
-                    :foreground "black"
-                    :background "limegreen"
-                    :inherit 'mode-line)
-
 (nyan-mode)
 ;; window移動 ================
 ;; 分割した画面間をShift+矢印で移動
