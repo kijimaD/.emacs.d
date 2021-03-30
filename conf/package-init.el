@@ -111,6 +111,9 @@
 (global-hl-line-mode)
 
 (nyan-mode)
+(beacon-mode)
+(setq beacon-color "yellow")
+
 ;; window移動 ================
 ;; 分割した画面間をShift+矢印で移動
 (setq windmove-wrap-around t)
