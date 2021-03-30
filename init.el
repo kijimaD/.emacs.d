@@ -27,25 +27,28 @@
         auto-highlight-symbol-mode
         auto-revert-mode
         back-button-mode
+        beacon-mode
+        command-log-mode
         company-mode
         ctags-auto-update-mode
         eldoc-mode
-        helm-mode
+        flyspell-mode
+        git-gutter+-mode
+        global-whitespace-mode
+        google-this-mode
         helm-gtags-mode
+        helm-mode
+        highlight-indent-guides-mode
         magit-auto-revert-mode
         projectile-mode
         projectile-rails-mode
+        rinari-minor-mode
         robe-mode
-        ruby-electric-mode
         rubocop-mode
+        ruby-electric-mode
+        undo-tree-mode
         which-key-mode
         yas-minor-mode
-        undo-tree-mode
-        git-gutter+-mode
-        flyspell-mode
-        command-log-mode
-        global-whitespace-mode
-        google-this-mode
         ))
 (mapc (lambda (mode)
         (setq minor-mode-alist
