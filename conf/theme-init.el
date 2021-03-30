@@ -9,15 +9,6 @@
   (dolist (theme custom-enabled-themes)
     (unless (custom-theme-p theme)
       (load-theme theme)))
-  (custom-set-variables `(custom-enabled-themes (quote ,custom-enabled-themes)))
-
-  (doom-modeline-mode 1)
-  (setq doom-modeline-height 16)
-
-  (setq doom-modeline-buffer-file-name-style 'truncate-with-project)
-  (setq doom-modeline-icon t)
-  (setq doom-modeline-major-mode-icon nil)
-  (setq doom-modeline-minor-modes nil)
-  )
+  (custom-set-variables `(custom-enabled-themes (quote ,custom-enabled-themes))))
 
 (add-hook 'after-init-hook 'reapply-themes)
