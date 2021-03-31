@@ -197,6 +197,7 @@
 (depends-on "typing")
 (depends-on "ucs-utils")
 (depends-on "use-package")
+(depends-on "volatile-highlights")
 (depends-on "w3m")
 (depends-on "wc-goal-mode")
 (depends-on "web-mode")

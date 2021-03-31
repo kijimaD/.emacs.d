@@ -95,6 +95,9 @@
           (lambda ()
             (setq indent-tabs-mode nil)))
 
+;; 編集箇所を強調表示
+(volatile-highlights-mode t)
+
 ;; 外観(非コーディング) ================
 ;; 現在行をハイライト
 (defface hlline-face
@@ -113,7 +116,8 @@
 (nyan-mode)
 
 (setq beacon-size 20) ; default 40
-(setq beacon-color "yellow")
+(setq beacon-color "LavenderBlush1")
+(setq beacon-blink-when-focused t)
 (beacon-mode)
 
 ;; window移動 ================
