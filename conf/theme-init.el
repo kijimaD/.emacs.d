@@ -13,5 +13,5 @@
 
 (add-hook 'after-init-hook 'reapply-themes)
 
-(setq sml/theme 'atom-one-dark)
+(setq sml/theme 'dark)
 (add-hook 'after-init-hook 'sml/setup)
