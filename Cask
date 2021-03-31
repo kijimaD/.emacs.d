@@ -118,6 +118,7 @@
 (depends-on "jedi-core")
 (depends-on "js2-mode")
 (depends-on "jump")
+(depends-on "key-quiz")
 (depends-on "let-alist")
 (depends-on "lispxmp")
 (depends-on "list-utils")
