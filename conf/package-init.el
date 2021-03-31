@@ -111,8 +111,10 @@
 (global-hl-line-mode)
 
 (nyan-mode)
-(beacon-mode)
+
+(setq beacon-size 20) ; default 40
 (setq beacon-color "yellow")
+(beacon-mode)
 
 ;; window移動 ================
 ;; 分割した画面間をShift+矢印で移動
