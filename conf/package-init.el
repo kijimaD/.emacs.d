@@ -95,6 +95,9 @@
           (lambda ()
             (setq indent-tabs-mode nil)))
 
+;; 編集箇所を強調表示
+(volatile-highlights-mode t)
+
 ;; 外観(非コーディング) ================
 ;; 現在行をハイライト
 (defface hlline-face
@@ -110,22 +113,13 @@
 (setq hl-line-face 'hlline-face)
 (global-hl-line-mode)
 
-;; モードライン
-(require 'powerline)
-(powerline-default-theme)
-
-;; なぜかMacではset-face-attributeでの表示がおかしくなる…
-(set-face-attribute 'powerline-active1 nil
-                    :foreground "white"
-                    :background "darkViolet"
-                    :inherit 'mode-line)
-
-(set-face-attribute 'powerline-active0 nil
-                    :foreground "black"
-                    :background "limegreen"
-                    :inherit 'mode-line)
-
 (nyan-mode)
+
+(setq beacon-size 20) ; default 40
+(setq beacon-color "LavenderBlush1")
+(setq beacon-blink-when-focused t)
+(beacon-mode)
+
 ;; window移動 ================
 ;; 分割した画面間をShift+矢印で移動
 (setq windmove-wrap-around t)

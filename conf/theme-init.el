@@ -1,6 +1,6 @@
-(setq custom-enabled-themes '(tango-dark))
+(setq custom-enabled-themes '(doom-wilmersdorf))
 (setq custom-safe-themes t)
-(setq-default custom-enabled-themes '(tango-dark))
+(setq-default custom-enabled-themes '(doom-wilmersdorf))
 
 ;; https://github.com/purcell/emacs.d
 ;; Ensure that themes will be applied even if they have not been customized
@@ -12,3 +12,6 @@
   (custom-set-variables `(custom-enabled-themes (quote ,custom-enabled-themes))))
 
 (add-hook 'after-init-hook 'reapply-themes)
+
+(setq sml/theme 'dark)
+(add-hook 'after-init-hook 'sml/setup)
