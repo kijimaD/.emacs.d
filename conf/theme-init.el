@@ -12,4 +12,6 @@
   (custom-set-variables `(custom-enabled-themes (quote ,custom-enabled-themes))))
 
 (add-hook 'after-init-hook 'reapply-themes)
-(add-hook 'after-init-hook 'powerline-default-theme)
+
+(setq sml/theme 'atom-one-dark)
+(add-hook 'after-init-hook 'sml/setup)
