@@ -103,7 +103,7 @@
 (defface hlline-face
   '((((class color)
       (background dark))
-     (:background "DarkSlateGray"))
+     (:background "DeepPink4"))
     (((class color)
       (background light))
      (:background "ForestGreen"))
