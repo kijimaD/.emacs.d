@@ -416,6 +416,7 @@
 (add-hook 'markdown-mode-hook
           '(lambda ()
              (setq flycheck-checker 'textlint)
+             (current-word-highlight-mode)
              (flycheck-mode 1)))
 
 (with-eval-after-load 'markdown-mode
