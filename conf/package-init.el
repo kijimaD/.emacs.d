@@ -103,7 +103,7 @@
 (defface hlline-face
   '((((class color)
       (background dark))
-     (:background "DarkSlateGray"))
+     (:background "Purple4"))
     (((class color)
       (background light))
      (:background "ForestGreen"))
@@ -416,6 +416,7 @@
 (add-hook 'markdown-mode-hook
           '(lambda ()
              (setq flycheck-checker 'textlint)
+             (current-word-highlight-mode)
              (flycheck-mode 1)))
 
 (with-eval-after-load 'markdown-mode

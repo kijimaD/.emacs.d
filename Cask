@@ -8,6 +8,7 @@
 ;; (depends-on "rinari")
 
 ;; Install Packages
+(depends-on "ace-isearch")
 (depends-on "ace-jump-mode")
 (depends-on "add-node-modules-path")
 (depends-on "afternoon-theme")
@@ -104,6 +105,8 @@
 (depends-on "helm-git-grep")
 (depends-on "helm-gtags")
 (depends-on "helm-make")
+(depends-on "helm-migemo")
+(depends-on "helm-swoop")
 (depends-on "helpful")
 (depends-on "highlight-indent-guides")
 (depends-on "hiwin")

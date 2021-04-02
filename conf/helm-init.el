@@ -39,12 +39,14 @@
 
 (helm-mode 1)
 
-;; キーバインド ================
+;; helmキーバインド ================
 (global-set-key (kbd "C-x C-b") 'helm-mini)
 (global-set-key (kbd "C-x C-r") 'helm-recentf)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(global-set-key (kbd "M-i") 'helm-swoop)
+(global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
 (global-set-key (kbd "C-c h") 'helm-man-woman)
 (global-set-key (kbd "C-c f") 'helm-find)
 (global-set-key (kbd "C-c i") 'helm-imenu)
@@ -63,3 +65,6 @@
 (require 'helm-git-grep)
 
 (global-set-key (kbd "C-x C-g") 'helm-git-grep)
+
+;; migemo ================
+(helm-migemo-mode 1)

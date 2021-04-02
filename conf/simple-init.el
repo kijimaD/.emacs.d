@@ -150,3 +150,5 @@
           (goto-char (mark))
           (isearch-repeat-forward)))
     ad-do-it))
+
+(global-ace-isearch-mode)
