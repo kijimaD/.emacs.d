@@ -46,6 +46,7 @@
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 (global-set-key (kbd "M-i") 'helm-swoop)
+(global-set-key (kbd "C-i") 'helm-multi-swoop-all)
 (global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
 (global-set-key (kbd "C-c h") 'helm-man-woman)
 (global-set-key (kbd "C-c f") 'helm-find)
