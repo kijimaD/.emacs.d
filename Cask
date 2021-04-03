@@ -216,7 +216,6 @@
 (depends-on "xml-rpc")
 (depends-on "yaml-mode")
 (depends-on "yasnippet")
-(depends-on "yasnippet-bundle")
 (depends-on "yasnippet-snippets")
 (depends-on "yatemplate")
 (depends-on "zenburn-theme")
