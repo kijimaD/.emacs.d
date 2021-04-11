@@ -81,6 +81,10 @@
   '(progn
      (define-key eww-mode-map (kbd "<mouse-1>") 'my-next-line)
      (define-key eww-mode-map (kbd "<mouse-2>") 'define-word-at-point)
+     (define-key eww-mode-map (kbd "<mouse-4>") 'my-previous-line)
+     (define-key eww-mode-map (kbd "<down-mouse-4>") 'nil)
+     (define-key eww-mode-map (kbd "<mouse-5>") 'my-next-line)
+     (define-key eww-mode-map (kbd "<down-mouse-5>") 'nil)
      (define-key eww-mode-map (kbd "<mouse-3>") 'my-previous-line)
      (define-key eww-mode-map (kbd "<mouse-8>") 'backward-word)
      (define-key eww-mode-map (kbd "<mouse-9>") 'forward-word)))

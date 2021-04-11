@@ -41,6 +41,7 @@
 
 ;; helmキーバインド ================
 (global-set-key (kbd "C-x C-b") 'helm-mini)
+(global-set-key (kbd "<muhenkan>") 'helm-mini)
 (global-set-key (kbd "C-x C-r") 'helm-recentf)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "M-x") 'helm-M-x)

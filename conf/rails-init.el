@@ -73,7 +73,7 @@
                             (company-mode)
                             (setq company-auto-expand t)
                             (setq company-transformers '(company-sort-by-backend-importance)) ;; ソート順
-                            (setq company-idle-delay 0) ; 遅延なしにすぐ表示
+                            (setq company-idle-delay 0.5)
                             (setq company-minimum-prefix-length 1) ; 何文字打つと補完動作を行うか設定
                             (setq company-selection-wrap-around t) ; 候補の最後の次は先頭に戻る
                             (setq completion-ignore-case t)

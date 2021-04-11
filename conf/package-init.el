@@ -153,7 +153,7 @@
 (global-set-key (kbd "C-M-;") 'ace-jump-line-mode)
 
 (require 'avy)
-(global-set-key (kbd "C-j") 'avy-goto-char-timer)
+;; (global-set-key (kbd "C-j") 'avy-goto-char-timer)
 (global-set-key (kbd "M-j") 'avy-goto-line)
 
 (back-button-mode 1)
