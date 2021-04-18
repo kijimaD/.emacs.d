@@ -24,6 +24,7 @@
 (setq my-hidden-minor-modes
       '(
         abbrev-mode
+        ace-isearch-mode
         auto-highlight-symbol-mode
         auto-revert-mode
         back-button-mode
@@ -37,6 +38,7 @@
         global-whitespace-mode
         google-this-mode
         helm-gtags-mode
+        helm-migemo-mode
         helm-mode
         highlight-indent-guides-mode
         magit-auto-revert-mode
@@ -47,6 +49,7 @@
         rubocop-mode
         ruby-electric-mode
         undo-tree-mode
+        volatile-highlights-mode
         which-key-mode
         yas-minor-mode
         ))
