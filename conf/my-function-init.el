@@ -92,3 +92,14 @@
 ;; マウス左クリック無効化
 ;; (dolist (k '([mouse-1] [down-mouse-1] [drag-mouse-1] [double-mouse-1] [triple-mouse-1]))
 ;;   (global-unset-key k))
+
+;; 起動時の設定
+;; (defun startup()
+;;   (toggle-frame-maximized)
+;;   (make-frame-command)
+;;   (other-frame 0))
+;; (add-hook 'after-init-hook 'startup)
+
+(provide 'my-function-init)
+
+;;; my-function-init.el ends here

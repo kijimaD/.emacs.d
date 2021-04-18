@@ -153,7 +153,7 @@
 (global-set-key (kbd "C-M-;") 'ace-jump-line-mode)
 
 (require 'avy)
-;; (global-set-key (kbd "C-j") 'avy-goto-char-timer)
+(global-set-key (kbd "C-j") 'avy-goto-char-timer)
 (global-set-key (kbd "M-j") 'avy-goto-line)
 
 (back-button-mode 1)
@@ -275,6 +275,8 @@
 (require 'flycheck)
 (setq flycheck-indication-mode 'right-fringe)
 (add-hook 'flycheck-mode-hook #'flycheck-set-indication-mode)
+(eval-after-load 'flycheck
+  '(add-hook 'flycheck-mode-hook #'flycheck-cask-setup))
 
 (add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
 (add-hook 'python-mode-hook 'flycheck-mode)
