@@ -69,24 +69,6 @@
 (eval-after-load 'company
   '(push 'company-robe company-backends))
 
-(add-hook 'ruby-mode-hook (lambda()
-                            (company-mode)
-                            (setq company-auto-expand t)
-                            (setq company-transformers '(company-sort-by-backend-importance)) ;; ソート順
-                            (setq company-idle-delay 0.5)
-                            (setq company-minimum-prefix-length 1) ; 何文字打つと補完動作を行うか設定
-                            (setq company-selection-wrap-around t) ; 候補の最後の次は先頭に戻る
-                            (setq completion-ignore-case t)
-                            (setq company-dabbrev-downcase nil)
-                            (global-set-key (kbd "C-M-i") 'company-complete)
-                            ;; C-n, C-pで補完候補を次/前の候補を選択
-                            (define-key company-active-map (kbd "C-n") 'company-select-next)
-                            (define-key company-active-map (kbd "C-p") 'company-select-previous)
-                            (define-key company-active-map (kbd "C-s") 'company-filter-candidates) ;; C-sで絞り込む
-                            (define-key company-active-map [tab] 'company-complete-selection) ;; TABで候補を設定
-                            (define-key emacs-lisp-mode-map (kbd "C-M-i") 'company-complete) ;; 各種メジャーモードでも C-M-iで company-modeの補完を使う
-                            ))
-
 ;; companyの色
 (set-face-attribute 'company-tooltip nil
                     :foreground "black" :background "lightgrey")
@@ -105,8 +87,9 @@
 
 (define-key robe-mode-map (kbd "M-.") nil)
 
+(setq company-auto-expand t)
 (setq company-transformers '(company-sort-by-backend-importance)) ;; ソート順
-(setq company-idle-delay 0) ; デフォルトは0.5
+(setq company-idle-delay 0.1) ; デフォルトは0.5
 (setq company-minimum-prefix-length 1) ; デフォルトは4
 (setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
 (setq completion-ignore-case t)
@@ -154,3 +137,9 @@
 
 ;; マジックコメントを挿入しない
 (setq ruby-insert-encoding-magic-comment nil)
+
+;; 対応ブロックを光らせる時間を短くする
+(defcustom ruby-block-delay 0
+  "*Time in seconds to delay before showing a matching paren."
+  :type  'number
+  :group 'ruby-block)

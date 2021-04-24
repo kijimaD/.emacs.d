@@ -315,7 +315,7 @@
 
 ;; 定義元ジャンプ ================
 (setq dumb-jump-mode t)
-;; (global-set-key [hiragana-katakana] 'dumb-jump-go)
+(global-set-key (kbd "C-c d") 'dumb-jump-go)
 
 ;; easy-kill ================
 (require 'easy-kill)
