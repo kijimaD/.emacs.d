@@ -423,3 +423,6 @@
 
 (with-eval-after-load 'markdown-mode
   (add-hook 'markdown-mode-hook #'add-node-modules-path))
+
+;; 正規表現 ================
+(global-set-key (kbd "M-%") 'vr/query-replace)
