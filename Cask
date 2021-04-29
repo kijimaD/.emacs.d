@@ -10,8 +10,10 @@
 ;; Install Packages
 (depends-on "ace-isearch")
 (depends-on "ace-jump-mode")
+(depends-on "ace-link")
 (depends-on "add-node-modules-path")
 (depends-on "afternoon-theme")
+(depends-on "helm-bm")
 (depends-on "ag")
 (depends-on "alert")
 (depends-on "ample-theme")
@@ -91,6 +93,7 @@
 (depends-on "git-commit")
 (depends-on "git-gutter+")
 (depends-on "git-gutter-fringe+")
+(depends-on "gitignore-mode")
 (depends-on "github-review")
 (depends-on "github-theme")
 (depends-on "gntp")
