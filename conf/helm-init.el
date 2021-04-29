@@ -41,10 +41,10 @@
 
 ;; helmキーバインド ================
 (global-set-key (kbd "C-x C-b") 'helm-mini)
-(global-set-key (kbd "<muhenkan>") 'helm-resume)
 (global-set-key (kbd "C-x C-r") 'helm-recentf)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x C-l") 'helm-all-mark-rings)
+(global-set-key (kbd "C-x C-u") 'helm-resume)
 (global-set-key (kbd "C-x l") 'helm-mark-ring)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
@@ -54,6 +54,7 @@
 (global-set-key (kbd "C-c f") 'helm-find)
 (global-set-key (kbd "C-c i") 'helm-imenu)
 (global-set-key (kbd "C-c g") 'helm-surfraw)
+(global-set-key (kbd "C-c y") 'helm-yas-complete)
 (global-set-key [delete] 'helm-apropos)
 (setq helm-semantic-fuzzy-match t
       helm-imenu-fuzzy-match    t)
@@ -72,3 +73,6 @@
 
 ;; migemo ================
 (helm-migemo-mode 1)
+
+;; helm-swoop ================
+(setq helm-swoop-speed-or-color t)

@@ -54,7 +54,6 @@
 (require 'company)
 (global-company-mode)
 
-;; (global-set-key (kbd "C-c y") 'company-yasnippet)
 (add-hook 'ruby-mode-hook
           (lambda ()
             (set (make-local-variable 'company-backends)
@@ -117,7 +116,7 @@
 
 ;; 実行環境 ================
 (require 'quickrun)
-(global-set-key (kbd "<f7>") 'quickrun)
+(global-set-key (kbd "<f8>") 'quickrun)
 (atomic-chrome-start-server)
 
 ;; pry
