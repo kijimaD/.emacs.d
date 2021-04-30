@@ -139,9 +139,22 @@
 (add-hook 'kill-emacs-hook '(lambda nil
                               (bm-buffer-save-all)
                               (bm-repository-save)))
-(global-set-key (kbd "C-M-SPC") 'bm-toggle)
 (global-set-key (kbd "M-[") 'bm-previous)
 (global-set-key (kbd "M-]") 'bm-next)
+
+;;; helm-bm.el設定
+(require 'helm-bm)
+(push '(migemo) helm-source-bm)
+;; annotationをオフに
+(setq helm-source-bm (delete '(multiline) helm-source-bm))
+
+(defun bm-toggle-or-helm ()
+  "2回連続で起動したらhelm-bmを実行させる"
+  (interactive)
+  (bm-toggle)
+  (when (eq last-command 'bm-toggle-or-helm)
+    (helm-bm)))
+(global-set-key (kbd "C-M-SPC") 'bm-toggle-or-helm)
 
 ;; カーソル移動 ================
 (require 'ace-jump-mode)
@@ -150,11 +163,12 @@
 (setq ace-jump-mode-move-keys
       (append "asdfghjkl;:]qwertyuiop@zxcvbnm,." nil))
 ;; (global-set-key (kbd "C-o") 'ace-jump-word-mode)
-(global-set-key (kbd "C-M-;") 'ace-jump-line-mode)
+
+(ace-link-setup-default)
 
 (require 'avy)
 (global-set-key (kbd "C-j") 'avy-goto-char-timer)
-(global-set-key (kbd "M-j") 'avy-goto-line)
+(global-set-key (kbd "M-j") 'avy-goto-word-1)
 
 (back-button-mode 1)
 
@@ -315,7 +329,7 @@
 
 ;; 定義元ジャンプ ================
 (setq dumb-jump-mode t)
-;; (global-set-key [hiragana-katakana] 'dumb-jump-go)
+(global-set-key (kbd "C-c d") 'dumb-jump-go)
 
 ;; easy-kill ================
 (require 'easy-kill)
@@ -423,3 +437,6 @@
 
 (with-eval-after-load 'markdown-mode
   (add-hook 'markdown-mode-hook #'add-node-modules-path))
+
+;; 正規表現 ================
+(global-set-key (kbd "C-M-%") 'vr/query-replace)
