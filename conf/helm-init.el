@@ -35,9 +35,9 @@
 
 (setq helm-autoresize-max-height 0)
 (setq helm-autoresize-min-height 40)
+(setq helm-follow-mode-persistent t)
 (helm-autoresize-mode 1)
 (helm-descbinds-mode)
-
 (helm-mode 1)
 
 ;; helmキーバインド ================
