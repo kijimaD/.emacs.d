@@ -172,6 +172,9 @@
 
 (back-button-mode 1)
 
+(global-set-key (kbd "C-c <left>") 'goto-last-change)
+(global-set-key (kbd "C-x <right>") 'goto-last-change-reverse)
+
 ;; インクリメンタルサーチ ================
 (require 'migemo)
 (when (and (executable-find "cmigemo")
@@ -413,6 +416,24 @@
       (apply them)
     (advice-remove 'shr-insert-document 'shr-insert-document--for-eww)))
 (advice-add 'eww-display-html :around 'eww-display-html--fill-column)
+
+;; 色設定
+(defvar eww-disable-colorize t)
+(defun shr-colorize-region--disable (orig start end fg &optional bg &rest _)
+  (unless eww-disable-colorize
+    (funcall orig start end fg)))
+(advice-add 'shr-colorize-region :around 'shr-colorize-region--disable)
+(advice-add 'eww-colorize-region :around 'shr-colorize-region--disable)
+(defun eww-disable-color ()
+  "eww で文字色を反映させない"
+  (interactive)
+  (setq-local eww-disable-colorize t)
+  (eww-reload))
+(defun eww-enable-color ()
+  "eww で文字色を反映させる"
+  (interactive)
+  (setq-local eww-disable-colorize nil)
+  (eww-reload))
 
 ;; 校正ツール ================
 (require 'markdown-mode)
