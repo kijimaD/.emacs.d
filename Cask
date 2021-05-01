@@ -95,6 +95,7 @@
 (depends-on "git-gutter-fringe+")
 (depends-on "git-link")
 (depends-on "github-review")
+(depends-on "github-search")
 (depends-on "github-theme")
 (depends-on "gitignore-mode")
 (depends-on "gntp")
