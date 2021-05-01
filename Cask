@@ -54,6 +54,7 @@
 (depends-on "django-mode")
 (depends-on "dokuwiki")
 (depends-on "dokuwiki-mode")
+(depends-on "doom-modeline")
 (depends-on "doom-themes")
 (depends-on "drag-stuff")
 (depends-on "dumb-jump")
