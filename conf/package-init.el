@@ -435,6 +435,9 @@
   (setq-local eww-disable-colorize nil)
   (eww-reload))
 
+;; デフォルトエンジン
+(setq eww-search-prefix "https://www.google.co.jp/search?q=")
+
 ;; 校正ツール ================
 (require 'markdown-mode)
 (define-key markdown-mode-map (kbd "C-c C-j") nil)
