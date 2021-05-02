@@ -36,6 +36,9 @@
 (setq helm-autoresize-max-height 0)
 (setq helm-autoresize-min-height 40)
 (setq helm-follow-mode-persistent t)
+(setq helm-source-names-using-follow
+   '("Time World List" "Major Mode Bindings:" "Recentf" "Imenu" "Buffers" "Git Grep" "Visible bookmarks"))
+
 (helm-autoresize-mode 1)
 (helm-descbinds-mode)
 (helm-mode 1)

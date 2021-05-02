@@ -331,8 +331,10 @@
   (add-hook 'dired-load-hook 'my-dired-init))
 
 ;; 定義元ジャンプ ================
-(setq dumb-jump-mode t)
+(dumb-jump-mode)
 (global-set-key (kbd "C-c d") 'dumb-jump-go)
+(setq dumb-jump-selector 'popup)
+;; (setq dumb-jump-selector 'helm)
 
 ;; easy-kill ================
 (require 'easy-kill)
