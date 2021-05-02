@@ -1,6 +1,7 @@
 *.emacs.desktop.lock
 .cache/
 .cask/
+.python-environments/
 auto-save-list/
 elisp-objects/
 elpa/
@@ -20,6 +21,7 @@ var/pcache/
 /history
 /network-security.data
 /projectile-bookmarks.eld
+/projectile.cache
 /recentf
 /scratch
 /session.*
