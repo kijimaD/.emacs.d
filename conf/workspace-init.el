@@ -3,14 +3,9 @@
 (setq persp-initial-frame-name "1")
 (persp-mode 1)
 
-(delete-other-windows)
-(split-window-right)
-
 ;; ワークスペース生成
 (mapc (lambda (i)
-        (persp-switch (int-to-string i))
-        (delete-other-windows)
-        (split-window-right))
+        (persp-switch (int-to-string i)))
       (number-sequence 1 9))
 
 (defun local-switch-workspace (index)
