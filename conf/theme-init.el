@@ -28,12 +28,12 @@
 (setq doom-modeline-major-mode-icon nil)
 (setq doom-modeline-minor-modes nil)
 (setq doom-modeline-buffer-encoding nil)
-(line-number-mode 0)
-(column-number-mode 0)
+(line-number-mode)
+(column-number-mode)
 (doom-modeline-def-modeline
   'my-simple-line
-  '(bar window-number matches buffer-info remote-host input-method major-mode process vcs checker)
-  '(misc-info buffer-position))
+  '(bar matches buffer-info remote-host input-method major-mode process buffer-position)
+  '(misc-info vcs checker))
 
 (defun setup-custom-doom-modeline ()
    (doom-modeline-set-modeline 'my-simple-line 'default))

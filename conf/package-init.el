@@ -113,7 +113,7 @@
 (setq hl-line-face 'hlline-face)
 (global-hl-line-mode)
 
-(nyan-mode)
+;; (nyan-mode)
 
 (setq beacon-size 20) ; default 40
 (setq beacon-color "LavenderBlush1")
@@ -125,7 +125,7 @@
 (setq windmove-wrap-around t)
 (windmove-default-keybindings)
 
-(window-numbering-mode 1)
+;; (window-numbering-mode 1)
 
 ;; ブックマーク ================
 (setq-default bm-buffer-persistence nil)
@@ -466,3 +466,35 @@
 
 ;; 正規表現 ================
 (global-set-key (kbd "C-M-%") 'vr/query-replace)
+
+;; ワークスペース ================
+(require 'perspective)
+(persp-mode 1)
+
+;; ワークスペース生成
+(mapc (lambda (i)
+        (persp-switch (int-to-string i)))
+      (number-sequence 0 9))
+
+;;;; キーに登録する関数を返す関数
+;;(defun local-switch-workspace (i)
+;;  (lexical-let ((index i))
+;;    (lambda ()
+;;      (interactive)
+;;      (persp-switch (int-to-string index)))))
+
+;;
+;; 更新 2020/04/28
+;;
+(defun local-switch-workspace (index)
+  `(lambda ()
+     (interactive)
+     (persp-switch (int-to-string ,index))))
+
+;; キーバインドの登録を行う
+(mapc (lambda (i)
+        (global-set-key (kbd (format "M-%d" i)) (local-switch-workspace i)));;
+      (number-sequence 0 9))
+
+; 最初のワークスペースは"1"に設定
+(persp-switch "1")
