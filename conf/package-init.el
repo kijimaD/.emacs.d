@@ -466,3 +466,7 @@
 
 ;; 正規表現 ================
 (global-set-key (kbd "C-M-%") 'vr/query-replace)
+
+;; vterm ================
+(global-set-key [f9] 'vterm-toggle)
+(global-set-key [C-f9] 'vterm-toggle-cd)
