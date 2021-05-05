@@ -60,6 +60,7 @@
 (global-set-key (kbd "C-c g") 'helm-surfraw)
 (global-set-key (kbd "C-c y") 'helm-yas-complete)
 (global-set-key [delete] 'helm-apropos)
+(global-set-key [insert] 'helm-info)
 (setq helm-semantic-fuzzy-match t
       helm-imenu-fuzzy-match    t)
 (setq helm-surfraw-default-browser-function 'browse-url-generic

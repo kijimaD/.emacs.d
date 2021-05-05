@@ -392,15 +392,13 @@
 
 (setq elfeed-feeds
       '(
-        ;; programming
-        ("https://news.ycombinator.com/rss" hacker)
-        ("https://www.heise.de/developer/rss/news-atom.xml" heise)
-        ("https://www.reddit.com/r/emacs.rss" emacs)))
+        ("https://news.ycombinator.com/rss" ycombinator)
+        ("https://www.reddit.com/r/emacs.rss" reddit-emacs)
+        ("https://www.sanityinc.com/feed.xml" sanityinc)))
 
 ;; Google検索 ================
 (require 'google-this)
 (google-this-mode 1)
-(global-set-key (kbd "<insert>") 'google-this)
 (setq google-this-location-suffix "co.jp")
 
 ;; 辞書 ================
