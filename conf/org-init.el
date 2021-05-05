@@ -6,7 +6,7 @@
 
 ;; org-modeでの強調表示を可能にする
 (add-hook 'org-mode-hook 'turn-on-font-lock)
-(add-hook 'org-mode-hook 'current-word-highlight-mode)
+;; (add-hook 'org-mode-hook 'current-word-highlight-mode)
 
 ;; 見出しの余分な*を消す
 (setq org-hide-leading-stars t)

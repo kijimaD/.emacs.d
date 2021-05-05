@@ -13,5 +13,30 @@
 
 (add-hook 'after-init-hook 'reapply-themes)
 
-(setq sml/theme 'dark)
-(add-hook 'after-init-hook 'sml/setup)
+;; モードライン ================
+(doom-modeline-mode)
+
+;; 縦調整
+(defun my-doom-modeline--font-height ()
+  (- (frame-char-height) 20))
+(advice-add #'doom-modeline--font-height :override #'my-doom-modeline--font-height)
+(setq doom-modeline-height 10)
+
+;; 表示項目の設定
+(setq doom-modeline-buffer-file-name-style 'truncate-with-project)
+(setq doom-modeline-icon t)
+(setq doom-modeline-major-mode-icon nil)
+(setq doom-modeline-minor-modes nil)
+(setq doom-modeline-buffer-encoding nil)
+(line-number-mode)
+(column-number-mode)
+(doom-modeline-def-modeline
+  'my-simple-line
+  '(bar matches buffer-info remote-host input-method major-mode process buffer-position)
+  '(misc-info vcs checker))
+
+(defun setup-custom-doom-modeline ()
+   (doom-modeline-set-modeline 'my-simple-line 'default))
+(add-hook 'doom-modeline-mode-hook 'setup-custom-doom-modeline)
+
+(setup-custom-doom-modeline)

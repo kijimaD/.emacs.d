@@ -136,6 +136,18 @@
 (eval-after-load "dired"
   '(progn
      (define-key dired-mode-map (kbd "C-t") nil)))
+(eval-after-load "vterm"
+  '(progn
+     (define-key vterm-mode-map (kbd "C-t") nil)
+     (define-key vterm-mode-map (kbd "M-<right>") nil)
+     (define-key vterm-mode-map (kbd "M-<left>") nil)
+     (define-key vterm-mode-map (kbd "<f9>") nil)
+     (define-key vterm-mode-map (kbd "C-<f9>") nil)))
+(eval-after-load "magit"
+  '(progn
+     (mapc (lambda (i)
+             (define-key magit-mode-map (kbd (format "M-%d" i)) nil))
+           (number-sequence 1 4))))
 
 ;; インクリメンタルサーチの挙動変更 ================
 

@@ -35,9 +35,12 @@
 
 (setq helm-autoresize-max-height 0)
 (setq helm-autoresize-min-height 40)
+(setq helm-follow-mode-persistent t)
+(setq helm-source-names-using-follow
+   '("Time World List" "Major Mode Bindings:" "Recentf" "Imenu" "Buffers" "Git Grep" "Visible bookmarks"))
+
 (helm-autoresize-mode 1)
 (helm-descbinds-mode)
-
 (helm-mode 1)
 
 ;; helmキーバインド ================
@@ -57,6 +60,7 @@
 (global-set-key (kbd "C-c g") 'helm-surfraw)
 (global-set-key (kbd "C-c y") 'helm-yas-complete)
 (global-set-key [delete] 'helm-apropos)
+(global-set-key [insert] 'helm-info)
 (setq helm-semantic-fuzzy-match t
       helm-imenu-fuzzy-match    t)
 (setq helm-surfraw-default-browser-function 'browse-url-generic

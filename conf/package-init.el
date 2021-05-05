@@ -113,7 +113,7 @@
 (setq hl-line-face 'hlline-face)
 (global-hl-line-mode)
 
-(nyan-mode)
+;; (nyan-mode)
 
 (setq beacon-size 20) ; default 40
 (setq beacon-color "LavenderBlush1")
@@ -125,7 +125,7 @@
 (setq windmove-wrap-around t)
 (windmove-default-keybindings)
 
-(window-numbering-mode 1)
+;; (window-numbering-mode 1)
 
 ;; ブックマーク ================
 (setq-default bm-buffer-persistence nil)
@@ -331,8 +331,10 @@
   (add-hook 'dired-load-hook 'my-dired-init))
 
 ;; 定義元ジャンプ ================
-(setq dumb-jump-mode t)
+(dumb-jump-mode)
 (global-set-key (kbd "C-c d") 'dumb-jump-go)
+(setq dumb-jump-selector 'popup)
+;; (setq dumb-jump-selector 'helm)
 
 ;; easy-kill ================
 (require 'easy-kill)
@@ -390,15 +392,13 @@
 
 (setq elfeed-feeds
       '(
-        ;; programming
-        ("https://news.ycombinator.com/rss" hacker)
-        ("https://www.heise.de/developer/rss/news-atom.xml" heise)
-        ("https://www.reddit.com/r/emacs.rss" emacs)))
+        ("https://news.ycombinator.com/rss" ycombinator)
+        ("https://www.reddit.com/r/emacs.rss" reddit-emacs)
+        ("https://www.sanityinc.com/feed.xml" sanityinc)))
 
 ;; Google検索 ================
 (require 'google-this)
 (google-this-mode 1)
-(global-set-key (kbd "<insert>") 'google-this)
 (setq google-this-location-suffix "co.jp")
 
 ;; 辞書 ================
@@ -435,6 +435,9 @@
   (setq-local eww-disable-colorize nil)
   (eww-reload))
 
+;; デフォルトエンジン
+(setq eww-search-prefix "https://www.google.co.jp/search?q=")
+
 ;; 校正ツール ================
 (require 'markdown-mode)
 (define-key markdown-mode-map (kbd "C-c C-j") nil)
@@ -461,3 +464,7 @@
 
 ;; 正規表現 ================
 (global-set-key (kbd "C-M-%") 'vr/query-replace)
+
+;; vterm ================
+(global-set-key [f9] 'vterm-toggle)
+(global-set-key [C-f9] 'vterm-toggle-cd)
