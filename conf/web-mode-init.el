@@ -84,3 +84,9 @@
 (add-hook 'sql-mode-hook 'sqlup-mode)
 (add-hook 'sql-interactive-mode-hook 'sqlup-mode)
 (global-set-key (kbd "C-c u") 'sqlup-capitalize-keywords-in-region)
+
+;; 結果を折り返さないようにする
+(add-hook 'sql-interactive-mode-hook
+          '(lambda()
+             (setq truncate-lines nil
+                   truncate-partial-width-windows t)))

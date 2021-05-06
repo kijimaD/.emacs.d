@@ -12,6 +12,12 @@
 ;; (setq rspec-docker-container "web")
 ;; (setq rspec-docker-cwd "")
 
+(defun rspec-spring-p ()
+  (and rspec-use-spring-when-possible
+       (stringp (executable-find "spring"))))
+;; spring
+;; bin/rspec
+
 ;; シンタックスチェック ================
 ;; flycheck と rubocop を連携させる
 (require 'rubocop)
