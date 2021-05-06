@@ -13,10 +13,10 @@
 ;; (setq ns-alternate-modifier (quote super))
 ;; (setq ctags-auto-update-mode nil)
 
-;; (require 'rbenv)
-;; (global-rbenv-mode)
-;; (setq rbenv-installation-dir "~/.rbenv")
-;; (setenv "PATH" (concat (expand-file-name "~/.rbenv/shims:") (getenv "PATH")))
+(require 'rbenv)
+(global-rbenv-mode)
+(setq rbenv-installation-dir "~/.rbenv")
+(setenv "PATH" (concat (expand-file-name "~/.rbenv/shims:") (getenv "PATH")))
 
 ;; DB ================
 
