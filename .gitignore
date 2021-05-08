@@ -20,6 +20,7 @@ var/pcache/
 /forge-database.sqlite
 /history
 /network-security.data
+/org-recent-headings
 /projectile-bookmarks.eld
 /projectile.cache
 /recentf
