@@ -10,6 +10,7 @@
 
 ;; 見出しの余分な*を消す
 (setq org-hide-leading-stars t)
+(setq org-hide-emphasis-markers t)
 
 ;; org-default-notes-fileのディレクトリ
 (setq org-directory "~/org/")
@@ -59,3 +60,7 @@
 (require 'open-junk-file)
 (setq open-junk-file-format (concat "~/" public-directory "/junk/%Y-%m-%d-%H%M%S."))
 (global-set-key (kbd "C-x C-z") 'open-junk-file)
+
+;; 見出しをいい感じにする ================
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))

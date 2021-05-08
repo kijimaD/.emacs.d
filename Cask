@@ -204,6 +204,7 @@
 (depends-on "smooth-scrolling")
 (depends-on "solarized-theme")
 (depends-on "sound-wav")
+(depends-on "spacemacs-theme")
 (depends-on "speed-type")
 (depends-on "sql-indent")
 (depends-on "sqlup-mode")
