@@ -45,18 +45,15 @@
                                (ruby . t)
                                (emacs-lisp . t)))
 
-;; 日誌(mark-down化) ================
+;; 日誌 ================
 (require 'org-journal)
 (setq org-journal-date-format "%Y-%m-%d")
 (setq org-journal-time-format "%R ")
 (setq org-journal-dir (concat "~/" public-directory "/junk/diary/org-journal"))
+(setq org-journal-file-format "%Y%m%d.org")
 (setq org-journal-find-file 'find-file)
 (setq org-journal-hide-entries-p nil)
 (setq org-startup-folded 'showeverything)
-(setq org-journal-file-format "%Y%m%d.md")
-(setq org-journal-date-prefix "# ")
-(setq org-journal-time-prefix "## ")
-(add-to-list 'magic-mode-alist '(org-journal-is-journal . markdown-mode))
 
 ;; 使い捨てのファイルを開く ================
 (require 'open-junk-file)
