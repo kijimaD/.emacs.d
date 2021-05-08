@@ -394,7 +394,8 @@
       '(
         ("https://news.ycombinator.com/rss" ycombinator)
         ("https://www.reddit.com/r/emacs.rss" reddit-emacs)
-        ("https://www.sanityinc.com/feed.xml" sanityinc)))
+        ("https://www.sanityinc.com/feed.xml" sanityinc)
+        ("https://sachachua.com/blog/category/weekly/feed/" sachachua)))
 
 ;; Google検索 ================
 (require 'google-this)
