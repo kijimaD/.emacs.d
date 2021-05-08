@@ -64,3 +64,6 @@
 ;; 見出しをいい感じにする ================
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+;; pomodoro ================
+(global-set-key (kbd "<home>") 'org-pomodoro)

@@ -48,9 +48,6 @@
 ;;ワードカウントをC-x p に割当
 (global-set-key "\C-xp" 'count-words)
 
-;; homeキーをpop-tag-mark(戻る)に割当
-(global-set-key [home] 'pop-tag-mark)
-
 ;; yesかnoではなく、yかnかで答えられるようにする
 (defalias 'yes-or-no-p 'y-or-n-p)
 
