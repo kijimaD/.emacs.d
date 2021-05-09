@@ -65,5 +65,21 @@
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
-;; pomodoro ================
-(global-set-key (kbd "<home>") 'org-pomodoro)
+;; スライド ================
+(global-set-key (kbd "<f6>") 'org-tree-slide-mode)
+(global-set-key (kbd "S-<f6>") 'org-tree-slide-skip-done-toggle)
+
+;; pdf ================
+(pdf-tools-install)
+(add-hook 'pdf-tools-enabled-hook 'pdf-view-midnight-minor-mode)
+(setq-default pdf-view-display-size 'fit-page)
+
+;; roam ================
+(add-hook 'after-init-hook 'org-roam-mode)
+(setq org-roam-directory "~/roam")
+
+(define-key org-roam-mode-map (kbd "C-c n l") 'org-roam)
+(define-key org-roam-mode-map (kbd "C-c n f") 'org-roam-find-file)
+(define-key org-roam-mode-map (kbd "C-c n g") 'org-roam-graph)
+(define-key org-mode-map (kbd "C-c n i") 'org-roam-insert)
+(define-key org-mode-map (kbd "C-c n I") 'org-roam-insert-immediate)

@@ -1,8 +1,13 @@
-;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8 -*- 
+;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8 -*-
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("Handbook | GitLab"
+(("org-capture-last-stored"
+ (filename . "~/roam/20210508234743-emacs.org")
+ (front-context-string . "#+title: Emacs\n\n")
+ (rear-context-string)
+ (position . 1))
+("Handbook | GitLab"
  (front-context-string . "Location: https:")
  (rear-context-string)
  (position . 1)

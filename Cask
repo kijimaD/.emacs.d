@@ -1,7 +1,6 @@
 ;; Package repository
 (source gnu)
 (source melpa)
-(source marmalade)
 
 ;; Caution packages: Causing errors in CI
 ;; (depends-on "rspec-mode")
