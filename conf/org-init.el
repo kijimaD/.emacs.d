@@ -70,11 +70,12 @@
 (global-set-key (kbd "S-<f6>") 'org-tree-slide-skip-done-toggle)
 
 ;; pdf ================
-(pdf-tools-install)
+(pdf-tools-install t)
 (add-hook 'pdf-tools-enabled-hook 'pdf-view-midnight-minor-mode)
 (setq-default pdf-view-display-size 'fit-page)
 
 ;; roam ================
+(require 'org-roam)
 (add-hook 'after-init-hook 'org-roam-mode)
 (setq org-roam-directory "~/roam")
 
