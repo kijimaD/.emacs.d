@@ -1,6 +1,6 @@
-(setq custom-enabled-themes '(doom-wilmersdorf))
+(setq custom-enabled-themes '(spacemacs-dark))
 (setq custom-safe-themes t)
-(setq-default custom-enabled-themes '(doom-wilmersdorf))
+(setq-default custom-enabled-themes '(spacemacs-dark))
 
 ;; https://github.com/purcell/emacs.d
 ;; Ensure that themes will be applied even if they have not been customized
