@@ -28,6 +28,9 @@
         (t
          (setq truncate-lines nil))))
 
+;; スピードコマンド有効化
+(setq org-use-speed-commands t)
+
 ;; キーバインド ================
 ;; ほかとかぶるので無効化
 (define-key org-mode-map (kbd "C-c C-j") nil)
@@ -77,6 +80,7 @@
 ;; roam ================
 (require 'org-roam)
 (add-hook 'after-init-hook 'org-roam-mode)
+(make-directory "~/roam" t)
 (setq org-roam-directory "~/roam")
 
 (define-key org-roam-mode-map (kbd "C-c n l") 'org-roam)
