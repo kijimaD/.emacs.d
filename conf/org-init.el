@@ -19,7 +19,7 @@
 (setq org-default-notes-file "notes.org")
 (setq org-log-done 'time)
 
-;;org-modeで行末で折り返しをする
+;; org-modeで行末で折り返しをする
 (setq org-startup-truncated nil)
 (defun change-truncation()
   (interactive)
@@ -27,6 +27,11 @@
          (setq truncate-lines t))
         (t
          (setq truncate-lines nil))))
+
+;; blockの背景色を設定する。spacemacs-darkに合わせる
+(custom-set-faces
+ '(org-block
+   ((t (:background "#373040" :foreground: "#827591")))))
 
 ;; スピードコマンド有効化
 (setq org-use-speed-commands t)
