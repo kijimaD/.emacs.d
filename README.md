@@ -15,6 +15,10 @@ cask install
 sudo apt-get install emacs-mozc cmigemo
 ```
 
+```
+M-x (all-the-icons-install-fonts)
+```
+
 ## emacs27
 
 ```

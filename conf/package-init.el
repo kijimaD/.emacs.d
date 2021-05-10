@@ -452,16 +452,20 @@
      (message (one-or-more not-newline)
        (zero-or-more "\n" (any " ") (one-or-more not-newline)))
      line-end))
-  :modes (text-mode markdown-mode gfm-mode))
+  :modes (text-mode markdown-mode gfm-mode org-mode))
 
 (add-hook 'markdown-mode-hook
           '(lambda ()
+             (add-node-modules-path)
              (setq flycheck-checker 'textlint)
              (current-word-highlight-mode)
              (flycheck-mode 1)))
 
-(with-eval-after-load 'markdown-mode
-  (add-hook 'markdown-mode-hook #'add-node-modules-path))
+(add-hook 'org-mode-hook
+          '(lambda ()
+             (add-node-modules-path)
+             (setq flycheck-checker 'textlint)
+             (flycheck-mode 1)))
 
 ;; 正規表現 ================
 (global-set-key (kbd "C-M-%") 'vr/query-replace)
