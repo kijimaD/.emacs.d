@@ -8,12 +8,15 @@
 (add-hook 'org-mode-hook 'turn-on-font-lock)
 ;; (add-hook 'org-mode-hook 'current-word-highlight-mode)
 
+;; 本文を自動インデント
+(setq org-startup-indented t)
+
 ;; 見出しの余分な*を消す
 (setq org-hide-leading-stars t)
 (setq org-hide-emphasis-markers t)
 
 ;; org-default-notes-fileのディレクトリ
-(setq org-directory "~/org/")
+(setq org-directory (concat "~/" public-directory "/junk/diary/org-journal"))
 
 ;; org-default-notes-fileのファイル名
 (setq org-default-notes-file "notes.org")
@@ -39,12 +42,20 @@
 ;; キーバインド ================
 ;; ほかとかぶるので無効化
 (define-key org-mode-map (kbd "C-c C-j") nil)
-(define-key org-mode-map (kbd "<S-left>") nil)
-(define-key org-mode-map (kbd "<S-right>") nil)
-(define-key org-mode-map (kbd "<S-up>") nil)
-(define-key org-mode-map (kbd "<S-down>") nil)
+;; (define-key org-mode-map (kbd "<S-left>") nil)
+;; (define-key org-mode-map (kbd "<S-right>") nil)
+;; (define-key org-mode-map (kbd "<S-up>") nil)
+;; (define-key org-mode-map (kbd "<S-down>") nil)
 (define-key org-mode-map (kbd "M-<left>") nil)
 (define-key org-mode-map (kbd "M-<right>") nil)
+
+;; agenda ================
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(define-key global-map "\C-cc" 'org-capture)
+(setq org-log-done t)
+;; (setq org-agenda-files (list (concat "~/" public-directory "/junk/diary/org-journal/" "notes.org")))
+
 
 ;; スニペット ================
 (org-babel-do-load-languages 'org-babel-load-languages
