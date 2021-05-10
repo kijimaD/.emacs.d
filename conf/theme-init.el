@@ -1,6 +1,6 @@
-(setq custom-enabled-themes '(doom-wilmersdorf))
+(setq custom-enabled-themes '(spacemacs-dark))
 (setq custom-safe-themes t)
-(setq-default custom-enabled-themes '(doom-wilmersdorf))
+(setq-default custom-enabled-themes '(spacemacs-dark))
 
 ;; https://github.com/purcell/emacs.d
 ;; Ensure that themes will be applied even if they have not been customized
@@ -16,16 +16,10 @@
 ;; モードライン ================
 (doom-modeline-mode)
 
-;; 縦調整
-(defun my-doom-modeline--font-height ()
-  (- (frame-char-height) 20))
-(advice-add #'doom-modeline--font-height :override #'my-doom-modeline--font-height)
-(setq doom-modeline-height 10)
-
 ;; 表示項目の設定
 (setq doom-modeline-buffer-file-name-style 'truncate-with-project)
 (setq doom-modeline-icon t)
-(setq doom-modeline-major-mode-icon nil)
+(setq doom-modeline-major-mode-icon t)
 (setq doom-modeline-minor-modes nil)
 (setq doom-modeline-buffer-encoding nil)
 (line-number-mode)
@@ -34,6 +28,12 @@
   'my-simple-line
   '(bar matches buffer-info remote-host input-method major-mode process buffer-position)
   '(misc-info vcs checker))
+
+;; 縦調整
+(defun my-doom-modeline--font-height ()
+  (- (frame-char-height) 20))
+(advice-add #'doom-modeline--font-height :override #'my-doom-modeline--font-height)
+(setq doom-modeline-height 10)
 
 (defun setup-custom-doom-modeline ()
    (doom-modeline-set-modeline 'my-simple-line 'default))
