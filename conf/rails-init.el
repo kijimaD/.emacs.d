@@ -120,6 +120,9 @@
             '(:with company-yasnippet))))
 (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
 
+;; 絵文字連携
+(add-to-list 'company-backends 'company-emoji)
+
 ;; 実行環境 ================
 (require 'quickrun)
 (global-set-key (kbd "<f8>") 'quickrun)
