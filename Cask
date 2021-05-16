@@ -194,6 +194,7 @@
 (depends-on "rake")
 (depends-on "rbenv")
 (depends-on "reformatter")
+(depends-on "request")
 (depends-on "restart-emacs")
 (depends-on "rjsx-mode")
 (depends-on "robe")
