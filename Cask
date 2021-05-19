@@ -166,6 +166,7 @@
 (depends-on "org-noter")
 (depends-on "org-pomodoro")
 (depends-on "org-roam")
+(depends-on "org-sticky-header")
 (depends-on "org-super-agenda")
 (depends-on "org-tree-slide")
 (depends-on "outline-magic")

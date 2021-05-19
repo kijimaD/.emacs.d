@@ -84,6 +84,10 @@
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
+(require 'org-sticky-header)
+(setq org-sticky-header-full-path 'full)
+(setq org-sticky-header-heading-star "◉")
+
 ;; スライド ================
 (global-set-key (kbd "<f6>") 'org-tree-slide-mode)
 (global-set-key (kbd "S-<f6>") 'org-tree-slide-skip-done-toggle)

@@ -465,6 +465,7 @@
           '(lambda ()
              (add-node-modules-path)
              (setq flycheck-checker 'textlint)
+             (org-sticky-header-mode)
              (flycheck-mode 1)))
 
 ;; 正規表現 ================
@@ -484,3 +485,6 @@
                 ;;(dedicated . t) ;dedicated is supported in emacs27
                 (reusable-frames . visible)
                 (window-height . 0.3)))
+
+;; write-room ================
+(global-set-key [f7] 'writeroom-mode)
