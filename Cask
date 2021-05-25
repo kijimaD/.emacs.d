@@ -71,6 +71,7 @@
 (depends-on "emacsql-sqlite")
 (depends-on "epc")
 (depends-on "epl")
+(depends-on "eshell-git-prompt")
 (depends-on "espresso-theme")
 (depends-on "evil")
 (depends-on "eww-lnum")
