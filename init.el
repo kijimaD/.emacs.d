@@ -13,6 +13,7 @@
 (load "web-mode-init")
 (load "org-init")
 (load "helm-init")
+(load "shell-init")
 (load "theme-init")
 (load "workspace-init")
 (load "my-function-init")
