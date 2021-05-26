@@ -81,9 +81,6 @@
 
 ;; 最適化 ================
 
-;;ガベッジコレクションを実行するまでの割当メモリの閾値を増やす
-(setq gc-cons-threshold (* 100 gc-cons-threshold))
-
 ;; 右から左に読む言語に対応させないことで描画高速化
 (setq-default bidi-display-reordering nil)
 
