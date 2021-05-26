@@ -330,6 +330,8 @@
   ;; it's not loaded yet, so add our bindings to the load-hook
   (add-hook 'dired-load-hook 'my-dired-init))
 
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+
 ;; 定義元ジャンプ ================
 (dumb-jump-mode)
 (global-set-key (kbd "C-c d") 'dumb-jump-go)
@@ -470,21 +472,6 @@
 
 ;; 正規表現 ================
 (global-set-key (kbd "C-M-%") 'vr/query-replace)
-
-;; vterm-toggle ================
-(global-set-key [f9] 'vterm-toggle)
-(global-set-key [C-f9] 'vterm-toggle-cd)
-
-(setq vterm-toggle-fullscreen-p nil)
-(add-to-list 'display-buffer-alist
-             '((lambda(bufname _) (with-current-buffer bufname (equal major-mode 'vterm-mode)))
-                (display-buffer-reuse-window display-buffer-at-bottom)
-                ;;(display-buffer-reuse-window display-buffer-in-direction)
-                ;;display-buffer-in-direction/direction/dedicated is added in emacs27
-                ;;(direction . bottom)
-                ;;(dedicated . t) ;dedicated is supported in emacs27
-                (reusable-frames . visible)
-                (window-height . 0.3)))
 
 ;; write-room ================
 (global-set-key [f7] 'writeroom-mode)
