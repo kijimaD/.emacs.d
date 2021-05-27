@@ -475,3 +475,6 @@
 
 ;; write-room ================
 (global-set-key [f7] 'writeroom-mode)
+
+;; git-link ================
+(setq git-link-default-branch "develop")
