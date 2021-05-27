@@ -1,6 +1,11 @@
-;; (custom-set-faces
-;;  '(default ((t (:family "Menlo" :slant normal :weight normal :height 90 :width normal :foundry "PfEd")))))
-;; (set-fontset-font t 'japanese-jisx0208 (font-spec :family "ヒラギノ 角ゴ ProN"))
+;; Set the font face based on platform
+(pcase system-type
+  ((or 'gnu/linux 'windows-nt 'cygwin)
+   (set-face-attribute 'default nil
+                       :font "JetBrains Mono"
+                       :weight 'light
+                       :height 100))
+  ('darwin (set-face-attribute 'default nil :font "Fira Mono" :height 170)))
 
 ;; 文字コード ================
 ;;ターミナルの文字コード
@@ -15,3 +20,25 @@
 (setq file-name-coding-system 'utf-8)
 ;;新規作成ファイルの文字コード
 (set-default-coding-systems 'utf-8)
+
+;; 絵文字フォント ================
+(defun --set-emoji-font (frame)
+  "Adjust the font settings of FRAME so Emacs can display emoji properly."
+  (if (eq system-type 'darwin)
+      ;; For NS/Cocoa
+      (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") frame 'prepend)
+    ;; For Linux
+    (set-fontset-font t 'symbol (font-spec :family "Symbola") frame 'prepend)))
+
+(when window-system
+  (progn
+    ;; GUI用設定
+    (--set-emoji-font nil)
+    ;; Hook for when a frame is created with emacsclient
+    ;; see https://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Frames.html
+    (add-hook 'after-make-frame-functions '--set-emoji-font)))
+
+(when (not window-system)
+  (progn
+    ;; CUI用設定
+    ))

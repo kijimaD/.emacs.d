@@ -84,6 +84,10 @@
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
+(require 'org-sticky-header)
+(setq org-sticky-header-full-path 'full)
+(setq org-sticky-header-heading-star "◉")
+
 ;; スライド ================
 (global-set-key (kbd "<f6>") 'org-tree-slide-mode)
 (global-set-key (kbd "S-<f6>") 'org-tree-slide-skip-done-toggle)
@@ -104,3 +108,7 @@
 (define-key org-roam-mode-map (kbd "C-c n g") 'org-roam-graph)
 (define-key org-mode-map (kbd "C-c n i") 'org-roam-insert)
 (define-key org-mode-map (kbd "C-c n I") 'org-roam-insert-immediate)
+
+;; テンプレート ================
+(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+(add-to-list 'org-structure-template-alist '("sh" . "src sh"))

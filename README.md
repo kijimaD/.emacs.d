@@ -13,6 +13,11 @@ echo 'export PATH="$HOME/.cask/bin:$PATH"' >> ~/.bash_profile
 cd ~/.emacs.d
 cask install
 sudo apt-get install emacs-mozc cmigemo
+sudo apt-get install ttf-ancient-fonts # emoji
+```
+
+```
+M-x (all-the-icons-install-fonts)
 ```
 
 ## emacs27

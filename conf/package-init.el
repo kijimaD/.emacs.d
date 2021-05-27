@@ -111,7 +111,7 @@
      ()))
   "*Face used by hl-line.")
 (setq hl-line-face 'hlline-face)
-(global-hl-line-mode)
+;; (global-hl-line-mode)
 
 ;; (nyan-mode)
 
@@ -330,6 +330,8 @@
   ;; it's not loaded yet, so add our bindings to the load-hook
   (add-hook 'dired-load-hook 'my-dired-init))
 
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+
 ;; 定義元ジャンプ ================
 (dumb-jump-mode)
 (global-set-key (kbd "C-c d") 'dumb-jump-go)
@@ -452,20 +454,27 @@
      (message (one-or-more not-newline)
        (zero-or-more "\n" (any " ") (one-or-more not-newline)))
      line-end))
-  :modes (text-mode markdown-mode gfm-mode))
+  :modes (text-mode markdown-mode gfm-mode org-mode))
 
 (add-hook 'markdown-mode-hook
           '(lambda ()
+             (add-node-modules-path)
              (setq flycheck-checker 'textlint)
              (current-word-highlight-mode)
              (flycheck-mode 1)))
 
-(with-eval-after-load 'markdown-mode
-  (add-hook 'markdown-mode-hook #'add-node-modules-path))
+(add-hook 'org-mode-hook
+          '(lambda ()
+             (add-node-modules-path)
+             (setq flycheck-checker 'textlint)
+             (org-sticky-header-mode)
+             (flycheck-mode 1)))
 
 ;; 正規表現 ================
 (global-set-key (kbd "C-M-%") 'vr/query-replace)
 
-;; vterm ================
-(global-set-key [f9] 'vterm-toggle)
-(global-set-key [C-f9] 'vterm-toggle-cd)
+;; write-room ================
+(global-set-key [f7] 'writeroom-mode)
+
+;; git-link ================
+(setq git-link-default-branch "develop")

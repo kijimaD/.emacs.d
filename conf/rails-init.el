@@ -58,17 +58,19 @@
 ;; robe-modeの有効化とcompanyとの連携
 (require 'robe)
 (require 'company)
-(global-company-mode)
+;; (global-company-mode)
 
 (add-hook 'ruby-mode-hook
           (lambda ()
             (set (make-local-variable 'company-backends)
-                 '((company-dabbrev-code company-yasnippet)))))
+                 '((company-dabbrev-code company-yasnippet)))
+            (company-mode)))
 
 (add-hook 'inf-ruby-mode-hook
           (lambda ()
             (set (make-local-variable 'company-backends)
-                 '((company-dabbrev-code company-yasnippet)))))
+                 '((company-dabbrev-code company-yasnippet)))
+            (company-mode)))
 
 (add-hook 'ruby-mode-hook 'robe-mode)
 (eval-after-load 'company
@@ -119,6 +121,9 @@
     (append (if (consp backend) backend (list backend))
             '(:with company-yasnippet))))
 (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
+
+;; 絵文字連携
+(add-to-list 'company-backends 'company-emoji)
 
 ;; 実行環境 ================
 (require 'quickrun)

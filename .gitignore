@@ -8,6 +8,7 @@ elpa/
 elpa/archives/
 eshell/
 private/
+request/
 transient/
 url/
 url/cache/
