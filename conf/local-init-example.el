@@ -14,9 +14,10 @@
 ;; (setq ctags-auto-update-mode nil)
 
 (require 'rbenv)
-(global-rbenv-mode)
+(setq rbenv-show-active-ruby-in-modeline nil)
 (setq rbenv-installation-dir "~/.rbenv")
 (setenv "PATH" (concat (expand-file-name "~/.rbenv/shims:") (getenv "PATH")))
+(global-rbenv-mode)
 
 ;; DB ================
 

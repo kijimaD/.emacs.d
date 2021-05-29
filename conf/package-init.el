@@ -116,7 +116,7 @@
 ;; (nyan-mode)
 
 (setq beacon-size 20) ; default 40
-(setq beacon-color "LavenderBlush1")
+(setq beacon-color "#827591")
 (setq beacon-blink-when-focused t)
 (beacon-mode)
 
