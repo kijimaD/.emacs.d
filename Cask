@@ -137,6 +137,7 @@
 (depends-on "js2-mode")
 (depends-on "jump")
 (depends-on "key-quiz")
+(depends-on "language-detection")
 (depends-on "let-alist")
 (depends-on "lispxmp")
 (depends-on "list-utils")
