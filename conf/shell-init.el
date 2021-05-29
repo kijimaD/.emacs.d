@@ -20,6 +20,7 @@
 (add-hook 'eshell-first-time-mode-hook 'efs/configure-eshell)
 (eshell-git-prompt-use-theme 'powerline)
 
+(global-set-key (kbd "C-M-;") 'eshell-toggle)
 ;; vterm ================
 (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
 (setq vterm-max-scrollback 10000)

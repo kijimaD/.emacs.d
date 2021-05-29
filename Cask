@@ -73,6 +73,7 @@
 (depends-on "epc")
 (depends-on "epl")
 (depends-on "eshell-git-prompt")
+(depends-on "eshell-toggle")
 (depends-on "espresso-theme")
 (depends-on "evil")
 (depends-on "eww-lnum")
