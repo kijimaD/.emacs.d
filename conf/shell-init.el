@@ -10,7 +10,7 @@
   (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
 
   ;; Bind some useful keys for evil-mode
-  (define-key eshell-mode-map (kbd "M-r") 'helm-eshell-history)
+  ;; (define-key eshell-mode-map (kbd "M-r") 'helm-eshell-history)
 
   (setq eshell-history-size         10000
         eshell-buffer-maximum-lines 10000

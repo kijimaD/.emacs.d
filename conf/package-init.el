@@ -543,6 +543,6 @@
 (setq git-link-default-branch "develop")
 
 ;; exwm ================
-(require 'exwm)
-(require 'exwm-config)
-(exwm-config-example)
+;; (require 'exwm)
+;; (require 'exwm-config)
+;; (exwm-config-example)

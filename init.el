@@ -15,7 +15,6 @@
 (load "python-init")
 (load "web-mode-init")
 (load "org-init")
-(load "helm-init")
 (load "ivy-init")
 (load "shell-init")
 (load "theme-init")
@@ -43,9 +42,6 @@
         git-gutter+-mode
         global-whitespace-mode
         google-this-mode
-        helm-gtags-mode
-        helm-migemo-mode
-        helm-mode
         highlight-indent-guides-mode
         magit-auto-revert-mode
         projectile-mode
