@@ -15,6 +15,7 @@ jobs:
         os: [ubuntu-latest]
         emacs_version:
           - 27.1
+          - 27.2
     steps:
     - uses: purcell/setup-emacs@master
       with:
