@@ -29,3 +29,4 @@ var/pcache/
 /recentf
 /scratch
 /session.*
+/smex-items
