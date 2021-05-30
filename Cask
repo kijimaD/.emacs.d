@@ -5,6 +5,7 @@
 ;; Caution packages: Causing errors in CI
 ;; (depends-on "rspec-mode")
 ;; (depends-on "rinari")
+;; (depends-on "counsel-projectile")
 
 ;; Install Packages
 (depends-on "ace-isearch")
@@ -38,7 +39,6 @@
 (depends-on "company-emoji")
 (depends-on "concurrent")
 (depends-on "counsel")
-(depends-on "counsel-projectile")
 (depends-on "create-link")
 (depends-on "ctable")
 (depends-on "ctags-update")
