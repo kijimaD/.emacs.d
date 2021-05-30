@@ -16,6 +16,7 @@
 (load "web-mode-init")
 (load "org-init")
 (load "helm-init")
+(load "ivy-init")
 (load "shell-init")
 (load "theme-init")
 (load "workspace-init")

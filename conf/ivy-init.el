@@ -1,7 +1,6 @@
 ;; https://qiita.com/takaxp/items/2fde2c119e419713342b
 ;; ivy ================
 (when (require 'ivy nil t)
-
   ;; M-o を ivy-hydra-read-action に割り当てる．
   (when (require 'ivy-hydra nil t)
     (setq ivy-read-action-function #'ivy-hydra-read-action))
@@ -25,6 +24,8 @@
   ;; アクティベート
   (ivy-mode 1))
 
+(setq ivy-count-format "⚝%d╳%d⚝ ")
+
 (with-eval-after-load "magit"
   (setq magit-completing-read-function 'ivy-completing-read))
 
@@ -39,23 +40,22 @@
 
 ;; counsel ================
 (when (require 'counsel nil t)
-
-  ;; キーバインドは一例です．好みに変えましょう．
+  (global-set-key (kbd "C-x C-b") 'counsel-ibuffer)
+  (global-set-key (kbd "C-x C-r") 'counsel-recentf)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  (global-set-key (kbd "C-x C-l") 'counsel-mark-ring)
+  (global-set-key (kbd "C-x C-u") 'ivy-resume)
+  (global-set-key (kbd "C-x C-g") 'counsel-git-grep)
   (global-set-key (kbd "M-x") 'counsel-M-x)
   (global-set-key (kbd "M-y") 'counsel-yank-pop)
-  (global-set-key (kbd "C-M-z") 'counsel-fzf)
-  (global-set-key (kbd "C-M-r") 'counsel-recentf)
-  (global-set-key (kbd "C-x C-b") 'counsel-ibuffer)
-  (global-set-key (kbd "C-M-f") 'counsel-ag)
+  (global-set-key (kbd "M-i") 'swiper-thing-at-point)
+  (global-set-key (kbd "C-c f") 'counsel-ag)
+  (global-set-key (kbd "C-c i") 'counsel-imenu)
+  (global-set-key (kbd "C-c y") 'ivy-yasnippet)
+  (global-set-key [delete] 'counsel-apropos)
 
   ;; アクティベート
   (counsel-mode 1))
-
-;; swiper ================
-(when (require 'swiper nil t)
-
-  ;; キーバインドは一例です．好みに変えましょう．
-  (global-set-key (kbd "M-s M-s") 'swiper-thing-at-point))
 
 ;; eldoc ================
 (with-eval-after-load "eldoc"
@@ -64,7 +64,7 @@
       (funcall f string)))
   (advice-add 'eldoc-message :around #'ad:eldoc-message))
 
-;; 履歴
+;; 履歴 ================
 (when (require 'smex nil t)
   (setq smex-history-length 35)
   (setq smex-completion-method 'ivy))
@@ -73,53 +73,34 @@
   ;; counsel-mark-ring のリストをソートさせない
   (setf (alist-get 'counsel-mark-ring ivy-sort-functions-alist) nil))
 
-(global-set-key (kbd "C-,") 'counsel-mark-ring)
-(with-eval-after-load "flyspell"
-  (define-key flyspell-mode-map (kbd "C-,") 'counsel-mark-ring))
+(all-the-icons-ivy-rich-mode 1)
+(ivy-rich-mode 1)
 
-(setq ivy-count-format "⦇%d/%d⦈ ")
-(with-eval-after-load "ivy"
-  (defun my-pre-prompt-function ()
-    (if window-system
-        (format "%s "
-                (all-the-icons-faicon "sort-amount-asc")) ;; ""
-      (format "%s" (make-string (1- (frame-width)) ?\x2D))))
-  (setq ivy-pre-prompt-function #'my-pre-prompt-function))
+;; 外観 ================
+(custom-set-faces
+ '(ivy-current-match
+   ((((class color) (background light))
+     :background "#FFF3F3" :distant-foreground "#000000")
+    (((class color) (background dark))
+     :background "#404040" :distant-foreground "#abb2bf")))
+ '(ivy-minibuffer-match-face-1
+   ((((class color) (background light)) :foreground "#666666")
+    (((class color) (background dark)) :foreground "#999999")))
+ '(ivy-minibuffer-match-face-2
+   ((((class color) (background light)) :foreground "#c03333" :underline t)
+    (((class color) (background dark)) :foreground "#e04444" :underline t)))
+ '(ivy-minibuffer-match-face-3
+   ((((class color) (background light)) :foreground "#8585ff" :underline t)
+    (((class color) (background dark)) :foreground "#7777ff" :underline t)))
+ '(ivy-minibuffer-match-face-4
+   ((((class color) (background light)) :foreground "#439943" :underline t)
+    (((class color) (background dark)) :foreground "#33bb33" :underline t))))
 
-(defface my-ivy-arrow-visible
-  '((((class color) (background light)) :foreground "orange")
-    (((class color) (background dark)) :foreground "#EE6363"))
-  "Face used by Ivy for highlighting the arrow.")
+;; ag
+(defun ad:counsel-ag (f &optional initial-input initial-directory extra-ag-args ag-prompt caller)
+  (apply f (or initial-input (ivy-thing-at-point))
+         (unless current-prefix-arg
+           (or initial-directory default-directory))
+         extra-ag-args ag-prompt caller))
 
-(defface my-ivy-arrow-invisible
-  '((((class color) (background light)) :foreground "#FFFFFF")
-    (((class color) (background dark)) :foreground "#31343F"))
-  "Face used by Ivy for highlighting the invisible arrow.")
-
-(if window-system
-    (when (require 'all-the-icons nil t)
-      (defun my-ivy-format-function-arrow (cands)
-        "Transform CANDS into a string for minibuffer."
-        (ivy--format-function-generic
-         (lambda (str)
-           (concat (all-the-icons-faicon
-                    "bolt"
-                    :v-adjust -0.2 :face 'my-ivy-arrow-visible)
-                   " " (ivy--add-face str 'ivy-current-match)))
-         (lambda (str)
-           (concat (all-the-icons-faicon
-                    "bolt" :face 'my-ivy-arrow-invisible) " " str))
-         cands
-         "\n"))
-      (setq ivy-format-functions-alist
-            '((t . my-ivy-format-function-arrow))))
-  (setq ivy-format-functions-alist '((t . ivy-format-function-arrow))))
-
-;; (when (require 'all-the-icons-ivy nil t)
-;;   (dolist (command '(counsel-projectile-switch-project
-;;                      counsel-ibuffer))
-;;     (add-to-list 'all-the-icons-ivy-buffer-commands command))
-;;   (all-the-icons-ivy-setup))
-
-(when (require 'ivy-rich nil t)
-  (ivy-rich-mode 1))
+(advice-add 'counsel-ag :around #'ad:counsel-ag)
