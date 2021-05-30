@@ -38,6 +38,7 @@
 (depends-on "company-emoji")
 (depends-on "concurrent")
 (depends-on "counsel")
+(depends-on "counsel-projectile")
 (depends-on "create-link")
 (depends-on "ctable")
 (depends-on "ctags-update")
