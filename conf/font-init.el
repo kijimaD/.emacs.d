@@ -2,10 +2,13 @@
 (pcase system-type
   ((or 'gnu/linux 'windows-nt 'cygwin)
    (set-face-attribute 'default nil
-                       :font "JetBrains Mono"
-                       :weight 'light
+                       :font "Iosevka SS08"
+                       :weight 'regular
                        :height 100))
   ('darwin (set-face-attribute 'default nil :font "Fira Mono" :height 170)))
+;; "JetBrains Mono"
+;; "Iosevka SS08"
+;; "Fira Mono"
 
 ;; 文字コード ================
 ;;ターミナルの文字コード

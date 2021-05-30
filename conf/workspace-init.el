@@ -1,6 +1,7 @@
 ;; workspace
 (require 'perspective)
 (setq persp-initial-frame-name "1")
+(setq persp-modestring-dividers '("" "" " "))
 (persp-mode 1)
 
 ;; ワークスペース生成
