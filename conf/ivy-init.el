@@ -52,7 +52,9 @@
   (global-set-key (kbd "C-c f") 'counsel-ag)
   (global-set-key (kbd "C-c i") 'counsel-imenu)
   (global-set-key (kbd "C-c y") 'ivy-yasnippet)
+  (global-set-key (kbd "C-c h") 'counsel-find-library)
   (global-set-key [delete] 'counsel-apropos)
+  ;; bm
 
   ;; アクティベート
   (counsel-mode 1))

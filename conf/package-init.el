@@ -142,20 +142,6 @@
 (global-set-key (kbd "M-[") 'bm-previous)
 (global-set-key (kbd "M-]") 'bm-next)
 
-;;; helm-bm.el設定
-(require 'helm-bm)
-(push '(migemo) helm-source-bm)
-;; annotationをオフに
-(setq helm-source-bm (delete '(multiline) helm-source-bm))
-
-(defun bm-toggle-or-helm ()
-  "2回連続で起動したらhelm-bmを実行させる"
-  (interactive)
-  (bm-toggle)
-  (when (eq last-command 'bm-toggle-or-helm)
-    (helm-bm)))
-(global-set-key (kbd "C-M-SPC") 'bm-toggle-or-helm)
-
 ;; カーソル移動 ================
 (require 'ace-jump-mode)
 (setq ace-jump-mode-gray-background nil)
@@ -555,3 +541,8 @@
 
 ;; git-link ================
 (setq git-link-default-branch "develop")
+
+;; exwm ================
+(require 'exwm)
+(require 'exwm-config)
+(exwm-config-example)
