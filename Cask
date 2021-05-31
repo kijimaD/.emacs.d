@@ -220,7 +220,6 @@
 (depends-on "volatile-highlights")
 (depends-on "vterm")
 (depends-on "vterm-toggle")
-(depends-on "w3m")
 (depends-on "wc-goal-mode")
 (depends-on "web-mode")
 (depends-on "websocket")
