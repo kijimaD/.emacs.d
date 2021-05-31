@@ -1,14 +1,16 @@
 ;; Set the font face based on platform
-(pcase system-type
-  ((or 'gnu/linux 'windows-nt 'cygwin)
-   (set-face-attribute 'default nil
-                       :font "JetBrains Mono"
-                       :weight 'regular
-                       :height 100)
-   (set-fontset-font
-    nil 'japanese-jisx0208
-    (font-spec :family "Hiragino Sans")))
-  ('darwin (set-face-attribute 'default nil :font "Fira Mono" :height 150)))
+(when window-system
+  (progn
+    (pcase system-type
+      ((or 'gnu/linux 'windows-nt 'cygwin)
+       (set-face-attribute 'default nil
+                           :font "JetBrains Mono"
+                           :weight 'regular
+                           :height 100)
+       (set-fontset-font
+        nil 'japanese-jisx0208
+        (font-spec :family "Hiragino Sans")))
+      ('darwin (set-face-attribute 'default nil :font "Fira Mono" :height 150)))))
 
 ;; "JetBrains Mono"
 ;; "Iosevka SS08"
