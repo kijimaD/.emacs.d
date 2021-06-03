@@ -4,7 +4,7 @@
     (pcase system-type
       ((or 'gnu/linux 'windows-nt 'cygwin)
        (set-face-attribute 'default nil
-                           :font "JetBrains Mono"
+                           :font "Fira Mono"
                            :weight 'regular
                            :height 100)
        (set-fontset-font

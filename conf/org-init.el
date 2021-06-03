@@ -112,3 +112,4 @@
 ;; テンプレート ================
 (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
 (add-to-list 'org-structure-template-alist '("sh" . "src sh"))
+(add-to-list 'org-structure-template-alist '("rb" . "src ruby"))
