@@ -1,14 +1,21 @@
 ;; Set the font face based on platform
-(pcase system-type
-  ((or 'gnu/linux 'windows-nt 'cygwin)
-   (set-face-attribute 'default nil
-                       :font "Iosevka SS08"
-                       :weight 'regular
-                       :height 100))
-  ('darwin (set-face-attribute 'default nil :font "Fira Mono" :height 170)))
+(when window-system
+  (progn
+    (pcase system-type
+      ((or 'gnu/linux 'windows-nt 'cygwin)
+       (set-face-attribute 'default nil
+                           :font "Fira Mono"
+                           :weight 'regular
+                           :height 100)
+       (set-fontset-font
+        nil 'japanese-jisx0208
+        (font-spec :family "Hiragino Sans")))
+      ('darwin (set-face-attribute 'default nil :font "Fira Mono" :height 150)))))
+
 ;; "JetBrains Mono"
 ;; "Iosevka SS08"
 ;; "Fira Mono"
+;; "Hiragino Sans" -- (japanese)
 
 ;; 文字コード ================
 ;;ターミナルの文字コード

@@ -90,3 +90,11 @@
           '(lambda()
              (setq truncate-lines nil
                    truncate-partial-width-windows t)))
+
+(setq erc-server "irc.libera.chat"
+      erc-nick "kijimad"
+      erc-user-full-name "Kijima Daigo"
+      erc-track-shorten-start 8
+      erc-autojoin-channels-alist '(("irc-libera.chat" "#systemcrafters" "#emacs"))
+      erc-kill-buffer-on-part t
+      erc-auto-query 'bufy)

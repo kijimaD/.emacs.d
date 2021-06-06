@@ -111,7 +111,7 @@
      ()))
   "*Face used by hl-line.")
 (setq hl-line-face 'hlline-face)
-;; (global-hl-line-mode)
+(global-hl-line-mode)
 
 ;; (nyan-mode)
 
@@ -139,6 +139,7 @@
 (add-hook 'kill-emacs-hook '(lambda nil
                               (bm-buffer-save-all)
                               (bm-repository-save)))
+(global-set-key (kbd "C-M-SPC") 'bm-toggle)
 (global-set-key (kbd "M-[") 'bm-previous)
 (global-set-key (kbd "M-]") 'bm-next)
 
@@ -159,7 +160,7 @@
 (back-button-mode 1)
 
 (global-set-key (kbd "C-c <left>") 'goto-last-change)
-(global-set-key (kbd "C-x <right>") 'goto-last-change-reverse)
+(global-set-key (kbd "C-c <right>") 'goto-last-change-reverse)
 
 ;; インクリメンタルサーチ ================
 (require 'migemo)

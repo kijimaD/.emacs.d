@@ -24,7 +24,7 @@
 ;; リスト先頭で `C-p' するとき，リストの最後に移動する
 (setq ivy-wrap t)
 
-(setq ivy-count-format "⚝%d╳%d⚝ ")
+(setq ivy-count-format "%d╳%d ")
 
 ;; アクティベート
 (ivy-mode 1)
