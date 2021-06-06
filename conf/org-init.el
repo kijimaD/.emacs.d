@@ -15,6 +15,9 @@
 (setq org-hide-leading-stars t)
 (setq org-hide-emphasis-markers t)
 
+;; 展開アイコン
+(setq org-ellipsis "▼")
+
 ;; org-default-notes-fileのディレクトリ
 (setq org-directory (concat "~/" public-directory "/junk/diary/org-journal"))
 
@@ -30,11 +33,6 @@
          (setq truncate-lines t))
         (t
          (setq truncate-lines nil))))
-
-;; blockの背景色を設定する。spacemacs-darkに合わせる
-(custom-set-faces
- '(org-block
-   ((t (:background "#373040" :foreground: "#827591")))))
 
 ;; スピードコマンド有効化
 (setq org-use-speed-commands t)
@@ -110,6 +108,47 @@
 (define-key org-mode-map (kbd "C-c n I") 'org-roam-insert-immediate)
 
 ;; テンプレート ================
-(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-(add-to-list 'org-structure-template-alist '("sh" . "src sh"))
-(add-to-list 'org-structure-template-alist '("rb" . "src ruby"))
+(with-eval-after-load 'org
+  ;; This is needed as of Org 9.2
+  (require 'org-tempo)
+
+  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist '("js" . "src javascript"))
+  (add-to-list 'org-structure-template-alist '("py" . "src python"))
+  (add-to-list 'org-structure-template-alist '("rb" . "src ruby"))
+  (add-to-list 'org-structure-template-alist '("sh" . "src shell")))
+
+;; face ================
+;; https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.org
+
+(defun efs/org-font-setup ()
+  ;; Replace list hyphen with dot
+  (font-lock-add-keywords 'org-mode
+                          '(("^ *\\([-]\\) "
+                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "✦"))))))
+
+  ;; Set faces for heading levels
+  (dolist (face '((org-level-1 . 1.2)
+                  (org-level-2 . 1.1)
+                  (org-level-3 . 1.05)
+                  (org-level-4 . 1.0)
+                  (org-level-5 . 1.1)
+                  (org-level-6 . 1.1)
+                  (org-level-7 . 1.1)
+                  (org-level-8 . 1.1)))
+    (set-face-attribute (car face) nil :font "Hiragino Sans" :weight 'bold :height (cdr face)))
+
+  ;; Ensure that anything that should be fixed-pitch in Org files appears that way
+  (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-table nil    :inherit 'fixed-pitch)
+  (set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
+  (set-face-attribute 'org-code nil     :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-table nil    :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-checkbox nil  :inherit 'fixed-pitch)
+  (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
+  (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch))
+
+(efs/org-font-setup)
