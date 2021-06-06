@@ -119,6 +119,7 @@
 (depends-on "jedi")
 (depends-on "jedi-core")
 (depends-on "js2-mode")
+(depends-on "json-mode")
 (depends-on "jump")
 (depends-on "key-quiz")
 (depends-on "language-detection")
