@@ -123,7 +123,18 @@
   (add-to-list 'org-structure-template-alist '("rb" . "src ruby"))
   (add-to-list 'org-structure-template-alist '("sh" . "src shell")))
 
+;; 中央寄せ ================
+(require 'visual-fill-column)
+(defun efs/org-mode-visual-fill ()
+  "Centering buffer."
+  (setq visual-fill-column-width 100
+        visual-fill-column-center-text t)
+  (visual-fill-column-mode 1))
+
+(add-hook 'org-mode-hook (lambda () (efs/org-mode-visual-fill)))
+
 ;; face ================
+;; themeのあとに評価するため、ここでは関数定義だけ。
 ;; https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.org
 
 (defun efs/org-font-setup ()
