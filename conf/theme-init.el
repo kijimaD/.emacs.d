@@ -9,7 +9,8 @@
   (dolist (theme custom-enabled-themes)
     (unless (custom-theme-p theme)
       (load-theme theme)))
-  (custom-set-variables `(custom-enabled-themes (quote ,custom-enabled-themes))))
+  (custom-set-variables `(custom-enabled-themes (quote ,custom-enabled-themes)))
+  (efs/org-font-setup))
 
 (add-hook 'after-init-hook 'reapply-themes)
 
