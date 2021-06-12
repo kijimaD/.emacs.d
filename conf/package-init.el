@@ -62,6 +62,9 @@
 
 ;; インデント可視化
 (require 'highlight-indent-guides)
+(setq highlight-indent-guides-auto-enabled t)
+(setq highlight-indent-guides-responsive t)
+(setq highlight-indent-guides-method 'character) ; column
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 
 ;; スペース可視化
@@ -318,6 +321,7 @@
   (add-hook 'dired-load-hook 'my-dired-init))
 
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+(add-hook 'dired-mode-hook 'dired-hide-details-mode)
 
 ;; 定義元ジャンプ ================
 (dumb-jump-mode)
