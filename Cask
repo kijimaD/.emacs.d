@@ -34,6 +34,7 @@
 (depends-on "cdb")
 (depends-on "chess")
 (depends-on "closql")
+(depends-on "coffee-mode")
 (depends-on "command-log-mode")
 (depends-on "company")
 (depends-on "company-emoji")
