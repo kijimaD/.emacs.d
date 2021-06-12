@@ -1,5 +1,5 @@
-;; (defvar efs/frame-transparency '(90 . 90))
-;; (set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)
+(defvar efs/frame-transparency '(90 . 90))
+(set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)
 ;; (add-to-list 'default-frame-alist `(alpha . ,efs/frame-transparency))
 
 ;; Set the font face based on platform

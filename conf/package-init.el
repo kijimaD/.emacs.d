@@ -551,3 +551,6 @@
 ;; (require 'exwm)
 ;; (require 'exwm-config)
 ;; (exwm-config-example)
+
+;; undo ================
+(global-undo-tree-mode)
