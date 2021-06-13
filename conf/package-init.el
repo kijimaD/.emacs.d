@@ -98,6 +98,8 @@
           (lambda ()
             (setq indent-tabs-mode nil)))
 
+(setq-default typescript-indent-level 2)
+
 ;; 編集箇所を強調表示
 (volatile-highlights-mode t)
 

@@ -18,7 +18,8 @@
 ;; 展開アイコン
 ;; (setq org-ellipsis "»")
 ;; (setq org-ellipsis "..")
-(setq org-ellipsis "⤵")
+;; (setq org-ellipsis "⤵")
+(setq org-ellipsis "🢗")
 (setq org-cycle-separator-lines -1)
 
 ;; org-default-notes-fileのディレクトリ
@@ -119,6 +120,7 @@
 
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist '("js" . "src javascript"))
+  (add-to-list 'org-structure-template-alist '("ts" . "src typescript"))
   (add-to-list 'org-structure-template-alist '("py" . "src python"))
   (add-to-list 'org-structure-template-alist '("rb" . "src ruby"))
   (add-to-list 'org-structure-template-alist '("sh" . "src shell")))
