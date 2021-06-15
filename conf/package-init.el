@@ -564,3 +564,5 @@
                         ("cafe - lainon"     . "https://lainon.life/radio/cafe.ogg.m3u")    ;; boring ambient, but with lain
                         ("ambient - HBR1.com" . "http://ubuntu.hbr1.com:19800/ambient.ogg")))
 
+;; typing game ================
+(setq toe-highscore-file "~/.emacs.d/games/.toe-scores")
