@@ -556,3 +556,11 @@
 
 ;; undo ================
 (global-undo-tree-mode)
+
+;; eradio ================
+(setq eradio-channels '(("def con - soma fm" . "https://somafm.com/defcon256.pls")          ;; electronica with defcon-speaker
+                        ("metal - soma fm"   . "https://somafm.com/metal130.pls")           ;; metal
+                        ("cyberia - lainon"  . "https://lainon.life/radio/cyberia.ogg.m3u") ;; cyberpunk-esque electronica
+                        ("cafe - lainon"     . "https://lainon.life/radio/cafe.ogg.m3u")    ;; boring ambient, but with lain
+                        ("ambient - HBR1.com" . "http://ubuntu.hbr1.com:19800/ambient.ogg")))
+
