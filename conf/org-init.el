@@ -74,8 +74,7 @@
 (setq org-journal-dir (concat "~/" public-directory "/junk/diary/org-journal"))
 (setq org-journal-file-format "%Y%m%d.org")
 (setq org-journal-find-file 'find-file)
-(setq org-journal-hide-entries-p nil)
-(setq org-startup-folded 'showeverything)
+(setq org-journal-hide-entries-p t)
 
 ;; 使い捨てのファイルを開く ================
 (require 'open-junk-file)
