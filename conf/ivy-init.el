@@ -26,6 +26,9 @@
 
 (setq ivy-count-format "%d╳%d ")
 
+;; 新規作成プロンプトを表示する
+(setq ivy-use-selectable-prompt t)
+
 ;; アクティベート
 (ivy-mode 1)
 
@@ -56,7 +59,6 @@
 ;; bm
 
 (counsel-mode 1)
-
 ;; eldoc ================
 (with-eval-after-load "eldoc"
   (defun ad:eldoc-message (f &optional string)

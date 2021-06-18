@@ -18,7 +18,8 @@
 ;; 展開アイコン
 ;; (setq org-ellipsis "»")
 ;; (setq org-ellipsis "..")
-(setq org-ellipsis "⤵")
+;; (setq org-ellipsis "⤵")
+(setq org-ellipsis "🢗")
 (setq org-cycle-separator-lines -1)
 
 ;; org-default-notes-fileのディレクトリ
@@ -73,8 +74,7 @@
 (setq org-journal-dir (concat "~/" public-directory "/junk/diary/org-journal"))
 (setq org-journal-file-format "%Y%m%d.org")
 (setq org-journal-find-file 'find-file)
-(setq org-journal-hide-entries-p nil)
-(setq org-startup-folded 'showeverything)
+(setq org-journal-hide-entries-p t)
 
 ;; 使い捨てのファイルを開く ================
 (require 'open-junk-file)
@@ -119,6 +119,7 @@
 
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist '("js" . "src javascript"))
+  (add-to-list 'org-structure-template-alist '("ts" . "src typescript"))
   (add-to-list 'org-structure-template-alist '("py" . "src python"))
   (add-to-list 'org-structure-template-alist '("rb" . "src ruby"))
   (add-to-list 'org-structure-template-alist '("sh" . "src shell")))

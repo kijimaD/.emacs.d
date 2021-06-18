@@ -48,6 +48,10 @@
 ;;ワードカウントをC-x p に割当
 (global-set-key "\C-xp" 'count-words)
 
+;; windowの大きさ変更
+(global-set-key (kbd "C-M-{") 'shrink-window-horizontally)
+(global-set-key (kbd "C-M-}") 'enlarge-window-horizontally)
+
 ;; yesかnoではなく、yかnかで答えられるようにする
 (defalias 'yes-or-no-p 'y-or-n-p)
 

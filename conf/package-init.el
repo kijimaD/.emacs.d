@@ -62,6 +62,9 @@
 
 ;; インデント可視化
 (require 'highlight-indent-guides)
+(setq highlight-indent-guides-auto-enabled t)
+(setq highlight-indent-guides-responsive t)
+(setq highlight-indent-guides-method 'character) ; column
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 
 ;; スペース可視化
@@ -94,6 +97,8 @@
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)))
+
+(setq-default typescript-indent-level 2)
 
 ;; 編集箇所を強調表示
 (volatile-highlights-mode t)
@@ -318,6 +323,7 @@
   (add-hook 'dired-load-hook 'my-dired-init))
 
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+(add-hook 'dired-mode-hook 'dired-hide-details-mode)
 
 ;; 定義元ジャンプ ================
 (dumb-jump-mode)
@@ -547,3 +553,16 @@
 ;; (require 'exwm)
 ;; (require 'exwm-config)
 ;; (exwm-config-example)
+
+;; undo ================
+(global-undo-tree-mode)
+
+;; eradio ================
+(setq eradio-channels '(("def con - soma fm" . "https://somafm.com/defcon256.pls")          ;; electronica with defcon-speaker
+                        ("metal - soma fm"   . "https://somafm.com/metal130.pls")           ;; metal
+                        ("cyberia - lainon"  . "https://lainon.life/radio/cyberia.ogg.m3u") ;; cyberpunk-esque electronica
+                        ("cafe - lainon"     . "https://lainon.life/radio/cafe.ogg.m3u")    ;; boring ambient, but with lain
+                        ("ambient - HBR1.com" . "http://ubuntu.hbr1.com:19800/ambient.ogg")))
+
+;; typing game ================
+(setq toe-highscore-file "~/.emacs.d/games/.toe-scores")
