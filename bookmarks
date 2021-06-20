@@ -3,8 +3,8 @@
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-capture-last-stored"
- (filename . "~/roam/20210509122633-elisp.org")
- (front-context-string)
+ (filename . "~/roam/20210615222732-project.org")
+ (front-context-string . "#+title: Project")
  (rear-context-string)
  (position . 1))
 ("Handbook | GitLab"
