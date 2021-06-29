@@ -111,7 +111,7 @@
      (:background "Purple4"))
     (((class color)
       (background light))
-     (:background "ForestGreen"))
+     (:background "gainsboro"))
     (t
      ()))
   "*Face used by hl-line.")
