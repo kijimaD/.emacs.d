@@ -74,6 +74,9 @@
   (setq web-mode-tag-auto-close-style 2))
 (add-hook 'web-mode-hook 'my-web-mode-hook)
 
+;; CSS ================
+(setq css-indent-offset 2)
+
 ;; SQL ================
 (add-hook 'ejc-sql-minor-mode-hook
           (lambda ()

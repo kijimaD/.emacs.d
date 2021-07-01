@@ -15,6 +15,9 @@
 (setq org-hide-leading-stars t)
 (setq org-hide-emphasis-markers t)
 
+;; 画像表示
+(setq org-startup-with-inline-images t)
+
 ;; 展開アイコン
 ;; (setq org-ellipsis "»")
 ;; (setq org-ellipsis "..")
@@ -112,6 +115,10 @@
 (define-key org-roam-mode-map (kbd "C-c n g") 'org-roam-graph)
 (define-key org-mode-map (kbd "C-c n i") 'org-roam-insert)
 (define-key org-mode-map (kbd "C-c n I") 'org-roam-insert-immediate)
+
+;; 画像 ================
+(require 'org-download)
+(setq-default org-download-image-dir "~/roam/images")
 
 ;; テンプレート ================
 (with-eval-after-load 'org
