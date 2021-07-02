@@ -152,6 +152,7 @@
 (depends-on "org")
 (depends-on "org-brain")
 (depends-on "org-bullets")
+(depends-on "org-download")
 (depends-on "org-journal")
 (depends-on "org-journal-list")
 (depends-on "org-noter")

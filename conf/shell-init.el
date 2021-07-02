@@ -21,6 +21,7 @@
 (eshell-git-prompt-use-theme 'powerline)
 
 (global-set-key (kbd "C-M-;") 'eshell-toggle)
+(setq eshell-toggle-use-projectile-root t)
 ;; vterm ================
 (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
 (setq vterm-max-scrollback 10000)

@@ -15,6 +15,9 @@
 (setq org-hide-leading-stars t)
 (setq org-hide-emphasis-markers t)
 
+;; 画像表示
+(setq org-startup-with-inline-images t)
+
 ;; 展開アイコン
 ;; (setq org-ellipsis "»")
 ;; (setq org-ellipsis "..")
@@ -94,6 +97,7 @@
 ;; スライド ================
 (global-set-key (kbd "<f6>") 'org-tree-slide-mode)
 (global-set-key (kbd "S-<f6>") 'org-tree-slide-skip-done-toggle)
+(org-tree-slide-simple-profile)
 
 ;; pdf ================
 (pdf-tools-install t)
@@ -111,6 +115,10 @@
 (define-key org-roam-mode-map (kbd "C-c n g") 'org-roam-graph)
 (define-key org-mode-map (kbd "C-c n i") 'org-roam-insert)
 (define-key org-mode-map (kbd "C-c n I") 'org-roam-insert-immediate)
+
+;; 画像 ================
+(require 'org-download)
+(setq-default org-download-image-dir "~/roam/images")
 
 ;; テンプレート ================
 (with-eval-after-load 'org
@@ -144,20 +152,20 @@
   ;;                         '(("^ *\\([-]\\) "
   ;;                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "✦"))))))
 
-(setq org-superstar-headline-bullets-list '("◉" "○" "✸" "✿" "⁖"))
+(setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
 (setq org-superstar-item-bullet-alist '((?* . ?•)
-                                        (?+ . ?➤)
-                                        (?- . ?»)))
+                                        (?+ . ?»)
+                                        (?- . ?➤)))
 
   ;; Set faces for heading levels
-  (dolist (face '((org-level-1 . 1.5)
-                  (org-level-2 . 1.4)
-                  (org-level-3 . 1.3)
+  (dolist (face '((org-level-1 . 1.4)
+                  (org-level-2 . 1.0)
+                  (org-level-3 . 1.0)
                   (org-level-4 . 1.0)
-                  (org-level-5 . 1.1)
-                  (org-level-6 . 1.1)
-                  (org-level-7 . 1.1)
-                  (org-level-8 . 1.1)))
+                  (org-level-5 . 1.0)
+                  (org-level-6 . 1.0)
+                  (org-level-7 . 1.0)
+                  (org-level-8 . 1.0)))
     (set-face-attribute (car face) nil :font "Jost" :weight 'extra-bold :height (cdr face)))
 
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way

@@ -111,7 +111,7 @@
      (:background "Purple4"))
     (((class color)
       (background light))
-     (:background "ForestGreen"))
+     (:background "gainsboro"))
     (t
      ()))
   "*Face used by hl-line.")
@@ -149,21 +149,24 @@
 (global-set-key (kbd "M-]") 'bm-next)
 
 ;; カーソル移動 ================
+(global-set-key (kbd "M-<left>") 'previous-buffer)
+(global-set-key (kbd "M-<right>") 'next-buffer)
+(global-set-key (kbd "C-t") 'other-window)
+
 (require 'ace-jump-mode)
 (setq ace-jump-mode-gray-background nil)
 (setq ace-jump-word-mode-use-query-char nil)
 (setq ace-jump-mode-move-keys
       (append "asdfghjkl;:]qwertyuiop@zxcvbnm,." nil))
-;; (global-set-key (kbd "C-o") 'ace-jump-word-mode)
+(global-set-key (kbd "C-o") 'ace-jump-word-mode)
 
 (ace-link-setup-default)
 
 (require 'avy)
-(global-set-key (kbd "C-j") 'avy-goto-char-timer)
-(global-set-key (kbd "M-j") 'avy-goto-word-1)
+(global-set-key (kbd "C-j") 'avy-copy-line)
+(global-set-key (kbd "M-j") 'avy-goto-char-2)
 
 (back-button-mode 1)
-
 (global-set-key (kbd "C-c <left>") 'goto-last-change)
 (global-set-key (kbd "C-c <right>") 'goto-last-change-reverse)
 
@@ -430,6 +433,8 @@
   (interactive)
   (setq-local eww-disable-colorize nil)
   (eww-reload))
+
+(add-hook 'eww-mode-hook (lambda () (efs/org-mode-visual-fill)))
 
 ;; デフォルトエンジン
 (setq eww-search-prefix "https://www.google.co.jp/search?q=")

@@ -9,7 +9,6 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.txt\\'" . dokuwiki-mode))
 (setq web-mode-engines-alist
       '(("php"    . "\\.phtml\\'")
         ("blade"  . "\\.blade\\.")))
@@ -74,6 +73,9 @@
   (setq web-mode-auto-close-style 2)
   (setq web-mode-tag-auto-close-style 2))
 (add-hook 'web-mode-hook 'my-web-mode-hook)
+
+;; CSS ================
+(setq css-indent-offset 2)
 
 ;; SQL ================
 (add-hook 'ejc-sql-minor-mode-hook

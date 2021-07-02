@@ -8,9 +8,3 @@
       (delete 'ac-source-words-in-same-mode-buffers ac-sources)) ;;jediの補完候補だけでいい
 (add-to-list 'ac-sources 'ac-source-filename)
 (add-to-list 'ac-sources 'ac-source-jedi-direct)
-
-(global-set-key (kbd "C-t") 'other-window)
-(global-set-key (kbd "C-o") 'other-frame)
-
-(global-set-key (kbd "M-<left>") 'previous-buffer)
-(global-set-key (kbd "M-<right>") 'next-buffer)
