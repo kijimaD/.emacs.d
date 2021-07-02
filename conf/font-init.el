@@ -56,14 +56,13 @@
     (--set-emoji-font nil)
     ;; Hook for when a frame is created with emacsclient
     ;; see https://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Frames.html
-    (add-hook 'after-make-frame-functions '--set-emoji-font)))
+    (add-hook 'after-make-frame-functions '--set-emoji-font)
+
+    ;; unicodefont
+    (require 'unicode-fonts)
+    (unicode-fonts-setup)))
 
 (when (not window-system)
   (progn
     ;; CUI用設定
     ))
-
-;; unicodefont ================
-(when (eq system-type 'darwin)
-  (require 'unicode-fonts)
-  (unicode-fonts-setup))
