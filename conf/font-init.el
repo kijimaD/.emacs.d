@@ -64,5 +64,6 @@
     ))
 
 ;; unicodefont ================
-(require 'unicode-fonts)
-(unicode-fonts-setup)
+(when (eq system-type 'darwin)
+  (require 'unicode-fonts)
+  (unicode-fonts-setup))
