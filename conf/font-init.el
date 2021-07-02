@@ -14,7 +14,13 @@
        (set-fontset-font
         nil 'japanese-jisx0208
         (font-spec :family "Hiragino Sans")))
-      ('darwin (set-face-attribute 'default nil :font "Fira Mono" :height 150)))))
+      ('darwin
+       (set-face-attribute 'default nil
+                           :font "Fira Mono"
+                           :height 150)
+       (set-fontset-font
+        nil 'japanese-jisx0208
+        (font-spec :family "Hiragino Sans"))))))
 
 ;; "JetBrains Mono"
 ;; "Iosevka SS08"
@@ -56,3 +62,7 @@
   (progn
     ;; CUI用設定
     ))
+
+;; unicodefont ================
+(require 'unicode-fonts)
+(unicode-fonts-setup)

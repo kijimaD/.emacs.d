@@ -222,6 +222,7 @@
 (depends-on "typing")
 (depends-on "ucs-utils")
 (depends-on "undo-tree")
+(depends-on "unicode-fonts")
 (depends-on "use-package")
 (depends-on "visual-regexp")
 (depends-on "volatile-highlights")
