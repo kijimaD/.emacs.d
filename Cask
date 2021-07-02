@@ -4,7 +4,7 @@
 
 ;; Caution packages: Causing errors in CI
 (depends-on "rspec-mode")
-;; (depends-on "rinari")
+(depends-on "rinari")
 ;; (depends-on "counsel-projectile")
 
 ;; Install Packages
