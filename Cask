@@ -2,11 +2,6 @@
 (source gnu)
 (source melpa)
 
-;; Caution packages: Causing errors in CI
-;; (depends-on "rspec-mode")
-;; (depends-on "rinari")
-;; (depends-on "counsel-projectile")
-
 ;; Install Packages
 (depends-on "ace-isearch")
 (depends-on "ace-jump-mode")
@@ -40,6 +35,7 @@
 (depends-on "company-emoji")
 (depends-on "concurrent")
 (depends-on "counsel")
+(depends-on "counsel-projectile")
 (depends-on "create-link")
 (depends-on "ctable")
 (depends-on "ctags-update")
@@ -190,8 +186,10 @@
 (depends-on "reformatter")
 (depends-on "request")
 (depends-on "restart-emacs")
+(depends-on "rinari")
 (depends-on "rjsx-mode")
 (depends-on "robe")
+(depends-on "rspec-mode")
 (depends-on "rubocop")
 (depends-on "ruby-compilation")
 (depends-on "ruby-electric")
@@ -222,6 +220,7 @@
 (depends-on "typing")
 (depends-on "ucs-utils")
 (depends-on "undo-tree")
+(depends-on "unicode-fonts")
 (depends-on "use-package")
 (depends-on "visual-regexp")
 (depends-on "volatile-highlights")

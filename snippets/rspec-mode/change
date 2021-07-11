@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: change
+# key: ch
+# --
+expect { ${1:content} }
+.to change(${2:change object}, :${3:method}).from(${4:value}).to(${5:value})

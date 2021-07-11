@@ -1,5 +1,5 @@
 (setq custom-safe-themes t)
-(setq-default custom-enabled-themes '(doom-acario-light))
+(setq-default custom-enabled-themes '(doom-vibrant))
 ;; doom-acario-light
 ;; doom-vibrant
 ;; spacemacs-dark

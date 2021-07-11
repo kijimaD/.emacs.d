@@ -22,7 +22,8 @@
 ;; (setq org-ellipsis "»")
 ;; (setq org-ellipsis "..")
 ;; (setq org-ellipsis "⤵")
-(setq org-ellipsis "🢗")
+;; (setq org-ellipsis "🢗")
+(setq org-ellipsis "❖")
 (setq org-cycle-separator-lines -1)
 
 ;; org-default-notes-fileのディレクトリ

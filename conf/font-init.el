@@ -14,7 +14,13 @@
        (set-fontset-font
         nil 'japanese-jisx0208
         (font-spec :family "Hiragino Sans")))
-      ('darwin (set-face-attribute 'default nil :font "Fira Mono" :height 150)))))
+      ('darwin
+       (set-face-attribute 'default nil
+                           :font "Fira Mono"
+                           :height 150)
+       (set-fontset-font
+        nil 'japanese-jisx0208
+        (font-spec :family "Hiragino Sans"))))))
 
 ;; "JetBrains Mono"
 ;; "Iosevka SS08"
@@ -50,7 +56,11 @@
     (--set-emoji-font nil)
     ;; Hook for when a frame is created with emacsclient
     ;; see https://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Frames.html
-    (add-hook 'after-make-frame-functions '--set-emoji-font)))
+    (add-hook 'after-make-frame-functions '--set-emoji-font)
+
+    ;; unicodefont
+    (require 'unicode-fonts)
+    (unicode-fonts-setup)))
 
 (when (not window-system)
   (progn

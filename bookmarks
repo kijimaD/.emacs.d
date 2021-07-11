@@ -2,9 +2,14 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("org-capture-last-stored"
- (filename . "~/roam/20210615222732-project.org")
- (front-context-string . "#+title: Project")
+(("org-refile-last-stored"
+ (filename . "~/roam/20210624232811-digger.org")
+ (front-context-string . "** DONE componen")
+ (rear-context-string . "ウィンドウにエリアを追加する。\n")
+ (position . 868))
+("org-capture-last-stored"
+ (filename . "~/roam/20210624232811-digger.org")
+ (front-context-string . "#+title: digger\n")
  (rear-context-string)
  (position . 1))
 ("Handbook | GitLab"
