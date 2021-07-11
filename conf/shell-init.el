@@ -27,6 +27,7 @@
 (setq vterm-max-scrollback 10000)
 ;; toggle
 (global-set-key [f9] 'vterm-toggle)
+(global-set-key (kbd "C-M-:") 'vterm-toggle)
 (global-set-key [C-f9] 'vterm-toggle-cd)
 
 (setq vterm-toggle-fullscreen-p nil)
