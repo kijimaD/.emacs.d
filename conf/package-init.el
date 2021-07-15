@@ -164,7 +164,8 @@
 
 (require 'avy)
 (global-set-key (kbd "C-j") 'avy-copy-line)
-(global-set-key (kbd "M-j") 'avy-goto-char-2)
+(global-set-key (kbd "M-j") 'avy-goto-line)
+(global-set-key (kbd "C-M-j") 'avy-goto-whitespace-end)
 
 (back-button-mode 1)
 (global-set-key (kbd "C-c <left>") 'goto-last-change)
