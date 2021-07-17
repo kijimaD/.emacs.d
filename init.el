@@ -29,7 +29,6 @@
 (setq my-hidden-minor-modes
       '(
         abbrev-mode
-        ace-isearch-mode
         auto-highlight-symbol-mode
         auto-revert-mode
         back-button-mode

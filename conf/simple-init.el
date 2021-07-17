@@ -161,7 +161,7 @@
           (isearch-repeat-forward)))
     ad-do-it))
 
-(global-ace-isearch-mode)
+(global-set-key (kbd "C-s") 'swiper-isearch)
 
 ;; マウスホイールの挙動
 (setq

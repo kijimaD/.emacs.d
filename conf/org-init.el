@@ -137,6 +137,7 @@
 (require 'visual-fill-column)
 (defun efs/org-mode-visual-fill ()
   "Centering buffer."
+  (interactive)
   (setq visual-fill-column-width 100
         visual-fill-column-center-text t)
   (visual-fill-column-mode 1))

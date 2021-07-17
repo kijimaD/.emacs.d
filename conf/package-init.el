@@ -390,12 +390,12 @@
 ;; RSS ================
 
 (setq elfeed-feeds
-      '(
-        ("https://news.ycombinator.com/rss" ycombinator)
-        ("https://www.reddit.com/r/emacs.rss" reddit-emacs)
-        ("https://www.sanityinc.com/feed.xml" sanityinc)
-        ("https://sachachua.com/blog/category/weekly/feed/" sachachua)
-        ("https://techracho.bpsinc.jp/feed" techracho)))
+      '(("https://www.reddit.com/r/emacs.rss" Emacs)
+        ("https://www.sanityinc.com/feed.xml" Emacs)
+        ("https://sachachua.com/blog/category/weekly/feed/" Emacs)
+        ("https://techracho.bpsinc.jp/feed" Ruby Rails)
+        ("http://b.hatena.ne.jp/t-wada/rss" Test)
+        ("https://cprss.s3.amazonaws.com/rubyweekly.com.xml" Ruby)))
 
 ;; Google検索 ================
 (require 'google-this)
