@@ -14,6 +14,8 @@ cd ~/.emacs.d
 cask install
 sudo apt-get install emacs-mozc cmigemo
 sudo apt-get install ttf-ancient-fonts # emoji
+
+gem install pry pry-doc # Ruby doc server
 ```
 
 ```

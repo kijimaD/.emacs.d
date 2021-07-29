@@ -159,5 +159,8 @@
 (define-key ruby-mode-map (kbd "C-<return>") 'xmp)
 
 ;; activate robe
-(inf-ruby)
-(robe-start)
+;; CIでは実行しない
+(when window-system
+  (progn
+    (inf-ruby)
+    (robe-start)))
