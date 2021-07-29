@@ -20,6 +20,7 @@
 (load "theme-init")
 (load "workspace-init")
 (load "my-function-init")
+(require 'rcodetools)
 
 ;; 環境変数を読み込む
 (exec-path-from-shell-initialize)
