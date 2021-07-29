@@ -66,6 +66,7 @@
   (setq web-mode-sql-indent-offset 2)
   (setq indent-tabs-mode nil)
   (setq tab-width 2)
+  (setq sql-indent-offset 2)
 
   (setq web-mode-attr-indent-offset nil)
   (setq web-mode-enable-auto-closing t)

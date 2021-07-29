@@ -23,7 +23,8 @@
 ;; (setq org-ellipsis "..")
 ;; (setq org-ellipsis "⤵")
 ;; (setq org-ellipsis "🢗")
-(setq org-ellipsis "❖")
+;; (setq org-ellipsis "❖")
+(setq org-ellipsis " ↯")
 (setq org-cycle-separator-lines -1)
 
 ;; org-default-notes-fileのディレクトリ
@@ -110,12 +111,14 @@
 (add-hook 'after-init-hook 'org-roam-mode)
 (make-directory "~/roam" t)
 (setq org-roam-directory "~/roam")
+(setq org-roam-completion-everywhere t)
 
 (define-key org-roam-mode-map (kbd "C-c n l") 'org-roam)
 (define-key org-roam-mode-map (kbd "C-c n f") 'org-roam-find-file)
 (define-key org-roam-mode-map (kbd "C-c n g") 'org-roam-graph)
 (define-key org-mode-map (kbd "C-c n i") 'org-roam-insert)
 (define-key org-mode-map (kbd "C-c n I") 'org-roam-insert-immediate)
+(define-key org-mode-map (kbd "C-M-i") 'completion-at-point)
 
 ;; 画像 ================
 (require 'org-download)
@@ -131,7 +134,11 @@
   (add-to-list 'org-structure-template-alist '("ts" . "src typescript"))
   (add-to-list 'org-structure-template-alist '("py" . "src python"))
   (add-to-list 'org-structure-template-alist '("rb" . "src ruby"))
+  (add-to-list 'org-structure-template-alist '("sq" . "src sql"))
   (add-to-list 'org-structure-template-alist '("sh" . "src shell")))
+
+;; sql
+(add-hook 'sql-mode-org-src-hook #'sqlind-minor-mode)
 
 ;; 中央寄せ ================
 (require 'visual-fill-column)
