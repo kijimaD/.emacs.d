@@ -5,7 +5,6 @@
   (newline)
   (indent-for-tab-command)
   )
-(global-set-key (kbd "C-<return>") 'my-new-line)
 
 ;; 前のマークに戻る
 (defun my-exchange-point-and-mark ()
@@ -52,7 +51,6 @@
   (interactive)
   (funcall #'isearch-done nopush edit)
   (when isearch-other-end (goto-char isearch-other-end)))
-(define-key isearch-mode-map (kbd "C-<return>")'my-isearch-done-opposite)
 
 ;; 短距離ジャンプ
 ;; 絶対2ストロークなので意外と旨味はない…微調整が必要。

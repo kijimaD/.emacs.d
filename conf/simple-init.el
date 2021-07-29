@@ -161,8 +161,6 @@
           (isearch-repeat-forward)))
     ad-do-it))
 
-(global-set-key (kbd "C-s") 'swiper-isearch)
-
 ;; マウスホイールの挙動
 (setq
  ;; ホイールでスクロールする行数を設定

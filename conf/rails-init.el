@@ -153,3 +153,11 @@
   "*Time in seconds to delay before showing a matching paren."
   :type  'number
   :group 'ruby-block)
+
+;; xmp(実行結果アノテーション)
+(require 'rcodetools)
+(define-key ruby-mode-map (kbd "C-<return>") 'xmp)
+
+;; activate robe
+(inf-ruby)
+(robe-start)
