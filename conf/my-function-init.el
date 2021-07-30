@@ -97,6 +97,12 @@
 ;;   (other-frame 0))
 ;; (add-hook 'after-init-hook 'startup)
 
+(defun my-ej-dict (&optional query)
+  (interactive (list (read-string "Query: " (current-word))))
+  (grep (concat "grep --color -E " "^." query "\s" " ~/.emacs.d/eiji_utf8.txt")))
+
+(global-set-key (kbd "C-c C-e") 'my-ej-dict)
+
 (provide 'my-function-init)
 
 ;;; my-function-init.el ends here
