@@ -97,11 +97,21 @@
 ;;   (other-frame 0))
 ;; (add-hook 'after-init-hook 'startup)
 
-(defun my-ej-dict (&optional query)
+(defun my-ej-dict ()
+  (interactive)
+  (let (query)
+    (cond ((region-active-p)
+           (deactivate-mark t)
+           (setq query (buffer-substring (region-beginning) (region-end))))
+          (t
+           (setq query (current-word))))
+    (grep (concat "grep --color -Ei " "^." query "\s" " ~/.emacs.d/eiji_utf8.txt"))))
+
+(defun my-ej-dict-read (&optional query)
   (interactive (list (read-string "Query: " (current-word))))
   (grep (concat "grep --color -E " "^." query "\s" " ~/.emacs.d/eiji_utf8.txt")))
 
-(global-set-key (kbd "C-c C-e") 'my-ej-dict)
+(global-set-key (kbd "C-x l") 'my-ej-dict)
 
 (provide 'my-function-init)
 
