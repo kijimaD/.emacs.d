@@ -5,7 +5,6 @@
   (newline)
   (indent-for-tab-command)
   )
-(global-set-key (kbd "C-<return>") 'my-new-line)
 
 ;; 前のマークに戻る
 (defun my-exchange-point-and-mark ()
@@ -52,7 +51,6 @@
   (interactive)
   (funcall #'isearch-done nopush edit)
   (when isearch-other-end (goto-char isearch-other-end)))
-(define-key isearch-mode-map (kbd "C-<return>")'my-isearch-done-opposite)
 
 ;; 短距離ジャンプ
 ;; 絶対2ストロークなので意外と旨味はない…微調整が必要。
@@ -62,7 +60,6 @@
   (interactive)
   (avy-jump avy-goto-word-0-regexp :beg (- (point) 200) :end (+ (point) 200))
 )
-(global-set-key (kbd "C-M-j") 'my-avy-jump-short)
 
 (defun my-next-line ()
   (interactive)
@@ -99,6 +96,22 @@
 ;;   (make-frame-command)
 ;;   (other-frame 0))
 ;; (add-hook 'after-init-hook 'startup)
+
+(defun my-ej-dict ()
+  (interactive)
+  (let (query)
+    (cond ((region-active-p)
+           (deactivate-mark t)
+           (setq query (buffer-substring (region-beginning) (region-end))))
+          (t
+           (setq query (current-word))))
+    (grep (concat "grep --color -Ei " "^." query "\s" " ~/.emacs.d/eiji_utf8.txt"))))
+
+(defun my-ej-dict-read (&optional query)
+  (interactive (list (read-string "Query: " (current-word))))
+  (grep (concat "grep --color -E " "^." query "\s" " ~/.emacs.d/eiji_utf8.txt")))
+
+(global-set-key (kbd "C-x l") 'my-ej-dict)
 
 (provide 'my-function-init)
 

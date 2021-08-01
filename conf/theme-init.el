@@ -1,8 +1,9 @@
 (setq custom-safe-themes t)
-(setq-default custom-enabled-themes '(doom-vibrant))
+(setq-default custom-enabled-themes '(doom-dracula))
 ;; doom-acario-light
 ;; doom-vibrant
 ;; spacemacs-dark
+;; doom-dracula
 
 ;; https://github.com/purcell/emacs.d
 ;; Ensure that themes will be applied even if they have not been customized

@@ -4,12 +4,12 @@
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-refile-last-stored"
  (filename . "~/roam/20210624232811-digger.org")
- (front-context-string . "** DONE componen")
- (rear-context-string . "ウィンドウにエリアを追加する。\n")
- (position . 868))
+ (front-context-string . "** DONE 移動AI\nCLO")
+ (rear-context-string . "い。\n\n抽象クラスに移動した。\n")
+ (position . 7440))
 ("org-capture-last-stored"
- (filename . "~/roam/20210624232811-digger.org")
- (front-context-string . "#+title: digger\n")
+ (filename . "~/roam/20210725100835-sql.org")
+ (front-context-string)
  (rear-context-string)
  (position . 1))
 ("Handbook | GitLab"

@@ -3,7 +3,6 @@
 (source melpa)
 
 ;; Install Packages
-(depends-on "ace-isearch")
 (depends-on "ace-jump-mode")
 (depends-on "ace-link")
 (depends-on "add-node-modules-path")

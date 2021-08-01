@@ -30,3 +30,4 @@ var/pcache/
 /scratch
 /session.*
 /smex-items
+/eiji_utf8.txt

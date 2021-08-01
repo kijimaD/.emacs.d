@@ -161,8 +161,6 @@
           (isearch-repeat-forward)))
     ad-do-it))
 
-(global-ace-isearch-mode)
-
 ;; マウスホイールの挙動
 (setq
  ;; ホイールでスクロールする行数を設定

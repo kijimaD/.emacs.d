@@ -164,7 +164,8 @@
 
 (require 'avy)
 (global-set-key (kbd "C-j") 'avy-copy-line)
-(global-set-key (kbd "M-j") 'avy-goto-char-2)
+(global-set-key (kbd "M-j") 'avy-goto-line)
+(global-set-key (kbd "C-M-j") 'avy-goto-whitespace-end)
 
 (back-button-mode 1)
 (global-set-key (kbd "C-c <left>") 'goto-last-change)
@@ -389,12 +390,12 @@
 ;; RSS ================
 
 (setq elfeed-feeds
-      '(
-        ("https://news.ycombinator.com/rss" ycombinator)
-        ("https://www.reddit.com/r/emacs.rss" reddit-emacs)
-        ("https://www.sanityinc.com/feed.xml" sanityinc)
-        ("https://sachachua.com/blog/category/weekly/feed/" sachachua)
-        ("https://techracho.bpsinc.jp/feed" techracho)))
+      '(("https://www.reddit.com/r/emacs.rss" Emacs)
+        ("https://www.sanityinc.com/feed.xml" Emacs)
+        ("https://sachachua.com/blog/category/weekly/feed/" Emacs)
+        ("https://techracho.bpsinc.jp/feed" Ruby Rails)
+        ("http://b.hatena.ne.jp/t-wada/rss" Test)
+        ("https://cprss.s3.amazonaws.com/rubyweekly.com.xml" Ruby)))
 
 ;; Google検索 ================
 (require 'google-this)
