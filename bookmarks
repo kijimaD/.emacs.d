@@ -3,13 +3,13 @@
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-refile-last-stored"
- (filename . "~/roam/20210624232811-digger.org")
- (front-context-string . "** DONE 移動AI\nCLO")
- (rear-context-string . "い。\n\n抽象クラスに移動した。\n")
- (position . 7440))
+ (filename . "~/roam/20210508234743-emacs.org")
+ (front-context-string . "** DONE C-c C-w ")
+ (rear-context-string . "うに自由に動き回るモードです。\n")
+ (position . 1969))
 ("org-capture-last-stored"
- (filename . "~/roam/20210725100835-sql.org")
- (front-context-string)
+ (filename . "~/roam/20210725134208-python.org")
+ (front-context-string . "#+title: Python\n")
  (rear-context-string)
  (position . 1))
 ("Handbook | GitLab"

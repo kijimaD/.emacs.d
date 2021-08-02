@@ -38,13 +38,3 @@ sudo apt autoremove
 sudo apt install emacs27
 emacs --version # 27
 ```
-
-## connect sql
-
-0. M-x `customize-variable` RET `sql-connection-alist` RET ...
-0. M-x `sql-connect`
-0. open buffer...
-0. M-x `sql-mode`
-0. M-x `sql-set-sqli-buffer` RET
-0. `sql-send-buffer` (`C-c C-b`)
-0. `sqlup-capitalize-keywords-in-region` (`C-c u`)
