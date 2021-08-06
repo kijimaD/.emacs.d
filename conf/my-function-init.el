@@ -113,6 +113,13 @@
 
 (global-set-key (kbd "C-c b") 'my-ej-dict)
 
+(defun my-persp-save ()
+  (interactive)
+  (persp-state-save "~/.emacs.d/persp"))
+(defun my-persp-load ()
+  (interactive)
+  (persp-state-load "~/.emacs.d/persp"))
+
 (provide 'my-function-init)
 
 ;;; my-function-init.el ends here

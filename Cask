@@ -49,6 +49,8 @@
 (depends-on "diminish")
 (depends-on "dired-single")
 (depends-on "django-mode")
+(depends-on "docker")
+(depends-on "dockerfile-mode")
 (depends-on "dokuwiki")
 (depends-on "dokuwiki-mode")
 (depends-on "doom-modeline")
