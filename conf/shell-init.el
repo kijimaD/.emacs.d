@@ -18,7 +18,7 @@
         eshell-scroll-to-bottom-on-input t))
 
 (add-hook 'eshell-first-time-mode-hook 'efs/configure-eshell)
-(eshell-git-prompt-use-theme 'powerline)
+(eshell-git-prompt-use-theme 'robbyrussell)
 
 (global-set-key (kbd "C-M-;") 'eshell-toggle)
 (setq eshell-toggle-use-projectile-root t)
