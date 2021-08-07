@@ -105,13 +105,20 @@
            (setq query (buffer-substring (region-beginning) (region-end))))
           (t
            (setq query (current-word))))
-    (grep (concat "grep --color -Ei " "^." query "\s" " ~/.emacs.d/eiji_utf8.txt"))))
+    (grep (concat "grep --color -Ei " "'^." query "'\s" " ~/.emacs.d/eiji_utf8.txt"))))
 
 (defun my-ej-dict-read (&optional query)
   (interactive (list (read-string "Query: " (current-word))))
   (grep (concat "grep --color -E " "^." query "\s" " ~/.emacs.d/eiji_utf8.txt")))
 
-(global-set-key (kbd "C-x l") 'my-ej-dict)
+(global-set-key (kbd "C-c b") 'my-ej-dict)
+
+(defun my-persp-save ()
+  (interactive)
+  (persp-state-save "~/.emacs.d/persp"))
+(defun my-persp-load ()
+  (interactive)
+  (persp-state-load "~/.emacs.d/persp"))
 
 (provide 'my-function-init)
 
