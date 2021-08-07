@@ -102,7 +102,7 @@
 (org-tree-slide-simple-profile)
 
 ;; pdf ================
-(pdf-tools-install t)
+;; (pdf-tools-install t)
 (add-hook 'pdf-tools-enabled-hook 'pdf-view-midnight-minor-mode)
 (setq-default pdf-view-display-size 'fit-page)
 
