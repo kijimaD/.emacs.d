@@ -114,13 +114,12 @@
 (setq org-roam-directory "~/roam")
 (setq org-roam-completion-everywhere t)
 
-(define-key org-roam-mode-map (kbd "C-c n l") 'org-roam)
-(define-key org-roam-mode-map (kbd "C-c n f") 'org-roam-find-file)
-(define-key org-roam-mode-map (kbd "C-c n g") 'org-roam-graph)
-(define-key org-mode-map (kbd "C-c n i") 'org-roam-insert)
-(define-key org-mode-map (kbd "C-c n I") 'org-roam-insert-immediate)
-(define-key org-mode-map (kbd "C-M-i") 'completion-at-point)
+(define-key global-map (kbd "C-c n f") 'org-roam-node-find)
+(define-key global-map (kbd "C-c n g") 'org-roam-graph)
+(define-key global-map (kbd "C-c n i") 'org-roam-node-insert)
+(define-key global-map (kbd "C-M-i") 'completion-at-point)
 
+(org-roam-setup)
 ;; 画像 ================
 (require 'org-download)
 (setq-default org-download-image-dir "~/roam/images")
