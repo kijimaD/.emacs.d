@@ -4,6 +4,7 @@
 (when (or (require 'cask "~/.cask/cask.el" t)
       (require 'cask nil t))
   (cask-initialize))
+(guix-emacs-autoload-packages)
 
 (add-to-list 'load-path (expand-file-name "conf" user-emacs-directory))
 (ignore-errors (load "local-init-example"))

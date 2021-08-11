@@ -110,6 +110,7 @@
 (require 'org-roam)
 (add-hook 'after-init-hook 'org-roam-mode)
 (make-directory "~/roam" t)
+(setq org-roam-v2-ack t)
 (setq org-roam-directory "~/roam")
 (setq org-roam-completion-everywhere t)
 
