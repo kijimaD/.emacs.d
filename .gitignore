@@ -31,3 +31,4 @@ var/pcache/
 /session.*
 /smex-items
 /eiji_utf8.txt
+/.org-id-locations
