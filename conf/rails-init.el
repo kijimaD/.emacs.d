@@ -162,5 +162,6 @@
 ;; CIでは実行しない
 (when window-system
   (progn
-    (inf-ruby)
-    (robe-start)))
+    ;; (inf-ruby)
+    ;; (robe-start)
+    ))

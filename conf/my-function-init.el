@@ -119,7 +119,3 @@
 (defun my-persp-load ()
   (interactive)
   (persp-state-load "~/.emacs.d/persp"))
-
-(provide 'my-function-init)
-
-;;; my-function-init.el ends here
