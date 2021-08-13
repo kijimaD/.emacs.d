@@ -119,6 +119,21 @@
 (define-key global-map (kbd "C-c n i") 'org-roam-node-insert)
 (define-key global-map (kbd "C-M-i") 'completion-at-point)
 
+(setq org-roam-capture-templates
+      '(("d" "default" plain
+         "%?"
+         :if-new
+         (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}"))
+        ("l" "programming language" plain
+         (file "~/roam/templates/programming-language.org")
+         :if-new
+         (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}"))
+        ("p" "project" plain
+         (file "~/roam/templates/project.org")
+         :if-new
+         (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Project"))
+        ))
+
 (org-roam-setup)
 ;; 画像 ================
 (require 'org-download)

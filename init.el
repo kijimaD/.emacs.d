@@ -23,7 +23,7 @@
 (load "my-function-init")
 
 ;; 環境変数を読み込む
-(exec-path-from-shell-initialize)
+;; (exec-path-from-shell-initialize)
 
 ;; モードラインからマイナーモードを消す
 ;; (describe-minor-mode-from-indicator) で調べる。
