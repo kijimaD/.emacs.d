@@ -215,8 +215,6 @@
 (setq default-input-method "japanese-mozc")
 
 ;; 固有サイトモード ================
-(require 'twittering-mode)
-
 (global-set-key (kbd "<f2>") 'devdocs-search)
 
 ;; コンソールモード ================
