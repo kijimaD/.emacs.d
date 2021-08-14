@@ -51,6 +51,7 @@
 ;;    (cl-callf color-saturate-name (face-foreground face) 30)))
 
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'emacs-lisp-mode-hook 'aggressive-indent-mode)
 
 (require 'auto-highlight-symbol)
 (global-auto-highlight-symbol-mode t)

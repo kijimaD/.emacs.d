@@ -3,6 +3,7 @@
 (source melpa)
 
 ;; Install Packages
+(depends-on "aggressive-indent")
 (depends-on "guix")
 (depends-on "ace-jump-mode")
 (depends-on "ace-link")
