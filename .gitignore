@@ -3,12 +3,14 @@
 .cask/
 .python-environments/
 auto-save-list/
+ej-dict-data/
 elisp-objects/
 elpa/
 elpa/archives/
 eshell/
 private/
 request/
+straight/
 transient/
 url/
 url/cache/
