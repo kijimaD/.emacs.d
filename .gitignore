@@ -19,6 +19,7 @@ var/pcache/
 /TAGS
 /ac-comphist.dat
 /async-bytecomp.log
+/bookmarks
 /conf/local-init.el
 /forge-database.sqlite
 /history
