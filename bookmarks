@@ -3,15 +3,15 @@
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-refile-last-stored"
- (filename . "~/roam/20210525005710-gnu_guix.org")
- (front-context-string . "** DONE システムビルド時")
- (rear-context-string . "パッケージを一気に導入できる。\n")
- (position . 4167))
+ (filename . "~/roam/20210508234743-emacs.org")
+ (front-context-string . "** DONE ~markdow")
+ (rear-context-string . "00:25]\n設定を追加した。\n")
+ (position . 4896))
 ("org-capture-last-stored"
- (filename . "~/roam/20210725134208-python.org")
- (front-context-string . "#+title: Python\n")
- (rear-context-string)
- (position . 1))
+ (filename . "~/roam/20210817094357-ej_dict.org")
+ (front-context-string . "* Goals\n[[id:1ad")
+ (rear-context-string . "letags: Project\n")
+ (position . 105))
 ("Handbook | GitLab"
  (front-context-string . "Location: https:")
  (rear-context-string)

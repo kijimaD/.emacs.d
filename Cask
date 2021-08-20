@@ -72,6 +72,7 @@
 (depends-on "eww-lnum")
 (depends-on "exec-path-from-shell")
 (depends-on "expand-region")
+(depends-on "exwm")
 (depends-on "f")
 (depends-on "fcitx")
 (depends-on "findr")
