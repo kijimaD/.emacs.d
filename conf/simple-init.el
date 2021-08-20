@@ -10,6 +10,9 @@
 ;; *scratch*で最初に描画されるメッセージを消す
 (setq initial-scratch-message "")
 
+;; 終了時に確認しない
+(setq confirm-kill-processes nil)
+
 ;; メニューバーを消す
 (menu-bar-mode 0)
 

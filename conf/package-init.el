@@ -246,6 +246,7 @@
 (require 'projectile)
 (projectile-global-mode)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(counsel-projectile-mode)
 
 ;; 再読込 ================
 (defun revert-buffer-no-confirm (&optional force-reverting)
