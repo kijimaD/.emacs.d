@@ -18,10 +18,12 @@
         eshell-scroll-to-bottom-on-input t))
 
 (add-hook 'eshell-first-time-mode-hook 'efs/configure-eshell)
-(eshell-git-prompt-use-theme 'robbyrussell)
+(eshell-git-prompt-use-theme 'multiline)
+(setq eshell-toggle-height-fraction 2)
 
 (global-set-key (kbd "C-M-;") 'eshell-toggle)
 (setq eshell-toggle-use-projectile-root t)
+
 ;; vterm ================
 (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
 (setq vterm-max-scrollback 10000)
@@ -33,10 +35,10 @@
 (setq vterm-toggle-fullscreen-p nil)
 (add-to-list 'display-buffer-alist
              '((lambda(bufname _) (with-current-buffer bufname (equal major-mode 'vterm-mode)))
-                (display-buffer-reuse-window display-buffer-at-bottom)
-                ;;(display-buffer-reuse-window display-buffer-in-direction)
-                ;;display-buffer-in-direction/direction/dedicated is added in emacs27
-                ;;(direction . bottom)
-                ;;(dedicated . t) ;dedicated is supported in emacs27
-                (reusable-frames . visible)
-                (window-height . 0.3)))
+               (display-buffer-reuse-window display-buffer-at-bottom)
+               ;;(display-buffer-reuse-window display-buffer-in-direction)
+               ;;display-buffer-in-direction/direction/dedicated is added in emacs27
+               ;;(direction . bottom)
+               ;;(dedicated . t) ;dedicated is supported in emacs27
+               (reusable-frames . visible)
+               (window-height . 0.3)))

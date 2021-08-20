@@ -246,6 +246,7 @@
 (require 'projectile)
 (projectile-global-mode)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(counsel-projectile-mode)
 
 ;; 再読込 ================
 (defun revert-buffer-no-confirm (&optional force-reverting)
@@ -377,12 +378,13 @@
 ;; RSS ================
 
 (setq elfeed-feeds
-      '(("https://www.reddit.com/r/emacs.rss" Emacs)
-        ("https://www.sanityinc.com/feed.xml" Emacs)
+      '(("https://www.sanityinc.com/feed.xml" Emacs)
         ("https://sachachua.com/blog/category/weekly/feed/" Emacs)
         ("https://techracho.bpsinc.jp/feed" Ruby Rails)
         ("http://b.hatena.ne.jp/t-wada/rss" Test)
-        ("https://cprss.s3.amazonaws.com/rubyweekly.com.xml" Ruby)))
+        ("https://cprss.s3.amazonaws.com/rubyweekly.com.xml" Ruby)
+        ("https://github.com/melpa/melpa/commits/master.atom" Melpa)
+        ("https://github.com/ruby/ruby/commits/master.atom" Ruby)))
 
 ;; Google検索 ================
 (require 'google-this)
