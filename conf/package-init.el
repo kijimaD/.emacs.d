@@ -7,28 +7,6 @@
         ("gnu" . "https://elpa.gnu.org/packages/")
         ("org" . "http://orgmode.org/elpa/")))
 
-;; セッション保存 ================
-;; 自動保存 auto-save-buffers-enhanced
-(require 'auto-save-buffers-enhanced)
-
-;; 2秒後に保存
-(setq auto-save-buffers-enhanced-interval 2)
-
-;; 特定のファイルのみ有効にする
-(setq auto-save-buffers-enhanced-include-regexps '(".+")) ;全ファイル
-
-;; not-save-fileと.ignoreは除外する
-(setq auto-save-buffers-enhanced-exclude-regexps '("^not-save-file" "\\.ignore$"))
-
-;; Wroteのメッセージを抑制
-(setq auto-save-buffers-enhanced-quiet-save-p t)
-
-;; *scratch*も ~/.emacs.d/scratch に自動保存
-(setq auto-save-buffers-enhanced-save-scratch-buffer-to-file-p t)
-(setq auto-save-buffers-enhanced-file-related-with-scratch-buffer
-      (locate-user-emacs-file "scratch"))
-(auto-save-buffers-enhanced t)
-
 ;;セッションの永続化 ================
 (psession-mode 1)
 
@@ -51,7 +29,6 @@
 ;;    (cl-callf color-saturate-name (face-foreground face) 30)))
 
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'emacs-lisp-mode-hook 'aggressive-indent-mode)
 
 (require 'auto-highlight-symbol)
 (global-auto-highlight-symbol-mode t)
