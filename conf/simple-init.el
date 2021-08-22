@@ -86,6 +86,12 @@
 ;;終了時にオートセーブファイルを削除
 (setq delete-auto-save-files t)
 
+;; オートセーブ
+(setq auto-save-timeout 2)
+(setq auto-save-visited-interval 2)
+(setq auto-save-no-message t)
+(auto-save-visited-mode)
+
 ;; 最適化 ================
 
 ;; 右から左に読む言語に対応させないことで描画高速化
