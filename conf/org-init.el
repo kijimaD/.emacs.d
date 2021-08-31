@@ -18,6 +18,11 @@
 ;; 画像表示
 (setq org-startup-with-inline-images t)
 
+(setq org-todo-keywords '((type "TODO" "DONE" "WAIT" "CLOSE")))
+(setq org-todo-keyword-faces
+      '(("DONE" . (:foreground "orange red" :weight bold))
+        ("WAIT" . (:foreground "HotPink2" :weight bold))))
+
 ;; 展開アイコン
 ;; (setq org-ellipsis "»")
 ;; (setq org-ellipsis "..")
