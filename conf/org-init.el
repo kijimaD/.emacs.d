@@ -124,8 +124,8 @@
          "%?"
          :if-new
          (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}"))
-        ("l" "programming language" plain
-         (file "~/roam/templates/programming-language.org")
+        ("g" "general" plain
+         (file "~/roam/templates/general.org")
          :if-new
          (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}"))
         ("p" "project" plain
@@ -204,3 +204,23 @@
   (set-face-attribute 'org-checkbox nil  :inherit 'fixed-pitch)
   (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
   (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch))
+
+;; export ================
+;; これを設定しないとroamのidリンクのエクスポートに失敗する
+(setq org-id-link-to-org-use-id t)
+(setq org-id-extra-files (org-roam--list-files org-roam-directory))
+
+;; UI ================
+(use-package org-roam-ui
+  :straight
+    (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
+    :after org-roam
+;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+;;         a hookable mode anymore, you're advised to pick something yourself
+;;         if you don't care about startup time, use
+;;  :hook (after-init . org-roam-ui-mode)
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
