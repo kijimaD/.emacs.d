@@ -18,6 +18,11 @@
 ;; 画像表示
 (setq org-startup-with-inline-images t)
 
+(setq org-todo-keywords '((type "TODO" "WAIT" "|" "DONE" "CLOSE")))
+(setq org-todo-keyword-faces
+      '(("DONE" . (:foreground "orange red" :weight bold))
+        ("WAIT" . (:foreground "HotPink2" :weight bold))))
+
 ;; 展開アイコン
 ;; (setq org-ellipsis "»")
 ;; (setq org-ellipsis "..")
@@ -26,13 +31,6 @@
 ;; (setq org-ellipsis "❖")
 (setq org-ellipsis " ↯")
 (setq org-cycle-separator-lines -1)
-
-;; org-default-notes-fileのディレクトリ
-(setq org-directory (concat "~/" public-directory "/junk/diary/org-journal"))
-
-;; org-default-notes-fileのファイル名
-(setq org-default-notes-file "notes.org")
-(setq org-log-done 'time)
 
 ;; org-modeで行末で折り返しをする
 (setq org-startup-truncated nil)
@@ -61,8 +59,16 @@
 (define-key global-map "\C-ca" 'org-agenda)
 (define-key global-map "\C-cc" 'org-capture)
 (setq org-log-done t)
-;; (setq org-agenda-files (list (concat "~/" public-directory "/junk/diary/org-journal/" "notes.org")))
 
+(setq my-org-directory (concat "~/" public-directory "/junk/diary/org-journal/"))
+(setq my-todo-file (concat my-org-directory "todo.org"))
+
+;; org-default-notes-fileのディレクトリ
+(setq org-directory my-org-directory)
+;; org-default-notes-fileのファイル名
+(setq org-default-notes-file my-todo-file)
+
+(setq org-agenda-files (list my-todo-file))
 
 ;; スニペット ================
 (org-babel-do-load-languages 'org-babel-load-languages
@@ -120,12 +126,14 @@
 (define-key global-map (kbd "C-M-i") 'completion-at-point)
 
 (setq org-roam-capture-templates
-      '(("d" "default" plain
+      '(("t" "TODO" entry (file+headline my-todo-file "Inbox")
+         "*** TODO %?\n")
+        ("d" "default" plain
          "%?"
          :if-new
          (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}"))
-        ("l" "programming language" plain
-         (file "~/roam/templates/programming-language.org")
+        ("g" "general" plain
+         (file "~/roam/templates/general.org")
          :if-new
          (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}"))
         ("p" "project" plain
@@ -204,3 +212,23 @@
   (set-face-attribute 'org-checkbox nil  :inherit 'fixed-pitch)
   (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
   (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch))
+
+;; export ================
+;; これを設定しないとroamのidリンクのエクスポートに失敗する
+(setq org-id-link-to-org-use-id t)
+(setq org-id-extra-files (org-roam--list-files org-roam-directory))
+
+;; UI ================
+(use-package org-roam-ui
+  :straight
+    (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
+    :after org-roam
+;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+;;         a hookable mode anymore, you're advised to pick something yourself
+;;         if you don't care about startup time, use
+;;  :hook (after-init . org-roam-ui-mode)
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
