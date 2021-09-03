@@ -18,7 +18,7 @@
 ;; 画像表示
 (setq org-startup-with-inline-images t)
 
-(setq org-todo-keywords '((type "TODO" "DONE" "WAIT" "CLOSE")))
+(setq org-todo-keywords '((type "TODO" "WAIT" "|" "DONE" "CLOSE")))
 (setq org-todo-keyword-faces
       '(("DONE" . (:foreground "orange red" :weight bold))
         ("WAIT" . (:foreground "HotPink2" :weight bold))))
@@ -31,13 +31,6 @@
 ;; (setq org-ellipsis "❖")
 (setq org-ellipsis " ↯")
 (setq org-cycle-separator-lines -1)
-
-;; org-default-notes-fileのディレクトリ
-(setq org-directory (concat "~/" public-directory "/junk/diary/org-journal"))
-
-;; org-default-notes-fileのファイル名
-(setq org-default-notes-file "notes.org")
-(setq org-log-done 'time)
 
 ;; org-modeで行末で折り返しをする
 (setq org-startup-truncated nil)
@@ -66,8 +59,16 @@
 (define-key global-map "\C-ca" 'org-agenda)
 (define-key global-map "\C-cc" 'org-capture)
 (setq org-log-done t)
-;; (setq org-agenda-files (list (concat "~/" public-directory "/junk/diary/org-journal/" "notes.org")))
 
+(setq my-org-directory (concat "~/" public-directory "/junk/diary/org-journal/"))
+(setq my-todo-file (concat my-org-directory "todo.org"))
+
+;; org-default-notes-fileのディレクトリ
+(setq org-directory my-org-directory)
+;; org-default-notes-fileのファイル名
+(setq org-default-notes-file my-todo-file)
+
+(setq org-agenda-files (list my-todo-file))
 
 ;; スニペット ================
 (org-babel-do-load-languages 'org-babel-load-languages
@@ -125,7 +126,9 @@
 (define-key global-map (kbd "C-M-i") 'completion-at-point)
 
 (setq org-roam-capture-templates
-      '(("d" "default" plain
+      '(("t" "TODO" entry (file+headline my-todo-file "Inbox")
+         "*** TODO %?\n")
+        ("d" "default" plain
          "%?"
          :if-new
          (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}"))

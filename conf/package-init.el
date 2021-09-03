@@ -539,3 +539,6 @@
 
 ;; typing game ================
 (setq toe-highscore-file "~/.emacs.d/games/.toe-scores")
+
+;; create-link ================
+(setq create-link-default-format 'create-link-format-org)
