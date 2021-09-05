@@ -151,6 +151,8 @@
 (depends-on "org-roam")
 (depends-on "org-sticky-header")
 (depends-on "rg")
+(depends-on "lsp-mode")
+(depends-on "lsp-ui")
 (depends-on "org-super-agenda")
 (depends-on "org-superstar")
 (depends-on "org-tree-slide")

@@ -30,6 +30,7 @@
 (load "rails-init")
 (load "python-init")
 (load "web-mode-init")
+(load "lsp-init")
 (load "ivy-init")
 (load "shell-init")
 (load "theme-init")

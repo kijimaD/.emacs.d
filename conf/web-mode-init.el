@@ -1,6 +1,7 @@
 ;; web-mode
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.js[x]?$" . web-mode));; js + jsx
+(add-to-list 'auto-mode-alist '("\\.tsx$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.[gj]sp\\'" . web-mode))
@@ -101,3 +102,7 @@
       erc-autojoin-channels-alist '(("irc-libera.chat" "#systemcrafters" "#emacs"))
       erc-kill-buffer-on-part t
       erc-auto-query 'bufy)
+
+;; Typescript ================
+(require 'typescript-mode)
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
