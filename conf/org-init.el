@@ -23,6 +23,9 @@
       '(("DONE" . (:foreground "orange red" :weight bold))
         ("WAIT" . (:foreground "HotPink2" :weight bold))))
 
+(setq org-src-fontify-natively t)
+(setq org-src-tab-acts-natively t)
+
 ;; 展開アイコン
 ;; (setq org-ellipsis "»")
 ;; (setq org-ellipsis "..")
@@ -63,12 +66,10 @@
 (setq my-org-directory (concat "~/" public-directory "/junk/diary/org-journal/"))
 (setq my-todo-file (concat my-org-directory "todo.org"))
 
-;; org-default-notes-fileのディレクトリ
 (setq org-directory my-org-directory)
-;; org-default-notes-fileのファイル名
 (setq org-default-notes-file my-todo-file)
 
-(setq org-agenda-files (list my-todo-file))
+(setq org-agenda-files `("~/roam" ,my-todo-file))
 
 ;; スニペット ================
 (org-babel-do-load-languages 'org-babel-load-languages
