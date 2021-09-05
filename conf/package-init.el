@@ -522,11 +522,6 @@
 ;; git-link ================
 (setq git-link-default-branch "develop")
 
-;; exwm ================
-;; (require 'exwm)
-;; (require 'exwm-config)
-;; (exwm-config-example)
-
 ;; undo ================
 (global-undo-tree-mode)
 
@@ -542,3 +537,6 @@
 
 ;; create-link ================
 (setq create-link-default-format 'create-link-format-org)
+
+;; ripgrep ================
+(rg-enable-default-bindings)
