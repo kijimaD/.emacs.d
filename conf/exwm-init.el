@@ -3,7 +3,9 @@
 ;; exwm ================
 (require 'exwm)
 (require 'exwm-config)
-(exwm-config-example)
+(when window-system
+  (progn
+    (exwm-config-example)))
 
 ;; Automatically move EXWM buffer to current workspace when selected
 (setq exwm-layout-show-all-buffers t)
