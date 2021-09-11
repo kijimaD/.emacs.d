@@ -152,6 +152,7 @@
 (depends-on "org-sticky-header")
 (depends-on "rg")
 (depends-on "lsp-mode")
+(depends-on "esh-autosuggest")
 (depends-on "lsp-ui")
 (depends-on "org-super-agenda")
 (depends-on "org-superstar")
