@@ -79,10 +79,20 @@
 (setq-default typescript-indent-level 2)
 
 ;; 編集箇所を強調表示
-(volatile-highlights-mode t)
+;; (volatile-highlights-mode t)
 
 ;; 外観(非コーディング) ================
 ;; 現在行をハイライト
+
+;; ハイライトの表示を遅くする
+(require 'hl-line)
+(defun global-hl-line-timer-function ()
+  (global-hl-line-unhighlight-all)
+  (let ((global-hl-line-mode t))
+    (global-hl-line-highlight)))
+(setq global-hl-line-timer
+      (run-with-idle-timer 0.03 t 'global-hl-line-timer-function))
+
 (defface hlline-face
   '((((class color)
       (background dark))
@@ -101,7 +111,7 @@
 (setq beacon-size 20) ; default 40
 (setq beacon-color "#827591")
 (setq beacon-blink-when-focused t)
-(beacon-mode)
+;; (beacon-mode)
 
 ;; window移動 ================
 ;; 分割した画面間をShift+矢印で移動

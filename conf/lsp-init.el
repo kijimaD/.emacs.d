@@ -39,3 +39,5 @@
 
 ;; hook
 (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+
+(setq lsp-prefer-capf t)
