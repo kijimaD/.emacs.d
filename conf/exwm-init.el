@@ -3,9 +3,6 @@
 ;; exwm ================
 (require 'exwm)
 (require 'exwm-config)
-(when window-system
-  (progn
-    (exwm-config-example)))
 
 ;; Automatically move EXWM buffer to current workspace when selected
 (setq exwm-layout-show-all-buffers t)
@@ -19,4 +16,7 @@
   (start-process-shell-command
    "compton" nil "compton -b --config $HOME/dotfiles/.config/compton/compton.conf"))
 
-(kd/set-compton)
+(when window-system
+  (progn
+    (exwm-config-example)
+    (kd/set-compton)))
