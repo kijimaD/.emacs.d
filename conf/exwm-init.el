@@ -12,3 +12,11 @@
 
 ;; Display all EXWM buffers in every workspace buffer list
 (setq exwm-workspace-show-all-buffers t)
+
+;; Run compton
+(defun kd/set-compton ()
+  (interactive)
+  (start-process-shell-command
+   "compton" nil "compton -b --config $HOME/dotfiles/.config/compton/compton.conf"))
+
+(kd/set-compton)

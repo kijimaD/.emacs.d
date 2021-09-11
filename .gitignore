@@ -35,3 +35,4 @@ var/pcache/
 /smex-items
 /eiji_utf8.txt
 /.org-id-locations
+/.lsp-session-v1
