@@ -369,9 +369,7 @@
         ("https://sachachua.com/blog/category/weekly/feed/" Emacs)
         ("https://techracho.bpsinc.jp/feed" Ruby Rails)
         ("http://b.hatena.ne.jp/t-wada/rss" Test)
-        ("https://cprss.s3.amazonaws.com/rubyweekly.com.xml" Ruby)
-        ("https://github.com/melpa/melpa/commits/master.atom" Melpa)
-        ("https://github.com/ruby/ruby/commits/master.atom" Ruby)))
+        ("https://cprss.s3.amazonaws.com/rubyweekly.com.xml" Ruby)))
 
 ;; Google検索 ================
 (require 'google-this)

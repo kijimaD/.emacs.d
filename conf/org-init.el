@@ -1,8 +1,15 @@
 ;; org-mode ================
 (require 'org)
 
+;; System locale to use for formatting time values.
+(setq system-time-locale "C")         ; Make sure that the weekdays in the
+                                      ; time stamps of your Org mode files and
+                                      ; in the agenda appear in English.
+
 ;; 拡張子がorgのファイルを開いた時，自動的にorg-modeにする
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+
+(setq org-startup-folded 'content)
 
 ;; org-modeでの強調表示を可能にする
 (add-hook 'org-mode-hook 'turn-on-font-lock)
@@ -24,6 +31,7 @@
         ("WAIT" . (:foreground "HotPink2" :weight bold))))
 
 (setq org-src-fontify-natively t)
+(setq org-fontify-quote-and-verse-blocks t)
 (setq org-src-tab-acts-natively t)
 
 ;; 展開アイコン
@@ -32,8 +40,8 @@
 ;; (setq org-ellipsis "⤵")
 ;; (setq org-ellipsis "🢗")
 ;; (setq org-ellipsis "❖")
-(setq org-ellipsis " ↯")
-(setq org-cycle-separator-lines -1)
+(setq org-ellipsis "↯")
+(setq org-cycle-separator-lines 2)
 
 ;; org-modeで行末で折り返しをする
 (setq org-startup-truncated nil)
@@ -125,6 +133,7 @@
 (define-key global-map (kbd "C-c n g") 'org-roam-graph)
 (define-key global-map (kbd "C-c n i") 'org-roam-node-insert)
 (define-key global-map (kbd "C-M-i") 'completion-at-point)
+(define-key global-map [insert] 'org-pomodoro)
 
 (setq org-roam-capture-templates
       '(("t" "TODO" entry (file+headline my-todo-file "Inbox")
@@ -142,6 +151,9 @@
          :if-new
          (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Project"))
         ))
+
+(setq org-id-link-to-org-use-id t)
+(setq org-id-extra-files (org-roam--list-files org-roam-directory))
 
 (org-roam-setup)
 ;; 画像 ================
@@ -192,14 +204,14 @@
 
   ;; Set faces for heading levels
   (dolist (face '((org-level-1 . 1.4)
-                  (org-level-2 . 1.0)
+                  (org-level-2 . 1.2)
                   (org-level-3 . 1.0)
                   (org-level-4 . 1.0)
                   (org-level-5 . 1.0)
                   (org-level-6 . 1.0)
                   (org-level-7 . 1.0)
                   (org-level-8 . 1.0)))
-    (set-face-attribute (car face) nil :font "Jost" :weight 'extra-bold :height (cdr face)))
+    (set-face-attribute (car face) nil :font "Hiragino Sans" :weight 'extra-bold :height (cdr face)))
 
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
@@ -213,11 +225,6 @@
   (set-face-attribute 'org-checkbox nil  :inherit 'fixed-pitch)
   (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
   (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch))
-
-;; export ================
-;; これを設定しないとroamのidリンクのエクスポートに失敗する
-(setq org-id-link-to-org-use-id t)
-(setq org-id-extra-files (org-roam--list-files org-roam-directory))
 
 ;; UI ================
 (when window-system
