@@ -27,8 +27,10 @@
 
 (setq org-todo-keywords '((type "TODO" "WAIT" "|" "DONE" "CLOSE")))
 (setq org-todo-keyword-faces
-      '(("DONE" . (:foreground "orange red" :weight bold))
-        ("WAIT" . (:foreground "HotPink2" :weight bold))))
+      '(("TODO" . (:foreground "orange" :weight bold))
+        ("WAIT" . (:foreground "HotPink2" :weight bold))
+        ("DONE" . (:foreground "green" :weight bold))
+        ("CLOSE" . (:foreground "DarkOrchid" :weight bold))))
 
 (setq org-src-fontify-natively t)
 (setq org-fontify-quote-and-verse-blocks t)
@@ -79,6 +81,23 @@
 
 (setq org-agenda-files `("~/roam" ,my-todo-file))
 
+;; 時刻をデフォルト表示
+(setq org-agenda-start-with-log-mode t)
+
+;; 直近7日分の予定を表示させる
+(setq org-agenda-span 7)
+(setq org-agenda-start-day "-0d")
+
+;; agendaには、習慣・スケジュール・TODOを表示させる
+(setq org-agenda-custom-commands
+      '(("a" "Agenda and all TODO's"
+         ((tags "project-CLOCK=>\"<today>\"|repeatable") (agenda "") (alltodo)))))
+
+(defun org-agenda-default ()
+  (interactive)
+  (org-agenda nil "a"))
+(global-set-key (kbd "<f6>") 'org-agenda-default)
+
 ;; スニペット ================
 (org-babel-do-load-languages 'org-babel-load-languages
                              '(
@@ -112,8 +131,6 @@
 (setq org-sticky-header-heading-star "◉")
 
 ;; スライド ================
-(global-set-key (kbd "<f6>") 'org-tree-slide-mode)
-(global-set-key (kbd "S-<f6>") 'org-tree-slide-skip-done-toggle)
 (org-tree-slide-simple-profile)
 
 ;; pdf ================
@@ -142,8 +159,8 @@
          "%?"
          :if-new
          (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}"))
-        ("g" "general" plain
-         (file "~/roam/templates/general.org")
+        ("r" "roam-page" plain
+         (file "~/roam/templates/roam-page.org")
          :if-new
          (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}"))
         ("p" "project" plain
