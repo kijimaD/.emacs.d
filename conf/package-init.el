@@ -8,7 +8,7 @@
         ("org" . "http://orgmode.org/elpa/")))
 
 ;;セッションの永続化 ================
-(psession-mode 1)
+;; (psession-mode 1)
 
 ;; 履歴保存
 (savehist-mode 1)
