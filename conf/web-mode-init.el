@@ -1,6 +1,7 @@
 ;; web-mode
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.js[x]?$" . web-mode));; js + jsx
+(add-to-list 'auto-mode-alist '("\\.tsx$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.[gj]sp\\'" . web-mode))
@@ -67,6 +68,7 @@
   (setq indent-tabs-mode nil)
   (setq tab-width 2)
   (setq sql-indent-offset 2)
+  (setq json-reformat:indent-width 2)
 
   (setq web-mode-attr-indent-offset nil)
   (setq web-mode-enable-auto-closing t)
@@ -101,3 +103,7 @@
       erc-autojoin-channels-alist '(("irc-libera.chat" "#systemcrafters" "#emacs"))
       erc-kill-buffer-on-part t
       erc-auto-query 'bufy)
+
+;; Typescript ================
+(require 'typescript-mode)
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))

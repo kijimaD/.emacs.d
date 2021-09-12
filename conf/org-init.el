@@ -1,8 +1,15 @@
 ;; org-mode ================
 (require 'org)
 
+;; System locale to use for formatting time values.
+(setq system-time-locale "C")         ; Make sure that the weekdays in the
+                                      ; time stamps of your Org mode files and
+                                      ; in the agenda appear in English.
+
 ;; 拡張子がorgのファイルを開いた時，自動的にorg-modeにする
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+
+(setq org-startup-folded 'content)
 
 ;; org-modeでの強調表示を可能にする
 (add-hook 'org-mode-hook 'turn-on-font-lock)
@@ -20,8 +27,14 @@
 
 (setq org-todo-keywords '((type "TODO" "WAIT" "|" "DONE" "CLOSE")))
 (setq org-todo-keyword-faces
-      '(("DONE" . (:foreground "orange red" :weight bold))
-        ("WAIT" . (:foreground "HotPink2" :weight bold))))
+      '(("TODO" . (:foreground "orange" :weight bold))
+        ("WAIT" . (:foreground "HotPink2" :weight bold))
+        ("DONE" . (:foreground "green" :weight bold))
+        ("CLOSE" . (:foreground "DarkOrchid" :weight bold))))
+
+(setq org-src-fontify-natively t)
+(setq org-fontify-quote-and-verse-blocks t)
+(setq org-src-tab-acts-natively t)
 
 ;; 展開アイコン
 ;; (setq org-ellipsis "»")
@@ -29,8 +42,8 @@
 ;; (setq org-ellipsis "⤵")
 ;; (setq org-ellipsis "🢗")
 ;; (setq org-ellipsis "❖")
-(setq org-ellipsis " ↯")
-(setq org-cycle-separator-lines -1)
+(setq org-ellipsis "↯")
+(setq org-cycle-separator-lines 2)
 
 ;; org-modeで行末で折り返しをする
 (setq org-startup-truncated nil)
@@ -63,12 +76,27 @@
 (setq my-org-directory (concat "~/" public-directory "/junk/diary/org-journal/"))
 (setq my-todo-file (concat my-org-directory "todo.org"))
 
-;; org-default-notes-fileのディレクトリ
 (setq org-directory my-org-directory)
-;; org-default-notes-fileのファイル名
 (setq org-default-notes-file my-todo-file)
 
-(setq org-agenda-files (list my-todo-file))
+(setq org-agenda-files `("~/roam" ,my-todo-file))
+
+;; 時刻をデフォルト表示
+(setq org-agenda-start-with-log-mode t)
+
+;; 直近7日分の予定を表示させる
+(setq org-agenda-span 7)
+(setq org-agenda-start-day "-0d")
+
+;; agendaには、習慣・スケジュール・TODOを表示させる
+(setq org-agenda-custom-commands
+      '(("a" "Agenda and all TODO's"
+         ((tags "project-CLOCK=>\"<today>\"|repeatable") (agenda "") (alltodo)))))
+
+(defun org-agenda-default ()
+  (interactive)
+  (org-agenda nil "a"))
+(global-set-key (kbd "<f6>") 'org-agenda-default)
 
 ;; スニペット ================
 (org-babel-do-load-languages 'org-babel-load-languages
@@ -103,8 +131,6 @@
 (setq org-sticky-header-heading-star "◉")
 
 ;; スライド ================
-(global-set-key (kbd "<f6>") 'org-tree-slide-mode)
-(global-set-key (kbd "S-<f6>") 'org-tree-slide-skip-done-toggle)
 (org-tree-slide-simple-profile)
 
 ;; pdf ================
@@ -124,6 +150,7 @@
 (define-key global-map (kbd "C-c n g") 'org-roam-graph)
 (define-key global-map (kbd "C-c n i") 'org-roam-node-insert)
 (define-key global-map (kbd "C-M-i") 'completion-at-point)
+(define-key global-map [insert] 'org-pomodoro)
 
 (setq org-roam-capture-templates
       '(("t" "TODO" entry (file+headline my-todo-file "Inbox")
@@ -132,8 +159,8 @@
          "%?"
          :if-new
          (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}"))
-        ("g" "general" plain
-         (file "~/roam/templates/general.org")
+        ("r" "roam-page" plain
+         (file "~/roam/templates/roam-page.org")
          :if-new
          (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}"))
         ("p" "project" plain
@@ -141,6 +168,9 @@
          :if-new
          (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Project"))
         ))
+
+(setq org-id-link-to-org-use-id t)
+(setq org-id-extra-files (org-roam--list-files org-roam-directory))
 
 (org-roam-setup)
 ;; 画像 ================
@@ -191,14 +221,14 @@
 
   ;; Set faces for heading levels
   (dolist (face '((org-level-1 . 1.4)
-                  (org-level-2 . 1.0)
+                  (org-level-2 . 1.2)
                   (org-level-3 . 1.0)
                   (org-level-4 . 1.0)
                   (org-level-5 . 1.0)
                   (org-level-6 . 1.0)
                   (org-level-7 . 1.0)
                   (org-level-8 . 1.0)))
-    (set-face-attribute (car face) nil :font "Jost" :weight 'extra-bold :height (cdr face)))
+    (set-face-attribute (car face) nil :font "Hiragino Sans" :weight 'extra-bold :height (cdr face)))
 
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
@@ -213,22 +243,19 @@
   (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
   (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch))
 
-;; export ================
-;; これを設定しないとroamのidリンクのエクスポートに失敗する
-(setq org-id-link-to-org-use-id t)
-(setq org-id-extra-files (org-roam--list-files org-roam-directory))
-
 ;; UI ================
-(use-package org-roam-ui
-  :straight
-    (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
-    :after org-roam
-;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
-;;         a hookable mode anymore, you're advised to pick something yourself
-;;         if you don't care about startup time, use
-;;  :hook (after-init . org-roam-ui-mode)
-    :config
-    (setq org-roam-ui-sync-theme t
-          org-roam-ui-follow t
-          org-roam-ui-update-on-save t
-          org-roam-ui-open-on-start t))
+(when window-system
+  (progn
+    (use-package org-roam-ui
+      :straight
+      (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
+      :after org-roam
+      ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+      ;;         a hookable mode anymore, you're advised to pick something yourself
+      ;;         if you don't care about startup time, use
+      ;;  :hook (after-init . org-roam-ui-mode)
+      :config
+      (setq org-roam-ui-sync-theme t
+            org-roam-ui-follow t
+            org-roam-ui-update-on-save t
+            org-roam-ui-open-on-start t))))

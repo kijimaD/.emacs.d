@@ -105,16 +105,6 @@
 (defadvice linum-schedule (around my-linum-schedule () activate)
   (run-with-idle-timer 0.2 nil #'linum-update-current))
 
-;; ハイライトの表示を遅くする
-(require 'hl-line)
-(defun global-hl-line-timer-function ()
-  (global-hl-line-unhighlight-all)
-  (let ((global-hl-line-mode t))
-    (global-hl-line-highlight)))
-(setq global-hl-line-timer
-      (run-with-idle-timer 0.03 t 'global-hl-line-timer-function))
-(cancel-timer global-hl-line-timer)
-
 ;; ツール系 ================
 
 ;; ediffを１ウィンドウで表示

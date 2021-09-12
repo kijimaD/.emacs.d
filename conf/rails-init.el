@@ -58,7 +58,7 @@
 ;; robe-modeの有効化とcompanyとの連携
 (require 'robe)
 (require 'company)
-;; (global-company-mode)
+(global-company-mode)
 
 (add-hook 'ruby-mode-hook
           (lambda ()
@@ -96,8 +96,8 @@
 
 (setq company-auto-expand t)
 (setq company-transformers '(company-sort-by-backend-importance)) ;; ソート順
-(setq company-idle-delay 0.1) ; デフォルトは0.5
-(setq company-minimum-prefix-length 1) ; デフォルトは4
+(setq company-idle-delay 0.5) ; デフォルトは0.5
+(setq company-minimum-prefix-length 4) ; デフォルトは4
 (setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
 (setq completion-ignore-case t)
 (setq company-dabbrev-downcase nil)

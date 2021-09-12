@@ -1,5 +1,6 @@
 ;; The default is 800 kilobytes.  Measured in bytes.
-(setq gc-cons-threshold (* 50 1000 1000))
+(setq gc-cons-threshold (* 100 1024 1024))
+(setq read-process-output-max (* 1024 1024))
 
 (when (or (require 'cask "~/.cask/cask.el" t)
       (require 'cask nil t))
@@ -30,10 +31,12 @@
 (load "rails-init")
 (load "python-init")
 (load "web-mode-init")
+(load "lsp-init")
 (load "ivy-init")
 (load "shell-init")
 (load "theme-init")
 (load "workspace-init")
+(load "exwm-init")
 (load "my-function-init")
 
 ;; 環境変数を読み込む
@@ -78,6 +81,3 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (when (file-exists-p custom-file)
   (load custom-file))
-
-;; Make gc pauses faster by decreasing the threshold.
-(setq gc-cons-threshold (* 2 1000 1000))

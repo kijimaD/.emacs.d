@@ -12,7 +12,7 @@ echo 'export PATH="$HOME/.cask/bin:$PATH"' >> ~/.bash_profile
 
 cd ~/.emacs.d
 cask install
-sudo apt-get install emacs-mozc cmigemo
+sudo apt-get install emacs-mozc cmigemo ripgrep
 sudo apt-get install ttf-ancient-fonts # emoji
 
 gem install pry pry-doc # Ruby doc server
