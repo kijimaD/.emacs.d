@@ -71,6 +71,15 @@
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (define-key global-map "\C-cc" 'org-capture)
+
+(setq org-capture-templates
+      '(("m" "Memo" entry
+         (file+headline my-todo-file "Inbox")
+         "** %?\n")
+        ("t" "Task" entry
+         (file+headline my-todo-file "Inbox")
+         "** TODO %?\n")))
+
 (setq org-log-done t)
 
 (setq my-org-directory (concat "~/" public-directory "/junk/diary/org-journal/"))
@@ -153,7 +162,8 @@
 (define-key global-map [insert] 'org-pomodoro)
 
 (setq org-roam-capture-templates
-      '(("t" "TODO" entry (file+headline my-todo-file "Inbox")
+      '(("t" "TODO" entry
+         (file+headline my-todo-file "Inbox")
          "*** TODO %?\n")
         ("d" "default" plain
          "%?"
