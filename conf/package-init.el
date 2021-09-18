@@ -39,11 +39,11 @@
 (define-key auto-highlight-symbol-mode-map (kbd "M-<left>") nil)
 
 ;; インデント可視化
-(require 'highlight-indent-guides)
-(setq highlight-indent-guides-auto-enabled t)
-(setq highlight-indent-guides-responsive t)
-(setq highlight-indent-guides-method 'character) ; column
-(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+;; (require 'highlight-indent-guides)
+;; (setq highlight-indent-guides-auto-enabled t)
+;; (setq highlight-indent-guides-responsive t)
+;; (setq highlight-indent-guides-method 'character) ; column
+;; (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 
 ;; スペース可視化
 (require 'whitespace)
