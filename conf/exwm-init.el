@@ -31,6 +31,10 @@
   (start-process-shell-command
    "fehbg" nil "~/dotfiles/.fehbg"))
 
+(define-key exwm-mode-map (kbd "C-M-:") 'vterm-toggle)
+(define-key exwm-mode-map (kbd "C-M-<right>") 'persp-next)
+(define-key exwm-mode-map (kbd "C-M-<left>") 'persp-prev)
+
 ;; (when window-system
 ;;   (progn
 ;;     (exwm-init)

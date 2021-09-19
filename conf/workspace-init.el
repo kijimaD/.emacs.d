@@ -24,5 +24,3 @@
 
 (global-set-key (kbd "C-M-<right>") 'persp-next)
 (global-set-key (kbd "C-M-<left>") 'persp-prev)
-(define-key exwm-mode-map (kbd "C-M-<right>") 'persp-next)
-(define-key exwm-mode-map (kbd "C-M-<left>") 'persp-prev)
