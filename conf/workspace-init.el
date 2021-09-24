@@ -9,6 +9,8 @@
         (persp-switch (int-to-string i)))
       (number-sequence 1 9))
 
+(persp-switch "1")
+
 (defun local-switch-workspace (index)
   `(lambda ()
      (interactive)
@@ -16,6 +18,9 @@
 
 ;; キーバインドの登録を行う
 (mapc (lambda (i)
-        (global-set-key (kbd (format "M-%d" i)) (local-switch-workspace i)))
+        (global-set-key (kbd (format "M-%d" i)) (local-switch-workspace i))
+        (define-key exwm-mode-map (kbd (format "M-%d" i)) (local-switch-workspace i)))
       (number-sequence 1 9))
-(persp-switch "1")
+
+(global-set-key (kbd "C-M-<right>") 'persp-next)
+(global-set-key (kbd "C-M-<left>") 'persp-prev)

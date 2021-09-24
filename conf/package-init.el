@@ -39,11 +39,11 @@
 (define-key auto-highlight-symbol-mode-map (kbd "M-<left>") nil)
 
 ;; インデント可視化
-(require 'highlight-indent-guides)
-(setq highlight-indent-guides-auto-enabled t)
-(setq highlight-indent-guides-responsive t)
-(setq highlight-indent-guides-method 'character) ; column
-(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+;; (require 'highlight-indent-guides)
+;; (setq highlight-indent-guides-auto-enabled t)
+;; (setq highlight-indent-guides-responsive t)
+;; (setq highlight-indent-guides-method 'character) ; column
+;; (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 
 ;; スペース可視化
 (require 'whitespace)
@@ -528,7 +528,8 @@
 (global-set-key [f7] 'writeroom-mode)
 
 ;; git-link ================
-(setq git-link-default-branch "develop")
+(setq git-link-default-branch nil)
+(setq git-link-use-commit t)
 
 ;; undo ================
 (global-undo-tree-mode)
@@ -573,3 +574,13 @@
 
 ;; ripgrep ================
 (rg-enable-default-bindings)
+
+;; Emacs Lisp ================
+(require 'paredit)
+;; (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
+;; (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
+;; (add-hook 'lisp-mode-hook 'enable-paredit-mode)
+;; (add-hook 'ielm-mode-hook 'enable-paredit-mode)
+
+(require 'lispxmp)
+(define-key emacs-lisp-mode-map (kbd "C-<return>") 'lispxmp)

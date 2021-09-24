@@ -35,8 +35,8 @@
 (load "ivy-init")
 (load "shell-init")
 (load "theme-init")
-(load "workspace-init")
 (load "exwm-init")
+(load "workspace-init")
 (load "my-function-init")
 
 ;; 環境変数を読み込む

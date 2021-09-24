@@ -10,13 +10,32 @@
 ;; Display all EXWM buffers in every workspace buffer list
 (setq exwm-workspace-show-all-buffers t)
 
-;; Run compton
-(defun kd/set-compton ()
+(setq mouse-autoselect-window nil
+        focus-follows-mouse t
+        exwm-workspace-warp-cursor t
+        exwm-workspace-number 5)
+
+(add-hook 'exwm-update-class-hook
+          (lambda ()
+            (exwm-workspace-rename-buffer exwm-class-name)))
+(add-hook 'exwm-update-title-hook
+          (lambda ()
+            (pcase exwm-class-name
+              ("qutebrowser" (exwm-workspace-rename-buffer (format "Qutebrowser: %s" exwm-title)))
+              ("chrome" (exwm-workspace-rename-buffer (format "Chrome: %s" exwm-title))))))
+
+(defun kd/set-background ()
   (interactive)
   (start-process-shell-command
-   "compton" nil "compton -b --config $HOME/dotfiles/.config/compton/compton.conf"))
+   "compton" nil "compton -b --config $HOME/dotfiles/.config/compton/compton.conf")
+  (start-process-shell-command
+   "fehbg" nil "~/dotfiles/.fehbg"))
 
-(when window-system
-  (progn
-    (exwm-config-example)
-    (kd/set-compton)))
+(define-key exwm-mode-map (kbd "C-M-:") 'vterm-toggle)
+(define-key exwm-mode-map (kbd "C-M-<right>") 'persp-next)
+(define-key exwm-mode-map (kbd "C-M-<left>") 'persp-prev)
+
+;; (when window-system
+;;   (progn
+;;     (exwm-init)
+;;     (kd/set-background)))

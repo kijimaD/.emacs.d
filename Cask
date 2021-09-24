@@ -97,6 +97,7 @@
 (depends-on "google-translate")
 (depends-on "goto-chg")
 (depends-on "guix")
+(depends-on "haskell-mode")
 (depends-on "helpful")
 (depends-on "highlight-indent-guides")
 (depends-on "hiwin")

@@ -71,6 +71,15 @@
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (define-key global-map "\C-cc" 'org-capture)
+
+(setq org-capture-templates
+      '(("m" "Memo" entry
+         (file+headline my-todo-file "Memo")
+         "** %?\n")
+        ("t" "Task" entry
+         (file+headline my-todo-file "Tasks")
+         "** TODO %?\n")))
+
 (setq org-log-done t)
 
 (setq my-org-directory (concat "~/" public-directory "/junk/diary/org-journal/"))
@@ -84,9 +93,9 @@
 ;; 時刻をデフォルト表示
 (setq org-agenda-start-with-log-mode t)
 
-;; 直近7日分の予定を表示させる
+;; 7日分の予定を表示させる
 (setq org-agenda-span 7)
-(setq org-agenda-start-day "-0d")
+(setq org-agenda-start-day "7d")
 
 ;; agendaには、習慣・スケジュール・TODOを表示させる
 (setq org-agenda-custom-commands
@@ -153,7 +162,8 @@
 (define-key global-map [insert] 'org-pomodoro)
 
 (setq org-roam-capture-templates
-      '(("t" "TODO" entry (file+headline my-todo-file "Inbox")
+      '(("t" "TODO" entry
+         (file+headline my-todo-file "Inbox")
          "*** TODO %?\n")
         ("d" "default" plain
          "%?"
