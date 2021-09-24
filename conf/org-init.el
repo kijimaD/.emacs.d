@@ -74,10 +74,10 @@
 
 (setq org-capture-templates
       '(("m" "Memo" entry
-         (file+headline my-todo-file "Inbox")
+         (file+headline my-todo-file "Memo")
          "** %?\n")
         ("t" "Task" entry
-         (file+headline my-todo-file "Inbox")
+         (file+headline my-todo-file "Tasks")
          "** TODO %?\n")))
 
 (setq org-log-done t)
@@ -93,9 +93,9 @@
 ;; 時刻をデフォルト表示
 (setq org-agenda-start-with-log-mode t)
 
-;; 直近7日分の予定を表示させる
+;; 7日分の予定を表示させる
 (setq org-agenda-span 7)
-(setq org-agenda-start-day "-0d")
+(setq org-agenda-start-day "7d")
 
 ;; agendaには、習慣・スケジュール・TODOを表示させる
 (setq org-agenda-custom-commands
