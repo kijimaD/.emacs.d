@@ -116,11 +116,12 @@
 
 ;; スニペット ================
 (org-babel-do-load-languages 'org-babel-load-languages
-                             '(
-                               (shell . t)
+                             '((shell . t)
                                (python . t)
                                (ruby . t)
-                               (emacs-lisp . t)))
+                               (emacs-lisp . t)
+                               (sql . t)
+                               (haskell . t)))
 
 ;; 日誌 ================
 (require 'org-journal)
@@ -205,6 +206,7 @@
   (add-to-list 'org-structure-template-alist '("py" . "src python"))
   (add-to-list 'org-structure-template-alist '("rb" . "src ruby"))
   (add-to-list 'org-structure-template-alist '("sq" . "src sql"))
+  (add-to-list 'org-structure-template-alist '("hs" . "src haskell"))
   (add-to-list 'org-structure-template-alist '("sh" . "src shell")))
 
 ;; sql
