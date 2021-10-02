@@ -4,8 +4,6 @@
 (require 'exwm)
 (require 'exwm-config)
 
-(exwm-config-example)
-
 ;; Automatically move EXWM buffer to current workspace when selected
 (setq exwm-layout-show-all-buffers t)
 
@@ -37,7 +35,9 @@
 (define-key exwm-mode-map (kbd "C-M-<right>") 'persp-next)
 (define-key exwm-mode-map (kbd "C-M-<left>") 'persp-prev)
 
-;; (when window-system
-;;   (progn
-;;     (exwm-init)
-;;     (kd/set-background)))
+(when window-system
+  (progn
+    (exwm-config-example)
+    ;; (exwm-init)
+    ;; (kd/set-background)
+    ))
