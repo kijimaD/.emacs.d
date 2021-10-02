@@ -1,5 +1,6 @@
 ;; org-mode ================
 (require 'org)
+(require 'org-protocol)
 
 ;; System locale to use for formatting time values.
 (setq system-time-locale "C")         ; Make sure that the weekdays in the
@@ -78,7 +79,13 @@
          "** %?\n")
         ("t" "Task" entry
          (file+headline my-todo-file "Tasks")
-         "** TODO %?\n")))
+         "** TODO %?\n")
+        ("p" "Protocol" entry
+         (file+headline my-todo-file "Inbox")
+         "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
+        ("L" "Protocol Link" entry
+         (file+headline my-todo-file "Inbox")
+         "* %?[[%:link][%:description]]")))
 
 (setq org-log-done t)
 
