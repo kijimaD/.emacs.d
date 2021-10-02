@@ -276,3 +276,18 @@
             org-roam-ui-follow t
             org-roam-ui-update-on-save t
             org-roam-ui-open-on-start t))))
+
+(defun org-lint-dir (directory)
+  (let* ((files (directory-files directory t ".*\\.org$")))
+    (org-lint-list files)))
+
+(defun org-lint-list (files)
+  (cond (files
+         (org-lint-file (car files))
+         (org-lint-list (cdr files)))))
+
+(defun org-lint-file (file)
+  (let ((buf)
+        (lint))
+    (setq buf (find-file-noselect file))
+    (with-current-buffer buf (if (setq lint (org-lint)) (print (list file lint))))))
