@@ -114,14 +114,20 @@
   (org-agenda nil "a"))
 (global-set-key (kbd "<f6>") 'org-agenda-default)
 
-;; スニペット ================
+;; agenda内でRで出るclocktableの設定。
+(setq org-clocktable-defaults '(:maxlevel 3 :scope agenda :tags "" :block today :step day :stepskip0 true :fileskip0 true))
+
+;; org-babel ================
 (org-babel-do-load-languages 'org-babel-load-languages
                              '((shell . t)
                                (python . t)
                                (ruby . t)
                                (emacs-lisp . t)
                                (sql . t)
-                               (haskell . t)))
+                               (haskell . t)
+                               (C . t)))
+
+(setq org-confirm-babel-evaluate nil)
 
 ;; 日誌 ================
 (require 'org-journal)

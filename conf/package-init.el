@@ -410,8 +410,6 @@
   (setq-local eww-disable-colorize nil)
   (eww-reload))
 
-(add-hook 'eww-mode-hook (lambda () (efs/org-mode-visual-fill)))
-
 ;; デフォルトエンジン
 (setq eww-search-prefix "https://www.google.co.jp/search?q=")
 
