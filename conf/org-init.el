@@ -148,7 +148,9 @@
 (setq org-sticky-header-heading-star "◉")
 
 ;; スライド ================
-(org-tree-slide-simple-profile)
+;; (org-tree-slide-simple-profile)
+(org-tree-slide-presentation-profile)
+(org-tree-slide--hide-slide-header)
 
 ;; pdf ================
 ;; (pdf-tools-install t)
@@ -214,14 +216,15 @@
 
 ;; 中央寄せ ================
 (require 'visual-fill-column)
-(defun efs/org-mode-visual-fill ()
+(defun kd/centering-buffer ()
   "Centering buffer."
   (interactive)
   (setq visual-fill-column-width 100
         visual-fill-column-center-text t)
   (visual-fill-column-mode 1))
 
-(add-hook 'org-mode-hook (lambda () (efs/org-mode-visual-fill)))
+(add-hook 'org-mode-hook (lambda () (kd/centering-buffer)))
+(add-hook 'eww-mode-hook (lambda () (kd/centering-buffer)))
 
 ;; face ================
 ;; themeのあとに評価するため、ここでは関数定義だけ。
