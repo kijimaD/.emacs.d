@@ -35,7 +35,9 @@
 (define-key exwm-mode-map (kbd "C-M-<right>") 'persp-next)
 (define-key exwm-mode-map (kbd "C-M-<left>") 'persp-prev)
 
-;; (when window-system
-;;   (progn
-;;     (exwm-init)
-;;     (kd/set-background)))
+(when window-system
+  (progn
+    (exwm-config-example)
+    ;; (exwm-init)
+    ;; (kd/set-background)
+    ))

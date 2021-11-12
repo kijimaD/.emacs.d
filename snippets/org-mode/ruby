@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: ruby
+# key: rb
+# --
+
+#+begin_src ruby
+$0
+#+end_src

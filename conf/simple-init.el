@@ -33,6 +33,8 @@
 
 (setq ring-bell-function 'ignore)
 
+(toggle-frame-fullscreen)
+
 (require 'scroll-bar)
 (scroll-bar-mode 0)
 (show-paren-mode t)

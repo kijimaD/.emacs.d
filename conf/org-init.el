@@ -1,5 +1,6 @@
 ;; org-mode ================
 (require 'org)
+(require 'org-protocol)
 
 ;; System locale to use for formatting time values.
 (setq system-time-locale "C")         ; Make sure that the weekdays in the
@@ -78,7 +79,13 @@
          "** %?\n")
         ("t" "Task" entry
          (file+headline my-todo-file "Tasks")
-         "** TODO %?\n")))
+         "** TODO %?\n")
+        ("p" "Protocol" entry
+         (file+headline my-todo-file "Inbox")
+         "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
+        ("L" "Protocol Link" entry
+         (file+headline my-todo-file "Inbox")
+         "* %?[[%:link][%:description]]")))
 
 (setq org-log-done t)
 
@@ -94,7 +101,7 @@
 (setq org-agenda-start-with-log-mode t)
 
 ;; 7日分の予定を表示させる
-(setq org-agenda-span 7)
+(setq org-agenda-span 14)
 (setq org-agenda-start-day "7d")
 
 ;; agendaには、習慣・スケジュール・TODOを表示させる
@@ -107,13 +114,24 @@
   (org-agenda nil "a"))
 (global-set-key (kbd "<f6>") 'org-agenda-default)
 
-;; スニペット ================
+;; agenda内でRで出るclocktableの設定。
+(setq org-clocktable-defaults '(:maxlevel 3 :scope agenda :tags "" :block today :step day :stepskip0 true :fileskip0 true))
+
+;; org-babel ================
 (org-babel-do-load-languages 'org-babel-load-languages
-                             '(
-                               (shell . t)
+                             '((shell . t)
                                (python . t)
                                (ruby . t)
-                               (emacs-lisp . t)))
+                               (emacs-lisp . t)
+                               (sql . t)
+                               (haskell . t)
+                               (clojure . t)
+                               (rust . t)
+                               (C . t)))
+
+(setq org-confirm-babel-evaluate nil)
+(setq org-babel-clojure-backend 'cider)
+(require 'cider)
 
 ;; 日誌 ================
 (require 'org-journal)
@@ -140,7 +158,9 @@
 (setq org-sticky-header-heading-star "◉")
 
 ;; スライド ================
-(org-tree-slide-simple-profile)
+;; (org-tree-slide-simple-profile)
+(org-tree-slide-presentation-profile)
+(org-tree-slide--hide-slide-header)
 
 ;; pdf ================
 ;; (pdf-tools-install t)
@@ -198,6 +218,8 @@
   (add-to-list 'org-structure-template-alist '("py" . "src python"))
   (add-to-list 'org-structure-template-alist '("rb" . "src ruby"))
   (add-to-list 'org-structure-template-alist '("sq" . "src sql"))
+  (add-to-list 'org-structure-template-alist '("hs" . "src haskell"))
+  (add-to-list 'org-structure-template-alist '("cj" . "src clojure"))
   (add-to-list 'org-structure-template-alist '("sh" . "src shell")))
 
 ;; sql
@@ -205,14 +227,15 @@
 
 ;; 中央寄せ ================
 (require 'visual-fill-column)
-(defun efs/org-mode-visual-fill ()
+(defun kd/centering-buffer ()
   "Centering buffer."
   (interactive)
   (setq visual-fill-column-width 100
         visual-fill-column-center-text t)
   (visual-fill-column-mode 1))
 
-(add-hook 'org-mode-hook (lambda () (efs/org-mode-visual-fill)))
+(add-hook 'org-mode-hook (lambda () (kd/centering-buffer)))
+(add-hook 'eww-mode-hook (lambda () (kd/centering-buffer)))
 
 ;; face ================
 ;; themeのあとに評価するため、ここでは関数定義だけ。
@@ -238,7 +261,7 @@
                   (org-level-6 . 1.0)
                   (org-level-7 . 1.0)
                   (org-level-8 . 1.0)))
-    (set-face-attribute (car face) nil :font "Hiragino Sans" :weight 'extra-bold :height (cdr face)))
+    (set-face-attribute (car face) nil :font "Hiragino Sans" :height (cdr face)))
 
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
@@ -269,3 +292,18 @@
             org-roam-ui-follow t
             org-roam-ui-update-on-save t
             org-roam-ui-open-on-start t))))
+
+(defun org-lint-dir (directory)
+  (let* ((files (directory-files directory t ".*\\.org$")))
+    (org-lint-list files)))
+
+(defun org-lint-list (files)
+  (cond (files
+         (org-lint-file (car files))
+         (org-lint-list (cdr files)))))
+
+(defun org-lint-file (file)
+  (let ((buf)
+        (lint))
+    (setq buf (find-file-noselect file))
+    (with-current-buffer buf (if (setq lint (org-lint)) (print (list file lint))))))
