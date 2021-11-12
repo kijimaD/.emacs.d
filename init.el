@@ -30,6 +30,7 @@
 (load "package-init")
 (load "rails-init")
 (load "python-init")
+(load "haskell-init")
 (load "web-mode-init")
 (load "lsp-init")
 (load "ivy-init")
