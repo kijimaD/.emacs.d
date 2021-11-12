@@ -91,7 +91,6 @@
 (depends-on "github-review")
 (depends-on "github-search")
 (depends-on "github-theme")
-(depends-on "gitignore-mode")
 (depends-on "gntp")
 (depends-on "google-this")
 (depends-on "google-translate")
