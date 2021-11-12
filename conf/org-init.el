@@ -101,7 +101,7 @@
 (setq org-agenda-start-with-log-mode t)
 
 ;; 7日分の予定を表示させる
-(setq org-agenda-span 7)
+(setq org-agenda-span 14)
 (setq org-agenda-start-day "7d")
 
 ;; agendaには、習慣・スケジュール・TODOを表示させる
@@ -261,7 +261,7 @@
                   (org-level-6 . 1.0)
                   (org-level-7 . 1.0)
                   (org-level-8 . 1.0)))
-    (set-face-attribute (car face) nil :font "Hiragino Sans" :weight 'extra-bold :height (cdr face)))
+    (set-face-attribute (car face) nil :font "Hiragino Sans" :height (cdr face)))
 
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)

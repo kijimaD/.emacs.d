@@ -171,6 +171,7 @@
 (depends-on "pomodoro")
 (depends-on "popup")
 (depends-on "popwin")
+(depends-on "prettier-js")
 (depends-on "prodigy")
 (depends-on "projectile")
 (depends-on "projectile-rails")
