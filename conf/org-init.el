@@ -125,9 +125,12 @@
                                (emacs-lisp . t)
                                (sql . t)
                                (haskell . t)
+                               (clojure . t)
                                (C . t)))
 
 (setq org-confirm-babel-evaluate nil)
+(setq org-babel-clojure-backend 'cider)
+(require 'cider)
 
 ;; 日誌 ================
 (require 'org-journal)
@@ -215,6 +218,7 @@
   (add-to-list 'org-structure-template-alist '("rb" . "src ruby"))
   (add-to-list 'org-structure-template-alist '("sq" . "src sql"))
   (add-to-list 'org-structure-template-alist '("hs" . "src haskell"))
+  (add-to-list 'org-structure-template-alist '("cj" . "src clojure"))
   (add-to-list 'org-structure-template-alist '("sh" . "src shell")))
 
 ;; sql
