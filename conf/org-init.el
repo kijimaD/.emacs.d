@@ -126,6 +126,7 @@
                                (sql . t)
                                (haskell . t)
                                (clojure . t)
+                               (rust . t)
                                (C . t)))
 
 (setq org-confirm-babel-evaluate nil)

@@ -191,6 +191,7 @@
 (depends-on "rubocop")
 (depends-on "ruby-compilation")
 (depends-on "ruby-electric")
+(depends-on "rust-mode")
 (depends-on "s")
 (depends-on "seq")
 (depends-on "slim-mode")
