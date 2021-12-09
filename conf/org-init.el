@@ -126,12 +126,16 @@
                                (sql . t)
                                (haskell . t)
                                (clojure . t)
+                               (lisp . t)
                                (rust . t)
                                (C . t)))
 
 (setq org-confirm-babel-evaluate nil)
 (setq org-babel-clojure-backend 'cider)
 (require 'cider)
+
+;; common lisp
+(setq inferior-lisp-program "sbcl")
 
 ;; 日誌 ================
 (require 'org-journal)
@@ -247,10 +251,10 @@
   ;;                         '(("^ *\\([-]\\) "
   ;;                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "✦"))))))
 
-(setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
-(setq org-superstar-item-bullet-alist '((?* . ?•)
-                                        (?+ . ?»)
-                                        (?- . ?➤)))
+  (setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
+  (setq org-superstar-item-bullet-alist '((?* . ?•)
+                                          (?+ . ?»)
+                                          (?- . ?➤)))
 
   ;; Set faces for heading levels
   (dolist (face '((org-level-1 . 1.4)
