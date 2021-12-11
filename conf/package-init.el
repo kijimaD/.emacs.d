@@ -77,9 +77,6 @@
 
 (setq-default typescript-indent-level 2)
 
-;; 編集箇所を強調表示
-;; (volatile-highlights-mode t)
-
 ;; 外観(非コーディング) ================
 ;; 現在行をハイライト
 
@@ -226,7 +223,6 @@
                 ("\\.md$" . "markdown-template.md")
                 ) auto-insert-alist))
 
-(yatemplate-fill-alist)
 (auto-insert-mode 1)
 (yas-global-mode 1)
 (setq yas-prompt-functions '(yas-ido-prompt))
