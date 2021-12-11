@@ -327,6 +327,8 @@
 
 ;; easy-kill ================
 (require 'easy-kill)
+(global-set-key [remap kill-ring-save] 'easy-kill)
+
 (require 'easy-kill-extras)
 ;; easy-kill-extras
 ;; Upgrade `mark-word' and `mark-sexp' with easy-mark
