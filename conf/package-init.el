@@ -39,11 +39,10 @@
 (define-key auto-highlight-symbol-mode-map (kbd "M-<left>") nil)
 
 ;; インデント可視化
-;; (require 'highlight-indent-guides)
-;; (setq highlight-indent-guides-auto-enabled t)
-;; (setq highlight-indent-guides-responsive t)
-;; (setq highlight-indent-guides-method 'character) ; column
-;; (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+;; (require 'highlight-indentation)
+;; (add-hook 'prog-mode-hook 'highlight-indentation-mode)
+;; (set-face-background 'highlight-indentation-face "#e3e3d3")
+;; (set-face-background 'highlight-indentation-current-column-face "#c3b3b3")
 
 ;; スペース可視化
 (require 'whitespace)
@@ -119,6 +118,10 @@
 (windmove-default-keybindings)
 
 ;; (window-numbering-mode 1)
+
+;; window表示 ================
+(require 'popwin)
+(popwin-mode)
 
 ;; ブックマーク ================
 (setq-default bm-buffer-persistence nil)
