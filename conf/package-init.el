@@ -383,7 +383,6 @@
 ;; 辞書 ================
 (require 'define-word)
 (global-set-key (kbd "<end>") 'define-word-at-point)
-(global-set-key (kbd "<henkan>") 'define-word-at-point)
 
 ;; eww ================
 ;; 改行するようにする
