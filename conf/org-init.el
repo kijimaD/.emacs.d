@@ -119,13 +119,6 @@
 
 (setq org-clock-mode-line-total 'current)
 
-;; org-alert ================
-(require 'org-alert)
-(setq alert-default-style 'notifications)
-(setq org-alert-interval 300)
-(setq org-alert-notification-title "Reminder")
-(org-alert-enable)
-
 ;; org-timeline ================
 (require 'org-timeline)
 (add-hook 'org-agenda-finalize-hook 'org-timeline-insert-timeline :append)

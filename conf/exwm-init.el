@@ -24,14 +24,24 @@
               ("qutebrowser" (exwm-workspace-rename-buffer (format "Qutebrowser: %s" exwm-title)))
               ("chrome" (exwm-workspace-rename-buffer (format "Chrome: %s" exwm-title))))))
 
-(defun kd/set-background ()
+(defun kd/set-init ()
   (interactive)
-  (start-process-shell-command
-   "compton" nil "compton -b --config ~/dotfiles/.config/compton/compton.conf")
-  (start-process-shell-command "fehbg" nil "~/dotfiles/.fehbg")
+  (kd/set-background)
+  (start-process-shell-command "compton" nil "compton -b --config ~/dotfiles/.config/compton/compton.conf")
   (start-process-shell-command "dunst" nil "dunst")
   ;; (start-process-shell-command "polybar" nil "~/dotfiles/.config/polybar/launch.sh")
-  )
+
+  ;; org-alert
+  ;; requireするとexwmのy/n選択ができないため
+  (require 'org-alert)
+  (setq alert-default-style 'notifications)
+  (setq org-alert-interval 300)
+  (setq org-alert-notification-title "Reminder")
+  (org-alert-enable))
+
+(defun kd/set-background ()
+  (interactive)
+  (start-process-shell-command "fehbg" nil "~/dotfiles/.fehbg"))
 
 (define-key exwm-mode-map (kbd "C-M-:") 'vterm-toggle)
 (define-key exwm-mode-map (kbd "C-M-<right>") 'persp-next)
