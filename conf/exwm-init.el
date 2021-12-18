@@ -25,6 +25,7 @@
               ("chrome" (exwm-workspace-rename-buffer (format "Chrome: %s" exwm-title))))))
 
 (defun kd/set-init ()
+  "Window Manager関係の各種プログラムを起動する."
   (interactive)
   (kd/set-background)
   (start-process-shell-command "compton" nil "compton -b --config ~/dotfiles/.config/compton/compton.conf")
@@ -40,6 +41,7 @@
   (org-alert-enable))
 
 (defun kd/set-background ()
+  "背景をセットする."
   (interactive)
   (start-process-shell-command "fehbg" nil "~/dotfiles/.fehbg"))
 

@@ -9,6 +9,7 @@
 (define-key my-keymap (kbd "a") 'counsel-apropos)
 (define-key my-keymap (kbd "!") 'counsel-linux-app)
 (define-key my-keymap (kbd "r") 'counsel-recentf)
+(define-key my-keymap (kbd "j") 'avy-goto-word-0)
 (define-key my-keymap (kbd "<henkan> f") 'forge-pull)
 (define-key my-keymap (kbd "<henkan> t") 'forge-list-topics)
 (define-key my-keymap (kbd "<henkan> i") 'forge-list-assigned-issues)
@@ -123,8 +124,19 @@
   (persp-state-load "~/.emacs.d/persp"))
 
 (defun kd/opt-git ()
+  "Gitの不要なファイル整理."
   (interactive)
   (start-process-shell-command "git-opt" nil "git gc && git fetch --prune"))
+
+(defun kd/mint-volumn-up ()
+  "Linux Mintでの音量アップ."
+  (interactive)
+  (start-process-shell-command "volumn up" nil "pactl set-sink-volume @DEFAULT_SINK@ +5%"))
+
+(defun kd/mint-volumn-down ()
+  "Linux Mintでの音量ダウン."
+  (interactive)
+  (start-process-shell-command "volumn up" nil "pactl set-sink-volume @DEFAULT_SINK@ -5%"))
 
 (use-package ej-dict
   :straight (:host github :repo "kijimaD/ej-dict"))
