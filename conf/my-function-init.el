@@ -1,3 +1,22 @@
+(define-prefix-command 'my-keymap)
+(global-set-key (kbd "<henkan>") my-keymap)
+(define-key my-keymap (kbd "b") 'ivy-switch-buffer)
+(define-key my-keymap (kbd "C-g") 'counsel-git-grep)
+(define-key my-keymap (kbd "g") 'magit-status)
+(define-key my-keymap (kbd "q") 'vr/query-replace)
+(define-key my-keymap (kbd "l") 'counsel-mark-ring)
+(define-key my-keymap (kbd "f") 'counsel-projectile-find-file)
+(define-key my-keymap (kbd "a") 'counsel-apropos)
+(define-key my-keymap (kbd "!") 'counsel-linux-app)
+(define-key my-keymap (kbd "r") 'counsel-recentf)
+(define-key my-keymap (kbd "j") 'avy-goto-word-0)
+(define-key my-keymap (kbd "<henkan> f") 'forge-pull)
+(define-key my-keymap (kbd "<henkan> t") 'forge-list-topics)
+(define-key my-keymap (kbd "<henkan> i") 'forge-list-assigned-issues)
+(define-key my-keymap (kbd "<henkan> p") 'forge-list-assigned-pullreqs)
+(define-key my-keymap (kbd "<henkan> o") 'forge-list-owned-issues)
+(define-key my-keymap (kbd "<henkan> l") 'magit-log)
+
 ;; 新しい行追加
 (defun my-new-line ()
   (interactive)
@@ -103,6 +122,21 @@
 (defun my-persp-load ()
   (interactive)
   (persp-state-load "~/.emacs.d/persp"))
+
+(defun kd/opt-git ()
+  "Gitの不要なファイル整理."
+  (interactive)
+  (start-process-shell-command "git-opt" nil "git gc && git fetch --prune"))
+
+(defun kd/mint-volumn-up ()
+  "Linux Mintでの音量アップ."
+  (interactive)
+  (start-process-shell-command "volumn up" nil "pactl set-sink-volume @DEFAULT_SINK@ +5%"))
+
+(defun kd/mint-volumn-down ()
+  "Linux Mintでの音量ダウン."
+  (interactive)
+  (start-process-shell-command "volumn up" nil "pactl set-sink-volume @DEFAULT_SINK@ -5%"))
 
 (use-package ej-dict
   :straight (:host github :repo "kijimaD/ej-dict"))

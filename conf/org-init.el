@@ -117,6 +117,12 @@
 ;; agenda内でRで出るclocktableの設定。
 (setq org-clocktable-defaults '(:maxlevel 3 :scope agenda :tags "" :block today :step day :stepskip0 true :fileskip0 true))
 
+(setq org-clock-mode-line-total 'current)
+
+;; org-timeline ================
+(require 'org-timeline)
+(add-hook 'org-agenda-finalize-hook 'org-timeline-insert-timeline :append)
+
 ;; org-babel ================
 (org-babel-do-load-languages 'org-babel-load-languages
                              '((shell . t)
@@ -126,12 +132,16 @@
                                (sql . t)
                                (haskell . t)
                                (clojure . t)
+                               (lisp . t)
                                (rust . t)
                                (C . t)))
 
 (setq org-confirm-babel-evaluate nil)
 (setq org-babel-clojure-backend 'cider)
 (require 'cider)
+
+;; common lisp
+(setq inferior-lisp-program "sbcl")
 
 ;; 日誌 ================
 (require 'org-journal)
@@ -202,6 +212,8 @@
 (setq org-id-link-to-org-use-id t)
 (setq org-id-extra-files (org-roam--list-files org-roam-directory))
 
+(setq org-roam-v2-ack t)
+
 (org-roam-setup)
 ;; 画像 ================
 (require 'org-download)
@@ -247,10 +259,12 @@
   ;;                         '(("^ *\\([-]\\) "
   ;;                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "✦"))))))
 
-(setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
-(setq org-superstar-item-bullet-alist '((?* . ?•)
-                                        (?+ . ?»)
-                                        (?- . ?➤)))
+  (setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
+  ;; (setq org-superstar-headline-bullets-list '("◉" "○" "●" "✿" "✸"))
+
+  (setq org-superstar-item-bullet-alist '((?* . ?•)
+                                          (?+ . ?»)
+                                          (?- . ?➤)))
 
   ;; Set faces for heading levels
   (dolist (face '((org-level-1 . 1.4)

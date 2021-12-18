@@ -3,6 +3,7 @@
 # key: hs
 # --
 
+#+caption: $1
 #+begin_src haskell
 $0
 #+end_src

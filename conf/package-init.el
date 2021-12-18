@@ -39,11 +39,10 @@
 (define-key auto-highlight-symbol-mode-map (kbd "M-<left>") nil)
 
 ;; インデント可視化
-;; (require 'highlight-indent-guides)
-;; (setq highlight-indent-guides-auto-enabled t)
-;; (setq highlight-indent-guides-responsive t)
-;; (setq highlight-indent-guides-method 'character) ; column
-;; (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+;; (require 'highlight-indentation)
+;; (add-hook 'prog-mode-hook 'highlight-indentation-mode)
+;; (set-face-background 'highlight-indentation-face "#e3e3d3")
+;; (set-face-background 'highlight-indentation-current-column-face "#c3b3b3")
 
 ;; スペース可視化
 (require 'whitespace)
@@ -77,9 +76,6 @@
             (setq indent-tabs-mode nil)))
 
 (setq-default typescript-indent-level 2)
-
-;; 編集箇所を強調表示
-;; (volatile-highlights-mode t)
 
 ;; 外観(非コーディング) ================
 ;; 現在行をハイライト
@@ -119,6 +115,10 @@
 (windmove-default-keybindings)
 
 ;; (window-numbering-mode 1)
+
+;; window表示 ================
+(require 'popwin)
+(popwin-mode)
 
 ;; ブックマーク ================
 (setq-default bm-buffer-persistence nil)
@@ -173,6 +173,9 @@
   (migemo-init)
   )
 
+(require 'anzu)
+(global-anzu-mode)
+
 ;; バージョン管理 ================
 (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
@@ -220,7 +223,6 @@
                 ("\\.md$" . "markdown-template.md")
                 ) auto-insert-alist))
 
-(yatemplate-fill-alist)
 (auto-insert-mode 1)
 (yas-global-mode 1)
 (setq yas-prompt-functions '(yas-ido-prompt))
@@ -324,6 +326,8 @@
 
 ;; easy-kill ================
 (require 'easy-kill)
+(global-set-key [remap kill-ring-save] 'easy-kill)
+
 (require 'easy-kill-extras)
 ;; easy-kill-extras
 ;; Upgrade `mark-word' and `mark-sexp' with easy-mark
@@ -379,7 +383,6 @@
 ;; 辞書 ================
 (require 'define-word)
 (global-set-key (kbd "<end>") 'define-word-at-point)
-(global-set-key (kbd "<henkan>") 'define-word-at-point)
 
 ;; eww ================
 ;; 改行するようにする

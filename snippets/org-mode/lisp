@@ -1,9 +1,9 @@
 # -*- mode: snippet -*-
-# name: ruby
-# key: rb
+# name: lisp
+# key: li
 # --
 
 #+caption: $1
-#+begin_src ruby
+#+begin_src lisp
 $0
 #+end_src

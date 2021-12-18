@@ -70,7 +70,6 @@
         rubocop-mode
         ruby-electric-mode
         undo-tree-mode
-        volatile-highlights-mode
         which-key-mode
         yas-minor-mode
         ))
