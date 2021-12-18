@@ -2,6 +2,10 @@
 (source gnu)
 (source melpa)
 
+;; Try
+(depends-on "org-alert")
+(depends-on "org-timeline")
+
 ;; Install Packages
 (depends-on "ace-jump-mode")
 (depends-on "ace-link")

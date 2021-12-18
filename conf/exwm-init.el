@@ -27,9 +27,11 @@
 (defun kd/set-background ()
   (interactive)
   (start-process-shell-command
-   "compton" nil "compton -b --config $HOME/dotfiles/.config/compton/compton.conf")
-  (start-process-shell-command
-   "fehbg" nil "~/dotfiles/.fehbg"))
+   "compton" nil "compton -b --config ~/dotfiles/.config/compton/compton.conf")
+  (start-process-shell-command "fehbg" nil "~/dotfiles/.fehbg")
+  (start-process-shell-command "dunst" nil "dunst")
+  ;; (start-process-shell-command "polybar" nil "~/dotfiles/.config/polybar/launch.sh")
+  )
 
 (define-key exwm-mode-map (kbd "C-M-:") 'vterm-toggle)
 (define-key exwm-mode-map (kbd "C-M-<right>") 'persp-next)

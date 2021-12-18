@@ -117,6 +117,19 @@
 ;; agenda内でRで出るclocktableの設定。
 (setq org-clocktable-defaults '(:maxlevel 3 :scope agenda :tags "" :block today :step day :stepskip0 true :fileskip0 true))
 
+(setq org-clock-mode-line-total 'current)
+
+;; org-alert ================
+(require 'org-alert)
+(setq alert-default-style 'notifications)
+(setq org-alert-interval 300)
+(setq org-alert-notification-title "Reminder")
+(org-alert-enable)
+
+;; org-timeline ================
+(require 'org-timeline)
+(add-hook 'org-agenda-finalize-hook 'org-timeline-insert-timeline :append)
+
 ;; org-babel ================
 (org-babel-do-load-languages 'org-babel-load-languages
                              '((shell . t)
@@ -206,6 +219,8 @@
 (setq org-id-link-to-org-use-id t)
 (setq org-id-extra-files (org-roam--list-files org-roam-directory))
 
+(setq org-roam-v2-ack t)
+
 (org-roam-setup)
 ;; 画像 ================
 (require 'org-download)
@@ -252,6 +267,8 @@
   ;;                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "✦"))))))
 
   (setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
+  ;; (setq org-superstar-headline-bullets-list '("◉" "○" "●" "✿" "✸"))
+
   (setq org-superstar-item-bullet-alist '((?* . ?•)
                                           (?+ . ?»)
                                           (?- . ?➤)))
