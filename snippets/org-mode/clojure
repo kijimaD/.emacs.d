@@ -3,6 +3,7 @@
 # key: cj
 # --
 
+#+caption: $1
 #+begin_src clojure
 $0
 #+end_src
