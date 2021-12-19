@@ -192,17 +192,15 @@
 (require 'mozc)
 (set-language-environment "Japanese")
 (setq default-input-method "japanese-mozc")
-
 (global-set-key (kbd "C-SPC") 'toggle-input-method)
-
-(require 'mozc-popup)
-(setq mozc-candidate-style 'popup)
 
 (add-hook 'input-method-activate-hook
           (lambda() (set-cursor-color "Green")))
 (add-hook 'input-method-inactivate-hook
           (lambda() (set-cursor-color "magenta")))
-(setq default-input-method "japanese-mozc")
+
+(require 'mozc-popup)
+(setq mozc-candidate-style 'popup)
 
 ;; 固有サイトモード ================
 (global-set-key (kbd "<f2>") 'devdocs-search)

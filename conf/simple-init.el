@@ -16,16 +16,19 @@
 ;; メニューバーを消す
 (menu-bar-mode 0)
 
-;;カーソルのある列をハイライト
+;; カーソルのある列をハイライト
 (global-hl-line-mode 0)
 
-;;対応する括弧をハイライト
+;; 対応する括弧をハイライト
 (show-paren-mode t)
 
-;;起動時のメッセージ非表示
+;; 起動時のメッセージ非表示
 (setq inhibit-startup-message t)
 
-;;font-lockをどこでも有効にする
+;; 保存時のmessage非表示
+;; (setq save-silently t)
+
+;; font-lockをどこでも有効にする
 (global-font-lock-mode t)
 
 ;; タイトルにフルパス表示
@@ -59,6 +62,12 @@
 
 ;; yesかnoではなく、yかnかで答えられるようにする
 (defalias 'yes-or-no-p 'y-or-n-p)
+
+;; 終了してしまう事故防止
+(setq confirm-kill-emacs 'y-or-n-p)
+
+;; リンクを聞かずに開く
+(setq vc-follow-symlinks t)
 
 ;;括弧の補完
 (global-set-key (kbd "(") 'skeleton-pair-insert-maybe)

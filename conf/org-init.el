@@ -176,6 +176,9 @@
 ;; (pdf-tools-install t)
 (add-hook 'pdf-tools-enabled-hook 'pdf-view-midnight-minor-mode)
 (setq-default pdf-view-display-size 'fit-page)
+(setq pdf-annot-activate-created-annotations t)
+(define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
+(setq pdf-view-resize-factor 1.1)
 
 ;; roam ================
 (require 'org-roam)
@@ -290,7 +293,28 @@
   (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
   (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch))
 
-;; UI ================
+(custom-theme-set-faces
+ 'user
+ '(variable-pitch ((t (:family "Helvetica Neue" :height 1.0 :weight regular))))
+ '(fixed-pitch ((t (:family "Fira Mono" :height 1.0))))
+ '(org-block ((t (:inherit fixed-pitch))))
+ '(org-code ((t (:inherit (shadow fixed-pitch)))))
+ '(org-document-info ((t (:foreground "dark orange"))))
+ '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
+ '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
+ '(org-link ((t (:foreground "royal blue" :underline t))))
+ '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+ '(org-property-value ((t (:inherit fixed-pitch))) t)
+ '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+ '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
+ '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
+ '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
+ '(org-block-begin-line ((t (:inherit org-block :background "#262829")))))
+
+  (add-hook 'org-mode-hook 'variable-pitch-mode)
+  (add-hook 'org-mode-hook 'visual-line-mode)
+
+;; org-roam-ui ================
 (when window-system
   (progn
     (use-package org-roam-ui

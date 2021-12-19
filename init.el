@@ -8,6 +8,7 @@
 (ignore-errors (guix-emacs-autoload-packages))
 
 ;; straight.el
+;; fail in other system environments
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
