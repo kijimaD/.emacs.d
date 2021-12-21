@@ -174,6 +174,7 @@
 
 ;; pdf ================
 ;; (pdf-tools-install t)
+(require 'pdf-tools)
 (add-hook 'pdf-tools-enabled-hook 'pdf-view-midnight-minor-mode)
 (setq-default pdf-view-display-size 'fit-page)
 (setq pdf-annot-activate-created-annotations t)
@@ -262,36 +263,44 @@
   ;;                         '(("^ *\\([-]\\) "
   ;;                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "✦"))))))
 
-  (setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
-  ;; (setq org-superstar-headline-bullets-list '("◉" "○" "●" "✿" "✸"))
+  ;; (setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
+  (setq org-superstar-headline-bullets-list '("◉" "○" "●" "✿" "✸"))
 
   (setq org-superstar-item-bullet-alist '((?* . ?•)
                                           (?+ . ?»)
                                           (?- . ?➤)))
 
-  ;; Set faces for heading levels
-  (dolist (face '((org-level-1 . 1.4)
-                  (org-level-2 . 1.2)
-                  (org-level-3 . 1.0)
-                  (org-level-4 . 1.0)
-                  (org-level-5 . 1.0)
-                  (org-level-6 . 1.0)
-                  (org-level-7 . 1.0)
-                  (org-level-8 . 1.0)))
-    (set-face-attribute (car face) nil :font "Hiragino Sans" :height (cdr face)))
+  ;; https://zzamboni.org/post/beautifying-org-mode-in-emacs/
+  (let* ((variable-tuple
+          (cond ((x-list-fonts "Hiragino Sans") '(:font "Hiragino Sans"))
+                ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
+                ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
+                (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
+         (headline           `(:inherit default :weight bold)))
 
-  ;; Ensure that anything that should be fixed-pitch in Org files appears that way
-  (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-table nil    :inherit 'fixed-pitch)
-  (set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
-  (set-face-attribute 'org-code nil     :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-table nil    :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-checkbox nil  :inherit 'fixed-pitch)
-  (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
-  (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch))
+    (custom-theme-set-faces
+     'user
+     `(org-level-8 ((t (,@headline ,@variable-tuple))))
+     `(org-level-7 ((t (,@headline ,@variable-tuple))))
+     `(org-level-6 ((t (,@headline ,@variable-tuple))))
+     `(org-level-5 ((t (,@headline ,@variable-tuple))))
+     `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.1))))
+     `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.25))))
+     `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.5))))
+     `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.75))))
+     `(org-document-title ((t (,@headline ,@variable-tuple :height 2.0 :underline nil)))))))
+
+(set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
+(set-face-attribute 'org-table nil    :inherit 'fixed-pitch)
+(set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
+(set-face-attribute 'org-code nil     :inherit '(shadow fixed-pitch))
+(set-face-attribute 'org-table nil    :inherit '(shadow fixed-pitch))
+(set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+(set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+(set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+(set-face-attribute 'org-checkbox nil  :inherit 'fixed-pitch)
+(set-face-attribute 'line-number nil :inherit 'fixed-pitch)
+(set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch)
 
 (custom-theme-set-faces
  'user
@@ -311,8 +320,8 @@
  '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
  '(org-block-begin-line ((t (:inherit org-block :background "#262829")))))
 
-  (add-hook 'org-mode-hook 'variable-pitch-mode)
-  (add-hook 'org-mode-hook 'visual-line-mode)
+(add-hook 'org-mode-hook 'variable-pitch-mode)
+(add-hook 'org-mode-hook 'visual-line-mode)
 
 ;; org-roam-ui ================
 (when window-system

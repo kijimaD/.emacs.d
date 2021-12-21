@@ -3,7 +3,7 @@
 (setq read-process-output-max (* 1024 1024))
 
 (when (or (require 'cask "~/.cask/cask.el" t)
-      (require 'cask nil t))
+          (require 'cask nil t))
   (cask-initialize))
 (ignore-errors (guix-emacs-autoload-packages))
 
