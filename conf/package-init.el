@@ -203,7 +203,7 @@
           (lambda() (set-cursor-color "magenta")))
 
 (require 'mozc-popup)
-(setq mozc-candidate-style 'popup)
+(setq mozc-candidate-style 'echo-area)
 
 ;; 固有サイトモード ================
 (global-set-key (kbd "<f2>") 'devdocs-search)
