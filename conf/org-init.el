@@ -174,6 +174,7 @@
 
 ;; pdf ================
 ;; (pdf-tools-install t)
+(require 'pdf-tools)
 (add-hook 'pdf-tools-enabled-hook 'pdf-view-midnight-minor-mode)
 (setq-default pdf-view-display-size 'fit-page)
 (setq pdf-annot-activate-created-annotations t)
@@ -262,25 +263,23 @@
   ;;                         '(("^ *\\([-]\\) "
   ;;                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "✦"))))))
 
-  (setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
-  ;; (setq org-superstar-headline-bullets-list '("◉" "○" "●" "✿" "✸"))
+  ;; (setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
+  (setq org-superstar-headline-bullets-list '("◉" "○" "●" "✿" "✸"))
 
   (setq org-superstar-item-bullet-alist '((?* . ?•)
                                           (?+ . ?»)
                                           (?- . ?➤)))
 
-  ;; Set faces for heading levels
-  (dolist (face '((org-level-1 . 1.4)
-                  (org-level-2 . 1.2)
-                  (org-level-3 . 1.0)
-                  (org-level-4 . 1.0)
+  (dolist (face '((org-level-1 . 1.75)
+                  (org-level-2 . 1.5)
+                  (org-level-3 . 1.25)
+                  (org-level-4 . 1.1)
                   (org-level-5 . 1.0)
                   (org-level-6 . 1.0)
                   (org-level-7 . 1.0)
                   (org-level-8 . 1.0)))
-    (set-face-attribute (car face) nil :font "Hiragino Sans" :height (cdr face)))
+    (set-face-attribute (car face) nil :font "Hiragino Sans" :height (cdr face) :weight 'bold))
 
-  ;; Ensure that anything that should be fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
   (set-face-attribute 'org-table nil    :inherit 'fixed-pitch)
   (set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
@@ -291,28 +290,28 @@
   (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
   (set-face-attribute 'org-checkbox nil  :inherit 'fixed-pitch)
   (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
-  (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch))
+  (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch)
 
-(custom-theme-set-faces
- 'user
- '(variable-pitch ((t (:family "Helvetica Neue" :height 1.0 :weight regular))))
- '(fixed-pitch ((t (:family "Fira Mono" :height 1.0))))
- '(org-block ((t (:inherit fixed-pitch))))
- '(org-code ((t (:inherit (shadow fixed-pitch)))))
- '(org-document-info ((t (:foreground "dark orange"))))
- '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
- '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
- '(org-link ((t (:foreground "royal blue" :underline t))))
- '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
- '(org-property-value ((t (:inherit fixed-pitch))) t)
- '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
- '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
- '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
- '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
- '(org-block-begin-line ((t (:inherit org-block :background "#262829")))))
+  (custom-theme-set-faces
+   'user
+   '(variable-pitch ((t (:family "Helvetica Neue" :height 1.0 :weight regular))))
+   '(fixed-pitch ((t (:family "Fira Mono" :height 1.0))))
+   '(org-block ((t (:inherit fixed-pitch))))
+   '(org-code ((t (:inherit (shadow fixed-pitch)))))
+   '(org-document-info ((t (:foreground "dark orange"))))
+   '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
+   '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
+   '(org-link ((t (:foreground "royal blue" :underline t))))
+   '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+   '(org-property-value ((t (:inherit fixed-pitch))) t)
+   '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+   '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
+   '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
+   '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
+   '(org-block-begin-line ((t (:inherit org-block :background "#262829"))))))
 
-  (add-hook 'org-mode-hook 'variable-pitch-mode)
-  (add-hook 'org-mode-hook 'visual-line-mode)
+(add-hook 'org-mode-hook 'variable-pitch-mode)
+(add-hook 'org-mode-hook 'visual-line-mode)
 
 ;; org-roam-ui ================
 (when window-system

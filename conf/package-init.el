@@ -159,6 +159,9 @@
 (global-set-key (kbd "C-c <left>") 'goto-last-change)
 (global-set-key (kbd "C-c <right>") 'goto-last-change-reverse)
 
+;; 矩形選択で使うため無効化する
+(define-key back-button-mode-map (kbd "C-x SPC") nil)
+
 ;; インクリメンタルサーチ ================
 (require 'migemo)
 (when (and (executable-find "cmigemo")
@@ -200,7 +203,7 @@
           (lambda() (set-cursor-color "magenta")))
 
 (require 'mozc-popup)
-(setq mozc-candidate-style 'popup)
+(setq mozc-candidate-style 'echo-area)
 
 ;; 固有サイトモード ================
 (global-set-key (kbd "<f2>") 'devdocs-search)
