@@ -22,7 +22,6 @@
 ;; flycheck と rubocop を連携させる
 (require 'rubocop)
 (add-hook 'ruby-mode-hook 'rubocop-mode)
-
 (add-hook 'ruby-mode-hook
           '(lambda ()
              (setq flycheck-checker 'ruby-rubocop)))
@@ -49,6 +48,8 @@
   (require 'rspec-mode)
   (eval-after-load 'rspec-mode
     '(rspec-install-snippets)))
+
+(setq flycheck-ruby-rubocop-executable "bundle exec rubocop")
 
 ;; 補完 ================
 (require 'ruby-electric)
