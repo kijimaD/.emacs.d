@@ -26,10 +26,11 @@
 ;; 画像表示
 (setq org-startup-with-inline-images t)
 
-(setq org-todo-keywords '((type "TODO" "WAIT" "|" "DONE" "CLOSE")))
+(setq org-todo-keywords '((type "TODO" "WAIT" "WIP" "|" "DONE" "CLOSE")))
 (setq org-todo-keyword-faces
       '(("TODO" . (:foreground "orange" :weight bold))
         ("WAIT" . (:foreground "HotPink2" :weight bold))
+        ("WIP" . (:foreground "DeepSkyBlue" :weight bold))
         ("DONE" . (:foreground "green" :weight bold))
         ("CLOSE" . (:foreground "DarkOrchid" :weight bold))))
 
