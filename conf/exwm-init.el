@@ -43,6 +43,7 @@
 (defun kd/set-background ()
   "背景をセットする."
   (interactive)
+  (start-process-shell-command "compton" nil "compton -b --config ~/dotfiles/.config/compton/compton.conf")
   (start-process-shell-command "fehbg" nil "~/dotfiles/.fehbg"))
 
 (define-key exwm-mode-map (kbd "C-M-:") 'vterm-toggle)

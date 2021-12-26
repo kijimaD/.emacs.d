@@ -26,10 +26,11 @@
 ;; 画像表示
 (setq org-startup-with-inline-images t)
 
-(setq org-todo-keywords '((type "TODO" "WAIT" "|" "DONE" "CLOSE")))
+(setq org-todo-keywords '((type "TODO" "WAIT" "WIP" "|" "DONE" "CLOSE")))
 (setq org-todo-keyword-faces
       '(("TODO" . (:foreground "orange" :weight bold))
         ("WAIT" . (:foreground "HotPink2" :weight bold))
+        ("WIP" . (:foreground "DeepSkyBlue" :weight bold))
         ("DONE" . (:foreground "green" :weight bold))
         ("CLOSE" . (:foreground "DarkOrchid" :weight bold))))
 
@@ -89,7 +90,7 @@
 
 (setq org-log-done t)
 
-(setq my-org-directory (concat "~/" public-directory "/junk/diary/org-journal/"))
+(setq my-org-directory (concat "~/dropbox/junk/diary/org-journal/"))
 (setq my-todo-file (concat my-org-directory "todo.org"))
 
 (setq org-directory my-org-directory)
@@ -147,14 +148,14 @@
 (require 'org-journal)
 (setq org-journal-date-format "%Y-%m-%d")
 (setq org-journal-time-format "%R ")
-(setq org-journal-dir (concat "~/" public-directory "/junk/diary/org-journal"))
+(setq org-journal-dir (concat "~/dropbox/junk/diary/org-journal"))
 (setq org-journal-file-format "%Y%m%d.org")
 (setq org-journal-find-file 'find-file)
 (setq org-journal-hide-entries-p t)
 
 ;; 使い捨てのファイルを開く ================
 (require 'open-junk-file)
-(setq open-junk-file-format (concat "~/" public-directory "/junk/%Y-%m-%d-%H%M%S."))
+(setq open-junk-file-format (concat "~/dropbox/junk/%Y-%m-%d-%H%M%S."))
 (global-set-key (kbd "C-x C-z") 'open-junk-file)
 
 ;; 見出しをいい感じにする ================
