@@ -8,9 +8,21 @@
 (setq compilation-scroll-output t)
 
 ;; Dockerのときの設定。プロジェクトごとに設定したいが…
-;; (setq rspec-use-docker-when-possible 1)
-;; (setq rspec-docker-container "web")
-;; (setq rspec-docker-cwd "")
+(setq rspec-use-docker-when-possible 1)
+(setq rspec-docker-container "rails")
+(setq rspec-docker-command "docker-compose -f docker-compose.yml -f docker-compose-app.override.yml exec")
+(setq rspec-docker-cwd "")
+
+;; RAILS_ENV=testを追加
+(defun rspec-runner ()
+  "Return command line to run rspec."
+  (let ((bundle-command (if (rspec-bundle-p) "RAILS_ENV=test bundle exec " ""))
+        (zeus-command (if (rspec-zeus-p) "zeus " nil))
+        (spring-command (if (rspec-spring-p) "spring " nil)))
+    (concat (or zeus-command spring-command bundle-command)
+            (if (rspec-rake-p)
+                (concat rspec-rake-command " spec")
+              rspec-spec-command))))
 
 (defun rspec-spring-p ()
   (and rspec-use-spring-when-possible
