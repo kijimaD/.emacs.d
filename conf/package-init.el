@@ -586,3 +586,6 @@
 
 (require 'lispxmp)
 (define-key emacs-lisp-mode-map (kbd "C-<return>") 'lispxmp)
+
+(require 'graphql-mode)
+(require 'ob-graphql)
