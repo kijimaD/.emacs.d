@@ -1,5 +1,7 @@
 (define-prefix-command 'my-keymap)
 (global-set-key (kbd "<henkan>") my-keymap)
+(define-key my-keymap (kbd "<prior>") 'kd/mint-volumn-up)
+(define-key my-keymap (kbd "<next>") 'kd/mint-volumn-down)
 (define-key my-keymap (kbd "b") 'ivy-switch-buffer)
 (define-key my-keymap (kbd "C-g") 'counsel-git-grep)
 (define-key my-keymap (kbd "g") 'magit-status)

@@ -5,8 +5,10 @@
 ;; Try
 (depends-on "org-alert")
 (depends-on "org-timeline")
+(depends-on "visual-regexp-steroids")
 (depends-on "graphql-mode")
 (depends-on "ob-graphql")
+
 
 ;; Install Packages
 (depends-on "ace-jump-mode")

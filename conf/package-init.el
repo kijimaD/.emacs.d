@@ -525,6 +525,7 @@
 
 ;; 正規表現 ================
 (global-set-key (kbd "C-M-%") 'vr/query-replace)
+(require 'visual-regexp-steroids)
 
 ;; write-room ================
 (global-set-key [f7] 'writeroom-mode)
