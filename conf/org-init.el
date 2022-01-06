@@ -120,10 +120,6 @@
 
 (setq org-clock-mode-line-total 'current)
 
-;; org-timeline ================
-(require 'org-timeline)
-(add-hook 'org-agenda-finalize-hook 'org-timeline-insert-timeline :append)
-
 ;; org-babel ================
 (org-babel-do-load-languages 'org-babel-load-languages
                              '((shell . t)
