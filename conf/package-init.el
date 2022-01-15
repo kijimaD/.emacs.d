@@ -590,3 +590,8 @@
 
 (require 'graphql-mode)
 (require 'ob-graphql)
+
+;; smart-newline ================
+(require 'smart-newline)
+(global-set-key (kbd "C-m") 'smart-newline)
+(add-hook 'prog-mode-hook 'smart-newline-mode)

@@ -7,7 +7,7 @@
 (depends-on "visual-regexp-steroids")
 (depends-on "graphql-mode")
 (depends-on "ob-graphql")
-
+(depends-on "smart-newline")
 
 ;; Install Packages
 (depends-on "ace-jump-mode")
