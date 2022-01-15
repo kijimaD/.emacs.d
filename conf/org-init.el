@@ -191,7 +191,6 @@
 (define-key global-map (kbd "C-c n g") 'org-roam-graph)
 (define-key global-map (kbd "C-c n i") 'org-roam-node-insert)
 (define-key global-map (kbd "C-M-i") 'completion-at-point)
-(define-key global-map [insert] 'org-pomodoro)
 
 (setq org-roam-capture-templates
       '(("t" "TODO" entry
@@ -345,7 +344,9 @@
     (with-current-buffer buf (if (setq lint (org-lint)) (print (list file lint))))))
 
 ;; pomodoro ================
+(require 'org-pomodoro)
+(define-key global-map [insert] 'org-pomodoro)
 (setq org-pomodoro-finished-sound "~/.emacs.d/resources/pmd-finished.wav")
-(org-pomodoro-finished)
+;; (org-pomodoro-finished)
 (setq org-pomodoro-short-break-sound "~/.emacs.d/resources/pmd-short-break.wav")
-(org-pomodoro-short-break-finished)
+;; (org-pomodoro-short-break-finished)
