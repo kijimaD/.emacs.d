@@ -118,7 +118,7 @@
 ;; agenda内でRで出るclocktableの設定。
 (setq org-clocktable-defaults '(:maxlevel 3 :scope agenda :tags "" :block today :step day :stepskip0 true :fileskip0 true))
 
-(setq org-clock-mode-line-total 'current)
+(setq org-clock-mode-line-total 'today)
 
 ;; org-babel ================
 (org-babel-do-load-languages 'org-babel-load-languages
@@ -343,3 +343,9 @@
         (lint))
     (setq buf (find-file-noselect file))
     (with-current-buffer buf (if (setq lint (org-lint)) (print (list file lint))))))
+
+;; pomodoro ================
+(setq org-pomodoro-finished-sound "~/.emacs.d/resources/pmd-finished.wav")
+(org-pomodoro-finished)
+(setq org-pomodoro-short-break-sound "~/.emacs.d/resources/pmd-short-break.wav")
+(org-pomodoro-short-break-finished)
