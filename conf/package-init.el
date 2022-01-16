@@ -525,6 +525,7 @@
 
 ;; 正規表現 ================
 (global-set-key (kbd "C-M-%") 'vr/query-replace)
+(require 'visual-regexp-steroids)
 
 ;; write-room ================
 (global-set-key [f7] 'writeroom-mode)
@@ -586,3 +587,11 @@
 
 (require 'lispxmp)
 (define-key emacs-lisp-mode-map (kbd "C-<return>") 'lispxmp)
+
+(require 'graphql-mode)
+(require 'ob-graphql)
+
+;; smart-newline ================
+(require 'smart-newline)
+(global-set-key (kbd "C-m") 'smart-newline)
+(add-hook 'prog-mode-hook 'smart-newline-mode)

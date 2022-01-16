@@ -4,6 +4,9 @@
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
 (define-key projectile-rails-mode-map (kbd "C-c r") 'projectile-rails-command-map)
 
+;; rspec ================
+(require 'rspec-mode)
+
 ;; Rspecの実行結果をスクロールして出力する
 (setq compilation-scroll-output t)
 

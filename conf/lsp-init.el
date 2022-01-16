@@ -14,8 +14,8 @@
 (setq lsp-response-timeout 5)
 
 ;; hook
-(add-hook 'typescript-mode-hook #'lsp)
-(add-hook 'web-mode-hook #'lsp)
+;; (add-hook 'typescript-mode-hook #'lsp)
+;; (add-hook 'web-mode-hook #'lsp)
 
 ;; func
 (defun lsp-mode-init ()

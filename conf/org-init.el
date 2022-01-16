@@ -118,11 +118,7 @@
 ;; agenda内でRで出るclocktableの設定。
 (setq org-clocktable-defaults '(:maxlevel 3 :scope agenda :tags "" :block today :step day :stepskip0 true :fileskip0 true))
 
-(setq org-clock-mode-line-total 'current)
-
-;; org-timeline ================
-(require 'org-timeline)
-(add-hook 'org-agenda-finalize-hook 'org-timeline-insert-timeline :append)
+(setq org-clock-mode-line-total 'today)
 
 ;; org-babel ================
 (org-babel-do-load-languages 'org-babel-load-languages
@@ -131,6 +127,7 @@
                                (ruby . t)
                                (emacs-lisp . t)
                                (sql . t)
+                               (graphql . t)
                                (haskell . t)
                                (clojure . t)
                                (lisp . t)
@@ -194,7 +191,6 @@
 (define-key global-map (kbd "C-c n g") 'org-roam-graph)
 (define-key global-map (kbd "C-c n i") 'org-roam-node-insert)
 (define-key global-map (kbd "C-M-i") 'completion-at-point)
-(define-key global-map [insert] 'org-pomodoro)
 
 (setq org-roam-capture-templates
       '(("t" "TODO" entry
@@ -234,6 +230,7 @@
   (add-to-list 'org-structure-template-alist '("ts" . "src typescript"))
   (add-to-list 'org-structure-template-alist '("py" . "src python"))
   (add-to-list 'org-structure-template-alist '("rb" . "src ruby"))
+  (add-to-list 'org-structure-template-alist '("gq" . "src graphql"))
   (add-to-list 'org-structure-template-alist '("sq" . "src sql"))
   (add-to-list 'org-structure-template-alist '("hs" . "src haskell"))
   (add-to-list 'org-structure-template-alist '("cj" . "src clojure"))
@@ -271,10 +268,10 @@
                                           (?+ . ?»)
                                           (?- . ?➤)))
 
-  (dolist (face '((org-level-1 . 1.75)
-                  (org-level-2 . 1.5)
-                  (org-level-3 . 1.25)
-                  (org-level-4 . 1.1)
+  (dolist (face '((org-level-1 . 1.0)
+                  (org-level-2 . 1.0)
+                  (org-level-3 . 1.0)
+                  (org-level-4 . 1.0)
                   (org-level-5 . 1.0)
                   (org-level-6 . 1.0)
                   (org-level-7 . 1.0)
@@ -345,3 +342,59 @@
         (lint))
     (setq buf (find-file-noselect file))
     (with-current-buffer buf (if (setq lint (org-lint)) (print (list file lint))))))
+
+;; pomodoro ================
+(require 'org-pomodoro)
+(define-key global-map [insert] 'org-pomodoro)
+(setq org-pomodoro-finished-sound "~/.emacs.d/resources/pmd-finished.wav")
+;; (org-pomodoro-finished)
+(setq org-pomodoro-short-break-sound "~/.emacs.d/resources/pmd-short-break.wav")
+;; (org-pomodoro-short-break-finished)
+
+(defun kd/org-pomodoro-remain-gauge (max-minutes)
+  "Display remain time gauge."
+  (let* ((display-len 10)
+         (remaining-minutes (/ (org-pomodoro-remaining-seconds) 60))
+         (current-percent (/ remaining-minutes max-minutes))
+         (done (truncate (* (- 1 current-percent) display-len)))
+         (will (truncate (* current-percent display-len))))
+    (concat
+     "%{T2}"
+     (concat "%{F#008000}" (make-string done ?█) "%{F-}")
+     (concat "%{F#ffffff}" "█" "%{F-}")
+     (concat "%{F#413839}" (make-string will ?█) "%{F-}")
+     "%{T-}")))
+
+;; https://colekillian.com/posts/org-pomodoro-and-polybar/
+(defun kd/org-pomodoro-time ()
+  "Return the remaining pomodoro time. Function for displaying in Polybar."
+  (if (org-pomodoro-active-p)
+      (cl-case org-pomodoro-state
+        (:pomodoro
+         (format "%s Pomo: %dm - %s"
+                 (kd/org-pomodoro-remain-gauge org-pomodoro-length)
+                 (/ (org-pomodoro-remaining-seconds) 60)
+                 org-clock-heading))
+        (:short-break
+         (format "%s Short break: %dm"
+                 (kd/org-pomodoro-remain-gauge org-pomodoro-short-break-length)
+                 (/ (org-pomodoro-remaining-seconds) 60)))
+        (:long-break
+         (format "%s Long break: %dm"
+                 (kd/org-pomodoro-remain-gauge org-pomodoro-long-break-length)
+                 (/ (org-pomodoro-remaining-seconds) 60)))
+        (:overtime
+         (format "Overtime! %dm" (/ (org-pomodoro-remaining-seconds) 60))))
+    "No active pomo"))
+
+(defvar kd/pmd-today-point 0)
+(add-hook 'org-pomodoro-finished-hook
+          (lambda () (setq kd/pmd-today-point (1+ kd/pmd-today-point))))
+
+;; reset point
+(run-at-time "00:01am" (* 24 60 60) (lambda ()
+                                      (setq kd/pmd-today-point 0)
+                                      (message "pomodoro count reset!")))
+
+(defun kd/pmd-today-point-display ()
+  (format " %s%s" "%{F#00ff00}✔%{F-}" kd/pmd-today-point))

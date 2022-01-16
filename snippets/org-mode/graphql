@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: graphql
+# key: gq
+# --
+
+#+caption: $1
+#+begin_src graphql :url
+$0
+#+end_src
