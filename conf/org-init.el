@@ -351,17 +351,35 @@
 (setq org-pomodoro-short-break-sound "~/.emacs.d/resources/pmd-short-break.wav")
 ;; (org-pomodoro-short-break-finished)
 
+(defun kd/org-pomodoro-remain-gauge (max-minutes)
+  "Display remain time gauge."
+  (let* ((display-len 10)
+         (remaining-minutes (/ (org-pomodoro-remaining-seconds) 60))
+         (current-percent (/ remaining-minutes max-minutes))
+         (done (truncate (* (- 1 current-percent) display-len)))
+         (will (truncate (* current-percent display-len))))
+    (concat
+     (make-string done ?▒)
+     (make-string will ?█))))
+
 ;; https://colekillian.com/posts/org-pomodoro-and-polybar/
 (defun kd/org-pomodoro-time ()
   "Return the remaining pomodoro time. Function for displaying in Polybar."
   (if (org-pomodoro-active-p)
       (cl-case org-pomodoro-state
         (:pomodoro
-         (format "Pomo: %d minutes - %s" (/ (org-pomodoro-remaining-seconds) 60) org-clock-heading))
+         (format "%s Pomo: %d minutes - %s"
+                 (kd/org-pomodoro-remain-gauge org-pomodoro-length)
+                 (/ (org-pomodoro-remaining-seconds) 60)
+                 org-clock-heading))
         (:short-break
-         (format "Short break time: %d minutes" (/ (org-pomodoro-remaining-seconds) 60)))
+         (format "%s Short break time: %d minutes"
+                 (kd/org-pomodoro-remain-gauge org-pomodoro-short-break-length)
+                 (/ (org-pomodoro-remaining-seconds) 60)))
         (:long-break
-         (format "Long break time: %d minutes" (/ (org-pomodoro-remaining-seconds) 60)))
+         (format "%s Long break time: %d minutes"
+                 (kd/org-pomodoro-remain-gauge org-pomodoro-long-break-length)
+                 (/ (org-pomodoro-remaining-seconds) 60)))
         (:overtime
          (format "Overtime! %d minutes" (/ (org-pomodoro-remaining-seconds) 60))))
     "No active pomo"))
