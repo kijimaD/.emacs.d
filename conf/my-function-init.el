@@ -143,3 +143,6 @@
 (use-package ej-dict
   :straight (:host github :repo "kijimaD/ej-dict"))
 ;; (ej-dict-install-dict)
+
+(defun kd/cancel-last-timer ()
+ (cancel-timer (car (last timer-list))))

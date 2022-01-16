@@ -368,18 +368,30 @@
   (if (org-pomodoro-active-p)
       (cl-case org-pomodoro-state
         (:pomodoro
-         (format "%s Pomo: %d m - %s"
+         (format "%s Pomo: %dm - %s"
                  (kd/org-pomodoro-remain-gauge org-pomodoro-length)
                  (/ (org-pomodoro-remaining-seconds) 60)
                  org-clock-heading))
         (:short-break
-         (format "%s Short break: %d m"
+         (format "%s Short break: %dm"
                  (kd/org-pomodoro-remain-gauge org-pomodoro-short-break-length)
                  (/ (org-pomodoro-remaining-seconds) 60)))
         (:long-break
-         (format "%s Long break: %d m"
+         (format "%s Long break: %dm"
                  (kd/org-pomodoro-remain-gauge org-pomodoro-long-break-length)
                  (/ (org-pomodoro-remaining-seconds) 60)))
         (:overtime
-         (format "Overtime! %d m" (/ (org-pomodoro-remaining-seconds) 60))))
+         (format "Overtime! %dm" (/ (org-pomodoro-remaining-seconds) 60))))
     "No active pomo"))
+
+(defvar kd/pmd-today-point 0)
+(add-hook 'org-pomodoro-finished-hook
+          (lambda () (setq kd/pmd-today-point (1+ kd/pmd-today-point))))
+
+;; reset point
+(run-at-time "00:01am" (* 24 60 60) (lambda ()
+                                      (setq kd/pmd-today-point 0)
+                                      (message "pomodoro count reset!")))
+
+(defun kd/pmd-today-point-display ()
+  (format "%s" kd/pmd-today-point))
