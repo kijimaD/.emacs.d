@@ -359,8 +359,11 @@
          (done (truncate (* (- 1 current-percent) display-len)))
          (will (truncate (* current-percent display-len))))
     (concat
-     (make-string done ?▒)
-     (make-string will ?█))))
+     "%{T2}"
+     (concat "%{F#008000}" (make-string done ?█) "%{F-}")
+     (concat "%{F#ffffff}" "█" "%{F-}")
+     (concat "%{F#413839}" (make-string will ?█) "%{F-}")
+     "%{T-}")))
 
 ;; https://colekillian.com/posts/org-pomodoro-and-polybar/
 (defun kd/org-pomodoro-time ()
@@ -394,4 +397,4 @@
                                       (message "pomodoro count reset!")))
 
 (defun kd/pmd-today-point-display ()
-  (format "%s" kd/pmd-today-point))
+  (format " %s%s" "%{F#00ff00}✔%{F-}" kd/pmd-today-point))
