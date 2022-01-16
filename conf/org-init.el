@@ -350,3 +350,18 @@
 ;; (org-pomodoro-finished)
 (setq org-pomodoro-short-break-sound "~/.emacs.d/resources/pmd-short-break.wav")
 ;; (org-pomodoro-short-break-finished)
+
+;; https://colekillian.com/posts/org-pomodoro-and-polybar/
+(defun kd/org-pomodoro-time ()
+  "Return the remaining pomodoro time. Function for displaying in Polybar."
+  (if (org-pomodoro-active-p)
+      (cl-case org-pomodoro-state
+        (:pomodoro
+         (format "Pomo: %d minutes - %s" (/ (org-pomodoro-remaining-seconds) 60) org-clock-heading))
+        (:short-break
+         (format "Short break time: %d minutes" (/ (org-pomodoro-remaining-seconds) 60)))
+        (:long-break
+         (format "Long break time: %d minutes" (/ (org-pomodoro-remaining-seconds) 60)))
+        (:overtime
+         (format "Overtime! %d minutes" (/ (org-pomodoro-remaining-seconds) 60))))
+    "No active pomo"))
