@@ -13,7 +13,7 @@
 ;; Dockerのときの設定。プロジェクトごとに設定したいが…
 (setq rspec-use-docker-when-possible 1)
 (setq rspec-docker-container "rails")
-(setq rspec-docker-command "docker-compose -f docker-compose.yml -f docker-compose-app.override.yml exec")
+(setq rspec-docker-command "docker-compose -f docker-compose.yml -f docker-compose-app.yml -f docker-compose-app.override.yml exec")
 (setq rspec-docker-cwd "")
 
 ;; RAILS_ENV=testを追加

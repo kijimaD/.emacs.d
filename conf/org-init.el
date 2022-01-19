@@ -371,7 +371,7 @@
   (if (org-pomodoro-active-p)
       (cl-case org-pomodoro-state
         (:pomodoro
-         (format "%s Pomo: %dm - %s"
+         (format "%s%dm - %s"
                  (kd/org-pomodoro-remain-gauge org-pomodoro-length)
                  (/ (org-pomodoro-remaining-seconds) 60)
                  org-clock-heading))
@@ -385,7 +385,7 @@
                  (/ (org-pomodoro-remaining-seconds) 60)))
         (:overtime
          (format "Overtime! %dm" (/ (org-pomodoro-remaining-seconds) 60))))
-    "No active pomo"))
+    ""))
 
 (defvar kd/pmd-today-point 0)
 (add-hook 'org-pomodoro-finished-hook

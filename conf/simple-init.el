@@ -70,12 +70,9 @@
 (setq vc-follow-symlinks t)
 
 ;;括弧の補完
-(global-set-key (kbd "(") 'skeleton-pair-insert-maybe)
-(global-set-key (kbd "{") 'skeleton-pair-insert-maybe)
-(global-set-key (kbd "[") 'skeleton-pair-insert-maybe)
-(global-set-key (kbd "\"") 'skeleton-pair-insert-maybe)
-(global-set-key (kbd "'") 'skeleton-pair-insert-maybe)
-(setq skeleton-pair 1)
+(require 'smartparens)
+(add-hook 'prog-mode-hook 'smartparens-mode)
+(add-hook 'eshell-mode-hook 'smartparens-mode)
 
 ;; オートセーブ関連 ================
 
