@@ -75,15 +75,10 @@
   (setq kd/polybar-process (start-process-shell-command "polybar" nil "~/dotfiles/.config/polybar/launch.sh")))
 ;; Not working...
 
-;; (defun kd/polybar-exwm-workspace ()
-;;   (pcase exwm-workspace-current-index
-;;     (0 "%{U#797D7F}Work%{F-} %{U#00ff00}Home%{F-}")
-;;     (1 "%{U#00ff00}Work%{F-} %{U#797D7F}Home%{F-}")))
-
 (defun kd/polybar-exwm-workspace ()
   (pcase exwm-workspace-current-index
-    (0 "Home")
-    (1 "Work")
+    (0 "%{F#797D7F}Work%{F-} Home")
+    (1 "Work %{F#797D7F}Home%{F-}")
     (2 "")
     (3 "")
     (4 "")))

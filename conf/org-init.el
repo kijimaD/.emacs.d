@@ -353,7 +353,7 @@
 
 (defun kd/org-pomodoro-remain-gauge (max-minutes)
   "Display remain time gauge."
-  (let* ((display-len 10)
+  (let* ((display-len 12)
          (remaining-minutes (/ (org-pomodoro-remaining-seconds) 60))
          (current-percent (/ remaining-minutes max-minutes))
          (done (truncate (* (- 1 current-percent) display-len)))
@@ -371,7 +371,7 @@
   (if (org-pomodoro-active-p)
       (cl-case org-pomodoro-state
         (:pomodoro
-         (format "%s%dm - %s"
+         (format "%s %dm - %s"
                  (kd/org-pomodoro-remain-gauge org-pomodoro-length)
                  (/ (org-pomodoro-remaining-seconds) 60)
                  org-clock-heading))
@@ -397,4 +397,4 @@
                                       (message "pomodoro count reset!")))
 
 (defun kd/pmd-today-point-display ()
-  (format " %s%s" "%{F#00ff00}✔%{F-}" kd/pmd-today-point))
+  (format " %s" kd/pmd-today-point))
