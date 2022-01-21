@@ -8,6 +8,7 @@
 (depends-on "graphql-mode")
 (depends-on "ob-graphql")
 (depends-on "smart-newline")
+(depends-on "smartparens")
 
 ;; Install Packages
 (depends-on "ace-jump-mode")

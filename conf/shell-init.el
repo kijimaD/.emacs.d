@@ -32,6 +32,8 @@
 
 ;; vterm ================
 (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
+(setq vterm-toggle-scope 'project)
+(setq vterm-toggle-project-root t)
 (setq vterm-max-scrollback 10000)
 ;; toggle
 (global-set-key [f9] 'vterm-toggle)

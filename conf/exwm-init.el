@@ -4,6 +4,9 @@
 (require 'exwm)
 (require 'exwm-config)
 
+;; not ask replace other wm
+(setq exwm-replace t)
+
 ;; Automatically move EXWM buffer to current workspace when selected
 (setq exwm-layout-show-all-buffers t)
 
@@ -30,6 +33,7 @@
   (kd/set-background)
   (start-process-shell-command "compton" nil "compton -b --config ~/dotfiles/.config/compton/compton.conf")
   (start-process-shell-command "dunst" nil "dunst")
+  ;; (start-process-shell-command "redshift" nil "redshift")
   ;; (start-process-shell-command "polybar" nil "~/dotfiles/.config/polybar/launch.sh")
 
   ;; org-alert
@@ -56,3 +60,37 @@
     ;; (exwm-init)
     ;; (kd/set-background)
     ))
+
+;; polybar================
+(defvar kd/polybar-process nil
+  "Holds the process of the running Polybar instance, if any")
+
+(defun kd/kill-panel ()
+  (interactive)
+  (when kd/polybar-process
+    (ignore-errors
+      (kill-process kd/polybar-process)))
+  (setq kd/polybar-process nil))
+
+(defun kd/start-panel ()
+  (interactive)
+  (kd/kill-panel)
+  (setq kd/polybar-process (start-process-shell-command "polybar" nil "~/dotfiles/.config/polybar/launch.sh")))
+;; Not working...
+
+(defun kd/polybar-exwm-workspace ()
+  (pcase exwm-workspace-current-index
+    (0 "%{F#797D7F}Work%{F-} Home")
+    (1 "Work %{F#797D7F}Home%{F-}")
+    (2 "")
+    (3 "")
+    (4 "")))
+
+(defun kd/send-polybar-hook (module-name hook-index)
+  (start-process-shell-command "polybar-msg" nil (format "polybar-msg hook %s %s" module-name hook-index)))
+
+(defun kd/send-polybar-exwm-workspace ()
+  (kd/send-polybar-hook "exwm-workspace" 1))
+
+;; Update panel indicator when workspace changes
+(add-hook 'exwm-workspace-switch-hook #'kd/send-polybar-exwm-workspace)
