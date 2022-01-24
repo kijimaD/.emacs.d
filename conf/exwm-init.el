@@ -31,7 +31,6 @@
   "Window Manager関係の各種プログラムを起動する."
   (interactive)
   (kd/set-background)
-  (start-process-shell-command "compton" nil "compton -b --config ~/dotfiles/.config/compton/compton.conf")
   (start-process-shell-command "dunst" nil "dunst")
   ;; (start-process-shell-command "redshift" nil "redshift")
   ;; (start-process-shell-command "polybar" nil "~/dotfiles/.config/polybar/launch.sh")

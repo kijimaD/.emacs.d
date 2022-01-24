@@ -44,7 +44,8 @@
 ;; (setq org-ellipsis "⤵")
 ;; (setq org-ellipsis "🢗")
 ;; (setq org-ellipsis "❖")
-(setq org-ellipsis "↯")
+;; (setq org-ellipsis "↯")
+(setq org-ellipsis "▽")
 (setq org-cycle-separator-lines 2)
 
 ;; org-modeで行末で折り返しをする
@@ -303,10 +304,10 @@
    '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
    '(org-property-value ((t (:inherit fixed-pitch))) t)
    '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-   '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
+   '(org-table ((t (:inherit fixed-pitch :foreground "#f5f5f5"))))
    '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
    '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
-   '(org-block-begin-line ((t (:inherit org-block :background "#262829"))))))
+   '(org-block-begin-line ((t (:inherit org-block :background "#f5f5f5"))))))
 
 (add-hook 'org-mode-hook 'variable-pitch-mode)
 (add-hook 'org-mode-hook 'visual-line-mode)
@@ -353,16 +354,16 @@
 
 (defun kd/org-pomodoro-remain-gauge (max-minutes)
   "Display remain time gauge."
-  (let* ((display-len 12)
+  (let* ((display-len 25)
          (remaining-minutes (/ (org-pomodoro-remaining-seconds) 60))
          (current-percent (/ remaining-minutes max-minutes))
          (done (truncate (* (- 1 current-percent) display-len)))
          (will (truncate (* current-percent display-len))))
     (concat
      "%{T2}"
-     (concat "%{F#008000}" (make-string done ?█) "%{F-}")
-     (concat "%{F#ffffff}" "█" "%{F-}")
-     (concat "%{F#413839}" (make-string will ?█) "%{F-}")
+     ;; (concat "%{F#008000}" (make-string done ?█) "%{F-}")
+     (concat "%{F#008000}" (make-string done ?|) "%{F-}")
+     (concat "%{F#413839}" (make-string will ?|) "%{F-}")
      "%{T-}")))
 
 ;; https://colekillian.com/posts/org-pomodoro-and-polybar/
@@ -397,4 +398,4 @@
                                       (message "pomodoro count reset!")))
 
 (defun kd/pmd-today-point-display ()
-  (format " %s" kd/pmd-today-point))
+  (format " [%s]" kd/pmd-today-point))

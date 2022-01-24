@@ -16,9 +16,6 @@
 ;; メニューバーを消す
 (menu-bar-mode 0)
 
-;; カーソルのある列をハイライト
-(global-hl-line-mode 0)
-
 ;; 対応する括弧をハイライト
 (show-paren-mode t)
 
@@ -35,8 +32,6 @@
 (setq frame-title-format "%f")
 
 (setq ring-bell-function 'ignore)
-
-(toggle-frame-fullscreen)
 
 (require 'scroll-bar)
 (scroll-bar-mode 0)

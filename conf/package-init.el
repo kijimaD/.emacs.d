@@ -28,7 +28,7 @@
 ;;  (let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
 ;;    (cl-callf color-saturate-name (face-foreground face) 30)))
 
-(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 (require 'auto-highlight-symbol)
 (global-auto-highlight-symbol-mode t)
@@ -82,32 +82,33 @@
 
 ;; ハイライトの表示を遅くする
 (require 'hl-line)
-(defun global-hl-line-timer-function ()
-  (global-hl-line-unhighlight-all)
-  (let ((global-hl-line-mode t))
-    (global-hl-line-highlight)))
-(setq global-hl-line-timer
-      (run-with-idle-timer 0.03 t 'global-hl-line-timer-function))
+;; (defun global-hl-line-timer-function ()
+;;   (global-hl-line-unhighlight-all)
+;;   (let ((global-hl-line-mode t))
+;;     (global-hl-line-highlight)))
+;; (setq global-hl-line-timer
+;;       (run-with-idle-timer 0.03 t 'global-hl-line-timer-function))
 
-(defface hlline-face
-  '((((class color)
-      (background dark))
-     (:background "Purple4"))
-    (((class color)
-      (background light))
-     (:background "gainsboro"))
-    (t
-     ()))
-  "*Face used by hl-line.")
-(setq hl-line-face 'hlline-face)
-(global-hl-line-mode)
+;; (defface hlline-face
+;;   '((((class color)
+;;       (background dark))
+;;      (:background "Purple4"))
+;;     (((class color)
+;;       (background light))
+;;      (:background "gainsboro"))
+;;     (t
+;;      ()))
+;;   "*Face used by hl-line.")
+
+;; (setq hl-line-face 'hlline-face)
+;; (global-hl-line-mode)
 
 ;; (nyan-mode)
 
-(setq beacon-size 20) ; default 40
+(setq beacon-size 40) ; default 40
 (setq beacon-color "#827591")
 (setq beacon-blink-when-focused t)
-;; (beacon-mode)
+(beacon-mode)
 
 ;; window移動 ================
 ;; 分割した画面間をShift+矢印で移動
@@ -520,7 +521,7 @@
           '(lambda ()
              (add-node-modules-path)
              (setq flycheck-checker 'textlint)
-             (org-sticky-header-mode)
+             ;; (org-sticky-header-mode)
              (flycheck-mode 1)))
 
 ;; 正規表現 ================
