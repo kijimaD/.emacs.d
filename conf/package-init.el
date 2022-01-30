@@ -105,10 +105,10 @@
 
 ;; (nyan-mode)
 
-(setq beacon-size 40) ; default 40
+(setq beacon-size 20) ; default 40
 (setq beacon-color "#827591")
 (setq beacon-blink-when-focused t)
-(beacon-mode)
+;; (beacon-mode)
 
 ;; window移動 ================
 ;; 分割した画面間をShift+矢印で移動
@@ -118,8 +118,8 @@
 ;; (window-numbering-mode 1)
 
 ;; window表示 ================
-(require 'popwin)
-(popwin-mode)
+;; (require 'popwin)
+;; (popwin-mode 0)
 
 ;; ブックマーク ================
 (setq-default bm-buffer-persistence nil)
@@ -594,5 +594,5 @@
 
 ;; smart-newline ================
 (require 'smart-newline)
-(global-set-key (kbd "C-m") 'smart-newline)
-(add-hook 'prog-mode-hook 'smart-newline-mode)
+(global-set-key (kbd "C-m") 'newline)
+(add-hook 'ruby-mode-hook 'smart-newline-mode)

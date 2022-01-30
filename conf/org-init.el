@@ -344,6 +344,13 @@
     (setq buf (find-file-noselect file))
     (with-current-buffer buf (if (setq lint (org-lint)) (print (list file lint))))))
 
+;; org-alert ================
+(require 'org-alert)
+(setq alert-default-style 'notifications)
+(setq org-alert-interval 300)
+(setq org-alert-notification-title "Reminder")
+(org-alert-enable)
+
 ;; pomodoro ================
 (require 'org-pomodoro)
 (define-key global-map [insert] 'org-pomodoro)

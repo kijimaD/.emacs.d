@@ -44,7 +44,7 @@
 (defun my-doom-modeline--font-height ()
   (- (frame-char-height) 20))
 (advice-add #'doom-modeline--font-height :override #'my-doom-modeline--font-height)
-(setq doom-modeline-height 14)
+(setq doom-modeline-height 20)
 
 (defun setup-custom-doom-modeline ()
    (doom-modeline-set-modeline 'my-simple-line 'default))
@@ -78,9 +78,13 @@
   (set-face-attribute 'mode-line nil
                       :background "white"
                       :overline nil
-                      :underline nil)
+                      :underline nil
+                      :box nil)
 
   (set-face-attribute 'mode-line-inactive nil
                       :background "white"
                       :overline nil
-                      :underline nil))
+                      :underline nil
+                      :box nil)
+
+  (window-divider-mode 0))
