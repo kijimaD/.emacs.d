@@ -2,7 +2,7 @@
 (doom-themes-org-config)
 
 (setq custom-safe-themes t)
-(setq-default custom-enabled-themes '(modus-operandi))
+(setq-default custom-enabled-themes '(doom-dracula))
 ;; doom-vibrant
 ;; spacemacs-dark
 ;; doom-dracula
