@@ -20,7 +20,8 @@
       (load-theme theme)))
   (custom-set-variables `(custom-enabled-themes (quote ,custom-enabled-themes)))
   (efs/org-font-setup)
-  (kd/set-modus-face))
+  ;; (kd/set-modus-face)
+  )
 
 (add-hook 'after-init-hook 'reapply-themes)
 
