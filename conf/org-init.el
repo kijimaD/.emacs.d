@@ -453,7 +453,8 @@
          ;; After the last group, the agenda will display items that didn't
          ;; match any of these groups, with the default order position of 99
          )))
-  (org-agenda nil "a"))
+  ;; (org-agenda nil "a")
+  )
 
 (setq spacemacs-theme-org-agenda-height nil
       org-agenda-skip-scheduled-if-done t
