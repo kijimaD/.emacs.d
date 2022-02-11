@@ -114,7 +114,8 @@
 
 (defun org-agenda-default ()
   (interactive)
-  (org-agenda nil "a"))
+  (persp-switch "2")
+  (org-agenda nil "z"))
 (global-set-key (kbd "<f6>") 'org-agenda-default)
 
 ;; agenda内でRで出るclocktableの設定。
@@ -360,6 +361,8 @@
 (setq org-pomodoro-short-break-sound "~/.emacs.d/resources/pmd-short-break.wav")
 ;; (org-pomodoro-short-break-finished)
 
+(add-hook 'org-pomodoro-short-break-finished-hook 'org-agenda-default)
+
 (defun kd/org-pomodoro-remain-gauge (max-minutes)
   "Display remain time gauge."
   (let* ((display-len 25)
@@ -394,7 +397,7 @@
                  (/ (org-pomodoro-remaining-seconds) 60)))
         (:overtime
          (format "Overtime! %dm" (/ (org-pomodoro-remaining-seconds) 60))))
-    ""))
+    " Toggle LAN switch, and run pomodoro!"))
 
 (defvar kd/pmd-today-point 0)
 (add-hook 'org-pomodoro-finished-hook
@@ -406,7 +409,8 @@
                                       (message "pomodoro count reset!")))
 
 (defun kd/pmd-today-point-display ()
-  (format " [%s]" kd/pmd-today-point))
+  ;; (format " [%s]" kd/pmd-today-point)
+  (format " %s" (make-string kd/pmd-today-point ?★)))
 
 ;; org-super-agenda
 (org-super-agenda-mode)
