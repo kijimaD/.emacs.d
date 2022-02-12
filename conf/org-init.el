@@ -478,7 +478,8 @@
                                 :date today
                                 :todo "TODAY"
                                 :scheduled today
-                                :order 1)))))
+                                :order 1)
+                         (:discard (:anything))))))
           (alltodo "" ((org-agenda-overriding-header "")
                        (org-super-agenda-groups
                         '((:name "Work In Progress"
