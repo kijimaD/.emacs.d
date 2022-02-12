@@ -348,6 +348,7 @@
 
 ;; org-alert ================
 (require 'org-alert)
+(setq org-pomodoro-short-break-length 1)
 (setq alert-default-style 'notifications)
 (setq org-alert-interval 300)
 (setq org-alert-notification-title "Reminder")
@@ -356,12 +357,14 @@
 ;; pomodoro ================
 (require 'org-pomodoro)
 (define-key global-map [insert] 'org-pomodoro)
+
 (setq org-pomodoro-finished-sound "~/.emacs.d/resources/pmd-finished.wav")
 ;; (org-pomodoro-finished)
 (setq org-pomodoro-short-break-sound "~/.emacs.d/resources/pmd-short-break.wav")
 ;; (org-pomodoro-short-break-finished)
 
 (add-hook 'org-pomodoro-short-break-finished-hook 'org-agenda-default)
+(add-hook 'org-pomodoro-long-break-finished-hook 'org-agenda-default)
 
 (defun kd/org-pomodoro-remain-gauge (max-minutes)
   "Display remain time gauge."
@@ -410,7 +413,7 @@
 
 (defun kd/pmd-today-point-display ()
   ;; (format " [%s]" kd/pmd-today-point)
-  (format " %s" (make-string kd/pmd-today-point ?★)))
+  (format " ✿ %s" kd/pmd-today-point))
 
 ;; org-super-agenda
 (org-super-agenda-mode)
