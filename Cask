@@ -85,6 +85,7 @@
 (depends-on "github-clone")
 (depends-on "github-review")
 (depends-on "github-search")
+(depends-on "go-mode")
 (depends-on "google-this")
 (depends-on "google-translate")
 (depends-on "goto-chg")
