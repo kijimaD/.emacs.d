@@ -142,7 +142,8 @@
 (require 'cider)
 
 ;; common lisp
-(setq inferior-lisp-program "sbcl")
+(setq inferior-lisp-program "clisp")
+;; clisp, sbcl,  ...
 
 ;; 日誌 ================
 (require 'org-journal)
@@ -452,7 +453,7 @@
                                                :not (:regexp "moon" :tag "planet")))))
          ;; Groups supply their own section names when none are given
          (:todo "WAITING" :order 8)  ; Set order of this section
-         (:todo ("SOMEDAY" "TO-READ" "CHECK" "TO-WATCH" "WATCHING")
+         (:todo ("SOMEDAY" "TO-READ" "TO-WRITE" "CHECK" "TO-WATCH" "WATCHING")
                 ;; Show this group at the end of the agenda (since it has the
                 ;; highest number). If you specified this group last, items
                 ;; with these todo keywords that e.g. have priority A would be
@@ -504,8 +505,8 @@
                           (:name "Overdue"
                                  :deadline past
                                  :order 7)
-                          (:name "Issues"
-                                 :tag "Issue"
+                          (:name "To write"
+                                 :tag "Write"
                                  :order 12)
                           (:name "To read"
                                  :tag "Read"

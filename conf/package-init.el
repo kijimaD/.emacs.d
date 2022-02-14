@@ -596,3 +596,6 @@
 (require 'smart-newline)
 (global-set-key (kbd "C-m") 'newline)
 (add-hook 'ruby-mode-hook 'smart-newline-mode)
+
+;; go ================
+(require 'go-mode)
