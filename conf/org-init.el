@@ -406,8 +406,15 @@
 (add-hook 'org-pomodoro-finished-hook
           (lambda () (setq kd/pmd-today-point (1+ kd/pmd-today-point))))
 
+(defun kd/write-pmd (str)
+  (shell-command (format "echo '%s' >> ~/roam/pmd.csv" str)))
+
 ;; reset point
-(run-at-time "00:01am" (* 24 60 60) (lambda ()
+;; FIXME: 起動時に即実行されてる
+(run-at-time "00:02am" (* 24 60 60) (lambda ()
+                                      (kd/write-pmd (concat (format-time-string "%Y-%m-%d")
+                                                            ", "
+                                                            (number-to-string kd/pmd-today-point)))
                                       (setq kd/pmd-today-point 0)
                                       (message "pomodoro count reset!")))
 
