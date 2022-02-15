@@ -27,6 +27,8 @@
                 (concat rspec-rake-command " spec")
               rspec-spec-command))))
 
+;; (setq rspec-use-spring-when-possible nil)
+(setq rspec-use-spring-when-possible t)
 (defun rspec-spring-p ()
   (and rspec-use-spring-when-possible
        (stringp (executable-find "spring"))))

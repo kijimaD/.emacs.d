@@ -30,24 +30,15 @@
 (defun kd/set-init ()
   "Window Manager関係の各種プログラムを起動する."
   (interactive)
-  (kd/set-background)
-  (start-process-shell-command "compton" nil "compton -b --config ~/dotfiles/.config/compton/compton.conf")
+  ;; (kd/set-background)
   (start-process-shell-command "dunst" nil "dunst")
-  ;; (start-process-shell-command "redshift" nil "redshift")
-  ;; (start-process-shell-command "polybar" nil "~/dotfiles/.config/polybar/launch.sh")
-
-  ;; org-alert
-  ;; requireするとexwmのy/n選択ができないため
-  (require 'org-alert)
-  (setq alert-default-style 'notifications)
-  (setq org-alert-interval 300)
-  (setq org-alert-notification-title "Reminder")
-  (org-alert-enable))
+  (start-process-shell-command "polybar" nil "~/dotfiles/.config/polybar/launch.sh"))
 
 (defun kd/set-background ()
   "背景をセットする."
   (interactive)
   (start-process-shell-command "compton" nil "compton -b --config ~/dotfiles/.config/compton/compton.conf")
+  ;; (start-process-shell-command "redshift" nil "redshift")
   (start-process-shell-command "fehbg" nil "~/dotfiles/.fehbg"))
 
 (define-key exwm-mode-map (kbd "C-M-:") 'vterm-toggle)

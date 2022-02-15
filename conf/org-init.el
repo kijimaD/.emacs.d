@@ -44,7 +44,8 @@
 ;; (setq org-ellipsis "⤵")
 ;; (setq org-ellipsis "🢗")
 ;; (setq org-ellipsis "❖")
-(setq org-ellipsis "↯")
+;; (setq org-ellipsis "↯")
+(setq org-ellipsis "▽")
 (setq org-cycle-separator-lines 2)
 
 ;; org-modeで行末で折り返しをする
@@ -109,10 +110,12 @@
 (setq org-agenda-custom-commands
       '(("a" "Agenda and all TODO's"
          ((tags "project-CLOCK=>\"<today>\"|repeatable") (agenda "") (alltodo)))))
+(setq org-agenda-custom-commands nil)
 
 (defun org-agenda-default ()
   (interactive)
-  (org-agenda nil "a"))
+  (persp-switch "2")
+  (org-agenda nil "z"))
 (global-set-key (kbd "<f6>") 'org-agenda-default)
 
 ;; agenda内でRで出るclocktableの設定。
@@ -139,7 +142,8 @@
 (require 'cider)
 
 ;; common lisp
-(setq inferior-lisp-program "sbcl")
+(setq inferior-lisp-program "clisp")
+;; clisp, sbcl,  ...
 
 ;; 日誌 ================
 (require 'org-journal)
@@ -303,10 +307,10 @@
    '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
    '(org-property-value ((t (:inherit fixed-pitch))) t)
    '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-   '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
+   '(org-table ((t (:inherit fixed-pitch :foreground "#f5f5f5"))))
    '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
    '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
-   '(org-block-begin-line ((t (:inherit org-block :background "#262829"))))))
+   '(org-block-begin-line ((t (:inherit org-block))))))
 
 (add-hook 'org-mode-hook 'variable-pitch-mode)
 (add-hook 'org-mode-hook 'visual-line-mode)
@@ -343,26 +347,38 @@
     (setq buf (find-file-noselect file))
     (with-current-buffer buf (if (setq lint (org-lint)) (print (list file lint))))))
 
+;; org-alert ================
+(require 'org-alert)
+(setq org-pomodoro-short-break-length 1)
+(setq alert-default-style 'notifications)
+(setq org-alert-interval 300)
+(setq org-alert-notification-title "Reminder")
+(org-alert-enable)
+
 ;; pomodoro ================
 (require 'org-pomodoro)
 (define-key global-map [insert] 'org-pomodoro)
+
 (setq org-pomodoro-finished-sound "~/.emacs.d/resources/pmd-finished.wav")
 ;; (org-pomodoro-finished)
 (setq org-pomodoro-short-break-sound "~/.emacs.d/resources/pmd-short-break.wav")
 ;; (org-pomodoro-short-break-finished)
 
+(add-hook 'org-pomodoro-short-break-finished-hook 'org-agenda-default)
+(add-hook 'org-pomodoro-long-break-finished-hook 'org-agenda-default)
+
 (defun kd/org-pomodoro-remain-gauge (max-minutes)
   "Display remain time gauge."
-  (let* ((display-len 12)
+  (let* ((display-len 25)
          (remaining-minutes (/ (org-pomodoro-remaining-seconds) 60))
          (current-percent (/ remaining-minutes max-minutes))
          (done (truncate (* (- 1 current-percent) display-len)))
          (will (truncate (* current-percent display-len))))
     (concat
      "%{T2}"
-     (concat "%{F#008000}" (make-string done ?█) "%{F-}")
-     (concat "%{F#ffffff}" "█" "%{F-}")
-     (concat "%{F#413839}" (make-string will ?█) "%{F-}")
+     ;; (concat "%{F#008000}" (make-string done ?█) "%{F-}")
+     (concat "%{F#008000}" (make-string done ?|) "%{F-}")
+     (concat "%{F#413839}" (make-string will ?|) "%{F-}")
      "%{T-}")))
 
 ;; https://colekillian.com/posts/org-pomodoro-and-polybar/
@@ -385,16 +401,117 @@
                  (/ (org-pomodoro-remaining-seconds) 60)))
         (:overtime
          (format "Overtime! %dm" (/ (org-pomodoro-remaining-seconds) 60))))
-    ""))
+    " Toggle LAN switch, and run pomodoro!"))
 
 (defvar kd/pmd-today-point 0)
 (add-hook 'org-pomodoro-finished-hook
           (lambda () (setq kd/pmd-today-point (1+ kd/pmd-today-point))))
 
+(defun kd/write-pmd (str)
+  (shell-command (format "echo '%s' >> ~/roam/pmd.csv" str)))
+
 ;; reset point
-(run-at-time "00:01am" (* 24 60 60) (lambda ()
+;; FIXME: 起動時に即実行されてる
+(run-at-time "00:02am" (* 24 60 60) (lambda ()
+                                      (kd/write-pmd (concat (format-time-string "%Y-%m-%d")
+                                                            ", "
+                                                            (number-to-string kd/pmd-today-point)))
                                       (setq kd/pmd-today-point 0)
                                       (message "pomodoro count reset!")))
 
 (defun kd/pmd-today-point-display ()
-  (format " %s" kd/pmd-today-point))
+  ;; (format " [%s]" kd/pmd-today-point)
+  (format " ✿ %s" kd/pmd-today-point))
+
+;; org-super-agenda
+(org-super-agenda-mode)
+
+(let ((org-super-agenda-groups
+       '(;; Each group has an implicit boolean OR operator between its selectors.
+         (:name "Today"  ; Optionally specify section name
+                :time-grid t  ; Items that appear on the time grid
+                :todo "TODAY")  ; Items that have this TODO keyword
+         (:name "Important"
+                ;; Single arguments given alone
+                :tag "bills"
+                :priority "A")
+         (:name "WIP"
+                ;; Single arguments given alone
+                :todo "WIP")
+         ;; Set order of multiple groups at once
+         (:order-multi (2 (:name "Shopping in town"
+                                 ;; Boolean AND group matches items that match all subgroups
+                                 :and (:tag "shopping" :tag "@town"))
+                          (:name "Food-related"
+                                 :habit t
+                                 ;; Multiple args given in list with implicit OR
+                                 :tag ("food" "dinner"))
+                          (:name "Space-related (non-moon-or-planet-related)"
+                                 ;; Regexps match case-insensitively on the entire entry
+                                 :and (:regexp ("space" "NASA")
+                                               ;; Boolean NOT also has implicit OR between selectors
+                                               :not (:regexp "moon" :tag "planet")))))
+         ;; Groups supply their own section names when none are given
+         (:todo "WAITING" :order 8)  ; Set order of this section
+         (:todo ("SOMEDAY" "TO-READ" "TO-WRITE" "CHECK" "TO-WATCH" "WATCHING")
+                ;; Show this group at the end of the agenda (since it has the
+                ;; highest number). If you specified this group last, items
+                ;; with these todo keywords that e.g. have priority A would be
+                ;; displayed in that group instead, because items are grouped
+                ;; out in the order the groups are listed.
+                :order 9)
+         (:priority<= "B"
+                      ;; Show this section after "Today" and "Important", because
+                      ;; their order is unspecified, defaulting to 0. Sections
+                      ;; are displayed lowest-number-first.
+                      :order 1)
+         ;; After the last group, the agenda will display items that didn't
+         ;; match any of these groups, with the default order position of 99
+         )))
+  ;; (org-agenda nil "a")
+  )
+
+(setq spacemacs-theme-org-agenda-height nil
+      org-agenda-skip-scheduled-if-done t
+      org-agenda-skip-deadline-if-done t
+      org-agenda-include-deadlines t
+      org-agenda-include-diary t
+      org-agenda-block-separator nil
+      org-agenda-compact-blocks t
+      org-agenda-start-with-log-mode t)
+
+(setq org-agenda-custom-commands
+      '(("z" "Super zaen view"
+         ((agenda "" ((org-agenda-span 'day)
+                      (org-super-agenda-groups
+                       '((:name "Today"
+                                :time-grid t
+                                :date today
+                                :todo "TODAY"
+                                :scheduled today
+                                :order 1)
+                         (:discard (:anything))))))
+          (alltodo "" ((org-agenda-overriding-header "")
+                       (org-super-agenda-groups
+                        '((:name "Work In Progress"
+                                 :todo "WIP"
+                                 :order 1)
+                          (:name "Due Today"
+                                 :deadline today
+                                 :order 2)
+                          (:name "Due Month"
+                                 :deadline future
+                                 :order 3)
+                          (:name "Overdue"
+                                 :deadline past
+                                 :order 7)
+                          (:name "To write"
+                                 :tag "Write"
+                                 :order 12)
+                          (:name "To read"
+                                 :tag "Read"
+                                 :order 14)
+                          (:name "Projects"
+                                 :tag "Project"
+                                 :order 30)
+                          (:discard (:tag ("Chore" "Routine" "Daily")))))))))))
