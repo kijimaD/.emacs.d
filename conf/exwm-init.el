@@ -31,12 +31,14 @@
   "Window Manager関係の各種プログラムを起動する."
   (interactive)
   (progn
+    (call-process-shell-command "shepherd")
+    (call-process-shell-command "~/dotfiles/.config/polybar/launch.sh")
+    (start-process-shell-command "xmodmap" nil "xmodmap ~/dotfiles/.Xmodmap")
+
     (exwm-workspace-switch-create 2)
     (start-process-shell-command "google-chrome" nil "google-chrome")
     (start-process-shell-command "spotify" nil "spotify")
     (sleep-for 2)
-    (call-process-shell-command "shepherd")
-    (call-process-shell-command "~/dotfiles/.config/polybar/launch.sh")
 
     (exwm-workspace-switch-create 0)
     (persp-switch "1")
