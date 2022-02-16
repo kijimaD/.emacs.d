@@ -31,8 +31,45 @@
   "Window Manager関係の各種プログラムを起動する."
   (interactive)
   (progn
+    (exwm-workspace-switch-create 2)
+    (start-process-shell-command "google-chrome" nil "google-chrome")
+    (start-process-shell-command "spotify" nil "spotify")
+    (sleep-for 2)
     (call-process-shell-command "shepherd")
-    (call-process-shell-command "~/dotfiles/.config/polybar/launch.sh")))
+    (call-process-shell-command "~/dotfiles/.config/polybar/launch.sh")
+
+    (exwm-workspace-switch-create 0)
+    (persp-switch "1")
+    ;; (org-journal-new-entry)
+    (persp-switch "2")
+    (find-file "~/roam")
+    (magit-status)
+    (persp-switch "3")
+    (split-window-right)
+    (switch-to-buffer "Google-chrome")
+    (persp-switch "4")
+    (switch-to-buffer "Google-chrome")
+    (persp-switch "5")
+    (find-file "~/dotfiles")
+    (magit-status)
+    (persp-switch "6")
+    (find-file "~/.emacs.d")
+    (magit-status)
+    (persp-switch "7")
+    (find-file "~/ProjectOrg")
+    (persp-switch "8")
+    (find-file "~/Project")
+
+    (exwm-workspace-switch-create 1)
+    (persp-switch "4")
+    (switch-to-buffer "Google-chrome")
+    (persp-switch "8")
+    (find-file "~/Project")
+
+    (exwm-workspace-switch-create 2)
+    (switch-to-buffer "Spotify")
+
+    (exwm-workspace-switch-create 0)))
 
 (defun kd/set-background ()
   "背景をセットする."
