@@ -42,9 +42,10 @@
 
     (exwm-workspace-switch-create 0)
     (persp-switch "1")
-    ;; (org-journal-new-entry)
+    (org-journal-new-entry nil)
     (persp-switch "2")
     (find-file "~/roam")
+    (org-agenda nil "z")
     (magit-status)
     (persp-switch "3")
     (split-window-right)
@@ -63,6 +64,11 @@
     (find-file "~/Project")
 
     (exwm-workspace-switch-create 1)
+    (persp-switch "1")
+    (org-journal-new-entry nil)
+    (persp-switch "2")
+    (find-file "~/roam")
+    (org-agenda nil "z")
     (persp-switch "4")
     (switch-to-buffer "Google-chrome")
     (persp-switch "8")
