@@ -33,7 +33,6 @@
   (progn
     (call-process-shell-command "shepherd")
     (call-process-shell-command "~/dotfiles/.config/polybar/launch.sh")
-    ;; (call-process-shell-command "xmodmap" nil "xmodmap ~/dotfiles/.Xmodmap")
 
     (exwm-workspace-switch-create 2)
     (start-process-shell-command "google-chrome" nil "google-chrome")
