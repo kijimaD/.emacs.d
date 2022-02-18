@@ -395,7 +395,7 @@
 
 ;; reset point
 ;; FIXME: 起動時に即実行されてる
-(run-at-time "00:02am" (* 24 60 60) (lambda ()
+(run-at-time "23:59pm" (* 24 60 60) (lambda ()
                                       (kd/write-pmd (concat (format-time-string "%Y-%m-%d")
                                                             ", "
                                                             (number-to-string kd/pmd-today-point)))
