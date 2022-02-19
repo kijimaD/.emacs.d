@@ -2,7 +2,8 @@
 (doom-themes-org-config)
 
 (setq custom-safe-themes t)
-(setq-default custom-enabled-themes '(doom-dracula))
+(setq-default custom-enabled-themes '(leuven))
+;; leuven
 ;; doom-vibrant
 ;; spacemacs-dark
 ;; doom-dracula
