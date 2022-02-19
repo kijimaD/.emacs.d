@@ -6,6 +6,7 @@
 (depends-on "visual-regexp-steroids")
 (depends-on "smart-newline")
 (depends-on "smartparens")
+(depends-on "leuven-theme")
 
 ;; Install Packages
 (depends-on "ace-jump-mode")
