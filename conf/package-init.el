@@ -192,6 +192,30 @@
 ;; modify された箇所で実行すると、diff を inline で見ることができる
 (global-set-key (kbd "C-c C-v") 'git-gutter+-show-hunk-inline-at-point)
 
+(defun kd/magit-commit-prompt ()
+  "Use ivy to insert conventional commit keyword."
+  (let ((conventional-prompt '(("build" "ビルド")
+                               ("chore" "雑事, カテゴライズする必要ないようなもの")
+                               ("ci" "CI")
+                               ("docs" "ドキュメント")
+                               ("feat" "新機能")
+                               ("fix" "バグフィックス")
+                               ("perf" "パフォーマンス")
+                               ("refactor" "リファクタリング")
+                               ("revert" "コミット取り消し")
+                               ("style" "コードスタイル修正")
+                               ("test" "テスト"))))
+    (insert (concat (ivy-read "Commit Type "
+                              (mapcar 'car conventional-prompt)
+                              :require-match t
+                              :sort t
+                              :preselect "Add: ")
+                    ": "))))
+
+(remove-hook 'git-commit-setup-hook 'with-editor-usage-message)
+(add-hook 'git-commit-setup-hook 'kd/magit-commit-prompt)
+(advice-add 'magit-commit :after 'kd/magit-commit-prompt)
+
 ;; 文字入力 ================
 (require 'mozc)
 (set-language-environment "Japanese")
