@@ -213,8 +213,8 @@
                     ": "))))
 
 (remove-hook 'git-commit-setup-hook 'with-editor-usage-message)
-(add-hook 'git-commit-setup-hook 'kd/magit-commit-prompt)
-(advice-add 'magit-commit :after 'kd/magit-commit-prompt)
+;; (add-hook 'git-commit-setup-hook 'kd/magit-commit-prompt)
+;; (advice-add 'magit-commit :after 'kd/magit-commit-prompt)
 
 ;; 文字入力 ================
 (require 'mozc)
