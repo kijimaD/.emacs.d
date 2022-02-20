@@ -63,7 +63,7 @@
     (vterm-toggle)
     (magit-status)
     (persp-switch "6")
-    (find-file "~/.emacs.d")
+    (find-file "~/.emacs.d/conf")
     (vterm-toggle)
     (vterm-toggle)
     (magit-status)

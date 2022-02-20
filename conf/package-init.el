@@ -192,6 +192,7 @@
 ;; modify された箇所で実行すると、diff を inline で見ることができる
 (global-set-key (kbd "C-c C-v") 'git-gutter+-show-hunk-inline-at-point)
 
+;; http://www.modernemacs.com/post/pretty-magit/
 (defun kd/magit-commit-prompt ()
   "Use ivy to insert conventional commit keyword."
   (let ((conventional-prompt '(("build" "ビルド")
@@ -213,8 +214,7 @@
                     ": "))))
 
 (remove-hook 'git-commit-setup-hook 'with-editor-usage-message)
-;; (add-hook 'git-commit-setup-hook 'kd/magit-commit-prompt)
-;; (advice-add 'magit-commit :after 'kd/magit-commit-prompt)
+(add-hook 'git-commit-setup-hook 'kd/magit-commit-prompt)
 
 ;; 文字入力 ================
 (require 'mozc)
