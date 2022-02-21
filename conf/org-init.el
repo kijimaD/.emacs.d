@@ -142,7 +142,7 @@
 (require 'cider)
 
 ;; common lisp
-(setq inferior-lisp-program "clisp")
+(setq inferior-lisp-program "sbcl")
 ;; clisp, sbcl,  ...
 
 ;; 日誌 ================
@@ -194,6 +194,8 @@
 (define-key global-map (kbd "C-c n f") 'org-roam-node-find)
 (define-key global-map (kbd "C-c n g") 'org-roam-graph)
 (define-key global-map (kbd "C-c n i") 'org-roam-node-insert)
+(define-key global-map (kbd "C-c n r") 'org-roam-node-random)
+(define-key global-map (kbd "C-c n l") 'org-roam-buffer-toggle)
 (define-key global-map (kbd "C-M-i") 'completion-at-point)
 
 (setq org-roam-capture-templates

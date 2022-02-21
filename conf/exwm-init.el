@@ -71,6 +71,8 @@
     (find-file "~/ProjectOrg")
     (persp-switch "8")
     (find-file "~/Project")
+    (persp-switch "9")
+    (elfeed)
 
     (exwm-workspace-switch-create 1)
     (persp-switch "1")

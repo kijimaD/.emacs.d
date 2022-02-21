@@ -395,11 +395,12 @@
 ;; RSS ================
 
 (setq elfeed-feeds
-      '(("https://www.sanityinc.com/feed.xml" Emacs)
-        ("https://sachachua.com/blog/category/weekly/feed/" Emacs)
+      '(("https://www.sanityinc.com/feed.xml" sanityinc blog)
+        ("https://sachachua.com/blog/category/weekly/feed/" sachachua blog)
         ("https://techracho.bpsinc.jp/feed" Ruby Rails)
         ("http://b.hatena.ne.jp/t-wada/rss" Test)
-        ("https://cprss.s3.amazonaws.com/rubyweekly.com.xml" Ruby)))
+        ("https://cprss.s3.amazonaws.com/rubyweekly.com.xml" Ruby weekly)
+        ("http://pragmaticemacs.com/feed/" Pragmatic Emacs)))
 
 ;; Google検索 ================
 (require 'google-this)
