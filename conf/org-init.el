@@ -152,7 +152,20 @@
 (setq org-journal-dir (concat "~/dropbox/junk/diary/org-journal"))
 (setq org-journal-file-format "%Y%m%d.org")
 (setq org-journal-find-file 'find-file)
-(setq org-journal-hide-entries-p t)
+(setq org-journal-hide-entries-p nil)
+
+;; https://emacs.stackexchange.com/questions/17897/create-an-org-journal-template-for-daily-journal-entry/32655#32655?newreg=7c9543fa39e342cfb438c4168020447d
+(defun kd/new-buffer-p ()
+  (not (file-exists-p (buffer-file-name))))
+
+(defun kd/insert-journal-template ()
+  (let ((template-file (expand-file-name "~/.emacs.d/resources/journal-template.org" org-directory)))
+    (when (kd/new-buffer-p)
+      (save-excursion
+        (goto-char (point-min))
+        (insert-file-contents template-file)))))
+
+(add-hook 'org-journal-after-entry-create-hook #'kd/insert-journal-template)
 
 ;; 使い捨てのファイルを開く ================
 (require 'open-junk-file)
