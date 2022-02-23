@@ -142,7 +142,7 @@
 (require 'cider)
 
 ;; common lisp
-(setq inferior-lisp-program "sbcl")
+(setq inferior-lisp-program "clisp")
 ;; clisp, sbcl,  ...
 
 ;; 日誌 ================
@@ -348,6 +348,8 @@
 ;; org-alert ================
 (require 'org-alert)
 (setq org-pomodoro-short-break-length 1)
+(setq org-pomodoro-long-break-length 1)
+
 (setq alert-default-style 'notifications)
 (setq org-alert-interval 300)
 (setq org-alert-notification-title "Reminder")

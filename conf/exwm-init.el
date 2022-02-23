@@ -36,11 +36,13 @@
 
     (exwm-workspace-switch-create 2)
     (start-process-shell-command "google-chrome" nil "google-chrome")
+    (start-process-shell-command "firefox" nil "firefox")
     (start-process-shell-command "spotify" nil "spotify")
     (sleep-for 2)
 
     (exwm-workspace-switch-create 0)
     (persp-switch "1")
+    (delete-other-windows)
     (org-journal-new-entry nil)
     (vterm-toggle)
     (vterm-toggle)
@@ -53,10 +55,11 @@
     (persp-switch "3")
     (split-window-right)
     (switch-to-buffer "Google-chrome")
-    (vterm-toggle)
-    (vterm-toggle)
+    (split-window-right)
     (persp-switch "4")
     (switch-to-buffer "Google-chrome")
+    (vterm-toggle)
+    (vterm-toggle)
     (persp-switch "5")
     (find-file "~/dotfiles")
     (vterm-toggle)
@@ -81,14 +84,15 @@
     (find-file "~/roam")
     (org-agenda nil "z")
     (persp-switch "4")
-    (switch-to-buffer "Google-chrome")
+    (switch-to-buffer "Firefox")
     (persp-switch "8")
     (find-file "~/Project")
 
     (exwm-workspace-switch-create 2)
     (switch-to-buffer "Spotify")
 
-    (exwm-workspace-switch-create 0)))
+    (exwm-workspace-switch-create 0)
+    (persp-switch "4")))
 
 (defun kd/set-background ()
   "背景をセットする."
