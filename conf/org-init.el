@@ -387,10 +387,13 @@
   (if (org-pomodoro-active-p)
       (cl-case org-pomodoro-state
         (:pomodoro
-         (format "%s %dm - %s"
+         (format "%s %dm - %s%s%s"
                  (kd/org-pomodoro-remain-gauge org-pomodoro-length)
                  (/ (org-pomodoro-remaining-seconds) 60)
-                 org-clock-heading))
+                 "%{F#ff9900}"
+                 org-clock-heading
+                 "%{F-}"
+                 ))
         (:short-break
          (format "%s Short break: %dm"
                  (kd/org-pomodoro-remain-gauge org-pomodoro-short-break-length)
