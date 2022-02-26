@@ -7,6 +7,7 @@
 (depends-on "smart-newline")
 (depends-on "smartparens")
 (depends-on "leuven-theme")
+(depends-on "modus-themes")
 
 ;; Install Packages
 (depends-on "ace-jump-mode")

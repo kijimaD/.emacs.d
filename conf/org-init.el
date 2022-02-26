@@ -152,7 +152,20 @@
 (setq org-journal-dir (concat "~/dropbox/junk/diary/org-journal"))
 (setq org-journal-file-format "%Y%m%d.org")
 (setq org-journal-find-file 'find-file)
-(setq org-journal-hide-entries-p t)
+(setq org-journal-hide-entries-p nil)
+
+;; https://emacs.stackexchange.com/questions/17897/create-an-org-journal-template-for-daily-journal-entry/32655#32655?newreg=7c9543fa39e342cfb438c4168020447d
+(defun kd/new-buffer-p ()
+  (not (file-exists-p (buffer-file-name))))
+
+(defun kd/insert-journal-template ()
+  (let ((template-file (expand-file-name "~/.emacs.d/resources/journal-template.org" org-directory)))
+    (when (kd/new-buffer-p)
+      (save-excursion
+        (goto-char (point-min))
+        (insert-file-contents template-file)))))
+
+(add-hook 'org-journal-after-entry-create-hook #'kd/insert-journal-template)
 
 ;; 使い捨てのファイルを開く ================
 (require 'open-junk-file)
@@ -194,6 +207,8 @@
 (define-key global-map (kbd "C-c n f") 'org-roam-node-find)
 (define-key global-map (kbd "C-c n g") 'org-roam-graph)
 (define-key global-map (kbd "C-c n i") 'org-roam-node-insert)
+(define-key global-map (kbd "C-c n r") 'org-roam-node-random)
+(define-key global-map (kbd "C-c n l") 'org-roam-buffer-toggle)
 (define-key global-map (kbd "C-M-i") 'completion-at-point)
 
 (setq org-roam-capture-templates
@@ -333,6 +348,8 @@
 ;; org-alert ================
 (require 'org-alert)
 (setq org-pomodoro-short-break-length 1)
+(setq org-pomodoro-long-break-length 1)
+
 (setq alert-default-style 'notifications)
 (setq org-alert-interval 300)
 (setq org-alert-notification-title "Reminder")
@@ -370,10 +387,13 @@
   (if (org-pomodoro-active-p)
       (cl-case org-pomodoro-state
         (:pomodoro
-         (format "%s %dm - %s"
+         (format "%s %dm - %s%s%s"
                  (kd/org-pomodoro-remain-gauge org-pomodoro-length)
                  (/ (org-pomodoro-remaining-seconds) 60)
-                 org-clock-heading))
+                 "%{F#ff9900}"
+                 org-clock-heading
+                 "%{F-}"
+                 ))
         (:short-break
          (format "%s Short break: %dm"
                  (kd/org-pomodoro-remain-gauge org-pomodoro-short-break-length)
