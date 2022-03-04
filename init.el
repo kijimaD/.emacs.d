@@ -26,6 +26,7 @@
 (ignore-errors (load "local-init-example"))
 (ignore-errors (load "local-init"))
 (load "ob-rust")
+(load "corf-init")
 (load "org-init")
 (load "font-init")
 (load "simple-init")

@@ -10,6 +10,15 @@
 (depends-on "modus-themes")
 (depends-on "scala-mode")
 
+(depends-on "corfu")
+(depends-on "vertico")
+(depends-on "vertico-directory")
+(depends-on "marginalia")
+(depends-on "orderless")
+(depends-on "cape")
+(depends-on "kind-icon")
+(depends-on "affe")
+
 ;; Install Packages
 (depends-on "ace-jump-mode")
 (depends-on "ace-link")
