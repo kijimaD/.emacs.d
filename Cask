@@ -12,7 +12,6 @@
 
 (depends-on "corfu")
 (depends-on "vertico")
-(depends-on "vertico-directory")
 (depends-on "marginalia")
 (depends-on "orderless")
 (depends-on "cape")
