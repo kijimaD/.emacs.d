@@ -8,6 +8,7 @@
 (depends-on "smartparens")
 (depends-on "leuven-theme")
 (depends-on "modus-themes")
+(depends-on "scala-mode")
 
 ;; Install Packages
 (depends-on "ace-jump-mode")

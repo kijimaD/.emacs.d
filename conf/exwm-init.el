@@ -92,7 +92,9 @@
     (switch-to-buffer "Spotify")
 
     (exwm-workspace-switch-create 0)
-    (persp-switch "4")))
+    (persp-switch "4")
+
+    (message "settings done!")))
 
 (defun kd/set-background ()
   "背景をセットする."

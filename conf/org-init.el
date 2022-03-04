@@ -125,17 +125,18 @@
 
 ;; org-babel ================
 (org-babel-do-load-languages 'org-babel-load-languages
-                             '((shell . t)
-                               (python . t)
-                               (ruby . t)
+                             '((C . t)
+                               (clojure . t)
                                (emacs-lisp . t)
-                               (sql . t)
                                (graphql . t)
                                (haskell . t)
-                               (clojure . t)
                                (lisp . t)
+                               (python . t)
+                               (ruby . t)
                                (rust . t)
-                               (C . t)))
+                               (scala . t)
+                               (shell . t)
+                               (sql . t)))
 
 (setq org-confirm-babel-evaluate nil)
 (setq org-babel-clojure-backend 'cider)
@@ -250,6 +251,7 @@
   (add-to-list 'org-structure-template-alist '("py" . "src python"))
   (add-to-list 'org-structure-template-alist '("rb" . "src ruby"))
   (add-to-list 'org-structure-template-alist '("gq" . "src graphql"))
+  (add-to-list 'org-structure-template-alist '("sc" . "src scala"))
   (add-to-list 'org-structure-template-alist '("sq" . "src sql"))
   (add-to-list 'org-structure-template-alist '("hs" . "src haskell"))
   (add-to-list 'org-structure-template-alist '("cj" . "src clojure"))
