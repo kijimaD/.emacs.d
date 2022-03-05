@@ -25,8 +25,9 @@
 (add-to-list 'load-path (expand-file-name "conf" user-emacs-directory))
 (ignore-errors (load "local-init-example"))
 (ignore-errors (load "local-init"))
-(load "ob-rust")
 (load "org-init")
+(load "ob-rust")
+(load "ob-scala")
 (load "font-init")
 (load "simple-init")
 (load "package-init")
@@ -35,6 +36,7 @@
 (load "haskell-init")
 (load "web-mode-init")
 (load "lsp-init")
+(load "corfu-init")
 (load "ivy-init")
 (load "shell-init")
 (load "theme-init")
@@ -55,7 +57,6 @@
         back-button-mode
         beacon-mode
         command-log-mode
-        company-mode
         ctags-auto-update-mode
         eldoc-mode
         flyspell-mode

@@ -81,7 +81,7 @@
 ;; 現在行をハイライト
 
 ;; ハイライトの表示を遅くする
-(require 'hl-line)
+;; (require 'hl-line)
 ;; (defun global-hl-line-timer-function ()
 ;;   (global-hl-line-unhighlight-all)
 ;;   (let ((global-hl-line-mode t))

@@ -2,15 +2,21 @@
 (doom-themes-org-config)
 
 (setq custom-safe-themes t)
-(setq-default custom-enabled-themes '(leuven))
-;; leuven
+(setq-default custom-enabled-themes '(modus-vivendi))
+;; dark ------
 ;; doom-vibrant
 ;; spacemacs-dark
 ;; doom-dracula
+;; modus-vivendi
+;; leuven-dark
 
+;; white ------
+;; leuven
 ;; doom-acario-light
 ;; doom-homage-white
 ;; modus-operandi
+
+;; ------------
 
 ;; https://github.com/purcell/emacs.d
 ;; Ensure that themes will be applied even if they have not been customized

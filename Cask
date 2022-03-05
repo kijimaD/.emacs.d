@@ -8,6 +8,15 @@
 (depends-on "smartparens")
 (depends-on "leuven-theme")
 (depends-on "modus-themes")
+(depends-on "scala-mode")
+
+(depends-on "corfu")
+(depends-on "vertico")
+(depends-on "marginalia")
+(depends-on "orderless")
+(depends-on "cape")
+(depends-on "kind-icon")
+(depends-on "affe")
 
 ;; Install Packages
 (depends-on "ace-jump-mode")
@@ -30,8 +39,6 @@
 (depends-on "cask")
 (depends-on "coffee-mode")
 (depends-on "command-log-mode")
-(depends-on "company")
-(depends-on "company-emoji")
 (depends-on "counsel")
 (depends-on "counsel-gtags")
 (depends-on "counsel-projectile")
@@ -114,8 +121,6 @@
 (depends-on "lispxmp")
 (depends-on "list-utils")
 (depends-on "log4e")
-(depends-on "lsp-mode")
-(depends-on "lsp-ui")
 (depends-on "macrostep")
 (depends-on "magit")
 (depends-on "magit-popup")

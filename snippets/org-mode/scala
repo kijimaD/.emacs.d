@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: scala
+# key: sc
+# --
+
+#+caption: $1
+#+begin_src scala
+$0
+#+end_src

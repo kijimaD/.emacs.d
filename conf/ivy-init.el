@@ -48,7 +48,7 @@
 (global-set-key (kbd "C-x C-l") 'counsel-mark-ring)
 (global-set-key (kbd "C-x C-u") 'ivy-resume)
 (global-set-key (kbd "C-x C-g") 'counsel-git-grep)
-(global-set-key (kbd "M-x") 'counsel-M-x)
+;; (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "M-y") 'counsel-yank-pop)
 (global-set-key (kbd "M-i") 'swiper-thing-at-point)
 (global-set-key (kbd "C-c f") 'counsel-ag)
