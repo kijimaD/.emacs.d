@@ -8,7 +8,8 @@
 (setq corfu-auto t)
 (setq corfu-quit-at-boundary nil) ;; nil: スペースを入れてもquitしない
 (setq corfu-quit-no-match nil) ;; nil: マッチしないとき"no match"を表示してquitしない
-(setq corfu-auto-prefix 1)
+(setq corfu-auto-prefix 3)
+(setq corfu-count 15)
 
 ;; TAB cycle if there are only few candidates
 (setq completion-cycle-threshold 3)
@@ -71,6 +72,7 @@
 (require 'kind-icon)
 (setq kind-icon-default-face 'corfu-default)
 (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
+;; (pop corfu-margin-formatters)
 
 ;; Available commands
 ;; affe-grep: Filters the content of all text files in the current directory
@@ -83,3 +85,12 @@
   (cons affe-orderless-regexp
         (lambda (str) (orderless--highlight affe-orderless-regexp str))))
 (setq affe-regexp-compiler #'affe-orderless-regexp-compiler)
+
+(use-package corfu-doc
+  :straight (:host github :repo "galeo/corfu-doc")
+  :hook (corfu-mode-hook . corfu-doc-mode))
+
+(defun corfu-lsp-setup ()
+  (setq-local completion-styles '(orderless)
+              completion-category-defaults nil))
+(add-hook 'lsp-mode-hook #'corfu-lsp-setup)
