@@ -1,3 +1,6 @@
+;; metals install error ... https://github.com/coursier/coursier/issues/2346
+(setq lsp-verify-signature nil)
+
 ;; Enable scala-mode for highlighting, indentation and motion commands
 (use-package scala-mode
   :interpreter

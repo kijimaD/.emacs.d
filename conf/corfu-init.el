@@ -90,4 +90,4 @@
 
 (use-package corfu-doc
   :straight (:host github :repo "galeo/corfu-doc")
-  :hook (corfu-mode-hook . corfu-doc-mode))
+  :hook (corfu-mode . corfu-doc-mode))
