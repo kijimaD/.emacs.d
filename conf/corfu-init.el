@@ -44,7 +44,9 @@
 (define-key minibuffer-local-map (kbd "C-M-a") #'marginalia-cycle)
 
 (require 'orderless)
-(setq completion-styles '(orderless))
+(setq completion-styles '(orderless partial-completion))
+(setq completion-category-defaults nil)
+(setq completion-category-overrides nil)
 
 (orderless-define-completion-style orderless+initialism
   (orderless-matching-styles '(orderless-initialism ;;一番最初にinitializm
@@ -89,8 +91,3 @@
 (use-package corfu-doc
   :straight (:host github :repo "galeo/corfu-doc")
   :hook (corfu-mode-hook . corfu-doc-mode))
-
-(defun corfu-lsp-setup ()
-  (setq-local completion-styles '(orderless)
-              completion-category-defaults nil))
-(add-hook 'lsp-mode-hook #'corfu-lsp-setup)

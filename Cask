@@ -11,6 +11,7 @@
 (depends-on "scala-mode")
 
 (depends-on "corfu")
+(depends-on "corfu-doc")
 (depends-on "vertico")
 (depends-on "marginalia")
 (depends-on "orderless")

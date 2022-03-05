@@ -12,6 +12,7 @@
 (define-key my-keymap (kbd "!") 'counsel-linux-app)
 (define-key my-keymap (kbd "r") 'counsel-recentf)
 (define-key my-keymap (kbd "j") 'avy-goto-word-0)
+(define-key my-keymap (kbd "SPC") 'lsp-ui-doc-show)
 (define-key my-keymap (kbd "<henkan> f") 'forge-pull)
 (define-key my-keymap (kbd "<henkan> t") 'forge-list-topics)
 (define-key my-keymap (kbd "<henkan> i") 'forge-list-assigned-issues)
