@@ -56,7 +56,6 @@
         back-button-mode
         beacon-mode
         command-log-mode
-        company-mode
         ctags-auto-update-mode
         eldoc-mode
         flyspell-mode

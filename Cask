@@ -40,8 +40,6 @@
 (depends-on "cask")
 (depends-on "coffee-mode")
 (depends-on "command-log-mode")
-(depends-on "company")
-(depends-on "company-emoji")
 (depends-on "counsel")
 (depends-on "counsel-gtags")
 (depends-on "counsel-projectile")

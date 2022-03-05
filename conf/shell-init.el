@@ -26,8 +26,6 @@
 
 ;; esh-autosuggest ================
 (add-hook 'eshell-first-time-mode-hook 'esh-autosuggest-mode)
-(set-face-foreground 'company-preview-common "#4b5668")
-(set-face-background 'company-preview nil)
 (setq esh-autosuggest-delay 0.5)
 
 ;; vterm ================
