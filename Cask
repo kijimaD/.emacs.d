@@ -11,7 +11,6 @@
 (depends-on "scala-mode")
 
 (depends-on "corfu")
-(depends-on "corfu-doc")
 (depends-on "vertico")
 (depends-on "marginalia")
 (depends-on "orderless")
@@ -122,8 +121,6 @@
 (depends-on "lispxmp")
 (depends-on "list-utils")
 (depends-on "log4e")
-(depends-on "lsp-mode")
-(depends-on "lsp-ui")
 (depends-on "macrostep")
 (depends-on "magit")
 (depends-on "magit-popup")
