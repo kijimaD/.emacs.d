@@ -94,10 +94,11 @@
 (setq my-org-directory (concat "~/dropbox/junk/diary/org-journal/"))
 (setq my-todo-file (concat my-org-directory "todo.org"))
 
+(if (file-exists-p my-todo-file)
+    (setq org-agenda-files `("~/roam" ,my-todo-file)))
+
 (setq org-directory my-org-directory)
 (setq org-default-notes-file my-todo-file)
-
-(setq org-agenda-files `("~/roam" ,my-todo-file))
 
 ;; 時刻をデフォルト表示
 (setq org-agenda-start-with-log-mode t)
