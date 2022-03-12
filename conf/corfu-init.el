@@ -73,7 +73,8 @@
 ;; EmacsのSVG対応コンパイルが必要
 (require 'kind-icon)
 (setq kind-icon-default-face 'corfu-default)
-(add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
+;; If 4k, big size icon displayed.
+;; (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
 ;; (pop corfu-margin-formatters)
 
 ;; Available commands

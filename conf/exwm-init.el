@@ -51,7 +51,6 @@
     (vterm-toggle)
     (vterm-toggle)
     (org-agenda nil "z")
-    (magit-status)
     (persp-switch "3")
     (split-window-right)
     (switch-to-buffer "Google-chrome")

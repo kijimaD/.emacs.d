@@ -10,7 +10,7 @@
        (set-face-attribute 'default nil
                            :font "Fira Mono"
                            :weight 'regular
-                           :height 100)
+                           :height 110)
        (set-fontset-font
         nil 'japanese-jisx0208
         (font-spec :family "Hiragino Sans")))
