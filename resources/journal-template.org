@@ -1,3 +1,6 @@
 * Summary
 * Mental Score(1~10)
 * Productivity Score(1~10)
+* 失敗したこと
+* 一番感動したこと
+* 翌日の目標
