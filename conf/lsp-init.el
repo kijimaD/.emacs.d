@@ -41,6 +41,8 @@
   :hook
   (scala-mode . lsp)
   (clojure-mode . lsp)
+  (c-mode . lsp)
+  (c++-mode . lsp)
   (lsp-mode . lsp-lens-mode)
   (lsp-mode . lsp-completion-mode)
   (lsp-mode . lsp-ui-mode)

@@ -141,6 +141,7 @@
 (global-set-key (kbd "M-<left>") 'previous-buffer)
 (global-set-key (kbd "M-<right>") 'next-buffer)
 (global-set-key (kbd "C-t") 'other-window)
+(global-set-key (kbd "M-t") (lambda () (interactive) (other-window -1)))
 
 (require 'ace-jump-mode)
 (setq ace-jump-mode-gray-background nil)

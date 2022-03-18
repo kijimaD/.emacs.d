@@ -147,4 +147,9 @@
 ;; (ej-dict-install-dict)
 
 (defun kd/cancel-last-timer ()
- (cancel-timer (car (last timer-list))))
+  (cancel-timer (car (last timer-list))))
+
+;; Emacs C source directory
+(let ((src-dir "~/ProjectOrg/emacs/src"))
+  (if (file-directory-p src-dir)
+      (setq source-directory src-dir)))

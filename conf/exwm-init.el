@@ -36,9 +36,8 @@
 
     (exwm-workspace-switch-create 2)
     (start-process-shell-command "google-chrome" nil "google-chrome")
-    (start-process-shell-command "firefox" nil "firefox")
     (start-process-shell-command "spotify" nil "spotify")
-    (sleep-for 2)
+    (sleep-for 3)
 
     (exwm-workspace-switch-create 0)
     (persp-switch "1")
@@ -51,7 +50,6 @@
     (vterm-toggle)
     (vterm-toggle)
     (org-agenda nil "z")
-    (magit-status)
     (persp-switch "3")
     (split-window-right)
     (switch-to-buffer "Google-chrome")
@@ -79,12 +77,11 @@
 
     (exwm-workspace-switch-create 1)
     (persp-switch "1")
-    (org-journal-new-entry nil)
     (persp-switch "2")
     (find-file "~/roam")
     (org-agenda nil "z")
     (persp-switch "4")
-    (switch-to-buffer "Firefox")
+    (switch-to-buffer "Google-chrome")
     (persp-switch "8")
     (find-file "~/Project")
 

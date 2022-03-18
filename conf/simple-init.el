@@ -68,6 +68,7 @@
 (require 'smartparens)
 (add-hook 'prog-mode-hook 'smartparens-mode)
 (add-hook 'eshell-mode-hook 'smartparens-mode)
+(add-hook 'org-mode-hook 'smartparens-mode)
 
 ;; オートセーブ関連 ================
 
