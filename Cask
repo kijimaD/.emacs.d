@@ -29,7 +29,6 @@
 (depends-on "all-the-icons-ivy-rich")
 (depends-on "anzu")
 (depends-on "async")
-(depends-on "atomic-chrome")
 (depends-on "auto-complete")
 (depends-on "auto-highlight-symbol")
 (depends-on "avy")
