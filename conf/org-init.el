@@ -350,8 +350,8 @@
 
 ;; org-alert ================
 (require 'org-alert)
-(setq org-pomodoro-short-break-length 1)
-(setq org-pomodoro-long-break-length 1)
+(setq org-pomodoro-short-break-length 0)
+(setq org-pomodoro-long-break-length 10)
 
 (setq alert-default-style 'notifications)
 (setq org-alert-interval 300)
@@ -393,7 +393,7 @@
          (format "%s %dm - %s%s%s"
                  (kd/org-pomodoro-remain-gauge org-pomodoro-length)
                  (/ (org-pomodoro-remaining-seconds) 60)
-                 "%{F#ff9900}"
+                 "%{F#F32013}"
                  org-clock-heading
                  "%{F-}"
                  ))
@@ -427,7 +427,10 @@
 
 (defun kd/pmd-today-point-display ()
   ;; (format " [%s]" kd/pmd-today-point)
-  (format " ✿ %s" kd/pmd-today-point))
+  (let* ((all-minute (* kd/pmd-today-point 25))
+         (hour (/ all-minute 60))
+         (minute (% all-minute 60)))
+  (format " ✿ %spts => %02dh%02dm" kd/pmd-today-point hour minute)))
 
 ;; org-super-agenda
 (org-super-agenda-mode)
