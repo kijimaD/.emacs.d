@@ -76,7 +76,6 @@
 ;; 実行環境 ================
 (require 'quickrun)
 (global-set-key (kbd "<f8>") 'quickrun)
-(atomic-chrome-start-server)
 
 ;; pry
 (require 'inf-ruby)

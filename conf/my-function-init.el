@@ -1,7 +1,9 @@
 (define-prefix-command 'my-keymap)
 (global-set-key (kbd "<henkan>") my-keymap)
 (define-key my-keymap (kbd "<prior>") 'kd/mint-volumn-up)
+(define-key my-keymap (kbd "<XF86AudioNext>") 'kd/mint-volumn-up)
 (define-key my-keymap (kbd "<next>") 'kd/mint-volumn-down)
+(define-key my-keymap (kbd "<XF86AudioPrev>") 'kd/mint-volumn-down)
 (define-key my-keymap (kbd "b") 'ivy-switch-buffer)
 (define-key my-keymap (kbd "C-g") 'counsel-git-grep)
 (define-key my-keymap (kbd "g") 'magit-status)
@@ -45,6 +47,8 @@
 (fset 'my-kill-sexp
    "\200\C-w")
 (global-set-key (kbd "C-M-d") 'my-kill-sexp)
+
+(global-set-key (kbd "C-c C-k") 'kill-whole-line)
 
 ;; カレントパス取得
 (defun current-path ()
