@@ -246,17 +246,18 @@
   ;; This is needed as of Org 9.2
   (require 'org-tempo)
 
+  (add-to-list 'org-structure-template-alist '("cj" . "src clojure"))
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist '("gq" . "src graphql"))
+  (add-to-list 'org-structure-template-alist '("hs" . "src haskell"))
   (add-to-list 'org-structure-template-alist '("js" . "src javascript"))
-  (add-to-list 'org-structure-template-alist '("ts" . "src typescript"))
   (add-to-list 'org-structure-template-alist '("py" . "src python"))
   (add-to-list 'org-structure-template-alist '("rb" . "src ruby"))
-  (add-to-list 'org-structure-template-alist '("gq" . "src graphql"))
+  (add-to-list 'org-structure-template-alist '("rs" . "src rust"))
   (add-to-list 'org-structure-template-alist '("sc" . "src scala"))
+  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
   (add-to-list 'org-structure-template-alist '("sq" . "src sql"))
-  (add-to-list 'org-structure-template-alist '("hs" . "src haskell"))
-  (add-to-list 'org-structure-template-alist '("cj" . "src clojure"))
-  (add-to-list 'org-structure-template-alist '("sh" . "src shell")))
+  (add-to-list 'org-structure-template-alist '("ts" . "src typescript")))
 
 ;; sql
 (add-hook 'sql-mode-org-src-hook #'sqlind-minor-mode)
