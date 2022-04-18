@@ -133,7 +133,8 @@
     (1 "Work %{F#797D7F}Home%{F-}")
     (2 "")
     (3 "")
-    (4 "")))
+    (4 "")
+    (9 "")))
 
 (defun kd/send-polybar-hook (module-name hook-index)
   (start-process-shell-command "polybar-msg" nil (format "polybar-msg hook %s %s" module-name hook-index)))

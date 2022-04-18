@@ -142,6 +142,7 @@
 (depends-on "org-download")
 (depends-on "org-journal")
 (depends-on "org-journal-list")
+(depends-on "org-modern")
 (depends-on "org-noter")
 (depends-on "org-pomodoro")
 (depends-on "org-roam")

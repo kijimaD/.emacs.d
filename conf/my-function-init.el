@@ -11,6 +11,7 @@
 (define-key my-keymap (kbd "l") 'counsel-mark-ring)
 (define-key my-keymap (kbd "f") 'counsel-projectile-find-file)
 (define-key my-keymap (kbd "a") 'counsel-apropos)
+(define-key my-keymap (kbd "c") 'recompile)
 (define-key my-keymap (kbd "!") 'counsel-linux-app)
 (define-key my-keymap (kbd "r") 'counsel-recentf)
 (define-key my-keymap (kbd "j") 'avy-goto-word-0)

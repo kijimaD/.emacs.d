@@ -180,6 +180,10 @@
 (require 'org-superstar)
 (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
 
+;; org-modern
+(add-hook 'org-mode-hook #'org-modern-mode)
+(add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
+
 (require 'org-sticky-header)
 (setq org-sticky-header-full-path 'full)
 (setq org-sticky-header-heading-star "◉")
@@ -408,7 +412,7 @@
                  (/ (org-pomodoro-remaining-seconds) 60)))
         (:overtime
          (format "Overtime! %dm" (/ (org-pomodoro-remaining-seconds) 60))))
-    " Toggle LAN switch, and run pomodoro!"))
+    ""))
 
 (defvar kd/pmd-today-point 0)
 (add-hook 'org-pomodoro-finished-hook
@@ -431,7 +435,7 @@
   (let* ((all-minute (* kd/pmd-today-point 25))
          (hour (/ all-minute 60))
          (minute (% all-minute 60)))
-  (format " ✿ %spts => %02dh%02dm" kd/pmd-today-point hour minute)))
+  (format "  %spts/%02dh%02dm" kd/pmd-today-point hour minute)))
 
 ;; org-super-agenda
 (org-super-agenda-mode)
