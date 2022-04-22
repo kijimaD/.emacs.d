@@ -24,6 +24,15 @@
 (define-key my-keymap (kbd "<henkan> o") 'forge-list-owned-issues)
 (define-key my-keymap (kbd "<henkan> l") 'magit-log)
 
+(defun local-switch-exwm-workspace (index)
+  `(lambda ()
+     (interactive)
+     (exwm-workspace-switch-create ,index)))
+
+(mapc (lambda (i)
+        (define-key my-keymap (kbd (format "%d" i)) (local-switch-exwm-workspace i)))
+      (number-sequence 0 9))
+
 ;; 新しい行追加
 (defun my-new-line ()
   (interactive)
