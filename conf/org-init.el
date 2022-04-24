@@ -395,7 +395,7 @@
   (if (org-pomodoro-active-p)
       (cl-case org-pomodoro-state
         (:pomodoro
-         (format "%s %dm %s%s%s"
+         (format " %s %dm %s%s%s"
                  (kd/org-pomodoro-remain-gauge org-pomodoro-length)
                  (/ (org-pomodoro-remaining-seconds) 60)
                  "%{F#F32013}"
@@ -412,7 +412,7 @@
                  (/ (org-pomodoro-remaining-seconds) 60)))
         (:overtime
          (format "Overtime! %dm" (/ (org-pomodoro-remaining-seconds) 60))))
-    ""))
+    "Not working..."))
 
 (defvar kd/pmd-today-point 0)
 (add-hook 'org-pomodoro-finished-hook
@@ -435,7 +435,7 @@
   (let* ((all-minute (* kd/pmd-today-point 25))
          (hour (/ all-minute 60))
          (minute (% all-minute 60)))
-  (format " ->%spts->%02dh%02dm" kd/pmd-today-point hour minute)))
+  (format " %spts/%02dh%02dm" kd/pmd-today-point hour minute)))
 
 ;; org-super-agenda
 (org-super-agenda-mode)
@@ -525,6 +525,9 @@
                           (:name "To read"
                                  :tag "Read"
                                  :order 14)
+                          (:name "Train"
+                                 :tag "Train"
+                                 :order 18)
                           (:name "Projects"
                                  :tag "Project"
                                  :order 30)

@@ -80,28 +80,28 @@
 ;; 外観(非コーディング) ================
 ;; 現在行をハイライト
 
-;; ハイライトの表示を遅くする
-;; (require 'hl-line)
-;; (defun global-hl-line-timer-function ()
-;;   (global-hl-line-unhighlight-all)
-;;   (let ((global-hl-line-mode t))
-;;     (global-hl-line-highlight)))
-;; (setq global-hl-line-timer
-;;       (run-with-idle-timer 0.03 t 'global-hl-line-timer-function))
+;; ハイライトの表示を遅くして高速化する
+(require 'hl-line)
+(defun global-hl-line-timer-function ()
+  (global-hl-line-unhighlight-all)
+  (let ((global-hl-line-mode t))
+    (global-hl-line-highlight)))
+(setq global-hl-line-timer
+      (run-with-idle-timer 0.03 t 'global-hl-line-timer-function))
 
-;; (defface hlline-face
-;;   '((((class color)
-;;       (background dark))
-;;      (:background "Purple4"))
-;;     (((class color)
-;;       (background light))
-;;      (:background "gainsboro"))
-;;     (t
-;;      ()))
-;;   "*Face used by hl-line.")
+(defface hlline-face
+  '((((class color)
+      (background dark))
+     (:background "grey16"))
+    (((class color)
+      (background light))
+     (:background "gainsboro"))
+    (t
+     ()))
+  "*Face used by hl-line.")
 
-;; (setq hl-line-face 'hlline-face)
-;; (global-hl-line-mode)
+(setq hl-line-face 'hlline-face)
+(global-hl-line-mode)
 
 ;; (nyan-mode)
 
@@ -401,6 +401,7 @@
         ("https://techracho.bpsinc.jp/feed" Ruby Rails)
         ("http://b.hatena.ne.jp/t-wada/rss" Test)
         ("https://cprss.s3.amazonaws.com/rubyweekly.com.xml" Ruby weekly)
+        ("https://news.ycombinator.com/rss" Ruby weekly)
         ("http://pragmaticemacs.com/feed/" Pragmatic Emacs)))
 
 ;; Google検索 ================
