@@ -10,6 +10,7 @@
 (depends-on "modus-themes")
 (depends-on "scala-mode")
 
+(depends-on "lsp-ui")
 (depends-on "corfu")
 (depends-on "vertico")
 (depends-on "marginalia")

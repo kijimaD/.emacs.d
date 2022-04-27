@@ -564,6 +564,7 @@
 
 ;; undo ================
 (global-undo-tree-mode)
+(setq undo-tree-auto-save-history nil)
 
 ;; eradio ================
 (setq eradio-channels '(("def con - soma fm" . "https://somafm.com/defcon256.pls")
