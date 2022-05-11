@@ -29,6 +29,9 @@
 (setq esh-autosuggest-delay 0.5)
 
 ;; vterm ================
+;; (when window-system
+;;   (require 'vterm))
+
 (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
 (setq vterm-toggle-scope 'project)
 (setq vterm-toggle-project-root t)

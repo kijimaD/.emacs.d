@@ -404,6 +404,8 @@
         ("https://news.ycombinator.com/rss" Ruby weekly)
         ("http://pragmaticemacs.com/feed/" Pragmatic Emacs)))
 
+(setq browse-url-browser-function 'eww-browse-url)
+
 ;; Google検索 ================
 (require 'google-this)
 (google-this-mode 1)

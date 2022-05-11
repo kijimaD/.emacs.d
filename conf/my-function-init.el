@@ -161,6 +161,7 @@
 ;; (ej-dict-install-dict)
 
 (defun kd/cancel-last-timer ()
+  (interactive)
   (cancel-timer (car (last timer-list))))
 
 ;; Emacs C source directory

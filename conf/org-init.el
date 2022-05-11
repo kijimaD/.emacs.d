@@ -367,6 +367,9 @@
 (require 'org-pomodoro)
 (define-key global-map [insert] 'org-pomodoro)
 
+;; deactivate "reset pomodoro count?" prompt
+(setq org-pomodoro-expiry-time nil)
+
 (setq org-pomodoro-finished-sound "~/.emacs.d/resources/pmd-finished.wav")
 ;; (org-pomodoro-finished)
 (setq org-pomodoro-short-break-sound "~/.emacs.d/resources/pmd-short-break.wav")
