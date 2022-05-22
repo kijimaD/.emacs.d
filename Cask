@@ -18,6 +18,7 @@
 (depends-on "cape")
 (depends-on "kind-icon")
 (depends-on "affe")
+(depends-on "dart-mode")
 
 ;; Install Packages
 (depends-on "ace-jump-mode")

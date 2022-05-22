@@ -8,9 +8,9 @@
     (pcase system-type
       ((or 'gnu/linux 'windows-nt 'cygwin)
        (set-face-attribute 'default nil
-                           :font "Hack"
+                           :font "Fira Code"
                            :weight 'regular
-                           :height 110)
+                           :height 100)
        (set-fontset-font
         nil 'japanese-jisx0208
         (font-spec :family "Hiragino Sans")))

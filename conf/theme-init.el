@@ -2,7 +2,7 @@
 (doom-themes-org-config)
 
 (setq custom-safe-themes t)
-(setq-default custom-enabled-themes '(doom-tokyo-night))
+(setq-default custom-enabled-themes '(modus-operandi))
 ;; dark ------
 ;; doom-vibrant
 ;; spacemacs-dark
