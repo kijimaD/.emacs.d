@@ -181,8 +181,8 @@
 (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
 
 ;; org-modern
-(add-hook 'org-mode-hook #'org-modern-mode)
-(add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
+;; (add-hook 'org-mode-hook #'org-modern-mode)
+;; (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
 
 (require 'org-sticky-header)
 (setq org-sticky-header-full-path 'full)
@@ -367,8 +367,7 @@
 (require 'org-pomodoro)
 (define-key global-map [insert] 'org-pomodoro)
 
-;; deactivate "reset pomodoro count?" prompt
-(setq org-pomodoro-expiry-time nil)
+(setq org-pomodoro-expiry-time 120)
 
 (setq org-pomodoro-finished-sound "~/.emacs.d/resources/pmd-finished.wav")
 ;; (org-pomodoro-finished)
