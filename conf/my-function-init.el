@@ -168,3 +168,24 @@
 (let ((src-dir "~/ProjectOrg/emacs/src"))
   (if (file-directory-p src-dir)
       (setq source-directory src-dir)))
+
+;; change polybar color by network ================
+(defun kd/online-p ()
+  (let ((command (string-trim (shell-command-to-string "ip -o link show enp0s31f6 | awk '{print $9}'"))))
+    (cond ((string= command "UP") t)
+          ((string= command "DOWN") nil))))
+
+(defvar kd/last-online t)
+
+(defun kd/change-network-p ()
+  (let ((result))
+   (if (eq kd/last-online (kd/online-p))
+       (setq result nil)
+     (progn
+       (setq result t)
+       (setq kd/last-online (kd/online-p))))
+   result))
+
+(defun kd/bar-color ()
+  (if (kd/online-p) "#E50914"
+    "#FFFFFF"))
