@@ -26,10 +26,9 @@
 ;; 画像表示
 (setq org-startup-with-inline-images t)
 
-(setq org-todo-keywords '((type "TODO" "WAIT" "WIP" "|" "DONE" "CLOSE")))
+(setq org-todo-keywords '((type "TODO" "WIP" "|" "DONE" "CLOSE")))
 (setq org-todo-keyword-faces
       '(("TODO" . (:foreground "orange" :weight bold))
-        ("WAIT" . (:foreground "HotPink2" :weight bold))
         ("WIP" . (:foreground "DeepSkyBlue" :weight bold))
         ("DONE" . (:foreground "green" :weight bold))
         ("CLOSE" . (:foreground "DarkOrchid" :weight bold))))
@@ -397,10 +396,10 @@
   (if (org-pomodoro-active-p)
       (cl-case org-pomodoro-state
         (:pomodoro
-         (format " %s %dm %s%s%s"
+         (format "%s %dm %s%s%s"
                  (kd/org-pomodoro-remain-gauge org-pomodoro-length)
                  (/ (org-pomodoro-remaining-seconds) 60)
-                 "%{F#F32013}"
+                 "%{F#000000}"
                  org-clock-heading
                  "%{F-}"
                  ))
@@ -414,7 +413,7 @@
                  (/ (org-pomodoro-remaining-seconds) 60)))
         (:overtime
          (format "Overtime! %dm" (/ (org-pomodoro-remaining-seconds) 60))))
-    "Not working..."))
+    "Not working..."))
 
 (defvar kd/pmd-today-point 0)
 (add-hook 'org-pomodoro-finished-hook
@@ -468,7 +467,6 @@
                                                ;; Boolean NOT also has implicit OR between selectors
                                                :not (:regexp "moon" :tag "planet")))))
          ;; Groups supply their own section names when none are given
-         (:todo "WAITING" :order 8)  ; Set order of this section
          (:todo ("SOMEDAY" "TO-READ" "TO-WRITE" "CHECK" "TO-WATCH" "WATCHING")
                 ;; Show this group at the end of the agenda (since it has the
                 ;; highest number). If you specified this group last, items
