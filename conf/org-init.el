@@ -250,6 +250,7 @@
   (require 'org-tempo)
 
   (add-to-list 'org-structure-template-alist '("cj" . "src clojure"))
+  (add-to-list 'org-structure-template-alist '("cl" . "src C"))
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist '("gq" . "src graphql"))
   (add-to-list 'org-structure-template-alist '("hs" . "src haskell"))
@@ -512,6 +513,9 @@
                                  :order 1)
                           (:name "Due Today"
                                  :deadline today
+                                 :order 2)
+                          (:name "Due Today"
+                                 :tag "Today"
                                  :order 2)
                           (:name "Due Month"
                                  :deadline future

@@ -224,9 +224,9 @@
 (global-set-key (kbd "C-SPC") 'toggle-input-method)
 
 (add-hook 'input-method-activate-hook
-          (lambda() (set-cursor-color "Green")))
+          (lambda() (set-cursor-color "Magenta")))
 (add-hook 'input-method-inactivate-hook
-          (lambda() (set-cursor-color "magenta")))
+          (lambda() (set-cursor-color "black")))
 
 (require 'mozc-popup)
 (setq mozc-candidate-style 'echo-area)
@@ -404,7 +404,10 @@
         ("https://news.ycombinator.com/rss" Ruby weekly)
         ("http://pragmaticemacs.com/feed/" Pragmatic Emacs)))
 
+;; default-browser
 (setq browse-url-browser-function 'eww-browse-url)
+
+(run-at-time "23:58pm" (* 24 60 60) (lambda () (elfeed-search-update--force)))
 
 ;; Google検索 ================
 (require 'google-this)
@@ -561,7 +564,7 @@
 (global-set-key [f7] 'writeroom-mode)
 
 ;; git-link ================
-(setq git-link-default-branch nil)
+(setq git-link-default-branch "main")
 (setq git-link-use-commit t)
 
 ;; undo ================
