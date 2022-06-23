@@ -72,6 +72,7 @@
 (depends-on "epc")
 (depends-on "epl")
 (depends-on "eradio")
+(depends-on "ert")
 (depends-on "esh-autosuggest")
 (depends-on "eshell-git-prompt")
 (depends-on "eshell-toggle")

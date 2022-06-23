@@ -1,8 +1,8 @@
 #!/bin/sh -e
 # From https://github.com/purcell/emacs.d
 
-git clone https://github.com/cask/cask ~/.cask
-PATH="$HOME/.cask/bin:$PATH"
+# git clone https://github.com/cask/cask ~/.cask
+# PATH="$HOME/.cask/bin:$PATH"
 
 cask install
 

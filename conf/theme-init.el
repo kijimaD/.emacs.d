@@ -81,18 +81,20 @@
         modus-themes-scale-4 1.27
         modus-themes-scale-title 1.33)
 
-  (set-face-foreground 'vertical-border "white")
+  (set-face-foreground 'vertical-border "gray")
 
   (set-face-attribute 'mode-line nil
-                      :background "white"
-                      :overline nil
+                      :background nil
+                      :overline "black"
                       :underline nil
                       :box nil)
 
   (set-face-attribute 'mode-line-inactive nil
                       :background "white"
-                      :overline nil
+                      :overline "gray"
                       :underline nil
                       :box nil)
 
   (window-divider-mode 0))
+
+(kd/set-modus-face)
