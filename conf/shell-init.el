@@ -29,6 +29,9 @@
 (setq esh-autosuggest-delay 0.5)
 
 ;; vterm ================
+(when window-system
+  (require 'vterm))
+
 (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
 (setq vterm-toggle-scope 'project)
 (setq vterm-toggle-project-root t)
@@ -40,11 +43,13 @@
 
 (setq vterm-toggle-fullscreen-p nil)
 (add-to-list 'display-buffer-alist
-             '((lambda(bufname _) (with-current-buffer bufname (equal major-mode 'vterm-mode)))
-               (display-buffer-reuse-window display-buffer-at-bottom)
-               ;;(display-buffer-reuse-window display-buffer-in-direction)
-               ;;display-buffer-in-direction/direction/dedicated is added in emacs27
-               ;;(direction . bottom)
-               ;;(dedicated . t) ;dedicated is supported in emacs27
-               (reusable-frames . visible)
-               (window-height . 0.3)))
+             '((lambda(bufname _) (with-current-buffer bufname
+                                    (or (equal major-mode 'vterm-mode)
+                                        (string-prefix-p vterm-buffer-name bufname))))
+                (display-buffer-reuse-window display-buffer-at-bottom)
+                ;;(display-buffer-reuse-window display-buffer-in-direction)
+                ;;display-buffer-in-direction/direction/dedicated is added in emacs27
+                ;;(direction . bottom)
+                ;;(dedicated . t) ;dedicated is supported in emacs27
+                (reusable-frames . visible)
+                (window-height . 0.3)))

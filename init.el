@@ -2,9 +2,10 @@
 (setq gc-cons-threshold (* 100 1024 1024))
 (setq read-process-output-max (* 1024 1024))
 
-(when (or (require 'cask "~/.cask/cask.el" t)
-          (require 'cask nil t))
-  (cask-initialize))
+(when (or (require 'cask "~/.cask/cask.el")
+          (require 'cask nil))
+  (cask--initialize))
+
 (ignore-errors (guix-emacs-autoload-packages))
 
 ;; straight.el
@@ -23,6 +24,7 @@
   (load bootstrap-file nil 'nomessage))
 
 (add-to-list 'load-path (expand-file-name "conf" user-emacs-directory))
+(setq load-path (cons "conf/" load-path))
 (ignore-errors (load "local-init-example"))
 (ignore-errors (load "local-init"))
 (load "org-init")

@@ -26,10 +26,9 @@
 ;; 画像表示
 (setq org-startup-with-inline-images t)
 
-(setq org-todo-keywords '((type "TODO" "WAIT" "WIP" "|" "DONE" "CLOSE")))
+(setq org-todo-keywords '((type "TODO" "WIP" "|" "DONE" "CLOSE")))
 (setq org-todo-keyword-faces
       '(("TODO" . (:foreground "orange" :weight bold))
-        ("WAIT" . (:foreground "HotPink2" :weight bold))
         ("WIP" . (:foreground "DeepSkyBlue" :weight bold))
         ("DONE" . (:foreground "green" :weight bold))
         ("CLOSE" . (:foreground "DarkOrchid" :weight bold))))
@@ -180,6 +179,10 @@
 (require 'org-superstar)
 (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
 
+;; org-modern
+;; (add-hook 'org-mode-hook #'org-modern-mode)
+;; (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
+
 (require 'org-sticky-header)
 (setq org-sticky-header-full-path 'full)
 (setq org-sticky-header-heading-star "◉")
@@ -247,6 +250,7 @@
   (require 'org-tempo)
 
   (add-to-list 'org-structure-template-alist '("cj" . "src clojure"))
+  (add-to-list 'org-structure-template-alist '("cl" . "src C"))
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist '("gq" . "src graphql"))
   (add-to-list 'org-structure-template-alist '("hs" . "src haskell"))
@@ -363,6 +367,8 @@
 (require 'org-pomodoro)
 (define-key global-map [insert] 'org-pomodoro)
 
+(setq org-pomodoro-expiry-time 120)
+
 (setq org-pomodoro-finished-sound "~/.emacs.d/resources/pmd-finished.wav")
 ;; (org-pomodoro-finished)
 (setq org-pomodoro-short-break-sound "~/.emacs.d/resources/pmd-short-break.wav")
@@ -391,10 +397,10 @@
   (if (org-pomodoro-active-p)
       (cl-case org-pomodoro-state
         (:pomodoro
-         (format "%s %dm - %s%s%s"
+         (format "%s %dm %s%s%s"
                  (kd/org-pomodoro-remain-gauge org-pomodoro-length)
                  (/ (org-pomodoro-remaining-seconds) 60)
-                 "%{F#F32013}"
+                 "%{F#000000}"
                  org-clock-heading
                  "%{F-}"
                  ))
@@ -408,7 +414,7 @@
                  (/ (org-pomodoro-remaining-seconds) 60)))
         (:overtime
          (format "Overtime! %dm" (/ (org-pomodoro-remaining-seconds) 60))))
-    " Toggle LAN switch, and run pomodoro!"))
+    "Not working..."))
 
 (defvar kd/pmd-today-point 0)
 (add-hook 'org-pomodoro-finished-hook
@@ -431,7 +437,7 @@
   (let* ((all-minute (* kd/pmd-today-point 25))
          (hour (/ all-minute 60))
          (minute (% all-minute 60)))
-  (format " ✿ %spts => %02dh%02dm" kd/pmd-today-point hour minute)))
+  (format " %spts/%02dh%02dm" kd/pmd-today-point hour minute)))
 
 ;; org-super-agenda
 (org-super-agenda-mode)
@@ -462,7 +468,6 @@
                                                ;; Boolean NOT also has implicit OR between selectors
                                                :not (:regexp "moon" :tag "planet")))))
          ;; Groups supply their own section names when none are given
-         (:todo "WAITING" :order 8)  ; Set order of this section
          (:todo ("SOMEDAY" "TO-READ" "TO-WRITE" "CHECK" "TO-WATCH" "WATCHING")
                 ;; Show this group at the end of the agenda (since it has the
                 ;; highest number). If you specified this group last, items
@@ -509,6 +514,9 @@
                           (:name "Due Today"
                                  :deadline today
                                  :order 2)
+                          (:name "Due Today"
+                                 :tag "Today"
+                                 :order 2)
                           (:name "Due Month"
                                  :deadline future
                                  :order 3)
@@ -521,6 +529,9 @@
                           (:name "To read"
                                  :tag "Read"
                                  :order 14)
+                          (:name "Train"
+                                 :tag "Train"
+                                 :order 18)
                           (:name "Projects"
                                  :tag "Project"
                                  :order 30)

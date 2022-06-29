@@ -170,5 +170,8 @@
  mouse-wheel-scroll-amount '(1 ((shift) . 2) ((control)))
  ;; 速度を無視する
  mouse-wheel-progressive-speed nil)
-
 (setq scroll-preserve-screen-position 'always)
+
+;; turn off blink cursor
+(if (fboundp 'blink-cursor-mode)
+    (blink-cursor-mode -1))

@@ -1,6 +1,7 @@
 *.emacs.desktop.lock
 .cache/
 .cask/
+.caskvar/
 .python-environments/
 auto-save-list/
 ej-dict-data/

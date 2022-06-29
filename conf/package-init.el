@@ -80,28 +80,28 @@
 ;; 外観(非コーディング) ================
 ;; 現在行をハイライト
 
-;; ハイライトの表示を遅くする
-;; (require 'hl-line)
-;; (defun global-hl-line-timer-function ()
-;;   (global-hl-line-unhighlight-all)
-;;   (let ((global-hl-line-mode t))
-;;     (global-hl-line-highlight)))
-;; (setq global-hl-line-timer
-;;       (run-with-idle-timer 0.03 t 'global-hl-line-timer-function))
+;; ハイライトの表示を遅くして高速化する
+(require 'hl-line)
+(defun global-hl-line-timer-function ()
+  (global-hl-line-unhighlight-all)
+  (let ((global-hl-line-mode t))
+    (global-hl-line-highlight)))
+(setq global-hl-line-timer
+      (run-with-idle-timer 0.03 t 'global-hl-line-timer-function))
 
-;; (defface hlline-face
-;;   '((((class color)
-;;       (background dark))
-;;      (:background "Purple4"))
-;;     (((class color)
-;;       (background light))
-;;      (:background "gainsboro"))
-;;     (t
-;;      ()))
-;;   "*Face used by hl-line.")
+(defface hlline-face
+  '((((class color)
+      (background dark))
+     (:background "grey16"))
+    (((class color)
+      (background light))
+     (:background "gainsboro"))
+    (t
+     ()))
+  "*Face used by hl-line.")
 
-;; (setq hl-line-face 'hlline-face)
-;; (global-hl-line-mode)
+(setq hl-line-face 'hlline-face)
+(global-hl-line-mode)
 
 ;; (nyan-mode)
 
@@ -224,9 +224,9 @@
 (global-set-key (kbd "C-SPC") 'toggle-input-method)
 
 (add-hook 'input-method-activate-hook
-          (lambda() (set-cursor-color "Green")))
+          (lambda() (set-cursor-color "Magenta")))
 (add-hook 'input-method-inactivate-hook
-          (lambda() (set-cursor-color "magenta")))
+          (lambda() (set-cursor-color "black")))
 
 (require 'mozc-popup)
 (setq mozc-candidate-style 'echo-area)
@@ -401,7 +401,13 @@
         ("https://techracho.bpsinc.jp/feed" Ruby Rails)
         ("http://b.hatena.ne.jp/t-wada/rss" Test)
         ("https://cprss.s3.amazonaws.com/rubyweekly.com.xml" Ruby weekly)
+        ("https://news.ycombinator.com/rss" Ruby weekly)
         ("http://pragmaticemacs.com/feed/" Pragmatic Emacs)))
+
+;; default-browser
+(setq browse-url-browser-function 'eww-browse-url)
+
+(run-at-time "23:58pm" (* 24 60 60) (lambda () (elfeed-search-update--force)))
 
 ;; Google検索 ================
 (require 'google-this)
@@ -558,11 +564,12 @@
 (global-set-key [f7] 'writeroom-mode)
 
 ;; git-link ================
-(setq git-link-default-branch nil)
+(setq git-link-default-branch "main")
 (setq git-link-use-commit t)
 
 ;; undo ================
 (global-undo-tree-mode)
+(setq undo-tree-auto-save-history nil)
 
 ;; eradio ================
 (setq eradio-channels '(("def con - soma fm" . "https://somafm.com/defcon256.pls")

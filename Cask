@@ -10,6 +10,7 @@
 (depends-on "modus-themes")
 (depends-on "scala-mode")
 
+(depends-on "lsp-ui")
 (depends-on "corfu")
 (depends-on "vertico")
 (depends-on "marginalia")
@@ -17,6 +18,7 @@
 (depends-on "cape")
 (depends-on "kind-icon")
 (depends-on "affe")
+(depends-on "dart-mode")
 
 ;; Install Packages
 (depends-on "ace-jump-mode")
@@ -70,6 +72,7 @@
 (depends-on "epc")
 (depends-on "epl")
 (depends-on "eradio")
+(depends-on "ert")
 (depends-on "esh-autosuggest")
 (depends-on "eshell-git-prompt")
 (depends-on "eshell-toggle")
@@ -142,6 +145,7 @@
 (depends-on "org-download")
 (depends-on "org-journal")
 (depends-on "org-journal-list")
+(depends-on "org-modern")
 (depends-on "org-noter")
 (depends-on "org-pomodoro")
 (depends-on "org-roam")

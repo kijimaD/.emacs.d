@@ -11,6 +11,7 @@
 (define-key my-keymap (kbd "l") 'counsel-mark-ring)
 (define-key my-keymap (kbd "f") 'counsel-projectile-find-file)
 (define-key my-keymap (kbd "a") 'counsel-apropos)
+(define-key my-keymap (kbd "c") 'recompile)
 (define-key my-keymap (kbd "!") 'counsel-linux-app)
 (define-key my-keymap (kbd "r") 'counsel-recentf)
 (define-key my-keymap (kbd "j") 'avy-goto-word-0)
@@ -22,6 +23,15 @@
 (define-key my-keymap (kbd "<henkan> p") 'forge-list-assigned-pullreqs)
 (define-key my-keymap (kbd "<henkan> o") 'forge-list-owned-issues)
 (define-key my-keymap (kbd "<henkan> l") 'magit-log)
+
+(defun local-switch-exwm-workspace (index)
+  `(lambda ()
+     (interactive)
+     (exwm-workspace-switch-create ,index)))
+
+(mapc (lambda (i)
+        (define-key my-keymap (kbd (format "%d" i)) (local-switch-exwm-workspace i)))
+      (number-sequence 0 9))
 
 ;; 新しい行追加
 (defun my-new-line ()
@@ -151,9 +161,31 @@
 ;; (ej-dict-install-dict)
 
 (defun kd/cancel-last-timer ()
+  (interactive)
   (cancel-timer (car (last timer-list))))
 
 ;; Emacs C source directory
 (let ((src-dir "~/ProjectOrg/emacs/src"))
   (if (file-directory-p src-dir)
       (setq source-directory src-dir)))
+
+;; change polybar color by network ================
+(defun kd/online-p ()
+  (let ((command (string-trim (shell-command-to-string "ip -o link show enp0s31f6 | awk '{print $9}'"))))
+    (cond ((string= command "UP") t)
+          ((string= command "DOWN") nil))))
+
+(defvar kd/last-online t)
+
+(defun kd/change-network-p ()
+  (let ((result))
+   (if (eq kd/last-online (kd/online-p))
+       (setq result nil)
+     (progn
+       (setq result t)
+       (setq kd/last-online (kd/online-p))))
+   result))
+
+(defun kd/bar-color ()
+  (if (kd/online-p) "#E50914"
+    "#FFFFFF"))
