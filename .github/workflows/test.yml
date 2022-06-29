@@ -33,10 +33,10 @@ jobs:
         path: ~/.cask
         key: cache-cask-executable
 
-    - uses: cask/setup-cask@master
-      if: steps.cache-cask-executable.outputs.cache-hit != 'true'
-      with:
-        version: snapshot
+    # - uses: cask/setup-cask@master
+    #   if: steps.cache-cask-executable.outputs.cache-hit != 'true'
+    #   with:
+    #     version: snapshot
 
     - uses: actions/checkout@v2
     - name: Check startup
