@@ -37,3 +37,4 @@ var/pcache/
 /eiji_utf8.txt
 /.org-id-locations
 /.lsp-session-v1
+/.cask.org-id-locations
