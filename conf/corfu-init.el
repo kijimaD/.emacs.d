@@ -3,7 +3,8 @@
 ;; https://tam5917.hatenablog.com/entry/2022/02/05/141115
 
 (require 'corfu)
-;; (corfu-global-mode)
+(global-corfu-mode)
+
 (setq corfu-cycle t)
 (setq corfu-auto t)
 (setq corfu-quit-at-boundary nil) ;; nil: スペースを入れてもquitしない

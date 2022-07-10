@@ -137,6 +137,7 @@
 (depends-on "npm-mode")
 (depends-on "nyan-mode")
 (depends-on "ob-elixir")
+(depends-on "ob-git-permalink")
 (depends-on "ob-graphql")
 (depends-on "open-junk-file")
 (depends-on "org-alert")
