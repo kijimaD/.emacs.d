@@ -250,8 +250,8 @@
                 ("\\.md$" . "markdown-template.md")
                 ) auto-insert-alist))
 
-(auto-insert-mode 1)
-(yas-global-mode 1)
+(auto-insert-mode t)
+(yas-global-mode t)
 (setq yas-prompt-functions '(yas-ido-prompt))
 
 (define-key yas-minor-mode-map (kbd "C-x y i") 'yas-insert-snippet)

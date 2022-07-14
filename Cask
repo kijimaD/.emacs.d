@@ -109,6 +109,7 @@
 (depends-on "ht")
 (depends-on "htmlize")
 (depends-on "hydra")
+(depends-on "imenu-list")
 (depends-on "inf-ruby")
 (depends-on "ivy")
 (depends-on "ivy-hydra")
