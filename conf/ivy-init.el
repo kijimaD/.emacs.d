@@ -42,13 +42,12 @@
 ;;         (woman . "^")))
 
 ;; counsel ================
-(global-set-key (kbd "C-x C-b") 'ivy-switch-buffer)
-(global-set-key (kbd "C-x C-r") 'counsel-recentf)
+(global-set-key (kbd "C-x C-b") 'counsel-switch-buffer)
+(global-set-key (kbd "C-x C-r") 'counsel-mark-ring)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key (kbd "C-x C-l") 'counsel-mark-ring)
+(global-set-key (kbd "C-x C-l") 'counsel-bookmark)
 (global-set-key (kbd "C-x C-u") 'ivy-resume)
 (global-set-key (kbd "C-x C-g") 'counsel-git-grep)
-;; (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "M-y") 'counsel-yank-pop)
 (global-set-key (kbd "M-i") 'swiper-thing-at-point)
 (global-set-key (kbd "C-c f") 'counsel-ag)
