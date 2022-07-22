@@ -250,6 +250,7 @@
                 ("\\.md$" . "markdown-template.md")
                 ) auto-insert-alist))
 
+(require 'yasnippet)
 (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
 (auto-insert-mode t)
 (yas-global-mode t)

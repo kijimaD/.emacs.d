@@ -24,6 +24,7 @@
   (load bootstrap-file nil 'nomessage))
 
 (add-to-list 'load-path "~/.emacs.d/conf" user-emacs-directory)
+(setq load-path (cons "conf/" load-path))
 (ignore-errors (load "local-init-example"))
 (ignore-errors (load "local-init"))
 (load "org-init")
