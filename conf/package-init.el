@@ -226,7 +226,7 @@
 (add-hook 'input-method-activate-hook
           (lambda() (set-cursor-color "Magenta")))
 (add-hook 'input-method-inactivate-hook
-          (lambda() (set-cursor-color "black")))
+          (lambda() (set-cursor-color "grey")))
 
 (require 'mozc-popup)
 (setq mozc-candidate-style 'echo-area)
@@ -250,6 +250,7 @@
                 ("\\.md$" . "markdown-template.md")
                 ) auto-insert-alist))
 
+(add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
 (auto-insert-mode t)
 (yas-global-mode t)
 (setq yas-prompt-functions '(yas-ido-prompt))

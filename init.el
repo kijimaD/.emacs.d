@@ -23,8 +23,7 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-(add-to-list 'load-path (expand-file-name "conf" user-emacs-directory))
-(setq load-path (cons "conf/" load-path))
+(add-to-list 'load-path "~/.emacs.d/conf" user-emacs-directory)
 (ignore-errors (load "local-init-example"))
 (ignore-errors (load "local-init"))
 (load "org-init")

@@ -401,7 +401,7 @@
          (format "%s %dm %s%s%s"
                  (kd/org-pomodoro-remain-gauge org-pomodoro-length)
                  (/ (org-pomodoro-remaining-seconds) 60)
-                 "%{F#000000}"
+                 "%{F#FFFFFF}"
                  org-clock-heading
                  "%{F-}"
                  ))
