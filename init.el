@@ -44,6 +44,7 @@
 (load "theme-init")
 (load "exwm-init")
 (load "workspace-init")
+(load "hydra-init")
 (load "my-function-init")
 
 ;; 環境変数を読み込む

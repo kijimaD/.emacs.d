@@ -80,7 +80,7 @@
 (depends-on "free-keys")
 (depends-on "fringe-helper")
 (depends-on "gh")
-(depends-on "diff-hl-mode"
+(depends-on "diff-hl-mode")
 (depends-on "git-link")
 (depends-on "git-timemachine")
 (depends-on "github-clone")
