@@ -1,11 +1,7 @@
-(use-package hydra-posframe
-  :straight (:host github :repo "Ladicle/hydra-posframe")
-  :hook (after-init . hydra-posframe-enable))
-
 (with-eval-after-load 'pretty-hydra
   ;; projectile-rails ================
   ;; https://mugijiru.github.io/.emacs.d/programming/rails/
-  (pretty-hydra-define pretty-hydra-projectile-rails-find (:separator "-" :color blue :foreign-keys warn :title "Projectile Rails")
+  (pretty-hydra-define pretty-hydra-projectile-rails-find (:color blue :foreign-keys warn :title "Projectile Rails")
     ("Current"
      (("M" projectile-rails-find-current-model      "Current model")
       ("V" projectile-rails-find-current-view       "Current view")
@@ -40,12 +36,12 @@
       ("G" projectile-rails-goto-gemfile  "Gemfile")
       ("D" projectile-rails-goto-schema   "schema.rb"))))
 
-  (pretty-hydra-define+ pretty-hydra-henkan (:foreign-keys warn :title "Convenient Tools" :quit-key "g")
+  (pretty-hydra-define pretty-hydra-henkan (:color blue :foreign-keys warn :title "Convenient Tools")
     ("Media"
      (("<prior>" kd/mint-volume-up "up")
       ("<next>" kd/mint-volume-down "down"))
 
-     "Move"
+     "Counsel"
      (("a" counsel-apropos "apropos")
       ("f" counsel-ag "ag")
       ("h" counsel-find-library "lib")
