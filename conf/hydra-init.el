@@ -46,19 +46,19 @@
       ("f" counsel-ag "ag")
       ("h" counsel-find-library "lib")
       ("i" counsel-imenu "imenu")
-      ("r" counsel-mark-ring "ring")
-      ("b" counsel-bookmark "bookmark"))
+      ("r" counsel-recentf "recentf")
+      ("b" counsel-bookmark "bookmark")
+      ("p" persp-ivy-switch-buffer "persp-buffer"))
 
      "Execute"
      (("e" counsel-linux-app "run")
       ("c" recompile "recompile")
-      ("s" counsel-search "google")
-      )
+      ("s" counsel-search "google"))
 
      "Edit"
      (("q" query-replace "replace")
-      ("y" ivy-yasnippet "yas")
-     )))
+      ("y" ivy-yasnippet "yas"))
+     ))
 
   (define-key projectile-rails-mode-map (kbd "C-c r") 'pretty-hydra-projectile-rails-find/body)
   (define-key global-map (kbd "<henkan>") 'pretty-hydra-henkan/body))
