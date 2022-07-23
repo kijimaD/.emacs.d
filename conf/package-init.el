@@ -189,7 +189,8 @@
   (require 'forge))
 
 ;; Gitの差分を表示する
-(global-diff-hl-mode)
+(global-git-gutter+-mode 1)
+(global-set-key (kbd "C-c C-v") 'git-gutter+-show-hunk-inline-at-point)
 
 ;; http://www.modernemacs.com/post/pretty-magit/
 (defun kd/magit-commit-prompt ()
