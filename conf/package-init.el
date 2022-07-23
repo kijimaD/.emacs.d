@@ -405,7 +405,8 @@
         ("http://pragmaticemacs.com/feed/" Pragmatic Emacs)))
 
 ;; default-browser
-(setq browse-url-browser-function 'eww-browse-url)
+;; (setq browse-url-browser-function 'eww-browse-url)
+(setq browse-url-browser-function 'browse-url-firefox)
 
 (run-at-time "23:58pm" (* 24 60 60) (lambda () (elfeed-search-update--force)))
 
