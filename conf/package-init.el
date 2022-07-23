@@ -188,10 +188,8 @@
 (with-eval-after-load 'magit
   (require 'forge))
 
-;; Gitの差分情報を表示する
-(global-git-gutter+-mode 1)
-;; modify された箇所で実行すると、diff を inline で見ることができる
-(global-set-key (kbd "C-c C-v") 'git-gutter+-show-hunk-inline-at-point)
+;; Gitの差分を表示する
+(global-diff-hl-mode)
 
 ;; http://www.modernemacs.com/post/pretty-magit/
 (defun kd/magit-commit-prompt ()

@@ -62,7 +62,6 @@
         ctags-auto-update-mode
         eldoc-mode
         flyspell-mode
-        git-gutter+-mode
         global-whitespace-mode
         google-this-mode
         highlight-indent-guides-mode
