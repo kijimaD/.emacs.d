@@ -41,24 +41,42 @@
      (("<prior>" kd/mint-volume-up "up")
       ("<next>" kd/mint-volume-down "down"))
 
-     "Counsel"
+     "Find"
      (("a" counsel-apropos "apropos")
       ("f" counsel-ag "ag")
       ("h" counsel-find-library "lib")
       ("i" counsel-imenu "imenu")
       ("r" counsel-recentf "recentf")
       ("b" counsel-bookmark "bookmark")
-      ("p" persp-ivy-switch-buffer "persp-buffer"))
+      ("p" persp-ivy-switch-buffer "persp-buffer")
+      ("w" swiper-all-thing-at-point "all"))
 
      "Execute"
      (("e" counsel-linux-app "run")
       ("c" recompile "recompile")
       ("s" counsel-search "google"))
 
+     "Git"
+     (("g" magit-blame)
+      (">" git-gutter+-next-hunk)
+      ("<" git-gutter+-previous-hunk)
+      ("@" git-timemachine)
+      ("l" git-link))
+
      "Edit"
      (("q" query-replace "replace")
       ("y" ivy-yasnippet "yas"))
-     ))
+
+     "Window"
+     (("1" (lambda nil (interactive) (persp-switch (int-to-string 1))) "Journal")
+      ("2" (lambda nil (interactive) (persp-switch (int-to-string 2))) "Roam")
+      ("3" (lambda nil (interactive) (persp-switch (int-to-string 3))) "Browser(Half)")
+      ("4" (lambda nil (interactive) (persp-switch (int-to-string 4))) "Browser(Full)")
+      ("5" (lambda nil (interactive) (persp-switch (int-to-string 5))) "Dotfiles")
+      ("6" (lambda nil (interactive) (persp-switch (int-to-string 6))) "Emacs")
+      ("7" (lambda nil (interactive) (persp-switch (int-to-string 7))) "Sub")
+      ("8" (lambda nil (interactive) (persp-switch (int-to-string 8))) "Main")
+      ("9" (lambda nil (interactive) (persp-switch (int-to-string 9))) "Blueberry"))))
 
   (define-key projectile-rails-mode-map (kbd "C-c r") 'pretty-hydra-projectile-rails-find/body)
   (define-key global-map (kbd "<henkan>") 'pretty-hydra-henkan/body))
