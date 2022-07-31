@@ -202,6 +202,7 @@
 (depends-on "swiper")
 (depends-on "tab-jump-out")
 (depends-on "terraform-mode")
+(depends-on "toml-mode")
 (depends-on "transient")
 (depends-on "typescript-mode")
 (depends-on "typing")

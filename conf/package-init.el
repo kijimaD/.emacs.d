@@ -634,3 +634,9 @@
 
 ;; go ================
 (require 'go-mode)
+
+;; git補完 ================
+(use-package git-complete
+  :straight (:host github :repo "zk-phi/git-complete"))
+
+(global-set-key (kbd "C-o") 'git-complete)
