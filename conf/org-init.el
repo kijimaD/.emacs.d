@@ -401,7 +401,7 @@
          (format "%s %dm %s%s%s"
                  (kd/org-pomodoro-remain-gauge org-pomodoro-length)
                  (/ (org-pomodoro-remaining-seconds) 60)
-                 "%{F#000000}"
+                 "%{F#FFFFFF}"
                  org-clock-heading
                  "%{F-}"
                  ))
@@ -425,7 +425,6 @@
   (shell-command (format "echo '%s' >> ~/roam/pmd.csv" str)))
 
 ;; reset point
-;; FIXME: 起動時に即実行されてる
 (run-at-time "23:59pm" (* 24 60 60) (lambda ()
                                       (kd/write-pmd (concat (format-time-string "%Y-%m-%d")
                                                             ", "
@@ -494,46 +493,43 @@
       org-agenda-include-diary t
       org-agenda-block-separator nil
       org-agenda-compact-blocks t
-      org-agenda-start-with-log-mode t)
+      org-agenda-start-with-log-mode t
+      org-habit-following-days 7
+      org-habit-preceding-days 10
+      org-habit-graph-column 80 ;; 見出しが隠れるため
+      org-habit-show-habits t)
 
 (setq org-agenda-custom-commands
       '(("z" "Super zaen view"
          ((agenda "" ((org-agenda-span 'day)
                       (org-super-agenda-groups
-                       '((:name "Today"
+                       '((:name "🏗️Today"
                                 :time-grid t
                                 :date today
-                                :todo "TODAY"
                                 :scheduled today
                                 :order 1)
+                         (:name "🍵Future"
+                                :deadline future
+                                :scheduled future
+                                :order 10)
+                         (:name "Overdue"
+                                :deadline past
+                                :order 10)
+                         (:habit t)
+                         (:log t)
                          (:discard (:anything))))))
           (alltodo "" ((org-agenda-overriding-header "")
                        (org-super-agenda-groups
-                        '((:name "Work In Progress"
+                        '((:name "▶️Work In Progress"
                                  :todo "WIP"
                                  :order 1)
-                          (:name "Due Today"
-                                 :deadline today
-                                 :order 2)
-                          (:name "Due Today"
-                                 :tag "Today"
-                                 :order 2)
-                          (:name "Due Month"
-                                 :deadline future
-                                 :order 3)
-                          (:name "Overdue"
-                                 :deadline past
-                                 :order 7)
-                          (:name "To write"
+                          (:name "✍To write"
                                  :tag "Write"
                                  :order 12)
-                          (:name "To read"
+                          (:name "📕To read"
                                  :tag "Read"
                                  :order 14)
-                          (:name "Train"
+                          (:name "🛤️Train"
                                  :tag "Train"
                                  :order 18)
-                          (:name "Projects"
-                                 :tag "Project"
-                                 :order 30)
-                          (:discard (:tag ("Chore" "Routine" "Daily")))))))))))
+                          (:discard (:anything t))))))))))

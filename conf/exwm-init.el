@@ -33,11 +33,15 @@
   (progn
     (call-process-shell-command "shepherd")
     (call-process-shell-command "~/dotfiles/.config/polybar/launch.sh")
+    (call-process-shell-command "blueberry")
 
     (exwm-workspace-switch-create 2)
     (start-process-shell-command "google-chrome" nil "google-chrome")
+    (start-process-shell-command "firefox" nil "firefox")
     (start-process-shell-command "spotify" nil "spotify")
-    (sleep-for 3)
+
+    (message "please wait...")
+    (sleep-for 2)
 
     (exwm-workspace-switch-create 0)
     (persp-switch "1")
@@ -52,10 +56,10 @@
     (org-agenda nil "z")
     (persp-switch "3")
     (split-window-right)
-    (switch-to-buffer "Google-chrome")
+    (switch-to-buffer "firefox")
     (split-window-right)
     (persp-switch "4")
-    (switch-to-buffer "Google-chrome")
+    (switch-to-buffer "firefox")
     (vterm-toggle)
     (vterm-toggle)
     (persp-switch "5")

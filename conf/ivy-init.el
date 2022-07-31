@@ -24,7 +24,7 @@
 ;; リスト先頭で `C-p' するとき，リストの最後に移動する
 (setq ivy-wrap t)
 
-(setq ivy-count-format "%d╳%d ")
+(setq ivy-count-format "%d -> %d ")
 
 ;; 新規作成プロンプトを表示する
 (setq ivy-use-selectable-prompt t)
@@ -42,23 +42,15 @@
 ;;         (woman . "^")))
 
 ;; counsel ================
-(global-set-key (kbd "C-x C-b") 'ivy-switch-buffer)
-(global-set-key (kbd "C-x C-r") 'counsel-recentf)
+(global-set-key (kbd "C-x C-b") 'counsel-switch-buffer)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key (kbd "C-x C-l") 'counsel-mark-ring)
 (global-set-key (kbd "C-x C-u") 'ivy-resume)
 (global-set-key (kbd "C-x C-g") 'counsel-git-grep)
-;; (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "M-y") 'counsel-yank-pop)
 (global-set-key (kbd "M-i") 'swiper-thing-at-point)
-(global-set-key (kbd "C-c f") 'counsel-ag)
-(global-set-key (kbd "C-c i") 'counsel-imenu)
-(global-set-key (kbd "C-c y") 'ivy-yasnippet)
-(global-set-key (kbd "C-c h") 'counsel-find-library)
-(global-set-key [delete] 'counsel-apropos)
-;; bm
 
 (counsel-mode 1)
+
 ;; eldoc ================
 (with-eval-after-load "eldoc"
   (defun ad:eldoc-message (f &optional string)

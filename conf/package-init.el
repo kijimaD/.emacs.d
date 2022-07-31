@@ -188,9 +188,8 @@
 (with-eval-after-load 'magit
   (require 'forge))
 
-;; Gitの差分情報を表示する
+;; Gitの差分を表示する
 (global-git-gutter+-mode 1)
-;; modify された箇所で実行すると、diff を inline で見ることができる
 (global-set-key (kbd "C-c C-v") 'git-gutter+-show-hunk-inline-at-point)
 
 ;; http://www.modernemacs.com/post/pretty-magit/
@@ -226,7 +225,7 @@
 (add-hook 'input-method-activate-hook
           (lambda() (set-cursor-color "Magenta")))
 (add-hook 'input-method-inactivate-hook
-          (lambda() (set-cursor-color "black")))
+          (lambda() (set-cursor-color "grey")))
 
 (require 'mozc-popup)
 (setq mozc-candidate-style 'echo-area)
@@ -250,8 +249,10 @@
                 ("\\.md$" . "markdown-template.md")
                 ) auto-insert-alist))
 
-(auto-insert-mode 1)
-(yas-global-mode 1)
+(require 'yasnippet)
+(add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
+(auto-insert-mode t)
+(yas-global-mode t)
 (setq yas-prompt-functions '(yas-ido-prompt))
 
 (define-key yas-minor-mode-map (kbd "C-x y i") 'yas-insert-snippet)
@@ -405,7 +406,8 @@
         ("http://pragmaticemacs.com/feed/" Pragmatic Emacs)))
 
 ;; default-browser
-(setq browse-url-browser-function 'eww-browse-url)
+;; (setq browse-url-browser-function 'eww-browse-url)
+(setq browse-url-browser-function 'browse-url-firefox)
 
 (run-at-time "23:58pm" (* 24 60 60) (lambda () (elfeed-search-update--force)))
 
@@ -632,3 +634,9 @@
 
 ;; go ================
 (require 'go-mode)
+
+;; git補完 ================
+(use-package git-complete
+  :straight (:host github :repo "zk-phi/git-complete"))
+
+(global-set-key (kbd "C-o") 'git-complete)

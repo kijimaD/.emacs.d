@@ -23,7 +23,7 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-(add-to-list 'load-path (expand-file-name "conf" user-emacs-directory))
+(add-to-list 'load-path "~/.emacs.d/conf" user-emacs-directory)
 (setq load-path (cons "conf/" load-path))
 (ignore-errors (load "local-init-example"))
 (ignore-errors (load "local-init"))
@@ -44,6 +44,7 @@
 (load "theme-init")
 (load "exwm-init")
 (load "workspace-init")
+(load "hydra-init")
 (load "my-function-init")
 
 ;; 環境変数を読み込む
@@ -62,7 +63,6 @@
         ctags-auto-update-mode
         eldoc-mode
         flyspell-mode
-        git-gutter+-mode
         global-whitespace-mode
         google-this-mode
         highlight-indent-guides-mode
