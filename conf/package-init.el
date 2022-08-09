@@ -111,9 +111,9 @@
 ;; (beacon-mode)
 
 ;; window移動 ================
-;; 分割した画面間をShift+矢印で移動
+;; 分割した画面間をShift+矢印で移動 を無効化
 (setq windmove-wrap-around t)
-(windmove-default-keybindings)
+(windmove-mode 0)
 
 ;; (window-numbering-mode 1)
 

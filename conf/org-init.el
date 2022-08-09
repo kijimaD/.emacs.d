@@ -529,6 +529,9 @@
                           (:name "📕To read"
                                  :tag "Read"
                                  :order 14)
+                          (:name "✍Things I Don't Know"
+                                 :tag "DontKnow"
+                                 :order 15)
                           (:name "🛤️Train"
                                  :tag "Train"
                                  :order 18)
