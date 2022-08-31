@@ -378,3 +378,9 @@
          (hour (/ all-minute 60))
          (minute (% all-minute 60)))
   (format " %spts/%02dh%02dm" kd/pmd-today-point hour minute)))
+
+(defun kd/pmd-manual ()
+  "set point"
+  (interactive)
+  (let ((point (read-from-minibuffer "How much point? ")))
+    (setq kd/pmd-today-point (string-to-number point))))
