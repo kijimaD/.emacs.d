@@ -199,6 +199,7 @@
   (add-to-list 'org-structure-template-alist '("cl" . "src C"))
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist '("gp" . "src git-permalink"))
+  (add-to-list 'org-structure-template-alist '("go" . "src go"))
   (add-to-list 'org-structure-template-alist '("gq" . "src graphql"))
   (add-to-list 'org-structure-template-alist '("hs" . "src haskell"))
   (add-to-list 'org-structure-template-alist '("js" . "src javascript"))
