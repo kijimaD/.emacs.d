@@ -634,6 +634,7 @@
 
 ;; go ================
 (require 'go-mode)
+(require 'ob-go)
 
 ;; git補完 ================
 (use-package git-complete
