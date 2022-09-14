@@ -1,4 +1,2 @@
 * Summary
-* Mental Score(1~10)
-* Productivity Score(1~10)
-* 失敗したこと
+* マイブーム
