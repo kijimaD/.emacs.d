@@ -112,8 +112,8 @@
 
 ;; window移動 ================
 ;; 分割した画面間をShift+矢印で移動
-(setq windmove-wrap-around t)
-(windmove-default-keybindings)
+;; (setq windmove-wrap-around t)
+;; (windmove-mode 0)
 
 ;; (window-numbering-mode 1)
 
@@ -634,6 +634,7 @@
 
 ;; go ================
 (require 'go-mode)
+(require 'ob-go)
 
 ;; git補完 ================
 (use-package git-complete

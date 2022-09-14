@@ -101,3 +101,8 @@
      (("f" describe-function "function")
       ("v" describe-variable "variable")
       ("i" info-lookup-symbol "info lookup")))))
+
+(with-eval-after-load 'major-mode-hydra
+  (major-mode-hydra-define org-agenda-mode nil
+    ("pomodoro"
+     (("s" org-pomodoro "start org-pomodoro")))))
