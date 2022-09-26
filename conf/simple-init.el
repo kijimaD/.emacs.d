@@ -105,9 +105,7 @@
 (setq inhibit-splash-screen t)
 
 ;; 行番号の表示
-(setq linum-delay t)
-(defadvice linum-schedule (around my-linum-schedule () activate)
-  (run-with-idle-timer 0.2 nil #'linum-update-current))
+;; (display-line-numbers-mode)
 
 ;; ツール系 ================
 

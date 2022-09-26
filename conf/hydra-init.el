@@ -46,7 +46,7 @@
       ("f" counsel-ag "ag")
       ("h" counsel-find-library "lib")
       ("i" counsel-imenu "imenu")
-      ("r" counsel-recentf "recentf")
+      ("r" counsel-register "register")
       ("b" counsel-bookmark "bookmark")
       ("p" persp-ivy-switch-buffer "persp-buffer")
       ("w" swiper-all-thing-at-point "all"))

@@ -27,16 +27,6 @@
   (deactivate-mark))
 (global-set-key (kbd "C-x C-x") 'my-exchange-point-and-mark)
 
-;; カーソルのあるword削除
-(fset 'my-kill-word
-   "\300\C-w")
-(global-set-key (kbd "M-d") 'my-kill-word)
-
-;; カーソルのあるsexp削除
-(fset 'my-kill-sexp
-   "\200\C-w")
-(global-set-key (kbd "C-M-d") 'my-kill-sexp)
-
 (global-set-key (kbd "C-c C-k") 'kill-whole-line)
 
 ;; カレントパス取得

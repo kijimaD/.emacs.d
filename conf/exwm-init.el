@@ -106,6 +106,7 @@
 (define-key exwm-mode-map (kbd "C-M-:") 'vterm-toggle)
 (define-key exwm-mode-map (kbd "C-M-<right>") 'persp-next)
 (define-key exwm-mode-map (kbd "C-M-<left>") 'persp-prev)
+(define-key exwm-mode-map (kbd "<henkan>") 'pretty-hydra-henkan/body)
 
 (when window-system
   (progn

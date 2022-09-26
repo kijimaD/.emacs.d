@@ -51,6 +51,8 @@
 
 (counsel-mode 1)
 
+(setq counsel-search-engine 'google)
+
 ;; eldoc ================
 (with-eval-after-load "eldoc"
   (defun ad:eldoc-message (f &optional string)
