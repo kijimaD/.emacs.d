@@ -130,7 +130,6 @@
   (interactive)
   (kd/kill-panel)
   (setq kd/polybar-process (start-process-shell-command "polybar" nil "~/dotfiles/.config/polybar/launch.sh")))
-;; Not working...
 
 (defun kd/polybar-exwm-workspace ()
   (pcase exwm-workspace-current-index
