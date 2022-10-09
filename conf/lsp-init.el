@@ -92,21 +92,6 @@
   ;; Posframe is a pop-up tool that must be manually installed for dap-mode
   )
 
-;; デバッガー
-(use-package dap-mode
-  :after lsp-mode
-  :hook
-  (lsp-mode . dap-mode)
-  (lsp-mode . dap-ui-mode)
-  :config
-  (dap-mode 1)
-  (require 'dap-hydra)
-  (require 'dap-dlv-go))
-
-(setq dap-print-io t)
-(setq lsp-gopls-server-path "~/go/bin/gopls")
-(setq dap-dlv-go-delve-path "~/go/bin/dlv")
-
 (use-package dap-ui
   :config
   (dap-ui-mode 1))

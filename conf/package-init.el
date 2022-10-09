@@ -633,10 +633,6 @@
 (global-set-key (kbd "C-m") 'newline)
 (add-hook 'ruby-mode-hook 'smart-newline-mode)
 
-;; go ================
-(require 'go-mode)
-(require 'ob-go)
-
 ;; git補完 ================
 (use-package git-complete
   :straight (:host github :repo "zk-phi/git-complete"))

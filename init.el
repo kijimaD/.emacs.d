@@ -36,6 +36,7 @@
 (load "simple-init")
 (load "package-init")
 (load "rails-init")
+(load "go-init")
 (load "python-init")
 (load "haskell-init")
 (load "web-mode-init")

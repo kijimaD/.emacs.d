@@ -8,6 +8,7 @@
 (depends-on "smartparens")
 
 ;; Install Packages
+(depends-on "go-eldoc")
 (depends-on "ace-jump-mode")
 (depends-on "ace-link")
 (depends-on "add-node-modules-path")
