@@ -39,7 +39,8 @@
   (pretty-hydra-define pretty-hydra-henkan (:color blue :foreign-keys warn :title "Convenient Tools")
     ("Media"
      (("<prior>" kd/mint-volume-up "up")
-      ("<next>" kd/mint-volume-down "down"))
+      ("<next>" kd/mint-volume-down "down")
+      ("<pause>" kd/player-stop "stop"))
 
      "Find"
      (("a" counsel-apropos "apropos")

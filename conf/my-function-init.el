@@ -125,6 +125,29 @@
   (interactive)
   (start-process-shell-command "volume up" nil "pactl set-sink-volume @DEFAULT_SINK@ -5%"))
 
+(defun kd/player-stop ()
+  "再生停止"
+  (interactive)
+  (start-process-shell-command "player stop" nil "playerctl stop"))
+
+(defun kd/up-network ()
+  "ネットワーク接続"
+  (interactive)
+  (let ((passwd))
+    (setq passwd (read-passwd "Password? "))
+    (shell-command  (concat "for intf in /sys/class/net/*; do echo "
+                            (shell-quote-argument passwd)
+                            " | sudo -S ifconfig `basename $intf` up; done"))))
+
+(defun kd/down-network ()
+  "ネットワーク切断"
+  (interactive)
+  (let ((passwd))
+    (setq passwd (read-passwd "Password? "))
+    (shell-command  (concat "for intf in /sys/class/net/*; do echo "
+                            (shell-quote-argument passwd)
+                            " | sudo -S ifconfig `basename $intf` down; done"))))
+
 (use-package ej-dict
   :straight (:host github :repo "kijimaD/ej-dict"))
 ;; (ej-dict-install-dict)
