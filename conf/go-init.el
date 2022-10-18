@@ -18,3 +18,5 @@
 
 (require 'go-eldoc)
 (add-hook 'go-mode-hook 'go-eldoc-setup)
+
+(add-hook 'before-save-hook 'gofmt-before-save)
