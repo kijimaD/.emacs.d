@@ -96,7 +96,7 @@
 (require 'org-journal)
 (setq org-journal-date-format "%Y-%m-%d")
 (setq org-journal-time-format "%R ")
-(setq org-journal-dir (concat "~/dropbox/junk/diary/org-journal"))
+(setq org-journal-dir (concat "~/Private/junk/diary/org-journal"))
 (setq org-journal-file-format "%Y%m%d.org")
 (setq org-journal-find-file 'find-file)
 (setq org-journal-hide-entries-p nil)
@@ -116,7 +116,7 @@
 
 ;; 使い捨てのファイルを開く ================
 (require 'open-junk-file)
-(setq open-junk-file-format (concat "~/dropbox/junk/%Y-%m-%d-%H%M%S."))
+(setq open-junk-file-format (concat "~/Private/junk/%Y-%m-%d-%H%M%S."))
 (global-set-key (kbd "C-x C-z") 'open-junk-file)
 
 ;; 見出しをいい感じにする ================
