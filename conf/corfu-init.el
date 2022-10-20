@@ -5,12 +5,13 @@
 (require 'corfu)
 (global-corfu-mode)
 
-(setq corfu-cycle t)
 (setq corfu-auto t)
-(setq corfu-quit-at-boundary nil) ;; nil: スペースを入れてもquitしない
-(setq corfu-quit-no-match nil) ;; nil: マッチしないとき"no match"を表示してquitしない
 (setq corfu-auto-prefix 3)
 (setq corfu-count 15)
+(setq corfu-cycle t)
+(setq corfu-preselect-first t) ;; 自動的に最初の候補を選択する
+(setq corfu-quit-at-boundary t) ;; スペースを入れるとquit
+(setq corfu-quit-no-match t)
 
 ;; TAB cycle if there are only few candidates
 (setq completion-cycle-threshold 3)

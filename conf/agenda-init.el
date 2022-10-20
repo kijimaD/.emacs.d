@@ -22,7 +22,7 @@
 
 (setq org-log-done t)
 
-(setq my-org-directory (concat "~/dropbox/junk/diary/org-journal/"))
+(setq my-org-directory (concat "~/Private/junk/diary/org-journal/"))
 (setq my-todo-file (concat my-org-directory "todo.org"))
 
 (if (file-exists-p my-todo-file)

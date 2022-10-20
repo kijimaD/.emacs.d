@@ -39,14 +39,15 @@
   (pretty-hydra-define pretty-hydra-henkan (:color blue :foreign-keys warn :title "Convenient Tools")
     ("Media"
      (("<prior>" kd/mint-volume-up "up")
-      ("<next>" kd/mint-volume-down "down"))
+      ("<next>" kd/mint-volume-down "down")
+      ("<pause>" kd/player-stop "stop"))
 
      "Find"
      (("a" counsel-apropos "apropos")
       ("f" counsel-ag "ag")
       ("h" counsel-find-library "lib")
       ("i" counsel-imenu "imenu")
-      ("r" counsel-recentf "recentf")
+      ("r" counsel-register "register")
       ("b" counsel-bookmark "bookmark")
       ("p" persp-ivy-switch-buffer "persp-buffer")
       ("w" swiper-all-thing-at-point "all"))

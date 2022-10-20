@@ -92,7 +92,7 @@
 (defface hlline-face
   '((((class color)
       (background dark))
-     (:background "grey16"))
+     (:background "DodgerBlue4"))
     (((class color)
       (background light))
      (:background "gainsboro"))
@@ -347,7 +347,8 @@
 (add-hook 'dired-mode-hook 'dired-hide-details-mode)
 
 ;; 定義元ジャンプ ================
-(dumb-jump-mode)
+;; C-M-p backward-list を上書きしてしまうのでコメントアウト
+;; (dumb-jump-mode)
 (global-set-key (kbd "C-c d") 'dumb-jump-go)
 (setq dumb-jump-selector 'popup)
 ;; (setq dumb-jump-selector 'helm)
@@ -631,10 +632,6 @@
 (require 'smart-newline)
 (global-set-key (kbd "C-m") 'newline)
 (add-hook 'ruby-mode-hook 'smart-newline-mode)
-
-;; go ================
-(require 'go-mode)
-(require 'ob-go)
 
 ;; git補完 ================
 (use-package git-complete

@@ -27,16 +27,6 @@
   (deactivate-mark))
 (global-set-key (kbd "C-x C-x") 'my-exchange-point-and-mark)
 
-;; カーソルのあるword削除
-(fset 'my-kill-word
-   "\300\C-w")
-(global-set-key (kbd "M-d") 'my-kill-word)
-
-;; カーソルのあるsexp削除
-(fset 'my-kill-sexp
-   "\200\C-w")
-(global-set-key (kbd "C-M-d") 'my-kill-sexp)
-
 (global-set-key (kbd "C-c C-k") 'kill-whole-line)
 
 ;; カレントパス取得
@@ -134,6 +124,29 @@
   "Linux Mintでの音量ダウン."
   (interactive)
   (start-process-shell-command "volume up" nil "pactl set-sink-volume @DEFAULT_SINK@ -5%"))
+
+(defun kd/player-stop ()
+  "再生停止"
+  (interactive)
+  (start-process-shell-command "player stop" nil "playerctl stop"))
+
+(defun kd/up-network ()
+  "ネットワーク接続"
+  (interactive)
+  (let ((passwd))
+    (setq passwd (read-passwd "Password? "))
+    (shell-command  (concat "for intf in /sys/class/net/*; do echo "
+                            (shell-quote-argument passwd)
+                            " | sudo -S ifconfig `basename $intf` up; done"))))
+
+(defun kd/down-network ()
+  "ネットワーク切断"
+  (interactive)
+  (let ((passwd))
+    (setq passwd (read-passwd "Password? "))
+    (shell-command  (concat "for intf in /sys/class/net/*; do echo "
+                            (shell-quote-argument passwd)
+                            " | sudo -S ifconfig `basename $intf` down; done"))))
 
 (use-package ej-dict
   :straight (:host github :repo "kijimaD/ej-dict"))
