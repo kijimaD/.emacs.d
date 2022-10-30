@@ -349,7 +349,7 @@
 ;; 定義元ジャンプ ================
 ;; C-M-p backward-list を上書きしてしまうのでコメントアウト
 ;; (dumb-jump-mode)
-(global-set-key (kbd "C-c d") 'dumb-jump-go)
+;; (global-set-key (kbd "C-c j") 'dumb-jump-go)
 (setq dumb-jump-selector 'popup)
 ;; (setq dumb-jump-selector 'helm)
 
