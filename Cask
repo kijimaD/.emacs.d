@@ -40,6 +40,7 @@
 (depends-on "dart-mode")
 (depends-on "dash")
 (depends-on "define-word")
+(depends-on "denote")
 (depends-on "devdocs")
 (depends-on "diminish")
 (depends-on "dired-single")

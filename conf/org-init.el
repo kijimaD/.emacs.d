@@ -307,3 +307,9 @@
 (setq org-alert-interval 300)
 (setq org-alert-notification-title "Reminder")
 (org-alert-enable)
+
+;; denote ================
+(setq denote-directory (expand-file-name "~/roam/denote"))
+(setq denote-known-keywords '("essay"))
+
+(define-key global-map (kbd "C-c d") 'denote-create-note)
