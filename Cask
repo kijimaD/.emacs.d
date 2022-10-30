@@ -8,7 +8,6 @@
 (depends-on "smartparens")
 
 ;; Install Packages
-(depends-on "go-eldoc")
 (depends-on "ace-jump-mode")
 (depends-on "ace-link")
 (depends-on "add-node-modules-path")
@@ -88,6 +87,7 @@
 (depends-on "github-clone")
 (depends-on "github-review")
 (depends-on "github-search")
+(depends-on "go-eldoc")
 (depends-on "go-mode")
 (depends-on "google-this")
 (depends-on "google-translate")
@@ -215,6 +215,7 @@
 (depends-on "visual-regexp")
 (depends-on "vterm")
 (depends-on "vterm-toggle")
+(depends-on "vue-mode")
 (depends-on "web-mode")
 (depends-on "which-key")
 (depends-on "with-editor")

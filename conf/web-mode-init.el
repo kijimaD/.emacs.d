@@ -37,7 +37,9 @@
 ;; 作業している project の node-module をみて、適切に
 ;; linter の設定を読み込む
 (eval-after-load 'web-mode
-  '(add-hook 'web-mode-hook #'add-node-modules-path))
+  '(progn
+     (add-hook 'web-mode-hook #'add-node-modules-path)
+     (add-hook 'web-mode-hook #'prettier-js-mode)))
 (eval-after-load 'web-mode
   '(add-hook 'rjsx-mode-hook #'add-node-modules-path))
 (add-hook 'web-mode-hook 'flycheck-mode)
@@ -60,14 +62,14 @@
 ;; インデント等調整 ================
 (defun my-web-mode-hook ()
   "Hooks for Web mode."
-  (setq web-mode-attr-indent-offset 2)
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  (setq web-mode-sql-indent-offset 2)
+  ;; (setq web-mode-attr-indent-offset 0)
+  ;; (setq web-mode-markup-indent-offset 0)
+  ;; (setq web-mode-css-indent-offset 0)
+  ;; (setq web-mode-code-indent-offset 0)
+  ;; (setq web-mode-sql-indent-offset 0)
+  ;; (setq sql-indent-offset 0)
   (setq indent-tabs-mode nil)
   (setq tab-width 2)
-  (setq sql-indent-offset 2)
   (setq json-reformat:indent-width 2)
 
   (setq web-mode-attr-indent-offset nil)
