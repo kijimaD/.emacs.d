@@ -32,27 +32,30 @@
 ;; https://colekillian.com/posts/org-pomodoro-and-polybar/
 (defun kd/org-pomodoro-time ()
   "Return the remaining pomodoro time. Function for displaying in Polybar."
-  (if (org-pomodoro-active-p)
-      (cl-case org-pomodoro-state
-        (:pomodoro
-         (format "%s %dm %s%s%s"
-                 (kd/org-pomodoro-remain-gauge org-pomodoro-length)
-                 (/ (org-pomodoro-remaining-seconds) 60)
-                 "%{F#000000}"
-                 org-clock-heading
-                 "%{F-}"
-                 ))
-        (:short-break
-         (format "%s Short break: %dm"
-                 (kd/org-pomodoro-remain-gauge org-pomodoro-short-break-length)
-                 (/ (org-pomodoro-remaining-seconds) 60)))
-        (:long-break
-         (format "%s Long break: %dm"
-                 (kd/org-pomodoro-remain-gauge org-pomodoro-long-break-length)
-                 (/ (org-pomodoro-remaining-seconds) 60)))
-        (:overtime
-         (format "Overtime! %dm" (/ (org-pomodoro-remaining-seconds) 60))))
-    "Not working..."))
+  (cond
+   ((org-pomodoro-active-p) (cl-case org-pomodoro-state
+                             (:pomodoro
+                              (format "%s %dm %s%s%s"
+                                      (kd/org-pomodoro-remain-gauge org-pomodoro-length)
+                                      (/ (org-pomodoro-remaining-seconds) 60)
+                                      "%{F#000000}"
+                                      org-clock-heading
+                                      "%{F-}"
+                                      ))
+                             (:short-break
+                              (format "%s Short break: %dm"
+                                      (kd/org-pomodoro-remain-gauge org-pomodoro-short-break-length)
+                                      (/ (org-pomodoro-remaining-seconds) 60)))
+                             (:long-break
+                              (format "%s Long break: %dm"
+                                      (kd/org-pomodoro-remain-gauge org-pomodoro-long-break-length)
+                                      (/ (org-pomodoro-remaining-seconds) 60)))
+                             (:overtime
+                              (format "Overtime! %dm" (/ (org-pomodoro-remaining-seconds) 60)))
+                             ))
+   ((org-clocking-p) (format "(%s) %s" (org-clock-get-clocked-time) org-clock-heading))
+   (t "Not working...")))
+(kd/org-pomodoro-time)
 
 (defvar kd/pmd-today-point 0)
 (add-hook 'org-pomodoro-finished-hook
