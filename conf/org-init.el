@@ -94,7 +94,7 @@
 
 ;; 日誌 ================
 (require 'org-journal)
-(setq org-journal-date-format "%Y-%m-%d")
+(setq org-journal-date-format "%Y-%m-%d(%a)")
 (setq org-journal-time-format "%R ")
 (setq org-journal-dir (concat "~/Private/junk/diary/org-journal"))
 (setq org-journal-file-format "%Y%m%d.org")
@@ -310,6 +310,6 @@
 
 ;; denote ================
 (setq denote-directory (expand-file-name "~/roam/denote"))
-(setq denote-known-keywords '("essay"))
+(setq denote-known-keywords '("essay" "code-reading"))
 
 (define-key global-map (kbd "C-c d") 'denote-create-note)

@@ -16,6 +16,8 @@
 (setq lsp-gopls-server-path "~/go/bin/gopls")
 (setq dap-dlv-go-delve-path "~/go/bin/dlv")
 
+(setq dap-print-io t)
+
 (require 'go-eldoc)
 (add-hook 'go-mode-hook 'go-eldoc-setup)
 
