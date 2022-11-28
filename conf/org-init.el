@@ -68,6 +68,8 @@
 ;; (define-key org-mode-map (kbd "<S-down>") nil)
 (define-key org-mode-map (kbd "M-<left>") nil)
 (define-key org-mode-map (kbd "M-<right>") nil)
+(define-key org-mode-map (kbd "C-c C-x i") 'org-clock-in)
+(define-key org-mode-map (kbd "C-c C-x o") 'org-clock-out)
 
 ;; org-babel ================
 (org-babel-do-load-languages 'org-babel-load-languages
