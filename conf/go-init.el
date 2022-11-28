@@ -21,4 +21,5 @@
 (require 'go-eldoc)
 (add-hook 'go-mode-hook 'go-eldoc-setup)
 
+(setq gofmt-command "goimports")
 (add-hook 'before-save-hook 'gofmt-before-save)
