@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: table driven test
+# key: tt
+# --
+
+tests := []struct {
+	name    string
+}{
+	{name: "name0"},
+	{name: "name1"},
+}
+
+for _, tt := range tests {
+	t.Run(tt.name, func(t *testing.T) {
+		got := tt.name
+		if got != tt.expect {
+			t.Errorf("got %g want %g", got, tt.expect)
+		}
+	})
+}

@@ -312,6 +312,6 @@
 
 ;; denote ================
 (setq denote-directory (expand-file-name "~/roam/denote"))
-(setq denote-known-keywords '("essay" "code-reading" "book"))
+(setq denote-known-keywords '("essay" "code-reading" "book" "hack"))
 
 (define-key global-map (kbd "C-c d") 'denote-create-note)
