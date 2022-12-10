@@ -66,11 +66,12 @@
 
 ;; reset point
 (run-at-time "23:59pm" (* 24 60 60) (lambda ()
-                                      (kd/write-pmd (concat (format-time-string "%Y-%m-%d")
-                                                            ", "
-                                                            (number-to-string kd/pmd-today-point)))
-                                      (setq kd/pmd-today-point 0)
-                                      (message "pomodoro count reset!")))
+                                      (when (> kd/pmd-today-point 0)
+                                        (kd/write-pmd (concat (format-time-string "%Y-%m-%d")
+                                                              ", "
+                                                              (number-to-string kd/pmd-today-point)))
+                                        (setq kd/pmd-today-point 0)
+                                        (message "pomodoro count reset!"))))
 
 (defun kd/pmd-today-point-display ()
   ;; (format " [%s]" kd/pmd-today-point)
