@@ -5,9 +5,19 @@
 
 tests := []struct {
 	name    string
+        input   string
+        expect  string
 }{
-	{name: "name0"},
-	{name: "name1"},
+	{
+		name: "",
+                input: "",
+		expect: "",
+        },
+	{
+		name: "",
+                input: "",
+		expect: "",
+	},
 }
 
 for _, tt := range tests {
