@@ -33,7 +33,7 @@ jobs:
         path: ~/.cask
         key: cache-cask-executable
 
-    - uses: cask/setup-cask@master
+    - uses: conao3/setup-cask@master
       with:
         version: snapshot
 

@@ -68,6 +68,8 @@
 ;; (define-key org-mode-map (kbd "<S-down>") nil)
 (define-key org-mode-map (kbd "M-<left>") nil)
 (define-key org-mode-map (kbd "M-<right>") nil)
+(define-key org-mode-map (kbd "C-c C-x i") 'org-clock-in)
+(define-key org-mode-map (kbd "C-c C-x o") 'org-clock-out)
 
 ;; org-babel ================
 (org-babel-do-load-languages 'org-babel-load-languages
@@ -94,7 +96,7 @@
 
 ;; 日誌 ================
 (require 'org-journal)
-(setq org-journal-date-format "%Y-%m-%d")
+(setq org-journal-date-format "%Y-%m-%d(%a)")
 (setq org-journal-time-format "%R ")
 (setq org-journal-dir (concat "~/Private/junk/diary/org-journal"))
 (setq org-journal-file-format "%Y%m%d.org")
@@ -310,6 +312,6 @@
 
 ;; denote ================
 (setq denote-directory (expand-file-name "~/roam/denote"))
-(setq denote-known-keywords '("essay"))
+(setq denote-known-keywords '("essay" "code-reading" "book" "hack"))
 
 (define-key global-map (kbd "C-c d") 'denote-create-note)

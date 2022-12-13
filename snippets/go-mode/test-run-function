@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: test Run function
+# key: tr
+# --
+t.Run("$1", func(t *testing.T) {
+            $2
+})
