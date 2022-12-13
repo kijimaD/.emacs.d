@@ -166,6 +166,7 @@
 (depends-on "pdf-tools")
 (depends-on "persistent-soft")
 (depends-on "perspective")
+(depends-on "php-mode")
 (depends-on "pkg-info")
 (depends-on "popup")
 (depends-on "popwin")
