@@ -15,7 +15,7 @@ jobs:
         os: [ubuntu-latest]
         emacs_version:
           - 27.2
-          # - 28.1
+          - 28.1
     steps:
     - uses: purcell/setup-emacs@master
       with:
@@ -33,7 +33,7 @@ jobs:
         path: ~/.cask
         key: cache-cask-executable
 
-    - uses: cask/setup-cask@master
+    - uses: conao3/setup-cask@master
       with:
         version: snapshot
 
