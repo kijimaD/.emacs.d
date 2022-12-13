@@ -46,9 +46,9 @@
 (load "shell-init")
 (load "theme-init")
 (load "exwm-init")
-(load "workspace-init")
 (load "hydra-init")
-(load "my-function-init")
+
+(org-babel-load-file "config.org")
 
 ;; 環境変数を読み込む
 ;; (exec-path-from-shell-initialize)
