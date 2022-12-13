@@ -48,7 +48,7 @@
 (load "exwm-init")
 (load "hydra-init")
 
-(org-babel-load-file "config.org")
+(org-babel-load-file "~/.emacs.d/config.org")
 
 ;; 環境変数を読み込む
 ;; (exec-path-from-shell-initialize)
