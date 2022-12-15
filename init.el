@@ -46,7 +46,6 @@
 (load "shell-init")
 (load "theme-init")
 (load "exwm-init")
-(load "hydra-init")
 
 (load "index")
 

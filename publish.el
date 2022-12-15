@@ -45,20 +45,10 @@
       :base-extension "org"
       :base-directory "./conf"
       :exclude "./.packages"
-      ;; :publishing-function #'org-html-publish-to-html
       :publishing-function org-html-publish-to-html
       :publishing-directory "./public"
-
       :html-link-home "/"
       :html-head nil ;; cleans up anything that would have been in there.
-      ;; :html-head-extra ,my-blog-extra-head
-      ;; :html-head-include-default-style nil
-      ;; :html-head-include-scripts nil
-
-      ;; :html-link-up ""
-      ;; :html-link-home ""
-      ;; :with-timestamps nil
-      ;; :with-toc t
       )))
 
 (defun kd/publish ()
