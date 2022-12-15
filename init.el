@@ -47,8 +47,9 @@
 (load "theme-init")
 (load "exwm-init")
 (load "hydra-init")
+(load "README")
 
-(org-babel-load-file "~/.emacs.d/README.org")
+;; (org-babel-load-file "~/.emacs.d/README.org")
 
 ;; 環境変数を読み込む
 ;; (exec-path-from-shell-initialize)
