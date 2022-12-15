@@ -48,7 +48,7 @@
 (load "exwm-init")
 (load "hydra-init")
 
-(load "config")
+(load "index")
 
 ;; 環境変数を読み込む
 ;; (exec-path-from-shell-initialize)
