@@ -1,4 +1,9 @@
+#+SETUPFILE: https://gitlab.com/OlMon/org-themes/-/raw/master/src/simple_gray/simple_gray.theme
+
 * ワークスペース
+:PROPERTIES:
+:ID:       ca11b45d-81a2-4759-93f8-0ff056d15df8
+:END:
 #+caption: モード初期化
 #+begin_src emacs-lisp
   (require 'perspective)
@@ -15,6 +20,9 @@
   (persp-switch "1")
 #+end_src
 * Emacsヘルパー関数
+:PROPERTIES:
+:ID:       78ad196c-913d-427c-a0a4-a2fd9609b815
+:END:
 #+caption: 前のマークに戻る
 #+begin_src emacs-lisp
   (defun my-exchange-point-and-mark ()
@@ -100,8 +108,10 @@
 #+end_src
 
 ~~/ProjectOrg~ にEmacsのソースコードを配置しておく。
-
 * ディスプレイマネージャー便利関数
+:PROPERTIES:
+:ID:       f4b160f4-be75-4af6-a986-b3e097c79e7b
+:END:
 OS操作の便利関数。
 
 #+caption: 音量調整する
