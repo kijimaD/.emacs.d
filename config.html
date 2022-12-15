@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-12-15 Thu 14:07 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<style type="text/css">
+html,body,div,span,dl,dt,dd,ul,ol,li,a,table,h1,h2,h3,h4,h5,h6,p,pre,form,fieldset,blockquote,.src,.example{margin:0px;padding:0px;font-weight:normal;text-decoration:none;font-size:inherit;color:inherit;}.section-number-1,.section-number-2,.section-number-3,.section-number-4,.section-number-5,.section-number-6{font-weight:inherit;}.float-right{float:right;}.author{color:#666;line-height:3em;}body{    font:87.5% "Georgia Serif", Times, Palatino, "Times New Roman", serif;    background: #DCDCDC;}a{color:blue;}html>body{font-size:14px;}body{    width:54em;    padding:1.5em;    padding-top:6em;    margin: auto;}p{    line-height:1.5em;    font-size:1em;    margin-top:1.5em;    margin-bottom:1.5em;}.post_list{    margin-top:1.5em;}.title{text-align:left;}h1{font-size:2.5em;line-height:1.2em;}h2{font-size:1.5em;line-height:1em;margin-top:2em;margin-bottom:1em;}h3{    font-size:1.1667em;    line-height: 1.286em;    margin-top:1.929em;    margin-bottom:0.643em;    font-weight:bolder;}h4{    font-weight:bold;    line-height:3em;}/*p + dl{    margin-top:-1.5em;    border:1px solid red;}*/dt{font-weight:bold;}dd{padding-left:1.5em;}li{    font-size:100%;    line-height:1.5em;}div{margin:0!important;padding:0!important;}/*table{display:none;}*/.src,.example{margin:0;padding:1em;font-size:1em;line-height:1.5em;}.src{background:#444;color:#fff;}.example{background:#242834;color:#fff;padding:.75em}.header{    font-family:Arial,Helvetica,Verdana,sans-serif;    vertical-align:text-top;    position:absolute;    top:0px;left:0px;    right:0px;    background:#345;    padding:.75em 1.5em!important;    border-bottom:1.5em solid #EBD6D6;    border-bottom-color:#9FB8D3;    background:#0F4D92;    border-bottom:1em solid #cdf;    background:#444;    background:#49A;    background:transparent;    background:#eef0ff;    background:#933;    background:#A55;    border-color:#EDD;    /*background: #939;    border-color:#EDE;*/    /* background:#359; */    /* border-color:#9AC; */}.header h1{font:1.75em Arial,Helvetica,Verdana,sans-serif;line-height:1.166em;font-weight:bold;color:#b90;color:#06a;color:#fff;text-shadow: #822 0px 0px 2px;font-weight:normal;display:inline;}.header h1 em{    color:#b90;    color:#fc2;    color:#b90;    color:#db2;    color:#fd4;    font-weight:bold;    font-style:normal;}.header * {vertical-align:middle;}.header ul {    display:inline;    padding-left:1.5em;    margin-left:0!important;}.header li {    display:inline;    padding:0 .75em;}.header li a{    text-decoration:none;    color:#ffd;}/*dl{display:none;}*/ol{margin-left:1.5em;}ul{    list-style-type: disc;    margin-left:1.5em;}ul ul{    list-style-type:circle;}#table-of-contents ul{list-style-type:none;}#text-table-of-contents > ul:first-child > li > a{ font-weight:bold;}#postamble p,#postamble a{    font-size:.857em;    line-height:1.75em;    padding:0;    margin:0;}#postamble{    margin:1.75em 0!important;    border-top:1px solid #888;}blockquote{    margin-left:1em;}/*** blue **/a{}.header a{background:inherit;}h1,h2,h3,h4,h5,h6, #text-table-of-contents li{    color:#026;    color:#0A3361;    font-weight:normal;}.header{background:#0F4D92;border-bottom-color:#AFC4DB}/*.header h1{text-shadow: #228 0px 0px 2px;}*/h1,h2,h3,h4,h5,h6{    color:#373737;    font-weight:bolder;}h1.title{font-weight:normal;font-size:3em;line-height:1em;}body{width:48em;}img{max-width:48em;}body{text-align:justify;     font:12px "Lucida Grande","Trebuchet MS","Bitstream Vera Sans",Verdana,Helvetica,sans-serif !important;     color:#272727;}code{    font-weight:inherit;    color:#048;    color:black;}a{color:#00e}a:visited{color:#551A8B}.figure {    background:#ddd;    border:1px solid #ccc;    font-size:.90em;    line-height:1.666em;    padding:1.5em!important;    text-align:left!important;    margin-bottom:1.666em;}.outline-2{    margin:3em 0!important;}body{padding-top:9em;padding-left:3em;}.header{    padding-left:3!important;}.header h1, .header h1 em {    text-shadow:none;    font-size:1.5em!important;}.header {    background:transparent;    padding-left:3em!important;    border-bottom:none;    color:inherit!important;    background:#dde8ff;    border-bottom:1px solid #c3d9ff;}.header h1, .header h1 em {    text-shadow:none;    color:#06c;    font-family:"Georgia Serif", Times, Palatino, "Times New Roman", serif;}.header li a {    color:inherit!important;    text-decoration:underline;}#text-table-of-contents a {}
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div><div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orge3be2f0">1. ワークスペース</a></li>
+<li><a href="#orgd80be0d">2. Emacsヘルパー関数</a></li>
+<li><a href="#orgaa1abc4">3. ディスプレイマネージャー便利関数</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge3be2f0" class="outline-2">
+<h2 id="orge3be2f0"><span class="section-number-2">1</span> ワークスペース</h2>
+<div class="outline-text-2" id="text-1">
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 1: </span>モード初期化</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">perspective</span>)
+(<span style="font-weight: bold;">setq</span> persp-initial-frame-name <span style="font-style: italic;">"1"</span>)
+(<span style="font-weight: bold;">setq</span> persp-modestring-dividers '(<span style="font-style: italic;">""</span> <span style="font-style: italic;">""</span> <span style="font-style: italic;">" "</span>))
+(persp-mode 1)
+</pre>
+</div>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 2: </span>ワークスペースを生成する</label><pre class="src src-emacs-lisp">(mapc (<span style="font-weight: bold;">lambda</span> (i)
+        (persp-switch (int-to-string i)))
+      (number-sequence 1 9))
+(persp-switch <span style="font-style: italic;">"1"</span>)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd80be0d" class="outline-2">
+<h2 id="orgd80be0d"><span class="section-number-2">2</span> Emacsヘルパー関数</h2>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 3: </span>前のマークに戻る</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">my-exchange-point-and-mark</span> ()
+  (<span style="font-weight: bold;">interactive</span>)
+  (exchange-point-and-mark)
+  (deactivate-mark))
+(global-set-key (kbd <span style="font-style: italic;">"C-x C-x"</span>) 'my-exchange-point-and-mark)
+</pre>
+</div>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 4: </span>行全体を削除する</label><pre class="src src-emacs-lisp">(global-set-key (kbd <span style="font-style: italic;">"C-c C-k"</span>) 'kill-whole-line)
+</pre>
+</div>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 5: </span>カレントパスを取得する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">current-path</span> ()
+  (<span style="font-weight: bold;">interactive</span>)
+  (<span style="font-weight: bold;">let</span> ((file-path buffer-file-name)
+        (dir-path default-directory))
+    (<span style="font-weight: bold;">cond</span> (file-path
+           (kill-new (expand-file-name file-path))
+           (message <span style="font-style: italic;">"Add Kill Ring: %s"</span> (expand-file-name file-path)))
+          (dir-path
+           (kill-new (expand-file-name dir-path))
+           (message <span style="font-style: italic;">"Add Kill Ring: %s"</span> (expand-file-name dir-path)))
+          (t
+           (error-message-string <span style="font-style: italic;">"Fail to get path name."</span>)))))
+</pre>
+</div>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 6: </span>i-searchで逆側にカーソルをセットする</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">my-isearch-done-opposite</span> (<span style="font-weight: bold; text-decoration: underline;">&amp;optional</span> nopush edit)
+  <span style="font-style: italic;">"End current search in the opposite side of the match."</span>
+  (<span style="font-weight: bold;">interactive</span>)
+  (funcall #'isearch-done nopush edit)
+  (<span style="font-weight: bold;">when</span> isearch-other-end (goto-char isearch-other-end)))
+</pre>
+</div>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 7: </span>カーソルを真ん中に保ちつつ行を1つ移動する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">my-next-line</span> ()
+  (<span style="font-weight: bold;">interactive</span>)
+  (next-line)
+  (recenter))
+(global-set-key (kbd <span style="font-style: italic;">"&lt;down&gt;"</span>) 'my-next-line)
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">my-previous-line</span> ()
+  (<span style="font-weight: bold;">interactive</span>)
+  (previous-line)
+  (recenter))
+(global-set-key (kbd <span style="font-style: italic;">"&lt;up&gt;"</span>) 'my-previous-line)
+</pre>
+</div>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 8: </span>ewwのキーバインドを設定する</label><pre class="src src-emacs-lisp">(eval-after-load <span style="font-style: italic;">"eww"</span>
+  '(<span style="font-weight: bold;">progn</span>
+     (define-key eww-mode-map (kbd <span style="font-style: italic;">"&lt;mouse-1&gt;"</span>) 'my-next-line)
+     (define-key eww-mode-map (kbd <span style="font-style: italic;">"&lt;mouse-2&gt;"</span>) 'define-word-at-point)
+     (define-key eww-mode-map (kbd <span style="font-style: italic;">"&lt;mouse-4&gt;"</span>) 'my-previous-line)
+     (define-key eww-mode-map (kbd <span style="font-style: italic;">"&lt;down-mouse-4&gt;"</span>) 'nil)
+     (define-key eww-mode-map (kbd <span style="font-style: italic;">"&lt;mouse-5&gt;"</span>) 'my-next-line)
+     (define-key eww-mode-map (kbd <span style="font-style: italic;">"&lt;down-mouse-5&gt;"</span>) 'nil)
+     (define-key eww-mode-map (kbd <span style="font-style: italic;">"&lt;mouse-3&gt;"</span>) 'my-previous-line)
+     (define-key eww-mode-map (kbd <span style="font-style: italic;">"&lt;mouse-8&gt;"</span>) 'backward-word)
+     (define-key eww-mode-map (kbd <span style="font-style: italic;">"&lt;mouse-9&gt;"</span>) 'forward-word)))
+</pre>
+</div>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 9: </span>最後のタイマーをキャンセルする</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/cancel-last-timer</span> ()
+  (<span style="font-weight: bold;">interactive</span>)
+  (cancel-timer (car (last timer-list))))
+</pre>
+</div>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 10: </span>Cの関数に定義ジャンプできるようにする</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Emacs C source directory</span>
+(<span style="font-weight: bold;">let</span> ((src-dir <span style="font-style: italic;">"~/ProjectOrg/emacs/src"</span>))
+  (<span style="font-weight: bold;">if</span> (file-directory-p src-dir)
+      (<span style="font-weight: bold;">setq</span> source-directory src-dir)))
+</pre>
+</div>
+
+<p>
+<code>~/ProjectOrg</code> にEmacsのソースコードを配置しておく。
+</p>
+</div>
+</div>
+<div id="outline-container-orgaa1abc4" class="outline-2">
+<h2 id="orgaa1abc4"><span class="section-number-2">3</span> ディスプレイマネージャー便利関数</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+OS操作の便利関数。
+</p>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 11: </span>音量調整する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/mint-volume-up</span> ()
+  <span style="font-style: italic;">"Linux Mint&#12391;&#12398;&#38899;&#37327;&#12450;&#12483;&#12503;."</span>
+  (<span style="font-weight: bold;">interactive</span>)
+  (start-process-shell-command <span style="font-style: italic;">"volume up"</span> nil <span style="font-style: italic;">"pactl set-sink-volume @DEFAULT_SINK@ +5%"</span>))
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/mint-volume-down</span> ()
+  <span style="font-style: italic;">"Linux Mint&#12391;&#12398;&#38899;&#37327;&#12480;&#12454;&#12531;."</span>
+  (<span style="font-weight: bold;">interactive</span>)
+  (start-process-shell-command <span style="font-style: italic;">"volume up"</span> nil <span style="font-style: italic;">"pactl set-sink-volume @DEFAULT_SINK@ -5%"</span>))
+</pre>
+</div>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 12: </span>再生を停止する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/player-stop</span> ()
+  <span style="font-style: italic;">"&#20877;&#29983;&#20572;&#27490;"</span>
+  (<span style="font-weight: bold;">interactive</span>)
+  (start-process-shell-command <span style="font-style: italic;">"player stop"</span> nil <span style="font-style: italic;">"playerctl stop"</span>))
+</pre>
+</div>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 13: </span>ネットワークを接続・切断する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/up-network</span> ()
+  <span style="font-style: italic;">"&#12493;&#12483;&#12488;&#12527;&#12540;&#12463;&#25509;&#32154;"</span>
+  (<span style="font-weight: bold;">interactive</span>)
+  (<span style="font-weight: bold;">let</span> ((passwd))
+    (<span style="font-weight: bold;">setq</span> passwd (read-passwd <span style="font-style: italic;">"Password? "</span>))
+    (shell-command  (concat <span style="font-style: italic;">"for intf in /sys/class/net/*; do echo "</span>
+                            (shell-quote-argument passwd)
+                            <span style="font-style: italic;">" | sudo -S ifconfig `basename $intf` up; done"</span>))))
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/down-network</span> ()
+  <span style="font-style: italic;">"&#12493;&#12483;&#12488;&#12527;&#12540;&#12463;&#20999;&#26029;"</span>
+  (<span style="font-weight: bold;">interactive</span>)
+  (<span style="font-weight: bold;">let</span> ((passwd))
+    (<span style="font-weight: bold;">setq</span> passwd (read-passwd <span style="font-style: italic;">"Password? "</span>))
+    (shell-command  (concat <span style="font-style: italic;">"for intf in /sys/class/net/*; do echo "</span>
+                            (shell-quote-argument passwd)
+                            <span style="font-style: italic;">" | sudo -S ifconfig `basename $intf` down; done"</span>))))
+</pre>
+</div>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 14: </span>英語辞書をインストールする</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(use-package ej-dict</span>
+<span style="font-weight: bold; font-style: italic;">;;   </span><span style="font-weight: bold; font-style: italic;">:straight (:host github :repo "kijimaD/ej-dict"))</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(ej-dict-install-dict)</span>
+</pre>
+</div>
+
+<p>
+あまり使ってないのでコメントアウトしている。
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2022-12-15 Thu 14:07</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
