@@ -44,44 +44,11 @@
 (load "corfu-init")
 (load "ivy-init")
 (load "shell-init")
-(load "theme-init")
 
 (load "index")
 
 ;; 環境変数を読み込む
 ;; (exec-path-from-shell-initialize)
-
-;; モードラインからマイナーモードを消す
-;; (describe-minor-mode-from-indicator) で調べる。
-(setq my-hidden-minor-modes
-      '(
-        abbrev-mode
-        auto-highlight-symbol-mode
-        auto-revert-mode
-        back-button-mode
-        beacon-mode
-        command-log-mode
-        ctags-auto-update-mode
-        eldoc-mode
-        flyspell-mode
-        global-whitespace-mode
-        google-this-mode
-        highlight-indent-guides-mode
-        magit-auto-revert-mode
-        projectile-mode
-        projectile-rails-mode
-        rinari-minor-mode
-        robe-mode
-        rubocop-mode
-        ruby-electric-mode
-        undo-tree-mode
-        which-key-mode
-        yas-minor-mode
-        ))
-(mapc (lambda (mode)
-        (setq minor-mode-alist
-              (cons (list mode "") (assq-delete-all mode minor-mode-alist))))
-      my-hidden-minor-modes)
 
 ;; ;; customが書き込まれないようにする
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
