@@ -45,7 +45,6 @@
 (load "ivy-init")
 (load "shell-init")
 (load "theme-init")
-(load "exwm-init")
 
 (load "index")
 

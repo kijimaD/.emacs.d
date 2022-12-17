@@ -1,3 +1,143 @@
+(require 'exwm)
+(require 'exwm-config)
+
+(setq exwm-replace t)
+
+(setq exwm-layout-show-all-buffers t)
+
+(setq mouse-autoselect-window nil
+        focus-follows-mouse t
+        exwm-workspace-warp-cursor t
+        exwm-workspace-number 5)
+
+(add-hook 'exwm-update-class-hook
+          (lambda ()
+            (exwm-workspace-rename-buffer exwm-class-name)))
+(add-hook 'exwm-update-title-hook
+          (lambda ()
+            (pcase exwm-class-name
+              ("qutebrowser" (exwm-workspace-rename-buffer (format "Qutebrowser: %s" exwm-title)))
+              ("chrome" (exwm-workspace-rename-buffer (format "Chrome: %s" exwm-title))))))
+
+(defun kd/set-init ()
+  "Window Manager関係の各種プログラムを起動する."
+  (interactive)
+  (progn
+    (call-process-shell-command "shepherd")
+    (call-process-shell-command "~/dotfiles/.config/polybar/launch.sh")
+    (call-process-shell-command "blueberry")
+
+    (exwm-workspace-switch-create 2)
+    (start-process-shell-command "google-chrome" nil "google-chrome")
+    (start-process-shell-command "firefox" nil "firefox")
+    (start-process-shell-command "spotify" nil "spotify")
+
+    (message "please wait...")
+    (sleep-for 2)
+
+    (exwm-workspace-switch-create 0)
+    (persp-switch "1")
+    (delete-other-windows)
+    (org-journal-new-entry nil)
+    (vterm-toggle)
+    (vterm-toggle)
+    (persp-switch "2")
+    (find-file "~/roam")
+    (vterm-toggle)
+    (vterm-toggle)
+    (org-agenda nil "z")
+    (persp-switch "3")
+    (split-window-right)
+    (switch-to-buffer "firefox")
+    (persp-switch "4")
+    (switch-to-buffer "firefox")
+    (vterm-toggle)
+    (vterm-toggle)
+    (persp-switch "5")
+    (find-file "~/dotfiles")
+    (vterm-toggle)
+    (vterm-toggle)
+    (magit-status)
+    (persp-switch "6")
+    (find-file "~/.emacs.d/conf")
+    (vterm-toggle)
+    (vterm-toggle)
+    (magit-status)
+    (persp-switch "7")
+    (find-file "~/ProjectOrg")
+    (persp-switch "8")
+    (find-file "~/Project")
+    (persp-switch "9")
+    (elfeed)
+
+    (exwm-workspace-switch-create 1)
+    (persp-switch "1")
+    (persp-switch "2")
+    (find-file "~/roam")
+    (org-agenda nil "z")
+    (persp-switch "4")
+    (switch-to-buffer "Google-chrome")
+    (persp-switch "8")
+    (find-file "~/Project")
+
+    (exwm-workspace-switch-create 2)
+    (switch-to-buffer "Spotify")
+
+    (exwm-workspace-switch-create 0)
+    (persp-switch "4")
+
+    (message "settings done!")))
+
+(defun kd/set-background ()
+  "背景をセットする."
+  (interactive)
+  (start-process-shell-command "compton" nil "compton --config ~/dotfiles/.config/compton/compton.conf")
+  (start-process-shell-command "fehbg" nil "~/dotfiles/.fehbg"))
+
+(define-key exwm-mode-map (kbd "C-M-:") 'vterm-toggle)
+(define-key exwm-mode-map (kbd "C-M-<right>") 'persp-next)
+(define-key exwm-mode-map (kbd "C-M-<left>") 'persp-prev)
+(define-key exwm-mode-map (kbd "<henkan>") 'pretty-hydra-henkan/body)
+
+(when window-system
+  (progn
+    (exwm-config-example)
+    ;; (kd/set-init)
+    ;; (kd/set-background)
+    ))
+
+(defvar kd/polybar-process nil
+  "Holds the process of the running Polybar instance, if any")
+
+(defun kd/start-panel ()
+  (interactive)
+  (kd/kill-panel)
+  (setq kd/polybar-process (start-process-shell-command "polybar" nil "~/dotfiles/.config/polybar/launch.sh")))
+
+(defun kd/kill-panel ()
+  (interactive)
+  (when kd/polybar-process
+    (ignore-errors
+      (kill-process kd/polybar-process)))
+  (setq kd/polybar-process nil))
+
+(defun kd/polybar-exwm-workspace ()
+  (pcase exwm-workspace-current-index
+    (0 "%{F#797D7F}Work%{F-} Home")
+    (1 "Work %{F#797D7F}Home%{F-}")
+    (2 "")
+    (3 "")
+    (4 "")
+    (9 "")))
+
+(defun kd/send-polybar-exwm-workspace ()
+  (kd/send-polybar-hook "exwm-workspace" 1))
+
+(defun kd/send-polybar-hook (module-name hook-index)
+  (start-process-shell-command "polybar-msg" nil (format "polybar-msg hook %s %s" module-name hook-index)))
+
+(add-hook 'exwm-workspace-switch-hook #'kd/send-polybar-exwm-workspace)
+
 (require 'perspective)
 (setq persp-initial-frame-name "1")
 (setq persp-modestring-dividers '("" "" " "))

@@ -1,6 +1,196 @@
 #+title: Kijimad Emacs Config
 #+SETUPFILE: https://gitlab.com/OlMon/org-themes/-/raw/master/src/bigblow_inline/bigblow_inline.theme
 
+* EXWM
+:PROPERTIES:
+:ID:       c99b472b-dd3b-494e-a733-5cbf95781064
+:END:
+EXWMはEmacs上で動くウィンドウマネージャ。
+- https://github.com/daviwil/emacs-from-scratch/blob/39f63fe133cd4c41e13bbd1551c6517162851411/show-notes/Emacs-Desktop-03.org
+
+#+caption: require
+#+begin_src emacs-lisp
+  (require 'exwm)
+  (require 'exwm-config)
+#+end_src
+
+#+caption: ほかのウィンドウマネージャを置き換えて起動する
+#+begin_src emacs-lisp
+  (setq exwm-replace t)
+#+end_src
+
+#+caption: ほかのワークスペースのバッファに移動できるようにする
+#+begin_src emacs-lisp
+  (setq exwm-layout-show-all-buffers t)
+#+end_src
+
+#+caption: マウス設定
+#+begin_src emacs-lisp
+  (setq mouse-autoselect-window nil
+          focus-follows-mouse t
+          exwm-workspace-warp-cursor t
+          exwm-workspace-number 5)
+#+end_src
+
+#+caption: ワークスペースのバッファに名前をつける
+#+begin_src emacs-lisp
+(add-hook 'exwm-update-class-hook
+          (lambda ()
+            (exwm-workspace-rename-buffer exwm-class-name)))
+(add-hook 'exwm-update-title-hook
+          (lambda ()
+            (pcase exwm-class-name
+              ("qutebrowser" (exwm-workspace-rename-buffer (format "Qutebrowser: %s" exwm-title)))
+              ("chrome" (exwm-workspace-rename-buffer (format "Chrome: %s" exwm-title))))))
+#+end_src
+
+#+caption: ウィンドウのセットを起動する
+#+begin_src emacs-lisp
+(defun kd/set-init ()
+  "Window Manager関係の各種プログラムを起動する."
+  (interactive)
+  (progn
+    (call-process-shell-command "shepherd")
+    (call-process-shell-command "~/dotfiles/.config/polybar/launch.sh")
+    (call-process-shell-command "blueberry")
+
+    (exwm-workspace-switch-create 2)
+    (start-process-shell-command "google-chrome" nil "google-chrome")
+    (start-process-shell-command "firefox" nil "firefox")
+    (start-process-shell-command "spotify" nil "spotify")
+
+    (message "please wait...")
+    (sleep-for 2)
+
+    (exwm-workspace-switch-create 0)
+    (persp-switch "1")
+    (delete-other-windows)
+    (org-journal-new-entry nil)
+    (vterm-toggle)
+    (vterm-toggle)
+    (persp-switch "2")
+    (find-file "~/roam")
+    (vterm-toggle)
+    (vterm-toggle)
+    (org-agenda nil "z")
+    (persp-switch "3")
+    (split-window-right)
+    (switch-to-buffer "firefox")
+    (persp-switch "4")
+    (switch-to-buffer "firefox")
+    (vterm-toggle)
+    (vterm-toggle)
+    (persp-switch "5")
+    (find-file "~/dotfiles")
+    (vterm-toggle)
+    (vterm-toggle)
+    (magit-status)
+    (persp-switch "6")
+    (find-file "~/.emacs.d/conf")
+    (vterm-toggle)
+    (vterm-toggle)
+    (magit-status)
+    (persp-switch "7")
+    (find-file "~/ProjectOrg")
+    (persp-switch "8")
+    (find-file "~/Project")
+    (persp-switch "9")
+    (elfeed)
+
+    (exwm-workspace-switch-create 1)
+    (persp-switch "1")
+    (persp-switch "2")
+    (find-file "~/roam")
+    (org-agenda nil "z")
+    (persp-switch "4")
+    (switch-to-buffer "Google-chrome")
+    (persp-switch "8")
+    (find-file "~/Project")
+
+    (exwm-workspace-switch-create 2)
+    (switch-to-buffer "Spotify")
+
+    (exwm-workspace-switch-create 0)
+    (persp-switch "4")
+
+    (message "settings done!")))
+#+end_src
+
+#+caption: 背景を設定する
+#+begin_src emacs-lisp
+(defun kd/set-background ()
+  "背景をセットする."
+  (interactive)
+  (start-process-shell-command "compton" nil "compton --config ~/dotfiles/.config/compton/compton.conf")
+  (start-process-shell-command "fehbg" nil "~/dotfiles/.fehbg"))
+#+end_src
+
+#+caption: キーバインド設定
+#+begin_src emacs-lisp
+(define-key exwm-mode-map (kbd "C-M-:") 'vterm-toggle)
+(define-key exwm-mode-map (kbd "C-M-<right>") 'persp-next)
+(define-key exwm-mode-map (kbd "C-M-<left>") 'persp-prev)
+(define-key exwm-mode-map (kbd "<henkan>") 'pretty-hydra-henkan/body)
+#+end_src
+
+#+caption: 設定する
+#+begin_src emacs-lisp
+  (when window-system
+    (progn
+      (exwm-config-example)
+      ;; (kd/set-init)
+      ;; (kd/set-background)
+      ))
+#+end_src
+* Polybar
+:PROPERTIES:
+:ID:       31fe46cc-99bc-46e5-bf49-0483fcdd99ed
+:END:
+polybarは柔軟にカスタマイズできるメニューバーを表示するソフトウェア。polybarとの連携を記載する。
+
+#+caption: polybarプロセスを保持する変数
+#+begin_src emacs-lisp
+  (defvar kd/polybar-process nil
+    "Holds the process of the running Polybar instance, if any")
+#+end_src
+
+#+caption: バーを起動する
+#+begin_src emacs-lisp
+  (defun kd/start-panel ()
+    (interactive)
+    (kd/kill-panel)
+    (setq kd/polybar-process (start-process-shell-command "polybar" nil "~/dotfiles/.config/polybar/launch.sh")))
+#+end_src
+
+#+caption: バーを停止する
+#+begin_src emacs-lisp
+  (defun kd/kill-panel ()
+    (interactive)
+    (when kd/polybar-process
+      (ignore-errors
+        (kill-process kd/polybar-process)))
+    (setq kd/polybar-process nil))
+#+end_src
+
+#+caption: ワークスペースをpolybarで表示する設定
+#+begin_src emacs-lisp
+  (defun kd/polybar-exwm-workspace ()
+    (pcase exwm-workspace-current-index
+      (0 "%{F#797D7F}Work%{F-} Home")
+      (1 "Work %{F#797D7F}Home%{F-}")
+      (2 "")
+      (3 "")
+      (4 "")
+      (9 "")))
+
+  (defun kd/send-polybar-exwm-workspace ()
+    (kd/send-polybar-hook "exwm-workspace" 1))
+
+  (defun kd/send-polybar-hook (module-name hook-index)
+    (start-process-shell-command "polybar-msg" nil (format "polybar-msg hook %s %s" module-name hook-index)))
+
+  (add-hook 'exwm-workspace-switch-hook #'kd/send-polybar-exwm-workspace)
+#+end_src
 * Workspace
 :PROPERTIES:
 :ID:       ca11b45d-81a2-4759-93f8-0ff056d15df8
@@ -21,6 +211,9 @@
   (persp-switch "1")
 #+end_src
 * Hydra
+:PROPERTIES:
+:ID:       0e450475-54cf-432d-8a75-d8a55b6c83bf
+:END:
 Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
 
 #+caption: グローバルに便利なメニューを追加する
@@ -199,6 +392,9 @@ OS操作の便利関数。
 
 あまり使ってないのでコメントアウトしている。
 * Helper
+:PROPERTIES:
+:ID:       5d064781-26b9-451d-86a5-11071e388796
+:END:
 #+caption: 前のマークに戻る
 #+begin_src emacs-lisp
   (defun my-exchange-point-and-mark ()
