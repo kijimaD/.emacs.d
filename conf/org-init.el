@@ -117,7 +117,7 @@
 (add-hook 'org-journal-after-entry-create-hook #'kd/insert-journal-template)
 
 ;; 使い捨てのファイルを開く ================
-(require 'open-junk-file)
+(use-package open-junk-file)
 (setq open-junk-file-format (concat "~/Private/junk/%Y-%m-%d-%H%M%S."))
 (global-set-key (kbd "C-x C-z") 'open-junk-file)
 

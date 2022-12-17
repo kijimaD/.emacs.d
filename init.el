@@ -1,10 +1,11 @@
+(setq debug-on-error t)
+
 ;; The default is 800 kilobytes.  Measured in bytes.
 (setq gc-cons-threshold (* 100 1024 1024))
 (setq read-process-output-max (* 1024 1024))
 
-(when (or (require 'cask "~/.cask/cask.el")
-          (require 'cask nil))
-  (cask--initialize))
+(require 'cask "~/.cask/cask.el")
+(cask--initialize)
 
 (ignore-errors (guix-emacs-autoload-packages))
 
