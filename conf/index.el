@@ -1,3 +1,49 @@
+(global-set-key (kbd "C-M-;") 'eshell-toggle)
+
+(add-hook 'eshell-first-time-mode-hook 'esh-autosuggest-mode)
+(setq esh-autosuggest-delay 0.5)
+
+(when window-system
+  (require 'vterm)
+  (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
+  (setq vterm-toggle-scope 'project)
+  (setq vterm-toggle-project-root t)
+  (setq vterm-max-scrollback 10000)
+  ;; toggle
+  (global-set-key [f9] 'vterm-toggle)
+  (global-set-key (kbd "C-M-:") 'vterm-toggle)
+  (global-set-key [C-f9] 'vterm-toggle-cd)
+
+  (setq vterm-toggle-fullscreen-p nil)
+  (add-to-list 'display-buffer-alist
+               '((lambda(bufname _) (with-current-buffer bufname
+                                      (or (equal major-mode 'vterm-mode)
+                                          (string-prefix-p vterm-buffer-name bufname))))
+                 (display-buffer-reuse-window display-buffer-at-bottom)
+                 ;;(display-buffer-reuse-window display-buffer-in-direction)
+                 ;;display-buffer-in-direction/direction/dedicated is added in emacs27
+                 ;;(direction . bottom)
+                 ;;(dedicated . t) ;dedicated is supported in emacs27
+                 (reusable-frames . visible)
+                 (window-height . 0.3))))
+
+(require 'doom-themes)
+(doom-themes-org-config)
+(setq custom-safe-themes t)
+(setq-default custom-enabled-themes '(modus-operandi))
+
+(defun reapply-themes ()
+  "Forcibly load the themes listed in `custom-enabled-themes'."
+  (dolist (theme custom-enabled-themes)
+    (unless (custom-theme-p theme)
+      (load-theme theme)))
+  (custom-set-variables `(custom-enabled-themes (quote ,custom-enabled-themes)))
+  (efs/org-font-setup)
+  ;; (kd/set-modus-face)
+  )
+
+(add-hook 'after-init-hook 'reapply-themes)
+
 (doom-modeline-mode)
 
 ;; 表示項目の設定

@@ -43,7 +43,6 @@
 (load "lsp-init")
 (load "corfu-init")
 (load "ivy-init")
-(load "shell-init")
 
 (load "index")
 
