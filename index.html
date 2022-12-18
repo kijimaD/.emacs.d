@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-12-18 Sun 13:42 -->
+<!-- 2022-12-18 Sun 13:44 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>kijimad Emacs Config</title>
@@ -204,38 +204,37 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org480c740">1. Emacs</a></li>
-<li><a href="#org21821b5">2. agenda</a></li>
-<li><a href="#orgd0b1d3c">3. pomodoro</a></li>
-<li><a href="#orgc68ccd9">4. Font</a></li>
-<li><a href="#org77aa265">5. simple</a></li>
-<li><a href="#org7c5a28c">6. packages</a></li>
-<li><a href="#orgcec0635">7. Rails</a></li>
-<li><a href="#orgb5393db">8. go-mode</a></li>
-<li><a href="#org524cc08">9. python-mode</a></li>
-<li><a href="#org555e8d8">10. haskell-mode</a></li>
-<li><a href="#org27a746c">11. web-mode</a></li>
-<li><a href="#org160c21f">12. LSP</a></li>
-<li><a href="#org668baca">13. corfu</a></li>
-<li><a href="#orgff2dbed">14. ivy</a></li>
-<li><a href="#orgcd41353">15. counsel</a></li>
-<li><a href="#org2df32c3">16. ag</a></li>
-<li><a href="#org978a275">17. eldoc</a></li>
-<li><a href="#org13c5343">18. eshell</a></li>
-<li><a href="#orgcb712a7">19. Vterm</a></li>
-<li><a href="#org07a834d">20. Theme</a></li>
-<li><a href="#orgd6b219a">21. EXWM</a></li>
-<li><a href="#org5043203">22. Polybar</a></li>
-<li><a href="#org4fcbffa">23. Workspace</a></li>
-<li><a href="#org7155ceb">24. Hydra</a></li>
-<li><a href="#org02402ab">25. Display Manager</a></li>
-<li><a href="#org8269180">26. Helper</a></li>
+<li><a href="#org0ea8527">1. Emacs</a></li>
+<li><a href="#org9c4d531">2. pomodoro</a></li>
+<li><a href="#org5c89c92">3. Font</a></li>
+<li><a href="#org4e162e7">4. simple</a></li>
+<li><a href="#org6edb289">5. packages</a></li>
+<li><a href="#org102e001">6. Rails</a></li>
+<li><a href="#org801693e">7. go-mode</a></li>
+<li><a href="#org6262c4a">8. python-mode</a></li>
+<li><a href="#org3f11753">9. haskell-mode</a></li>
+<li><a href="#org79f641c">10. web-mode</a></li>
+<li><a href="#org44db02e">11. LSP</a></li>
+<li><a href="#org3f001eb">12. corfu</a></li>
+<li><a href="#org4a4b999">13. ivy</a></li>
+<li><a href="#org52779fa">14. counsel</a></li>
+<li><a href="#orgcda659c">15. ag</a></li>
+<li><a href="#orga0ab893">16. eldoc</a></li>
+<li><a href="#org622dad3">17. eshell</a></li>
+<li><a href="#orge11f465">18. Vterm</a></li>
+<li><a href="#orgc8bb7bc">19. Theme</a></li>
+<li><a href="#org28b1e66">20. EXWM</a></li>
+<li><a href="#orgea1749e">21. Polybar</a></li>
+<li><a href="#org5a798f7">22. Workspace</a></li>
+<li><a href="#org71f7d8a">23. Hydra</a></li>
+<li><a href="#org1e80cb2">24. Display Manager</a></li>
+<li><a href="#org4e31df3">25. Helper</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org480c740" class="outline-2">
-<h2 id="org480c740"><span class="section-number-2">1.</span> Emacs</h2>
+<div id="outline-container-org0ea8527" class="outline-2">
+<h2 id="org0ea8527"><span class="section-number-2">1.</span> Emacs</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Emacsの文芸的設定。移行作業中。
@@ -258,179 +257,15 @@ Emacsの文芸的設定。移行作業中。
 </div>
 </div>
 
-<div id="outline-container-org21821b5" class="outline-2">
-<h2 id="org21821b5"><span class="section-number-2">2.</span> agenda</h2>
+<div id="outline-container-org9c4d531" class="outline-2">
+<h2 id="org9c4d531"><span class="section-number-2">2.</span> pomodoro</h2>
 <div class="outline-text-2" id="text-2">
-<p>
-agenda用の設定。
-</p>
-
-<div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 2: </span>基本設定</label><pre class="src src-emacs-lisp">(define-key global-map <span style="font-style: italic;">"\C-cl"</span> 'org-store-link)
-(define-key global-map <span style="font-style: italic;">"\C-ca"</span> 'org-agenda)
-(define-key global-map <span style="font-style: italic;">"\C-cc"</span> 'org-capture)
-
-(add-hook 'org-pomodoro-short-break-finished-hook 'org-agenda-default)
-(add-hook 'org-pomodoro-long-break-finished-hook 'org-agenda-default)
-
-(<span style="font-weight: bold;">setq</span> org-capture-templates
-      '((<span style="font-style: italic;">"m"</span> <span style="font-style: italic;">"Memo"</span> entry
-         (file+headline my-todo-file <span style="font-style: italic;">"Memo"</span>)
-         <span style="font-style: italic;">"** %?\n"</span>)
-        (<span style="font-style: italic;">"t"</span> <span style="font-style: italic;">"Task"</span> entry
-         (file+headline my-todo-file <span style="font-style: italic;">"Tasks"</span>)
-         <span style="font-style: italic;">"** TODO %?\n"</span>)
-        (<span style="font-style: italic;">"p"</span> <span style="font-style: italic;">"Protocol"</span> entry
-         (file+headline my-todo-file <span style="font-style: italic;">"Inbox"</span>)
-         <span style="font-style: italic;">"* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?"</span>)
-        (<span style="font-style: italic;">"L"</span> <span style="font-style: italic;">"Protocol Link"</span> entry
-         (file+headline my-todo-file <span style="font-style: italic;">"Inbox"</span>)
-         <span style="font-style: italic;">"* %?[[%:link][%:description]]"</span>)))
-
-(<span style="font-weight: bold;">setq</span> org-log-done t)
-
-(<span style="font-weight: bold;">setq</span> my-org-directory (concat <span style="font-style: italic;">"~/Private/junk/diary/org-journal/"</span>))
-(<span style="font-weight: bold;">setq</span> my-todo-file (concat my-org-directory <span style="font-style: italic;">"todo.org"</span>))
-
-(<span style="font-weight: bold;">if</span> (file-exists-p my-todo-file)
-    (<span style="font-weight: bold;">setq</span> org-agenda-files `(<span style="font-style: italic;">"~/roam"</span> <span style="font-style: italic;">"~/roam/denote"</span> ,my-todo-file)))
-
-(<span style="font-weight: bold;">setq</span> org-directory my-org-directory)
-(<span style="font-weight: bold;">setq</span> org-default-notes-file my-todo-file)
-
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#26178;&#21051;&#12434;&#12487;&#12501;&#12457;&#12523;&#12488;&#34920;&#31034;</span>
-(<span style="font-weight: bold;">setq</span> org-agenda-start-with-log-mode t)
-
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">7&#26085;&#20998;&#12398;&#20104;&#23450;&#12434;&#34920;&#31034;&#12373;&#12379;&#12427;</span>
-(<span style="font-weight: bold;">setq</span> org-agenda-span 14)
-(<span style="font-weight: bold;">setq</span> org-agenda-start-day <span style="font-style: italic;">"7d"</span>)
-
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">agenda&#12395;&#12399;&#12289;&#32722;&#24931;&#12539;&#12473;&#12465;&#12472;&#12517;&#12540;&#12523;&#12539;TODO&#12434;&#34920;&#31034;&#12373;&#12379;&#12427;</span>
-(<span style="font-weight: bold;">setq</span> org-agenda-custom-commands
-      '((<span style="font-style: italic;">"a"</span> <span style="font-style: italic;">"Agenda and all TODO's"</span>
-         ((tags <span style="font-style: italic;">"project-CLOCK=&gt;\"&lt;today&gt;\"|repeatable"</span>) (agenda <span style="font-style: italic;">""</span>) (alltodo)))))
-(<span style="font-weight: bold;">setq</span> org-agenda-custom-commands nil)
-
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">org-agenda-default</span> ()
-  (<span style="font-weight: bold;">interactive</span>)
-  (persp-switch <span style="font-style: italic;">"2"</span>)
-  (org-agenda nil <span style="font-style: italic;">"z"</span>))
-(global-set-key (kbd <span style="font-style: italic;">"&lt;f6&gt;"</span>) 'org-agenda-default)
-
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">agenda&#20869;&#12391;R&#12391;&#20986;&#12427;clocktable&#12398;&#35373;&#23450;&#12290;</span>
-(<span style="font-weight: bold;">setq</span> org-clocktable-defaults '(<span style="font-weight: bold;">:maxlevel</span> 3 <span style="font-weight: bold;">:scope</span> agenda <span style="font-weight: bold;">:tags</span> <span style="font-style: italic;">""</span> <span style="font-weight: bold;">:block</span> today <span style="font-weight: bold;">:step</span> day <span style="font-weight: bold;">:stepskip0</span> true <span style="font-weight: bold;">:fileskip0</span> true))
-
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">org-super-agenda ================</span>
-(org-super-agenda-mode)
-
-(<span style="font-weight: bold;">let</span> ((org-super-agenda-groups
-       '(<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Each group has an implicit boolean OR operator between its selectors.</span>
-         (<span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Today"</span>  <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">Optionally specify section name</span>
-                <span style="font-weight: bold;">:time-grid</span> t  <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">Items that appear on the time grid</span>
-                <span style="font-weight: bold;">:todo</span> <span style="font-style: italic;">"TODAY"</span>)  <span style="font-weight: bold; font-style: italic;">; </span><span style="font-weight: bold; font-style: italic;">Items that have this TODO keyword</span>
-         (<span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Important"</span>
-                <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Single arguments given alone</span>
-                <span style="font-weight: bold;">:tag</span> <span style="font-style: italic;">"bills"</span>
-                <span style="font-weight: bold;">:priority</span> <span style="font-style: italic;">"A"</span>)
-         (<span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"WIP"</span>
-                <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Single arguments given alone</span>
-                <span style="font-weight: bold;">:todo</span> <span style="font-style: italic;">"WIP"</span>)
-         <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Set order of multiple groups at once</span>
-         (<span style="font-weight: bold;">:order-multi</span> (2 (<span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Shopping in town"</span>
-                                 <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Boolean AND group matches items that match all subgroups</span>
-                                 <span style="font-weight: bold;">:and</span> (<span style="font-weight: bold;">:tag</span> <span style="font-style: italic;">"shopping"</span> <span style="font-weight: bold;">:tag</span> <span style="font-style: italic;">"@town"</span>))
-                          (<span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Food-related"</span>
-                                 <span style="font-weight: bold;">:habit</span> t
-                                 <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Multiple args given in list with implicit OR</span>
-                                 <span style="font-weight: bold;">:tag</span> (<span style="font-style: italic;">"food"</span> <span style="font-style: italic;">"dinner"</span>))
-                          (<span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Space-related (non-moon-or-planet-related)"</span>
-                                 <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Regexps match case-insensitively on the entire entry</span>
-                                 <span style="font-weight: bold;">:and</span> (<span style="font-weight: bold;">:regexp</span> (<span style="font-style: italic;">"space"</span> <span style="font-style: italic;">"NASA"</span>)
-                                               <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Boolean NOT also has implicit OR between selectors</span>
-                                               <span style="font-weight: bold;">:not</span> (<span style="font-weight: bold;">:regexp</span> <span style="font-style: italic;">"moon"</span> <span style="font-weight: bold;">:tag</span> <span style="font-style: italic;">"planet"</span>)))))
-         <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Groups supply their own section names when none are given</span>
-         (<span style="font-weight: bold;">:todo</span> (<span style="font-style: italic;">"SOMEDAY"</span> <span style="font-style: italic;">"TO-READ"</span> <span style="font-style: italic;">"TO-WRITE"</span> <span style="font-style: italic;">"CHECK"</span> <span style="font-style: italic;">"TO-WATCH"</span> <span style="font-style: italic;">"WATCHING"</span>)
-                <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Show this group at the end of the agenda (since it has the</span>
-                <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">highest number). If you specified this group last, items</span>
-                <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">with these todo keywords that e.g. have priority A would be</span>
-                <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">displayed in that group instead, because items are grouped</span>
-                <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">out in the order the groups are listed.</span>
-                <span style="font-weight: bold;">:order</span> 9)
-         (<span style="font-weight: bold;">:priority&lt;=</span> <span style="font-style: italic;">"B"</span>
-                      <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Show this section after "Today" and "Important", because</span>
-                      <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">their order is unspecified, defaulting to 0. Sections</span>
-                      <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">are displayed lowest-number-first.</span>
-                      <span style="font-weight: bold;">:order</span> 1)
-         <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">After the last group, the agenda will display items that didn't</span>
-         <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">match any of these groups, with the default order position of 99</span>
-         )))
-  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(org-agenda nil "a")</span>
-  )
-
-(<span style="font-weight: bold;">setq</span> spacemacs-theme-org-agenda-height nil
-      org-agenda-skip-scheduled-if-done t
-      org-agenda-skip-deadline-if-done t
-      org-agenda-include-deadlines t
-      org-agenda-include-diary t
-      org-agenda-block-separator nil
-      org-agenda-compact-blocks t
-      org-agenda-start-with-log-mode t
-      org-habit-following-days 7
-      org-habit-preceding-days 10
-      org-habit-graph-column 80 <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#35211;&#20986;&#12375;&#12364;&#38560;&#12428;&#12427;&#12383;&#12417;</span>
-      org-habit-show-habits t)
-
-(<span style="font-weight: bold;">setq</span> org-agenda-custom-commands
-      '((<span style="font-style: italic;">"z"</span> <span style="font-style: italic;">"Super zaen view"</span>
-         ((agenda <span style="font-style: italic;">""</span> ((org-agenda-span 'day)
-                      (org-super-agenda-groups
-                       '((<span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"&#127959;&#65039;Today"</span>
-                                <span style="font-weight: bold;">:time-grid</span> t
-                                <span style="font-weight: bold;">:date</span> today
-                                <span style="font-weight: bold;">:scheduled</span> today
-                                <span style="font-weight: bold;">:order</span> 1)
-                         (<span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"&#127861;Future"</span>
-                                <span style="font-weight: bold;">:deadline</span> future
-                                <span style="font-weight: bold;">:scheduled</span> future
-                                <span style="font-weight: bold;">:order</span> 10)
-                         (<span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"Overdue"</span>
-                                <span style="font-weight: bold;">:deadline</span> past
-                                <span style="font-weight: bold;">:order</span> 10)
-                         (<span style="font-weight: bold;">:habit</span> t)
-                         (<span style="font-weight: bold;">:log</span> t)
-                         (<span style="font-weight: bold;">:discard</span> (<span style="font-weight: bold;">:anything</span>))))))
-          (alltodo <span style="font-style: italic;">""</span> ((org-agenda-overriding-header <span style="font-style: italic;">""</span>)
-                       (org-super-agenda-groups
-                        '((<span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"&#9654;&#65039;Work In Progress"</span>
-                                 <span style="font-weight: bold;">:todo</span> <span style="font-style: italic;">"WIP"</span>
-                                 <span style="font-weight: bold;">:order</span> 1)
-                          (<span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"&#9997;To write"</span>
-                                 <span style="font-weight: bold;">:tag</span> <span style="font-style: italic;">"Write"</span>
-                                 <span style="font-weight: bold;">:order</span> 12)
-                          (<span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"&#128213;To read"</span>
-                                 <span style="font-weight: bold;">:tag</span> <span style="font-style: italic;">"Read"</span>
-                                 <span style="font-weight: bold;">:order</span> 14)
-                          (<span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"&#9997;Things I Don't Know"</span>
-                                 <span style="font-weight: bold;">:tag</span> <span style="font-style: italic;">"DontKnow"</span>
-                                 <span style="font-weight: bold;">:order</span> 15)
-                          (<span style="font-weight: bold;">:name</span> <span style="font-style: italic;">"&#128740;&#65039;Train"</span>
-                                 <span style="font-weight: bold;">:tag</span> <span style="font-style: italic;">"Train"</span>
-                                 <span style="font-weight: bold;">:order</span> 18)
-                          (<span style="font-weight: bold;">:discard</span> (<span style="font-weight: bold;">:anything</span> t))))))))))
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-orgd0b1d3c" class="outline-2">
-<h2 id="orgd0b1d3c"><span class="section-number-2">3.</span> pomodoro</h2>
-<div class="outline-text-2" id="text-3">
 <p>
 ポモドーロ用の設定。
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 1: </span>基本設定</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">org-pomodoro</span>)
+<label class="org-src-name"><span class="listing-number">Listing 2: </span>基本設定</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">org-pomodoro</span>)
 (define-key global-map [insert] 'org-pomodoro)
 
 (<span style="font-weight: bold;">setq</span> org-pomodoro-short-break-length 0)
@@ -522,9 +357,9 @@ agenda用の設定。
 </div>
 </div>
 
-<div id="outline-container-orgc68ccd9" class="outline-2">
-<h2 id="orgc68ccd9"><span class="section-number-2">4.</span> Font</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org5c89c92" class="outline-2">
+<h2 id="org5c89c92"><span class="section-number-2">3.</span> Font</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 フォント設定。
 </p>
@@ -606,9 +441,9 @@ agenda用の設定。
 </div>
 </div>
 
-<div id="outline-container-org77aa265" class="outline-2">
-<h2 id="org77aa265"><span class="section-number-2">5.</span> simple</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-org4e162e7" class="outline-2">
+<h2 id="org4e162e7"><span class="section-number-2">4.</span> simple</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 未分類の設定。最初から入っているものの設定。
 </p>
@@ -792,9 +627,9 @@ agenda用の設定。
 </div>
 </div>
 
-<div id="outline-container-org7c5a28c" class="outline-2">
-<h2 id="org7c5a28c"><span class="section-number-2">6.</span> packages</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-org6edb289" class="outline-2">
+<h2 id="org6edb289"><span class="section-number-2">5.</span> packages</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 未分類の設定。拡張設定。
 </p>
@@ -1427,9 +1262,9 @@ agenda用の設定。
 </div>
 </div>
 
-<div id="outline-container-orgcec0635" class="outline-2">
-<h2 id="orgcec0635"><span class="section-number-2">7.</span> Rails</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-org102e001" class="outline-2">
+<h2 id="org102e001"><span class="section-number-2">6.</span> Rails</h2>
+<div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 1: </span>基本設定</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;;; </span><span style="font-weight: bold; font-style: italic;">ruby_on_rails&#12514;&#12540;&#12489;</span>
 (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">projectile-rails</span>)
@@ -1548,9 +1383,9 @@ agenda用の設定。
 </div>
 </div>
 </div>
-<div id="outline-container-orgb5393db" class="outline-2">
-<h2 id="orgb5393db"><span class="section-number-2">8.</span> go-mode</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-org801693e" class="outline-2">
+<h2 id="org801693e"><span class="section-number-2">7.</span> go-mode</h2>
+<div class="outline-text-2" id="text-7">
 <p>
 goの設定。
 </p>
@@ -1586,9 +1421,9 @@ goの設定。
 </div>
 </div>
 
-<div id="outline-container-org524cc08" class="outline-2">
-<h2 id="org524cc08"><span class="section-number-2">9.</span> python-mode</h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-org6262c4a" class="outline-2">
+<h2 id="org6262c4a"><span class="section-number-2">8.</span> python-mode</h2>
+<div class="outline-text-2" id="text-8">
 <p>
 pythonの設定。
 </p>
@@ -1607,9 +1442,9 @@ pythonの設定。
 </div>
 </div>
 </div>
-<div id="outline-container-org555e8d8" class="outline-2">
-<h2 id="org555e8d8"><span class="section-number-2">10.</span> haskell-mode</h2>
-<div class="outline-text-2" id="text-10">
+<div id="outline-container-org3f11753" class="outline-2">
+<h2 id="org3f11753"><span class="section-number-2">9.</span> haskell-mode</h2>
+<div class="outline-text-2" id="text-9">
 <p>
 haskellの設定。
 </p>
@@ -1627,9 +1462,9 @@ haskellの設定。
 </div>
 </div>
 
-<div id="outline-container-org27a746c" class="outline-2">
-<h2 id="org27a746c"><span class="section-number-2">11.</span> web-mode</h2>
-<div class="outline-text-2" id="text-11">
+<div id="outline-container-org79f641c" class="outline-2">
+<h2 id="org79f641c"><span class="section-number-2">10.</span> web-mode</h2>
+<div class="outline-text-2" id="text-10">
 <p>
 web-modeはhtmlライクな複数の言語に対応するモード。
 </p>
@@ -1750,9 +1585,9 @@ web-modeはhtmlライクな複数の言語に対応するモード。
 </div>
 </div>
 </div>
-<div id="outline-container-org160c21f" class="outline-2">
-<h2 id="org160c21f"><span class="section-number-2">12.</span> LSP</h2>
-<div class="outline-text-2" id="text-12">
+<div id="outline-container-org44db02e" class="outline-2">
+<h2 id="org44db02e"><span class="section-number-2">11.</span> LSP</h2>
+<div class="outline-text-2" id="text-11">
 <p>
 lsp-modeはLSPを使えるようにするパッケージ。
 </p>
@@ -1866,9 +1701,9 @@ lsp-modeはLSPを使えるようにするパッケージ。
 </div>
 </div>
 
-<div id="outline-container-org668baca" class="outline-2">
-<h2 id="org668baca"><span class="section-number-2">13.</span> corfu</h2>
-<div class="outline-text-2" id="text-13">
+<div id="outline-container-org3f001eb" class="outline-2">
+<h2 id="org3f001eb"><span class="section-number-2">12.</span> corfu</h2>
+<div class="outline-text-2" id="text-12">
 <p>
 corfuはシンプルな補完を提供するパッケージ。
 </p>
@@ -1984,9 +1819,9 @@ corfuはシンプルな補完を提供するパッケージ。
 </div>
 </div>
 
-<div id="outline-container-orgff2dbed" class="outline-2">
-<h2 id="orgff2dbed"><span class="section-number-2">14.</span> ivy</h2>
-<div class="outline-text-2" id="text-14">
+<div id="outline-container-org4a4b999" class="outline-2">
+<h2 id="org4a4b999"><span class="section-number-2">13.</span> ivy</h2>
+<div class="outline-text-2" id="text-13">
 <p>
 ivyはさまざまなインクリメンタル検索を追加するパッケージ。
 </p>
@@ -2084,9 +1919,9 @@ ivyはさまざまなインクリメンタル検索を追加するパッケー�
 </div>
 </div>
 </div>
-<div id="outline-container-orgcd41353" class="outline-2">
-<h2 id="orgcd41353"><span class="section-number-2">15.</span> counsel</h2>
-<div class="outline-text-2" id="text-15">
+<div id="outline-container-org52779fa" class="outline-2">
+<h2 id="org52779fa"><span class="section-number-2">14.</span> counsel</h2>
+<div class="outline-text-2" id="text-14">
 <p>
 counselはさまざまなインクリメンタル検索を可能にするパッケージ。
 </p>
@@ -2113,9 +1948,9 @@ counselはさまざまなインクリメンタル検索を可能にするパッ�
 </div>
 </div>
 </div>
-<div id="outline-container-org2df32c3" class="outline-2">
-<h2 id="org2df32c3"><span class="section-number-2">16.</span> ag</h2>
-<div class="outline-text-2" id="text-16">
+<div id="outline-container-orgcda659c" class="outline-2">
+<h2 id="orgcda659c"><span class="section-number-2">15.</span> ag</h2>
+<div class="outline-text-2" id="text-15">
 <p>
 agはgrepより高速な検索ツール。
 </p>
@@ -2132,9 +1967,9 @@ agはgrepより高速な検索ツール。
 </div>
 </div>
 </div>
-<div id="outline-container-org978a275" class="outline-2">
-<h2 id="org978a275"><span class="section-number-2">17.</span> eldoc</h2>
-<div class="outline-text-2" id="text-17">
+<div id="outline-container-orga0ab893" class="outline-2">
+<h2 id="orga0ab893"><span class="section-number-2">16.</span> eldoc</h2>
+<div class="outline-text-2" id="text-16">
 <p>
 eldocは関数ドキュメントを表示するパッケージ。
 </p>
@@ -2149,9 +1984,9 @@ eldocは関数ドキュメントを表示するパッケージ。
 </div>
 </div>
 </div>
-<div id="outline-container-org13c5343" class="outline-2">
-<h2 id="org13c5343"><span class="section-number-2">18.</span> eshell</h2>
-<div class="outline-text-2" id="text-18">
+<div id="outline-container-org622dad3" class="outline-2">
+<h2 id="org622dad3"><span class="section-number-2">17.</span> eshell</h2>
+<div class="outline-text-2" id="text-17">
 <p>
 eshellはEmacs Lispで実装されたシェル。
 </p>
@@ -2194,9 +2029,9 @@ eshellはEmacs Lispで実装されたシェル。
 </div>
 </div>
 
-<div id="outline-container-orgcb712a7" class="outline-2">
-<h2 id="orgcb712a7"><span class="section-number-2">19.</span> Vterm</h2>
-<div class="outline-text-2" id="text-19">
+<div id="outline-container-orge11f465" class="outline-2">
+<h2 id="orge11f465"><span class="section-number-2">18.</span> Vterm</h2>
+<div class="outline-text-2" id="text-18">
 <p>
 vtermはCで実装されたシェル。
 </p>
@@ -2229,9 +2064,9 @@ vtermはCで実装されたシェル。
 </div>
 </div>
 </div>
-<div id="outline-container-org07a834d" class="outline-2">
-<h2 id="org07a834d"><span class="section-number-2">20.</span> Theme</h2>
-<div class="outline-text-2" id="text-20">
+<div id="outline-container-orgc8bb7bc" class="outline-2">
+<h2 id="orgc8bb7bc"><span class="section-number-2">19.</span> Theme</h2>
+<div class="outline-text-2" id="text-19">
 <p>
 いい感じのテーマを設定する。割と白いテーマと黒いテーマを切り替えるのですぐ切り替えられるようにする。
 </p>
@@ -2398,9 +2233,9 @@ describe-minor-mode-from-indicator で調べられる。
 </div>
 </div>
 
-<div id="outline-container-orgd6b219a" class="outline-2">
-<h2 id="orgd6b219a"><span class="section-number-2">21.</span> EXWM</h2>
-<div class="outline-text-2" id="text-21">
+<div id="outline-container-org28b1e66" class="outline-2">
+<h2 id="org28b1e66"><span class="section-number-2">20.</span> EXWM</h2>
+<div class="outline-text-2" id="text-20">
 <p>
 EXWMはEmacs上で動くウィンドウマネージャ。
 </p>
@@ -2544,9 +2379,9 @@ EXWMはEmacs上で動くウィンドウマネージャ。
 </div>
 </div>
 </div>
-<div id="outline-container-org5043203" class="outline-2">
-<h2 id="org5043203"><span class="section-number-2">22.</span> Polybar</h2>
-<div class="outline-text-2" id="text-22">
+<div id="outline-container-orgea1749e" class="outline-2">
+<h2 id="orgea1749e"><span class="section-number-2">21.</span> Polybar</h2>
+<div class="outline-text-2" id="text-21">
 <p>
 polybarは柔軟にカスタマイズできるメニューバーを表示するソフトウェア。polybarとの連携を記載する。
 </p>
@@ -2596,9 +2431,9 @@ polybarは柔軟にカスタマイズできるメニューバーを表示する�
 </div>
 </div>
 </div>
-<div id="outline-container-org4fcbffa" class="outline-2">
-<h2 id="org4fcbffa"><span class="section-number-2">23.</span> Workspace</h2>
-<div class="outline-text-2" id="text-23">
+<div id="outline-container-org5a798f7" class="outline-2">
+<h2 id="org5a798f7"><span class="section-number-2">22.</span> Workspace</h2>
+<div class="outline-text-2" id="text-22">
 <p>
 1~9のワークスペースを作成し、番号で切り替えられるようにする。
 </p>
@@ -2620,9 +2455,9 @@ polybarは柔軟にカスタマイズできるメニューバーを表示する�
 </div>
 </div>
 </div>
-<div id="outline-container-org7155ceb" class="outline-2">
-<h2 id="org7155ceb"><span class="section-number-2">24.</span> Hydra</h2>
-<div class="outline-text-2" id="text-24">
+<div id="outline-container-org71f7d8a" class="outline-2">
+<h2 id="org71f7d8a"><span class="section-number-2">23.</span> Hydra</h2>
+<div class="outline-text-2" id="text-23">
 <p>
 Hydraはカスタマイズ可能なキー表示を追加するパッケージ。キーバインド空間を制限しつつ、入力のヒントを表示して使いやすくする。
 </p>
@@ -2752,9 +2587,9 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
 </div>
 </div>
 
-<div id="outline-container-org02402ab" class="outline-2">
-<h2 id="org02402ab"><span class="section-number-2">25.</span> Display Manager</h2>
-<div class="outline-text-2" id="text-25">
+<div id="outline-container-org1e80cb2" class="outline-2">
+<h2 id="org1e80cb2"><span class="section-number-2">24.</span> Display Manager</h2>
+<div class="outline-text-2" id="text-24">
 <p>
 OS操作の便利関数。
 </p>
@@ -2812,9 +2647,9 @@ OS操作の便利関数。
 </p>
 </div>
 </div>
-<div id="outline-container-org8269180" class="outline-2">
-<h2 id="org8269180"><span class="section-number-2">26.</span> Helper</h2>
-<div class="outline-text-2" id="text-26">
+<div id="outline-container-org4e31df3" class="outline-2">
+<h2 id="org4e31df3"><span class="section-number-2">25.</span> Helper</h2>
+<div class="outline-text-2" id="text-25">
 <p>
 その他の便利関数。
 </p>
@@ -2910,7 +2745,7 @@ OS操作の便利関数。
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2022-12-18 Sun 13:42</p>
+<p class="date">Created: 2022-12-18 Sun 13:44</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
