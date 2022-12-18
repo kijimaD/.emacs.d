@@ -42,7 +42,6 @@
 (load "haskell-init")
 (load "web-mode-init")
 (load "lsp-init")
-(load "corfu-init")
 
 (load "index")
 
