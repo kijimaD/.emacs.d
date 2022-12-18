@@ -1,4 +1,4 @@
-#+title: Kijimad Emacs Config
+#+title: kijimad Emacs Config
 #+SETUPFILE: https://gitlab.com/OlMon/org-themes/-/raw/master/src/bigblow_inline/bigblow_inline.theme
 
 
