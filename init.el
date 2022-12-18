@@ -43,7 +43,6 @@
 (load "web-mode-init")
 (load "lsp-init")
 (load "corfu-init")
-(load "ivy-init")
 
 (load "index")
 

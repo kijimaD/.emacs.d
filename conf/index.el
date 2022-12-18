@@ -1,3 +1,78 @@
+(when (require 'ivy-hydra nil t)
+  (setq ivy-read-action-function #'ivy-hydra-read-action))
+
+(setq magit-completing-read-function 'ivy-completing-read)
+
+(when (setq enable-recursive-minibuffers t)
+  (minibuffer-depth-indicate-mode 1))
+
+(define-key ivy-minibuffer-map (kbd "<escape>") 'minibuffer-keyboard-quit)
+
+(setq ivy-truncate-lines nil)
+
+(setq ivy-wrap t)
+
+(setq ivy-count-format "%d -> %d ")
+
+(setq ivy-use-selectable-prompt t)
+
+(with-eval-after-load "ivy"
+  (setf (alist-get 'counsel-mark-ring ivy-sort-functions-alist) nil))
+
+(all-the-icons-ivy-rich-mode 1)
+(ivy-rich-mode 1)
+
+(custom-set-faces
+ '(ivy-current-match
+   ((((class color) (background light))
+     :background "#FFF3F3" :distant-foreground "#000000")
+    (((class color) (background dark))
+     :background "#404040" :distant-foreground "#abb2bf")))
+ '(ivy-minibuffer-match-face-1
+   ((((class color) (background light)) :foreground "#666666")
+    (((class color) (background dark)) :foreground "#999999")))
+ '(ivy-minibuffer-match-face-2
+   ((((class color) (background light)) :foreground "#c03333" :underline t)
+    (((class color) (background dark)) :foreground "#e04444" :underline t)))
+ '(ivy-minibuffer-match-face-3
+   ((((class color) (background light)) :foreground "#8585ff" :underline t)
+    (((class color) (background dark)) :foreground "#7777ff" :underline t)))
+ '(ivy-minibuffer-match-face-4
+   ((((class color) (background light)) :foreground "#439943" :underline t)
+    (((class color) (background dark)) :foreground "#33bb33" :underline t))))
+
+(when (require 'smex nil t)
+  (setq smex-history-length 35)
+  (setq smex-completion-method 'ivy))
+
+(ivy-mode 1)
+
+(global-set-key (kbd "C-x C-b") 'counsel-switch-buffer)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+(global-set-key (kbd "C-x C-u") 'ivy-resume)
+(global-set-key (kbd "C-x C-g") 'counsel-git-grep)
+(global-set-key (kbd "C-x r i") 'counsel-register)
+(global-set-key (kbd "M-y") 'counsel-yank-pop)
+(global-set-key (kbd "M-i") 'swiper-thing-at-point)
+
+(setq counsel-search-engine 'google)
+
+(counsel-mode 1)
+
+(defun ad:counsel-ag (f &optional initial-input initial-directory extra-ag-args ag-prompt caller)
+  (apply f (or initial-input (ivy-thing-at-point))
+         (unless current-prefix-arg
+           (or initial-directory default-directory))
+         extra-ag-args ag-prompt caller))
+
+(advice-add 'counsel-ag :around #'ad:counsel-ag)
+
+(with-eval-after-load "eldoc"
+  (defun ad:eldoc-message (f &optional string)
+    (unless (active-minibuffer-window)
+      (funcall f string)))
+  (advice-add 'eldoc-message :around #'ad:eldoc-message))
+
 (defun efs/configure-eshell ()
   ;; Save command history when commands are entered
   (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
