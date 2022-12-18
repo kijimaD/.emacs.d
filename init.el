@@ -29,7 +29,6 @@
 (setq load-path (cons "conf/" load-path))
 (ignore-errors (load "local-init-example"))
 (ignore-errors (load "local-init"))
-(load "org-init")
 
 (load "index")
 
