@@ -38,7 +38,6 @@
 (load "package-init")
 (load "rails-init")
 (load "go-init")
-(load "python-init")
 
 (load "index")
 
