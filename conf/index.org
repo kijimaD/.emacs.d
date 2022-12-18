@@ -1,6 +1,11 @@
 #+title: kijimad Emacs Config
 #+SETUPFILE: https://gitlab.com/OlMon/org-themes/-/raw/master/src/bigblow_inline/bigblow_inline.theme
 
+* Emacs
+Emacsの文芸的設定。
+
+- [[https://github.com/kijimaD/.emacs.d][Repository]]
+
 * ivy
 ivyはさまざまなインクリメンタル検索を追加するパッケージ。
 
@@ -92,6 +97,8 @@ ivyはさまざまなインクリメンタル検索を追加するパッケー�
   (ivy-mode 1)
 #+end_src
 * counsel
+counselはさまざまなインクリメンタル検索を可能にするパッケージ。
+
 #+caption: キーバインド
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-x C-b") 'counsel-switch-buffer)
@@ -113,6 +120,8 @@ ivyはさまざまなインクリメンタル検索を追加するパッケー�
   (counsel-mode 1)
 #+end_src
 * ag
+agはgrepより高速な検索ツール。
+
 #+caption: agのデフォルト入力値をthing-at-pointにする
 #+begin_src emacs-lisp
   (defun ad:counsel-ag (f &optional initial-input initial-directory extra-ag-args ag-prompt caller)
@@ -124,6 +133,8 @@ ivyはさまざまなインクリメンタル検索を追加するパッケー�
   (advice-add 'counsel-ag :around #'ad:counsel-ag)
 #+end_src
 * eldoc
+eldocは関数ドキュメントを表示するパッケージ。
+
 #+caption: eldocをミニバッファに表示する
 #+begin_src emacs-lisp
   (with-eval-after-load "eldoc"
@@ -199,6 +210,8 @@ vtermはCで実装されたシェル。
                  (window-height . 0.3))))
 #+end_src
 * Theme
+いい感じのテーマを設定する。割と白いテーマと黒いテーマを切り替えるのですぐ切り替えられるようにする。
+
 #+caption: doom themeを読み込み
 #+begin_src emacs-lisp
   (require 'doom-themes)
@@ -536,9 +549,8 @@ polybarは柔軟にカスタマイズできるメニューバーを表示する�
   (add-hook 'exwm-workspace-switch-hook #'kd/send-polybar-exwm-workspace)
 #+end_src
 * Workspace
-:PROPERTIES:
-:ID:       ca11b45d-81a2-4759-93f8-0ff056d15df8
-:END:
+1~9のワークスペースを作成し、番号で切り替えられるようにする。
+
 #+caption: モード初期化
 #+begin_src emacs-lisp
   (require 'perspective)
@@ -558,7 +570,7 @@ polybarは柔軟にカスタマイズできるメニューバーを表示する�
 :PROPERTIES:
 :ID:       0e450475-54cf-432d-8a75-d8a55b6c83bf
 :END:
-Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
+Hydraはカスタマイズ可能なキー表示を追加するパッケージ。キーバインド空間を制限しつつ、入力のヒントを表示して使いやすくする。
 
 #+caption: グローバルに便利なメニューを追加する
 #+begin_src emacs-lisp
@@ -739,6 +751,9 @@ OS操作の便利関数。
 :PROPERTIES:
 :ID:       5d064781-26b9-451d-86a5-11071e388796
 :END:
+
+その他の便利関数。
+
 #+caption: 前のマークに戻る
 #+begin_src emacs-lisp
   (defun my-exchange-point-and-mark ()
