@@ -6,6 +6,54 @@ Emacsの文芸的設定。
 
 - [[https://github.com/kijimaD/.emacs.d][Repository]]
 
+* LSP
+lsp-modeはLSPを使えるようにするパッケージ。
+
+#+caption: metalがインストールできないので確認を無効化する
+#+begin_src emacs-lisp
+  (setq lsp-verify-signature nil)
+#+end_src
+
+#+caption: 言語共通設定
+#+begin_src emacs-lisp
+  (use-package flycheck
+    :init (global-flycheck-mode))
+
+  (use-package lsp-mode
+    :custom
+    (lsp-completion-provider :none)
+    (lsp-prefer-flymake nil)
+    (lsp-print-io nil)
+    (lsp-trace nil)
+    (lsp-print-performance nil)
+    (lsp-auto-guess-root t)
+    (lsp-document-sync-method 'incremental)
+    (lsp-response-timeout 5)
+    :init
+    (defun my/lsp-mode-setup-completion ()
+      (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+            '(orderless))) ;; Configure orderless
+    :hook
+    (scala-mode . lsp)
+    (clojure-mode . lsp)
+    (c-mode . lsp)
+    (c++-mode . lsp)
+    (rust-mode . lsp)
+    (go-mode . lsp)
+    (lsp-mode . lsp-lens-mode)
+    (lsp-mode . lsp-completion-mode)
+    (lsp-mode . lsp-ui-mode)
+    (lsp-completion-mode . my/lsp-mode-setup-completion)
+    :config
+    ;; Uncomment following section if you would like to tune lsp-mode performance according to
+    ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
+    ;;       (setq gc-cons-threshold 100000000) ;; 100mb
+    ;;       (setq read-process-output-max (* 1024 1024)) ;; 1mb
+    ;;       (setq lsp-idle-delay 0.500)
+    ;;       (setq lsp-log-io nil)
+    )
+#+end_src
+
 * corfu
 corfuはシンプルな補完を提供するパッケージ。
 
