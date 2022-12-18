@@ -40,6 +40,12 @@ jobs:
     - name: Check startup
       run: ./test-startup.sh
 
+    - name: Generate elisp
+      run: make gen-el
+
+    - name: Check diff
+      run: test -z "$(git status -s)"
+
     - name: Generate HTML
       run: make gen-html
 
