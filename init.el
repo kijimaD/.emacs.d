@@ -36,7 +36,6 @@
 (load "font-init")
 (load "simple-init")
 (load "package-init")
-(load "rails-init")
 
 (load "index")
 

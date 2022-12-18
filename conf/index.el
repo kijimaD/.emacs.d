@@ -760,7 +760,6 @@
       ("8" (lambda nil (interactive) (persp-switch (int-to-string 8))) "Main")
       ("9" (lambda nil (interactive) (persp-switch (int-to-string 9))) "Blueberry"))))
 
-  (define-key projectile-rails-mode-map (kbd "C-c r") 'pretty-hydra-projectile-rails-find/body)
   (define-key global-map (kbd "<henkan>") 'pretty-hydra-henkan/body))
 
 (with-eval-after-load 'pretty-hydra
