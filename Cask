@@ -29,6 +29,7 @@
 (depends-on "coffee-mode")
 (depends-on "command-log-mode")
 (depends-on "corfu")
+(depends-on "corfu-doc")
 (depends-on "counsel")
 (depends-on "counsel-gtags")
 (depends-on "counsel-projectile")

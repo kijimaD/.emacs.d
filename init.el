@@ -1,4 +1,5 @@
-(setq debug-on-error t)
+;; 謎のエラーが出てるのでとりあえずコメントアウト
+;; (setq debug-on-error t)
 
 ;; The default is 800 kilobytes.  Measured in bytes.
 (setq gc-cons-threshold (* 100 1024 1024))

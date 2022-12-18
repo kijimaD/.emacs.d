@@ -1248,8 +1248,7 @@
         (lambda (str) (orderless--highlight affe-orderless-regexp str))))
 (setq affe-regexp-compiler #'affe-orderless-regexp-compiler)
 
-(use-package corfu-doc
-  :hook (corfu-mode . corfu-doc-mode))
+(add-hook 'corfu-mode-hook 'corfu-doc-mode)
 
 (when (require 'ivy-hydra nil t)
   (setq ivy-read-action-function #'ivy-hydra-read-action))
