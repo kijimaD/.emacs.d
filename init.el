@@ -35,7 +35,6 @@
 (load "ob-scala")
 (load "font-init")
 (load "simple-init")
-(load "package-init")
 
 (load "index")
 
