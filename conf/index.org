@@ -6,7 +6,7 @@
 eshellはEmacs Lispで実装されたシェル。
 
 #+caption: eshellの設定を追加する
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp
   (defun efs/configure-eshell ()
     ;; Save command history when commands are entered
     (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
@@ -16,7 +16,6 @@ eshellはEmacs Lispで実装されたシェル。
 
     ;; Bind some useful keys for evil-mode
     ;; (define-key eshell-mode-map (kbd "M-r") 'helm-eshell-history)
-
     (setq eshell-history-size         10000
           eshell-buffer-maximum-lines 10000
           eshell-hist-ignoredups t
@@ -35,7 +34,7 @@ eshellはEmacs Lispで実装されたシェル。
 #+end_src
 
 #+caption: eshellのサジェストを設定する
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp
   (add-hook 'eshell-first-time-mode-hook 'esh-autosuggest-mode)
   (setq esh-autosuggest-delay 0.5)
 #+end_src
@@ -111,7 +110,7 @@ doom themeはモダンなテーマ集。
 - https://github.com/purcell/emacs.d
 
 #+caption: モードライン設定
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp
   (doom-modeline-mode)
 
   ;; 表示項目の設定
@@ -141,7 +140,7 @@ doom themeはモダンなテーマ集。
 #+end_src
 
 #+caption: modus themeのカスタマイズ設定
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp
   (defun kd/set-modus-face ()
     (setq modus-themes-slanted-constructs t
           modus-themes-bold-constructs t
@@ -182,7 +181,7 @@ doom themeはモダンなテーマ集。
 #+end_src
 
 #+caption: モードラインからマイナーモードを消す
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp
   (setq my-hidden-minor-modes
         '(
           abbrev-mode
