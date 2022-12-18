@@ -33,7 +33,6 @@
 (load "agenda-init")
 (load "pomodoro-init")
 (load "ob-rust")
-(load "ob-scala")
 
 (load "index")
 
