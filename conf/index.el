@@ -330,7 +330,6 @@
 (setq affe-regexp-compiler #'affe-orderless-regexp-compiler)
 
 (use-package corfu-doc
-  :straight (:host github :repo "galeo/corfu-doc")
   :hook (corfu-mode . corfu-doc-mode))
 
 (when (require 'ivy-hydra nil t)
