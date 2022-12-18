@@ -31,7 +31,6 @@
 (ignore-errors (load "local-init"))
 (load "org-init")
 (load "agenda-init")
-(load "pomodoro-init")
 
 (load "index")
 
