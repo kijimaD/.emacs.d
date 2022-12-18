@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-12-18 Sun 04:08 -->
+<!-- 2022-12-18 Sun 04:10 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>kijimad Emacs Config</title>
@@ -237,23 +237,23 @@ if (typeof HS_STARTUP_FOLDED === 'undefined') {    var HS_STARTUP_FOLDED = false
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgef229c1">eshell</a></li>
-<li><a href="#org1947f44">Vterm</a></li>
-<li><a href="#org5e11c21">Theme</a></li>
-<li><a href="#orgece8f0c">EXWM</a></li>
-<li><a href="#orgcb06c8d">Polybar</a></li>
-<li><a href="#org6e35b8c">Workspace</a></li>
-<li><a href="#org302b1c3">Hydra</a></li>
-<li><a href="#org61a6750">Display Manager</a></li>
-<li><a href="#orgb14b9be">Helper</a></li>
+<li><a href="#orgaf87279">eshell</a></li>
+<li><a href="#orgfb50be4">Vterm</a></li>
+<li><a href="#org943a36e">Theme</a></li>
+<li><a href="#orgd581364">EXWM</a></li>
+<li><a href="#org2f453cc">Polybar</a></li>
+<li><a href="#org161078c">Workspace</a></li>
+<li><a href="#orgb09d2bb">Hydra</a></li>
+<li><a href="#org67e80e4">Display Manager</a></li>
+<li><a href="#org98fa997">Helper</a></li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-orgef229c1" class="outline-2">
-<h2 id="orgef229c1">eshell</h2>
-<div class="outline-text-2" id="text-orgef229c1">
+<div id="outline-container-orgaf87279" class="outline-2">
+<h2 id="orgaf87279">eshell</h2>
+<div class="outline-text-2" id="text-orgaf87279">
 <p>
 eshellはEmacs Lispで実装されたシェル。
 </p>
@@ -296,9 +296,9 @@ eshellはEmacs Lispで実装されたシェル。
 </div>
 </div>
 
-<div id="outline-container-org1947f44" class="outline-2">
-<h2 id="org1947f44">Vterm</h2>
-<div class="outline-text-2" id="text-org1947f44">
+<div id="outline-container-orgfb50be4" class="outline-2">
+<h2 id="orgfb50be4">Vterm</h2>
+<div class="outline-text-2" id="text-orgfb50be4">
 <p>
 vtermはCで実装されたシェル。
 </p>
@@ -331,9 +331,9 @@ vtermはCで実装されたシェル。
 </div>
 </div>
 </div>
-<div id="outline-container-org5e11c21" class="outline-2">
-<h2 id="org5e11c21">Theme</h2>
-<div class="outline-text-2" id="text-org5e11c21">
+<div id="outline-container-org943a36e" class="outline-2">
+<h2 id="org943a36e">Theme</h2>
+<div class="outline-text-2" id="text-org943a36e">
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 5: </span>doom themeを読み込み</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">doom-themes</span>)
 (doom-themes-org-config)
@@ -496,9 +496,9 @@ describe-minor-mode-from-indicator で調べられる。
 </div>
 </div>
 
-<div id="outline-container-orgece8f0c" class="outline-2">
-<h2 id="orgece8f0c">EXWM</h2>
-<div class="outline-text-2" id="text-orgece8f0c">
+<div id="outline-container-orgd581364" class="outline-2">
+<h2 id="orgd581364">EXWM</h2>
+<div class="outline-text-2" id="text-orgd581364">
 <p>
 EXWMはEmacs上で動くウィンドウマネージャ。
 </p>
@@ -642,9 +642,9 @@ EXWMはEmacs上で動くウィンドウマネージャ。
 </div>
 </div>
 </div>
-<div id="outline-container-orgcb06c8d" class="outline-2">
-<h2 id="orgcb06c8d">Polybar</h2>
-<div class="outline-text-2" id="text-orgcb06c8d">
+<div id="outline-container-org2f453cc" class="outline-2">
+<h2 id="org2f453cc">Polybar</h2>
+<div class="outline-text-2" id="text-org2f453cc">
 <p>
 polybarは柔軟にカスタマイズできるメニューバーを表示するソフトウェア。polybarとの連携を記載する。
 </p>
@@ -694,9 +694,9 @@ polybarは柔軟にカスタマイズできるメニューバーを表示する�
 </div>
 </div>
 </div>
-<div id="outline-container-org6e35b8c" class="outline-2">
-<h2 id="org6e35b8c">Workspace</h2>
-<div class="outline-text-2" id="text-org6e35b8c">
+<div id="outline-container-org161078c" class="outline-2">
+<h2 id="org161078c">Workspace</h2>
+<div class="outline-text-2" id="text-org161078c">
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 23: </span>モード初期化</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">perspective</span>)
 (<span style="font-weight: bold;">setq</span> persp-initial-frame-name <span style="font-style: italic;">"1"</span>)
@@ -714,9 +714,9 @@ polybarは柔軟にカスタマイズできるメニューバーを表示する�
 </div>
 </div>
 </div>
-<div id="outline-container-org302b1c3" class="outline-2">
-<h2 id="org302b1c3">Hydra</h2>
-<div class="outline-text-2" id="text-org302b1c3">
+<div id="outline-container-orgb09d2bb" class="outline-2">
+<h2 id="orgb09d2bb">Hydra</h2>
+<div class="outline-text-2" id="text-orgb09d2bb">
 <p>
 Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
 </p>
@@ -847,9 +847,9 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
 </div>
 </div>
 
-<div id="outline-container-org61a6750" class="outline-2">
-<h2 id="org61a6750">Display Manager</h2>
-<div class="outline-text-2" id="text-org61a6750">
+<div id="outline-container-org67e80e4" class="outline-2">
+<h2 id="org67e80e4">Display Manager</h2>
+<div class="outline-text-2" id="text-org67e80e4">
 <p>
 OS操作の便利関数。
 </p>
@@ -907,9 +907,9 @@ OS操作の便利関数。
 </p>
 </div>
 </div>
-<div id="outline-container-orgb14b9be" class="outline-2">
-<h2 id="orgb14b9be">Helper</h2>
-<div class="outline-text-2" id="text-orgb14b9be">
+<div id="outline-container-org98fa997" class="outline-2">
+<h2 id="org98fa997">Helper</h2>
+<div class="outline-text-2" id="text-org98fa997">
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 32: </span>前のマークに戻る</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">my-exchange-point-and-mark</span> ()
   (<span style="font-weight: bold;">interactive</span>)
@@ -1001,7 +1001,7 @@ OS操作の便利関数。
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2022-12-18 Sun 04:08</p>
+<p class="date">Created: 2022-12-18 Sun 04:10</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
