@@ -140,6 +140,7 @@
 (depends-on "ob-git-permalink")
 (depends-on "ob-go")
 (depends-on "ob-graphql")
+(depends-on "ob-rust")
 (depends-on "orderless")
 (depends-on "org-alert")
 (depends-on "org-brain")

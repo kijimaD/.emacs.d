@@ -82,7 +82,6 @@
                                (python . t)
                                (ruby . t)
                                (rust . t)
-                               (scala . t)
                                (shell . t)
                                (sql . t)))
 

@@ -32,7 +32,6 @@
 (load "org-init")
 (load "agenda-init")
 (load "pomodoro-init")
-(load "ob-rust")
 
 (load "index")
 
