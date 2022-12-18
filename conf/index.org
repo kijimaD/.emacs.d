@@ -6,6 +6,38 @@ Emacsの文芸的設定。
 
 - [[https://github.com/kijimaD/.emacs.d][Repository]]
 
+* go-mode
+goの設定。
+
+#+caption: 基本設定
+#+begin_src emacs-lisp
+  (require 'go-mode)
+  (require 'ob-go)
+
+  ;; Go デバッガー
+  (use-package dap-mode
+    :after lsp-mode
+    :hook
+    (lsp-mode . dap-mode)
+    (lsp-mode . dap-ui-mode)
+    :config
+    (dap-mode 1)
+    (require 'dap-hydra)
+    (require 'dap-dlv-go))
+
+  (setq dap-print-io t)
+  (setq lsp-gopls-server-path "~/go/bin/gopls")
+  (setq dap-dlv-go-delve-path "~/go/bin/dlv")
+
+  (setq dap-print-io t)
+
+  (require 'go-eldoc)
+  (add-hook 'go-mode-hook 'go-eldoc-setup)
+
+  (setq gofmt-command "goimports")
+  (add-hook 'before-save-hook 'gofmt-before-save)
+#+end_src
+
 * python-mode
 pythonの設定。
 
@@ -24,6 +56,7 @@ pythonの設定。
 * haskell-mode
 haskellの設定。
 
+#+caption: 基本設定
 #+begin_src emacs-lisp
   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
