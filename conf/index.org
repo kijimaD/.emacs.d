@@ -17,7 +17,7 @@ Emacsの文芸的設定。移行作業中。
           ("org" . "http://orgmode.org/elpa/")))
 #+end_src
 
-* org
+* Org
 org用の設定。
 
 #+caption: 基本設定
@@ -339,7 +339,7 @@ org用の設定。
   (define-key global-map (kbd "C-c d") 'denote-create-note)
 #+end_src
 
-* agenda
+* Agenda
 agenda用の設定。
 
 #+caption: 基本設定
@@ -497,7 +497,7 @@ agenda用の設定。
                             (:discard (:anything t))))))))))
 #+end_src
 
-* pomodoro
+* Pomodoro
 ポモドーロ用の設定。
 
 #+caption: 基本設定
@@ -669,7 +669,7 @@ agenda用の設定。
       ))
 #+end_src
 
-* simple
+* Simple
 未分類の設定。最初から入っているものの設定。
 
 #+caption: 基本設定
@@ -849,7 +849,7 @@ agenda用の設定。
       (blink-cursor-mode -1))
 #+end_src
 
-* packages
+* Packages
 未分類の設定。拡張設定。
 
 #+caption: 全設定
@@ -1595,7 +1595,7 @@ agenda用の設定。
       ;; (robe-start)
       ))
 #+end_src
-* go-mode
+* Go
 goの設定。
 
 #+caption: 基本設定
@@ -1627,8 +1627,8 @@ goの設定。
   (add-hook 'before-save-hook 'gofmt-before-save)
 #+end_src
 
-* python-mode
-pythonの設定。
+* Python
+Pythonの設定。
 
 #+caption: 基本設定
 #+begin_src emacs-lisp
@@ -1642,7 +1642,7 @@ pythonの設定。
   ;; (add-to-list 'ac-sources 'ac-source-filename)
   ;; (add-to-list 'ac-sources 'ac-source-jedi-direct)
 #+end_src
-* haskell-mode
+* Haskell
 haskellの設定。
 
 #+caption: 基本設定
@@ -1656,7 +1656,7 @@ haskellの設定。
    '(haskell-indent-spaces 4))
 #+end_src
 
-* web-mode
+* Web
 web-modeはhtmlライクな複数の言語に対応するモード。
 
 #+begin_src emacs-lisp
