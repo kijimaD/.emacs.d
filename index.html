@@ -204,36 +204,35 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org755c9ff">1. Emacs</a></li>
-<li><a href="#org24f448b">2. Font</a></li>
-<li><a href="#orgfc2f170">3. simple</a></li>
-<li><a href="#org9c6a9d9">4. packages</a></li>
-<li><a href="#org24c2977">5. Rails</a></li>
-<li><a href="#org6d0afd7">6. go-mode</a></li>
-<li><a href="#orgf856345">7. python-mode</a></li>
-<li><a href="#org439a470">8. haskell-mode</a></li>
-<li><a href="#org8260744">9. web-mode</a></li>
-<li><a href="#orga096f43">10. LSP</a></li>
-<li><a href="#org8d0ff6c">11. corfu</a></li>
-<li><a href="#orge22c291">12. ivy</a></li>
-<li><a href="#org67d771f">13. counsel</a></li>
-<li><a href="#orga7d89b1">14. ag</a></li>
-<li><a href="#org3171fad">15. eldoc</a></li>
-<li><a href="#org32edabb">16. eshell</a></li>
-<li><a href="#orgd7161ee">17. Vterm</a></li>
-<li><a href="#orgc60f7a9">18. Theme</a></li>
-<li><a href="#org9e2b970">19. EXWM</a></li>
-<li><a href="#orgb30d828">20. Polybar</a></li>
-<li><a href="#orga163fae">21. Workspace</a></li>
-<li><a href="#orgf196db7">22. Hydra</a></li>
-<li><a href="#org1387af6">23. Display Manager</a></li>
-<li><a href="#org6e36913">24. Helper</a></li>
+<li><a href="#org7048032">1. Emacs</a></li>
+<li><a href="#orgbdcf085">2. simple</a></li>
+<li><a href="#org616b1f0">3. packages</a></li>
+<li><a href="#orgb953ab2">4. Rails</a></li>
+<li><a href="#orge88a028">5. go-mode</a></li>
+<li><a href="#org320c272">6. python-mode</a></li>
+<li><a href="#orga6f5c40">7. haskell-mode</a></li>
+<li><a href="#orgd085ef4">8. web-mode</a></li>
+<li><a href="#org17d23d3">9. LSP</a></li>
+<li><a href="#org020ebd2">10. corfu</a></li>
+<li><a href="#orga3bbebc">11. ivy</a></li>
+<li><a href="#org360eee4">12. counsel</a></li>
+<li><a href="#orgac4b035">13. ag</a></li>
+<li><a href="#orgf31237c">14. eldoc</a></li>
+<li><a href="#org46ad0a1">15. eshell</a></li>
+<li><a href="#orgfccc1c1">16. Vterm</a></li>
+<li><a href="#org2d3b068">17. Theme</a></li>
+<li><a href="#orge9aaf8d">18. EXWM</a></li>
+<li><a href="#org2ebc198">19. Polybar</a></li>
+<li><a href="#org78b8611">20. Workspace</a></li>
+<li><a href="#orgc90c082">21. Hydra</a></li>
+<li><a href="#org4e4faff">22. Display Manager</a></li>
+<li><a href="#orgb508b15">23. Helper</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org755c9ff" class="outline-2">
-<h2 id="org755c9ff"><span class="section-number-2">1.</span> Emacs</h2>
+<div id="outline-container-org7048032" class="outline-2">
+<h2 id="org7048032"><span class="section-number-2">1.</span> Emacs</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Emacsの文芸的設定。移行作業中。
@@ -256,99 +255,15 @@ Emacsの文芸的設定。移行作業中。
 </div>
 </div>
 
-<div id="outline-container-org24f448b" class="outline-2">
-<h2 id="org24f448b"><span class="section-number-2">2.</span> Font</h2>
+<div id="outline-container-orgbdcf085" class="outline-2">
+<h2 id="orgbdcf085"><span class="section-number-2">2.</span> simple</h2>
 <div class="outline-text-2" id="text-2">
-<p>
-フォント設定。
-</p>
-
-<div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 2: </span>基本設定</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(defvar efs/frame-transparency '(90 . 90))</span>
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)</span>
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(add-to-list 'default-frame-alist `(alpha . ,efs/frame-transparency))</span>
-
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Set the font face based on platform</span>
-(<span style="font-weight: bold;">when</span> window-system
-  (<span style="font-weight: bold;">progn</span>
-    (<span style="font-weight: bold;">pcase</span> system-type
-      ((<span style="font-weight: bold;">or</span> 'gnu/linux 'windows-nt 'cygwin)
-       (set-face-attribute 'default nil
-                           <span style="font-weight: bold;">:font</span> <span style="font-style: italic;">"Fira Code"</span>
-                           <span style="font-weight: bold;">:weight</span> 'regular
-                           <span style="font-weight: bold;">:height</span> 100)
-       (set-fontset-font
-        nil 'japanese-jisx0208
-        (font-spec <span style="font-weight: bold;">:family</span> <span style="font-style: italic;">"Hiragino Sans"</span>)))
-      <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Mac</span>
-      ('darwin
-       (set-face-attribute 'default nil
-                           <span style="font-weight: bold;">:font</span> <span style="font-style: italic;">"Fira Mono"</span>
-                           <span style="font-weight: bold;">:height</span> 150)
-       (set-fontset-font
-        nil 'japanese-jisx0208
-        (font-spec <span style="font-weight: bold;">:family</span> <span style="font-style: italic;">"Hiragino Sans"</span>))))))
-
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">"JetBrains Mono"</span>
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">"Iosevka SS08"</span>
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">"Fira Mono"</span>
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">"Fira Code"</span>
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">"Hiragino Sans" -- (japanese)</span>
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">"Hack"</span>
-
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#25991;&#23383;&#12467;&#12540;&#12489; ================</span>
-<span style="font-weight: bold; font-style: italic;">;;</span><span style="font-weight: bold; font-style: italic;">&#12479;&#12540;&#12511;&#12490;&#12523;&#12398;&#25991;&#23383;&#12467;&#12540;&#12489;</span>
-(set-terminal-coding-system 'utf-8)
-<span style="font-weight: bold; font-style: italic;">;;</span><span style="font-weight: bold; font-style: italic;">&#12461;&#12540;&#12508;&#12540;&#12489;&#12363;&#12425;&#20837;&#21147;&#12373;&#12428;&#12427;&#25991;&#23383;&#12467;&#12540;&#12489;</span>
-(set-keyboard-coding-system 'utf-8)
-<span style="font-weight: bold; font-style: italic;">;;</span><span style="font-weight: bold; font-style: italic;">&#12501;&#12449;&#12452;&#12523;&#12398;&#12496;&#12483;&#12501;&#12449;&#12398;&#12487;&#12501;&#12457;&#12523;&#12488;&#25991;&#23383;&#12467;&#12540;&#12489;</span>
-(set-buffer-file-coding-system 'utf-8)
-<span style="font-weight: bold; font-style: italic;">;;</span><span style="font-weight: bold; font-style: italic;">&#12496;&#12483;&#12501;&#12449;&#12398;&#12503;&#12525;&#12475;&#12473;&#12398;&#25991;&#23383;&#12467;&#12540;&#12489;</span>
-(<span style="font-weight: bold;">setq</span> default-buffer-file-coding-system 'utf-8)
-<span style="font-weight: bold; font-style: italic;">;;</span><span style="font-weight: bold; font-style: italic;">&#12501;&#12449;&#12452;&#12523;&#12398;&#25991;&#23383;&#12467;&#12540;&#12489;</span>
-(<span style="font-weight: bold;">setq</span> file-name-coding-system 'utf-8)
-<span style="font-weight: bold; font-style: italic;">;;</span><span style="font-weight: bold; font-style: italic;">&#26032;&#35215;&#20316;&#25104;&#12501;&#12449;&#12452;&#12523;&#12398;&#25991;&#23383;&#12467;&#12540;&#12489;</span>
-(set-default-coding-systems 'utf-8)
-
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#32117;&#25991;&#23383;&#12501;&#12457;&#12531;&#12488; ================</span>
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">--set-emoji-font</span> (frame)
-  <span style="font-style: italic;">"Adjust the font settings of FRAME so Emacs can display emoji properly."</span>
-  (<span style="font-weight: bold;">if</span> (eq system-type 'darwin)
-      <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">For NS/Cocoa</span>
-      (set-fontset-font t 'symbol (font-spec <span style="font-weight: bold;">:family</span> <span style="font-style: italic;">"Apple Color Emoji"</span>) frame 'prepend)
-    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">For Linux</span>
-    (set-fontset-font t 'symbol (font-spec <span style="font-weight: bold;">:family</span> <span style="font-style: italic;">"Symbola"</span>) frame 'prepend)))
-
-(<span style="font-weight: bold;">when</span> window-system
-  (<span style="font-weight: bold;">progn</span>
-    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">GUI&#29992;&#35373;&#23450;</span>
-    (--set-emoji-font nil)
-    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Hook for when a frame is created with emacsclient</span>
-    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">see https://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Frames.html</span>
-    (add-hook 'after-make-frame-functions '--set-emoji-font)
-
-    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">unicodefont</span>
-    (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">unicode-fonts</span>)
-    (unicode-fonts-setup)))
-
-(<span style="font-weight: bold;">when</span> (not window-system)
-  (<span style="font-weight: bold;">progn</span>
-    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">CUI&#29992;&#35373;&#23450;</span>
-    ))
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-orgfc2f170" class="outline-2">
-<h2 id="orgfc2f170"><span class="section-number-2">3.</span> simple</h2>
-<div class="outline-text-2" id="text-3">
 <p>
 未分類の設定。最初から入っているものの設定。
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 1: </span>基本設定</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#25991;&#23383;&#12467;&#12540;&#12489;</span>
+<label class="org-src-name"><span class="listing-number">Listing 2: </span>基本設定</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#25991;&#23383;&#12467;&#12540;&#12489;</span>
 (prefer-coding-system 'utf-8)
 (set-language-environment 'utf-8)
 
@@ -526,9 +441,9 @@ Emacsの文芸的設定。移行作業中。
 </div>
 </div>
 
-<div id="outline-container-org9c6a9d9" class="outline-2">
-<h2 id="org9c6a9d9"><span class="section-number-2">4.</span> packages</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org616b1f0" class="outline-2">
+<h2 id="org616b1f0"><span class="section-number-2">3.</span> packages</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 未分類の設定。拡張設定。
 </p>
@@ -1161,9 +1076,9 @@ Emacsの文芸的設定。移行作業中。
 </div>
 </div>
 
-<div id="outline-container-org24c2977" class="outline-2">
-<h2 id="org24c2977"><span class="section-number-2">5.</span> Rails</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-orgb953ab2" class="outline-2">
+<h2 id="orgb953ab2"><span class="section-number-2">4.</span> Rails</h2>
+<div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 1: </span>基本設定</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;;; </span><span style="font-weight: bold; font-style: italic;">ruby_on_rails&#12514;&#12540;&#12489;</span>
 (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">projectile-rails</span>)
@@ -1282,9 +1197,9 @@ Emacsの文芸的設定。移行作業中。
 </div>
 </div>
 </div>
-<div id="outline-container-org6d0afd7" class="outline-2">
-<h2 id="org6d0afd7"><span class="section-number-2">6.</span> go-mode</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-orge88a028" class="outline-2">
+<h2 id="orge88a028"><span class="section-number-2">5.</span> go-mode</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 goの設定。
 </p>
@@ -1320,9 +1235,9 @@ goの設定。
 </div>
 </div>
 
-<div id="outline-container-orgf856345" class="outline-2">
-<h2 id="orgf856345"><span class="section-number-2">7.</span> python-mode</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-org320c272" class="outline-2">
+<h2 id="org320c272"><span class="section-number-2">6.</span> python-mode</h2>
+<div class="outline-text-2" id="text-6">
 <p>
 pythonの設定。
 </p>
@@ -1341,9 +1256,9 @@ pythonの設定。
 </div>
 </div>
 </div>
-<div id="outline-container-org439a470" class="outline-2">
-<h2 id="org439a470"><span class="section-number-2">8.</span> haskell-mode</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-orga6f5c40" class="outline-2">
+<h2 id="orga6f5c40"><span class="section-number-2">7.</span> haskell-mode</h2>
+<div class="outline-text-2" id="text-7">
 <p>
 haskellの設定。
 </p>
@@ -1361,9 +1276,9 @@ haskellの設定。
 </div>
 </div>
 
-<div id="outline-container-org8260744" class="outline-2">
-<h2 id="org8260744"><span class="section-number-2">9.</span> web-mode</h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-orgd085ef4" class="outline-2">
+<h2 id="orgd085ef4"><span class="section-number-2">8.</span> web-mode</h2>
+<div class="outline-text-2" id="text-8">
 <p>
 web-modeはhtmlライクな複数の言語に対応するモード。
 </p>
@@ -1484,9 +1399,9 @@ web-modeはhtmlライクな複数の言語に対応するモード。
 </div>
 </div>
 </div>
-<div id="outline-container-orga096f43" class="outline-2">
-<h2 id="orga096f43"><span class="section-number-2">10.</span> LSP</h2>
-<div class="outline-text-2" id="text-10">
+<div id="outline-container-org17d23d3" class="outline-2">
+<h2 id="org17d23d3"><span class="section-number-2">9.</span> LSP</h2>
+<div class="outline-text-2" id="text-9">
 <p>
 lsp-modeはLSPを使えるようにするパッケージ。
 </p>
@@ -1600,9 +1515,9 @@ lsp-modeはLSPを使えるようにするパッケージ。
 </div>
 </div>
 
-<div id="outline-container-org8d0ff6c" class="outline-2">
-<h2 id="org8d0ff6c"><span class="section-number-2">11.</span> corfu</h2>
-<div class="outline-text-2" id="text-11">
+<div id="outline-container-org020ebd2" class="outline-2">
+<h2 id="org020ebd2"><span class="section-number-2">10.</span> corfu</h2>
+<div class="outline-text-2" id="text-10">
 <p>
 corfuはシンプルな補完を提供するパッケージ。
 </p>
@@ -1718,9 +1633,9 @@ corfuはシンプルな補完を提供するパッケージ。
 </div>
 </div>
 
-<div id="outline-container-orge22c291" class="outline-2">
-<h2 id="orge22c291"><span class="section-number-2">12.</span> ivy</h2>
-<div class="outline-text-2" id="text-12">
+<div id="outline-container-orga3bbebc" class="outline-2">
+<h2 id="orga3bbebc"><span class="section-number-2">11.</span> ivy</h2>
+<div class="outline-text-2" id="text-11">
 <p>
 ivyはさまざまなインクリメンタル検索を追加するパッケージ。
 </p>
@@ -1818,9 +1733,9 @@ ivyはさまざまなインクリメンタル検索を追加するパッケー�
 </div>
 </div>
 </div>
-<div id="outline-container-org67d771f" class="outline-2">
-<h2 id="org67d771f"><span class="section-number-2">13.</span> counsel</h2>
-<div class="outline-text-2" id="text-13">
+<div id="outline-container-org360eee4" class="outline-2">
+<h2 id="org360eee4"><span class="section-number-2">12.</span> counsel</h2>
+<div class="outline-text-2" id="text-12">
 <p>
 counselはさまざまなインクリメンタル検索を可能にするパッケージ。
 </p>
@@ -1847,9 +1762,9 @@ counselはさまざまなインクリメンタル検索を可能にするパッ�
 </div>
 </div>
 </div>
-<div id="outline-container-orga7d89b1" class="outline-2">
-<h2 id="orga7d89b1"><span class="section-number-2">14.</span> ag</h2>
-<div class="outline-text-2" id="text-14">
+<div id="outline-container-orgac4b035" class="outline-2">
+<h2 id="orgac4b035"><span class="section-number-2">13.</span> ag</h2>
+<div class="outline-text-2" id="text-13">
 <p>
 agはgrepより高速な検索ツール。
 </p>
@@ -1866,9 +1781,9 @@ agはgrepより高速な検索ツール。
 </div>
 </div>
 </div>
-<div id="outline-container-org3171fad" class="outline-2">
-<h2 id="org3171fad"><span class="section-number-2">15.</span> eldoc</h2>
-<div class="outline-text-2" id="text-15">
+<div id="outline-container-orgf31237c" class="outline-2">
+<h2 id="orgf31237c"><span class="section-number-2">14.</span> eldoc</h2>
+<div class="outline-text-2" id="text-14">
 <p>
 eldocは関数ドキュメントを表示するパッケージ。
 </p>
@@ -1883,9 +1798,9 @@ eldocは関数ドキュメントを表示するパッケージ。
 </div>
 </div>
 </div>
-<div id="outline-container-org32edabb" class="outline-2">
-<h2 id="org32edabb"><span class="section-number-2">16.</span> eshell</h2>
-<div class="outline-text-2" id="text-16">
+<div id="outline-container-org46ad0a1" class="outline-2">
+<h2 id="org46ad0a1"><span class="section-number-2">15.</span> eshell</h2>
+<div class="outline-text-2" id="text-15">
 <p>
 eshellはEmacs Lispで実装されたシェル。
 </p>
@@ -1928,9 +1843,9 @@ eshellはEmacs Lispで実装されたシェル。
 </div>
 </div>
 
-<div id="outline-container-orgd7161ee" class="outline-2">
-<h2 id="orgd7161ee"><span class="section-number-2">17.</span> Vterm</h2>
-<div class="outline-text-2" id="text-17">
+<div id="outline-container-orgfccc1c1" class="outline-2">
+<h2 id="orgfccc1c1"><span class="section-number-2">16.</span> Vterm</h2>
+<div class="outline-text-2" id="text-16">
 <p>
 vtermはCで実装されたシェル。
 </p>
@@ -1963,9 +1878,9 @@ vtermはCで実装されたシェル。
 </div>
 </div>
 </div>
-<div id="outline-container-orgc60f7a9" class="outline-2">
-<h2 id="orgc60f7a9"><span class="section-number-2">18.</span> Theme</h2>
-<div class="outline-text-2" id="text-18">
+<div id="outline-container-org2d3b068" class="outline-2">
+<h2 id="org2d3b068"><span class="section-number-2">17.</span> Theme</h2>
+<div class="outline-text-2" id="text-17">
 <p>
 いい感じのテーマを設定する。割と白いテーマと黒いテーマを切り替えるのですぐ切り替えられるようにする。
 </p>
@@ -2132,9 +2047,9 @@ describe-minor-mode-from-indicator で調べられる。
 </div>
 </div>
 
-<div id="outline-container-org9e2b970" class="outline-2">
-<h2 id="org9e2b970"><span class="section-number-2">19.</span> EXWM</h2>
-<div class="outline-text-2" id="text-19">
+<div id="outline-container-orge9aaf8d" class="outline-2">
+<h2 id="orge9aaf8d"><span class="section-number-2">18.</span> EXWM</h2>
+<div class="outline-text-2" id="text-18">
 <p>
 EXWMはEmacs上で動くウィンドウマネージャ。
 </p>
@@ -2278,9 +2193,9 @@ EXWMはEmacs上で動くウィンドウマネージャ。
 </div>
 </div>
 </div>
-<div id="outline-container-orgb30d828" class="outline-2">
-<h2 id="orgb30d828"><span class="section-number-2">20.</span> Polybar</h2>
-<div class="outline-text-2" id="text-20">
+<div id="outline-container-org2ebc198" class="outline-2">
+<h2 id="org2ebc198"><span class="section-number-2">19.</span> Polybar</h2>
+<div class="outline-text-2" id="text-19">
 <p>
 polybarは柔軟にカスタマイズできるメニューバーを表示するソフトウェア。polybarとの連携を記載する。
 </p>
@@ -2330,9 +2245,9 @@ polybarは柔軟にカスタマイズできるメニューバーを表示する�
 </div>
 </div>
 </div>
-<div id="outline-container-orga163fae" class="outline-2">
-<h2 id="orga163fae"><span class="section-number-2">21.</span> Workspace</h2>
-<div class="outline-text-2" id="text-21">
+<div id="outline-container-org78b8611" class="outline-2">
+<h2 id="org78b8611"><span class="section-number-2">20.</span> Workspace</h2>
+<div class="outline-text-2" id="text-20">
 <p>
 1~9のワークスペースを作成し、番号で切り替えられるようにする。
 </p>
@@ -2354,9 +2269,9 @@ polybarは柔軟にカスタマイズできるメニューバーを表示する�
 </div>
 </div>
 </div>
-<div id="outline-container-orgf196db7" class="outline-2">
-<h2 id="orgf196db7"><span class="section-number-2">22.</span> Hydra</h2>
-<div class="outline-text-2" id="text-22">
+<div id="outline-container-orgc90c082" class="outline-2">
+<h2 id="orgc90c082"><span class="section-number-2">21.</span> Hydra</h2>
+<div class="outline-text-2" id="text-21">
 <p>
 Hydraはカスタマイズ可能なキー表示を追加するパッケージ。キーバインド空間を制限しつつ、入力のヒントを表示して使いやすくする。
 </p>
@@ -2486,9 +2401,9 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
 </div>
 </div>
 
-<div id="outline-container-org1387af6" class="outline-2">
-<h2 id="org1387af6"><span class="section-number-2">23.</span> Display Manager</h2>
-<div class="outline-text-2" id="text-23">
+<div id="outline-container-org4e4faff" class="outline-2">
+<h2 id="org4e4faff"><span class="section-number-2">22.</span> Display Manager</h2>
+<div class="outline-text-2" id="text-22">
 <p>
 OS操作の便利関数。
 </p>
@@ -2546,9 +2461,9 @@ OS操作の便利関数。
 </p>
 </div>
 </div>
-<div id="outline-container-org6e36913" class="outline-2">
-<h2 id="org6e36913"><span class="section-number-2">24.</span> Helper</h2>
-<div class="outline-text-2" id="text-24">
+<div id="outline-container-orgb508b15" class="outline-2">
+<h2 id="orgb508b15"><span class="section-number-2">23.</span> Helper</h2>
+<div class="outline-text-2" id="text-23">
 <p>
 その他の便利関数。
 </p>
