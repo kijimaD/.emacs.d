@@ -204,36 +204,37 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc645bca">1. Emacs</a></li>
-<li><a href="#orga0e384c">2. Font</a></li>
-<li><a href="#org4c9d6a3">3. simple</a></li>
-<li><a href="#org30735d5">4. packages</a></li>
-<li><a href="#org1a629af">5. Rails</a></li>
-<li><a href="#org9a93758">6. go-mode</a></li>
-<li><a href="#org788fba1">7. python-mode</a></li>
-<li><a href="#orgcf775f3">8. haskell-mode</a></li>
-<li><a href="#org4d88985">9. web-mode</a></li>
-<li><a href="#org68306c1">10. LSP</a></li>
-<li><a href="#org2a441ed">11. corfu</a></li>
-<li><a href="#org4dbb84e">12. ivy</a></li>
-<li><a href="#org1bbadcc">13. counsel</a></li>
-<li><a href="#org24f1e8e">14. ag</a></li>
-<li><a href="#orgb168f30">15. eldoc</a></li>
-<li><a href="#org0d27a83">16. eshell</a></li>
-<li><a href="#org1a3342d">17. Vterm</a></li>
-<li><a href="#orgd04243d">18. Theme</a></li>
-<li><a href="#org9134159">19. EXWM</a></li>
-<li><a href="#orgcd650d1">20. Polybar</a></li>
-<li><a href="#org3722ea2">21. Workspace</a></li>
-<li><a href="#org4c4e5b9">22. Hydra</a></li>
-<li><a href="#org168f3b9">23. Display Manager</a></li>
-<li><a href="#org5522a04">24. Helper</a></li>
+<li><a href="#orgb8680a4">1. Emacs</a></li>
+<li><a href="#org119cd23">2. pomodoro</a></li>
+<li><a href="#org92b0fdf">3. Font</a></li>
+<li><a href="#orgba191d7">4. simple</a></li>
+<li><a href="#org8a82f2d">5. packages</a></li>
+<li><a href="#orga70ba56">6. Rails</a></li>
+<li><a href="#org705bf96">7. go-mode</a></li>
+<li><a href="#org6c1e8e5">8. python-mode</a></li>
+<li><a href="#orge620fd6">9. haskell-mode</a></li>
+<li><a href="#orgba81310">10. web-mode</a></li>
+<li><a href="#orgfe707fa">11. LSP</a></li>
+<li><a href="#org4c47c8d">12. corfu</a></li>
+<li><a href="#orgb9aac34">13. ivy</a></li>
+<li><a href="#org0c59e8a">14. counsel</a></li>
+<li><a href="#orgcb8b6fb">15. ag</a></li>
+<li><a href="#org628cb46">16. eldoc</a></li>
+<li><a href="#orga1e0477">17. eshell</a></li>
+<li><a href="#org876dfdf">18. Vterm</a></li>
+<li><a href="#org5826c10">19. Theme</a></li>
+<li><a href="#org2f527ab">20. EXWM</a></li>
+<li><a href="#org2da24e8">21. Polybar</a></li>
+<li><a href="#org259deeb">22. Workspace</a></li>
+<li><a href="#org438c719">23. Hydra</a></li>
+<li><a href="#org910ccbc">24. Display Manager</a></li>
+<li><a href="#org0a455a8">25. Helper</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgc645bca" class="outline-2">
-<h2 id="orgc645bca"><span class="section-number-2">1.</span> Emacs</h2>
+<div id="outline-container-orgb8680a4" class="outline-2">
+<h2 id="orgb8680a4"><span class="section-number-2">1.</span> Emacs</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Emacsの文芸的設定。移行作業中。
@@ -256,15 +257,115 @@ Emacsの文芸的設定。移行作業中。
 </div>
 </div>
 
-<div id="outline-container-orga0e384c" class="outline-2">
-<h2 id="orga0e384c"><span class="section-number-2">2.</span> Font</h2>
+<div id="outline-container-org119cd23" class="outline-2">
+<h2 id="org119cd23"><span class="section-number-2">2.</span> pomodoro</h2>
 <div class="outline-text-2" id="text-2">
+<p>
+ポモドーロ用の設定。
+</p>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 2: </span>基本設定</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">org-pomodoro</span>)
+(define-key global-map [insert] 'org-pomodoro)
+
+(<span style="font-weight: bold;">setq</span> org-pomodoro-short-break-length 0)
+(<span style="font-weight: bold;">setq</span> org-pomodoro-long-break-length 10)
+(<span style="font-weight: bold;">setq</span> org-pomodoro-expiry-time 120)
+
+(<span style="font-weight: bold;">setq</span> org-pomodoro-finished-sound <span style="font-style: italic;">"~/.emacs.d/resources/pmd-finished.wav"</span>)
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(org-pomodoro-finished)</span>
+(<span style="font-weight: bold;">setq</span> org-pomodoro-short-break-sound <span style="font-style: italic;">"~/.emacs.d/resources/pmd-short-break.wav"</span>)
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(org-pomodoro-short-break-finished)</span>
+
+(add-hook 'org-pomodoro-short-break-finished-hook 'org-agenda-default)
+(add-hook 'org-pomodoro-long-break-finished-hook 'org-agenda-default)
+
+(<span style="font-weight: bold;">setq</span> org-clock-mode-line-total 'today)
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/org-pomodoro-remain-gauge</span> (max-minutes)
+  <span style="font-style: italic;">"Display remain time gauge."</span>
+  (<span style="font-weight: bold;">let*</span> ((display-len 25)
+         (remaining-minutes (/ (org-pomodoro-remaining-seconds) 60))
+         (current-percent (/ remaining-minutes max-minutes))
+         (done (truncate (* (- 1 current-percent) display-len)))
+         (will (truncate (* current-percent display-len))))
+    (concat
+     <span style="font-style: italic;">"%{T2}"</span>
+     <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(concat "%{F#008000}" (make-string done ?&#9608;) "%{F-}")</span>
+     (concat <span style="font-style: italic;">"%{F#008000}"</span> (make-string done ?|) <span style="font-style: italic;">"%{F-}"</span>)
+     (concat <span style="font-style: italic;">"%{F#413839}"</span> (make-string will ?|) <span style="font-style: italic;">"%{F-}"</span>)
+     <span style="font-style: italic;">"%{T-}"</span>)))
+
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">https://colekillian.com/posts/org-pomodoro-and-polybar/</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/org-pomodoro-time</span> ()
+  <span style="font-style: italic;">"Return the remaining pomodoro time. Function for displaying in Polybar."</span>
+  (<span style="font-weight: bold;">cond</span>
+   ((org-pomodoro-active-p) (<span style="font-weight: bold;">cl-case</span> org-pomodoro-state
+                              (<span style="font-weight: bold;">:pomodoro</span>
+                               (format <span style="font-style: italic;">"%s %dm %s%s%s"</span>
+                                       (kd/org-pomodoro-remain-gauge org-pomodoro-length)
+                                       (/ (org-pomodoro-remaining-seconds) 60)
+                                       <span style="font-style: italic;">"%{F#000000}"</span>
+                                       org-clock-heading
+                                       <span style="font-style: italic;">"%{F-}"</span>
+                                       ))
+                              (<span style="font-weight: bold;">:short-break</span>
+                               (format <span style="font-style: italic;">"%s &#61476;Short break: %dm"</span>
+                                       (kd/org-pomodoro-remain-gauge org-pomodoro-short-break-length)
+                                       (/ (org-pomodoro-remaining-seconds) 60)))
+                              (<span style="font-weight: bold;">:long-break</span>
+                               (format <span style="font-style: italic;">"%s &#61476;Long break: %dm"</span>
+                                       (kd/org-pomodoro-remain-gauge org-pomodoro-long-break-length)
+                                       (/ (org-pomodoro-remaining-seconds) 60)))
+                              (<span style="font-weight: bold;">:overtime</span>
+                               (format <span style="font-style: italic;">"&#61561;Overtime! %dm"</span> (/ (org-pomodoro-remaining-seconds) 60)))
+                              ))
+   ((org-clocking-p) (format <span style="font-style: italic;">"(%s) %s"</span> (org-clock-get-clocked-time) org-clock-heading))
+   (t <span style="font-style: italic;">"Not working..."</span>)))
+(kd/org-pomodoro-time)
+
+(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">kd/pmd-today-point</span> 0)
+(add-hook 'org-pomodoro-finished-hook
+          (<span style="font-weight: bold;">lambda</span> () (<span style="font-weight: bold;">setq</span> kd/pmd-today-point (1+ kd/pmd-today-point))))
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/write-pmd</span> (str)
+  (shell-command (format <span style="font-style: italic;">"echo '</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">%s</span><span style="font-style: italic;">' &gt;&gt; ~/roam/pmd.csv"</span> str)))
+
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">reset point</span>
+(run-at-time <span style="font-style: italic;">"23:59pm"</span> (* 24 60 60) (<span style="font-weight: bold;">lambda</span> ()
+                                      (<span style="font-weight: bold;">when</span> (&gt; kd/pmd-today-point 0)
+                                        (kd/write-pmd (concat (format-time-string <span style="font-style: italic;">"%Y-%m-%d"</span>)
+                                                              <span style="font-style: italic;">", "</span>
+                                                              (number-to-string kd/pmd-today-point)))
+                                        (<span style="font-weight: bold;">setq</span> kd/pmd-today-point 0)
+                                        (message <span style="font-style: italic;">"pomodoro count reset!"</span>))))
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/pmd-today-point-display</span> ()
+  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(format " [%s]" kd/pmd-today-point)</span>
+  (<span style="font-weight: bold;">let*</span> ((all-minute (* kd/pmd-today-point 25))
+         (hour (/ all-minute 60))
+         (minute (% all-minute 60)))
+    (format <span style="font-style: italic;">" &#61874;%spts/%02dh%02dm"</span> kd/pmd-today-point hour minute)))
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/pmd-manual</span> ()
+  <span style="font-style: italic;">"set point"</span>
+  (<span style="font-weight: bold;">interactive</span>)
+  (<span style="font-weight: bold;">let</span> ((point (read-from-minibuffer <span style="font-style: italic;">"How much point? "</span>)))
+    (<span style="font-weight: bold;">setq</span> kd/pmd-today-point (string-to-number point))))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org92b0fdf" class="outline-2">
+<h2 id="org92b0fdf"><span class="section-number-2">3.</span> Font</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 フォント設定。
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 2: </span>基本設定</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(defvar efs/frame-transparency '(90 . 90))</span>
+<label class="org-src-name"><span class="listing-number">Listing 1: </span>基本設定</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(defvar efs/frame-transparency '(90 . 90))</span>
 <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)</span>
 <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(add-to-list 'default-frame-alist `(alpha . ,efs/frame-transparency))</span>
 
@@ -340,9 +441,9 @@ Emacsの文芸的設定。移行作業中。
 </div>
 </div>
 
-<div id="outline-container-org4c9d6a3" class="outline-2">
-<h2 id="org4c9d6a3"><span class="section-number-2">3.</span> simple</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-orgba191d7" class="outline-2">
+<h2 id="orgba191d7"><span class="section-number-2">4.</span> simple</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 未分類の設定。最初から入っているものの設定。
 </p>
@@ -526,9 +627,9 @@ Emacsの文芸的設定。移行作業中。
 </div>
 </div>
 
-<div id="outline-container-org30735d5" class="outline-2">
-<h2 id="org30735d5"><span class="section-number-2">4.</span> packages</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org8a82f2d" class="outline-2">
+<h2 id="org8a82f2d"><span class="section-number-2">5.</span> packages</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 未分類の設定。拡張設定。
 </p>
@@ -1161,9 +1262,9 @@ Emacsの文芸的設定。移行作業中。
 </div>
 </div>
 
-<div id="outline-container-org1a629af" class="outline-2">
-<h2 id="org1a629af"><span class="section-number-2">5.</span> Rails</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-orga70ba56" class="outline-2">
+<h2 id="orga70ba56"><span class="section-number-2">6.</span> Rails</h2>
+<div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 1: </span>基本設定</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;;; </span><span style="font-weight: bold; font-style: italic;">ruby_on_rails&#12514;&#12540;&#12489;</span>
 (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">projectile-rails</span>)
@@ -1282,9 +1383,9 @@ Emacsの文芸的設定。移行作業中。
 </div>
 </div>
 </div>
-<div id="outline-container-org9a93758" class="outline-2">
-<h2 id="org9a93758"><span class="section-number-2">6.</span> go-mode</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-org705bf96" class="outline-2">
+<h2 id="org705bf96"><span class="section-number-2">7.</span> go-mode</h2>
+<div class="outline-text-2" id="text-7">
 <p>
 goの設定。
 </p>
@@ -1320,9 +1421,9 @@ goの設定。
 </div>
 </div>
 
-<div id="outline-container-org788fba1" class="outline-2">
-<h2 id="org788fba1"><span class="section-number-2">7.</span> python-mode</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-org6c1e8e5" class="outline-2">
+<h2 id="org6c1e8e5"><span class="section-number-2">8.</span> python-mode</h2>
+<div class="outline-text-2" id="text-8">
 <p>
 pythonの設定。
 </p>
@@ -1341,9 +1442,9 @@ pythonの設定。
 </div>
 </div>
 </div>
-<div id="outline-container-orgcf775f3" class="outline-2">
-<h2 id="orgcf775f3"><span class="section-number-2">8.</span> haskell-mode</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-orge620fd6" class="outline-2">
+<h2 id="orge620fd6"><span class="section-number-2">9.</span> haskell-mode</h2>
+<div class="outline-text-2" id="text-9">
 <p>
 haskellの設定。
 </p>
@@ -1361,9 +1462,9 @@ haskellの設定。
 </div>
 </div>
 
-<div id="outline-container-org4d88985" class="outline-2">
-<h2 id="org4d88985"><span class="section-number-2">9.</span> web-mode</h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-orgba81310" class="outline-2">
+<h2 id="orgba81310"><span class="section-number-2">10.</span> web-mode</h2>
+<div class="outline-text-2" id="text-10">
 <p>
 web-modeはhtmlライクな複数の言語に対応するモード。
 </p>
@@ -1484,9 +1585,9 @@ web-modeはhtmlライクな複数の言語に対応するモード。
 </div>
 </div>
 </div>
-<div id="outline-container-org68306c1" class="outline-2">
-<h2 id="org68306c1"><span class="section-number-2">10.</span> LSP</h2>
-<div class="outline-text-2" id="text-10">
+<div id="outline-container-orgfe707fa" class="outline-2">
+<h2 id="orgfe707fa"><span class="section-number-2">11.</span> LSP</h2>
+<div class="outline-text-2" id="text-11">
 <p>
 lsp-modeはLSPを使えるようにするパッケージ。
 </p>
@@ -1600,9 +1701,9 @@ lsp-modeはLSPを使えるようにするパッケージ。
 </div>
 </div>
 
-<div id="outline-container-org2a441ed" class="outline-2">
-<h2 id="org2a441ed"><span class="section-number-2">11.</span> corfu</h2>
-<div class="outline-text-2" id="text-11">
+<div id="outline-container-org4c47c8d" class="outline-2">
+<h2 id="org4c47c8d"><span class="section-number-2">12.</span> corfu</h2>
+<div class="outline-text-2" id="text-12">
 <p>
 corfuはシンプルな補完を提供するパッケージ。
 </p>
@@ -1718,9 +1819,9 @@ corfuはシンプルな補完を提供するパッケージ。
 </div>
 </div>
 
-<div id="outline-container-org4dbb84e" class="outline-2">
-<h2 id="org4dbb84e"><span class="section-number-2">12.</span> ivy</h2>
-<div class="outline-text-2" id="text-12">
+<div id="outline-container-orgb9aac34" class="outline-2">
+<h2 id="orgb9aac34"><span class="section-number-2">13.</span> ivy</h2>
+<div class="outline-text-2" id="text-13">
 <p>
 ivyはさまざまなインクリメンタル検索を追加するパッケージ。
 </p>
@@ -1818,9 +1919,9 @@ ivyはさまざまなインクリメンタル検索を追加するパッケー�
 </div>
 </div>
 </div>
-<div id="outline-container-org1bbadcc" class="outline-2">
-<h2 id="org1bbadcc"><span class="section-number-2">13.</span> counsel</h2>
-<div class="outline-text-2" id="text-13">
+<div id="outline-container-org0c59e8a" class="outline-2">
+<h2 id="org0c59e8a"><span class="section-number-2">14.</span> counsel</h2>
+<div class="outline-text-2" id="text-14">
 <p>
 counselはさまざまなインクリメンタル検索を可能にするパッケージ。
 </p>
@@ -1847,9 +1948,9 @@ counselはさまざまなインクリメンタル検索を可能にするパッ�
 </div>
 </div>
 </div>
-<div id="outline-container-org24f1e8e" class="outline-2">
-<h2 id="org24f1e8e"><span class="section-number-2">14.</span> ag</h2>
-<div class="outline-text-2" id="text-14">
+<div id="outline-container-orgcb8b6fb" class="outline-2">
+<h2 id="orgcb8b6fb"><span class="section-number-2">15.</span> ag</h2>
+<div class="outline-text-2" id="text-15">
 <p>
 agはgrepより高速な検索ツール。
 </p>
@@ -1866,9 +1967,9 @@ agはgrepより高速な検索ツール。
 </div>
 </div>
 </div>
-<div id="outline-container-orgb168f30" class="outline-2">
-<h2 id="orgb168f30"><span class="section-number-2">15.</span> eldoc</h2>
-<div class="outline-text-2" id="text-15">
+<div id="outline-container-org628cb46" class="outline-2">
+<h2 id="org628cb46"><span class="section-number-2">16.</span> eldoc</h2>
+<div class="outline-text-2" id="text-16">
 <p>
 eldocは関数ドキュメントを表示するパッケージ。
 </p>
@@ -1883,9 +1984,9 @@ eldocは関数ドキュメントを表示するパッケージ。
 </div>
 </div>
 </div>
-<div id="outline-container-org0d27a83" class="outline-2">
-<h2 id="org0d27a83"><span class="section-number-2">16.</span> eshell</h2>
-<div class="outline-text-2" id="text-16">
+<div id="outline-container-orga1e0477" class="outline-2">
+<h2 id="orga1e0477"><span class="section-number-2">17.</span> eshell</h2>
+<div class="outline-text-2" id="text-17">
 <p>
 eshellはEmacs Lispで実装されたシェル。
 </p>
@@ -1928,9 +2029,9 @@ eshellはEmacs Lispで実装されたシェル。
 </div>
 </div>
 
-<div id="outline-container-org1a3342d" class="outline-2">
-<h2 id="org1a3342d"><span class="section-number-2">17.</span> Vterm</h2>
-<div class="outline-text-2" id="text-17">
+<div id="outline-container-org876dfdf" class="outline-2">
+<h2 id="org876dfdf"><span class="section-number-2">18.</span> Vterm</h2>
+<div class="outline-text-2" id="text-18">
 <p>
 vtermはCで実装されたシェル。
 </p>
@@ -1963,9 +2064,9 @@ vtermはCで実装されたシェル。
 </div>
 </div>
 </div>
-<div id="outline-container-orgd04243d" class="outline-2">
-<h2 id="orgd04243d"><span class="section-number-2">18.</span> Theme</h2>
-<div class="outline-text-2" id="text-18">
+<div id="outline-container-org5826c10" class="outline-2">
+<h2 id="org5826c10"><span class="section-number-2">19.</span> Theme</h2>
+<div class="outline-text-2" id="text-19">
 <p>
 いい感じのテーマを設定する。割と白いテーマと黒いテーマを切り替えるのですぐ切り替えられるようにする。
 </p>
@@ -2132,9 +2233,9 @@ describe-minor-mode-from-indicator で調べられる。
 </div>
 </div>
 
-<div id="outline-container-org9134159" class="outline-2">
-<h2 id="org9134159"><span class="section-number-2">19.</span> EXWM</h2>
-<div class="outline-text-2" id="text-19">
+<div id="outline-container-org2f527ab" class="outline-2">
+<h2 id="org2f527ab"><span class="section-number-2">20.</span> EXWM</h2>
+<div class="outline-text-2" id="text-20">
 <p>
 EXWMはEmacs上で動くウィンドウマネージャ。
 </p>
@@ -2278,9 +2379,9 @@ EXWMはEmacs上で動くウィンドウマネージャ。
 </div>
 </div>
 </div>
-<div id="outline-container-orgcd650d1" class="outline-2">
-<h2 id="orgcd650d1"><span class="section-number-2">20.</span> Polybar</h2>
-<div class="outline-text-2" id="text-20">
+<div id="outline-container-org2da24e8" class="outline-2">
+<h2 id="org2da24e8"><span class="section-number-2">21.</span> Polybar</h2>
+<div class="outline-text-2" id="text-21">
 <p>
 polybarは柔軟にカスタマイズできるメニューバーを表示するソフトウェア。polybarとの連携を記載する。
 </p>
@@ -2330,9 +2431,9 @@ polybarは柔軟にカスタマイズできるメニューバーを表示する�
 </div>
 </div>
 </div>
-<div id="outline-container-org3722ea2" class="outline-2">
-<h2 id="org3722ea2"><span class="section-number-2">21.</span> Workspace</h2>
-<div class="outline-text-2" id="text-21">
+<div id="outline-container-org259deeb" class="outline-2">
+<h2 id="org259deeb"><span class="section-number-2">22.</span> Workspace</h2>
+<div class="outline-text-2" id="text-22">
 <p>
 1~9のワークスペースを作成し、番号で切り替えられるようにする。
 </p>
@@ -2354,9 +2455,9 @@ polybarは柔軟にカスタマイズできるメニューバーを表示する�
 </div>
 </div>
 </div>
-<div id="outline-container-org4c4e5b9" class="outline-2">
-<h2 id="org4c4e5b9"><span class="section-number-2">22.</span> Hydra</h2>
-<div class="outline-text-2" id="text-22">
+<div id="outline-container-org438c719" class="outline-2">
+<h2 id="org438c719"><span class="section-number-2">23.</span> Hydra</h2>
+<div class="outline-text-2" id="text-23">
 <p>
 Hydraはカスタマイズ可能なキー表示を追加するパッケージ。キーバインド空間を制限しつつ、入力のヒントを表示して使いやすくする。
 </p>
@@ -2486,9 +2587,9 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
 </div>
 </div>
 
-<div id="outline-container-org168f3b9" class="outline-2">
-<h2 id="org168f3b9"><span class="section-number-2">23.</span> Display Manager</h2>
-<div class="outline-text-2" id="text-23">
+<div id="outline-container-org910ccbc" class="outline-2">
+<h2 id="org910ccbc"><span class="section-number-2">24.</span> Display Manager</h2>
+<div class="outline-text-2" id="text-24">
 <p>
 OS操作の便利関数。
 </p>
@@ -2546,9 +2647,9 @@ OS操作の便利関数。
 </p>
 </div>
 </div>
-<div id="outline-container-org5522a04" class="outline-2">
-<h2 id="org5522a04"><span class="section-number-2">24.</span> Helper</h2>
-<div class="outline-text-2" id="text-24">
+<div id="outline-container-org0a455a8" class="outline-2">
+<h2 id="org0a455a8"><span class="section-number-2">25.</span> Helper</h2>
+<div class="outline-text-2" id="text-25">
 <p>
 その他の便利関数。
 </p>
