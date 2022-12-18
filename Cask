@@ -139,7 +139,6 @@
 (depends-on "ob-git-permalink")
 (depends-on "ob-go")
 (depends-on "ob-graphql")
-(depends-on "open-junk-file")
 (depends-on "orderless")
 (depends-on "org-alert")
 (depends-on "org-brain")
