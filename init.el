@@ -1,4 +1,5 @@
-(setq debug-on-error t)
+;; 謎のエラーが出てるのでとりあえずコメントアウト
+;; (setq debug-on-error t)
 
 ;; The default is 800 kilobytes.  Measured in bytes.
 (setq gc-cons-threshold (* 100 1024 1024))
@@ -28,22 +29,6 @@
 (setq load-path (cons "conf/" load-path))
 (ignore-errors (load "local-init-example"))
 (ignore-errors (load "local-init"))
-(load "org-init")
-(load "agenda-init")
-(load "pomodoro-init")
-(load "ob-rust")
-(load "ob-scala")
-(load "font-init")
-(load "simple-init")
-(load "package-init")
-(load "rails-init")
-(load "go-init")
-(load "python-init")
-(load "haskell-init")
-(load "web-mode-init")
-(load "lsp-init")
-(load "corfu-init")
-(load "ivy-init")
 
 (load "index")
 
