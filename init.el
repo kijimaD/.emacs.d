@@ -40,7 +40,6 @@
 (load "go-init")
 (load "python-init")
 (load "haskell-init")
-(load "web-mode-init")
 
 (load "index")
 
