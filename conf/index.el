@@ -803,12 +803,6 @@
 (global-set-key (kbd "C-m") 'newline)
 (add-hook 'ruby-mode-hook 'smart-newline-mode)
 
-;; git補完 ================
-(use-package git-complete
-  :straight (:host github :repo "zk-phi/git-complete"))
-
-(global-set-key (kbd "C-o") 'git-complete)
-
 ;;; ruby_on_railsモード
 (require 'projectile-rails)
 (projectile-rails-global-mode)

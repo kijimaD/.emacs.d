@@ -824,12 +824,6 @@ Emacsの文芸的設定。移行作業中。
   (require 'smart-newline)
   (global-set-key (kbd "C-m") 'newline)
   (add-hook 'ruby-mode-hook 'smart-newline-mode)
-
-  ;; git補完 ================
-  (use-package git-complete
-    :straight (:host github :repo "zk-phi/git-complete"))
-
-  (global-set-key (kbd "C-o") 'git-complete)
 #+end_src
 
 * Rails
