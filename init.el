@@ -34,7 +34,6 @@
 (load "ob-rust")
 (load "ob-scala")
 (load "font-init")
-(load "simple-init")
 
 (load "index")
 
