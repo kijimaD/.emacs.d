@@ -34,7 +34,6 @@
 (load "pomodoro-init")
 (load "ob-rust")
 (load "ob-scala")
-(load "font-init")
 
 (load "index")
 
