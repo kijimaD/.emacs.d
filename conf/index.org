@@ -54,6 +54,66 @@ lsp-modeはLSPを使えるようにするパッケージ。
     )
 #+end_src
 
+#+caption: scala用を設定する
+#+begin_src emacs-lisp
+  ;; (use-package scala-mode
+  ;;   :interpreter
+  ;;   ("scala" . scala-mode))
+
+  ;; ;; Enable sbt mode for executing sbt commands
+  ;; (use-package sbt-mode
+  ;;   :commands sbt-start sbt-command
+  ;;   :config
+  ;;   ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
+  ;;   ;; allows using SPACE when in the minibuffer
+  ;;   (substitute-key-definition
+  ;;    'minibuffer-complete-word
+  ;;    'self-insert-command
+  ;;    minibuffer-local-completion-map)
+  ;;   ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
+  ;;   (setq sbt:program-options '("-Dsbt.supershell=false"))
+  ;;   )
+
+  ;; (use-package lsp-metals
+  ;;   :ensure t
+  ;;   :custom
+  ;;   ;; Metals claims to support range formatting by default but it supports range
+  ;;   ;; formatting of multiline strings only. You might want to disable it so that
+  ;;   ;; emacs can use indentation provided by scala-mode.
+  ;;   (lsp-metals-server-args '("-J-Dmetals.allow-multiline-string-formatting=off"))
+  ;;   :hook (scala-mode . lsp))
+#+end_src
+
+使ってない。
+
+#+caption: ドキュメントをホバー表示できるようにする
+#+begin_src emacs-lisp
+  (use-package lsp-ui
+    :custom
+    (lsp-ui-doc-enable t)
+    (lsp-ui-doc-header t)
+    (lsp-ui-doc-include-signature t)
+    (lsp-ui-doc-max-width 150)
+    (lsp-ui-doc-max-height 30)
+    (lsp-ui-peek-enable t))
+#+end_src
+
+#+caption: snippetを挿入する
+#+begin_src emacs-lisp
+  (use-package yasnippet)
+#+end_src
+
+#+caption: DAPデバッガーを使えるようにする
+#+begin_src emacs-lisp
+  (use-package posframe
+    ;; Posframe is a pop-up tool that must be manually installed for dap-mode
+    )
+
+  (use-package dap-ui
+    :config
+    (dap-ui-mode 1))
+#+end_src
+
 * corfu
 corfuはシンプルな補完を提供するパッケージ。
 
