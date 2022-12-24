@@ -9,143 +9,6 @@
 (require 'org)
 (require 'org-protocol)
 
-;; System locale to use for formatting time values.
-(setq system-time-locale "C")         ; Make sure that the weekdays in the
-                                        ; time stamps of your Org mode files and
-                                        ; in the agenda appear in English.
-
-;; 拡張子がorgのファイルを開いた時，自動的にorg-modeにする
-(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-
-(setq org-startup-folded 'content)
-
-;; org-modeでの強調表示を可能にする
-(add-hook 'org-mode-hook 'turn-on-font-lock)
-;; (add-hook 'org-mode-hook 'current-word-highlight-mode)
-
-;; 本文を自動インデント
-(setq org-startup-indented t)
-
-;; 見出しの余分な*を消す
-(setq org-hide-leading-stars t)
-(setq org-hide-emphasis-markers t)
-
-;; 画像表示
-(setq org-startup-with-inline-images t)
-
-(setq org-todo-keywords '((type "TODO" "WIP" "|" "DONE" "CLOSE")))
-(setq org-todo-keyword-faces
-      '(("TODO" . (:foreground "orange" :weight bold))
-        ("WIP" . (:foreground "DeepSkyBlue" :weight bold))
-        ("DONE" . (:foreground "green" :weight bold))
-        ("CLOSE" . (:foreground "DarkOrchid" :weight bold))))
-
-(setq org-src-fontify-natively t)
-(setq org-fontify-quote-and-verse-blocks t)
-(setq org-src-tab-acts-natively t)
-
-;; 展開アイコン
-;; (setq org-ellipsis "»")
-;; (setq org-ellipsis "..")
-;; (setq org-ellipsis "⤵")
-;; (setq org-ellipsis "🢗")
-;; (setq org-ellipsis "❖")
-;; (setq org-ellipsis "↯")
-(setq org-ellipsis "▽")
-(setq org-cycle-separator-lines 2)
-
-;; org-modeで行末で折り返しをする
-(setq org-startup-truncated nil)
-(defun change-truncation()
-  (interactive)
-  (cond ((eq truncate-lines nil)
-         (setq truncate-lines t))
-        (t
-         (setq truncate-lines nil))))
-
-;; スピードコマンド有効化
-(setq org-use-speed-commands t)
-
-;; キーバインド ================
-;; ほかとかぶるので無効化
-(define-key org-mode-map (kbd "C-c C-j") nil)
-;; (define-key org-mode-map (kbd "<S-left>") nil)
-;; (define-key org-mode-map (kbd "<S-right>") nil)
-;; (define-key org-mode-map (kbd "<S-up>") nil)
-;; (define-key org-mode-map (kbd "<S-down>") nil)
-(define-key org-mode-map (kbd "M-<left>") nil)
-(define-key org-mode-map (kbd "M-<right>") nil)
-(define-key org-mode-map (kbd "C-c C-x i") 'org-clock-in)
-(define-key org-mode-map (kbd "C-c C-x o") 'org-clock-out)
-
-;; org-babel ================
-(org-babel-do-load-languages 'org-babel-load-languages
-                             '((C . t)
-                               (clojure . t)
-                               (emacs-lisp . t)
-                               (graphql . t)
-                               (haskell . t)
-                               (lisp . t)
-                               (python . t)
-                               (ruby . t)
-                               (rust . t)
-                               (shell . t)
-                               (sql . t)))
-
-(setq org-confirm-babel-evaluate nil)
-(setq org-babel-clojure-backend 'cider)
-(require 'cider)
-
-;; common lisp
-(setq inferior-lisp-program "clisp")
-;; clisp, sbcl,  ...
-
-;; 日誌 ================
-(require 'org-journal)
-(setq org-journal-date-format "%Y-%m-%d(%a)")
-(setq org-journal-time-format "%R ")
-(setq org-journal-dir (concat "~/Private/junk/diary/org-journal"))
-(setq org-journal-file-format "%Y%m%d.org")
-(setq org-journal-find-file 'find-file)
-(setq org-journal-hide-entries-p nil)
-
-;; https://emacs.stackexchange.com/questions/17897/create-an-org-journal-template-for-daily-journal-entry/32655#32655?newreg=7c9543fa39e342cfb438c4168020447d
-(defun kd/new-buffer-p ()
-  (not (file-exists-p (buffer-file-name))))
-
-(defun kd/insert-journal-template ()
-  (let ((template-file (expand-file-name "~/.emacs.d/resources/journal-template.org" org-directory)))
-    (when (kd/new-buffer-p)
-      (save-excursion
-        (goto-char (point-min))
-        (insert-file-contents template-file)))))
-
-(add-hook 'org-journal-after-entry-create-hook #'kd/insert-journal-template)
-
-;; 使い捨てのファイルを開く ================
-(use-package open-junk-file)
-(setq open-junk-file-format (concat "~/Private/junk/%Y-%m-%d-%H%M%S."))
-(global-set-key (kbd "C-x C-z") 'open-junk-file)
-
-;; 見出しをいい感じにする ================
-;; (require 'org-bullets)
-;; (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-(require 'org-superstar)
-(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
-
-;; org-modern
-;; (add-hook 'org-mode-hook #'org-modern-mode)
-;; (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
-
-(require 'org-sticky-header)
-(setq org-sticky-header-full-path 'full)
-(setq org-sticky-header-heading-star "◉")
-
-;; スライド ================
-;; (org-tree-slide-simple-profile)
-(org-tree-slide-presentation-profile)
-(org-tree-slide--hide-slide-header)
-
 ;; pdf ================
 ;; (pdf-tools-install t)
 (require 'pdf-tools)
@@ -321,6 +184,123 @@
 (setq denote-known-keywords '("essay" "code-reading" "book" "hack"))
 
 (define-key global-map (kbd "C-c d") 'denote-create-note)
+
+(setq system-time-locale "C")
+
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+
+(setq org-startup-folded 'content)
+
+(add-hook 'org-mode-hook 'turn-on-font-lock)
+
+(setq org-startup-indented t)
+
+(setq org-hide-leading-stars t)
+(setq org-hide-emphasis-markers t)
+
+(setq org-startup-with-inline-images t)
+
+(setq org-todo-keywords '((type "TODO" "WIP" "|" "DONE" "CLOSE")))
+(setq org-todo-keyword-faces
+      '(("TODO" . (:foreground "orange" :weight bold))
+        ("WIP" . (:foreground "DeepSkyBlue" :weight bold))
+        ("DONE" . (:foreground "green" :weight bold))
+        ("CLOSE" . (:foreground "DarkOrchid" :weight bold))))
+
+(setq org-src-fontify-natively t)
+(setq org-fontify-quote-and-verse-blocks t)
+(setq org-src-tab-acts-natively t)
+
+;; (setq org-ellipsis "»")
+;; (setq org-ellipsis "..")
+;; (setq org-ellipsis "⤵")
+;; (setq org-ellipsis "🢗")
+;; (setq org-ellipsis "❖")
+;; (setq org-ellipsis "↯")
+(setq org-ellipsis "▽")
+
+(setq org-cycle-separator-lines 2)
+
+(setq org-startup-truncated nil)
+(defun change-truncation()
+  (interactive)
+  (cond ((eq truncate-lines nil)
+         (setq truncate-lines t))
+        (t
+         (setq truncate-lines nil))))
+
+(setq org-use-speed-commands t)
+
+(define-key org-mode-map (kbd "C-c C-j") nil)
+(define-key org-mode-map (kbd "M-<left>") nil)
+(define-key org-mode-map (kbd "M-<right>") nil)
+
+(define-key org-mode-map (kbd "C-c C-x i") 'org-clock-in)
+(define-key org-mode-map (kbd "C-c C-x o") 'org-clock-out)
+
+(org-babel-do-load-languages 'org-babel-load-languages
+                             '((C . t)
+                               (clojure . t)
+                               (emacs-lisp . t)
+                               (graphql . t)
+                               (haskell . t)
+                               (lisp . t)
+                               (python . t)
+                               (ruby . t)
+                               (rust . t)
+                               (shell . t)
+                               (sql . t)))
+
+(require 'cider)
+(setq org-babel-clojure-backend 'cider)
+
+(setq inferior-lisp-program "clisp")
+
+(setq org-confirm-babel-evaluate nil)
+
+(use-package open-junk-file)
+(setq open-junk-file-format (concat "~/Private/junk/%Y-%m-%d-%H%M%S."))
+(global-set-key (kbd "C-x C-z") 'open-junk-file)
+
+(require 'org-superstar)
+(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+
+(add-hook 'org-mode-hook #'org-modern-mode)
+(add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
+
+(require 'org-sticky-header)
+(setq org-sticky-header-full-path 'full)
+(setq org-sticky-header-heading-star "◉")
+(add-hook 'org-mode-hook #'org-stickey-header-mode)
+
+(org-tree-slide-presentation-profile)
+(org-tree-slide--hide-slide-header)
+
+(require 'org-journal)
+
+(require 'org-journal)
+
+(setq org-journal-date-format "%Y-%m-%d(%a)")
+(setq org-journal-time-format "%R ")
+
+(setq org-journal-dir (concat "~/Private/junk/diary/org-journal"))
+
+(setq org-journal-file-format "%Y%m%d.org")
+
+(setq org-journal-find-file 'find-file)
+
+(setq org-journal-hide-entries-p nil)
+
+(defun kd/new-buffer-p ()
+  (not (file-exists-p (buffer-file-name))))
+
+(defun kd/insert-journal-template ()
+  (let ((template-file (expand-file-name "~/.emacs.d/resources/journal-template.org" org-directory)))
+    (when (kd/new-buffer-p)
+      (save-excursion
+        (goto-char (point-min))
+        (insert-file-contents template-file)))))
+(add-hook 'org-journal-after-entry-create-hook #'kd/insert-journal-template)
 
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
@@ -1700,6 +1680,8 @@
 ;; Typescript ================
 (require 'typescript-mode)
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+
+(setq lsp-verify-signature nil)
 
 (setq lsp-verify-signature nil)
 

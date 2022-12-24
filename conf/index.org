@@ -25,143 +25,6 @@ org用の設定。
   (require 'org)
   (require 'org-protocol)
 
-  ;; System locale to use for formatting time values.
-  (setq system-time-locale "C")         ; Make sure that the weekdays in the
-                                          ; time stamps of your Org mode files and
-                                          ; in the agenda appear in English.
-
-  ;; 拡張子がorgのファイルを開いた時，自動的にorg-modeにする
-  (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-
-  (setq org-startup-folded 'content)
-
-  ;; org-modeでの強調表示を可能にする
-  (add-hook 'org-mode-hook 'turn-on-font-lock)
-  ;; (add-hook 'org-mode-hook 'current-word-highlight-mode)
-
-  ;; 本文を自動インデント
-  (setq org-startup-indented t)
-
-  ;; 見出しの余分な*を消す
-  (setq org-hide-leading-stars t)
-  (setq org-hide-emphasis-markers t)
-
-  ;; 画像表示
-  (setq org-startup-with-inline-images t)
-
-  (setq org-todo-keywords '((type "TODO" "WIP" "|" "DONE" "CLOSE")))
-  (setq org-todo-keyword-faces
-        '(("TODO" . (:foreground "orange" :weight bold))
-          ("WIP" . (:foreground "DeepSkyBlue" :weight bold))
-          ("DONE" . (:foreground "green" :weight bold))
-          ("CLOSE" . (:foreground "DarkOrchid" :weight bold))))
-
-  (setq org-src-fontify-natively t)
-  (setq org-fontify-quote-and-verse-blocks t)
-  (setq org-src-tab-acts-natively t)
-
-  ;; 展開アイコン
-  ;; (setq org-ellipsis "»")
-  ;; (setq org-ellipsis "..")
-  ;; (setq org-ellipsis "⤵")
-  ;; (setq org-ellipsis "🢗")
-  ;; (setq org-ellipsis "❖")
-  ;; (setq org-ellipsis "↯")
-  (setq org-ellipsis "▽")
-  (setq org-cycle-separator-lines 2)
-
-  ;; org-modeで行末で折り返しをする
-  (setq org-startup-truncated nil)
-  (defun change-truncation()
-    (interactive)
-    (cond ((eq truncate-lines nil)
-           (setq truncate-lines t))
-          (t
-           (setq truncate-lines nil))))
-
-  ;; スピードコマンド有効化
-  (setq org-use-speed-commands t)
-
-  ;; キーバインド ================
-  ;; ほかとかぶるので無効化
-  (define-key org-mode-map (kbd "C-c C-j") nil)
-  ;; (define-key org-mode-map (kbd "<S-left>") nil)
-  ;; (define-key org-mode-map (kbd "<S-right>") nil)
-  ;; (define-key org-mode-map (kbd "<S-up>") nil)
-  ;; (define-key org-mode-map (kbd "<S-down>") nil)
-  (define-key org-mode-map (kbd "M-<left>") nil)
-  (define-key org-mode-map (kbd "M-<right>") nil)
-  (define-key org-mode-map (kbd "C-c C-x i") 'org-clock-in)
-  (define-key org-mode-map (kbd "C-c C-x o") 'org-clock-out)
-
-  ;; org-babel ================
-  (org-babel-do-load-languages 'org-babel-load-languages
-                               '((C . t)
-                                 (clojure . t)
-                                 (emacs-lisp . t)
-                                 (graphql . t)
-                                 (haskell . t)
-                                 (lisp . t)
-                                 (python . t)
-                                 (ruby . t)
-                                 (rust . t)
-                                 (shell . t)
-                                 (sql . t)))
-
-  (setq org-confirm-babel-evaluate nil)
-  (setq org-babel-clojure-backend 'cider)
-  (require 'cider)
-
-  ;; common lisp
-  (setq inferior-lisp-program "clisp")
-  ;; clisp, sbcl,  ...
-
-  ;; 日誌 ================
-  (require 'org-journal)
-  (setq org-journal-date-format "%Y-%m-%d(%a)")
-  (setq org-journal-time-format "%R ")
-  (setq org-journal-dir (concat "~/Private/junk/diary/org-journal"))
-  (setq org-journal-file-format "%Y%m%d.org")
-  (setq org-journal-find-file 'find-file)
-  (setq org-journal-hide-entries-p nil)
-
-  ;; https://emacs.stackexchange.com/questions/17897/create-an-org-journal-template-for-daily-journal-entry/32655#32655?newreg=7c9543fa39e342cfb438c4168020447d
-  (defun kd/new-buffer-p ()
-    (not (file-exists-p (buffer-file-name))))
-
-  (defun kd/insert-journal-template ()
-    (let ((template-file (expand-file-name "~/.emacs.d/resources/journal-template.org" org-directory)))
-      (when (kd/new-buffer-p)
-        (save-excursion
-          (goto-char (point-min))
-          (insert-file-contents template-file)))))
-
-  (add-hook 'org-journal-after-entry-create-hook #'kd/insert-journal-template)
-
-  ;; 使い捨てのファイルを開く ================
-  (use-package open-junk-file)
-  (setq open-junk-file-format (concat "~/Private/junk/%Y-%m-%d-%H%M%S."))
-  (global-set-key (kbd "C-x C-z") 'open-junk-file)
-
-  ;; 見出しをいい感じにする ================
-  ;; (require 'org-bullets)
-  ;; (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-  (require 'org-superstar)
-  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
-
-  ;; org-modern
-  ;; (add-hook 'org-mode-hook #'org-modern-mode)
-  ;; (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
-
-  (require 'org-sticky-header)
-  (setq org-sticky-header-full-path 'full)
-  (setq org-sticky-header-heading-star "◉")
-
-  ;; スライド ================
-  ;; (org-tree-slide-simple-profile)
-  (org-tree-slide-presentation-profile)
-  (org-tree-slide--hide-slide-header)
-
   ;; pdf ================
   ;; (pdf-tools-install t)
   (require 'pdf-tools)
@@ -338,6 +201,225 @@ org用の設定。
 
   (define-key global-map (kbd "C-c d") 'denote-create-note)
 #+end_src
+
+#+caption: 日付時刻のフォーマットを指定する
+#+begin_src emacs-lisp
+  (setq system-time-locale "C")
+#+end_src
+
+#+caption: 拡張子がorgのファイルを開いた時，自動的にorg-modeにする
+#+begin_src emacs-lisp
+  (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+#+end_src
+
+#+caption: orgファイルを開いたときに展開状態にする
+#+begin_src emacs-lisp
+  (setq org-startup-folded 'content)
+#+end_src
+
+#+caption: 強調表示できるようにする
+#+begin_src emacs-lisp
+  (add-hook 'org-mode-hook 'turn-on-font-lock)
+#+end_src
+
+#+caption: 本文を自動インデント
+#+begin_src emacs-lisp
+  (setq org-startup-indented t)
+#+end_src
+
+#+caption: 見出しの余分な*を消す
+#+begin_src emacs-lisp
+  (setq org-hide-leading-stars t)
+  (setq org-hide-emphasis-markers t)
+#+end_src
+
+#+caption: 画像表示
+#+begin_src emacs-lisp
+  (setq org-startup-with-inline-images t)
+#+end_src
+
+#+caption: 独自のTODOキーワードを設定する
+#+begin_src emacs-lisp
+  (setq org-todo-keywords '((type "TODO" "WIP" "|" "DONE" "CLOSE")))
+  (setq org-todo-keyword-faces
+        '(("TODO" . (:foreground "orange" :weight bold))
+          ("WIP" . (:foreground "DeepSkyBlue" :weight bold))
+          ("DONE" . (:foreground "green" :weight bold))
+          ("CLOSE" . (:foreground "DarkOrchid" :weight bold))))
+#+end_src
+
+#+caption: コードブロックをシンタックスハイライトする
+#+begin_src emacs-lisp
+  (setq org-src-fontify-natively t)
+  (setq org-fontify-quote-and-verse-blocks t)
+  (setq org-src-tab-acts-natively t)
+#+end_src
+
+#+caption: 本文収納時の記号
+#+begin_src emacs-lisp
+  ;; (setq org-ellipsis "»")
+  ;; (setq org-ellipsis "..")
+  ;; (setq org-ellipsis "⤵")
+  ;; (setq org-ellipsis "🢗")
+  ;; (setq org-ellipsis "❖")
+  ;; (setq org-ellipsis "↯")
+  (setq org-ellipsis "▽")
+#+end_src
+
+#+caption: 本文収納時の記号と、本文に空ける行数
+#+begin_src emacs-lisp
+  (setq org-cycle-separator-lines 2)
+#+end_src
+
+#+caption: 行末で折り返し表示する
+#+begin_src emacs-lisp
+  (setq org-startup-truncated nil)
+  (defun change-truncation()
+    (interactive)
+    (cond ((eq truncate-lines nil)
+           (setq truncate-lines t))
+          (t
+           (setq truncate-lines nil))))
+#+end_src
+
+#+caption: スピードコマンド有効化
+#+begin_src emacs-lisp
+  (setq org-use-speed-commands t)
+#+end_src
+
+#+caption: ほかとかぶるので無効化するキーバインド
+#+begin_src emacs-lisp
+  (define-key org-mode-map (kbd "C-c C-j") nil)
+  (define-key org-mode-map (kbd "M-<left>") nil)
+  (define-key org-mode-map (kbd "M-<right>") nil)
+#+end_src
+
+#+caption: キーバインド
+#+begin_src emacs-lisp
+  (define-key org-mode-map (kbd "C-c C-x i") 'org-clock-in)
+  (define-key org-mode-map (kbd "C-c C-x o") 'org-clock-out)
+#+end_src
+
+#+caption: org-babelで実行可能にする言語
+#+begin_src emacs-lisp
+  (org-babel-do-load-languages 'org-babel-load-languages
+                               '((C . t)
+                                 (clojure . t)
+                                 (emacs-lisp . t)
+                                 (graphql . t)
+                                 (haskell . t)
+                                 (lisp . t)
+                                 (python . t)
+                                 (ruby . t)
+                                 (rust . t)
+                                 (shell . t)
+                                 (sql . t)))
+#+end_src
+
+#+caption: Clojure 設定
+#+begin_src emacs-lisp
+  (require 'cider)
+  (setq org-babel-clojure-backend 'cider)
+#+end_src
+
+#+caption: Common Lisp設定
+#+begin_src emacs-lisp
+  (setq inferior-lisp-program "clisp")
+#+end_src
+
+#+caption: 評価するときに確認プロンプトを出さない
+#+begin_src emacs-lisp
+  (setq org-confirm-babel-evaluate nil)
+#+end_src
+
+#+caption: 使い捨てファイルを開く
+#+begin_src emacs-lisp
+  (use-package open-junk-file)
+  (setq open-junk-file-format (concat "~/Private/junk/%Y-%m-%d-%H%M%S."))
+  (global-set-key (kbd "C-x C-z") 'open-junk-file)
+#+end_src
+
+#+caption: 見出しをいい感じにする
+#+begin_src emacs-lisp
+  (require 'org-superstar)
+  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+#+end_src
+
+#+caption: org-modernを有効化する
+#+begin_src emacs-lisp
+  (add-hook 'org-mode-hook #'org-modern-mode)
+  (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
+#+end_src
+
+org-modernはorg-modeの外観をいい感じにするパッケージ。
+
+#+caption: org-stickey-headerを有効化する
+#+begin_src emacs-lisp
+  (require 'org-sticky-header)
+  (setq org-sticky-header-full-path 'full)
+  (setq org-sticky-header-heading-star "◉")
+  (add-hook 'org-mode-hook #'org-stickey-header-mode)
+#+end_src
+
+org-stickey-headerは現在の見出し位置を示すヘッダーを表示するパッケージ。
+
+#+caption: org-tree-slideを有効化する
+#+begin_src emacs-lisp
+  (org-tree-slide-presentation-profile)
+  (org-tree-slide--hide-slide-header)
+#+end_src
+
+org-tree-slideはorg-modeでスライド表示するパッケージ。
+
+* org-journal
+org-journalは日付ごとのファイルを生成したり、時刻を挿入できるパッケージ。
+
+#+caption: org-journal
+#+begin_src emacs-lisp
+  (require 'org-journal)
+#+end_src
+
+#+caption: 日付と時刻のフォーマット
+#+begin_src emacs-lisp
+  (setq org-journal-date-format "%Y-%m-%d(%a)")
+  (setq org-journal-time-format "%R ")
+#+end_src
+
+#+caption: 読込・保存するディレクトリ
+#+begin_src emacs-lisp
+  (setq org-journal-dir (concat "~/Private/junk/diary/org-journal"))
+#+end_src
+
+#+caption: ファイルのフォーマット
+#+begin_src emacs-lisp
+  (setq org-journal-file-format "%Y%m%d.org")
+#+end_src
+
+#+caption: ファイルを開く時、画面分割させない
+#+begin_src emacs-lisp
+  (setq org-journal-find-file 'find-file)
+#+end_src
+
+#+caption: ファイルを開いたときに展開状態にする
+#+begin_src emacs-lisp
+  (setq org-journal-hide-entries-p nil)
+#+end_src
+
+#+caption: テンプレートファイルを設定する
+#+begin_src emacs-lisp
+  (defun kd/new-buffer-p ()
+    (not (file-exists-p (buffer-file-name))))
+
+  (defun kd/insert-journal-template ()
+    (let ((template-file (expand-file-name "~/.emacs.d/resources/journal-template.org" org-directory)))
+      (when (kd/new-buffer-p)
+        (save-excursion
+          (goto-char (point-min))
+          (insert-file-contents template-file)))))
+  (add-hook 'org-journal-after-entry-create-hook #'kd/insert-journal-template)
+#+end_src
+
+- https://emacs.stackexchange.com/questions/17897/create-an-org-journal-template-for-daily-journal-entry/32655#32655?newreg=7c9543fa39e342cfb438c4168020447d
 
 * Agenda
 agenda用の設定。
