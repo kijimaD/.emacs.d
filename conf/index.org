@@ -643,28 +643,48 @@ org-super-agendaは詳細に設定できるagenda表示ができるパッケー�
     )
 #+end_src
 
-* Pomodoro
-ポモドーロ用の設定。
+** org-pomodoro
+org-pomodoro用の設定。
 
 #+caption: 基本設定
 #+begin_src emacs-lisp
   (require 'org-pomodoro)
-  (define-key global-map [insert] 'org-pomodoro)
+#+end_src
 
+#+caption: キーバインド
+#+begin_src emacs-lisp
+  (define-key global-map [insert] 'org-pomodoro)
+#+end_src
+
+#+caption: 時間の長さ
+#+begin_src emacs-lisp
   (setq org-pomodoro-short-break-length 0)
   (setq org-pomodoro-long-break-length 10)
   (setq org-pomodoro-expiry-time 120)
+#+end_src
 
+#+caption: サウンド
+#+begin_src emacs-lisp
   (setq org-pomodoro-finished-sound "~/.emacs.d/resources/pmd-finished.wav")
-  ;; (org-pomodoro-finished)
   (setq org-pomodoro-short-break-sound "~/.emacs.d/resources/pmd-short-break.wav")
+  ;; テスト
+  ;; (org-pomodoro-finished)
   ;; (org-pomodoro-short-break-finished)
+#+end_src
 
+#+caption: タイマーが終了したときにagendaに切り替える
+#+begin_src emacs-lisp
   (add-hook 'org-pomodoro-short-break-finished-hook 'org-agenda-default)
   (add-hook 'org-pomodoro-long-break-finished-hook 'org-agenda-default)
+#+end_src
 
+#+caption: モードラインに表示する経過時間を今日限定にする
+#+begin_src emacs-lisp
   (setq org-clock-mode-line-total 'today)
+#+end_src
 
+#+caption: polybarにpomodoro情報を表示する
+#+begin_src emacs-lisp
   (defun kd/org-pomodoro-remain-gauge (max-minutes)
     "Display remain time gauge."
     (let* ((display-len 25)
@@ -679,7 +699,6 @@ org-super-agendaは詳細に設定できるagenda表示ができるパッケー�
        (concat "%{F#413839}" (make-string will ?|) "%{F-}")
        "%{T-}")))
 
-  ;; https://colekillian.com/posts/org-pomodoro-and-polybar/
   (defun kd/org-pomodoro-time ()
     "Return the remaining pomodoro time. Function for displaying in Polybar."
     (cond
@@ -705,8 +724,19 @@ org-super-agendaは詳細に設定できるagenda表示ができるパッケー�
                                 ))
      ((org-clocking-p) (format "(%s) %s" (org-clock-get-clocked-time) org-clock-heading))
      (t "Not working...")))
-  (kd/org-pomodoro-time)
 
+  (defun kd/pmd-today-point-display ()
+    ;; (format " [%s]" kd/pmd-today-point)
+    (let* ((all-minute (* kd/pmd-today-point 25))
+           (hour (/ all-minute 60))
+           (minute (% all-minute 60)))
+      (format " %spts/%02dh%02dm" kd/pmd-today-point hour minute)))
+#+end_src
+
+- https://colekillian.com/posts/org-pomodoro-and-polybar/
+
+#+caption: 今日のポイントをカウントする
+#+begin_src emacs-lisp
   (defvar kd/pmd-today-point 0)
   (add-hook 'org-pomodoro-finished-hook
             (lambda () (setq kd/pmd-today-point (1+ kd/pmd-today-point))))
@@ -721,15 +751,11 @@ org-super-agendaは詳細に設定できるagenda表示ができるパッケー�
                                                                 ", "
                                                                 (number-to-string kd/pmd-today-point)))
                                           (setq kd/pmd-today-point 0)
-                                          (message "pomodoro count reset!"))))
+                                          (message "pomodoro count reset!")))
+#+end_src
 
-  (defun kd/pmd-today-point-display ()
-    ;; (format " [%s]" kd/pmd-today-point)
-    (let* ((all-minute (* kd/pmd-today-point 25))
-           (hour (/ all-minute 60))
-           (minute (% all-minute 60)))
-      (format " %spts/%02dh%02dm" kd/pmd-today-point hour minute)))
-
+#+caption: ポモドーロのカウントを手動で変更する
+#+begin_src emacs-lisp
   (defun kd/pmd-manual ()
     "set point"
     (interactive)
