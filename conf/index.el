@@ -429,6 +429,9 @@
   )
 
 (require 'org-pomodoro)
+
+(require 'org-pomodoro)
+
 (define-key global-map [insert] 'org-pomodoro)
 
 (setq org-pomodoro-short-break-length 0)
@@ -436,8 +439,9 @@
 (setq org-pomodoro-expiry-time 120)
 
 (setq org-pomodoro-finished-sound "~/.emacs.d/resources/pmd-finished.wav")
-;; (org-pomodoro-finished)
 (setq org-pomodoro-short-break-sound "~/.emacs.d/resources/pmd-short-break.wav")
+;; テスト
+;; (org-pomodoro-finished)
 ;; (org-pomodoro-short-break-finished)
 
 (add-hook 'org-pomodoro-short-break-finished-hook 'org-agenda-default)
@@ -459,7 +463,6 @@
      (concat "%{F#413839}" (make-string will ?|) "%{F-}")
      "%{T-}")))
 
-;; https://colekillian.com/posts/org-pomodoro-and-polybar/
 (defun kd/org-pomodoro-time ()
   "Return the remaining pomodoro time. Function for displaying in Polybar."
   (cond
@@ -485,7 +488,13 @@
                               ))
    ((org-clocking-p) (format "(%s) %s" (org-clock-get-clocked-time) org-clock-heading))
    (t "Not working...")))
-(kd/org-pomodoro-time)
+
+(defun kd/pmd-today-point-display ()
+  ;; (format " [%s]" kd/pmd-today-point)
+  (let* ((all-minute (* kd/pmd-today-point 25))
+         (hour (/ all-minute 60))
+         (minute (% all-minute 60)))
+    (format " %spts/%02dh%02dm" kd/pmd-today-point hour minute)))
 
 (defvar kd/pmd-today-point 0)
 (add-hook 'org-pomodoro-finished-hook
@@ -503,15 +512,8 @@
                                         (setq kd/pmd-today-point 0)
                                         (message "pomodoro count reset!"))))
 
-(defun kd/pmd-today-point-display ()
-  ;; (format " [%s]" kd/pmd-today-point)
-  (let* ((all-minute (* kd/pmd-today-point 25))
-         (hour (/ all-minute 60))
-         (minute (% all-minute 60)))
-    (format " %spts/%02dh%02dm" kd/pmd-today-point hour minute)))
-
 (defun kd/pmd-manual ()
-  "set point"
+  "set point manually"
   (interactive)
   (let ((point (read-from-minibuffer "How much point? ")))
     (setq kd/pmd-today-point (string-to-number point))))

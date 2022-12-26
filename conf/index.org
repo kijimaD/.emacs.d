@@ -751,13 +751,13 @@ org-pomodoro用の設定。
                                                                 ", "
                                                                 (number-to-string kd/pmd-today-point)))
                                           (setq kd/pmd-today-point 0)
-                                          (message "pomodoro count reset!")))
+                                          (message "pomodoro count reset!"))))
 #+end_src
 
 #+caption: ポモドーロのカウントを手動で変更する
 #+begin_src emacs-lisp
   (defun kd/pmd-manual ()
-    "set point"
+    "set point manually"
     (interactive)
     (let ((point (read-from-minibuffer "How much point? ")))
       (setq kd/pmd-today-point (string-to-number point))))
