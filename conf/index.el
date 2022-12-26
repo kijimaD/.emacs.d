@@ -518,11 +518,6 @@
   (let ((point (read-from-minibuffer "How much point? ")))
     (setq kd/pmd-today-point (string-to-number point))))
 
-;; (defvar efs/frame-transparency '(90 . 90))
-;; (set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)
-;; (add-to-list 'default-frame-alist `(alpha . ,efs/frame-transparency))
-
-;; Set the font face based on platform
 (when window-system
   (progn
     (pcase system-type
@@ -543,28 +538,22 @@
         nil 'japanese-jisx0208
         (font-spec :family "Hiragino Sans"))))))
 
-;; "JetBrains Mono"
-;; "Iosevka SS08"
-;; "Fira Mono"
-;; "Fira Code"
-;; "Hiragino Sans" -- (japanese)
-;; "Hack"
+(prefer-coding-system 'utf-8)
 
-;; 文字コード ================
-;;ターミナルの文字コード
+(set-language-environment 'utf-8)
+
 (set-terminal-coding-system 'utf-8)
-;;キーボードから入力される文字コード
+
 (set-keyboard-coding-system 'utf-8)
-;;ファイルのバッファのデフォルト文字コード
+
 (set-buffer-file-coding-system 'utf-8)
-;;バッファのプロセスの文字コード
+
 (setq default-buffer-file-coding-system 'utf-8)
-;;ファイルの文字コード
+
 (setq file-name-coding-system 'utf-8)
-;;新規作成ファイルの文字コード
+
 (set-default-coding-systems 'utf-8)
 
-;; 絵文字フォント ================
 (defun --set-emoji-font (frame)
   "Adjust the font settings of FRAME so Emacs can display emoji properly."
   (if (eq system-type 'darwin)
@@ -584,15 +573,6 @@
     ;; unicodefont
     (require 'unicode-fonts)
     (unicode-fonts-setup)))
-
-(when (not window-system)
-  (progn
-    ;; CUI用設定
-    ))
-
-;; 文字コード
-(prefer-coding-system 'utf-8)
-(set-language-environment 'utf-8)
 
 (server-start)
 
