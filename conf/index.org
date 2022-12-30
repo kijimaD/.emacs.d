@@ -3077,9 +3077,9 @@ OS操作の便利関数。
 #+caption: Cの関数に定義ジャンプできるようにする
 #+begin_src emacs-lisp
 ;; Emacs C source directory
-(let ((src-dir "~/ProjectOrg/emacs/src"))
+(let ((src-dir "~/ProjectOrg/emacs/emacs/src"))
   (if (file-directory-p src-dir)
       (setq source-directory src-dir)))
 #+end_src
 
-~~/ProjectOrg~ にEmacsのソースコードを配置しておく。
+前提: ~~/ProjectOrg/emacs~ にEmacsのソースコードを配置しておく。
