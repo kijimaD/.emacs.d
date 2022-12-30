@@ -864,134 +864,202 @@ org-pomodoro用の設定。
 * Simple
 未分類の設定。最初から入っているものの設定。
 
-#+caption: 基本設定
+#+caption: Emacs Server開始
 #+begin_src emacs-lisp
   (server-start)
+#+end_src
 
-  ;; 表示系 ================
-  ;; *scratch*で最初に描画されるメッセージを消す
+#+caption: *scratch*で最初に描画されるメッセージを消す
+#+begin_src emacs-lisp
   (setq initial-scratch-message "")
+#+end_src
 
-  ;; 終了時に確認しない
+#+caption: 終了時に確認しない
+#+begin_src emacs-lisp
   (setq confirm-kill-processes nil)
+#+end_src
 
-  ;; メニューバーを消す
+#+caption: メニューバーを消す
+#+begin_src emacs-lisp
   (menu-bar-mode 0)
+#+end_src
 
-  ;; 対応する括弧をハイライト
+#+caption: 対応する括弧をハイライト
+#+begin_src emacs-lisp
   (show-paren-mode t)
+#+end_src
 
-  ;; 起動時のメッセージ非表示
+#+caption: 起動時のメッセージ非表示
+#+begin_src emacs-lisp
   (setq inhibit-startup-message t)
+#+end_src
 
-  ;; 保存時のmessage非表示
-  ;; (setq save-silently t)
+#+caption: 保存時のmessage非表示
+#+begin_src emacs-lisp
+  (setq save-silently t)
+#+end_src
 
-  ;; font-lockをどこでも有効にする
+#+caption: font-lockをどこでも有効にする
+#+begin_src emacs-lisp
   (global-font-lock-mode t)
+#+end_src
 
-  ;; タイトルにフルパス表示
+#+caption: タイトルにフルパス表示
+#+begin_src emacs-lisp
   (setq frame-title-format "%f")
+#+end_src
 
+#+caption: ビープ音を出さない
+#+begin_src emacs-lisp
   (setq ring-bell-function 'ignore)
+#+end_src
 
+#+caption: スクロールバーを消す
+#+begin_src emacs-lisp
   (require 'scroll-bar)
   (scroll-bar-mode 0)
+#+end_src
+
+#+caption: 対応カッコを表示する
+#+begin_src emacs-lisp
   (show-paren-mode t)
+#+end_src
+
+#+caption: ツールバーを消す
+#+begin_src emacs-lisp
   (require 'tool-bar)
   (tool-bar-mode 0)
+#+end_src
+
+#+caption: ツールチップを消す
+#+begin_src emacs-lisp
   (tooltip-mode 0)
+#+end_src
 
-  ;; キーバインド ================
-
+#+caption: １行スクロール
+#+begin_src emacs-lisp
   (global-set-key (kbd "M-n") (lambda () (interactive) (scroll-up 1)))
   (global-set-key (kbd "M-p") (lambda () (interactive) (scroll-down 1)))
+#+end_src
 
-  ;; キーボード入れ替えーーバックスペースをC-hで。
+#+caption: バックスペースをC-hに割り当てる
+#+begin_src emacs-lisp
   (keyboard-translate ?\C-h ?\C-?)
+#+end_src
 
-  ;;ワードカウントをC-x p に割当
+#+caption: ワードカウントをC-x p に割当
+#+begin_src emacs-lisp
   (global-set-key "\C-xp" 'count-words)
+#+end_src
 
-  ;; windowの大きさ変更
+#+caption: windowの大きさ変更
+#+begin_src emacs-lisp
   (global-set-key (kbd "C-M-{") 'shrink-window-horizontally)
   (global-set-key (kbd "C-M-}") 'enlarge-window-horizontally)
+#+end_src
 
-  ;; yesかnoではなく、yかnかで答えられるようにする
+#+caption: yesかnoではなく、yかnかで答えられるようにする
+#+begin_src emacs-lisp
   (defalias 'yes-or-no-p 'y-or-n-p)
+#+end_src
 
-  ;; 終了してしまう事故防止
+#+caption: 終了してしまう事故防止
+#+begin_src emacs-lisp
   (setq confirm-kill-emacs 'y-or-n-p)
+#+end_src
 
-  ;; リンクを聞かずに開く
+#+caption: リンクを聞かずに開く
+#+begin_src emacs-lisp
   (setq vc-follow-symlinks t)
+#+end_src
 
-  ;;括弧の補完
+#+caption: カッコの補完
+#+begin_src emacs-lisp
   (require 'smartparens)
   (add-hook 'prog-mode-hook 'smartparens-mode)
   (add-hook 'eshell-mode-hook 'smartparens-mode)
   (add-hook 'org-mode-hook 'smartparens-mode)
+#+end_src
 
-  ;; オートセーブ関連 ================
-
-  ;;ログの記録量
+#+caption: messageログの記録数
+#+begin_src emacs-lisp
   (setq message-log-max 1000)
+#+end_src
 
-  ;;履歴存数
+#+caption: 履歴の保存数
+#+begin_src emacs-lisp
   (setq history-length 500)
+#+end_src
 
-  ;;重複する履歴は保存しない
+#+caption: 重複する履歴は保存しない
+#+begin_src emacs-lisp
   (setq history-delete-duplicates t)
+#+end_src
 
-  ;;バックアップファイルを作らない
+#+caption: バックアップファイルを作らない
+#+begin_src emacs-lisp
   (setq backup-inhibited t)
   (setq make-backup-files nil)
   (setq auto-save-default nil)
   (setq create-lockfiles nil)
+#+end_src
 
-  ;;終了時にオートセーブファイルを削除
+#+caption: 終了時にオートセーブファイルを削除
+#+begin_src emacs-lisp
   (setq delete-auto-save-files t)
+#+end_src
 
-  ;; オートセーブ
+#+caption: オートセーブ
+#+begin_src emacs-lisp
   (setq auto-save-timeout 2)
   (setq auto-save-visited-interval 2)
   (setq auto-save-no-message t)
   (auto-save-visited-mode)
+#+end_src
 
-  ;; 最適化 ================
-
-  ;; 右から左に読む言語に対応させないことで描画高速化
+#+caption: 右から左に読む言語に対応させないことで描画高速化
+#+begin_src emacs-lisp
   (setq-default bidi-display-reordering nil)
+#+end_src
 
-  ;; splash screenを無効にする
+#+caption: splash screenを無効にする
+#+begin_src emacs-lisp
   (setq inhibit-splash-screen t)
+#+end_src
 
-  ;; 行番号の表示
-  ;; (display-line-numbers-mode)
+#+caption: 行番号の表示
+#+begin_src emacs-lisp
+  (display-line-numbers-mode)
+#+end_src
 
-  ;; ツール系 ================
-
-  ;; ediffを１ウィンドウで表示
+#+caption: ediffを１ウィンドウで表示
+#+begin_src emacs-lisp
   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+#+end_src
 
-  ;; コーディング ================
-
-  ;; オートインデントでスペースを使う
+#+caption: オートインデントでスペースを使う
+#+begin_src emacs-lisp
   (setq-default indent-tabs-mode nil)
+#+end_src
 
-  ;; クリップボードと同期
+#+caption: クリップボードと同期
+#+begin_src emacs-lisp
   (setq x-select-enable-primary t)
+#+end_src
 
-  ;; 空白を自動削除
+#+caption: 空白を自動削除
+#+begin_src emacs-lisp
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
+#+end_src
 
-  ;; 選択状態で入力すると上書き
+#+caption: 選択状態で入力すると上書き
+#+begin_src emacs-lisp
   (delete-selection-mode t)
+#+end_src
 
-  ;; ウィンドウ移動 ================
-
-  ;; メジャーモードのC-tキーバインドを無効化する
-  (eval-after-load "django-mode"
+#+caption: メジャーモードのC-tキーバインドを無効化する
+#+begin_src emacs-lisp
+(eval-after-load "django-mode"
     '(progn
        (define-key django-mode-map (kbd "C-t") nil)))
   (eval-after-load "dired"
@@ -1009,10 +1077,11 @@ org-pomodoro用の設定。
        (mapc (lambda (i)
                (define-key magit-mode-map (kbd (format "M-%d" i)) nil))
              (number-sequence 1 4))))
+#+end_src
 
-  ;; インクリメンタルサーチの挙動変更 ================
-
-  (defadvice isearch-mode (around isearch-mode-default-string (forward &optional regexp op-fun recursive-edit word-p) activate)
+#+caption: インクリメンタルサーチの挙動変更
+#+begin_src emacs-lisp
+(defadvice isearch-mode (around isearch-mode-default-string (forward &optional regexp op-fun recursive-edit word-p) activate)
     (if (and transient-mark-mode mark-active (not (eq (mark) (point))))
         (progn
           (isearch-update-ring (buffer-substring-no-properties (mark) (point)))
@@ -1023,17 +1092,21 @@ org-pomodoro用の設定。
             (goto-char (mark))
             (isearch-repeat-forward)))
       ad-do-it))
+#+end_src
 
-  ;; マウスホイールの挙動
-  (setq
+#+caption: マウスホイールの挙動
+#+begin_src emacs-lisp
+(setq
    ;; ホイールでスクロールする行数を設定
    mouse-wheel-scroll-amount '(1 ((shift) . 2) ((control)))
    ;; 速度を無視する
    mouse-wheel-progressive-speed nil)
   (setq scroll-preserve-screen-position 'always)
+#+end_src
 
-  ;; turn off blink cursor
-  (if (fboundp 'blink-cursor-mode)
+#+caption: カーソルの点滅無効化
+#+begin_src emacs-lisp
+(if (fboundp 'blink-cursor-mode)
       (blink-cursor-mode -1))
 #+end_src
 
