@@ -1113,44 +1113,45 @@ org-pomodoro用の設定。
 * Packages
 未分類の設定。拡張設定。
 
-#+caption: 全設定
+#+caption: 履歴保存
 #+begin_src emacs-lisp
-  ;; 履歴保存
   (savehist-mode 1)
-  ;;; 永続化する変数を新たに追加する
-  (push 'compile-command savehist-additional-variables)
-  ;;; 永続化しないミニバッファ履歴の変数を追加する
-  (push 'command-history savehist-ignored-variables)
+#+end_src
 
-  ;; コーディング外観  ================
+#+caption: 永続化する変数を新たに追加する
+#+begin_src emacs-lisp
+  (push 'compile-command savehist-additional-variables)
+#+end_src
+
+#+caption: 永続化しないミニバッファ履歴の変数を追加する
+#+begin_src emacs-lisp
+  (push 'command-history savehist-ignored-variables)
+#+end_src
+
+#+caption: カッコを色付けする
+#+begin_src emacs-lisp
   (require 'rainbow-delimiters)
   (rainbow-delimiters-mode t)
-  ;; (require 'cl-lib)
-  ;; (require 'color)
-  ;; (cl-loop
-  ;;  for index from 1 to rainbow-delimiters-max-face-count
-  ;;  do
-  ;;  (let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
-  ;;    (cl-callf color-saturate-name (face-foreground face) 30)))
-
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+#+end_src
 
+#+caption: シンボルをハイライトする
+#+begin_src emacs-lisp
   (require 'auto-highlight-symbol)
   (global-auto-highlight-symbol-mode t)
   (ahs-set-idle-interval 0.4)
+#+end_src
 
-  ;; ahs-modeのキーバインドを無効化する
+#+caption: ahs-modeのキーバインドを無効化する
+#+begin_src emacs-lisp
   (define-key auto-highlight-symbol-mode-map (kbd "M-<right>") nil)
   (define-key auto-highlight-symbol-mode-map (kbd "M-<left>") nil)
+#+end_src
 
-  ;; インデント可視化
-  ;; (require 'highlight-indentation)
-  ;; (add-hook 'prog-mode-hook 'highlight-indentation-mode)
-  ;; (set-face-background 'highlight-indentation-face "#e3e3d3")
-  ;; (set-face-background 'highlight-indentation-current-column-face "#c3b3b3")
-
-  ;; スペース可視化
+#+caption: スペース可視化
+#+begin_src emacs-lisp
   (require 'whitespace)
+
   ;; 空白
   (set-face-foreground 'whitespace-space nil)
   (set-face-background 'whitespace-space "gray33")
@@ -1175,17 +1176,19 @@ org-pomodoro用の設定。
   (setq whitespace-display-mappings
         '((tab-mark ?\t [?\xBB ?\t])))
   (global-whitespace-mode 1)
+#+end_src
 
+#+caption: インデント設定
+#+begin_src emacs-lisp
   (add-hook 'emacs-lisp-mode-hook
             (lambda ()
               (setq indent-tabs-mode nil)))
 
   (setq-default typescript-indent-level 2)
+#+end_src
 
-  ;; 外観(非コーディング) ================
-  ;; 現在行をハイライト
-
-  ;; ハイライトの表示を遅くして高速化する
+#+caption: ハイライトの表示を遅くして高速化する
+#+begin_src emacs-lisp
   (require 'hl-line)
   (defun global-hl-line-timer-function ()
     (global-hl-line-unhighlight-all)
@@ -1193,7 +1196,10 @@ org-pomodoro用の設定。
       (global-hl-line-highlight)))
   (setq global-hl-line-timer
         (run-with-idle-timer 0.03 t 'global-hl-line-timer-function))
+#+end_src
 
+#+caption: 現在行をハイライトする
+#+begin_src emacs-lisp
   (defface hlline-face
     '((((class color)
         (background dark))
@@ -1207,26 +1213,18 @@ org-pomodoro用の設定。
 
   (setq hl-line-face 'hlline-face)
   (global-hl-line-mode)
+#+end_src
 
-  ;; (nyan-mode)
-
+#+caption: 移動時にハイライトする
+#+begin_src emacs-lisp
   (setq beacon-size 20) ; default 40
   (setq beacon-color "#827591")
   (setq beacon-blink-when-focused t)
-  ;; (beacon-mode)
+  (beacon-mode)
+#+end_src
 
-  ;; window移動 ================
-  ;; 分割した画面間をShift+矢印で移動
-  ;; (setq windmove-wrap-around t)
-  ;; (windmove-mode 0)
-
-  ;; (window-numbering-mode 1)
-
-  ;; window表示 ================
-  ;; (require 'popwin)
-  ;; (popwin-mode 0)
-
-  ;; ブックマーク ================
+#+caption: バッファ内ブックマーク
+#+begin_src emacs-lisp
   (setq-default bm-buffer-persistence nil)
   (setq bm-restore-repository-on-load t)
   (require 'bm)
@@ -1241,35 +1239,51 @@ org-pomodoro用の設定。
   (global-set-key (kbd "C-M-SPC") 'bm-toggle)
   (global-set-key (kbd "M-[") 'bm-previous)
   (global-set-key (kbd "M-]") 'bm-next)
+#+end_src
 
-  ;; カーソル移動 ================
+#+caption: カーソル移動のキーバインド
+#+begin_src emacs-lisp
   (global-set-key (kbd "M-<left>") 'previous-buffer)
   (global-set-key (kbd "M-<right>") 'next-buffer)
   (global-set-key (kbd "C-t") 'other-window)
   (global-set-key (kbd "M-t") (lambda () (interactive) (other-window -1)))
+#+end_src
 
+#+caption: ace-jump-mode
+#+begin_src emacs-lisp
   (require 'ace-jump-mode)
   (setq ace-jump-mode-gray-background nil)
   (setq ace-jump-word-mode-use-query-char nil)
   (setq ace-jump-mode-move-keys
         (append "asdfghjkl;:]qwertyuiop@zxcvbnm,." nil))
   (global-set-key (kbd "C-o") 'ace-jump-word-mode)
+#+end_src
 
+#+caption: ace-link
+#+begin_src emacs-lisp
   (ace-link-setup-default)
+#+end_src
 
+#+caption: avy
+#+begin_src emacs-lisp
   (require 'avy)
   (global-set-key (kbd "C-j") 'avy-copy-line)
   (global-set-key (kbd "M-j") 'avy-goto-line)
   (global-set-key (kbd "C-M-j") 'avy-goto-whitespace-end)
+#+end_src
 
+#+caption: back-button
+#+begin_src emacs-lisp
   (back-button-mode 1)
   (global-set-key (kbd "C-c <left>") 'goto-last-change)
   (global-set-key (kbd "C-c <right>") 'goto-last-change-reverse)
 
   ;; 矩形選択で使うため無効化する
   (define-key back-button-mode-map (kbd "C-x SPC") nil)
+#+end_src
 
-  ;; インクリメンタルサーチ ================
+#+caption: migemo
+#+begin_src emacs-lisp
   (require 'migemo)
   (when (and (executable-find "cmigemo")
              (require 'migemo nil t))
@@ -1282,21 +1296,32 @@ org-pomodoro用の設定。
     (load-library "migemo")
     (migemo-init)
     )
+#+end_src
 
+#+caption: anzu
+#+begin_src emacs-lisp
   (require 'anzu)
   (global-anzu-mode)
+#+end_src
 
-  ;; バージョン管理 ================
+#+caption: magit
+#+begin_src emacs-lisp
   (require 'magit)
   (global-set-key (kbd "C-x g") 'magit-status)
 
   (with-eval-after-load 'magit
     (require 'forge))
+#+end_src
 
-  ;; Gitの差分を表示する
+
+#+caption: git-gutter+-mode
+#+begin_src emacs-lisp
   (global-git-gutter+-mode 1)
   (global-set-key (kbd "C-c C-v") 'git-gutter+-show-hunk-inline-at-point)
+#+end_src
 
+#+caption: commit時にconvential commitを選択する
+#+begin_src emacs-lisp
   ;; http://www.modernemacs.com/post/pretty-magit/
   (defun kd/magit-commit-prompt ()
     "Use ivy to insert conventional commit keyword."
@@ -1317,11 +1342,12 @@ org-pomodoro用の設定。
                                 :sort t
                                 :preselect "Add: ")
                       ": "))))
-
   (remove-hook 'git-commit-setup-hook 'with-editor-usage-message)
   (add-hook 'git-commit-setup-hook 'kd/magit-commit-prompt)
+#+end_src
 
-  ;; 文字入力 ================
+#+caption: mozc
+#+begin_src emacs-lisp
   (require 'mozc)
   (set-language-environment "Japanese")
   (setq default-input-method "japanese-mozc")
@@ -1331,17 +1357,26 @@ org-pomodoro用の設定。
             (lambda() (set-cursor-color "Magenta")))
   (add-hook 'input-method-inactivate-hook
             (lambda() (set-cursor-color "grey")))
+#+end_src
 
+#+caption: mozc-popup
+#+begin_src emacs-lisp
   (require 'mozc-popup)
   (setq mozc-candidate-style 'echo-area)
+#+end_src
 
-  ;; 固有サイトモード ================
-  (global-set-key (kbd "<f2>") 'devdocs-search)
+#+caption: devdocs-search
+#+begin_src emacs-lisp
+    (global-set-key (kbd "<f2>") 'devdocs-search)
+#+end_src
 
-  ;; コンソールモード ================
+#+caption: fish
+#+begin_src emacs-lisp
   (require 'fish-mode)
+#+end_src
 
-  ;; テンプレート ================
+#+caption: auto-insert
+#+begin_src emacs-lisp
   (auto-insert-mode)
   (setq auto-insert-directory "~/.emacs.d/insert/")
   ;; (define-auto-insert "\\.rb$" "ruby-template.rb")
@@ -1353,7 +1388,10 @@ org-pomodoro用の設定。
                   ("\\.org$" . "org-template.org")
                   ("\\.md$" . "markdown-template.md")
                   ) auto-insert-alist))
+#+end_src
 
+#+caption: yasnippet
+#+begin_src emacs-lisp
   (require 'yasnippet)
   (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
   (auto-insert-mode t)
@@ -1363,14 +1401,18 @@ org-pomodoro用の設定。
   (define-key yas-minor-mode-map (kbd "C-x y i") 'yas-insert-snippet)
   (define-key yas-minor-mode-map (kbd "C-x y n") 'yas-new-snippet)
   (define-key yas-minor-mode-map (kbd "C-x y v") 'yas-visit-snippet-file)
+#+end_src
 
-  ;; プロジェクト ================
+#+caption: projectile
+#+begin_src emacs-lisp
   (require 'projectile)
   (projectile-global-mode)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (counsel-projectile-mode)
+#+end_src
 
-  ;; 再読込 ================
+#+caption: バッファ再読込
+#+begin_src emacs-lisp
   (defun revert-buffer-no-confirm (&optional force-reverting)
     "Interactive call to revert-buffer. Ignoring the auto-save
    file and not requesting for confirmation. When the current buffer
@@ -1381,32 +1423,22 @@ org-pomodoro用の設定。
     (if (or force-reverting (not (buffer-modified-p)))
         (revert-buffer :ignore-auto :noconfirm)
       (error "The buffer has been modified")))
-
   (global-set-key (kbd "<f5>") 'revert-buffer-no-confirm)
+#+end_src
 
-  ;; 変更があったら自動で更新
+#+caption: 変更があったら自動で更新
+#+begin_src emacs-lisp
   (global-auto-revert-mode 1)
+#+end_src
 
-  ;; SSH ================
+#+caption: tramp
+#+begin_src emacs-lisp
   (require 'tramp)
   (setq tramp-default-method "ssh")
+#+end_src
 
-  ;; スペルチェック ================
-  ;; (add-hook 'prog-mode-hook 'flyspell-mode)
-
-  ;; ispell の後継である aspell を使う。
-  ;; CamelCase でもいい感じに spellcheck してくれる設定を追加
-  ;; See: https://stackoverflow.com/a/24878128/8888451
-
-  ;; (setq-default ispell-program-name "aspell")
-  ;; (eval-after-load "ispell"
-  ;;   '(add-to-list 'ispell-skip-region-alist '("[^\000-\377]+")))
-  ;; (setq ispell-program-name "aspell"
-  ;;       ispell-extra-args
-  ;;       '("--sug-mode=ultra" "--lang=en_US" "--run-together" "--run-together-limit=5" "--run-together-min=2"))
-
-  ;; シンタックスチェック ================
-
+#+caption: flycheck
+#+begin_src emacs-lisp
   (require 'flycheck)
   (setq flycheck-indication-mode 'right-fringe)
   (add-hook 'flycheck-mode-hook #'flycheck-set-indication-mode)
@@ -1423,12 +1455,16 @@ org-pomodoro用の設定。
 
   ;; コード変更後、2秒後にチェックする
   (setq flycheck-idle-change-delay 2)
+#+end_src
 
-  ;; ヘルプ ================
+#+caption: which-key
+#+begin_src emacs-lisp
   (which-key-mode)
   (which-key-setup-side-window-bottom)
+#+end_src
 
-  ;; dired ================
+#+caption: dired
+#+begin_src emacs-lisp
   (require 'dired-single)
   (defun my-dired-init ()
     "Bunch of stuff to run for dired, either immediately or when it's
@@ -1450,15 +1486,10 @@ org-pomodoro用の設定。
 
   (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
   (add-hook 'dired-mode-hook 'dired-hide-details-mode)
+#+end_src
 
-  ;; 定義元ジャンプ ================
-  ;; C-M-p backward-list を上書きしてしまうのでコメントアウト
-  ;; (dumb-jump-mode)
-  ;; (global-set-key (kbd "C-c j") 'dumb-jump-go)
-  (setq dumb-jump-selector 'popup)
-  ;; (setq dumb-jump-selector 'helm)
-
-  ;; easy-kill ================
+#+caption: easy-kill
+#+begin_src emacs-lisp
   (require 'easy-kill)
   (global-set-key [remap kill-ring-save] 'easy-kill)
 
@@ -1488,20 +1519,19 @@ org-pomodoro用の設定。
   (add-to-list 'easy-kill-alist '(?F string-up-to-char-forward ""))
   (add-to-list 'easy-kill-alist '(?t string-to-char-backward ""))
   (add-to-list 'easy-kill-alist '(?T string-up-to-char-backward ""))
+#+end_src
 
-  ;; Emacs 24.4+ comes with rectangle-mark-mode.
-  ;; (define-key rectangle-mark-mode-map (kbd "C-. C-,") 'mc/rect-rectangle-to-multiple-cursors)
-  ;; (define-key cua--rectangle-keymap   (kbd "C-. C-,") 'mc/cua-rectangle-to-multiple-cursors)
-
-  ;; log-mode ================
+#+caption: command-log-mode
+#+begin_src emacs-lisp
   (require 'command-log-mode)
   (global-command-log-mode)
 
   (setq clm/log-command-exceptions*
         '(mozc-handle-event self-insert-command))
+#+end_src
 
-  ;; RSS ================
-
+#+caption: elfeed
+#+begin_src emacs-lisp
   (setq elfeed-feeds
         '(("https://www.sanityinc.com/feed.xml" sanityinc blog)
           ("https://sachachua.com/blog/category/weekly/feed/" sachachua blog)
@@ -1512,21 +1542,24 @@ org-pomodoro用の設定。
           ("http://pragmaticemacs.com/feed/" Pragmatic Emacs)))
 
   ;; default-browser
-  ;; (setq browse-url-browser-function 'eww-browse-url)
   (setq browse-url-browser-function 'browse-url-firefox)
+#+end_src
 
-  (run-at-time "23:58pm" (* 24 60 60) (lambda () (elfeed-search-update--force)))
-
-  ;; Google検索 ================
+#+caption: google-this
+#+begin_src emacs-lisp
   (require 'google-this)
   (google-this-mode 1)
   (setq google-this-location-suffix "co.jp")
+#+end_src
 
-  ;; 辞書 ================
+#+caption: define-word
+#+begin_src emacs-lisp
   (require 'define-word)
   (global-set-key (kbd "<end>") 'define-word-at-point)
+#+end_src
 
-  ;; eww ================
+#+caption: eww
+#+begin_src emacs-lisp
   ;; 改行するようにする
   (defun shr-insert-document--for-eww (&rest them)
     (let ((shr-width 70)) (apply them)))
@@ -1557,8 +1590,6 @@ org-pomodoro用の設定。
 
   ;; デフォルトエンジン
   (setq eww-search-prefix "https://www.google.co.jp/search?q=")
-
-  (require 'cl-lib)
 
   (defun eww-tag-pre (dom)
     (let ((shr-folding-mode 'none)
@@ -1634,11 +1665,10 @@ org-pomodoro用の設定。
 
   (setq shr-external-rendering-functions
         '((pre . eww-tag-pre)))
+#+end_src
 
-  ;; 校正ツール ================
-  (require 'markdown-mode)
-  (define-key markdown-mode-map (kbd "C-c C-j") nil)
-
+#+caption: flycheck + textlint
+#+begin_src emacs-lisp
   (flycheck-define-checker textlint
     "A linter for Markdown."
     :command ("textlint" "--format" "unix" source)
@@ -1661,26 +1691,35 @@ org-pomodoro用の設定。
             '(lambda ()
                (add-node-modules-path)
                (setq flycheck-checker 'textlint)
-               ;; (org-sticky-header-mode)
                (flycheck-mode 1)))
+#+end_src
 
-  ;; 正規表現 ================
+#+caption: 正規表現
+#+begin_src emacs-lisp
   (global-set-key (kbd "C-M-%") 'vr/query-replace)
   (require 'visual-regexp-steroids)
+#+end_src
 
-  ;; write-room ================
+#+caption: writeroom-mode
+#+begin_src emacs-lisp
   (global-set-key [f7] 'writeroom-mode)
+#+end_src
 
-  ;; git-link ================
+#+caption: git-link
+#+begin_src emacs-lisp
   (setq git-link-default-branch "main")
   (setq git-link-use-commit t)
+#+end_src
 
-  ;; undo ================
+#+caption: undo-tree-mode
+#+begin_src emacs-lisp
   (global-undo-tree-mode)
   (setq undo-tree-auto-save-history nil)
+#+end_src
 
-  ;; eradio ================
-  (setq eradio-channels '(("def con - soma fm" . "https://somafm.com/defcon256.pls")
+#+caption: eradio
+#+begin_src emacs-lisp
+(setq eradio-channels '(("def con - soma fm" . "https://somafm.com/defcon256.pls")
                           ("metal - soma fm"   . "https://somafm.com/metal130.pls")
                           ("cyberia - lainon"  . "https://lainon.life/radio/cyberia.ogg.m3u")
                           ("cafe - lainon"     . "https://lainon.life/radio/cafe.ogg.m3u")
@@ -1711,29 +1750,46 @@ org-pomodoro用の設定。
                           ("piano - CALMRADIO.COM - Most Beautiful Piano Ever" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://209.58.147.84:19991/listen.pls?sid=1&t=.m3u")
                           ("piano - CALMRADIO.COM - Light Jazz Piano" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://23.82.11.88:10800/listen.pls?sid=1&t=.m3u")
                           ))
-  ;; typing game ================
+#+end_src
+
+#+caption: タイピングゲームの保存ファイル
+#+begin_src emacs-lisp
   (setq toe-highscore-file "~/.emacs.d/games/.toe-scores")
+#+end_src
 
-  ;; create-link ================
+#+caption: create-link
+#+begin_src emacs-lisp
   (setq create-link-default-format 'create-link-format-org)
+#+end_src
 
-  ;; ripgrep ================
+#+caption: ripgrep
+#+begin_src emacs-lisp
   (rg-enable-default-bindings)
+#+end_src
 
-  ;; Emacs Lisp ================
+#+caption: paredit
+#+begin_src emacs-lisp
   (require 'paredit)
   ;; (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
   ;; (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
   ;; (add-hook 'lisp-mode-hook 'enable-paredit-mode)
   ;; (add-hook 'ielm-mode-hook 'enable-paredit-mode)
+#+end_src
 
+#+caption: lispxmp
+#+begin_src emacs-lisp
   (require 'lispxmp)
   (define-key emacs-lisp-mode-map (kbd "C-<return>") 'lispxmp)
+#+end_src
 
+#+caption: graphql
+#+begin_src emacs-lisp
   (require 'graphql-mode)
   (require 'ob-graphql)
+#+end_src
 
-  ;; smart-newline ================
+#+caption: smart-newline
+#+begin_src emacs-lisp
   (require 'smart-newline)
   (global-set-key (kbd "C-m") 'newline)
   (add-hook 'ruby-mode-hook 'smart-newline-mode)

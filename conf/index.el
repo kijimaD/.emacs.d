@@ -696,42 +696,25 @@
 (if (fboundp 'blink-cursor-mode)
       (blink-cursor-mode -1))
 
-;; 履歴保存
 (savehist-mode 1)
-;;; 永続化する変数を新たに追加する
+
 (push 'compile-command savehist-additional-variables)
-;;; 永続化しないミニバッファ履歴の変数を追加する
+
 (push 'command-history savehist-ignored-variables)
 
-;; コーディング外観  ================
 (require 'rainbow-delimiters)
 (rainbow-delimiters-mode t)
-;; (require 'cl-lib)
-;; (require 'color)
-;; (cl-loop
-;;  for index from 1 to rainbow-delimiters-max-face-count
-;;  do
-;;  (let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
-;;    (cl-callf color-saturate-name (face-foreground face) 30)))
-
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 (require 'auto-highlight-symbol)
 (global-auto-highlight-symbol-mode t)
 (ahs-set-idle-interval 0.4)
 
-;; ahs-modeのキーバインドを無効化する
 (define-key auto-highlight-symbol-mode-map (kbd "M-<right>") nil)
 (define-key auto-highlight-symbol-mode-map (kbd "M-<left>") nil)
 
-;; インデント可視化
-;; (require 'highlight-indentation)
-;; (add-hook 'prog-mode-hook 'highlight-indentation-mode)
-;; (set-face-background 'highlight-indentation-face "#e3e3d3")
-;; (set-face-background 'highlight-indentation-current-column-face "#c3b3b3")
-
-;; スペース可視化
 (require 'whitespace)
+
 ;; 空白
 (set-face-foreground 'whitespace-space nil)
 (set-face-background 'whitespace-space "gray33")
@@ -763,10 +746,6 @@
 
 (setq-default typescript-indent-level 2)
 
-;; 外観(非コーディング) ================
-;; 現在行をハイライト
-
-;; ハイライトの表示を遅くして高速化する
 (require 'hl-line)
 (defun global-hl-line-timer-function ()
   (global-hl-line-unhighlight-all)
@@ -789,25 +768,11 @@
 (setq hl-line-face 'hlline-face)
 (global-hl-line-mode)
 
-;; (nyan-mode)
-
 (setq beacon-size 20) ; default 40
 (setq beacon-color "#827591")
 (setq beacon-blink-when-focused t)
-;; (beacon-mode)
+(beacon-mode)
 
-;; window移動 ================
-;; 分割した画面間をShift+矢印で移動
-;; (setq windmove-wrap-around t)
-;; (windmove-mode 0)
-
-;; (window-numbering-mode 1)
-
-;; window表示 ================
-;; (require 'popwin)
-;; (popwin-mode 0)
-
-;; ブックマーク ================
 (setq-default bm-buffer-persistence nil)
 (setq bm-restore-repository-on-load t)
 (require 'bm)
@@ -823,7 +788,6 @@
 (global-set-key (kbd "M-[") 'bm-previous)
 (global-set-key (kbd "M-]") 'bm-next)
 
-;; カーソル移動 ================
 (global-set-key (kbd "M-<left>") 'previous-buffer)
 (global-set-key (kbd "M-<right>") 'next-buffer)
 (global-set-key (kbd "C-t") 'other-window)
@@ -850,7 +814,6 @@
 ;; 矩形選択で使うため無効化する
 (define-key back-button-mode-map (kbd "C-x SPC") nil)
 
-;; インクリメンタルサーチ ================
 (require 'migemo)
 (when (and (executable-find "cmigemo")
            (require 'migemo nil t))
@@ -867,14 +830,12 @@
 (require 'anzu)
 (global-anzu-mode)
 
-;; バージョン管理 ================
 (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
 
 (with-eval-after-load 'magit
   (require 'forge))
 
-;; Gitの差分を表示する
 (global-git-gutter+-mode 1)
 (global-set-key (kbd "C-c C-v") 'git-gutter+-show-hunk-inline-at-point)
 
@@ -898,11 +859,9 @@
                               :sort t
                               :preselect "Add: ")
                     ": "))))
-
 (remove-hook 'git-commit-setup-hook 'with-editor-usage-message)
 (add-hook 'git-commit-setup-hook 'kd/magit-commit-prompt)
 
-;; 文字入力 ================
 (require 'mozc)
 (set-language-environment "Japanese")
 (setq default-input-method "japanese-mozc")
@@ -916,13 +875,10 @@
 (require 'mozc-popup)
 (setq mozc-candidate-style 'echo-area)
 
-;; 固有サイトモード ================
 (global-set-key (kbd "<f2>") 'devdocs-search)
 
-;; コンソールモード ================
 (require 'fish-mode)
 
-;; テンプレート ================
 (auto-insert-mode)
 (setq auto-insert-directory "~/.emacs.d/insert/")
 ;; (define-auto-insert "\\.rb$" "ruby-template.rb")
@@ -945,13 +901,11 @@
 (define-key yas-minor-mode-map (kbd "C-x y n") 'yas-new-snippet)
 (define-key yas-minor-mode-map (kbd "C-x y v") 'yas-visit-snippet-file)
 
-;; プロジェクト ================
 (require 'projectile)
 (projectile-global-mode)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (counsel-projectile-mode)
 
-;; 再読込 ================
 (defun revert-buffer-no-confirm (&optional force-reverting)
   "Interactive call to revert-buffer. Ignoring the auto-save
  file and not requesting for confirmation. When the current buffer
@@ -962,31 +916,12 @@
   (if (or force-reverting (not (buffer-modified-p)))
       (revert-buffer :ignore-auto :noconfirm)
     (error "The buffer has been modified")))
-
 (global-set-key (kbd "<f5>") 'revert-buffer-no-confirm)
 
-;; 変更があったら自動で更新
 (global-auto-revert-mode 1)
 
-;; SSH ================
 (require 'tramp)
 (setq tramp-default-method "ssh")
-
-;; スペルチェック ================
-;; (add-hook 'prog-mode-hook 'flyspell-mode)
-
-;; ispell の後継である aspell を使う。
-;; CamelCase でもいい感じに spellcheck してくれる設定を追加
-;; See: https://stackoverflow.com/a/24878128/8888451
-
-;; (setq-default ispell-program-name "aspell")
-;; (eval-after-load "ispell"
-;;   '(add-to-list 'ispell-skip-region-alist '("[^\000-\377]+")))
-;; (setq ispell-program-name "aspell"
-;;       ispell-extra-args
-;;       '("--sug-mode=ultra" "--lang=en_US" "--run-together" "--run-together-limit=5" "--run-together-min=2"))
-
-;; シンタックスチェック ================
 
 (require 'flycheck)
 (setq flycheck-indication-mode 'right-fringe)
@@ -1005,11 +940,9 @@
 ;; コード変更後、2秒後にチェックする
 (setq flycheck-idle-change-delay 2)
 
-;; ヘルプ ================
 (which-key-mode)
 (which-key-setup-side-window-bottom)
 
-;; dired ================
 (require 'dired-single)
 (defun my-dired-init ()
   "Bunch of stuff to run for dired, either immediately or when it's
@@ -1032,14 +965,6 @@
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 (add-hook 'dired-mode-hook 'dired-hide-details-mode)
 
-;; 定義元ジャンプ ================
-;; C-M-p backward-list を上書きしてしまうのでコメントアウト
-;; (dumb-jump-mode)
-;; (global-set-key (kbd "C-c j") 'dumb-jump-go)
-(setq dumb-jump-selector 'popup)
-;; (setq dumb-jump-selector 'helm)
-
-;; easy-kill ================
 (require 'easy-kill)
 (global-set-key [remap kill-ring-save] 'easy-kill)
 
@@ -1070,18 +995,11 @@
 (add-to-list 'easy-kill-alist '(?t string-to-char-backward ""))
 (add-to-list 'easy-kill-alist '(?T string-up-to-char-backward ""))
 
-;; Emacs 24.4+ comes with rectangle-mark-mode.
-;; (define-key rectangle-mark-mode-map (kbd "C-. C-,") 'mc/rect-rectangle-to-multiple-cursors)
-;; (define-key cua--rectangle-keymap   (kbd "C-. C-,") 'mc/cua-rectangle-to-multiple-cursors)
-
-;; log-mode ================
 (require 'command-log-mode)
 (global-command-log-mode)
 
 (setq clm/log-command-exceptions*
       '(mozc-handle-event self-insert-command))
-
-;; RSS ================
 
 (setq elfeed-feeds
       '(("https://www.sanityinc.com/feed.xml" sanityinc blog)
@@ -1093,21 +1011,15 @@
         ("http://pragmaticemacs.com/feed/" Pragmatic Emacs)))
 
 ;; default-browser
-;; (setq browse-url-browser-function 'eww-browse-url)
 (setq browse-url-browser-function 'browse-url-firefox)
 
-(run-at-time "23:58pm" (* 24 60 60) (lambda () (elfeed-search-update--force)))
-
-;; Google検索 ================
 (require 'google-this)
 (google-this-mode 1)
 (setq google-this-location-suffix "co.jp")
 
-;; 辞書 ================
 (require 'define-word)
 (global-set-key (kbd "<end>") 'define-word-at-point)
 
-;; eww ================
 ;; 改行するようにする
 (defun shr-insert-document--for-eww (&rest them)
   (let ((shr-width 70)) (apply them)))
@@ -1138,8 +1050,6 @@
 
 ;; デフォルトエンジン
 (setq eww-search-prefix "https://www.google.co.jp/search?q=")
-
-(require 'cl-lib)
 
 (defun eww-tag-pre (dom)
   (let ((shr-folding-mode 'none)
@@ -1216,10 +1126,6 @@
 (setq shr-external-rendering-functions
       '((pre . eww-tag-pre)))
 
-;; 校正ツール ================
-(require 'markdown-mode)
-(define-key markdown-mode-map (kbd "C-c C-j") nil)
-
 (flycheck-define-checker textlint
   "A linter for Markdown."
   :command ("textlint" "--format" "unix" source)
@@ -1242,66 +1148,57 @@
           '(lambda ()
              (add-node-modules-path)
              (setq flycheck-checker 'textlint)
-             ;; (org-sticky-header-mode)
              (flycheck-mode 1)))
 
-;; 正規表現 ================
 (global-set-key (kbd "C-M-%") 'vr/query-replace)
 (require 'visual-regexp-steroids)
 
-;; write-room ================
 (global-set-key [f7] 'writeroom-mode)
 
-;; git-link ================
 (setq git-link-default-branch "main")
 (setq git-link-use-commit t)
 
-;; undo ================
 (global-undo-tree-mode)
 (setq undo-tree-auto-save-history nil)
 
-;; eradio ================
 (setq eradio-channels '(("def con - soma fm" . "https://somafm.com/defcon256.pls")
-                        ("metal - soma fm"   . "https://somafm.com/metal130.pls")
-                        ("cyberia - lainon"  . "https://lainon.life/radio/cyberia.ogg.m3u")
-                        ("cafe - lainon"     . "https://lainon.life/radio/cafe.ogg.m3u")
-                        ("ambient - HBR1.com" . "http://ubuntu.hbr1.com:19800/ambient.ogg")
-                        ("ambient - RADIO ESTILO LEBLON" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us4.internet-radio.com:8193/listen.pls&t=.m3u")
-                        ("ambient - Pink Noise Radio" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk1.internet-radio.com:8004/listen.pls&t=.m3u")
-                        ("ambient - Deeply Beautiful Chillout Music - A Heavenly World of Sound" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk2.internet-radio.com:31491/listen.pls&t=.m3u")
-                        ("ambient - Chill Lounge Florida" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us5.internet-radio.com:8283/listen.pls&t=.m3u")
-                        ("ambient - PARTY VIBE RADIO : AMBIENT" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://www.partyviberadio.com:8056/listen.pls?sid=1&t=.m3u")
-                        ("healing - Healing Music Radio - The music of Peter Edwards" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us3.internet-radio.com:8169/live.m3u&t=.m3u")
-                        ("ambient - Real World Sounds" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk5.internet-radio.com:8260/listen.pls&t=.m3u")
-                        ("meditation - SilentZazen" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk5.internet-radio.com:8167/live.m3u&t=.m3u")
-                        ("meditation - Zero Beat Zone (MRG.fm)" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://62.149.196.16:8800/listen.pls?sid=1&t=.m3u")
-                        ("meditation - Meditation Radio" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://213.239.218.99:7241/listen.pls?sid=1&t=.m3u")
-                        ("ambient - AmbientRadio (MRG.fm)" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://62.149.196.16:8888/listen.pls?sid=1&t=.m3u")
-                        ("jungle - Konflict Radio" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk3.internet-radio.com:8192/live.m3u&t=.m3u")
-                        ("jungle - Future Pressure Radio" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk3.internet-radio.com:8108/listen.pls&t=.m3u")
-                        ("jungle - PARTY VIBE RADIO : JUNGLE" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://www.partyviberadio.com:8004/listen.pls?sid=2&t=.m3u")
-                        ("jazz - Smooth Jazz Florida" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us4.internet-radio.com:8266/listen.pls&t=.m3u")
-                        ("rock - Classic Rock Florida HD" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us4.internet-radio.com:8258/listen.pls&t=.m3u")
-                        ("dance - Dance UK Radio danceradiouk" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk2.internet-radio.com:8024/listen.pls&t=.m3u")
-                        ("rock - Majestic Jukebox Radio #HIGH QUALITY SOUND" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk3.internet-radio.com:8405/live.m3u&t=.m3u")
-                        ("ambient - LIFE CHILL MUSIC" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://aska.ru-hoster.com:8053/autodj.m3u&t=.m3u")
-                        ("dance - PulseEDM Dance Music Radio" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://pulseedm.cdnstream1.com:8124/1373_128.m3u&t=.m3u")
-                        ("piano - Matt Johnson Radio" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us2.internet-radio.com:8046/listen.pls&t=.m3u")
-                        ("piano - Music Lake - Relaxation Music, Meditation, Focus, Chill, Nature Sounds" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://104.251.118.50:8626/listen.pls?sid=1&t=.m3u")
-                        ("piano - Bru Zane Classical Radio - Rediscovering French Romantic Music" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://116.202.241.212:7001/listen.pls?sid=1&t=.m3u")
-                        ("piano - CALMRADIO.COM - Most Beautiful Piano Ever" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://209.58.147.84:19991/listen.pls?sid=1&t=.m3u")
-                        ("piano - CALMRADIO.COM - Light Jazz Piano" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://23.82.11.88:10800/listen.pls?sid=1&t=.m3u")
-                        ))
-;; typing game ================
+                          ("metal - soma fm"   . "https://somafm.com/metal130.pls")
+                          ("cyberia - lainon"  . "https://lainon.life/radio/cyberia.ogg.m3u")
+                          ("cafe - lainon"     . "https://lainon.life/radio/cafe.ogg.m3u")
+                          ("ambient - HBR1.com" . "http://ubuntu.hbr1.com:19800/ambient.ogg")
+                          ("ambient - RADIO ESTILO LEBLON" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us4.internet-radio.com:8193/listen.pls&t=.m3u")
+                          ("ambient - Pink Noise Radio" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk1.internet-radio.com:8004/listen.pls&t=.m3u")
+                          ("ambient - Deeply Beautiful Chillout Music - A Heavenly World of Sound" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk2.internet-radio.com:31491/listen.pls&t=.m3u")
+                          ("ambient - Chill Lounge Florida" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us5.internet-radio.com:8283/listen.pls&t=.m3u")
+                          ("ambient - PARTY VIBE RADIO : AMBIENT" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://www.partyviberadio.com:8056/listen.pls?sid=1&t=.m3u")
+                          ("healing - Healing Music Radio - The music of Peter Edwards" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us3.internet-radio.com:8169/live.m3u&t=.m3u")
+                          ("ambient - Real World Sounds" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk5.internet-radio.com:8260/listen.pls&t=.m3u")
+                          ("meditation - SilentZazen" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk5.internet-radio.com:8167/live.m3u&t=.m3u")
+                          ("meditation - Zero Beat Zone (MRG.fm)" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://62.149.196.16:8800/listen.pls?sid=1&t=.m3u")
+                          ("meditation - Meditation Radio" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://213.239.218.99:7241/listen.pls?sid=1&t=.m3u")
+                          ("ambient - AmbientRadio (MRG.fm)" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://62.149.196.16:8888/listen.pls?sid=1&t=.m3u")
+                          ("jungle - Konflict Radio" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk3.internet-radio.com:8192/live.m3u&t=.m3u")
+                          ("jungle - Future Pressure Radio" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk3.internet-radio.com:8108/listen.pls&t=.m3u")
+                          ("jungle - PARTY VIBE RADIO : JUNGLE" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://www.partyviberadio.com:8004/listen.pls?sid=2&t=.m3u")
+                          ("jazz - Smooth Jazz Florida" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us4.internet-radio.com:8266/listen.pls&t=.m3u")
+                          ("rock - Classic Rock Florida HD" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us4.internet-radio.com:8258/listen.pls&t=.m3u")
+                          ("dance - Dance UK Radio danceradiouk" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk2.internet-radio.com:8024/listen.pls&t=.m3u")
+                          ("rock - Majestic Jukebox Radio #HIGH QUALITY SOUND" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk3.internet-radio.com:8405/live.m3u&t=.m3u")
+                          ("ambient - LIFE CHILL MUSIC" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://aska.ru-hoster.com:8053/autodj.m3u&t=.m3u")
+                          ("dance - PulseEDM Dance Music Radio" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://pulseedm.cdnstream1.com:8124/1373_128.m3u&t=.m3u")
+                          ("piano - Matt Johnson Radio" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us2.internet-radio.com:8046/listen.pls&t=.m3u")
+                          ("piano - Music Lake - Relaxation Music, Meditation, Focus, Chill, Nature Sounds" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://104.251.118.50:8626/listen.pls?sid=1&t=.m3u")
+                          ("piano - Bru Zane Classical Radio - Rediscovering French Romantic Music" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://116.202.241.212:7001/listen.pls?sid=1&t=.m3u")
+                          ("piano - CALMRADIO.COM - Most Beautiful Piano Ever" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://209.58.147.84:19991/listen.pls?sid=1&t=.m3u")
+                          ("piano - CALMRADIO.COM - Light Jazz Piano" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://23.82.11.88:10800/listen.pls?sid=1&t=.m3u")
+                          ))
+
 (setq toe-highscore-file "~/.emacs.d/games/.toe-scores")
 
-;; create-link ================
 (setq create-link-default-format 'create-link-format-org)
 
-;; ripgrep ================
 (rg-enable-default-bindings)
 
-;; Emacs Lisp ================
 (require 'paredit)
 ;; (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
 ;; (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
@@ -1314,7 +1211,6 @@
 (require 'graphql-mode)
 (require 'ob-graphql)
 
-;; smart-newline ================
 (require 'smart-newline)
 (global-set-key (kbd "C-m") 'newline)
 (add-hook 'ruby-mode-hook 'smart-newline-mode)
@@ -2346,6 +2242,6 @@
   (cancel-timer (car (last timer-list))))
 
 ;; Emacs C source directory
-(let ((src-dir "~/ProjectOrg/emacs/src"))
+(let ((src-dir "~/ProjectOrg/emacs/emacs/src"))
   (if (file-directory-p src-dir)
       (setq source-directory src-dir)))
