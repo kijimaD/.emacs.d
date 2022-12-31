@@ -1796,14 +1796,15 @@ org-pomodoro用の設定。
 #+end_src
 
 * Rails
-#+caption: 基本設定
+#+caption: projectile-rails
 #+begin_src emacs-lisp
-  ;;; ruby_on_railsモード
   (require 'projectile-rails)
   (projectile-rails-global-mode)
   (add-hook 'projectile-mode-hook 'projectile-rails-on)
+#+end_src
 
-  ;; rspec ================
+#+caption: rspec
+#+begin_src emacs-lisp
   (require 'rspec-mode)
 
   ;; Rspecの実行結果をスクロールして出力する
@@ -1814,8 +1815,10 @@ org-pomodoro用の設定。
   (setq rspec-docker-container "rails")
   (setq rspec-docker-command "docker-compose -f docker-compose.yml -f docker-compose-app.yml -f docker-compose-app.override.yml exec")
   (setq rspec-docker-cwd "")
+#+end_src
 
-  ;; RAILS_ENV=testを追加
+#+caption: RAILS_ENV=testを追加
+#+begin_src emacs-lisp
   (defun rspec-runner ()
     "Return command line to run rspec."
     (let ((bundle-command (if (rspec-bundle-p) "RAILS_ENV=test bundle exec " ""))
@@ -1825,17 +1828,18 @@ org-pomodoro用の設定。
               (if (rspec-rake-p)
                   (concat rspec-rake-command " spec")
                 rspec-spec-command))))
+#+end_src
 
-  ;; (setq rspec-use-spring-when-possible nil)
-  (setq rspec-use-spring-when-possible t)
+#+caption: springを有効化
+#+begin_src emacs-lisp
+(setq rspec-use-spring-when-possible t)
   (defun rspec-spring-p ()
     (and rspec-use-spring-when-possible
          (stringp (executable-find "spring"))))
-  ;; spring
-  ;; bin/rspec
+#+end_src
 
-  ;; シンタックスチェック ================
-  ;; flycheck と rubocop を連携させる
+#+caption: rubocopとflycheck連携
+#+begin_src emacs-lisp
   (require 'rubocop)
   (add-hook 'ruby-mode-hook 'rubocop-mode)
   (add-hook 'ruby-mode-hook
@@ -1854,64 +1858,84 @@ org-pomodoro用の設定。
             (file-name) ":" line ":" column ": " (or "E" "F") ": " (message) line-end))
     :modes (ruby-mode motion-mode))
 
-  ;; rinari
+  (setq flycheck-ruby-rubocop-executable "bundle exec rubocop")
+#+end_src
+
+#+caption: rinari
+#+begin_src emacs-lisp
   (when (require 'rinari nil 'noerror)
     (require 'rinari)
     (add-hook 'ruby-mode-hook 'rinari-minor-mode))
 
-  ;; rspec-mode 用の snippet を認識させる
   (when (require 'rinari nil 'noerror)
     (require 'rspec-mode)
     (eval-after-load 'rspec-mode
       '(rspec-install-snippets)))
+#+end_src
 
-  (setq flycheck-ruby-rubocop-executable "bundle exec rubocop")
-
-  ;; 補完 ================
+#+caption: 補完
+#+begin_src emacs-lisp
   (require 'ruby-electric)
   (add-hook 'ruby-mode-hook '(lambda ()
                                (ruby-electric-mode t)))
 
-  ;; 実行環境 ================
+#+end_src
+
+#+caption: quickrun
+#+begin_src emacs-lisp
   (require 'quickrun)
   (global-set-key (kbd "<f8>") 'quickrun)
+#+end_src
 
-  ;; pry
+#+caption: inf-ruby
+#+begin_src emacs-lisp
   (require 'inf-ruby)
   (setq inf-ruby-default-implementation "pry")
   (setq inf-ruby-eval-binding "Pry.toplevel_binding")
   ;; riなどのエスケープシーケンスを処理し、色付けする
   (add-hook 'inf-ruby-mode-hook 'ansi-color-for-comint-mode-on)
+#+end_src
 
-  ;; slim-mode ================
+#+caption: slim-mode
+#+begin_src emacs-lisp
   (unless (package-installed-p 'slim-mode)
     (package-refresh-contents) (package-install 'slim-mode))
   (add-to-list 'auto-mode-alist '("\\.slim?\\'" . slim-mode))
+#+end_src
 
-  ;; yaml-mode ================
+#+caption: yaml-mode
+#+begin_src emacs-lisp
   (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
+#+end_src
 
-  ;; マジックコメントを挿入しない
+#+caption: マジックコメントを挿入しない
+#+begin_src emacs-lisp
   (setq ruby-insert-encoding-magic-comment nil)
+#+end_src
 
-  ;; 対応ブロックを光らせる時間を短くする
-  (defcustom ruby-block-delay 0
+#+caption: 対応ブロックを光らせる時間を短くする
+#+begin_src emacs-lisp
+(defcustom ruby-block-delay 0
     "*Time in seconds to delay before showing a matching paren."
     :type  'number
     :group 'ruby-block)
+#+end_src
 
-  ;; xmp(実行結果アノテーション)
+#+caption: 実行結果アノテーション
+#+begin_src emacs-lisp
   (require 'rcodetools)
   (define-key ruby-mode-map (kbd "C-<return>") 'xmp)
+#+end_src
 
-  ;; activate robe
-  ;; CIでは実行しない
+#+caption: 補完
+#+begin_src emacs-lisp
   (when window-system
     (progn
       ;; (inf-ruby)
       ;; (robe-start)
       ))
 #+end_src
+
 * Go
 goの設定。
 
