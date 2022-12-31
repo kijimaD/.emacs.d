@@ -22,3 +22,17 @@ sudo apt-get install ttf-ancient-fonts # emoji
 ```
 M-x (all-the-icons-install-fonts)
 ```
+
+## Generate
+
+- generate config
+
+```shell
+make gen-el
+```
+
+- export html
+
+```shell
+make gen-html
+```
