@@ -18,49 +18,69 @@ Emacsの文芸的設定。移行作業中。
 #+end_src
 
 * Org
-org用の設定。
+org-modeはEmacsのキラーアプリの1つ。パッケージ名であり、ファイルの種類の1つ。ドキュメント管理にスケジュール、時間計測、コード評価を含めることができる。このドキュメントもorg-modeで書かれている。
 
-#+caption: 基本設定
+#+caption: 読み込み
 #+begin_src emacs-lisp
   (require 'org)
   (require 'org-protocol)
+#+end_src
 
-  ;; System locale to use for formatting time values.
-  (setq system-time-locale "C")         ; Make sure that the weekdays in the
-                                          ; time stamps of your Org mode files and
-                                          ; in the agenda appear in English.
+#+caption: 日付時刻のフォーマットを指定する
+#+begin_src emacs-lisp
+  (setq system-time-locale "C")
+#+end_src
 
-  ;; 拡張子がorgのファイルを開いた時，自動的にorg-modeにする
+#+caption: 拡張子がorgのファイルを開いた時，自動的にorg-modeにする
+#+begin_src emacs-lisp
   (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+#+end_src
 
+#+caption: orgファイルを開いたときに展開状態にする
+#+begin_src emacs-lisp
   (setq org-startup-folded 'content)
+#+end_src
 
-  ;; org-modeでの強調表示を可能にする
+#+caption: 強調表示できるようにする
+#+begin_src emacs-lisp
   (add-hook 'org-mode-hook 'turn-on-font-lock)
-  ;; (add-hook 'org-mode-hook 'current-word-highlight-mode)
+#+end_src
 
-  ;; 本文を自動インデント
+#+caption: 本文を自動インデント
+#+begin_src emacs-lisp
   (setq org-startup-indented t)
+#+end_src
 
-  ;; 見出しの余分な*を消す
+#+caption: 見出しの余分な*を消す
+#+begin_src emacs-lisp
   (setq org-hide-leading-stars t)
   (setq org-hide-emphasis-markers t)
+#+end_src
 
-  ;; 画像表示
+#+caption: 画像表示
+#+begin_src emacs-lisp
   (setq org-startup-with-inline-images t)
+#+end_src
 
+#+caption: 独自のTODOキーワードを設定する
+#+begin_src emacs-lisp
   (setq org-todo-keywords '((type "TODO" "WIP" "|" "DONE" "CLOSE")))
   (setq org-todo-keyword-faces
         '(("TODO" . (:foreground "orange" :weight bold))
           ("WIP" . (:foreground "DeepSkyBlue" :weight bold))
           ("DONE" . (:foreground "green" :weight bold))
           ("CLOSE" . (:foreground "DarkOrchid" :weight bold))))
+#+end_src
 
+#+caption: コードブロックをシンタックスハイライトする
+#+begin_src emacs-lisp
   (setq org-src-fontify-natively t)
   (setq org-fontify-quote-and-verse-blocks t)
   (setq org-src-tab-acts-natively t)
+#+end_src
 
-  ;; 展開アイコン
+#+caption: 本文収納時の記号
+#+begin_src emacs-lisp
   ;; (setq org-ellipsis "»")
   ;; (setq org-ellipsis "..")
   ;; (setq org-ellipsis "⤵")
@@ -68,9 +88,15 @@ org用の設定。
   ;; (setq org-ellipsis "❖")
   ;; (setq org-ellipsis "↯")
   (setq org-ellipsis "▽")
-  (setq org-cycle-separator-lines 2)
+#+end_src
 
-  ;; org-modeで行末で折り返しをする
+#+caption: 本文収納時の記号と、本文に空ける行数
+#+begin_src emacs-lisp
+  (setq org-cycle-separator-lines 2)
+#+end_src
+
+#+caption: 行末で折り返し表示する
+#+begin_src emacs-lisp
   (setq org-startup-truncated nil)
   (defun change-truncation()
     (interactive)
@@ -78,23 +104,28 @@ org用の設定。
            (setq truncate-lines t))
           (t
            (setq truncate-lines nil))))
+#+end_src
 
-  ;; スピードコマンド有効化
+#+caption: スピードコマンド有効化
+#+begin_src emacs-lisp
   (setq org-use-speed-commands t)
+#+end_src
 
-  ;; キーバインド ================
-  ;; ほかとかぶるので無効化
+#+caption: ほかとかぶるので無効化するキーバインド
+#+begin_src emacs-lisp
   (define-key org-mode-map (kbd "C-c C-j") nil)
-  ;; (define-key org-mode-map (kbd "<S-left>") nil)
-  ;; (define-key org-mode-map (kbd "<S-right>") nil)
-  ;; (define-key org-mode-map (kbd "<S-up>") nil)
-  ;; (define-key org-mode-map (kbd "<S-down>") nil)
   (define-key org-mode-map (kbd "M-<left>") nil)
   (define-key org-mode-map (kbd "M-<right>") nil)
+#+end_src
+
+#+caption: キーバインド
+#+begin_src emacs-lisp
   (define-key org-mode-map (kbd "C-c C-x i") 'org-clock-in)
   (define-key org-mode-map (kbd "C-c C-x o") 'org-clock-out)
+#+end_src
 
-  ;; org-babel ================
+#+caption: org-babelで実行可能にする言語
+#+begin_src emacs-lisp
   (org-babel-do-load-languages 'org-babel-load-languages
                                '((C . t)
                                  (clojure . t)
@@ -107,114 +138,31 @@ org用の設定。
                                  (rust . t)
                                  (shell . t)
                                  (sql . t)))
+#+end_src
 
-  (setq org-confirm-babel-evaluate nil)
-  (setq org-babel-clojure-backend 'cider)
+#+caption: Clojure 設定
+#+begin_src emacs-lisp
   (require 'cider)
+  (setq org-babel-clojure-backend 'cider)
+#+end_src
 
-  ;; common lisp
+#+caption: Common Lisp設定
+#+begin_src emacs-lisp
   (setq inferior-lisp-program "clisp")
-  ;; clisp, sbcl,  ...
+#+end_src
 
-  ;; 日誌 ================
-  (require 'org-journal)
-  (setq org-journal-date-format "%Y-%m-%d(%a)")
-  (setq org-journal-time-format "%R ")
-  (setq org-journal-dir (concat "~/Private/junk/diary/org-journal"))
-  (setq org-journal-file-format "%Y%m%d.org")
-  (setq org-journal-find-file 'find-file)
-  (setq org-journal-hide-entries-p nil)
+#+caption: sql設定
+#+begin_src emacs-lisp
+  (add-hook 'sql-mode-org-src-hook #'sqlind-minor-mode)
+#+end_src
 
-  ;; https://emacs.stackexchange.com/questions/17897/create-an-org-journal-template-for-daily-journal-entry/32655#32655?newreg=7c9543fa39e342cfb438c4168020447d
-  (defun kd/new-buffer-p ()
-    (not (file-exists-p (buffer-file-name))))
+#+caption: 評価するときに確認プロンプトを出さない
+#+begin_src emacs-lisp
+  (setq org-confirm-babel-evaluate nil)
+#+end_src
 
-  (defun kd/insert-journal-template ()
-    (let ((template-file (expand-file-name "~/.emacs.d/resources/journal-template.org" org-directory)))
-      (when (kd/new-buffer-p)
-        (save-excursion
-          (goto-char (point-min))
-          (insert-file-contents template-file)))))
-
-  (add-hook 'org-journal-after-entry-create-hook #'kd/insert-journal-template)
-
-  ;; 使い捨てのファイルを開く ================
-  (use-package open-junk-file)
-  (setq open-junk-file-format (concat "~/Private/junk/%Y-%m-%d-%H%M%S."))
-  (global-set-key (kbd "C-x C-z") 'open-junk-file)
-
-  ;; 見出しをいい感じにする ================
-  ;; (require 'org-bullets)
-  ;; (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-  (require 'org-superstar)
-  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
-
-  ;; org-modern
-  ;; (add-hook 'org-mode-hook #'org-modern-mode)
-  ;; (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
-
-  (require 'org-sticky-header)
-  (setq org-sticky-header-full-path 'full)
-  (setq org-sticky-header-heading-star "◉")
-
-  ;; スライド ================
-  ;; (org-tree-slide-simple-profile)
-  (org-tree-slide-presentation-profile)
-  (org-tree-slide--hide-slide-header)
-
-  ;; pdf ================
-  ;; (pdf-tools-install t)
-  (require 'pdf-tools)
-  (add-hook 'pdf-tools-enabled-hook 'pdf-view-midnight-minor-mode)
-  (setq-default pdf-view-display-size 'fit-page)
-  (setq pdf-annot-activate-created-annotations t)
-  (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
-  (setq pdf-view-resize-factor 1.1)
-
-  ;; roam ================
-  (require 'org-roam)
-  (add-hook 'after-init-hook 'org-roam-mode)
-  (make-directory "~/roam" t)
-  (setq org-roam-v2-ack t)
-  (setq org-roam-directory "~/roam")
-  (setq org-roam-completion-everywhere t)
-
-  (define-key global-map (kbd "C-c n f") 'org-roam-node-find)
-  (define-key global-map (kbd "C-c n g") 'org-roam-graph)
-  (define-key global-map (kbd "C-c n i") 'org-roam-node-insert)
-  (define-key global-map (kbd "C-c n r") 'org-roam-node-random)
-  (define-key global-map (kbd "C-c n l") 'org-roam-buffer-toggle)
-  (define-key global-map (kbd "C-M-i") 'completion-at-point)
-
-  (setq org-roam-capture-templates
-        '(("t" "TODO" entry
-           (file+headline my-todo-file "Inbox")
-           "*** TODO %?\n")
-          ("d" "default" plain
-           "%?"
-           :if-new
-           (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}"))
-          ("r" "roam-page" plain
-           (file "~/roam/templates/roam-page.org")
-           :if-new
-           (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}"))
-          ("p" "project" plain
-           (file "~/roam/templates/project.org")
-           :if-new
-           (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Project"))
-          ))
-
-  (setq org-id-link-to-org-use-id t)
-  (setq org-id-extra-files (org-roam--list-files org-roam-directory))
-
-  (setq org-roam-v2-ack t)
-
-  (org-roam-setup)
-  ;; 画像 ================
-  (require 'org-download)
-  (setq-default org-download-image-dir "~/roam/images")
-
-  ;; テンプレート ================
+#+caption: org selectでコード挿入時に表示される選択肢を増やす
+#+begin_src emacs-lisp
   (with-eval-after-load 'org
     ;; This is needed as of Org 9.2
     (require 'org-tempo)
@@ -234,11 +182,10 @@ org用の設定。
     (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
     (add-to-list 'org-structure-template-alist '("sq" . "src sql"))
     (add-to-list 'org-structure-template-alist '("ts" . "src typescript")))
+#+end_src
 
-  ;; sql
-  (add-hook 'sql-mode-org-src-hook #'sqlind-minor-mode)
-
-  ;; 中央寄せ ================
+#+caption: 中央寄せ設定
+#+begin_src emacs-lisp
   (require 'visual-fill-column)
   (defun kd/centering-buffer ()
     "Centering buffer."
@@ -249,12 +196,11 @@ org用の設定。
 
   (add-hook 'org-mode-hook (lambda () (kd/centering-buffer)))
   (add-hook 'eww-mode-hook (lambda () (kd/centering-buffer)))
+#+end_src
 
-  ;; face ================
-  ;; themeのあとに評価するため、ここでは関数定義だけ。
-  ;; https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.org
-
-  (defun efs/org-font-setup ()
+#+caption: よりよい外観
+#+begin_src emacs-lisp
+(defun efs/org-font-setup ()
     ;; Replace list hyphen with dot
     ;; (font-lock-add-keywords 'org-mode
     ;;                         '(("^ *\\([-]\\) "
@@ -306,10 +252,18 @@ org用の設定。
      '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
      '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
      '(org-block-begin-line ((t (:inherit org-block))))))
+#+end_src
 
+themeのあとに評価するため、ここでは関数定義だけ。参考 https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.org
+
+#+caption: 線の幅
+#+begin_src emacs-lisp
   (add-hook 'org-mode-hook 'variable-pitch-mode)
   (add-hook 'org-mode-hook 'visual-line-mode)
+#+end_src
 
+#+caption: org-lintの対象ファイル
+#+begin_src emacs-lisp
   (defun org-lint-dir (directory)
     (let* ((files (directory-files directory t ".*\\.org$")))
       (org-lint-list files)))
@@ -324,33 +278,216 @@ org用の設定。
           (lint))
       (setq buf (find-file-noselect file))
       (with-current-buffer buf (if (setq lint (org-lint)) (print (list file lint))))))
+#+end_src
 
-  ;; org-alert ================
+** open-junk-file
+#+caption: 使い捨てファイルを開く
+#+begin_src emacs-lisp
+  (use-package open-junk-file)
+  (setq open-junk-file-format (concat "~/Private/junk/%Y-%m-%d-%H%M%S."))
+  (global-set-key (kbd "C-x C-z") 'open-junk-file)
+#+end_src
+
+** org-superstar
+#+caption: 見出しをいい感じにする
+#+begin_src emacs-lisp
+  (require 'org-superstar)
+  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+#+end_src
+** org-modern
+org-modernはorg-modeの外観をいい感じにするパッケージ。
+
+#+caption: org-modernを有効化する
+#+begin_src emacs-lisp
+  (add-hook 'org-mode-hook #'org-modern-mode)
+  (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
+#+end_src
+** org-stickey-header
+org-stickey-headerは現在の見出し位置を示すヘッダーを表示するパッケージ。
+ヘッダーの記号が*に戻るので、とりあえず無効化している。
+
+#+caption: org-stickey-headerを有効化する
+#+begin_src emacs-lisp
+  ;; (require 'org-sticky-header)
+  ;; (setq org-sticky-header-full-path 'full)
+  ;; (setq org-sticky-header-heading-star "◉")
+  ;; (remove-hook 'org-mode-hook #'org-stickey-header-mode)
+#+end_src
+** org-tree-slide
+org-tree-slideはorg-modeでスライド表示するパッケージ。
+
+#+caption: org-tree-slideを有効化する
+#+begin_src emacs-lisp
+  (org-tree-slide-presentation-profile)
+  (org-tree-slide--hide-slide-header)
+#+end_src
+
+** org-journal
+org-journalは日付ごとのファイルを生成したり、時刻を挿入できるパッケージ。
+
+#+caption: org-journal
+#+begin_src emacs-lisp
+  (require 'org-journal)
+#+end_src
+
+#+caption: 日付と時刻のフォーマット
+#+begin_src emacs-lisp
+  (setq org-journal-date-format "%Y-%m-%d(%a)")
+  (setq org-journal-time-format "%R ")
+#+end_src
+
+#+caption: 読込・保存するディレクトリ
+#+begin_src emacs-lisp
+  (setq org-journal-dir (concat "~/Private/junk/diary/org-journal"))
+#+end_src
+
+#+caption: ファイルのフォーマット
+#+begin_src emacs-lisp
+  (setq org-journal-file-format "%Y%m%d.org")
+#+end_src
+
+#+caption: ファイルを開く時、画面分割させない
+#+begin_src emacs-lisp
+  (setq org-journal-find-file 'find-file)
+#+end_src
+
+#+caption: ファイルを開いたときに展開状態にする
+#+begin_src emacs-lisp
+  (setq org-journal-hide-entries-p nil)
+#+end_src
+
+#+caption: テンプレートファイルを設定する
+#+begin_src emacs-lisp
+  (defun kd/new-buffer-p ()
+    (not (file-exists-p (buffer-file-name))))
+
+  (defun kd/insert-journal-template ()
+    (let ((template-file (expand-file-name "~/.emacs.d/resources/journal-template.org" org-directory)))
+      (when (kd/new-buffer-p)
+        (save-excursion
+          (goto-char (point-min))
+          (insert-file-contents template-file)))))
+  (add-hook 'org-journal-after-entry-create-hook #'kd/insert-journal-template)
+#+end_src
+
+- https://emacs.stackexchange.com/questions/17897/create-an-org-journal-template-for-daily-journal-entry/32655#32655?newreg=7c9543fa39e342cfb438c4168020447d
+
+** pdf-tools
+Emacs上でpdfを扱うためのパッケージ。orgの項目にあるのは微妙な気がする。
+
+#+caption: 設定。インストールが必要
+#+begin_src emacs-lisp
+  ;; (pdf-tools-install t)
+  (require 'pdf-tools)
+  (add-hook 'pdf-tools-enabled-hook 'pdf-view-midnight-minor-mode)
+  (setq-default pdf-view-display-size 'fit-page)
+  (setq pdf-annot-activate-created-annotations t)
+  (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
+  (setq pdf-view-resize-factor 1.1)
+#+end_src
+
+** org-download
+org-downloadはorg上のリンクから画像をダウンロードして指定のディレクトリに保存できるパッケージ。
+
+#+caption: 設定
+#+begin_src emacs-lisp
+  (require 'org-download)
+  (setq-default org-download-image-dir "~/roam/images")
+#+end_src
+
+** org-roam
+org-roamはorgファイルをsqliteによって管理しやすくしたパッケージ。orgファイル同士の関連を挿入したり、リンク元のファイルを一覧にする、といったことができる。sqliteに保存されるので、別でクエリを使って取り出してグラフ描画に使ったりも可能。
+
+#+caption: 基本設定
+#+begin_src emacs-lisp
+  (require 'org-roam)
+  (add-hook 'after-init-hook 'org-roam-mode)
+  (make-directory "~/roam" t)
+  (setq org-roam-v2-ack t)
+  (setq org-roam-directory "~/roam")
+  (setq org-roam-completion-everywhere t)
+
+  (setq org-id-link-to-org-use-id t)
+  (setq org-id-extra-files (org-roam--list-files org-roam-directory))
+  (org-roam-setup)
+#+end_src
+
+#+caption: キーバインド
+#+begin_src emacs-lisp
+  (define-key global-map (kbd "C-c n f") 'org-roam-node-find)
+  (define-key global-map (kbd "C-c n g") 'org-roam-graph)
+  (define-key global-map (kbd "C-c n i") 'org-roam-node-insert)
+  (define-key global-map (kbd "C-c n r") 'org-roam-node-random)
+  (define-key global-map (kbd "C-c n l") 'org-roam-buffer-toggle)
+  (define-key global-map (kbd "C-M-i") 'completion-at-point)
+#+end_src
+
+#+caption: テンプレート
+#+begin_src emacs-lisp
+  (setq org-roam-capture-templates
+        '(("t" "TODO" entry
+           (file+headline my-todo-file "Inbox")
+           "*** TODO %?\n")
+          ("d" "default" plain
+           "%?"
+           :if-new
+           (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}"))
+          ("r" "roam-page" plain
+           (file "~/roam/templates/roam-page.org")
+           :if-new
+           (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}"))
+          ("p" "project" plain
+           (file "~/roam/templates/project.org")
+           :if-new
+           (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Project"))
+          ))
+#+end_src
+** org-alert
+org-alertはorg scheduleの項目を時間経過で通知してくれるパッケージ。
+
+#+caption: 設定
+#+begin_src emacs-lisp
   (require 'org-alert)
   (setq alert-default-style 'notifications)
   (setq org-alert-interval 300)
   (setq org-alert-notification-title "Reminder")
   (org-alert-enable)
+#+end_src
+** denote
+denoteはシンプルなノートパッケージ。
 
-  ;; denote ================
+#+caption: 設定
+#+begin_src emacs-lisp
   (setq denote-directory (expand-file-name "~/roam/denote"))
   (setq denote-known-keywords '("essay" "code-reading" "book" "hack"))
 
   (define-key global-map (kbd "C-c d") 'denote-create-note)
 #+end_src
 
-* Agenda
-agenda用の設定。
+** org-agenda
+org-agendaはorg-modeでtodo管理する機能。
 
-#+caption: 基本設定
+#+caption: キーバインド
 #+begin_src emacs-lisp
   (define-key global-map "\C-cl" 'org-store-link)
   (define-key global-map "\C-ca" 'org-agenda)
   (define-key global-map "\C-cc" 'org-capture)
 
+  (defun org-agenda-default ()
+    (interactive)
+    (persp-switch "2")
+    (org-agenda nil "z"))
+  (global-set-key (kbd "<f6>") 'org-agenda-default)
+#+end_src
+
+#+caption: フック
+#+begin_src emacs-lisp
   (add-hook 'org-pomodoro-short-break-finished-hook 'org-agenda-default)
   (add-hook 'org-pomodoro-long-break-finished-hook 'org-agenda-default)
+#+end_src
 
+#+caption: org-captureするときのテンプレート
+#+begin_src emacs-lisp
   (setq org-capture-templates
         '(("m" "Memo" entry
            (file+headline my-todo-file "Memo")
@@ -364,41 +501,101 @@ agenda用の設定。
           ("L" "Protocol Link" entry
            (file+headline my-todo-file "Inbox")
            "* %?[[%:link][%:description]]")))
+#+end_src
 
+#+caption: 完了したときの時刻を記録する
+#+begin_src emacs-lisp
   (setq org-log-done t)
+#+end_src
 
+#+caption: agenda対象のディレクトリを指定する
+#+begin_src emacs-lisp
   (setq my-org-directory (concat "~/Private/junk/diary/org-journal/"))
   (setq my-todo-file (concat my-org-directory "todo.org"))
-
   (if (file-exists-p my-todo-file)
       (setq org-agenda-files `("~/roam" "~/roam/denote" ,my-todo-file)))
-
   (setq org-directory my-org-directory)
   (setq org-default-notes-file my-todo-file)
+#+end_src
 
-  ;; 時刻をデフォルト表示
+#+caption: 時刻をデフォルト表示する
+#+begin_src emacs-lisp
   (setq org-agenda-start-with-log-mode t)
+#+end_src
 
-  ;; 7日分の予定を表示させる
+#+caption: 7日分の予定を表示する
+#+begin_src emacs-lisp
   (setq org-agenda-span 14)
   (setq org-agenda-start-day "7d")
+#+end_src
 
-  ;; agendaには、習慣・スケジュール・TODOを表示させる
-  (setq org-agenda-custom-commands
-        '(("a" "Agenda and all TODO's"
-           ((tags "project-CLOCK=>\"<today>\"|repeatable") (agenda "") (alltodo)))))
-  (setq org-agenda-custom-commands nil)
+#+caption: agendaには、習慣・スケジュール・TODOを表示させる
+#+begin_src emacs-lisp
+(setq org-agenda-custom-commands
+        '(("z" "Super zaen view"
+           ((agenda "" ((org-agenda-span 'day)
+                        (org-super-agenda-groups
+                         '((:name "🏗️Today"
+                                  :time-grid t
+                                  :date today
+                                  :scheduled today
+                                  :order 1)
+                           (:name "🍵Future"
+                                  :deadline future
+                                  :scheduled future
+                                  :order 10)
+                           (:name "Overdue"
+                                  :deadline past
+                                  :order 10)
+                           (:habit t)
+                           (:log t)
+                           (:discard (:anything))))))
+            (alltodo "" ((org-agenda-overriding-header "")
+                         (org-super-agenda-groups
+                          '((:name "▶️Work In Progress"
+                                   :todo "WIP"
+                                   :order 1)
+                            (:name "✍To write"
+                                   :tag "Write"
+                                   :order 12)
+                            (:name "📕To read"
+                                   :tag "Read"
+                                   :order 14)
+                            (:name "✍Things I Don't Know"
+                                   :tag "DontKnow"
+                                   :order 15)
+                            (:name "🛤️Train"
+                                   :tag "Train"
+                                   :order 18)
+                            (:discard (:anything t))))))))))
+#+end_src
 
-  (defun org-agenda-default ()
-    (interactive)
-    (persp-switch "2")
-    (org-agenda nil "z"))
-  (global-set-key (kbd "<f6>") 'org-agenda-default)
-
-  ;; agenda内でRで出るclocktableの設定。
+#+caption: agenda内でRで出るclocktableを設定する
+#+begin_src emacs-lisp
   (setq org-clocktable-defaults '(:maxlevel 3 :scope agenda :tags "" :block today :step day :stepskip0 true :fileskip0 true))
+#+end_src
 
-  ;; org-super-agenda ================
+#+caption: 外観設定
+#+begin_src emacs-lisp
+  (setq spacemacs-theme-org-agenda-height nil
+        org-agenda-skip-scheduled-if-done t
+        org-agenda-skip-deadline-if-done t
+        org-agenda-include-deadlines t
+        org-agenda-include-diary t
+        org-agenda-block-separator nil
+        org-agenda-compact-blocks t
+        org-agenda-start-with-log-mode t
+        org-habit-following-days 7
+        org-habit-preceding-days 10
+        org-habit-graph-column 80 ;; 見出しが隠れるため
+        org-habit-show-habits t)
+#+end_src
+
+** org-super-agenda
+org-super-agendaは詳細に設定できるagenda表示ができるパッケージ。
+
+#+caption: グループ設定
+#+begin_src emacs-lisp
   (org-super-agenda-mode)
 
   (let ((org-super-agenda-groups
@@ -444,81 +641,50 @@ agenda用の設定。
            )))
     ;; (org-agenda nil "a")
     )
-
-  (setq spacemacs-theme-org-agenda-height nil
-        org-agenda-skip-scheduled-if-done t
-        org-agenda-skip-deadline-if-done t
-        org-agenda-include-deadlines t
-        org-agenda-include-diary t
-        org-agenda-block-separator nil
-        org-agenda-compact-blocks t
-        org-agenda-start-with-log-mode t
-        org-habit-following-days 7
-        org-habit-preceding-days 10
-        org-habit-graph-column 80 ;; 見出しが隠れるため
-        org-habit-show-habits t)
-
-  (setq org-agenda-custom-commands
-        '(("z" "Super zaen view"
-           ((agenda "" ((org-agenda-span 'day)
-                        (org-super-agenda-groups
-                         '((:name "🏗️Today"
-                                  :time-grid t
-                                  :date today
-                                  :scheduled today
-                                  :order 1)
-                           (:name "🍵Future"
-                                  :deadline future
-                                  :scheduled future
-                                  :order 10)
-                           (:name "Overdue"
-                                  :deadline past
-                                  :order 10)
-                           (:habit t)
-                           (:log t)
-                           (:discard (:anything))))))
-            (alltodo "" ((org-agenda-overriding-header "")
-                         (org-super-agenda-groups
-                          '((:name "▶️Work In Progress"
-                                   :todo "WIP"
-                                   :order 1)
-                            (:name "✍To write"
-                                   :tag "Write"
-                                   :order 12)
-                            (:name "📕To read"
-                                   :tag "Read"
-                                   :order 14)
-                            (:name "✍Things I Don't Know"
-                                   :tag "DontKnow"
-                                   :order 15)
-                            (:name "🛤️Train"
-                                   :tag "Train"
-                                   :order 18)
-                            (:discard (:anything t))))))))))
 #+end_src
 
-* Pomodoro
-ポモドーロ用の設定。
+** org-pomodoro
+org-pomodoro用の設定。
 
 #+caption: 基本設定
 #+begin_src emacs-lisp
   (require 'org-pomodoro)
-  (define-key global-map [insert] 'org-pomodoro)
+#+end_src
 
+#+caption: キーバインド
+#+begin_src emacs-lisp
+  (define-key global-map [insert] 'org-pomodoro)
+#+end_src
+
+#+caption: 時間の長さ
+#+begin_src emacs-lisp
   (setq org-pomodoro-short-break-length 0)
   (setq org-pomodoro-long-break-length 10)
   (setq org-pomodoro-expiry-time 120)
+#+end_src
 
+#+caption: サウンド
+#+begin_src emacs-lisp
   (setq org-pomodoro-finished-sound "~/.emacs.d/resources/pmd-finished.wav")
-  ;; (org-pomodoro-finished)
   (setq org-pomodoro-short-break-sound "~/.emacs.d/resources/pmd-short-break.wav")
+  ;; テスト
+  ;; (org-pomodoro-finished)
   ;; (org-pomodoro-short-break-finished)
+#+end_src
 
+#+caption: タイマーが終了したときにagendaに切り替える
+#+begin_src emacs-lisp
   (add-hook 'org-pomodoro-short-break-finished-hook 'org-agenda-default)
   (add-hook 'org-pomodoro-long-break-finished-hook 'org-agenda-default)
+#+end_src
 
+#+caption: モードラインに表示する経過時間を今日限定にする
+#+begin_src emacs-lisp
   (setq org-clock-mode-line-total 'today)
+#+end_src
 
+#+caption: polybarにpomodoro情報を表示する
+#+begin_src emacs-lisp
   (defun kd/org-pomodoro-remain-gauge (max-minutes)
     "Display remain time gauge."
     (let* ((display-len 25)
@@ -533,7 +699,6 @@ agenda用の設定。
        (concat "%{F#413839}" (make-string will ?|) "%{F-}")
        "%{T-}")))
 
-  ;; https://colekillian.com/posts/org-pomodoro-and-polybar/
   (defun kd/org-pomodoro-time ()
     "Return the remaining pomodoro time. Function for displaying in Polybar."
     (cond
@@ -559,8 +724,19 @@ agenda用の設定。
                                 ))
      ((org-clocking-p) (format "(%s) %s" (org-clock-get-clocked-time) org-clock-heading))
      (t "Not working...")))
-  (kd/org-pomodoro-time)
 
+  (defun kd/pmd-today-point-display ()
+    ;; (format " [%s]" kd/pmd-today-point)
+    (let* ((all-minute (* kd/pmd-today-point 25))
+           (hour (/ all-minute 60))
+           (minute (% all-minute 60)))
+      (format " %spts/%02dh%02dm" kd/pmd-today-point hour minute)))
+#+end_src
+
+- https://colekillian.com/posts/org-pomodoro-and-polybar/
+
+#+caption: 今日のポイントをカウントする
+#+begin_src emacs-lisp
   (defvar kd/pmd-today-point 0)
   (add-hook 'org-pomodoro-finished-hook
             (lambda () (setq kd/pmd-today-point (1+ kd/pmd-today-point))))
@@ -576,16 +752,12 @@ agenda用の設定。
                                                                 (number-to-string kd/pmd-today-point)))
                                           (setq kd/pmd-today-point 0)
                                           (message "pomodoro count reset!"))))
+#+end_src
 
-  (defun kd/pmd-today-point-display ()
-    ;; (format " [%s]" kd/pmd-today-point)
-    (let* ((all-minute (* kd/pmd-today-point 25))
-           (hour (/ all-minute 60))
-           (minute (% all-minute 60)))
-      (format " %spts/%02dh%02dm" kd/pmd-today-point hour minute)))
-
+#+caption: ポモドーロのカウントを手動で変更する
+#+begin_src emacs-lisp
   (defun kd/pmd-manual ()
-    "set point"
+    "set point manually"
     (interactive)
     (let ((point (read-from-minibuffer "How much point? ")))
       (setq kd/pmd-today-point (string-to-number point))))
@@ -594,13 +766,8 @@ agenda用の設定。
 * Font
 フォント設定。
 
-#+caption: 基本設定
+#+caption: OSごとのフォント
 #+begin_src emacs-lisp
-  ;; (defvar efs/frame-transparency '(90 . 90))
-  ;; (set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)
-  ;; (add-to-list 'default-frame-alist `(alpha . ,efs/frame-transparency))
-
-  ;; Set the font face based on platform
   (when window-system
     (progn
       (pcase system-type
@@ -608,7 +775,7 @@ agenda用の設定。
          (set-face-attribute 'default nil
                              :font "Fira Code"
                              :weight 'regular
-                             :height 100)
+                             :height 110)
          (set-fontset-font
           nil 'japanese-jisx0208
           (font-spec :family "Hiragino Sans")))
@@ -620,29 +787,59 @@ agenda用の設定。
          (set-fontset-font
           nil 'japanese-jisx0208
           (font-spec :family "Hiragino Sans"))))))
+#+end_src
 
-  ;; "JetBrains Mono"
-  ;; "Iosevka SS08"
-  ;; "Fira Mono"
-  ;; "Fira Code"
-  ;; "Hiragino Sans" -- (japanese)
-  ;; "Hack"
+いい感じのフォントリスト。
 
-  ;; 文字コード ================
-  ;;ターミナルの文字コード
+- JetBrains Mono
+- Iosevka SS08
+- Fira Mono
+- Fira Code
+- Hiragino Sans -- japanese
+- Hack
+
+#+caption: utf-8を使用する
+#+begin_src emacs-lisp
+  (prefer-coding-system 'utf-8)
+#+end_src
+
+#+caption: utf-8を使用する
+#+begin_src emacs-lisp
+  (set-language-environment 'utf-8)
+#+end_src
+
+#+caption: ターミナルの文字コード
+#+begin_src emacs-lisp
   (set-terminal-coding-system 'utf-8)
-  ;;キーボードから入力される文字コード
-  (set-keyboard-coding-system 'utf-8)
-  ;;ファイルのバッファのデフォルト文字コード
-  (set-buffer-file-coding-system 'utf-8)
-  ;;バッファのプロセスの文字コード
-  (setq default-buffer-file-coding-system 'utf-8)
-  ;;ファイルの文字コード
-  (setq file-name-coding-system 'utf-8)
-  ;;新規作成ファイルの文字コード
-  (set-default-coding-systems 'utf-8)
+#+end_src
 
-  ;; 絵文字フォント ================
+#+caption: キーボードから入力される文字コード
+#+begin_src emacs-lisp
+  (set-keyboard-coding-system 'utf-8)
+#+end_src
+
+#+caption: ファイルのバッファのデフォルト文字コード
+#+begin_src emacs-lisp
+  (set-buffer-file-coding-system 'utf-8)
+#+end_src
+
+#+caption: バッファのプロセスの文字コード
+#+begin_src emacs-lisp
+  (setq default-buffer-file-coding-system 'utf-8)
+#+end_src
+
+#+caption: ファイルの文字コード
+#+begin_src emacs-lisp
+  (setq file-name-coding-system 'utf-8)
+#+end_src
+
+#+caption: 新規作成ファイルの文字コード
+#+begin_src emacs-lisp
+  (set-default-coding-systems 'utf-8)
+#+end_src
+
+#+caption: 絵文字フォント
+#+begin_src emacs-lisp
   (defun --set-emoji-font (frame)
     "Adjust the font settings of FRAME so Emacs can display emoji properly."
     (if (eq system-type 'darwin)
@@ -662,148 +859,207 @@ agenda用の設定。
       ;; unicodefont
       (require 'unicode-fonts)
       (unicode-fonts-setup)))
-
-  (when (not window-system)
-    (progn
-      ;; CUI用設定
-      ))
 #+end_src
 
 * Simple
 未分類の設定。最初から入っているものの設定。
 
-#+caption: 基本設定
+#+caption: Emacs Server開始
 #+begin_src emacs-lisp
-  ;; 文字コード
-  (prefer-coding-system 'utf-8)
-  (set-language-environment 'utf-8)
-
   (server-start)
+#+end_src
 
-  ;; 表示系 ================
-  ;; *scratch*で最初に描画されるメッセージを消す
+#+caption: *scratch*で最初に描画されるメッセージを消す
+#+begin_src emacs-lisp
   (setq initial-scratch-message "")
+#+end_src
 
-  ;; 終了時に確認しない
+#+caption: 終了時に確認しない
+#+begin_src emacs-lisp
   (setq confirm-kill-processes nil)
+#+end_src
 
-  ;; メニューバーを消す
+#+caption: メニューバーを消す
+#+begin_src emacs-lisp
   (menu-bar-mode 0)
+#+end_src
 
-  ;; 対応する括弧をハイライト
+#+caption: 対応する括弧をハイライト
+#+begin_src emacs-lisp
   (show-paren-mode t)
+#+end_src
 
-  ;; 起動時のメッセージ非表示
+#+caption: 起動時のメッセージ非表示
+#+begin_src emacs-lisp
   (setq inhibit-startup-message t)
+#+end_src
 
-  ;; 保存時のmessage非表示
-  ;; (setq save-silently t)
+#+caption: 保存時のmessage非表示
+#+begin_src emacs-lisp
+  (setq save-silently t)
+#+end_src
 
-  ;; font-lockをどこでも有効にする
+#+caption: font-lockをどこでも有効にする
+#+begin_src emacs-lisp
   (global-font-lock-mode t)
+#+end_src
 
-  ;; タイトルにフルパス表示
+#+caption: タイトルにフルパス表示
+#+begin_src emacs-lisp
   (setq frame-title-format "%f")
+#+end_src
 
+#+caption: ビープ音を出さない
+#+begin_src emacs-lisp
   (setq ring-bell-function 'ignore)
+#+end_src
 
+#+caption: スクロールバーを消す
+#+begin_src emacs-lisp
   (require 'scroll-bar)
   (scroll-bar-mode 0)
+#+end_src
+
+#+caption: 対応カッコを表示する
+#+begin_src emacs-lisp
   (show-paren-mode t)
+#+end_src
+
+#+caption: ツールバーを消す
+#+begin_src emacs-lisp
   (require 'tool-bar)
   (tool-bar-mode 0)
+#+end_src
+
+#+caption: ツールチップを消す
+#+begin_src emacs-lisp
   (tooltip-mode 0)
+#+end_src
 
-  ;; キーバインド ================
-
+#+caption: １行スクロール
+#+begin_src emacs-lisp
   (global-set-key (kbd "M-n") (lambda () (interactive) (scroll-up 1)))
   (global-set-key (kbd "M-p") (lambda () (interactive) (scroll-down 1)))
+#+end_src
 
-  ;; キーボード入れ替えーーバックスペースをC-hで。
+#+caption: バックスペースをC-hに割り当てる
+#+begin_src emacs-lisp
   (keyboard-translate ?\C-h ?\C-?)
+#+end_src
 
-  ;;ワードカウントをC-x p に割当
+#+caption: ワードカウントをC-x p に割当
+#+begin_src emacs-lisp
   (global-set-key "\C-xp" 'count-words)
+#+end_src
 
-  ;; windowの大きさ変更
+#+caption: windowの大きさ変更
+#+begin_src emacs-lisp
   (global-set-key (kbd "C-M-{") 'shrink-window-horizontally)
   (global-set-key (kbd "C-M-}") 'enlarge-window-horizontally)
+#+end_src
 
-  ;; yesかnoではなく、yかnかで答えられるようにする
+#+caption: yesかnoではなく、yかnかで答えられるようにする
+#+begin_src emacs-lisp
   (defalias 'yes-or-no-p 'y-or-n-p)
+#+end_src
 
-  ;; 終了してしまう事故防止
+#+caption: 終了してしまう事故防止
+#+begin_src emacs-lisp
   (setq confirm-kill-emacs 'y-or-n-p)
+#+end_src
 
-  ;; リンクを聞かずに開く
+#+caption: リンクを聞かずに開く
+#+begin_src emacs-lisp
   (setq vc-follow-symlinks t)
+#+end_src
 
-  ;;括弧の補完
+#+caption: カッコの補完
+#+begin_src emacs-lisp
   (require 'smartparens)
   (add-hook 'prog-mode-hook 'smartparens-mode)
   (add-hook 'eshell-mode-hook 'smartparens-mode)
   (add-hook 'org-mode-hook 'smartparens-mode)
+#+end_src
 
-  ;; オートセーブ関連 ================
-
-  ;;ログの記録量
+#+caption: messageログの記録数
+#+begin_src emacs-lisp
   (setq message-log-max 1000)
+#+end_src
 
-  ;;履歴存数
+#+caption: 履歴の保存数
+#+begin_src emacs-lisp
   (setq history-length 500)
+#+end_src
 
-  ;;重複する履歴は保存しない
+#+caption: 重複する履歴は保存しない
+#+begin_src emacs-lisp
   (setq history-delete-duplicates t)
+#+end_src
 
-  ;;バックアップファイルを作らない
+#+caption: バックアップファイルを作らない
+#+begin_src emacs-lisp
   (setq backup-inhibited t)
   (setq make-backup-files nil)
   (setq auto-save-default nil)
   (setq create-lockfiles nil)
+#+end_src
 
-  ;;終了時にオートセーブファイルを削除
+#+caption: 終了時にオートセーブファイルを削除
+#+begin_src emacs-lisp
   (setq delete-auto-save-files t)
+#+end_src
 
-  ;; オートセーブ
+#+caption: オートセーブ
+#+begin_src emacs-lisp
   (setq auto-save-timeout 2)
   (setq auto-save-visited-interval 2)
   (setq auto-save-no-message t)
   (auto-save-visited-mode)
+#+end_src
 
-  ;; 最適化 ================
-
-  ;; 右から左に読む言語に対応させないことで描画高速化
+#+caption: 右から左に読む言語に対応させないことで描画高速化
+#+begin_src emacs-lisp
   (setq-default bidi-display-reordering nil)
+#+end_src
 
-  ;; splash screenを無効にする
+#+caption: splash screenを無効にする
+#+begin_src emacs-lisp
   (setq inhibit-splash-screen t)
+#+end_src
 
-  ;; 行番号の表示
-  ;; (display-line-numbers-mode)
+#+caption: 行番号の表示
+#+begin_src emacs-lisp
+  (display-line-numbers-mode)
+#+end_src
 
-  ;; ツール系 ================
-
-  ;; ediffを１ウィンドウで表示
+#+caption: ediffを１ウィンドウで表示
+#+begin_src emacs-lisp
   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+#+end_src
 
-  ;; コーディング ================
-
-  ;; オートインデントでスペースを使う
+#+caption: オートインデントでスペースを使う
+#+begin_src emacs-lisp
   (setq-default indent-tabs-mode nil)
+#+end_src
 
-  ;; クリップボードと同期
+#+caption: クリップボードと同期
+#+begin_src emacs-lisp
   (setq x-select-enable-primary t)
+#+end_src
 
-  ;; 空白を自動削除
+#+caption: 空白を自動削除
+#+begin_src emacs-lisp
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
+#+end_src
 
-  ;; 選択状態で入力すると上書き
+#+caption: 選択状態で入力すると上書き
+#+begin_src emacs-lisp
   (delete-selection-mode t)
+#+end_src
 
-  ;; ウィンドウ移動 ================
-
-  ;; メジャーモードのC-tキーバインドを無効化する
-  (eval-after-load "django-mode"
+#+caption: メジャーモードのC-tキーバインドを無効化する
+#+begin_src emacs-lisp
+(eval-after-load "django-mode"
     '(progn
        (define-key django-mode-map (kbd "C-t") nil)))
   (eval-after-load "dired"
@@ -821,10 +1077,11 @@ agenda用の設定。
        (mapc (lambda (i)
                (define-key magit-mode-map (kbd (format "M-%d" i)) nil))
              (number-sequence 1 4))))
+#+end_src
 
-  ;; インクリメンタルサーチの挙動変更 ================
-
-  (defadvice isearch-mode (around isearch-mode-default-string (forward &optional regexp op-fun recursive-edit word-p) activate)
+#+caption: インクリメンタルサーチの挙動変更
+#+begin_src emacs-lisp
+(defadvice isearch-mode (around isearch-mode-default-string (forward &optional regexp op-fun recursive-edit word-p) activate)
     (if (and transient-mark-mode mark-active (not (eq (mark) (point))))
         (progn
           (isearch-update-ring (buffer-substring-no-properties (mark) (point)))
@@ -835,61 +1092,66 @@ agenda用の設定。
             (goto-char (mark))
             (isearch-repeat-forward)))
       ad-do-it))
+#+end_src
 
-  ;; マウスホイールの挙動
-  (setq
+#+caption: マウスホイールの挙動
+#+begin_src emacs-lisp
+(setq
    ;; ホイールでスクロールする行数を設定
    mouse-wheel-scroll-amount '(1 ((shift) . 2) ((control)))
    ;; 速度を無視する
    mouse-wheel-progressive-speed nil)
   (setq scroll-preserve-screen-position 'always)
+#+end_src
 
-  ;; turn off blink cursor
-  (if (fboundp 'blink-cursor-mode)
+#+caption: カーソルの点滅無効化
+#+begin_src emacs-lisp
+(if (fboundp 'blink-cursor-mode)
       (blink-cursor-mode -1))
 #+end_src
 
 * Packages
 未分類の設定。拡張設定。
 
-#+caption: 全設定
+#+caption: 履歴保存
 #+begin_src emacs-lisp
-  ;; 履歴保存
   (savehist-mode 1)
-  ;;; 永続化する変数を新たに追加する
-  (push 'compile-command savehist-additional-variables)
-  ;;; 永続化しないミニバッファ履歴の変数を追加する
-  (push 'command-history savehist-ignored-variables)
+#+end_src
 
-  ;; コーディング外観  ================
+#+caption: 永続化する変数を新たに追加する
+#+begin_src emacs-lisp
+  (push 'compile-command savehist-additional-variables)
+#+end_src
+
+#+caption: 永続化しないミニバッファ履歴の変数を追加する
+#+begin_src emacs-lisp
+  (push 'command-history savehist-ignored-variables)
+#+end_src
+
+#+caption: カッコを色付けする
+#+begin_src emacs-lisp
   (require 'rainbow-delimiters)
   (rainbow-delimiters-mode t)
-  ;; (require 'cl-lib)
-  ;; (require 'color)
-  ;; (cl-loop
-  ;;  for index from 1 to rainbow-delimiters-max-face-count
-  ;;  do
-  ;;  (let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
-  ;;    (cl-callf color-saturate-name (face-foreground face) 30)))
-
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+#+end_src
 
+#+caption: シンボルをハイライトする
+#+begin_src emacs-lisp
   (require 'auto-highlight-symbol)
   (global-auto-highlight-symbol-mode t)
   (ahs-set-idle-interval 0.4)
+#+end_src
 
-  ;; ahs-modeのキーバインドを無効化する
+#+caption: ahs-modeのキーバインドを無効化する
+#+begin_src emacs-lisp
   (define-key auto-highlight-symbol-mode-map (kbd "M-<right>") nil)
   (define-key auto-highlight-symbol-mode-map (kbd "M-<left>") nil)
+#+end_src
 
-  ;; インデント可視化
-  ;; (require 'highlight-indentation)
-  ;; (add-hook 'prog-mode-hook 'highlight-indentation-mode)
-  ;; (set-face-background 'highlight-indentation-face "#e3e3d3")
-  ;; (set-face-background 'highlight-indentation-current-column-face "#c3b3b3")
-
-  ;; スペース可視化
+#+caption: スペース可視化
+#+begin_src emacs-lisp
   (require 'whitespace)
+
   ;; 空白
   (set-face-foreground 'whitespace-space nil)
   (set-face-background 'whitespace-space "gray33")
@@ -914,17 +1176,19 @@ agenda用の設定。
   (setq whitespace-display-mappings
         '((tab-mark ?\t [?\xBB ?\t])))
   (global-whitespace-mode 1)
+#+end_src
 
+#+caption: インデント設定
+#+begin_src emacs-lisp
   (add-hook 'emacs-lisp-mode-hook
             (lambda ()
               (setq indent-tabs-mode nil)))
 
   (setq-default typescript-indent-level 2)
+#+end_src
 
-  ;; 外観(非コーディング) ================
-  ;; 現在行をハイライト
-
-  ;; ハイライトの表示を遅くして高速化する
+#+caption: ハイライトの表示を遅くして高速化する
+#+begin_src emacs-lisp
   (require 'hl-line)
   (defun global-hl-line-timer-function ()
     (global-hl-line-unhighlight-all)
@@ -932,7 +1196,10 @@ agenda用の設定。
       (global-hl-line-highlight)))
   (setq global-hl-line-timer
         (run-with-idle-timer 0.03 t 'global-hl-line-timer-function))
+#+end_src
 
+#+caption: 現在行をハイライトする
+#+begin_src emacs-lisp
   (defface hlline-face
     '((((class color)
         (background dark))
@@ -946,26 +1213,18 @@ agenda用の設定。
 
   (setq hl-line-face 'hlline-face)
   (global-hl-line-mode)
+#+end_src
 
-  ;; (nyan-mode)
-
+#+caption: 移動時にハイライトする
+#+begin_src emacs-lisp
   (setq beacon-size 20) ; default 40
   (setq beacon-color "#827591")
   (setq beacon-blink-when-focused t)
-  ;; (beacon-mode)
+  (beacon-mode)
+#+end_src
 
-  ;; window移動 ================
-  ;; 分割した画面間をShift+矢印で移動
-  ;; (setq windmove-wrap-around t)
-  ;; (windmove-mode 0)
-
-  ;; (window-numbering-mode 1)
-
-  ;; window表示 ================
-  ;; (require 'popwin)
-  ;; (popwin-mode 0)
-
-  ;; ブックマーク ================
+#+caption: バッファ内ブックマーク
+#+begin_src emacs-lisp
   (setq-default bm-buffer-persistence nil)
   (setq bm-restore-repository-on-load t)
   (require 'bm)
@@ -980,35 +1239,51 @@ agenda用の設定。
   (global-set-key (kbd "C-M-SPC") 'bm-toggle)
   (global-set-key (kbd "M-[") 'bm-previous)
   (global-set-key (kbd "M-]") 'bm-next)
+#+end_src
 
-  ;; カーソル移動 ================
+#+caption: カーソル移動のキーバインド
+#+begin_src emacs-lisp
   (global-set-key (kbd "M-<left>") 'previous-buffer)
   (global-set-key (kbd "M-<right>") 'next-buffer)
   (global-set-key (kbd "C-t") 'other-window)
   (global-set-key (kbd "M-t") (lambda () (interactive) (other-window -1)))
+#+end_src
 
+#+caption: ace-jump-mode
+#+begin_src emacs-lisp
   (require 'ace-jump-mode)
   (setq ace-jump-mode-gray-background nil)
   (setq ace-jump-word-mode-use-query-char nil)
   (setq ace-jump-mode-move-keys
         (append "asdfghjkl;:]qwertyuiop@zxcvbnm,." nil))
   (global-set-key (kbd "C-o") 'ace-jump-word-mode)
+#+end_src
 
+#+caption: ace-link
+#+begin_src emacs-lisp
   (ace-link-setup-default)
+#+end_src
 
+#+caption: avy
+#+begin_src emacs-lisp
   (require 'avy)
   (global-set-key (kbd "C-j") 'avy-copy-line)
   (global-set-key (kbd "M-j") 'avy-goto-line)
   (global-set-key (kbd "C-M-j") 'avy-goto-whitespace-end)
+#+end_src
 
+#+caption: back-button
+#+begin_src emacs-lisp
   (back-button-mode 1)
   (global-set-key (kbd "C-c <left>") 'goto-last-change)
   (global-set-key (kbd "C-c <right>") 'goto-last-change-reverse)
 
   ;; 矩形選択で使うため無効化する
   (define-key back-button-mode-map (kbd "C-x SPC") nil)
+#+end_src
 
-  ;; インクリメンタルサーチ ================
+#+caption: migemo
+#+begin_src emacs-lisp
   (require 'migemo)
   (when (and (executable-find "cmigemo")
              (require 'migemo nil t))
@@ -1021,21 +1296,32 @@ agenda用の設定。
     (load-library "migemo")
     (migemo-init)
     )
+#+end_src
 
+#+caption: anzu
+#+begin_src emacs-lisp
   (require 'anzu)
   (global-anzu-mode)
+#+end_src
 
-  ;; バージョン管理 ================
+#+caption: magit
+#+begin_src emacs-lisp
   (require 'magit)
   (global-set-key (kbd "C-x g") 'magit-status)
 
   (with-eval-after-load 'magit
     (require 'forge))
+#+end_src
 
-  ;; Gitの差分を表示する
+
+#+caption: git-gutter+-mode
+#+begin_src emacs-lisp
   (global-git-gutter+-mode 1)
   (global-set-key (kbd "C-c C-v") 'git-gutter+-show-hunk-inline-at-point)
+#+end_src
 
+#+caption: commit時にconvential commitを選択する
+#+begin_src emacs-lisp
   ;; http://www.modernemacs.com/post/pretty-magit/
   (defun kd/magit-commit-prompt ()
     "Use ivy to insert conventional commit keyword."
@@ -1056,11 +1342,12 @@ agenda用の設定。
                                 :sort t
                                 :preselect "Add: ")
                       ": "))))
-
   (remove-hook 'git-commit-setup-hook 'with-editor-usage-message)
   (add-hook 'git-commit-setup-hook 'kd/magit-commit-prompt)
+#+end_src
 
-  ;; 文字入力 ================
+#+caption: mozc
+#+begin_src emacs-lisp
   (require 'mozc)
   (set-language-environment "Japanese")
   (setq default-input-method "japanese-mozc")
@@ -1070,17 +1357,26 @@ agenda用の設定。
             (lambda() (set-cursor-color "Magenta")))
   (add-hook 'input-method-inactivate-hook
             (lambda() (set-cursor-color "grey")))
+#+end_src
 
+#+caption: mozc-popup
+#+begin_src emacs-lisp
   (require 'mozc-popup)
   (setq mozc-candidate-style 'echo-area)
+#+end_src
 
-  ;; 固有サイトモード ================
-  (global-set-key (kbd "<f2>") 'devdocs-search)
+#+caption: devdocs-search
+#+begin_src emacs-lisp
+    (global-set-key (kbd "<f2>") 'devdocs-search)
+#+end_src
 
-  ;; コンソールモード ================
+#+caption: fish
+#+begin_src emacs-lisp
   (require 'fish-mode)
+#+end_src
 
-  ;; テンプレート ================
+#+caption: auto-insert
+#+begin_src emacs-lisp
   (auto-insert-mode)
   (setq auto-insert-directory "~/.emacs.d/insert/")
   ;; (define-auto-insert "\\.rb$" "ruby-template.rb")
@@ -1092,7 +1388,10 @@ agenda用の設定。
                   ("\\.org$" . "org-template.org")
                   ("\\.md$" . "markdown-template.md")
                   ) auto-insert-alist))
+#+end_src
 
+#+caption: yasnippet
+#+begin_src emacs-lisp
   (require 'yasnippet)
   (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
   (auto-insert-mode t)
@@ -1102,14 +1401,18 @@ agenda用の設定。
   (define-key yas-minor-mode-map (kbd "C-x y i") 'yas-insert-snippet)
   (define-key yas-minor-mode-map (kbd "C-x y n") 'yas-new-snippet)
   (define-key yas-minor-mode-map (kbd "C-x y v") 'yas-visit-snippet-file)
+#+end_src
 
-  ;; プロジェクト ================
+#+caption: projectile
+#+begin_src emacs-lisp
   (require 'projectile)
   (projectile-global-mode)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (counsel-projectile-mode)
+#+end_src
 
-  ;; 再読込 ================
+#+caption: バッファ再読込
+#+begin_src emacs-lisp
   (defun revert-buffer-no-confirm (&optional force-reverting)
     "Interactive call to revert-buffer. Ignoring the auto-save
    file and not requesting for confirmation. When the current buffer
@@ -1120,32 +1423,22 @@ agenda用の設定。
     (if (or force-reverting (not (buffer-modified-p)))
         (revert-buffer :ignore-auto :noconfirm)
       (error "The buffer has been modified")))
-
   (global-set-key (kbd "<f5>") 'revert-buffer-no-confirm)
+#+end_src
 
-  ;; 変更があったら自動で更新
+#+caption: 変更があったら自動で更新
+#+begin_src emacs-lisp
   (global-auto-revert-mode 1)
+#+end_src
 
-  ;; SSH ================
+#+caption: tramp
+#+begin_src emacs-lisp
   (require 'tramp)
   (setq tramp-default-method "ssh")
+#+end_src
 
-  ;; スペルチェック ================
-  ;; (add-hook 'prog-mode-hook 'flyspell-mode)
-
-  ;; ispell の後継である aspell を使う。
-  ;; CamelCase でもいい感じに spellcheck してくれる設定を追加
-  ;; See: https://stackoverflow.com/a/24878128/8888451
-
-  ;; (setq-default ispell-program-name "aspell")
-  ;; (eval-after-load "ispell"
-  ;;   '(add-to-list 'ispell-skip-region-alist '("[^\000-\377]+")))
-  ;; (setq ispell-program-name "aspell"
-  ;;       ispell-extra-args
-  ;;       '("--sug-mode=ultra" "--lang=en_US" "--run-together" "--run-together-limit=5" "--run-together-min=2"))
-
-  ;; シンタックスチェック ================
-
+#+caption: flycheck
+#+begin_src emacs-lisp
   (require 'flycheck)
   (setq flycheck-indication-mode 'right-fringe)
   (add-hook 'flycheck-mode-hook #'flycheck-set-indication-mode)
@@ -1162,12 +1455,16 @@ agenda用の設定。
 
   ;; コード変更後、2秒後にチェックする
   (setq flycheck-idle-change-delay 2)
+#+end_src
 
-  ;; ヘルプ ================
+#+caption: which-key
+#+begin_src emacs-lisp
   (which-key-mode)
   (which-key-setup-side-window-bottom)
+#+end_src
 
-  ;; dired ================
+#+caption: dired
+#+begin_src emacs-lisp
   (require 'dired-single)
   (defun my-dired-init ()
     "Bunch of stuff to run for dired, either immediately or when it's
@@ -1189,15 +1486,10 @@ agenda用の設定。
 
   (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
   (add-hook 'dired-mode-hook 'dired-hide-details-mode)
+#+end_src
 
-  ;; 定義元ジャンプ ================
-  ;; C-M-p backward-list を上書きしてしまうのでコメントアウト
-  ;; (dumb-jump-mode)
-  ;; (global-set-key (kbd "C-c j") 'dumb-jump-go)
-  (setq dumb-jump-selector 'popup)
-  ;; (setq dumb-jump-selector 'helm)
-
-  ;; easy-kill ================
+#+caption: easy-kill
+#+begin_src emacs-lisp
   (require 'easy-kill)
   (global-set-key [remap kill-ring-save] 'easy-kill)
 
@@ -1227,20 +1519,19 @@ agenda用の設定。
   (add-to-list 'easy-kill-alist '(?F string-up-to-char-forward ""))
   (add-to-list 'easy-kill-alist '(?t string-to-char-backward ""))
   (add-to-list 'easy-kill-alist '(?T string-up-to-char-backward ""))
+#+end_src
 
-  ;; Emacs 24.4+ comes with rectangle-mark-mode.
-  ;; (define-key rectangle-mark-mode-map (kbd "C-. C-,") 'mc/rect-rectangle-to-multiple-cursors)
-  ;; (define-key cua--rectangle-keymap   (kbd "C-. C-,") 'mc/cua-rectangle-to-multiple-cursors)
-
-  ;; log-mode ================
+#+caption: command-log-mode
+#+begin_src emacs-lisp
   (require 'command-log-mode)
   (global-command-log-mode)
 
   (setq clm/log-command-exceptions*
         '(mozc-handle-event self-insert-command))
+#+end_src
 
-  ;; RSS ================
-
+#+caption: elfeed
+#+begin_src emacs-lisp
   (setq elfeed-feeds
         '(("https://www.sanityinc.com/feed.xml" sanityinc blog)
           ("https://sachachua.com/blog/category/weekly/feed/" sachachua blog)
@@ -1251,21 +1542,24 @@ agenda用の設定。
           ("http://pragmaticemacs.com/feed/" Pragmatic Emacs)))
 
   ;; default-browser
-  ;; (setq browse-url-browser-function 'eww-browse-url)
   (setq browse-url-browser-function 'browse-url-firefox)
+#+end_src
 
-  (run-at-time "23:58pm" (* 24 60 60) (lambda () (elfeed-search-update--force)))
-
-  ;; Google検索 ================
+#+caption: google-this
+#+begin_src emacs-lisp
   (require 'google-this)
   (google-this-mode 1)
   (setq google-this-location-suffix "co.jp")
+#+end_src
 
-  ;; 辞書 ================
+#+caption: define-word
+#+begin_src emacs-lisp
   (require 'define-word)
   (global-set-key (kbd "<end>") 'define-word-at-point)
+#+end_src
 
-  ;; eww ================
+#+caption: eww
+#+begin_src emacs-lisp
   ;; 改行するようにする
   (defun shr-insert-document--for-eww (&rest them)
     (let ((shr-width 70)) (apply them)))
@@ -1296,8 +1590,6 @@ agenda用の設定。
 
   ;; デフォルトエンジン
   (setq eww-search-prefix "https://www.google.co.jp/search?q=")
-
-  (require 'cl-lib)
 
   (defun eww-tag-pre (dom)
     (let ((shr-folding-mode 'none)
@@ -1373,11 +1665,10 @@ agenda用の設定。
 
   (setq shr-external-rendering-functions
         '((pre . eww-tag-pre)))
+#+end_src
 
-  ;; 校正ツール ================
-  (require 'markdown-mode)
-  (define-key markdown-mode-map (kbd "C-c C-j") nil)
-
+#+caption: flycheck + textlint
+#+begin_src emacs-lisp
   (flycheck-define-checker textlint
     "A linter for Markdown."
     :command ("textlint" "--format" "unix" source)
@@ -1400,26 +1691,35 @@ agenda用の設定。
             '(lambda ()
                (add-node-modules-path)
                (setq flycheck-checker 'textlint)
-               ;; (org-sticky-header-mode)
                (flycheck-mode 1)))
+#+end_src
 
-  ;; 正規表現 ================
+#+caption: 正規表現
+#+begin_src emacs-lisp
   (global-set-key (kbd "C-M-%") 'vr/query-replace)
   (require 'visual-regexp-steroids)
+#+end_src
 
-  ;; write-room ================
+#+caption: writeroom-mode
+#+begin_src emacs-lisp
   (global-set-key [f7] 'writeroom-mode)
+#+end_src
 
-  ;; git-link ================
+#+caption: git-link
+#+begin_src emacs-lisp
   (setq git-link-default-branch "main")
   (setq git-link-use-commit t)
+#+end_src
 
-  ;; undo ================
+#+caption: undo-tree-mode
+#+begin_src emacs-lisp
   (global-undo-tree-mode)
   (setq undo-tree-auto-save-history nil)
+#+end_src
 
-  ;; eradio ================
-  (setq eradio-channels '(("def con - soma fm" . "https://somafm.com/defcon256.pls")
+#+caption: eradio
+#+begin_src emacs-lisp
+(setq eradio-channels '(("def con - soma fm" . "https://somafm.com/defcon256.pls")
                           ("metal - soma fm"   . "https://somafm.com/metal130.pls")
                           ("cyberia - lainon"  . "https://lainon.life/radio/cyberia.ogg.m3u")
                           ("cafe - lainon"     . "https://lainon.life/radio/cafe.ogg.m3u")
@@ -1450,43 +1750,61 @@ agenda用の設定。
                           ("piano - CALMRADIO.COM - Most Beautiful Piano Ever" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://209.58.147.84:19991/listen.pls?sid=1&t=.m3u")
                           ("piano - CALMRADIO.COM - Light Jazz Piano" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://23.82.11.88:10800/listen.pls?sid=1&t=.m3u")
                           ))
-  ;; typing game ================
+#+end_src
+
+#+caption: タイピングゲームの保存ファイル
+#+begin_src emacs-lisp
   (setq toe-highscore-file "~/.emacs.d/games/.toe-scores")
+#+end_src
 
-  ;; create-link ================
+#+caption: create-link
+#+begin_src emacs-lisp
   (setq create-link-default-format 'create-link-format-org)
+#+end_src
 
-  ;; ripgrep ================
+#+caption: ripgrep
+#+begin_src emacs-lisp
   (rg-enable-default-bindings)
+#+end_src
 
-  ;; Emacs Lisp ================
+#+caption: paredit
+#+begin_src emacs-lisp
   (require 'paredit)
   ;; (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
   ;; (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
   ;; (add-hook 'lisp-mode-hook 'enable-paredit-mode)
   ;; (add-hook 'ielm-mode-hook 'enable-paredit-mode)
+#+end_src
 
+#+caption: lispxmp
+#+begin_src emacs-lisp
   (require 'lispxmp)
   (define-key emacs-lisp-mode-map (kbd "C-<return>") 'lispxmp)
+#+end_src
 
+#+caption: graphql
+#+begin_src emacs-lisp
   (require 'graphql-mode)
   (require 'ob-graphql)
+#+end_src
 
-  ;; smart-newline ================
+#+caption: smart-newline
+#+begin_src emacs-lisp
   (require 'smart-newline)
   (global-set-key (kbd "C-m") 'newline)
   (add-hook 'ruby-mode-hook 'smart-newline-mode)
 #+end_src
 
 * Rails
-#+caption: 基本設定
+#+caption: projectile-rails
 #+begin_src emacs-lisp
-  ;;; ruby_on_railsモード
   (require 'projectile-rails)
   (projectile-rails-global-mode)
   (add-hook 'projectile-mode-hook 'projectile-rails-on)
+#+end_src
 
-  ;; rspec ================
+#+caption: rspec
+#+begin_src emacs-lisp
   (require 'rspec-mode)
 
   ;; Rspecの実行結果をスクロールして出力する
@@ -1497,8 +1815,10 @@ agenda用の設定。
   (setq rspec-docker-container "rails")
   (setq rspec-docker-command "docker-compose -f docker-compose.yml -f docker-compose-app.yml -f docker-compose-app.override.yml exec")
   (setq rspec-docker-cwd "")
+#+end_src
 
-  ;; RAILS_ENV=testを追加
+#+caption: RAILS_ENV=testを追加
+#+begin_src emacs-lisp
   (defun rspec-runner ()
     "Return command line to run rspec."
     (let ((bundle-command (if (rspec-bundle-p) "RAILS_ENV=test bundle exec " ""))
@@ -1508,17 +1828,18 @@ agenda用の設定。
               (if (rspec-rake-p)
                   (concat rspec-rake-command " spec")
                 rspec-spec-command))))
+#+end_src
 
-  ;; (setq rspec-use-spring-when-possible nil)
-  (setq rspec-use-spring-when-possible t)
+#+caption: springを有効化
+#+begin_src emacs-lisp
+(setq rspec-use-spring-when-possible t)
   (defun rspec-spring-p ()
     (and rspec-use-spring-when-possible
          (stringp (executable-find "spring"))))
-  ;; spring
-  ;; bin/rspec
+#+end_src
 
-  ;; シンタックスチェック ================
-  ;; flycheck と rubocop を連携させる
+#+caption: rubocopとflycheck連携
+#+begin_src emacs-lisp
   (require 'rubocop)
   (add-hook 'ruby-mode-hook 'rubocop-mode)
   (add-hook 'ruby-mode-hook
@@ -1537,92 +1858,118 @@ agenda用の設定。
             (file-name) ":" line ":" column ": " (or "E" "F") ": " (message) line-end))
     :modes (ruby-mode motion-mode))
 
-  ;; rinari
+  (setq flycheck-ruby-rubocop-executable "bundle exec rubocop")
+#+end_src
+
+#+caption: rinari
+#+begin_src emacs-lisp
   (when (require 'rinari nil 'noerror)
     (require 'rinari)
     (add-hook 'ruby-mode-hook 'rinari-minor-mode))
 
-  ;; rspec-mode 用の snippet を認識させる
   (when (require 'rinari nil 'noerror)
     (require 'rspec-mode)
     (eval-after-load 'rspec-mode
       '(rspec-install-snippets)))
+#+end_src
 
-  (setq flycheck-ruby-rubocop-executable "bundle exec rubocop")
-
-  ;; 補完 ================
+#+caption: 補完
+#+begin_src emacs-lisp
   (require 'ruby-electric)
   (add-hook 'ruby-mode-hook '(lambda ()
                                (ruby-electric-mode t)))
 
-  ;; 実行環境 ================
+#+end_src
+
+#+caption: quickrun
+#+begin_src emacs-lisp
   (require 'quickrun)
   (global-set-key (kbd "<f8>") 'quickrun)
+#+end_src
 
-  ;; pry
+#+caption: inf-ruby
+#+begin_src emacs-lisp
   (require 'inf-ruby)
   (setq inf-ruby-default-implementation "pry")
   (setq inf-ruby-eval-binding "Pry.toplevel_binding")
   ;; riなどのエスケープシーケンスを処理し、色付けする
   (add-hook 'inf-ruby-mode-hook 'ansi-color-for-comint-mode-on)
+#+end_src
 
-  ;; slim-mode ================
+#+caption: slim-mode
+#+begin_src emacs-lisp
   (unless (package-installed-p 'slim-mode)
     (package-refresh-contents) (package-install 'slim-mode))
   (add-to-list 'auto-mode-alist '("\\.slim?\\'" . slim-mode))
+#+end_src
 
-  ;; yaml-mode ================
+#+caption: yaml-mode
+#+begin_src emacs-lisp
   (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
+#+end_src
 
-  ;; マジックコメントを挿入しない
+#+caption: マジックコメントを挿入しない
+#+begin_src emacs-lisp
   (setq ruby-insert-encoding-magic-comment nil)
+#+end_src
 
-  ;; 対応ブロックを光らせる時間を短くする
-  (defcustom ruby-block-delay 0
+#+caption: 対応ブロックを光らせる時間を短くする
+#+begin_src emacs-lisp
+(defcustom ruby-block-delay 0
     "*Time in seconds to delay before showing a matching paren."
     :type  'number
     :group 'ruby-block)
+#+end_src
 
-  ;; xmp(実行結果アノテーション)
+#+caption: 実行結果アノテーション
+#+begin_src emacs-lisp
   (require 'rcodetools)
   (define-key ruby-mode-map (kbd "C-<return>") 'xmp)
+#+end_src
 
-  ;; activate robe
-  ;; CIでは実行しない
+#+caption: 補完
+#+begin_src emacs-lisp
   (when window-system
     (progn
       ;; (inf-ruby)
       ;; (robe-start)
       ))
 #+end_src
+
 * Go
 goの設定。
 
-#+caption: 基本設定
+#+caption: require
 #+begin_src emacs-lisp
   (require 'go-mode)
   (require 'ob-go)
+#+end_src
 
-  ;; Go デバッガー
+#+caption: デバッガ
+#+begin_src emacs-lisp
   (use-package dap-mode
-    :after lsp-mode
-    :hook
-    (lsp-mode . dap-mode)
-    (lsp-mode . dap-ui-mode)
-    :config
-    (dap-mode 1)
-    (require 'dap-hydra)
-    (require 'dap-dlv-go))
+      :after lsp-mode
+      :hook
+      (lsp-mode . dap-mode)
+      (lsp-mode . dap-ui-mode)
+      :config
+      (dap-mode 1)
+      (require 'dap-hydra)
+      (require 'dap-dlv-go))
 
   (setq dap-print-io t)
   (setq lsp-gopls-server-path "~/go/bin/gopls")
   (setq dap-dlv-go-delve-path "~/go/bin/dlv")
+#+end_src
 
-  (setq dap-print-io t)
-
+#+caption: go-eldoc
+#+begin_src emacs-lisp
   (require 'go-eldoc)
   (add-hook 'go-mode-hook 'go-eldoc-setup)
+#+end_src
 
+#+caption: go fmt
+#+begin_src emacs-lisp
   (setq gofmt-command "goimports")
   (add-hook 'before-save-hook 'gofmt-before-save)
 #+end_src
@@ -1987,7 +2334,7 @@ corfuはシンプルな補完を提供するパッケージ。
           (lambda (str) (orderless--highlight affe-orderless-regexp str))))
   (setq affe-regexp-compiler #'affe-orderless-regexp-compiler)
 
-  (add-hook 'corfu-mode-hook 'corfu-doc-mode)
+  ;; (add-hook 'corfu-mode-hook 'corfu-doc-mode)
 #+end_src
 
 * ivy
@@ -2816,9 +3163,9 @@ OS操作の便利関数。
 #+caption: Cの関数に定義ジャンプできるようにする
 #+begin_src emacs-lisp
 ;; Emacs C source directory
-(let ((src-dir "~/ProjectOrg/emacs/src"))
+(let ((src-dir "~/ProjectOrg/emacs/emacs/src"))
   (if (file-directory-p src-dir)
       (setq source-directory src-dir)))
 #+end_src
 
-~~/ProjectOrg~ にEmacsのソースコードを配置しておく。
+前提: ~~/ProjectOrg/emacs~ にEmacsのソースコードを配置しておく。

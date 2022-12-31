@@ -9,28 +9,19 @@
 (require 'org)
 (require 'org-protocol)
 
-;; System locale to use for formatting time values.
-(setq system-time-locale "C")         ; Make sure that the weekdays in the
-                                        ; time stamps of your Org mode files and
-                                        ; in the agenda appear in English.
+(setq system-time-locale "C")
 
-;; 拡張子がorgのファイルを開いた時，自動的にorg-modeにする
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
 (setq org-startup-folded 'content)
 
-;; org-modeでの強調表示を可能にする
 (add-hook 'org-mode-hook 'turn-on-font-lock)
-;; (add-hook 'org-mode-hook 'current-word-highlight-mode)
 
-;; 本文を自動インデント
 (setq org-startup-indented t)
 
-;; 見出しの余分な*を消す
 (setq org-hide-leading-stars t)
 (setq org-hide-emphasis-markers t)
 
-;; 画像表示
 (setq org-startup-with-inline-images t)
 
 (setq org-todo-keywords '((type "TODO" "WIP" "|" "DONE" "CLOSE")))
@@ -44,7 +35,6 @@
 (setq org-fontify-quote-and-verse-blocks t)
 (setq org-src-tab-acts-natively t)
 
-;; 展開アイコン
 ;; (setq org-ellipsis "»")
 ;; (setq org-ellipsis "..")
 ;; (setq org-ellipsis "⤵")
@@ -52,9 +42,9 @@
 ;; (setq org-ellipsis "❖")
 ;; (setq org-ellipsis "↯")
 (setq org-ellipsis "▽")
+
 (setq org-cycle-separator-lines 2)
 
-;; org-modeで行末で折り返しをする
 (setq org-startup-truncated nil)
 (defun change-truncation()
   (interactive)
@@ -63,22 +53,15 @@
         (t
          (setq truncate-lines nil))))
 
-;; スピードコマンド有効化
 (setq org-use-speed-commands t)
 
-;; キーバインド ================
-;; ほかとかぶるので無効化
 (define-key org-mode-map (kbd "C-c C-j") nil)
-;; (define-key org-mode-map (kbd "<S-left>") nil)
-;; (define-key org-mode-map (kbd "<S-right>") nil)
-;; (define-key org-mode-map (kbd "<S-up>") nil)
-;; (define-key org-mode-map (kbd "<S-down>") nil)
 (define-key org-mode-map (kbd "M-<left>") nil)
 (define-key org-mode-map (kbd "M-<right>") nil)
+
 (define-key org-mode-map (kbd "C-c C-x i") 'org-clock-in)
 (define-key org-mode-map (kbd "C-c C-x o") 'org-clock-out)
 
-;; org-babel ================
 (org-babel-do-load-languages 'org-babel-load-languages
                              '((C . t)
                                (clojure . t)
@@ -92,24 +75,148 @@
                                (shell . t)
                                (sql . t)))
 
-(setq org-confirm-babel-evaluate nil)
-(setq org-babel-clojure-backend 'cider)
 (require 'cider)
+(setq org-babel-clojure-backend 'cider)
 
-;; common lisp
 (setq inferior-lisp-program "clisp")
-;; clisp, sbcl,  ...
 
-;; 日誌 ================
+(add-hook 'sql-mode-org-src-hook #'sqlind-minor-mode)
+
+(setq org-confirm-babel-evaluate nil)
+
+(with-eval-after-load 'org
+  ;; This is needed as of Org 9.2
+  (require 'org-tempo)
+
+  (add-to-list 'org-structure-template-alist '("cj" . "src clojure"))
+  (add-to-list 'org-structure-template-alist '("cl" . "src C"))
+  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist '("gp" . "src git-permalink"))
+  (add-to-list 'org-structure-template-alist '("go" . "src go"))
+  (add-to-list 'org-structure-template-alist '("gq" . "src graphql"))
+  (add-to-list 'org-structure-template-alist '("hs" . "src haskell"))
+  (add-to-list 'org-structure-template-alist '("js" . "src javascript"))
+  (add-to-list 'org-structure-template-alist '("py" . "src python"))
+  (add-to-list 'org-structure-template-alist '("rb" . "src ruby"))
+  (add-to-list 'org-structure-template-alist '("rs" . "src rust"))
+  (add-to-list 'org-structure-template-alist '("sc" . "src scala"))
+  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+  (add-to-list 'org-structure-template-alist '("sq" . "src sql"))
+  (add-to-list 'org-structure-template-alist '("ts" . "src typescript")))
+
+(require 'visual-fill-column)
+(defun kd/centering-buffer ()
+  "Centering buffer."
+  (interactive)
+  (setq visual-fill-column-width 100
+        visual-fill-column-center-text t)
+  (visual-fill-column-mode 1))
+
+(add-hook 'org-mode-hook (lambda () (kd/centering-buffer)))
+(add-hook 'eww-mode-hook (lambda () (kd/centering-buffer)))
+
+(defun efs/org-font-setup ()
+    ;; Replace list hyphen with dot
+    ;; (font-lock-add-keywords 'org-mode
+    ;;                         '(("^ *\\([-]\\) "
+    ;;                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "✦"))))))
+
+    ;; (setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
+    (setq org-superstar-headline-bullets-list '("◉" "○" "●" "✿" "✸"))
+
+    (setq org-superstar-item-bullet-alist '((?* . ?•)
+                                            (?+ . ?»)
+                                            (?- . ?➤)))
+
+    (dolist (face '((org-level-1 . 1.0)
+                    (org-level-2 . 1.0)
+                    (org-level-3 . 1.0)
+                    (org-level-4 . 1.0)
+                    (org-level-5 . 1.0)
+                    (org-level-6 . 1.0)
+                    (org-level-7 . 1.0)
+                    (org-level-8 . 1.0)))
+      (set-face-attribute (car face) nil :font "Hiragino Sans" :height (cdr face) :weight 'bold))
+
+    (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-table nil    :inherit 'fixed-pitch)
+    (set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
+    (set-face-attribute 'org-code nil     :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-table nil    :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+    (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+    (set-face-attribute 'org-checkbox nil  :inherit 'fixed-pitch)
+    (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
+    (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch)
+
+    (custom-theme-set-faces
+     'user
+     '(variable-pitch ((t (:family "Helvetica Neue" :height 1.0 :weight regular))))
+     '(fixed-pitch ((t (:family "Fira Mono" :height 1.0))))
+     '(org-block ((t (:inherit fixed-pitch))))
+     '(org-code ((t (:inherit (shadow fixed-pitch)))))
+     '(org-document-info ((t (:foreground "dark orange"))))
+     '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
+     '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
+     '(org-link ((t (:foreground "royal blue" :underline t))))
+     '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+     '(org-property-value ((t (:inherit fixed-pitch))) t)
+     '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+     '(org-table ((t (:inherit fixed-pitch :foreground "#f5f5f5"))))
+     '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
+     '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
+     '(org-block-begin-line ((t (:inherit org-block))))))
+
+(add-hook 'org-mode-hook 'variable-pitch-mode)
+(add-hook 'org-mode-hook 'visual-line-mode)
+
+(defun org-lint-dir (directory)
+  (let* ((files (directory-files directory t ".*\\.org$")))
+    (org-lint-list files)))
+
+(defun org-lint-list (files)
+  (cond (files
+         (org-lint-file (car files))
+         (org-lint-list (cdr files)))))
+
+(defun org-lint-file (file)
+  (let ((buf)
+        (lint))
+    (setq buf (find-file-noselect file))
+    (with-current-buffer buf (if (setq lint (org-lint)) (print (list file lint))))))
+
+(use-package open-junk-file)
+(setq open-junk-file-format (concat "~/Private/junk/%Y-%m-%d-%H%M%S."))
+(global-set-key (kbd "C-x C-z") 'open-junk-file)
+
+(require 'org-superstar)
+(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+
+(add-hook 'org-mode-hook #'org-modern-mode)
+(add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
+
+;; (require 'org-sticky-header)
+;; (setq org-sticky-header-full-path 'full)
+;; (setq org-sticky-header-heading-star "◉")
+;; (remove-hook 'org-mode-hook #'org-stickey-header-mode)
+
+(org-tree-slide-presentation-profile)
+(org-tree-slide--hide-slide-header)
+
 (require 'org-journal)
+
 (setq org-journal-date-format "%Y-%m-%d(%a)")
 (setq org-journal-time-format "%R ")
+
 (setq org-journal-dir (concat "~/Private/junk/diary/org-journal"))
+
 (setq org-journal-file-format "%Y%m%d.org")
+
 (setq org-journal-find-file 'find-file)
+
 (setq org-journal-hide-entries-p nil)
 
-;; https://emacs.stackexchange.com/questions/17897/create-an-org-journal-template-for-daily-journal-entry/32655#32655?newreg=7c9543fa39e342cfb438c4168020447d
 (defun kd/new-buffer-p ()
   (not (file-exists-p (buffer-file-name))))
 
@@ -119,34 +226,8 @@
       (save-excursion
         (goto-char (point-min))
         (insert-file-contents template-file)))))
-
 (add-hook 'org-journal-after-entry-create-hook #'kd/insert-journal-template)
 
-;; 使い捨てのファイルを開く ================
-(use-package open-junk-file)
-(setq open-junk-file-format (concat "~/Private/junk/%Y-%m-%d-%H%M%S."))
-(global-set-key (kbd "C-x C-z") 'open-junk-file)
-
-;; 見出しをいい感じにする ================
-;; (require 'org-bullets)
-;; (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-(require 'org-superstar)
-(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
-
-;; org-modern
-;; (add-hook 'org-mode-hook #'org-modern-mode)
-;; (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
-
-(require 'org-sticky-header)
-(setq org-sticky-header-full-path 'full)
-(setq org-sticky-header-heading-star "◉")
-
-;; スライド ================
-;; (org-tree-slide-simple-profile)
-(org-tree-slide-presentation-profile)
-(org-tree-slide--hide-slide-header)
-
-;; pdf ================
 ;; (pdf-tools-install t)
 (require 'pdf-tools)
 (add-hook 'pdf-tools-enabled-hook 'pdf-view-midnight-minor-mode)
@@ -155,13 +236,19 @@
 (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
 (setq pdf-view-resize-factor 1.1)
 
-;; roam ================
+(require 'org-download)
+(setq-default org-download-image-dir "~/roam/images")
+
 (require 'org-roam)
 (add-hook 'after-init-hook 'org-roam-mode)
 (make-directory "~/roam" t)
 (setq org-roam-v2-ack t)
 (setq org-roam-directory "~/roam")
 (setq org-roam-completion-everywhere t)
+
+(setq org-id-link-to-org-use-id t)
+(setq org-id-extra-files (org-roam--list-files org-roam-directory))
+(org-roam-setup)
 
 (define-key global-map (kbd "C-c n f") 'org-roam-node-find)
 (define-key global-map (kbd "C-c n g") 'org-roam-graph)
@@ -188,135 +275,12 @@
          (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Project"))
         ))
 
-(setq org-id-link-to-org-use-id t)
-(setq org-id-extra-files (org-roam--list-files org-roam-directory))
-
-(setq org-roam-v2-ack t)
-
-(org-roam-setup)
-;; 画像 ================
-(require 'org-download)
-(setq-default org-download-image-dir "~/roam/images")
-
-;; テンプレート ================
-(with-eval-after-load 'org
-  ;; This is needed as of Org 9.2
-  (require 'org-tempo)
-
-  (add-to-list 'org-structure-template-alist '("cj" . "src clojure"))
-  (add-to-list 'org-structure-template-alist '("cl" . "src C"))
-  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-  (add-to-list 'org-structure-template-alist '("gp" . "src git-permalink"))
-  (add-to-list 'org-structure-template-alist '("go" . "src go"))
-  (add-to-list 'org-structure-template-alist '("gq" . "src graphql"))
-  (add-to-list 'org-structure-template-alist '("hs" . "src haskell"))
-  (add-to-list 'org-structure-template-alist '("js" . "src javascript"))
-  (add-to-list 'org-structure-template-alist '("py" . "src python"))
-  (add-to-list 'org-structure-template-alist '("rb" . "src ruby"))
-  (add-to-list 'org-structure-template-alist '("rs" . "src rust"))
-  (add-to-list 'org-structure-template-alist '("sc" . "src scala"))
-  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
-  (add-to-list 'org-structure-template-alist '("sq" . "src sql"))
-  (add-to-list 'org-structure-template-alist '("ts" . "src typescript")))
-
-;; sql
-(add-hook 'sql-mode-org-src-hook #'sqlind-minor-mode)
-
-;; 中央寄せ ================
-(require 'visual-fill-column)
-(defun kd/centering-buffer ()
-  "Centering buffer."
-  (interactive)
-  (setq visual-fill-column-width 100
-        visual-fill-column-center-text t)
-  (visual-fill-column-mode 1))
-
-(add-hook 'org-mode-hook (lambda () (kd/centering-buffer)))
-(add-hook 'eww-mode-hook (lambda () (kd/centering-buffer)))
-
-;; face ================
-;; themeのあとに評価するため、ここでは関数定義だけ。
-;; https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.org
-
-(defun efs/org-font-setup ()
-  ;; Replace list hyphen with dot
-  ;; (font-lock-add-keywords 'org-mode
-  ;;                         '(("^ *\\([-]\\) "
-  ;;                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "✦"))))))
-
-  ;; (setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
-  (setq org-superstar-headline-bullets-list '("◉" "○" "●" "✿" "✸"))
-
-  (setq org-superstar-item-bullet-alist '((?* . ?•)
-                                          (?+ . ?»)
-                                          (?- . ?➤)))
-
-  (dolist (face '((org-level-1 . 1.0)
-                  (org-level-2 . 1.0)
-                  (org-level-3 . 1.0)
-                  (org-level-4 . 1.0)
-                  (org-level-5 . 1.0)
-                  (org-level-6 . 1.0)
-                  (org-level-7 . 1.0)
-                  (org-level-8 . 1.0)))
-    (set-face-attribute (car face) nil :font "Hiragino Sans" :height (cdr face) :weight 'bold))
-
-  (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-table nil    :inherit 'fixed-pitch)
-  (set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
-  (set-face-attribute 'org-code nil     :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-table nil    :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-checkbox nil  :inherit 'fixed-pitch)
-  (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
-  (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch)
-
-  (custom-theme-set-faces
-   'user
-   '(variable-pitch ((t (:family "Helvetica Neue" :height 1.0 :weight regular))))
-   '(fixed-pitch ((t (:family "Fira Mono" :height 1.0))))
-   '(org-block ((t (:inherit fixed-pitch))))
-   '(org-code ((t (:inherit (shadow fixed-pitch)))))
-   '(org-document-info ((t (:foreground "dark orange"))))
-   '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
-   '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
-   '(org-link ((t (:foreground "royal blue" :underline t))))
-   '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-   '(org-property-value ((t (:inherit fixed-pitch))) t)
-   '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-   '(org-table ((t (:inherit fixed-pitch :foreground "#f5f5f5"))))
-   '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
-   '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
-   '(org-block-begin-line ((t (:inherit org-block))))))
-
-(add-hook 'org-mode-hook 'variable-pitch-mode)
-(add-hook 'org-mode-hook 'visual-line-mode)
-
-(defun org-lint-dir (directory)
-  (let* ((files (directory-files directory t ".*\\.org$")))
-    (org-lint-list files)))
-
-(defun org-lint-list (files)
-  (cond (files
-         (org-lint-file (car files))
-         (org-lint-list (cdr files)))))
-
-(defun org-lint-file (file)
-  (let ((buf)
-        (lint))
-    (setq buf (find-file-noselect file))
-    (with-current-buffer buf (if (setq lint (org-lint)) (print (list file lint))))))
-
-;; org-alert ================
 (require 'org-alert)
 (setq alert-default-style 'notifications)
 (setq org-alert-interval 300)
 (setq org-alert-notification-title "Reminder")
 (org-alert-enable)
 
-;; denote ================
 (setq denote-directory (expand-file-name "~/roam/denote"))
 (setq denote-known-keywords '("essay" "code-reading" "book" "hack"))
 
@@ -325,6 +289,12 @@
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (define-key global-map "\C-cc" 'org-capture)
+
+(defun org-agenda-default ()
+  (interactive)
+  (persp-switch "2")
+  (org-agenda nil "z"))
+(global-set-key (kbd "<f6>") 'org-agenda-default)
 
 (add-hook 'org-pomodoro-short-break-finished-hook 'org-agenda-default)
 (add-hook 'org-pomodoro-long-break-finished-hook 'org-agenda-default)
@@ -347,36 +317,69 @@
 
 (setq my-org-directory (concat "~/Private/junk/diary/org-journal/"))
 (setq my-todo-file (concat my-org-directory "todo.org"))
-
 (if (file-exists-p my-todo-file)
     (setq org-agenda-files `("~/roam" "~/roam/denote" ,my-todo-file)))
-
 (setq org-directory my-org-directory)
 (setq org-default-notes-file my-todo-file)
 
-;; 時刻をデフォルト表示
 (setq org-agenda-start-with-log-mode t)
 
-;; 7日分の予定を表示させる
 (setq org-agenda-span 14)
 (setq org-agenda-start-day "7d")
 
-;; agendaには、習慣・スケジュール・TODOを表示させる
 (setq org-agenda-custom-commands
-      '(("a" "Agenda and all TODO's"
-         ((tags "project-CLOCK=>\"<today>\"|repeatable") (agenda "") (alltodo)))))
-(setq org-agenda-custom-commands nil)
+        '(("z" "Super zaen view"
+           ((agenda "" ((org-agenda-span 'day)
+                        (org-super-agenda-groups
+                         '((:name "🏗️Today"
+                                  :time-grid t
+                                  :date today
+                                  :scheduled today
+                                  :order 1)
+                           (:name "🍵Future"
+                                  :deadline future
+                                  :scheduled future
+                                  :order 10)
+                           (:name "Overdue"
+                                  :deadline past
+                                  :order 10)
+                           (:habit t)
+                           (:log t)
+                           (:discard (:anything))))))
+            (alltodo "" ((org-agenda-overriding-header "")
+                         (org-super-agenda-groups
+                          '((:name "▶️Work In Progress"
+                                   :todo "WIP"
+                                   :order 1)
+                            (:name "✍To write"
+                                   :tag "Write"
+                                   :order 12)
+                            (:name "📕To read"
+                                   :tag "Read"
+                                   :order 14)
+                            (:name "✍Things I Don't Know"
+                                   :tag "DontKnow"
+                                   :order 15)
+                            (:name "🛤️Train"
+                                   :tag "Train"
+                                   :order 18)
+                            (:discard (:anything t))))))))))
 
-(defun org-agenda-default ()
-  (interactive)
-  (persp-switch "2")
-  (org-agenda nil "z"))
-(global-set-key (kbd "<f6>") 'org-agenda-default)
-
-;; agenda内でRで出るclocktableの設定。
 (setq org-clocktable-defaults '(:maxlevel 3 :scope agenda :tags "" :block today :step day :stepskip0 true :fileskip0 true))
 
-;; org-super-agenda ================
+(setq spacemacs-theme-org-agenda-height nil
+      org-agenda-skip-scheduled-if-done t
+      org-agenda-skip-deadline-if-done t
+      org-agenda-include-deadlines t
+      org-agenda-include-diary t
+      org-agenda-block-separator nil
+      org-agenda-compact-blocks t
+      org-agenda-start-with-log-mode t
+      org-habit-following-days 7
+      org-habit-preceding-days 10
+      org-habit-graph-column 80 ;; 見出しが隠れるため
+      org-habit-show-habits t)
+
 (org-super-agenda-mode)
 
 (let ((org-super-agenda-groups
@@ -423,58 +426,8 @@
   ;; (org-agenda nil "a")
   )
 
-(setq spacemacs-theme-org-agenda-height nil
-      org-agenda-skip-scheduled-if-done t
-      org-agenda-skip-deadline-if-done t
-      org-agenda-include-deadlines t
-      org-agenda-include-diary t
-      org-agenda-block-separator nil
-      org-agenda-compact-blocks t
-      org-agenda-start-with-log-mode t
-      org-habit-following-days 7
-      org-habit-preceding-days 10
-      org-habit-graph-column 80 ;; 見出しが隠れるため
-      org-habit-show-habits t)
-
-(setq org-agenda-custom-commands
-      '(("z" "Super zaen view"
-         ((agenda "" ((org-agenda-span 'day)
-                      (org-super-agenda-groups
-                       '((:name "🏗️Today"
-                                :time-grid t
-                                :date today
-                                :scheduled today
-                                :order 1)
-                         (:name "🍵Future"
-                                :deadline future
-                                :scheduled future
-                                :order 10)
-                         (:name "Overdue"
-                                :deadline past
-                                :order 10)
-                         (:habit t)
-                         (:log t)
-                         (:discard (:anything))))))
-          (alltodo "" ((org-agenda-overriding-header "")
-                       (org-super-agenda-groups
-                        '((:name "▶️Work In Progress"
-                                 :todo "WIP"
-                                 :order 1)
-                          (:name "✍To write"
-                                 :tag "Write"
-                                 :order 12)
-                          (:name "📕To read"
-                                 :tag "Read"
-                                 :order 14)
-                          (:name "✍Things I Don't Know"
-                                 :tag "DontKnow"
-                                 :order 15)
-                          (:name "🛤️Train"
-                                 :tag "Train"
-                                 :order 18)
-                          (:discard (:anything t))))))))))
-
 (require 'org-pomodoro)
+
 (define-key global-map [insert] 'org-pomodoro)
 
 (setq org-pomodoro-short-break-length 0)
@@ -482,8 +435,9 @@
 (setq org-pomodoro-expiry-time 120)
 
 (setq org-pomodoro-finished-sound "~/.emacs.d/resources/pmd-finished.wav")
-;; (org-pomodoro-finished)
 (setq org-pomodoro-short-break-sound "~/.emacs.d/resources/pmd-short-break.wav")
+;; テスト
+;; (org-pomodoro-finished)
 ;; (org-pomodoro-short-break-finished)
 
 (add-hook 'org-pomodoro-short-break-finished-hook 'org-agenda-default)
@@ -505,7 +459,6 @@
      (concat "%{F#413839}" (make-string will ?|) "%{F-}")
      "%{T-}")))
 
-;; https://colekillian.com/posts/org-pomodoro-and-polybar/
 (defun kd/org-pomodoro-time ()
   "Return the remaining pomodoro time. Function for displaying in Polybar."
   (cond
@@ -531,7 +484,13 @@
                               ))
    ((org-clocking-p) (format "(%s) %s" (org-clock-get-clocked-time) org-clock-heading))
    (t "Not working...")))
-(kd/org-pomodoro-time)
+
+(defun kd/pmd-today-point-display ()
+  ;; (format " [%s]" kd/pmd-today-point)
+  (let* ((all-minute (* kd/pmd-today-point 25))
+         (hour (/ all-minute 60))
+         (minute (% all-minute 60)))
+    (format " %spts/%02dh%02dm" kd/pmd-today-point hour minute)))
 
 (defvar kd/pmd-today-point 0)
 (add-hook 'org-pomodoro-finished-hook
@@ -549,24 +508,12 @@
                                         (setq kd/pmd-today-point 0)
                                         (message "pomodoro count reset!"))))
 
-(defun kd/pmd-today-point-display ()
-  ;; (format " [%s]" kd/pmd-today-point)
-  (let* ((all-minute (* kd/pmd-today-point 25))
-         (hour (/ all-minute 60))
-         (minute (% all-minute 60)))
-    (format " %spts/%02dh%02dm" kd/pmd-today-point hour minute)))
-
 (defun kd/pmd-manual ()
-  "set point"
+  "set point manually"
   (interactive)
   (let ((point (read-from-minibuffer "How much point? ")))
     (setq kd/pmd-today-point (string-to-number point))))
 
-;; (defvar efs/frame-transparency '(90 . 90))
-;; (set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)
-;; (add-to-list 'default-frame-alist `(alpha . ,efs/frame-transparency))
-
-;; Set the font face based on platform
 (when window-system
   (progn
     (pcase system-type
@@ -574,7 +521,7 @@
        (set-face-attribute 'default nil
                            :font "Fira Code"
                            :weight 'regular
-                           :height 100)
+                           :height 110)
        (set-fontset-font
         nil 'japanese-jisx0208
         (font-spec :family "Hiragino Sans")))
@@ -587,28 +534,22 @@
         nil 'japanese-jisx0208
         (font-spec :family "Hiragino Sans"))))))
 
-;; "JetBrains Mono"
-;; "Iosevka SS08"
-;; "Fira Mono"
-;; "Fira Code"
-;; "Hiragino Sans" -- (japanese)
-;; "Hack"
+(prefer-coding-system 'utf-8)
 
-;; 文字コード ================
-;;ターミナルの文字コード
+(set-language-environment 'utf-8)
+
 (set-terminal-coding-system 'utf-8)
-;;キーボードから入力される文字コード
+
 (set-keyboard-coding-system 'utf-8)
-;;ファイルのバッファのデフォルト文字コード
+
 (set-buffer-file-coding-system 'utf-8)
-;;バッファのプロセスの文字コード
+
 (setq default-buffer-file-coding-system 'utf-8)
-;;ファイルの文字コード
+
 (setq file-name-coding-system 'utf-8)
-;;新規作成ファイルの文字コード
+
 (set-default-coding-systems 'utf-8)
 
-;; 絵文字フォント ================
 (defun --set-emoji-font (frame)
   "Adjust the font settings of FRAME so Emacs can display emoji properly."
   (if (eq system-type 'darwin)
@@ -629,221 +570,151 @@
     (require 'unicode-fonts)
     (unicode-fonts-setup)))
 
-(when (not window-system)
-  (progn
-    ;; CUI用設定
-    ))
-
-;; 文字コード
-(prefer-coding-system 'utf-8)
-(set-language-environment 'utf-8)
-
 (server-start)
 
-;; 表示系 ================
-;; *scratch*で最初に描画されるメッセージを消す
 (setq initial-scratch-message "")
 
-;; 終了時に確認しない
 (setq confirm-kill-processes nil)
 
-;; メニューバーを消す
 (menu-bar-mode 0)
 
-;; 対応する括弧をハイライト
 (show-paren-mode t)
 
-;; 起動時のメッセージ非表示
 (setq inhibit-startup-message t)
 
-;; 保存時のmessage非表示
-;; (setq save-silently t)
+(setq save-silently t)
 
-;; font-lockをどこでも有効にする
 (global-font-lock-mode t)
 
-;; タイトルにフルパス表示
 (setq frame-title-format "%f")
 
 (setq ring-bell-function 'ignore)
 
 (require 'scroll-bar)
 (scroll-bar-mode 0)
+
 (show-paren-mode t)
+
 (require 'tool-bar)
 (tool-bar-mode 0)
-(tooltip-mode 0)
 
-;; キーバインド ================
+(tooltip-mode 0)
 
 (global-set-key (kbd "M-n") (lambda () (interactive) (scroll-up 1)))
 (global-set-key (kbd "M-p") (lambda () (interactive) (scroll-down 1)))
 
-;; キーボード入れ替えーーバックスペースをC-hで。
 (keyboard-translate ?\C-h ?\C-?)
 
-;;ワードカウントをC-x p に割当
 (global-set-key "\C-xp" 'count-words)
 
-;; windowの大きさ変更
 (global-set-key (kbd "C-M-{") 'shrink-window-horizontally)
 (global-set-key (kbd "C-M-}") 'enlarge-window-horizontally)
 
-;; yesかnoではなく、yかnかで答えられるようにする
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;; 終了してしまう事故防止
 (setq confirm-kill-emacs 'y-or-n-p)
 
-;; リンクを聞かずに開く
 (setq vc-follow-symlinks t)
 
-;;括弧の補完
 (require 'smartparens)
 (add-hook 'prog-mode-hook 'smartparens-mode)
 (add-hook 'eshell-mode-hook 'smartparens-mode)
 (add-hook 'org-mode-hook 'smartparens-mode)
 
-;; オートセーブ関連 ================
-
-;;ログの記録量
 (setq message-log-max 1000)
 
-;;履歴存数
 (setq history-length 500)
 
-;;重複する履歴は保存しない
 (setq history-delete-duplicates t)
 
-;;バックアップファイルを作らない
 (setq backup-inhibited t)
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 (setq create-lockfiles nil)
 
-;;終了時にオートセーブファイルを削除
 (setq delete-auto-save-files t)
 
-;; オートセーブ
 (setq auto-save-timeout 2)
 (setq auto-save-visited-interval 2)
 (setq auto-save-no-message t)
 (auto-save-visited-mode)
 
-;; 最適化 ================
-
-;; 右から左に読む言語に対応させないことで描画高速化
 (setq-default bidi-display-reordering nil)
 
-;; splash screenを無効にする
 (setq inhibit-splash-screen t)
 
-;; 行番号の表示
-;; (display-line-numbers-mode)
+(display-line-numbers-mode)
 
-;; ツール系 ================
-
-;; ediffを１ウィンドウで表示
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
-;; コーディング ================
-
-;; オートインデントでスペースを使う
 (setq-default indent-tabs-mode nil)
 
-;; クリップボードと同期
 (setq x-select-enable-primary t)
 
-;; 空白を自動削除
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;; 選択状態で入力すると上書き
 (delete-selection-mode t)
 
-;; ウィンドウ移動 ================
-
-;; メジャーモードのC-tキーバインドを無効化する
 (eval-after-load "django-mode"
-  '(progn
-     (define-key django-mode-map (kbd "C-t") nil)))
-(eval-after-load "dired"
-  '(progn
-     (define-key dired-mode-map (kbd "C-t") nil)))
-(eval-after-load "vterm"
-  '(progn
-     (define-key vterm-mode-map (kbd "C-t") nil)
-     (define-key vterm-mode-map (kbd "M-<right>") nil)
-     (define-key vterm-mode-map (kbd "M-<left>") nil)
-     (define-key vterm-mode-map (kbd "<f9>") nil)
-     (define-key vterm-mode-map (kbd "C-<f9>") nil)))
-(eval-after-load "magit"
-  '(progn
-     (mapc (lambda (i)
-             (define-key magit-mode-map (kbd (format "M-%d" i)) nil))
-           (number-sequence 1 4))))
-
-;; インクリメンタルサーチの挙動変更 ================
+    '(progn
+       (define-key django-mode-map (kbd "C-t") nil)))
+  (eval-after-load "dired"
+    '(progn
+       (define-key dired-mode-map (kbd "C-t") nil)))
+  (eval-after-load "vterm"
+    '(progn
+       (define-key vterm-mode-map (kbd "C-t") nil)
+       (define-key vterm-mode-map (kbd "M-<right>") nil)
+       (define-key vterm-mode-map (kbd "M-<left>") nil)
+       (define-key vterm-mode-map (kbd "<f9>") nil)
+       (define-key vterm-mode-map (kbd "C-<f9>") nil)))
+  (eval-after-load "magit"
+    '(progn
+       (mapc (lambda (i)
+               (define-key magit-mode-map (kbd (format "M-%d" i)) nil))
+             (number-sequence 1 4))))
 
 (defadvice isearch-mode (around isearch-mode-default-string (forward &optional regexp op-fun recursive-edit word-p) activate)
-  (if (and transient-mark-mode mark-active (not (eq (mark) (point))))
-      (progn
-        (isearch-update-ring (buffer-substring-no-properties (mark) (point)))
-        (deactivate-mark)
-        ad-do-it
-        (if (not forward)
-            (isearch-repeat-backward)
-          (goto-char (mark))
-          (isearch-repeat-forward)))
-    ad-do-it))
+    (if (and transient-mark-mode mark-active (not (eq (mark) (point))))
+        (progn
+          (isearch-update-ring (buffer-substring-no-properties (mark) (point)))
+          (deactivate-mark)
+          ad-do-it
+          (if (not forward)
+              (isearch-repeat-backward)
+            (goto-char (mark))
+            (isearch-repeat-forward)))
+      ad-do-it))
 
-;; マウスホイールの挙動
 (setq
- ;; ホイールでスクロールする行数を設定
- mouse-wheel-scroll-amount '(1 ((shift) . 2) ((control)))
- ;; 速度を無視する
- mouse-wheel-progressive-speed nil)
-(setq scroll-preserve-screen-position 'always)
+   ;; ホイールでスクロールする行数を設定
+   mouse-wheel-scroll-amount '(1 ((shift) . 2) ((control)))
+   ;; 速度を無視する
+   mouse-wheel-progressive-speed nil)
+  (setq scroll-preserve-screen-position 'always)
 
-;; turn off blink cursor
 (if (fboundp 'blink-cursor-mode)
-    (blink-cursor-mode -1))
+      (blink-cursor-mode -1))
 
-;; 履歴保存
 (savehist-mode 1)
-;;; 永続化する変数を新たに追加する
+
 (push 'compile-command savehist-additional-variables)
-;;; 永続化しないミニバッファ履歴の変数を追加する
+
 (push 'command-history savehist-ignored-variables)
 
-;; コーディング外観  ================
 (require 'rainbow-delimiters)
 (rainbow-delimiters-mode t)
-;; (require 'cl-lib)
-;; (require 'color)
-;; (cl-loop
-;;  for index from 1 to rainbow-delimiters-max-face-count
-;;  do
-;;  (let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
-;;    (cl-callf color-saturate-name (face-foreground face) 30)))
-
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 (require 'auto-highlight-symbol)
 (global-auto-highlight-symbol-mode t)
 (ahs-set-idle-interval 0.4)
 
-;; ahs-modeのキーバインドを無効化する
 (define-key auto-highlight-symbol-mode-map (kbd "M-<right>") nil)
 (define-key auto-highlight-symbol-mode-map (kbd "M-<left>") nil)
 
-;; インデント可視化
-;; (require 'highlight-indentation)
-;; (add-hook 'prog-mode-hook 'highlight-indentation-mode)
-;; (set-face-background 'highlight-indentation-face "#e3e3d3")
-;; (set-face-background 'highlight-indentation-current-column-face "#c3b3b3")
-
-;; スペース可視化
 (require 'whitespace)
+
 ;; 空白
 (set-face-foreground 'whitespace-space nil)
 (set-face-background 'whitespace-space "gray33")
@@ -875,10 +746,6 @@
 
 (setq-default typescript-indent-level 2)
 
-;; 外観(非コーディング) ================
-;; 現在行をハイライト
-
-;; ハイライトの表示を遅くして高速化する
 (require 'hl-line)
 (defun global-hl-line-timer-function ()
   (global-hl-line-unhighlight-all)
@@ -901,25 +768,11 @@
 (setq hl-line-face 'hlline-face)
 (global-hl-line-mode)
 
-;; (nyan-mode)
-
 (setq beacon-size 20) ; default 40
 (setq beacon-color "#827591")
 (setq beacon-blink-when-focused t)
-;; (beacon-mode)
+(beacon-mode)
 
-;; window移動 ================
-;; 分割した画面間をShift+矢印で移動
-;; (setq windmove-wrap-around t)
-;; (windmove-mode 0)
-
-;; (window-numbering-mode 1)
-
-;; window表示 ================
-;; (require 'popwin)
-;; (popwin-mode 0)
-
-;; ブックマーク ================
 (setq-default bm-buffer-persistence nil)
 (setq bm-restore-repository-on-load t)
 (require 'bm)
@@ -935,7 +788,6 @@
 (global-set-key (kbd "M-[") 'bm-previous)
 (global-set-key (kbd "M-]") 'bm-next)
 
-;; カーソル移動 ================
 (global-set-key (kbd "M-<left>") 'previous-buffer)
 (global-set-key (kbd "M-<right>") 'next-buffer)
 (global-set-key (kbd "C-t") 'other-window)
@@ -962,7 +814,6 @@
 ;; 矩形選択で使うため無効化する
 (define-key back-button-mode-map (kbd "C-x SPC") nil)
 
-;; インクリメンタルサーチ ================
 (require 'migemo)
 (when (and (executable-find "cmigemo")
            (require 'migemo nil t))
@@ -979,14 +830,12 @@
 (require 'anzu)
 (global-anzu-mode)
 
-;; バージョン管理 ================
 (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
 
 (with-eval-after-load 'magit
   (require 'forge))
 
-;; Gitの差分を表示する
 (global-git-gutter+-mode 1)
 (global-set-key (kbd "C-c C-v") 'git-gutter+-show-hunk-inline-at-point)
 
@@ -1010,11 +859,9 @@
                               :sort t
                               :preselect "Add: ")
                     ": "))))
-
 (remove-hook 'git-commit-setup-hook 'with-editor-usage-message)
 (add-hook 'git-commit-setup-hook 'kd/magit-commit-prompt)
 
-;; 文字入力 ================
 (require 'mozc)
 (set-language-environment "Japanese")
 (setq default-input-method "japanese-mozc")
@@ -1028,13 +875,10 @@
 (require 'mozc-popup)
 (setq mozc-candidate-style 'echo-area)
 
-;; 固有サイトモード ================
 (global-set-key (kbd "<f2>") 'devdocs-search)
 
-;; コンソールモード ================
 (require 'fish-mode)
 
-;; テンプレート ================
 (auto-insert-mode)
 (setq auto-insert-directory "~/.emacs.d/insert/")
 ;; (define-auto-insert "\\.rb$" "ruby-template.rb")
@@ -1057,13 +901,11 @@
 (define-key yas-minor-mode-map (kbd "C-x y n") 'yas-new-snippet)
 (define-key yas-minor-mode-map (kbd "C-x y v") 'yas-visit-snippet-file)
 
-;; プロジェクト ================
 (require 'projectile)
 (projectile-global-mode)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (counsel-projectile-mode)
 
-;; 再読込 ================
 (defun revert-buffer-no-confirm (&optional force-reverting)
   "Interactive call to revert-buffer. Ignoring the auto-save
  file and not requesting for confirmation. When the current buffer
@@ -1074,31 +916,12 @@
   (if (or force-reverting (not (buffer-modified-p)))
       (revert-buffer :ignore-auto :noconfirm)
     (error "The buffer has been modified")))
-
 (global-set-key (kbd "<f5>") 'revert-buffer-no-confirm)
 
-;; 変更があったら自動で更新
 (global-auto-revert-mode 1)
 
-;; SSH ================
 (require 'tramp)
 (setq tramp-default-method "ssh")
-
-;; スペルチェック ================
-;; (add-hook 'prog-mode-hook 'flyspell-mode)
-
-;; ispell の後継である aspell を使う。
-;; CamelCase でもいい感じに spellcheck してくれる設定を追加
-;; See: https://stackoverflow.com/a/24878128/8888451
-
-;; (setq-default ispell-program-name "aspell")
-;; (eval-after-load "ispell"
-;;   '(add-to-list 'ispell-skip-region-alist '("[^\000-\377]+")))
-;; (setq ispell-program-name "aspell"
-;;       ispell-extra-args
-;;       '("--sug-mode=ultra" "--lang=en_US" "--run-together" "--run-together-limit=5" "--run-together-min=2"))
-
-;; シンタックスチェック ================
 
 (require 'flycheck)
 (setq flycheck-indication-mode 'right-fringe)
@@ -1117,11 +940,9 @@
 ;; コード変更後、2秒後にチェックする
 (setq flycheck-idle-change-delay 2)
 
-;; ヘルプ ================
 (which-key-mode)
 (which-key-setup-side-window-bottom)
 
-;; dired ================
 (require 'dired-single)
 (defun my-dired-init ()
   "Bunch of stuff to run for dired, either immediately or when it's
@@ -1144,14 +965,6 @@
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 (add-hook 'dired-mode-hook 'dired-hide-details-mode)
 
-;; 定義元ジャンプ ================
-;; C-M-p backward-list を上書きしてしまうのでコメントアウト
-;; (dumb-jump-mode)
-;; (global-set-key (kbd "C-c j") 'dumb-jump-go)
-(setq dumb-jump-selector 'popup)
-;; (setq dumb-jump-selector 'helm)
-
-;; easy-kill ================
 (require 'easy-kill)
 (global-set-key [remap kill-ring-save] 'easy-kill)
 
@@ -1182,18 +995,11 @@
 (add-to-list 'easy-kill-alist '(?t string-to-char-backward ""))
 (add-to-list 'easy-kill-alist '(?T string-up-to-char-backward ""))
 
-;; Emacs 24.4+ comes with rectangle-mark-mode.
-;; (define-key rectangle-mark-mode-map (kbd "C-. C-,") 'mc/rect-rectangle-to-multiple-cursors)
-;; (define-key cua--rectangle-keymap   (kbd "C-. C-,") 'mc/cua-rectangle-to-multiple-cursors)
-
-;; log-mode ================
 (require 'command-log-mode)
 (global-command-log-mode)
 
 (setq clm/log-command-exceptions*
       '(mozc-handle-event self-insert-command))
-
-;; RSS ================
 
 (setq elfeed-feeds
       '(("https://www.sanityinc.com/feed.xml" sanityinc blog)
@@ -1205,21 +1011,15 @@
         ("http://pragmaticemacs.com/feed/" Pragmatic Emacs)))
 
 ;; default-browser
-;; (setq browse-url-browser-function 'eww-browse-url)
 (setq browse-url-browser-function 'browse-url-firefox)
 
-(run-at-time "23:58pm" (* 24 60 60) (lambda () (elfeed-search-update--force)))
-
-;; Google検索 ================
 (require 'google-this)
 (google-this-mode 1)
 (setq google-this-location-suffix "co.jp")
 
-;; 辞書 ================
 (require 'define-word)
 (global-set-key (kbd "<end>") 'define-word-at-point)
 
-;; eww ================
 ;; 改行するようにする
 (defun shr-insert-document--for-eww (&rest them)
   (let ((shr-width 70)) (apply them)))
@@ -1250,8 +1050,6 @@
 
 ;; デフォルトエンジン
 (setq eww-search-prefix "https://www.google.co.jp/search?q=")
-
-(require 'cl-lib)
 
 (defun eww-tag-pre (dom)
   (let ((shr-folding-mode 'none)
@@ -1328,10 +1126,6 @@
 (setq shr-external-rendering-functions
       '((pre . eww-tag-pre)))
 
-;; 校正ツール ================
-(require 'markdown-mode)
-(define-key markdown-mode-map (kbd "C-c C-j") nil)
-
 (flycheck-define-checker textlint
   "A linter for Markdown."
   :command ("textlint" "--format" "unix" source)
@@ -1354,66 +1148,57 @@
           '(lambda ()
              (add-node-modules-path)
              (setq flycheck-checker 'textlint)
-             ;; (org-sticky-header-mode)
              (flycheck-mode 1)))
 
-;; 正規表現 ================
 (global-set-key (kbd "C-M-%") 'vr/query-replace)
 (require 'visual-regexp-steroids)
 
-;; write-room ================
 (global-set-key [f7] 'writeroom-mode)
 
-;; git-link ================
 (setq git-link-default-branch "main")
 (setq git-link-use-commit t)
 
-;; undo ================
 (global-undo-tree-mode)
 (setq undo-tree-auto-save-history nil)
 
-;; eradio ================
 (setq eradio-channels '(("def con - soma fm" . "https://somafm.com/defcon256.pls")
-                        ("metal - soma fm"   . "https://somafm.com/metal130.pls")
-                        ("cyberia - lainon"  . "https://lainon.life/radio/cyberia.ogg.m3u")
-                        ("cafe - lainon"     . "https://lainon.life/radio/cafe.ogg.m3u")
-                        ("ambient - HBR1.com" . "http://ubuntu.hbr1.com:19800/ambient.ogg")
-                        ("ambient - RADIO ESTILO LEBLON" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us4.internet-radio.com:8193/listen.pls&t=.m3u")
-                        ("ambient - Pink Noise Radio" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk1.internet-radio.com:8004/listen.pls&t=.m3u")
-                        ("ambient - Deeply Beautiful Chillout Music - A Heavenly World of Sound" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk2.internet-radio.com:31491/listen.pls&t=.m3u")
-                        ("ambient - Chill Lounge Florida" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us5.internet-radio.com:8283/listen.pls&t=.m3u")
-                        ("ambient - PARTY VIBE RADIO : AMBIENT" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://www.partyviberadio.com:8056/listen.pls?sid=1&t=.m3u")
-                        ("healing - Healing Music Radio - The music of Peter Edwards" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us3.internet-radio.com:8169/live.m3u&t=.m3u")
-                        ("ambient - Real World Sounds" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk5.internet-radio.com:8260/listen.pls&t=.m3u")
-                        ("meditation - SilentZazen" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk5.internet-radio.com:8167/live.m3u&t=.m3u")
-                        ("meditation - Zero Beat Zone (MRG.fm)" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://62.149.196.16:8800/listen.pls?sid=1&t=.m3u")
-                        ("meditation - Meditation Radio" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://213.239.218.99:7241/listen.pls?sid=1&t=.m3u")
-                        ("ambient - AmbientRadio (MRG.fm)" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://62.149.196.16:8888/listen.pls?sid=1&t=.m3u")
-                        ("jungle - Konflict Radio" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk3.internet-radio.com:8192/live.m3u&t=.m3u")
-                        ("jungle - Future Pressure Radio" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk3.internet-radio.com:8108/listen.pls&t=.m3u")
-                        ("jungle - PARTY VIBE RADIO : JUNGLE" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://www.partyviberadio.com:8004/listen.pls?sid=2&t=.m3u")
-                        ("jazz - Smooth Jazz Florida" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us4.internet-radio.com:8266/listen.pls&t=.m3u")
-                        ("rock - Classic Rock Florida HD" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us4.internet-radio.com:8258/listen.pls&t=.m3u")
-                        ("dance - Dance UK Radio danceradiouk" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk2.internet-radio.com:8024/listen.pls&t=.m3u")
-                        ("rock - Majestic Jukebox Radio #HIGH QUALITY SOUND" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk3.internet-radio.com:8405/live.m3u&t=.m3u")
-                        ("ambient - LIFE CHILL MUSIC" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://aska.ru-hoster.com:8053/autodj.m3u&t=.m3u")
-                        ("dance - PulseEDM Dance Music Radio" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://pulseedm.cdnstream1.com:8124/1373_128.m3u&t=.m3u")
-                        ("piano - Matt Johnson Radio" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us2.internet-radio.com:8046/listen.pls&t=.m3u")
-                        ("piano - Music Lake - Relaxation Music, Meditation, Focus, Chill, Nature Sounds" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://104.251.118.50:8626/listen.pls?sid=1&t=.m3u")
-                        ("piano - Bru Zane Classical Radio - Rediscovering French Romantic Music" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://116.202.241.212:7001/listen.pls?sid=1&t=.m3u")
-                        ("piano - CALMRADIO.COM - Most Beautiful Piano Ever" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://209.58.147.84:19991/listen.pls?sid=1&t=.m3u")
-                        ("piano - CALMRADIO.COM - Light Jazz Piano" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://23.82.11.88:10800/listen.pls?sid=1&t=.m3u")
-                        ))
-;; typing game ================
+                          ("metal - soma fm"   . "https://somafm.com/metal130.pls")
+                          ("cyberia - lainon"  . "https://lainon.life/radio/cyberia.ogg.m3u")
+                          ("cafe - lainon"     . "https://lainon.life/radio/cafe.ogg.m3u")
+                          ("ambient - HBR1.com" . "http://ubuntu.hbr1.com:19800/ambient.ogg")
+                          ("ambient - RADIO ESTILO LEBLON" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us4.internet-radio.com:8193/listen.pls&t=.m3u")
+                          ("ambient - Pink Noise Radio" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk1.internet-radio.com:8004/listen.pls&t=.m3u")
+                          ("ambient - Deeply Beautiful Chillout Music - A Heavenly World of Sound" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk2.internet-radio.com:31491/listen.pls&t=.m3u")
+                          ("ambient - Chill Lounge Florida" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us5.internet-radio.com:8283/listen.pls&t=.m3u")
+                          ("ambient - PARTY VIBE RADIO : AMBIENT" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://www.partyviberadio.com:8056/listen.pls?sid=1&t=.m3u")
+                          ("healing - Healing Music Radio - The music of Peter Edwards" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us3.internet-radio.com:8169/live.m3u&t=.m3u")
+                          ("ambient - Real World Sounds" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk5.internet-radio.com:8260/listen.pls&t=.m3u")
+                          ("meditation - SilentZazen" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk5.internet-radio.com:8167/live.m3u&t=.m3u")
+                          ("meditation - Zero Beat Zone (MRG.fm)" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://62.149.196.16:8800/listen.pls?sid=1&t=.m3u")
+                          ("meditation - Meditation Radio" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://213.239.218.99:7241/listen.pls?sid=1&t=.m3u")
+                          ("ambient - AmbientRadio (MRG.fm)" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://62.149.196.16:8888/listen.pls?sid=1&t=.m3u")
+                          ("jungle - Konflict Radio" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk3.internet-radio.com:8192/live.m3u&t=.m3u")
+                          ("jungle - Future Pressure Radio" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk3.internet-radio.com:8108/listen.pls&t=.m3u")
+                          ("jungle - PARTY VIBE RADIO : JUNGLE" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://www.partyviberadio.com:8004/listen.pls?sid=2&t=.m3u")
+                          ("jazz - Smooth Jazz Florida" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us4.internet-radio.com:8266/listen.pls&t=.m3u")
+                          ("rock - Classic Rock Florida HD" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us4.internet-radio.com:8258/listen.pls&t=.m3u")
+                          ("dance - Dance UK Radio danceradiouk" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk2.internet-radio.com:8024/listen.pls&t=.m3u")
+                          ("rock - Majestic Jukebox Radio #HIGH QUALITY SOUND" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk3.internet-radio.com:8405/live.m3u&t=.m3u")
+                          ("ambient - LIFE CHILL MUSIC" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://aska.ru-hoster.com:8053/autodj.m3u&t=.m3u")
+                          ("dance - PulseEDM Dance Music Radio" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://pulseedm.cdnstream1.com:8124/1373_128.m3u&t=.m3u")
+                          ("piano - Matt Johnson Radio" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us2.internet-radio.com:8046/listen.pls&t=.m3u")
+                          ("piano - Music Lake - Relaxation Music, Meditation, Focus, Chill, Nature Sounds" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://104.251.118.50:8626/listen.pls?sid=1&t=.m3u")
+                          ("piano - Bru Zane Classical Radio - Rediscovering French Romantic Music" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://116.202.241.212:7001/listen.pls?sid=1&t=.m3u")
+                          ("piano - CALMRADIO.COM - Most Beautiful Piano Ever" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://209.58.147.84:19991/listen.pls?sid=1&t=.m3u")
+                          ("piano - CALMRADIO.COM - Light Jazz Piano" . "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://23.82.11.88:10800/listen.pls?sid=1&t=.m3u")
+                          ))
+
 (setq toe-highscore-file "~/.emacs.d/games/.toe-scores")
 
-;; create-link ================
 (setq create-link-default-format 'create-link-format-org)
 
-;; ripgrep ================
 (rg-enable-default-bindings)
 
-;; Emacs Lisp ================
 (require 'paredit)
 ;; (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
 ;; (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
@@ -1426,17 +1211,14 @@
 (require 'graphql-mode)
 (require 'ob-graphql)
 
-;; smart-newline ================
 (require 'smart-newline)
 (global-set-key (kbd "C-m") 'newline)
 (add-hook 'ruby-mode-hook 'smart-newline-mode)
 
-;;; ruby_on_railsモード
 (require 'projectile-rails)
 (projectile-rails-global-mode)
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
 
-;; rspec ================
 (require 'rspec-mode)
 
 ;; Rspecの実行結果をスクロールして出力する
@@ -1448,7 +1230,6 @@
 (setq rspec-docker-command "docker-compose -f docker-compose.yml -f docker-compose-app.yml -f docker-compose-app.override.yml exec")
 (setq rspec-docker-cwd "")
 
-;; RAILS_ENV=testを追加
 (defun rspec-runner ()
   "Return command line to run rspec."
   (let ((bundle-command (if (rspec-bundle-p) "RAILS_ENV=test bundle exec " ""))
@@ -1459,16 +1240,11 @@
                 (concat rspec-rake-command " spec")
               rspec-spec-command))))
 
-;; (setq rspec-use-spring-when-possible nil)
 (setq rspec-use-spring-when-possible t)
-(defun rspec-spring-p ()
-  (and rspec-use-spring-when-possible
-       (stringp (executable-find "spring"))))
-;; spring
-;; bin/rspec
+  (defun rspec-spring-p ()
+    (and rspec-use-spring-when-possible
+         (stringp (executable-find "spring"))))
 
-;; シンタックスチェック ================
-;; flycheck と rubocop を連携させる
 (require 'rubocop)
 (add-hook 'ruby-mode-hook 'rubocop-mode)
 (add-hook 'ruby-mode-hook
@@ -1487,58 +1263,46 @@
           (file-name) ":" line ":" column ": " (or "E" "F") ": " (message) line-end))
   :modes (ruby-mode motion-mode))
 
-;; rinari
+(setq flycheck-ruby-rubocop-executable "bundle exec rubocop")
+
 (when (require 'rinari nil 'noerror)
   (require 'rinari)
   (add-hook 'ruby-mode-hook 'rinari-minor-mode))
 
-;; rspec-mode 用の snippet を認識させる
 (when (require 'rinari nil 'noerror)
   (require 'rspec-mode)
   (eval-after-load 'rspec-mode
     '(rspec-install-snippets)))
 
-(setq flycheck-ruby-rubocop-executable "bundle exec rubocop")
-
-;; 補完 ================
 (require 'ruby-electric)
 (add-hook 'ruby-mode-hook '(lambda ()
                              (ruby-electric-mode t)))
 
-;; 実行環境 ================
 (require 'quickrun)
 (global-set-key (kbd "<f8>") 'quickrun)
 
-;; pry
 (require 'inf-ruby)
 (setq inf-ruby-default-implementation "pry")
 (setq inf-ruby-eval-binding "Pry.toplevel_binding")
 ;; riなどのエスケープシーケンスを処理し、色付けする
 (add-hook 'inf-ruby-mode-hook 'ansi-color-for-comint-mode-on)
 
-;; slim-mode ================
 (unless (package-installed-p 'slim-mode)
   (package-refresh-contents) (package-install 'slim-mode))
 (add-to-list 'auto-mode-alist '("\\.slim?\\'" . slim-mode))
 
-;; yaml-mode ================
 (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
 
-;; マジックコメントを挿入しない
 (setq ruby-insert-encoding-magic-comment nil)
 
-;; 対応ブロックを光らせる時間を短くする
 (defcustom ruby-block-delay 0
-  "*Time in seconds to delay before showing a matching paren."
-  :type  'number
-  :group 'ruby-block)
+    "*Time in seconds to delay before showing a matching paren."
+    :type  'number
+    :group 'ruby-block)
 
-;; xmp(実行結果アノテーション)
 (require 'rcodetools)
 (define-key ruby-mode-map (kbd "C-<return>") 'xmp)
 
-;; activate robe
-;; CIでは実行しない
 (when window-system
   (progn
     ;; (inf-ruby)
@@ -1548,22 +1312,19 @@
 (require 'go-mode)
 (require 'ob-go)
 
-;; Go デバッガー
 (use-package dap-mode
-  :after lsp-mode
-  :hook
-  (lsp-mode . dap-mode)
-  (lsp-mode . dap-ui-mode)
-  :config
-  (dap-mode 1)
-  (require 'dap-hydra)
-  (require 'dap-dlv-go))
+    :after lsp-mode
+    :hook
+    (lsp-mode . dap-mode)
+    (lsp-mode . dap-ui-mode)
+    :config
+    (dap-mode 1)
+    (require 'dap-hydra)
+    (require 'dap-dlv-go))
 
 (setq dap-print-io t)
 (setq lsp-gopls-server-path "~/go/bin/gopls")
 (setq dap-dlv-go-delve-path "~/go/bin/dlv")
-
-(setq dap-print-io t)
 
 (require 'go-eldoc)
 (add-hook 'go-mode-hook 'go-eldoc-setup)
@@ -1874,7 +1635,7 @@
         (lambda (str) (orderless--highlight affe-orderless-regexp str))))
 (setq affe-regexp-compiler #'affe-orderless-regexp-compiler)
 
-(add-hook 'corfu-mode-hook 'corfu-doc-mode)
+;; (add-hook 'corfu-mode-hook 'corfu-doc-mode)
 
 (when (require 'ivy-hydra nil t)
   (setq ivy-read-action-function #'ivy-hydra-read-action))
@@ -2458,6 +2219,6 @@
   (cancel-timer (car (last timer-list))))
 
 ;; Emacs C source directory
-(let ((src-dir "~/ProjectOrg/emacs/src"))
+(let ((src-dir "~/ProjectOrg/emacs/emacs/src"))
   (if (file-directory-p src-dir)
       (setq source-directory src-dir)))
