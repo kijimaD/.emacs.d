@@ -141,6 +141,7 @@
 (depends-on "ob-go")
 (depends-on "ob-graphql")
 (depends-on "ob-rust")
+(depends-on "open-junk-file")
 (depends-on "orderless")
 (depends-on "org-alert")
 (depends-on "org-brain")
