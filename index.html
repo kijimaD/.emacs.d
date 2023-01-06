@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-01-06 Fri 17:06 -->
+<!-- 2023-01-06 Fri 17:09 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>kijimad Emacs Config</title>
@@ -205,59 +205,59 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org9ce4323">1. Emacs</a></li>
-<li><a href="#org48ae36c">2. Org</a>
+<li><a href="#orgd565241">1. Emacs</a></li>
+<li><a href="#org73968c9">2. Org</a>
 <ul>
-<li><a href="#orgb4ed302">2.1. open-junk-file</a></li>
-<li><a href="#orgd7962c8">2.2. org-superstar</a></li>
-<li><a href="#org57fee3a">2.3. org-modern</a></li>
-<li><a href="#orgd186c59">2.4. org-stickey-header</a></li>
-<li><a href="#org47214d3">2.5. org-tree-slide</a></li>
-<li><a href="#orgfed1586">2.6. org-journal</a></li>
-<li><a href="#orgdce168e">2.7. pdf-tools</a></li>
-<li><a href="#org21efabb">2.8. org-download</a></li>
-<li><a href="#org4fa745a">2.9. org-roam</a></li>
-<li><a href="#org8447424">2.10. org-alert</a></li>
-<li><a href="#org137f9a9">2.11. denote</a></li>
-<li><a href="#orga201000">2.12. org-agenda</a></li>
-<li><a href="#orgf56c3fa">2.13. org-super-agenda</a></li>
-<li><a href="#org02af389">2.14. org-pomodoro</a></li>
+<li><a href="#org9153a85">2.1. open-junk-file</a></li>
+<li><a href="#orgb5407ca">2.2. org-superstar</a></li>
+<li><a href="#org08176dc">2.3. org-modern</a></li>
+<li><a href="#orgbcb8ae8">2.4. org-stickey-header</a></li>
+<li><a href="#org9a8adcf">2.5. org-tree-slide</a></li>
+<li><a href="#org506c86a">2.6. org-journal</a></li>
+<li><a href="#org5581f60">2.7. pdf-tools</a></li>
+<li><a href="#org32f92d4">2.8. org-download</a></li>
+<li><a href="#orgc872337">2.9. org-roam</a></li>
+<li><a href="#org54f59cc">2.10. org-alert</a></li>
+<li><a href="#org679972a">2.11. denote</a></li>
+<li><a href="#org378ddb0">2.12. org-agenda</a></li>
+<li><a href="#org5ed1e84">2.13. org-super-agenda</a></li>
+<li><a href="#orgb0d335e">2.14. org-pomodoro</a></li>
 </ul>
 </li>
-<li><a href="#org81ced20">3. Font</a></li>
-<li><a href="#org9db868f">4. Simple</a></li>
-<li><a href="#orgb52c3ee">5. Packages</a></li>
-<li><a href="#orgc21d6be">6. Rails</a></li>
-<li><a href="#orgd05f98c">7. Go</a></li>
-<li><a href="#org0eb2a1a">8. Python</a></li>
-<li><a href="#org753f057">9. Haskell</a></li>
-<li><a href="#org1dea25e">10. Web</a></li>
-<li><a href="#org40e75e2">11. LSP</a></li>
-<li><a href="#org3db86ec">12. corfu</a></li>
-<li><a href="#org721622a">13. Emacs Lisp</a>
+<li><a href="#orgf2c0c33">3. Font</a></li>
+<li><a href="#org5c1f2b9">4. Simple</a></li>
+<li><a href="#org8667536">5. Packages</a></li>
+<li><a href="#org2029a2a">6. Rails</a></li>
+<li><a href="#orgd67b3b7">7. Go</a></li>
+<li><a href="#orgfcf8e60">8. Python</a></li>
+<li><a href="#org54a1c54">9. Haskell</a></li>
+<li><a href="#orgbb9e4e6">10. Web</a></li>
+<li><a href="#org92ac45c">11. LSP</a></li>
+<li><a href="#org60b027f">12. corfu</a></li>
+<li><a href="#orgc32800b">13. Emacs Lisp</a>
 <ul>
-<li><a href="#orgff1feaf">13.1. rispy</a></li>
+<li><a href="#orgb259cfc">13.1. rispy</a></li>
 </ul>
 </li>
-<li><a href="#org79bc10e">14. ivy</a></li>
-<li><a href="#orgc32b2e1">15. counsel</a></li>
-<li><a href="#orgdc41460">16. ag</a></li>
-<li><a href="#orga1ef0d3">17. eldoc</a></li>
-<li><a href="#org6ae3599">18. eshell</a></li>
-<li><a href="#orgc5a21cc">19. Vterm</a></li>
-<li><a href="#org7f30133">20. Theme</a></li>
-<li><a href="#org306e80a">21. EXWM</a></li>
-<li><a href="#org9f31ab8">22. Polybar</a></li>
-<li><a href="#orgfae2282">23. Workspace</a></li>
-<li><a href="#org9a0e64f">24. Hydra</a></li>
-<li><a href="#org75d1dfc">25. Display Manager</a></li>
-<li><a href="#org3cd73f4">26. Helper</a></li>
+<li><a href="#orgbe18bee">14. ivy</a></li>
+<li><a href="#orgf490c87">15. counsel</a></li>
+<li><a href="#org4d72e0d">16. ag</a></li>
+<li><a href="#org50fbe71">17. eldoc</a></li>
+<li><a href="#org0ce11f9">18. eshell</a></li>
+<li><a href="#org3aacf68">19. Vterm</a></li>
+<li><a href="#org84b41db">20. Theme</a></li>
+<li><a href="#org647cf26">21. EXWM</a></li>
+<li><a href="#org4f3366a">22. Polybar</a></li>
+<li><a href="#org309055f">23. Workspace</a></li>
+<li><a href="#org3ffe5c9">24. Hydra</a></li>
+<li><a href="#orgc13e612">25. Display Manager</a></li>
+<li><a href="#orgf3212f7">26. Helper</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org9ce4323" class="outline-2">
-<h2 id="org9ce4323"><span class="section-number-2">1.</span> Emacs</h2>
+<div id="outline-container-orgd565241" class="outline-2">
+<h2 id="orgd565241"><span class="section-number-2">1.</span> Emacs</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Emacsの文芸的設定。移行作業中。
@@ -280,8 +280,8 @@ Emacsの文芸的設定。移行作業中。
 </div>
 </div>
 
-<div id="outline-container-org48ae36c" class="outline-2">
-<h2 id="org48ae36c"><span class="section-number-2">2.</span> Org</h2>
+<div id="outline-container-org73968c9" class="outline-2">
+<h2 id="org73968c9"><span class="section-number-2">2.</span> Org</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 org-modeはEmacsのキラーアプリの1つ。パッケージ名であり、ファイルの種類の1つ。ドキュメント管理にスケジュール、時間計測、コード評価を含めることができる。このドキュメントもorg-modeで書かれている。
@@ -550,8 +550,8 @@ themeのあとに評価するため、ここでは関数定義だけ。参考 <a
 </div>
 </div>
 
-<div id="outline-container-orgb4ed302" class="outline-3">
-<h3 id="orgb4ed302"><span class="section-number-3">2.1.</span> open-junk-file</h3>
+<div id="outline-container-org9153a85" class="outline-3">
+<h3 id="org9153a85"><span class="section-number-3">2.1.</span> open-junk-file</h3>
 <div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 28: </span>Cask install が失敗するので取り込んでいる</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;;; </span><span style="font-weight: bold; font-style: italic;">open-junk-file.el --- Open a junk (memo) file to try-and-error</span>
@@ -745,8 +745,8 @@ themeのあとに評価するため、ここでは関数定義だけ。参考 <a
 </div>
 </div>
 
-<div id="outline-container-orgd7962c8" class="outline-3">
-<h3 id="orgd7962c8"><span class="section-number-3">2.2.</span> org-superstar</h3>
+<div id="outline-container-orgb5407ca" class="outline-3">
+<h3 id="orgb5407ca"><span class="section-number-3">2.2.</span> org-superstar</h3>
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 30: </span>見出しをいい感じにする</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">org-superstar</span>)
@@ -755,8 +755,8 @@ themeのあとに評価するため、ここでは関数定義だけ。参考 <a
 </div>
 </div>
 </div>
-<div id="outline-container-org57fee3a" class="outline-3">
-<h3 id="org57fee3a"><span class="section-number-3">2.3.</span> org-modern</h3>
+<div id="outline-container-org08176dc" class="outline-3">
+<h3 id="org08176dc"><span class="section-number-3">2.3.</span> org-modern</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 org-modernはorg-modeの外観をいい感じにするパッケージ。
@@ -769,8 +769,8 @@ org-modernはorg-modeの外観をいい感じにするパッケージ。
 </div>
 </div>
 </div>
-<div id="outline-container-orgd186c59" class="outline-3">
-<h3 id="orgd186c59"><span class="section-number-3">2.4.</span> org-stickey-header</h3>
+<div id="outline-container-orgbcb8ae8" class="outline-3">
+<h3 id="orgbcb8ae8"><span class="section-number-3">2.4.</span> org-stickey-header</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 org-stickey-headerは現在の見出し位置を示すヘッダーを表示するパッケージ。
@@ -786,8 +786,8 @@ org-stickey-headerは現在の見出し位置を示すヘッダーを表示す�
 </div>
 </div>
 </div>
-<div id="outline-container-org47214d3" class="outline-3">
-<h3 id="org47214d3"><span class="section-number-3">2.5.</span> org-tree-slide</h3>
+<div id="outline-container-org9a8adcf" class="outline-3">
+<h3 id="org9a8adcf"><span class="section-number-3">2.5.</span> org-tree-slide</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 org-tree-slideはorg-modeでスライド表示するパッケージ。
@@ -801,8 +801,8 @@ org-tree-slideはorg-modeでスライド表示するパッケージ。
 </div>
 </div>
 
-<div id="outline-container-orgfed1586" class="outline-3">
-<h3 id="orgfed1586"><span class="section-number-3">2.6.</span> org-journal</h3>
+<div id="outline-container-org506c86a" class="outline-3">
+<h3 id="org506c86a"><span class="section-number-3">2.6.</span> org-journal</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 org-journalは日付ごとのファイルを生成したり、時刻を挿入できるパッケージ。
@@ -859,8 +859,8 @@ org-journalは日付ごとのファイルを生成したり、時刻を挿入で
 </div>
 </div>
 
-<div id="outline-container-orgdce168e" class="outline-3">
-<h3 id="orgdce168e"><span class="section-number-3">2.7.</span> pdf-tools</h3>
+<div id="outline-container-org5581f60" class="outline-3">
+<h3 id="org5581f60"><span class="section-number-3">2.7.</span> pdf-tools</h3>
 <div class="outline-text-3" id="text-2-7">
 <p>
 Emacs上でpdfを扱うためのパッケージ。orgの項目にあるのは微妙な気がする。
@@ -879,8 +879,8 @@ Emacs上でpdfを扱うためのパッケージ。orgの項目にあるのは微
 </div>
 </div>
 
-<div id="outline-container-org21efabb" class="outline-3">
-<h3 id="org21efabb"><span class="section-number-3">2.8.</span> org-download</h3>
+<div id="outline-container-org32f92d4" class="outline-3">
+<h3 id="org32f92d4"><span class="section-number-3">2.8.</span> org-download</h3>
 <div class="outline-text-3" id="text-2-8">
 <p>
 org-downloadはorg上のリンクから画像をダウンロードして指定のディレクトリに保存できるパッケージ。
@@ -894,8 +894,8 @@ org-downloadはorg上のリンクから画像をダウンロードして指定�
 </div>
 </div>
 
-<div id="outline-container-org4fa745a" class="outline-3">
-<h3 id="org4fa745a"><span class="section-number-3">2.9.</span> org-roam</h3>
+<div id="outline-container-orgc872337" class="outline-3">
+<h3 id="orgc872337"><span class="section-number-3">2.9.</span> org-roam</h3>
 <div class="outline-text-3" id="text-2-9">
 <p>
 org-roamはorgファイルをsqliteによって管理しやすくしたパッケージ。orgファイル同士の関連を挿入したり、リンク元のファイルを一覧にする、といったことができる。sqliteに保存されるので、別でクエリを使って取り出してグラフ描画に使ったりも可能。
@@ -947,8 +947,8 @@ org-roamはorgファイルをsqliteによって管理しやすくしたパッケ
 </div>
 </div>
 </div>
-<div id="outline-container-org8447424" class="outline-3">
-<h3 id="org8447424"><span class="section-number-3">2.10.</span> org-alert</h3>
+<div id="outline-container-org54f59cc" class="outline-3">
+<h3 id="org54f59cc"><span class="section-number-3">2.10.</span> org-alert</h3>
 <div class="outline-text-3" id="text-2-10">
 <p>
 org-alertはorg scheduleの項目を時間経過で通知してくれるパッケージ。
@@ -964,8 +964,8 @@ org-alertはorg scheduleの項目を時間経過で通知してくれるパッ�
 </div>
 </div>
 </div>
-<div id="outline-container-org137f9a9" class="outline-3">
-<h3 id="org137f9a9"><span class="section-number-3">2.11.</span> denote</h3>
+<div id="outline-container-org679972a" class="outline-3">
+<h3 id="org679972a"><span class="section-number-3">2.11.</span> denote</h3>
 <div class="outline-text-3" id="text-2-11">
 <p>
 denoteはシンプルなノートパッケージ。
@@ -981,8 +981,8 @@ denoteはシンプルなノートパッケージ。
 </div>
 </div>
 
-<div id="outline-container-orga201000" class="outline-3">
-<h3 id="orga201000"><span class="section-number-3">2.12.</span> org-agenda</h3>
+<div id="outline-container-org378ddb0" class="outline-3">
+<h3 id="org378ddb0"><span class="section-number-3">2.12.</span> org-agenda</h3>
 <div class="outline-text-3" id="text-2-12">
 <p>
 org-agendaはorg-modeでtodo管理する機能。
@@ -1114,8 +1114,8 @@ org-agendaはorg-modeでtodo管理する機能。
 </div>
 </div>
 
-<div id="outline-container-orgf56c3fa" class="outline-3">
-<h3 id="orgf56c3fa"><span class="section-number-3">2.13.</span> org-super-agenda</h3>
+<div id="outline-container-org5ed1e84" class="outline-3">
+<h3 id="org5ed1e84"><span class="section-number-3">2.13.</span> org-super-agenda</h3>
 <div class="outline-text-3" id="text-2-13">
 <p>
 org-super-agendaは詳細に設定できるagenda表示ができるパッケージ。
@@ -1172,8 +1172,8 @@ org-super-agendaは詳細に設定できるagenda表示ができるパッケー�
 </div>
 </div>
 
-<div id="outline-container-org02af389" class="outline-3">
-<h3 id="org02af389"><span class="section-number-3">2.14.</span> org-pomodoro</h3>
+<div id="outline-container-orgb0d335e" class="outline-3">
+<h3 id="orgb0d335e"><span class="section-number-3">2.14.</span> org-pomodoro</h3>
 <div class="outline-text-3" id="text-2-14">
 <p>
 org-pomodoro用の設定。
@@ -1301,8 +1301,8 @@ org-pomodoro用の設定。
 </div>
 </div>
 
-<div id="outline-container-org81ced20" class="outline-2">
-<h2 id="org81ced20"><span class="section-number-2">3.</span> Font</h2>
+<div id="outline-container-orgf2c0c33" class="outline-2">
+<h2 id="orgf2c0c33"><span class="section-number-2">3.</span> Font</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 フォント設定。
@@ -1409,8 +1409,8 @@ org-pomodoro用の設定。
 </div>
 </div>
 
-<div id="outline-container-org9db868f" class="outline-2">
-<h2 id="org9db868f"><span class="section-number-2">4.</span> Simple</h2>
+<div id="outline-container-org5c1f2b9" class="outline-2">
+<h2 id="org5c1f2b9"><span class="section-number-2">4.</span> Simple</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 未分類の設定。最初から入っているものの設定。
@@ -1669,8 +1669,8 @@ org-pomodoro用の設定。
 </div>
 </div>
 
-<div id="outline-container-orgb52c3ee" class="outline-2">
-<h2 id="orgb52c3ee"><span class="section-number-2">5.</span> Packages</h2>
+<div id="outline-container-org8667536" class="outline-2">
+<h2 id="org8667536"><span class="section-number-2">5.</span> Packages</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 未分類の設定。拡張設定。
@@ -2360,8 +2360,8 @@ org-pomodoro用の設定。
 </div>
 </div>
 
-<div id="outline-container-orgc21d6be" class="outline-2">
-<h2 id="orgc21d6be"><span class="section-number-2">6.</span> Rails</h2>
+<div id="outline-container-org2029a2a" class="outline-2">
+<h2 id="org2029a2a"><span class="section-number-2">6.</span> Rails</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 172: </span>projectile-rails</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">projectile-rails</span>)
@@ -2505,8 +2505,8 @@ org-pomodoro用の設定。
 </div>
 </div>
 
-<div id="outline-container-orgd05f98c" class="outline-2">
-<h2 id="orgd05f98c"><span class="section-number-2">7.</span> Go</h2>
+<div id="outline-container-orgd67b3b7" class="outline-2">
+<h2 id="orgd67b3b7"><span class="section-number-2">7.</span> Go</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 goの設定。
@@ -2549,8 +2549,8 @@ goの設定。
 </div>
 </div>
 
-<div id="outline-container-org0eb2a1a" class="outline-2">
-<h2 id="org0eb2a1a"><span class="section-number-2">8.</span> Python</h2>
+<div id="outline-container-orgfcf8e60" class="outline-2">
+<h2 id="orgfcf8e60"><span class="section-number-2">8.</span> Python</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 Pythonの設定。
@@ -2570,8 +2570,8 @@ Pythonの設定。
 </div>
 </div>
 </div>
-<div id="outline-container-org753f057" class="outline-2">
-<h2 id="org753f057"><span class="section-number-2">9.</span> Haskell</h2>
+<div id="outline-container-org54a1c54" class="outline-2">
+<h2 id="org54a1c54"><span class="section-number-2">9.</span> Haskell</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 haskellの設定。
@@ -2589,8 +2589,8 @@ haskellの設定。
 </div>
 </div>
 </div>
-<div id="outline-container-org1dea25e" class="outline-2">
-<h2 id="org1dea25e"><span class="section-number-2">10.</span> Web</h2>
+<div id="outline-container-orgbb9e4e6" class="outline-2">
+<h2 id="orgbb9e4e6"><span class="section-number-2">10.</span> Web</h2>
 <div class="outline-text-2" id="text-10">
 <p>
 web-modeはhtmlライクな複数の言語に対応するモード。
@@ -2712,8 +2712,8 @@ web-modeはhtmlライクな複数の言語に対応するモード。
 </div>
 </div>
 </div>
-<div id="outline-container-org40e75e2" class="outline-2">
-<h2 id="org40e75e2"><span class="section-number-2">11.</span> LSP</h2>
+<div id="outline-container-org92ac45c" class="outline-2">
+<h2 id="org92ac45c"><span class="section-number-2">11.</span> LSP</h2>
 <div class="outline-text-2" id="text-11">
 <p>
 lsp-modeはLSPを使えるようにするパッケージ。
@@ -2828,8 +2828,8 @@ lsp-modeはLSPを使えるようにするパッケージ。
 </div>
 </div>
 
-<div id="outline-container-org3db86ec" class="outline-2">
-<h2 id="org3db86ec"><span class="section-number-2">12.</span> corfu</h2>
+<div id="outline-container-org60b027f" class="outline-2">
+<h2 id="org60b027f"><span class="section-number-2">12.</span> corfu</h2>
 <div class="outline-text-2" id="text-12">
 <p>
 corfuはシンプルな補完を提供するパッケージ。
@@ -2946,12 +2946,12 @@ corfuはシンプルな補完を提供するパッケージ。
 </div>
 </div>
 
-<div id="outline-container-org721622a" class="outline-2">
-<h2 id="org721622a"><span class="section-number-2">13.</span> Emacs Lisp</h2>
+<div id="outline-container-orgc32800b" class="outline-2">
+<h2 id="orgc32800b"><span class="section-number-2">13.</span> Emacs Lisp</h2>
 <div class="outline-text-2" id="text-13">
 </div>
-<div id="outline-container-orgff1feaf" class="outline-3">
-<h3 id="orgff1feaf"><span class="section-number-3">13.1.</span> rispy</h3>
+<div id="outline-container-orgb259cfc" class="outline-3">
+<h3 id="orgb259cfc"><span class="section-number-3">13.1.</span> rispy</h3>
 <div class="outline-text-3" id="text-13-1">
 <p>
 rispyはリストの操作をやりやすくするパッケージ。
@@ -2965,8 +2965,8 @@ rispyはリストの操作をやりやすくするパッケージ。
 </div>
 </div>
 
-<div id="outline-container-org79bc10e" class="outline-2">
-<h2 id="org79bc10e"><span class="section-number-2">14.</span> ivy</h2>
+<div id="outline-container-orgbe18bee" class="outline-2">
+<h2 id="orgbe18bee"><span class="section-number-2">14.</span> ivy</h2>
 <div class="outline-text-2" id="text-14">
 <p>
 ivyはさまざまなインクリメンタル検索を追加するパッケージ。
@@ -3065,8 +3065,8 @@ ivyはさまざまなインクリメンタル検索を追加するパッケー�
 </div>
 </div>
 </div>
-<div id="outline-container-orgc32b2e1" class="outline-2">
-<h2 id="orgc32b2e1"><span class="section-number-2">15.</span> counsel</h2>
+<div id="outline-container-orgf490c87" class="outline-2">
+<h2 id="orgf490c87"><span class="section-number-2">15.</span> counsel</h2>
 <div class="outline-text-2" id="text-15">
 <p>
 counselはさまざまなインクリメンタル検索を可能にするパッケージ。
@@ -3094,8 +3094,8 @@ counselはさまざまなインクリメンタル検索を可能にするパッ�
 </div>
 </div>
 </div>
-<div id="outline-container-orgdc41460" class="outline-2">
-<h2 id="orgdc41460"><span class="section-number-2">16.</span> ag</h2>
+<div id="outline-container-org4d72e0d" class="outline-2">
+<h2 id="org4d72e0d"><span class="section-number-2">16.</span> ag</h2>
 <div class="outline-text-2" id="text-16">
 <p>
 agはgrepより高速な検索ツール。
@@ -3113,8 +3113,8 @@ agはgrepより高速な検索ツール。
 </div>
 </div>
 </div>
-<div id="outline-container-orga1ef0d3" class="outline-2">
-<h2 id="orga1ef0d3"><span class="section-number-2">17.</span> eldoc</h2>
+<div id="outline-container-org50fbe71" class="outline-2">
+<h2 id="org50fbe71"><span class="section-number-2">17.</span> eldoc</h2>
 <div class="outline-text-2" id="text-17">
 <p>
 eldocは関数ドキュメントを表示するパッケージ。
@@ -3130,8 +3130,8 @@ eldocは関数ドキュメントを表示するパッケージ。
 </div>
 </div>
 </div>
-<div id="outline-container-org6ae3599" class="outline-2">
-<h2 id="org6ae3599"><span class="section-number-2">18.</span> eshell</h2>
+<div id="outline-container-org0ce11f9" class="outline-2">
+<h2 id="org0ce11f9"><span class="section-number-2">18.</span> eshell</h2>
 <div class="outline-text-2" id="text-18">
 <p>
 eshellはEmacs Lispで実装されたシェル。
@@ -3175,8 +3175,8 @@ eshellはEmacs Lispで実装されたシェル。
 </div>
 </div>
 
-<div id="outline-container-orgc5a21cc" class="outline-2">
-<h2 id="orgc5a21cc"><span class="section-number-2">19.</span> Vterm</h2>
+<div id="outline-container-org3aacf68" class="outline-2">
+<h2 id="org3aacf68"><span class="section-number-2">19.</span> Vterm</h2>
 <div class="outline-text-2" id="text-19">
 <p>
 vtermはCで実装されたシェル。
@@ -3210,8 +3210,8 @@ vtermはCで実装されたシェル。
 </div>
 </div>
 </div>
-<div id="outline-container-org7f30133" class="outline-2">
-<h2 id="org7f30133"><span class="section-number-2">20.</span> Theme</h2>
+<div id="outline-container-org84b41db" class="outline-2">
+<h2 id="org84b41db"><span class="section-number-2">20.</span> Theme</h2>
 <div class="outline-text-2" id="text-20">
 <p>
 いい感じのテーマを設定する。割と白いテーマと黒いテーマを切り替えるのですぐ切り替えられるようにする。
@@ -3381,8 +3381,8 @@ describe-minor-mode-from-indicator で調べられる。
 </div>
 </div>
 
-<div id="outline-container-org306e80a" class="outline-2">
-<h2 id="org306e80a"><span class="section-number-2">21.</span> EXWM</h2>
+<div id="outline-container-org647cf26" class="outline-2">
+<h2 id="org647cf26"><span class="section-number-2">21.</span> EXWM</h2>
 <div class="outline-text-2" id="text-21">
 <p>
 EXWMはEmacs上で動くウィンドウマネージャ。
@@ -3527,8 +3527,8 @@ EXWMはEmacs上で動くウィンドウマネージャ。
 </div>
 </div>
 </div>
-<div id="outline-container-org9f31ab8" class="outline-2">
-<h2 id="org9f31ab8"><span class="section-number-2">22.</span> Polybar</h2>
+<div id="outline-container-org4f3366a" class="outline-2">
+<h2 id="org4f3366a"><span class="section-number-2">22.</span> Polybar</h2>
 <div class="outline-text-2" id="text-22">
 <p>
 polybarは柔軟にカスタマイズできるメニューバーを表示するソフトウェア。polybarとの連携を記載する。
@@ -3579,8 +3579,8 @@ polybarは柔軟にカスタマイズできるメニューバーを表示する�
 </div>
 </div>
 </div>
-<div id="outline-container-orgfae2282" class="outline-2">
-<h2 id="orgfae2282"><span class="section-number-2">23.</span> Workspace</h2>
+<div id="outline-container-org309055f" class="outline-2">
+<h2 id="org309055f"><span class="section-number-2">23.</span> Workspace</h2>
 <div class="outline-text-2" id="text-23">
 <p>
 1~9のワークスペースを作成し、番号で切り替えられるようにする。
@@ -3603,8 +3603,8 @@ polybarは柔軟にカスタマイズできるメニューバーを表示する�
 </div>
 </div>
 </div>
-<div id="outline-container-org9a0e64f" class="outline-2">
-<h2 id="org9a0e64f"><span class="section-number-2">24.</span> Hydra</h2>
+<div id="outline-container-org3ffe5c9" class="outline-2">
+<h2 id="org3ffe5c9"><span class="section-number-2">24.</span> Hydra</h2>
 <div class="outline-text-2" id="text-24">
 <p>
 Hydraはカスタマイズ可能なキー表示を追加するパッケージ。キーバインド空間を制限しつつ、入力のヒントを表示して使いやすくする。
@@ -3735,8 +3735,8 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
 </div>
 </div>
 
-<div id="outline-container-org75d1dfc" class="outline-2">
-<h2 id="org75d1dfc"><span class="section-number-2">25.</span> Display Manager</h2>
+<div id="outline-container-orgc13e612" class="outline-2">
+<h2 id="orgc13e612"><span class="section-number-2">25.</span> Display Manager</h2>
 <div class="outline-text-2" id="text-25">
 <p>
 OS操作の便利関数。
@@ -3795,8 +3795,8 @@ OS操作の便利関数。
 </p>
 </div>
 </div>
-<div id="outline-container-org3cd73f4" class="outline-2">
-<h2 id="org3cd73f4"><span class="section-number-2">26.</span> Helper</h2>
+<div id="outline-container-orgf3212f7" class="outline-2">
+<h2 id="orgf3212f7"><span class="section-number-2">26.</span> Helper</h2>
 <div class="outline-text-2" id="text-26">
 <p>
 その他の便利関数。
@@ -3894,7 +3894,7 @@ OS操作の便利関数。
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: runner</p>
-<p class="date">Created: 2023-01-06 Fri 17:06</p>
+<p class="date">Created: 2023-01-06 Fri 17:09</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
