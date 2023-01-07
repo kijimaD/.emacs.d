@@ -1,3 +1,5 @@
+(package "kijimad-config" "0.1.0" "Kijimad Emacs")
+
 ;; Package repository
 (source gnu)
 (source melpa)
