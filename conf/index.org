@@ -642,7 +642,7 @@ denoteはシンプルなノートパッケージ。
 #+caption: 設定
 #+begin_src emacs-lisp
   (setq denote-directory (expand-file-name "~/roam/denote"))
-  (setq denote-known-keywords '("essay" "code-reading" "book" "hack"))
+  (setq denote-known-keywords '("essay" "code" "book"))
 
   (define-key global-map (kbd "C-c d") 'denote-create-note)
 #+end_src
@@ -946,6 +946,22 @@ org-pomodoro用の設定。
       (setq kd/pmd-today-point (string-to-number point))))
 #+end_src
 
+** org-effort
+
+- org-clock-effort
+- mode-line-format
+- org-pomodoro-mode-line
+
+** org-tag
+タグを選択できるようにする。
+
+#+caption: タグのプリセット
+#+begin_src emacs-lisp
+  (setq org-tag-alist '(("Write" . ?w)
+                        ("Read" . ?r)
+                        ("DontKnow" . ?d)
+                        ("Train" . ?t)))
+#+end_src
 * Font
 フォント設定。
 

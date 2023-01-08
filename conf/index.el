@@ -697,6 +697,11 @@ How to send a bug report:
   (let ((point (read-from-minibuffer "How much point? ")))
     (setq kd/pmd-today-point (string-to-number point))))
 
+(setq org-tag-alist '(("Write" . ?w)
+                      ("Read" . ?r)
+                      ("DontKnow" . ?d)
+                      ("Train" . ?t)))
+
 (when window-system
   (progn
     (pcase system-type
