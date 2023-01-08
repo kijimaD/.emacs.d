@@ -1278,8 +1278,9 @@ org-pomodoro用の設定。
              (number-sequence 1 4))))
   (eval-after-load "lispy-mode"
     '(progn
-       (define-key lispy-mode-map (kbd "M-<right>") nil)
-       (define-key lispy-mode-map (kbd "M-<left>") nil)
+       (define-key lispy-mode-map (kbd "M-<right>") 'next-buffer)
+       (define-key lispy-mode-map (kbd "M-<left>") 'previous-buffer)
+       (define-key lispy-mode-map (kbd "M-i") 'swiper-thing-at-point)
        ))
 #+end_src
 

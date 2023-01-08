@@ -463,7 +463,7 @@ How to send a bug report:
 (org-alert-enable)
 
 (setq denote-directory (expand-file-name "~/roam/denote"))
-(setq denote-known-keywords '("essay" "code-reading" "book" "hack"))
+(setq denote-known-keywords '("essay" "code" "book"))
 
 (define-key global-map (kbd "C-c d") 'denote-create-note)
 
@@ -865,8 +865,9 @@ How to send a bug report:
            (number-sequence 1 4))))
 (eval-after-load "lispy-mode"
   '(progn
-     (define-key lispy-mode-map (kbd "M-<right>") nil)
-     (define-key lispy-mode-map (kbd "M-<left>") nil)
+     (define-key lispy-mode-map (kbd "M-<right>") 'next-buffer)
+     (define-key lispy-mode-map (kbd "M-<left>") 'previous-buffer)
+     (define-key lispy-mode-map (kbd "M-i") 'swiper-thing-at-point)
      ))
 
 (defadvice isearch-mode (around isearch-mode-default-string (forward &optional regexp op-fun recursive-edit word-p) activate)
