@@ -666,14 +666,19 @@ How to send a bug report:
                                (format "Overtime! %dm" (/ (org-pomodoro-remaining-seconds) 60)))
                               ))
    ((org-clocking-p) (format "(%s) %s" (org-clock-get-clocked-time) org-clock-heading))
-   (t "Not working...")))
+   (t "OFF")))
+
+(defun kd/effort-timer ()
+  (if (and org-clock-effort (or (org-pomodoro-active-p) (org-clocking-p)))
+      (format "[%s/%s]" (org-duration-from-minutes (org-clock-get-clocked-time)) org-clock-effort)
+    ""))
 
 (defun kd/pmd-today-point-display ()
   ;; (format " [%s]" kd/pmd-today-point)
   (let* ((all-minute (* kd/pmd-today-point 25))
          (hour (/ all-minute 60))
          (minute (% all-minute 60)))
-    (format " %spts/%02dh%02dm" kd/pmd-today-point hour minute)))
+    (format " %s %spts/%02dh%02dm" (kd/effort-timer) kd/pmd-today-point hour minute)))
 
 (defvar kd/pmd-today-point 0)
 (add-hook 'org-pomodoro-finished-hook
