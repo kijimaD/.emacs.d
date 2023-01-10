@@ -2120,6 +2120,8 @@ How to send a bug report:
     (exwm-workspace-switch-create 0)
     (persp-switch "1")
     (delete-other-windows)
+    (if (file-exists-p org-journal-dir)
+        (org-journal-new-entry nil))
     (org-journal-new-entry nil)
     (vterm-toggle)
     (vterm-toggle)
