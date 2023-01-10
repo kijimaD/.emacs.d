@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-01-10 Tue 03:25 -->
+<!-- 2023-01-10 Tue 03:27 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>kijimad Emacs Config</title>
@@ -190,7 +190,7 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
+  .org-svg { }
 </style>
 <style type="text/css">
 .org-bold { /* bold */ font-weight: bold; }.org-bold-italic { /* bold-italic */ font-weight: bold; font-style: italic; }.org-buffer-menu-buffer { /* buffer-menu-buffer */ font-weight: bold; }.org-builtin { /* font-lock-builtin-face */ color: #7a378b; }.org-button { /* button */ text-decoration: underline; }.org-calendar-today { /* calendar-today */ text-decoration: underline; }.org-change-log-acknowledgement { /* change-log-acknowledgement */ color: #b22222; }.org-change-log-conditionals { /* change-log-conditionals */ color: #a0522d; }.org-change-log-date { /* change-log-date */ color: #8b2252; }.org-change-log-email { /* change-log-email */ color: #a0522d; }.org-change-log-file { /* change-log-file */ color: #0000ff; }.org-change-log-function { /* change-log-function */ color: #a0522d; }.org-change-log-list { /* change-log-list */ color: #a020f0; }.org-change-log-name { /* change-log-name */ color: #008b8b; }.org-comint-highlight-input { /* comint-highlight-input */ font-weight: bold; }.org-comint-highlight-prompt { /* comint-highlight-prompt */ color: #00008b; }.org-comment { /* font-lock-comment-face */ color: #b22222; }.org-comment-delimiter { /* font-lock-comment-delimiter-face */ color: #b22222; }.org-completions-annotations { /* completions-annotations */ font-style: italic; }.org-completions-common-part { /* completions-common-part */ color: #000000; background-color: #ffffff; }.org-completions-first-difference { /* completions-first-difference */ font-weight: bold; }.org-constant { /* font-lock-constant-face */ color: #008b8b; }.org-diary { /* diary */ color: #ff0000; }.org-diff-context { /* diff-context */ color: #7f7f7f; }.org-diff-file-header { /* diff-file-header */ background-color: #b3b3b3; font-weight: bold; }.org-diff-function { /* diff-function */ background-color: #cccccc; }.org-diff-header { /* diff-header */ background-color: #cccccc; }.org-diff-hunk-header { /* diff-hunk-header */ background-color: #cccccc; }.org-diff-index { /* diff-index */ background-color: #b3b3b3; font-weight: bold; }.org-diff-nonexistent { /* diff-nonexistent */ background-color: #b3b3b3; font-weight: bold; }.org-diff-refine-change { /* diff-refine-change */ background-color: #d9d9d9; }.org-dired-directory { /* dired-directory */ color: #0000ff; }.org-dired-flagged { /* dired-flagged */ color: #ff0000; font-weight: bold; }.org-dired-header { /* dired-header */ color: #228b22; }.org-dired-ignored { /* dired-ignored */ color: #7f7f7f; }.org-dired-mark { /* dired-mark */ color: #008b8b; }.org-dired-marked { /* dired-marked */ color: #ff0000; font-weight: bold; }.org-dired-perm-write { /* dired-perm-write */ color: #b22222; }.org-dired-symlink { /* dired-symlink */ color: #a020f0; }.org-dired-warning { /* dired-warning */ color: #ff0000; font-weight: bold; }.org-doc { /* font-lock-doc-face */ color: #8b2252; }.org-escape-glyph { /* escape-glyph */ color: #a52a2a; }.org-file-name-shadow { /* file-name-shadow */ color: #7f7f7f; }.org-flyspell-duplicate { /* flyspell-duplicate */ color: #cdad00; font-weight: bold; text-decoration: underline; }.org-flyspell-incorrect { /* flyspell-incorrect */ color: #ff4500; font-weight: bold; text-decoration: underline; }.org-fringe { /* fringe */ background-color: #f2f2f2; }.org-function-name { /* font-lock-function-name-face */ color: #0000ff; }.org-header-line { /* header-line */ color: #333333; background-color: #e5e5e5; }.org-help-argument-name { /* help-argument-name */ font-style: italic; }.org-highlight { /* highlight */ background-color: #b4eeb4; }.org-holiday { /* holiday */ background-color: #ffc0cb; }.org-isearch { /* isearch */ color: #b0e2ff; background-color: #cd00cd; }.org-isearch-fail { /* isearch-fail */ background-color: #ffc1c1; }.org-italic { /* italic */ font-style: italic; }.org-keyword { /* font-lock-keyword-face */ color: #a020f0; }.org-lazy-highlight { /* lazy-highlight */ background-color: #afeeee; }.org-link { /* link */ color: #0000ff; text-decoration: underline; }.org-link-visited { /* link-visited */ color: #8b008b; text-decoration: underline; }.org-log-edit-header { /* log-edit-header */ color: #a020f0; }.org-log-edit-summary { /* log-edit-summary */ color: #0000ff; }.org-log-edit-unknown-header { /* log-edit-unknown-header */ color: #b22222; }.org-match { /* match */ background-color: #ffff00; }.org-next-error { /* next-error */ background-color: #eedc82; }.org-nobreak-space { /* nobreak-space */ color: #a52a2a; text-decoration: underline; }.org-org-archived { /* org-archived */ color: #7f7f7f; }.org-org-block { /* org-block */ color: #7f7f7f; }.org-org-block-begin-line { /* org-block-begin-line */ color: #b22222; }.org-org-block-end-line { /* org-block-end-line */ color: #b22222; }.org-org-checkbox { /* org-checkbox */ font-weight: bold; }.org-org-checkbox-statistics-done { /* org-checkbox-statistics-done */ color: #228b22; font-weight: bold; }.org-org-checkbox-statistics-todo { /* org-checkbox-statistics-todo */ color: #ff0000; font-weight: bold; }.org-org-clock-overlay { /* org-clock-overlay */ background-color: #ffff00; }.org-org-code { /* org-code */ color: #7f7f7f; }.org-org-column { /* org-column */ background-color: #e5e5e5; }.org-org-column-title { /* org-column-title */ background-color: #e5e5e5; font-weight: bold; text-decoration: underline; }.org-org-date { /* org-date */ color: #a020f0; text-decoration: underline; }.org-org-document-info { /* org-document-info */ color: #191970; }.org-org-document-info-keyword { /* org-document-info-keyword */ color: #7f7f7f; }.org-org-document-title { /* org-document-title */ color: #191970; font-size: 144%; font-weight: bold; }.org-org-done { /* org-done */ color: #228b22; font-weight: bold; }.org-org-drawer { /* org-drawer */ color: #0000ff; }.org-org-ellipsis { /* org-ellipsis */ color: #b8860b; text-decoration: underline; }.org-org-footnote { /* org-footnote */ color: #a020f0; text-decoration: underline; }.org-org-formula { /* org-formula */ color: #b22222; }.org-org-headline-done { /* org-headline-done */ color: #bc8f8f; }.org-org-hide { /* org-hide */ color: #ffffff; }.org-org-latex-and-export-specials { /* org-latex-and-export-specials */ color: #8b4513; }.org-org-level-1 { /* org-level-1 */ color: #0000ff; }.org-org-level-2 { /* org-level-2 */ color: #a0522d; }.org-org-level-3 { /* org-level-3 */ color: #a020f0; }.org-org-level-4 { /* org-level-4 */ color: #b22222; }.org-org-level-5 { /* org-level-5 */ color: #228b22; }.org-org-level-6 { /* org-level-6 */ color: #008b8b; }.org-org-level-7 { /* org-level-7 */ color: #7a378b; }.org-org-level-8 { /* org-level-8 */ color: #8b2252; }.org-org-link { /* org-link */ color: #0000ff; text-decoration: underline; }.org-org-meta-line { /* org-meta-line */ color: #b22222; }.org-org-mode-line-clock { /* org-mode-line-clock */ color: #000000; background-color: #bfbfbf; }.org-org-mode-line-clock-overrun { /* org-mode-line-clock-overrun */ color: #000000; background-color: #ff0000; }.org-org-quote { /* org-quote */ color: #7f7f7f; }.org-org-scheduled { /* org-scheduled */ color: #006400; }.org-org-scheduled-previously { /* org-scheduled-previously */ color: #b22222; }.org-org-scheduled-today { /* org-scheduled-today */ color: #006400; }.org-org-sexp-date { /* org-sexp-date */ color: #a020f0; }.org-org-special-keyword { /* org-special-keyword */ color: #a020f0; }.org-org-table { /* org-table */ color: #0000ff; }.org-org-tag { /* org-tag */ font-weight: bold; }.org-org-target { /* org-target */ text-decoration: underline; }.org-org-time-grid { /* org-time-grid */ color: #b8860b; }.org-org-todo { /* org-todo */ color: #ff0000; font-weight: bold; }.org-org-upcoming-deadline { /* org-upcoming-deadline */ color: #b22222; }.org-org-verbatim { /* org-verbatim */ color: #7f7f7f; }.org-org-verse { /* org-verse */ color: #7f7f7f; }.org-org-warning { /* org-warning */ color: #ff0000; font-weight: bold; }.org-outline-1 { /* outline-1 */ color: #0000ff; }.org-outline-2 { /* outline-2 */ color: #a0522d; }.org-outline-3 { /* outline-3 */ color: #a020f0; }.org-outline-4 { /* outline-4 */ color: #b22222; }.org-outline-5 { /* outline-5 */ color: #228b22; }.org-outline-6 { /* outline-6 */ color: #008b8b; }.org-outline-7 { /* outline-7 */ color: #7a378b; }.org-outline-8 { /* outline-8 */ color: #8b2252; }.org-preprocessor { /* font-lock-preprocessor-face */ color: #7a378b; }.org-query-replace { /* query-replace */ color: #b0e2ff; background-color: #cd00cd; }.org-regexp-grouping-backslash { /* font-lock-regexp-grouping-backslash */ font-weight: bold; }.org-regexp-grouping-construct { /* font-lock-regexp-grouping-construct */ font-weight: bold; }.org-region { /* region */ background-color: #eedc82; }.org-secondary-selection { /* secondary-selection */ background-color: #ffff00; }.org-shadow { /* shadow */ color: #7f7f7f; }.org-show-paren-match { /* show-paren-match */ background-color: #40e0d0; }.org-show-paren-mismatch { /* show-paren-mismatch */ color: #ffffff; background-color: #a020f0; }.org-string { /* font-lock-string-face */ color: #8b2252; }.org-tool-bar { /* tool-bar */ color: #000000; background-color: #bfbfbf; }.org-tooltip { /* tooltip */ color: #000000; background-color: #ffffe0; }.org-trailing-whitespace { /* trailing-whitespace */ background-color: #ff0000; }.org-type { /* font-lock-type-face */ color: #228b22; }.org-underline { /* underline */ text-decoration: underline; }.org-variable-name { /* font-lock-variable-name-face */ color: #a0522d; }.org-warning { /* font-lock-warning-face */ color: #ff0000; font-weight: bold; }.org-widget-button { /* widget-button */ font-weight: bold; }.org-widget-button-pressed { /* widget-button-pressed */ color: #ff0000; }.org-widget-documentation { /* widget-documentation */ color: #006400; }.org-widget-field { /* widget-field */ background-color: #d9d9d9; }.org-widget-inactive { /* widget-inactive */ color: #7f7f7f; }.org-widget-single-line-field { /* widget-single-line-field */ background-color: #d9d9d9; }
@@ -237,62 +237,62 @@ if (typeof HS_STARTUP_FOLDED === 'undefined') {    var HS_STARTUP_FOLDED = false
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org248ae4d">Emacs</a></li>
-<li><a href="#orgaf50253">Org</a>
+<li><a href="#org442b356">Emacs</a></li>
+<li><a href="#orgfa6c30a">Org</a>
 <ul>
-<li><a href="#org182485a">open-junk-file</a></li>
-<li><a href="#org4a55e61">org-superstar</a></li>
-<li><a href="#org0c3e168">org-modern</a></li>
-<li><a href="#org7ef077f">org-stickey-header</a></li>
-<li><a href="#orgf9f72ef">org-tree-slide</a></li>
-<li><a href="#org7f11489">org-journal</a></li>
-<li><a href="#org752b34c">pdf-tools</a></li>
-<li><a href="#org77d5950">org-download</a></li>
-<li><a href="#orge5155b0">org-roam</a></li>
-<li><a href="#org0a1c4b5">org-alert</a></li>
-<li><a href="#orgc1d4765">denote</a></li>
-<li><a href="#org45066a8">org-agenda</a></li>
-<li><a href="#orgcb4fea8">org-super-agenda</a></li>
-<li><a href="#org6ce5fa3">org-pomodoro</a></li>
-<li><a href="#org2c57f52">org-effort</a></li>
-<li><a href="#org1b18b62">org-tag</a></li>
+<li><a href="#org38f896b">open-junk-file</a></li>
+<li><a href="#org10addf8">org-superstar</a></li>
+<li><a href="#org1888921">org-modern</a></li>
+<li><a href="#org541bb53">org-stickey-header</a></li>
+<li><a href="#org8b6e094">org-tree-slide</a></li>
+<li><a href="#org9608d8a">org-journal</a></li>
+<li><a href="#org6c5d743">pdf-tools</a></li>
+<li><a href="#org7215625">org-download</a></li>
+<li><a href="#org7817b5d">org-roam</a></li>
+<li><a href="#orga167e1d">org-alert</a></li>
+<li><a href="#orgcd28782">denote</a></li>
+<li><a href="#org320fe04">org-agenda</a></li>
+<li><a href="#org3f51a60">org-super-agenda</a></li>
+<li><a href="#org88b0dd7">org-pomodoro</a></li>
+<li><a href="#org408f8c1">org-effort</a></li>
+<li><a href="#org4119686">org-tag</a></li>
 </ul>
 </li>
-<li><a href="#org3bbf2d8">Font</a></li>
-<li><a href="#org0926d75">Simple</a></li>
-<li><a href="#org778a7e7">Packages</a></li>
-<li><a href="#org3376113">Rails</a></li>
-<li><a href="#org7fd86d4">Go</a></li>
-<li><a href="#orga5f07c9">Python</a></li>
-<li><a href="#orgac18a96">Haskell</a></li>
-<li><a href="#org6890e94">Web</a></li>
-<li><a href="#org5a5a19c">LSP</a></li>
-<li><a href="#org3b9801d">corfu</a></li>
-<li><a href="#org2cffc21">Emacs Lisp</a>
+<li><a href="#org17a7b61">Font</a></li>
+<li><a href="#org85b0a64">Simple</a></li>
+<li><a href="#org07db758">Packages</a></li>
+<li><a href="#orgc628d83">Rails</a></li>
+<li><a href="#orgb4421c6">Go</a></li>
+<li><a href="#org7a9f05c">Python</a></li>
+<li><a href="#org47bb459">Haskell</a></li>
+<li><a href="#org5ee01af">Web</a></li>
+<li><a href="#org110b0cd">LSP</a></li>
+<li><a href="#orgff6cdda">corfu</a></li>
+<li><a href="#org8510b1d">Emacs Lisp</a>
 <ul>
-<li><a href="#org9a29cb0">rispy</a></li>
+<li><a href="#orge52ff9f">rispy</a></li>
 </ul>
 </li>
-<li><a href="#org7937bbd">ivy</a></li>
-<li><a href="#org2ae976b">counsel</a></li>
-<li><a href="#org40dc8cb">ag</a></li>
-<li><a href="#orga0df8a9">eldoc</a></li>
-<li><a href="#org45a3875">eshell</a></li>
-<li><a href="#orgd25442e">Vterm</a></li>
-<li><a href="#org2004233">Theme</a></li>
-<li><a href="#orgb7c3a56">EXWM</a></li>
-<li><a href="#org7e2fe9c">Polybar</a></li>
-<li><a href="#orge7b2efe">Workspace</a></li>
-<li><a href="#orga44151d">Hydra</a></li>
-<li><a href="#org8258100">Display Manager</a></li>
-<li><a href="#org6fda59b">Helper</a></li>
+<li><a href="#orge89a59c">ivy</a></li>
+<li><a href="#org14aab0e">counsel</a></li>
+<li><a href="#org67329b8">ag</a></li>
+<li><a href="#org3a024a4">eldoc</a></li>
+<li><a href="#org448d84f">eshell</a></li>
+<li><a href="#org48c482d">Vterm</a></li>
+<li><a href="#org7db1cd0">Theme</a></li>
+<li><a href="#orgc0aa52b">EXWM</a></li>
+<li><a href="#orgcba7d63">Polybar</a></li>
+<li><a href="#orgf3d5fa2">Workspace</a></li>
+<li><a href="#org96c7ab4">Hydra</a></li>
+<li><a href="#orgf42ecf5">Display Manager</a></li>
+<li><a href="#org9780321">Helper</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org248ae4d" class="outline-2">
-<h2 id="org248ae4d">Emacs</h2>
-<div class="outline-text-2" id="text-org248ae4d">
+<div id="outline-container-org442b356" class="outline-2">
+<h2 id="org442b356">Emacs</h2>
+<div class="outline-text-2" id="text-org442b356">
 <p>
 Emacsの文芸的設定。移行作業中。
 </p>
@@ -314,9 +314,9 @@ Emacsの文芸的設定。移行作業中。
 </div>
 </div>
 
-<div id="outline-container-orgaf50253" class="outline-2">
-<h2 id="orgaf50253">Org</h2>
-<div class="outline-text-2" id="text-orgaf50253">
+<div id="outline-container-orgfa6c30a" class="outline-2">
+<h2 id="orgfa6c30a">Org</h2>
+<div class="outline-text-2" id="text-orgfa6c30a">
 <p>
 org-modeはEmacsのキラーアプリの1つ。パッケージ名であり、ファイルの種類の1つ。ドキュメント管理にスケジュール、時間計測、コード評価を含めることができる。このドキュメントもorg-modeで書かれている。
 </p>
@@ -584,9 +584,9 @@ themeのあとに評価するため、ここでは関数定義だけ。参考 <a
 </div>
 </div>
 
-<div id="outline-container-org182485a" class="outline-3">
-<h3 id="org182485a">open-junk-file</h3>
-<div class="outline-text-3" id="text-org182485a">
+<div id="outline-container-org38f896b" class="outline-3">
+<h3 id="org38f896b">open-junk-file</h3>
+<div class="outline-text-3" id="text-org38f896b">
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 28: </span>Cask install が失敗するので取り込んでいる</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;;; </span><span style="font-weight: bold; font-style: italic;">open-junk-file.el --- Open a junk (memo) file to try-and-error</span>
 
@@ -779,9 +779,9 @@ themeのあとに評価するため、ここでは関数定義だけ。参考 <a
 </div>
 </div>
 
-<div id="outline-container-org4a55e61" class="outline-3">
-<h3 id="org4a55e61">org-superstar</h3>
-<div class="outline-text-3" id="text-org4a55e61">
+<div id="outline-container-org10addf8" class="outline-3">
+<h3 id="org10addf8">org-superstar</h3>
+<div class="outline-text-3" id="text-org10addf8">
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 30: </span>見出しをいい感じにする</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">org-superstar</span>)
 (add-hook 'org-mode-hook (<span style="font-weight: bold;">lambda</span> () (org-superstar-mode 1)))
@@ -789,9 +789,9 @@ themeのあとに評価するため、ここでは関数定義だけ。参考 <a
 </div>
 </div>
 </div>
-<div id="outline-container-org0c3e168" class="outline-3">
-<h3 id="org0c3e168">org-modern</h3>
-<div class="outline-text-3" id="text-org0c3e168">
+<div id="outline-container-org1888921" class="outline-3">
+<h3 id="org1888921">org-modern</h3>
+<div class="outline-text-3" id="text-org1888921">
 <p>
 org-modernはorg-modeの外観をいい感じにするパッケージ。
 </p>
@@ -803,9 +803,9 @@ org-modernはorg-modeの外観をいい感じにするパッケージ。
 </div>
 </div>
 </div>
-<div id="outline-container-org7ef077f" class="outline-3">
-<h3 id="org7ef077f">org-stickey-header</h3>
-<div class="outline-text-3" id="text-org7ef077f">
+<div id="outline-container-org541bb53" class="outline-3">
+<h3 id="org541bb53">org-stickey-header</h3>
+<div class="outline-text-3" id="text-org541bb53">
 <p>
 org-stickey-headerは現在の見出し位置を示すヘッダーを表示するパッケージ。
 ヘッダーの記号が*に戻るので、とりあえず無効化している。
@@ -820,9 +820,9 @@ org-stickey-headerは現在の見出し位置を示すヘッダーを表示す�
 </div>
 </div>
 </div>
-<div id="outline-container-orgf9f72ef" class="outline-3">
-<h3 id="orgf9f72ef">org-tree-slide</h3>
-<div class="outline-text-3" id="text-orgf9f72ef">
+<div id="outline-container-org8b6e094" class="outline-3">
+<h3 id="org8b6e094">org-tree-slide</h3>
+<div class="outline-text-3" id="text-org8b6e094">
 <p>
 org-tree-slideはorg-modeでスライド表示するパッケージ。
 </p>
@@ -835,9 +835,9 @@ org-tree-slideはorg-modeでスライド表示するパッケージ。
 </div>
 </div>
 
-<div id="outline-container-org7f11489" class="outline-3">
-<h3 id="org7f11489">org-journal</h3>
-<div class="outline-text-3" id="text-org7f11489">
+<div id="outline-container-org9608d8a" class="outline-3">
+<h3 id="org9608d8a">org-journal</h3>
+<div class="outline-text-3" id="text-org9608d8a">
 <p>
 org-journalは日付ごとのファイルを生成したり、時刻を挿入できるパッケージ。
 </p>
@@ -893,9 +893,9 @@ org-journalは日付ごとのファイルを生成したり、時刻を挿入で
 </div>
 </div>
 
-<div id="outline-container-org752b34c" class="outline-3">
-<h3 id="org752b34c">pdf-tools</h3>
-<div class="outline-text-3" id="text-org752b34c">
+<div id="outline-container-org6c5d743" class="outline-3">
+<h3 id="org6c5d743">pdf-tools</h3>
+<div class="outline-text-3" id="text-org6c5d743">
 <p>
 Emacs上でpdfを扱うためのパッケージ。orgの項目にあるのは微妙な気がする。
 </p>
@@ -913,9 +913,9 @@ Emacs上でpdfを扱うためのパッケージ。orgの項目にあるのは微
 </div>
 </div>
 
-<div id="outline-container-org77d5950" class="outline-3">
-<h3 id="org77d5950">org-download</h3>
-<div class="outline-text-3" id="text-org77d5950">
+<div id="outline-container-org7215625" class="outline-3">
+<h3 id="org7215625">org-download</h3>
+<div class="outline-text-3" id="text-org7215625">
 <p>
 org-downloadはorg上のリンクから画像をダウンロードして指定のディレクトリに保存できるパッケージ。
 </p>
@@ -928,9 +928,9 @@ org-downloadはorg上のリンクから画像をダウンロードして指定�
 </div>
 </div>
 
-<div id="outline-container-orge5155b0" class="outline-3">
-<h3 id="orge5155b0">org-roam</h3>
-<div class="outline-text-3" id="text-orge5155b0">
+<div id="outline-container-org7817b5d" class="outline-3">
+<h3 id="org7817b5d">org-roam</h3>
+<div class="outline-text-3" id="text-org7817b5d">
 <p>
 org-roamはorgファイルをsqliteによって管理しやすくしたパッケージ。orgファイル同士の関連を挿入したり、リンク元のファイルを一覧にする、といったことができる。sqliteに保存されるので、別でクエリを使って取り出してグラフ描画に使ったりも可能。
 </p>
@@ -981,9 +981,9 @@ org-roamはorgファイルをsqliteによって管理しやすくしたパッケ
 </div>
 </div>
 </div>
-<div id="outline-container-org0a1c4b5" class="outline-3">
-<h3 id="org0a1c4b5">org-alert</h3>
-<div class="outline-text-3" id="text-org0a1c4b5">
+<div id="outline-container-orga167e1d" class="outline-3">
+<h3 id="orga167e1d">org-alert</h3>
+<div class="outline-text-3" id="text-orga167e1d">
 <p>
 org-alertはorg scheduleの項目を時間経過で通知してくれるパッケージ。
 </p>
@@ -998,9 +998,9 @@ org-alertはorg scheduleの項目を時間経過で通知してくれるパッ�
 </div>
 </div>
 </div>
-<div id="outline-container-orgc1d4765" class="outline-3">
-<h3 id="orgc1d4765">denote</h3>
-<div class="outline-text-3" id="text-orgc1d4765">
+<div id="outline-container-orgcd28782" class="outline-3">
+<h3 id="orgcd28782">denote</h3>
+<div class="outline-text-3" id="text-orgcd28782">
 <p>
 denoteはシンプルなノートパッケージ。
 </p>
@@ -1015,9 +1015,9 @@ denoteはシンプルなノートパッケージ。
 </div>
 </div>
 
-<div id="outline-container-org45066a8" class="outline-3">
-<h3 id="org45066a8">org-agenda</h3>
-<div class="outline-text-3" id="text-org45066a8">
+<div id="outline-container-org320fe04" class="outline-3">
+<h3 id="org320fe04">org-agenda</h3>
+<div class="outline-text-3" id="text-org320fe04">
 <p>
 org-agendaはorg-modeでtodo管理する機能。
 </p>
@@ -1148,9 +1148,9 @@ org-agendaはorg-modeでtodo管理する機能。
 </div>
 </div>
 
-<div id="outline-container-orgcb4fea8" class="outline-3">
-<h3 id="orgcb4fea8">org-super-agenda</h3>
-<div class="outline-text-3" id="text-orgcb4fea8">
+<div id="outline-container-org3f51a60" class="outline-3">
+<h3 id="org3f51a60">org-super-agenda</h3>
+<div class="outline-text-3" id="text-org3f51a60">
 <p>
 org-super-agendaは詳細に設定できるagenda表示ができるパッケージ。
 </p>
@@ -1206,9 +1206,9 @@ org-super-agendaは詳細に設定できるagenda表示ができるパッケー�
 </div>
 </div>
 
-<div id="outline-container-org6ce5fa3" class="outline-3">
-<h3 id="org6ce5fa3">org-pomodoro</h3>
-<div class="outline-text-3" id="text-org6ce5fa3">
+<div id="outline-container-org88b0dd7" class="outline-3">
+<h3 id="org88b0dd7">org-pomodoro</h3>
+<div class="outline-text-3" id="text-org88b0dd7">
 <p>
 org-pomodoro用の設定。
 </p>
@@ -1339,9 +1339,9 @@ org-pomodoro用の設定。
 </div>
 </div>
 
-<div id="outline-container-org2c57f52" class="outline-3">
-<h3 id="org2c57f52">org-effort</h3>
-<div class="outline-text-3" id="text-org2c57f52">
+<div id="outline-container-org408f8c1" class="outline-3">
+<h3 id="org408f8c1">org-effort</h3>
+<div class="outline-text-3" id="text-org408f8c1">
 <ul class="org-ul">
 <li>org-clock-effort</li>
 <li>mode-line-format</li>
@@ -1350,9 +1350,9 @@ org-pomodoro用の設定。
 </div>
 </div>
 
-<div id="outline-container-org1b18b62" class="outline-3">
-<h3 id="org1b18b62">org-tag</h3>
-<div class="outline-text-3" id="text-org1b18b62">
+<div id="outline-container-org4119686" class="outline-3">
+<h3 id="org4119686">org-tag</h3>
+<div class="outline-text-3" id="text-org4119686">
 <p>
 タグを選択できるようにする。
 </p>
@@ -1367,9 +1367,9 @@ org-pomodoro用の設定。
 </div>
 </div>
 </div>
-<div id="outline-container-org3bbf2d8" class="outline-2">
-<h2 id="org3bbf2d8">Font</h2>
-<div class="outline-text-2" id="text-org3bbf2d8">
+<div id="outline-container-org17a7b61" class="outline-2">
+<h2 id="org17a7b61">Font</h2>
+<div class="outline-text-2" id="text-org17a7b61">
 <p>
 フォント設定。
 </p>
@@ -1475,9 +1475,9 @@ org-pomodoro用の設定。
 </div>
 </div>
 
-<div id="outline-container-org0926d75" class="outline-2">
-<h2 id="org0926d75">Simple</h2>
-<div class="outline-text-2" id="text-org0926d75">
+<div id="outline-container-org85b0a64" class="outline-2">
+<h2 id="org85b0a64">Simple</h2>
+<div class="outline-text-2" id="text-org85b0a64">
 <p>
 未分類の設定。最初から入っているものの設定。
 </p>
@@ -1736,9 +1736,9 @@ org-pomodoro用の設定。
 </div>
 </div>
 
-<div id="outline-container-org778a7e7" class="outline-2">
-<h2 id="org778a7e7">Packages</h2>
-<div class="outline-text-2" id="text-org778a7e7">
+<div id="outline-container-org07db758" class="outline-2">
+<h2 id="org07db758">Packages</h2>
+<div class="outline-text-2" id="text-org07db758">
 <p>
 未分類の設定。拡張設定。
 </p>
@@ -2427,9 +2427,9 @@ org-pomodoro用の設定。
 </div>
 </div>
 
-<div id="outline-container-org3376113" class="outline-2">
-<h2 id="org3376113">Rails</h2>
-<div class="outline-text-2" id="text-org3376113">
+<div id="outline-container-orgc628d83" class="outline-2">
+<h2 id="orgc628d83">Rails</h2>
+<div class="outline-text-2" id="text-orgc628d83">
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 173: </span>projectile-rails</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">projectile-rails</span>)
 (projectile-rails-global-mode)
@@ -2572,9 +2572,9 @@ org-pomodoro用の設定。
 </div>
 </div>
 
-<div id="outline-container-org7fd86d4" class="outline-2">
-<h2 id="org7fd86d4">Go</h2>
-<div class="outline-text-2" id="text-org7fd86d4">
+<div id="outline-container-orgb4421c6" class="outline-2">
+<h2 id="orgb4421c6">Go</h2>
+<div class="outline-text-2" id="text-orgb4421c6">
 <p>
 goの設定。
 </p>
@@ -2616,9 +2616,9 @@ goの設定。
 </div>
 </div>
 
-<div id="outline-container-orga5f07c9" class="outline-2">
-<h2 id="orga5f07c9">Python</h2>
-<div class="outline-text-2" id="text-orga5f07c9">
+<div id="outline-container-org7a9f05c" class="outline-2">
+<h2 id="org7a9f05c">Python</h2>
+<div class="outline-text-2" id="text-org7a9f05c">
 <p>
 Pythonの設定。
 </p>
@@ -2637,9 +2637,9 @@ Pythonの設定。
 </div>
 </div>
 </div>
-<div id="outline-container-orgac18a96" class="outline-2">
-<h2 id="orgac18a96">Haskell</h2>
-<div class="outline-text-2" id="text-orgac18a96">
+<div id="outline-container-org47bb459" class="outline-2">
+<h2 id="org47bb459">Haskell</h2>
+<div class="outline-text-2" id="text-org47bb459">
 <p>
 haskellの設定。
 </p>
@@ -2656,9 +2656,9 @@ haskellの設定。
 </div>
 </div>
 </div>
-<div id="outline-container-org6890e94" class="outline-2">
-<h2 id="org6890e94">Web</h2>
-<div class="outline-text-2" id="text-org6890e94">
+<div id="outline-container-org5ee01af" class="outline-2">
+<h2 id="org5ee01af">Web</h2>
+<div class="outline-text-2" id="text-org5ee01af">
 <p>
 web-modeはhtmlライクな複数の言語に対応するモード。
 </p>
@@ -2779,9 +2779,9 @@ web-modeはhtmlライクな複数の言語に対応するモード。
 </div>
 </div>
 </div>
-<div id="outline-container-org5a5a19c" class="outline-2">
-<h2 id="org5a5a19c">LSP</h2>
-<div class="outline-text-2" id="text-org5a5a19c">
+<div id="outline-container-org110b0cd" class="outline-2">
+<h2 id="org110b0cd">LSP</h2>
+<div class="outline-text-2" id="text-org110b0cd">
 <p>
 lsp-modeはLSPを使えるようにするパッケージ。
 </p>
@@ -2895,9 +2895,9 @@ lsp-modeはLSPを使えるようにするパッケージ。
 </div>
 </div>
 
-<div id="outline-container-org3b9801d" class="outline-2">
-<h2 id="org3b9801d">corfu</h2>
-<div class="outline-text-2" id="text-org3b9801d">
+<div id="outline-container-orgff6cdda" class="outline-2">
+<h2 id="orgff6cdda">corfu</h2>
+<div class="outline-text-2" id="text-orgff6cdda">
 <p>
 corfuはシンプルな補完を提供するパッケージ。
 </p>
@@ -3013,13 +3013,13 @@ corfuはシンプルな補完を提供するパッケージ。
 </div>
 </div>
 
-<div id="outline-container-org2cffc21" class="outline-2">
-<h2 id="org2cffc21">Emacs Lisp</h2>
-<div class="outline-text-2" id="text-org2cffc21">
+<div id="outline-container-org8510b1d" class="outline-2">
+<h2 id="org8510b1d">Emacs Lisp</h2>
+<div class="outline-text-2" id="text-org8510b1d">
 </div>
-<div id="outline-container-org9a29cb0" class="outline-3">
-<h3 id="org9a29cb0">rispy</h3>
-<div class="outline-text-3" id="text-org9a29cb0">
+<div id="outline-container-orge52ff9f" class="outline-3">
+<h3 id="orge52ff9f">rispy</h3>
+<div class="outline-text-3" id="text-orge52ff9f">
 <p>
 rispyはリストの操作をやりやすくするパッケージ。
 </p>
@@ -3032,9 +3032,9 @@ rispyはリストの操作をやりやすくするパッケージ。
 </div>
 </div>
 
-<div id="outline-container-org7937bbd" class="outline-2">
-<h2 id="org7937bbd">ivy</h2>
-<div class="outline-text-2" id="text-org7937bbd">
+<div id="outline-container-orge89a59c" class="outline-2">
+<h2 id="orge89a59c">ivy</h2>
+<div class="outline-text-2" id="text-orge89a59c">
 <p>
 ivyはさまざまなインクリメンタル検索を追加するパッケージ。
 </p>
@@ -3132,9 +3132,9 @@ ivyはさまざまなインクリメンタル検索を追加するパッケー�
 </div>
 </div>
 </div>
-<div id="outline-container-org2ae976b" class="outline-2">
-<h2 id="org2ae976b">counsel</h2>
-<div class="outline-text-2" id="text-org2ae976b">
+<div id="outline-container-org14aab0e" class="outline-2">
+<h2 id="org14aab0e">counsel</h2>
+<div class="outline-text-2" id="text-org14aab0e">
 <p>
 counselはさまざまなインクリメンタル検索を可能にするパッケージ。
 </p>
@@ -3161,9 +3161,9 @@ counselはさまざまなインクリメンタル検索を可能にするパッ�
 </div>
 </div>
 </div>
-<div id="outline-container-org40dc8cb" class="outline-2">
-<h2 id="org40dc8cb">ag</h2>
-<div class="outline-text-2" id="text-org40dc8cb">
+<div id="outline-container-org67329b8" class="outline-2">
+<h2 id="org67329b8">ag</h2>
+<div class="outline-text-2" id="text-org67329b8">
 <p>
 agはgrepより高速な検索ツール。
 </p>
@@ -3180,9 +3180,9 @@ agはgrepより高速な検索ツール。
 </div>
 </div>
 </div>
-<div id="outline-container-orga0df8a9" class="outline-2">
-<h2 id="orga0df8a9">eldoc</h2>
-<div class="outline-text-2" id="text-orga0df8a9">
+<div id="outline-container-org3a024a4" class="outline-2">
+<h2 id="org3a024a4">eldoc</h2>
+<div class="outline-text-2" id="text-org3a024a4">
 <p>
 eldocは関数ドキュメントを表示するパッケージ。
 </p>
@@ -3197,9 +3197,9 @@ eldocは関数ドキュメントを表示するパッケージ。
 </div>
 </div>
 </div>
-<div id="outline-container-org45a3875" class="outline-2">
-<h2 id="org45a3875">eshell</h2>
-<div class="outline-text-2" id="text-org45a3875">
+<div id="outline-container-org448d84f" class="outline-2">
+<h2 id="org448d84f">eshell</h2>
+<div class="outline-text-2" id="text-org448d84f">
 <p>
 eshellはEmacs Lispで実装されたシェル。
 </p>
@@ -3242,9 +3242,9 @@ eshellはEmacs Lispで実装されたシェル。
 </div>
 </div>
 
-<div id="outline-container-orgd25442e" class="outline-2">
-<h2 id="orgd25442e">Vterm</h2>
-<div class="outline-text-2" id="text-orgd25442e">
+<div id="outline-container-org48c482d" class="outline-2">
+<h2 id="org48c482d">Vterm</h2>
+<div class="outline-text-2" id="text-org48c482d">
 <p>
 vtermはCで実装されたシェル。
 </p>
@@ -3277,9 +3277,9 @@ vtermはCで実装されたシェル。
 </div>
 </div>
 </div>
-<div id="outline-container-org2004233" class="outline-2">
-<h2 id="org2004233">Theme</h2>
-<div class="outline-text-2" id="text-org2004233">
+<div id="outline-container-org7db1cd0" class="outline-2">
+<h2 id="org7db1cd0">Theme</h2>
+<div class="outline-text-2" id="text-org7db1cd0">
 <p>
 いい感じのテーマを設定する。割と白いテーマと黒いテーマを切り替えるのですぐ切り替えられるようにする。
 </p>
@@ -3448,9 +3448,9 @@ describe-minor-mode-from-indicator で調べられる。
 </div>
 </div>
 
-<div id="outline-container-orgb7c3a56" class="outline-2">
-<h2 id="orgb7c3a56">EXWM</h2>
-<div class="outline-text-2" id="text-orgb7c3a56">
+<div id="outline-container-orgc0aa52b" class="outline-2">
+<h2 id="orgc0aa52b">EXWM</h2>
+<div class="outline-text-2" id="text-orgc0aa52b">
 <p>
 EXWMはEmacs上で動くウィンドウマネージャ。
 </p>
@@ -3596,9 +3596,9 @@ EXWMはEmacs上で動くウィンドウマネージャ。
 </div>
 </div>
 </div>
-<div id="outline-container-org7e2fe9c" class="outline-2">
-<h2 id="org7e2fe9c">Polybar</h2>
-<div class="outline-text-2" id="text-org7e2fe9c">
+<div id="outline-container-orgcba7d63" class="outline-2">
+<h2 id="orgcba7d63">Polybar</h2>
+<div class="outline-text-2" id="text-orgcba7d63">
 <p>
 polybarは柔軟にカスタマイズできるメニューバーを表示するソフトウェア。polybarとの連携を記載する。
 </p>
@@ -3648,9 +3648,9 @@ polybarは柔軟にカスタマイズできるメニューバーを表示する�
 </div>
 </div>
 </div>
-<div id="outline-container-orge7b2efe" class="outline-2">
-<h2 id="orge7b2efe">Workspace</h2>
-<div class="outline-text-2" id="text-orge7b2efe">
+<div id="outline-container-orgf3d5fa2" class="outline-2">
+<h2 id="orgf3d5fa2">Workspace</h2>
+<div class="outline-text-2" id="text-orgf3d5fa2">
 <p>
 1~9のワークスペースを作成し、番号で切り替えられるようにする。
 </p>
@@ -3672,9 +3672,9 @@ polybarは柔軟にカスタマイズできるメニューバーを表示する�
 </div>
 </div>
 </div>
-<div id="outline-container-orga44151d" class="outline-2">
-<h2 id="orga44151d">Hydra</h2>
-<div class="outline-text-2" id="text-orga44151d">
+<div id="outline-container-org96c7ab4" class="outline-2">
+<h2 id="org96c7ab4">Hydra</h2>
+<div class="outline-text-2" id="text-org96c7ab4">
 <p>
 Hydraはカスタマイズ可能なキー表示を追加するパッケージ。キーバインド空間を制限しつつ、入力のヒントを表示して使いやすくする。
 </p>
@@ -3804,9 +3804,9 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
 </div>
 </div>
 
-<div id="outline-container-org8258100" class="outline-2">
-<h2 id="org8258100">Display Manager</h2>
-<div class="outline-text-2" id="text-org8258100">
+<div id="outline-container-orgf42ecf5" class="outline-2">
+<h2 id="orgf42ecf5">Display Manager</h2>
+<div class="outline-text-2" id="text-orgf42ecf5">
 <p>
 OS操作の便利関数。
 </p>
@@ -3864,9 +3864,9 @@ OS操作の便利関数。
 </p>
 </div>
 </div>
-<div id="outline-container-org6fda59b" class="outline-2">
-<h2 id="org6fda59b">Helper</h2>
-<div class="outline-text-2" id="text-org6fda59b">
+<div id="outline-container-org9780321" class="outline-2">
+<h2 id="org9780321">Helper</h2>
+<div class="outline-text-2" id="text-org9780321">
 <p>
 その他の便利関数。
 </p>
@@ -3962,7 +3962,7 @@ OS操作の便利関数。
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2023-01-10 Tue 03:25</p>
+<p class="date">Created: 2023-01-10 Tue 03:27</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
