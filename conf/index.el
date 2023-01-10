@@ -385,8 +385,6 @@ How to send a bug report:
 
 (require 'org-journal)
 
-(require 'org-journal)
-
 (setq org-journal-date-format "%Y-%m-%d(%a)")
 (setq org-journal-time-format "%R ")
 
@@ -609,8 +607,6 @@ How to send a bug report:
 
 (require 'org-pomodoro)
 
-(require 'org-pomodoro)
-
 (define-key global-map [insert] 'org-pomodoro)
 
 (setq org-pomodoro-short-break-length 0)
@@ -765,8 +761,6 @@ How to send a bug report:
 
 (server-start)
 
-(server-start)
-
 (setq initial-scratch-message "")
 
 (setq confirm-kill-processes nil)
@@ -896,8 +890,6 @@ How to send a bug report:
 
 (if (fboundp 'blink-cursor-mode)
       (blink-cursor-mode -1))
-
-(savehist-mode 1)
 
 (savehist-mode 1)
 
@@ -1667,8 +1659,6 @@ How to send a bug report:
 
 (setq lsp-verify-signature nil)
 
-(setq lsp-verify-signature nil)
-
 (use-package flycheck
   :init (global-flycheck-mode))
 
@@ -2122,7 +2112,6 @@ How to send a bug report:
     (delete-other-windows)
     (if (file-exists-p org-journal-dir)
         (org-journal-new-entry nil))
-    (org-journal-new-entry nil)
     (vterm-toggle)
     (vterm-toggle)
     (persp-switch "2")

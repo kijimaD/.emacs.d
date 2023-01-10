@@ -2975,7 +2975,6 @@ EXWMはEmacs上で動くウィンドウマネージャ。
       (delete-other-windows)
       (if (file-exists-p org-journal-dir)
           (org-journal-new-entry nil))
-      (org-journal-new-entry nil)
       (vterm-toggle)
       (vterm-toggle)
       (persp-switch "2")
