@@ -3036,10 +3036,10 @@ EXWMはEmacs上で動くウィンドウマネージャ。
 
 #+caption: キーバインド設定
 #+begin_src emacs-lisp
-(define-key exwm-mode-map (kbd "C-M-:") 'vterm-toggle)
-(define-key exwm-mode-map (kbd "C-M-<right>") 'persp-next)
-(define-key exwm-mode-map (kbd "C-M-<left>") 'persp-prev)
-(define-key exwm-mode-map (kbd "<henkan>") 'pretty-hydra-henkan/body)
+  (define-key exwm-mode-map (kbd "C-M-:") 'vterm-toggle)
+  (define-key exwm-mode-map (kbd "C-M-<right>") 'persp-next)
+  (define-key exwm-mode-map (kbd "C-M-<left>") 'persp-prev)
+  (define-key exwm-mode-map (kbd "<henkan>") 'pretty-hydra-henkan/body)
 #+end_src
 
 #+caption: 設定する
@@ -3152,15 +3152,15 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
        (("g" magit-blame)
         (">" git-gutter+-next-hunk)
         ("<" git-gutter+-previous-hunk)
-        ("@" git-timemachine)
-        ("l" git-link))
+        ("@" git-timemachine))
 
        "Edit"
        (("q" query-replace "replace")
         ("y" ivy-yasnippet "yas"))
 
        "Window"
-       (("1" (lambda nil (interactive) (persp-switch (int-to-string 1))) "Journal")
+       (("l" (lambda nil (interactive) (persp-switch-last)) "Last")
+        ("1" (lambda nil (interactive) (persp-switch (int-to-string 1))) "Journal")
         ("2" (lambda nil (interactive) (persp-switch (int-to-string 2))) "Roam")
         ("3" (lambda nil (interactive) (persp-switch (int-to-string 3))) "Browser(Half)")
         ("4" (lambda nil (interactive) (persp-switch (int-to-string 4))) "Browser(Full)")

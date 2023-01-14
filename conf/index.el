@@ -385,6 +385,8 @@ How to send a bug report:
 
 (require 'org-journal)
 
+(require 'org-journal)
+
 (setq org-journal-date-format "%Y-%m-%d(%a)")
 (setq org-journal-time-format "%R ")
 
@@ -607,6 +609,8 @@ How to send a bug report:
 
 (require 'org-pomodoro)
 
+(require 'org-pomodoro)
+
 (define-key global-map [insert] 'org-pomodoro)
 
 (setq org-pomodoro-short-break-length 0)
@@ -761,6 +765,8 @@ How to send a bug report:
 
 (server-start)
 
+(server-start)
+
 (setq initial-scratch-message "")
 
 (setq confirm-kill-processes nil)
@@ -890,6 +896,8 @@ How to send a bug report:
 
 (if (fboundp 'blink-cursor-mode)
       (blink-cursor-mode -1))
+
+(savehist-mode 1)
 
 (savehist-mode 1)
 
@@ -1659,6 +1667,8 @@ How to send a bug report:
 
 (setq lsp-verify-signature nil)
 
+(setq lsp-verify-signature nil)
+
 (use-package flycheck
   :init (global-flycheck-mode))
 
@@ -2247,15 +2257,15 @@ How to send a bug report:
      (("g" magit-blame)
       (">" git-gutter+-next-hunk)
       ("<" git-gutter+-previous-hunk)
-      ("@" git-timemachine)
-      ("l" git-link))
+      ("@" git-timemachine))
 
      "Edit"
      (("q" query-replace "replace")
       ("y" ivy-yasnippet "yas"))
 
      "Window"
-     (("1" (lambda nil (interactive) (persp-switch (int-to-string 1))) "Journal")
+     (("l" (lambda nil (interactive) (persp-switch-last)) "Last")
+      ("1" (lambda nil (interactive) (persp-switch (int-to-string 1))) "Journal")
       ("2" (lambda nil (interactive) (persp-switch (int-to-string 2))) "Roam")
       ("3" (lambda nil (interactive) (persp-switch (int-to-string 3))) "Browser(Half)")
       ("4" (lambda nil (interactive) (persp-switch (int-to-string 4))) "Browser(Full)")
