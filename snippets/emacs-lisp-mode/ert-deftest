@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: ert-deftest
+# key: ed
+# --
+
+(ert-deftest $1-test ()
+  "$2"
+  (let (a)
+    (should $3)
+    ))

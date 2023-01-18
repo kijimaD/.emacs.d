@@ -385,8 +385,6 @@ How to send a bug report:
 
 (require 'org-journal)
 
-(require 'org-journal)
-
 (setq org-journal-date-format "%Y-%m-%d(%a)")
 (setq org-journal-time-format "%R ")
 
@@ -609,8 +607,6 @@ How to send a bug report:
 
 (require 'org-pomodoro)
 
-(require 'org-pomodoro)
-
 (define-key global-map [insert] 'org-pomodoro)
 
 (setq org-pomodoro-short-break-length 0)
@@ -650,7 +646,7 @@ How to send a bug report:
                                (format "%s %dm %s%s%s"
                                        (kd/org-pomodoro-remain-gauge org-pomodoro-length)
                                        (/ (org-pomodoro-remaining-seconds) 60)
-                                       "%{F#000000}"
+                                       "%{F#FFFFFF}"
                                        org-clock-heading
                                        "%{F-}"
                                        ))
@@ -762,8 +758,6 @@ How to send a bug report:
     ;; unicodefont
     (require 'unicode-fonts)
     (unicode-fonts-setup)))
-
-(server-start)
 
 (server-start)
 
@@ -896,8 +890,6 @@ How to send a bug report:
 
 (if (fboundp 'blink-cursor-mode)
       (blink-cursor-mode -1))
-
-(savehist-mode 1)
 
 (savehist-mode 1)
 
@@ -1667,8 +1659,6 @@ How to send a bug report:
 
 (setq lsp-verify-signature nil)
 
-(setq lsp-verify-signature nil)
-
 (use-package flycheck
   :init (global-flycheck-mode))
 
@@ -2251,7 +2241,8 @@ How to send a bug report:
      "Execute"
      (("e" counsel-linux-app "run")
       ("c" recompile "recompile")
-      ("s" counsel-search "google"))
+      ("s" counsel-search "google")
+      ("!" org-pomodoro "start pomodoro"))
 
      "Git"
      (("g" magit-blame)
@@ -2319,12 +2310,12 @@ How to send a bug report:
   (major-mode-hydra-define emacs-lisp-mode nil
     ("Eval"
      (("b" eval-buffer "buffer")
-      ("e" eval-defun "defun")
-      ("r" eval-region "region"))
+      ("e" eval-defun "defun"))
      "REPL"
      (("I" ielm "ielm"))
      "Test"
-     (("t" ert "prompt")
+     (("r" (ert-run-tests-interactively (car ert--selector-history)) "rerun")
+      ("t" ert "prompt")
       ("T" (ert t) "all")
       ("F" (ert :failed) "failed"))
      "Doc"

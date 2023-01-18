@@ -890,7 +890,7 @@ org-pomodoro用の設定。
                                    (format "%s %dm %s%s%s"
                                            (kd/org-pomodoro-remain-gauge org-pomodoro-length)
                                            (/ (org-pomodoro-remaining-seconds) 60)
-                                           "%{F#000000}"
+                                           "%{F#FFFFFF}"
                                            org-clock-heading
                                            "%{F-}"
                                            ))
@@ -3146,7 +3146,8 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
        "Execute"
        (("e" counsel-linux-app "run")
         ("c" recompile "recompile")
-        ("s" counsel-search "google"))
+        ("s" counsel-search "google")
+        ("!" org-pomodoro "start pomodoro"))
 
        "Git"
        (("g" magit-blame)
@@ -3216,29 +3217,29 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
 
 #+caption: major-mode-hydra
 #+begin_src emacs-lisp
-(global-set-key (kbd "M-SPC") #'major-mode-hydra)
+  (global-set-key (kbd "M-SPC") #'major-mode-hydra)
 
-(with-eval-after-load 'major-mode-hydra
-  (major-mode-hydra-define emacs-lisp-mode nil
-    ("Eval"
-     (("b" eval-buffer "buffer")
-      ("e" eval-defun "defun")
-      ("r" eval-region "region"))
-     "REPL"
-     (("I" ielm "ielm"))
-     "Test"
-     (("t" ert "prompt")
-      ("T" (ert t) "all")
-      ("F" (ert :failed) "failed"))
-     "Doc"
-     (("f" describe-function "function")
-      ("v" describe-variable "variable")
-      ("i" info-lookup-symbol "info lookup")))))
+  (with-eval-after-load 'major-mode-hydra
+    (major-mode-hydra-define emacs-lisp-mode nil
+      ("Eval"
+       (("b" eval-buffer "buffer")
+        ("e" eval-defun "defun"))
+       "REPL"
+       (("I" ielm "ielm"))
+       "Test"
+       (("r" (ert-run-tests-interactively (car ert--selector-history)) "rerun")
+        ("t" ert "prompt")
+        ("T" (ert t) "all")
+        ("F" (ert :failed) "failed"))
+       "Doc"
+       (("f" describe-function "function")
+        ("v" describe-variable "variable")
+        ("i" info-lookup-symbol "info lookup")))))
 
-(with-eval-after-load 'major-mode-hydra
-  (major-mode-hydra-define org-agenda-mode nil
-    ("pomodoro"
-     (("s" org-pomodoro "start org-pomodoro")))))
+  (with-eval-after-load 'major-mode-hydra
+    (major-mode-hydra-define org-agenda-mode nil
+      ("pomodoro"
+       (("s" org-pomodoro "start org-pomodoro")))))
 #+end_src
 
 メジャーモードに対するhydraを設定する。
