@@ -1486,8 +1486,6 @@ How to send a bug report:
   (package-refresh-contents) (package-install 'slim-mode))
 (add-to-list 'auto-mode-alist '("\\.slim?\\'" . slim-mode))
 
-(add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
-
 (setq ruby-insert-encoding-magic-comment nil)
 
 (defcustom ruby-block-delay 0
@@ -1544,6 +1542,26 @@ How to send a bug report:
  '(haskell-indent-after-keywords (quote (("where" 4 0) ("of" 4) ("do" 4) ("mdo" 4) ("rec" 4) ("in" 4 0) ("{" 4) "if" "then" "else" "let")))
  '(haskell-indent-offset 4)
  '(haskell-indent-spaces 4))
+
+(add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
+
+(add-hook 'yaml-mode-hook 'highlight-indentation-mode)
+
+(require 'origami)
+(define-minor-mode origami-view-mode
+  "TABにorigamiの折畳みを割り当てる"
+  nil "折紙"
+  '(("\C-i" . origami-cycle))
+  (or origami-mode (origami-mode 1)))
+(defun origami-cycle (recursive)
+  "origamiの機能をorg風にまとめる"
+  (interactive "P")
+  (call-interactively
+   (if recursive 'origami-toggle-all-nodes 'origami-toggle-node)))
+(defun yaml-mode-hook--origami ()
+  (when (eq major-mode 'yaml-mode)
+    (origami-view-mode)))
+(add-hook 'yaml-mode-hook 'yaml-mode-hook--origami)
 
 ;; web-mode
 (require 'web-mode)

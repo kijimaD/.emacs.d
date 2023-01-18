@@ -5,7 +5,6 @@
 (source melpa)
 
 ;; Try
-(depends-on "visual-regexp-steroids")
 (depends-on "smart-newline")
 (depends-on "smartparens")
 
@@ -95,6 +94,7 @@
 (depends-on "haskell-mode")
 (depends-on "helpful")
 (depends-on "highlight-indentation")
+(depends-on "highlight-indentation-mode")
 (depends-on "hiwin")
 (depends-on "ht")
 (depends-on "htmlize")
@@ -154,6 +154,7 @@
 (depends-on "org-super-agenda")
 (depends-on "org-superstar")
 (depends-on "org-tree-slide")
+(depends-on "origami")
 (depends-on "outline-magic")
 (depends-on "package-lint")
 (depends-on "package-lint-flymake")

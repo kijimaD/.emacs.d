@@ -2113,11 +2113,6 @@ org-pomodoro用の設定。
   (add-to-list 'auto-mode-alist '("\\.slim?\\'" . slim-mode))
 #+end_src
 
-#+caption: yaml-mode
-#+begin_src emacs-lisp
-  (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
-#+end_src
-
 #+caption: マジックコメントを挿入しない
 #+begin_src emacs-lisp
   (setq ruby-insert-encoding-magic-comment nil)
@@ -2212,6 +2207,38 @@ haskellの設定。
    '(haskell-indent-offset 4)
    '(haskell-indent-spaces 4))
 #+end_src
+* Yaml
+#+caption: yaml-mode
+#+begin_src emacs-lisp
+  (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
+#+end_src
+
+#+caption:インデントを視覚化
+#+begin_src emacs-lisp
+  (add-hook 'yaml-mode-hook 'highlight-indentation-mode)
+#+end_src
+
+#+caption: origami
+#+begin_src emacs-lisp
+(require 'origami)
+(define-minor-mode origami-view-mode
+  "TABにorigamiの折畳みを割り当てる"
+  nil "折紙"
+  '(("\C-i" . origami-cycle))
+  (or origami-mode (origami-mode 1)))
+(defun origami-cycle (recursive)
+  "origamiの機能をorg風にまとめる"
+  (interactive "P")
+  (call-interactively
+   (if recursive 'origami-toggle-all-nodes 'origami-toggle-node)))
+(defun yaml-mode-hook--origami ()
+  (when (eq major-mode 'yaml-mode)
+    (origami-view-mode)))
+(add-hook 'yaml-mode-hook 'yaml-mode-hook--origami)
+#+end_src
+
+- http://emacs.rubikitch.com/origami/
+
 * Web
 web-modeはhtmlライクな複数の言語に対応するモード。
 
