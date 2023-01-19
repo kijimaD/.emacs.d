@@ -94,7 +94,6 @@
 (depends-on "haskell-mode")
 (depends-on "helpful")
 (depends-on "highlight-indentation")
-(depends-on "highlight-indentation-mode")
 (depends-on "hiwin")
 (depends-on "ht")
 (depends-on "htmlize")
