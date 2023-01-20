@@ -494,12 +494,15 @@ How to send a bug report:
 
 (setq org-log-done t)
 
-(setq my-org-directory (concat "~/Private/junk/diary/org-journal/"))
-(setq my-todo-file (concat my-org-directory "todo.org"))
-(if (file-exists-p my-todo-file)
-    (setq org-agenda-files `("~/roam" "~/roam/denote" ,my-todo-file)))
-(setq org-directory my-org-directory)
-(setq org-default-notes-file my-todo-file)
+(let* ((my-org-directory (concat "~/Private/junk/diary/org-journal/"))
+       (my-todo-file (concat my-org-directory "todo.org"))
+       (my-agenda-files '("~/roam" "~/roam/denote")))
+
+  (if (file-exists-p my-todo-file)
+      (setq my-agenda-files (add-to-list my-agenda-files my-todo-file)))
+  (setq org-agenda-files my-agenda-files)
+  (setq org-directory my-org-directory)
+  (setq org-default-notes-file my-todo-file))
 
 (setq org-agenda-start-with-log-mode t)
 

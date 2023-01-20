@@ -693,12 +693,15 @@ org-agendaはorg-modeでtodo管理する機能。
 
 #+caption: agenda対象のディレクトリを指定する
 #+begin_src emacs-lisp
-  (setq my-org-directory (concat "~/Private/junk/diary/org-journal/"))
-  (setq my-todo-file (concat my-org-directory "todo.org"))
-  (if (file-exists-p my-todo-file)
-      (setq org-agenda-files `("~/roam" "~/roam/denote" ,my-todo-file)))
-  (setq org-directory my-org-directory)
-  (setq org-default-notes-file my-todo-file)
+    (let* ((my-org-directory (concat "~/Private/junk/diary/org-journal/"))
+           (my-todo-file (concat my-org-directory "todo.org"))
+           (my-agenda-file '("~/roam" "~/roam/denote")))
+
+      (if (file-exists-p my-todo-file)
+          (setq my-agenda-files (add-to-list my-agenda-files my-todo-file)))
+      (setq org-agenda-files my-agenda-file)
+      (setq org-directory my-org-directory)
+      (setq org-default-notes-file my-todo-file))
 #+end_src
 
 #+caption: 時刻をデフォルト表示する
@@ -2793,7 +2796,7 @@ vtermはCで実装されたシェル。
   (require 'doom-themes)
   (doom-themes-org-config)
   (setq custom-safe-themes t)
-  (setq-default custom-enabled-themes '(modus-operandi))
+  (setq-default custom-enabled-themes '(doom-tokyo-night))
 #+end_src
 
 doom themeはモダンなテーマ集。
