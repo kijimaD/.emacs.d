@@ -1907,7 +1907,6 @@ org-pomodoro用の設定。
 #+caption: 正規表現
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-M-%") 'vr/query-replace)
-  (require 'visual-regexp-steroids)
 #+end_src
 
 #+caption: writeroom-mode

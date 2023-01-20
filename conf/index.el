@@ -1346,7 +1346,6 @@ How to send a bug report:
              (flycheck-mode 1)))
 
 (global-set-key (kbd "C-M-%") 'vr/query-replace)
-(require 'visual-regexp-steroids)
 
 (global-set-key [f7] 'writeroom-mode)
 
