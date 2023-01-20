@@ -848,8 +848,9 @@ org-pomodoro用の設定。
 
 #+caption: サウンド
 #+begin_src emacs-lisp
-  (setq org-pomodoro-finished-sound "~/.emacs.d/resources/pmd-finished.wav")
-  (setq org-pomodoro-short-break-sound "~/.emacs.d/resources/pmd-short-break.wav")
+  (setq org-pomodoro-finished-sound "~/.emacs.d/resources/atos.wav")
+  (setq org-pomodoro-short-break-sound "~/.emacs.d/resources/atos.wav")
+  (setq org-pomodoro-long-break-sound "~/.emacs.d/resources/atos.wav")
   ;; テスト
   ;; (org-pomodoro-finished)
   ;; (org-pomodoro-short-break-finished)
@@ -3077,6 +3078,19 @@ EXWMはEmacs上で動くウィンドウマネージャ。
       ;; (kd/set-background)
       ))
 #+end_src
+
+#+caption: マルチディスプレイ設定
+#+begin_src emacs-lisp
+(require 'exwm-randr)
+(setq exwm-randr-workspace-output-plist '(0 "HDMI-1"))
+(add-hook 'exwm-randr-screen-change-hook
+          (lambda ()
+            (start-process-shell-command
+             "xrandr" nil "xrandr --output HDMI-1 --right-of eDP-1 --auto --mode 1920x1080")))
+(exwm-enable)
+(exwm-randr-enable)
+#+end_src
+
 * Polybar
 :PROPERTIES:
 :ID:       31fe46cc-99bc-46e5-bf49-0483fcdd99ed

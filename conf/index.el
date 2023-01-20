@@ -613,8 +613,9 @@ How to send a bug report:
 (setq org-pomodoro-long-break-length 10)
 (setq org-pomodoro-expiry-time 120)
 
-(setq org-pomodoro-finished-sound "~/.emacs.d/resources/pmd-finished.wav")
-(setq org-pomodoro-short-break-sound "~/.emacs.d/resources/pmd-short-break.wav")
+(setq org-pomodoro-finished-sound "~/.emacs.d/resources/atos.wav")
+(setq org-pomodoro-short-break-sound "~/.emacs.d/resources/atos.wav")
+(setq org-pomodoro-long-break-sound "~/.emacs.d/resources/atos.wav")
 ;; テスト
 ;; (org-pomodoro-finished)
 ;; (org-pomodoro-short-break-finished)
@@ -2195,6 +2196,15 @@ How to send a bug report:
     ;; (kd/set-init)
     ;; (kd/set-background)
     ))
+
+(require 'exwm-randr)
+(setq exwm-randr-workspace-output-plist '(0 "HDMI-1"))
+(add-hook 'exwm-randr-screen-change-hook
+          (lambda ()
+            (start-process-shell-command
+             "xrandr" nil "xrandr --output HDMI-1 --right-of eDP-1 --auto --mode 1920x1080")))
+(exwm-enable)
+(exwm-randr-enable)
 
 (defvar kd/polybar-process nil
   "Holds the process of the running Polybar instance, if any")
