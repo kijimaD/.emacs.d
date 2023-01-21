@@ -3098,7 +3098,7 @@ EXWMはEmacs上で動くウィンドウマネージャ。
 (add-hook 'exwm-randr-screen-change-hook
           (lambda ()
             (start-process-shell-command
-             "xrandr" nil "xrandr --output HDMI-1 --auto --right-of eDP-1 --auto")))
+             "xrandr" nil "xrandr --output HDMI-1 --mode 1920x1080 --right-of eDP-1 --auto")))
 (exwm-enable)
 (exwm-randr-enable)
 #+end_src

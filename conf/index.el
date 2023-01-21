@@ -496,11 +496,11 @@ How to send a bug report:
 
 (let* ((my-org-directory (concat "~/Private/junk/diary/org-journal/"))
        (my-todo-file (concat my-org-directory "todo.org"))
-       (my-agenda-files '("~/roam" "~/roam/denote")))
+       (my-agenda-file '("~/roam" "~/roam/denote")))
 
   (if (file-exists-p my-todo-file)
       (setq my-agenda-files (add-to-list my-agenda-files my-todo-file)))
-  (setq org-agenda-files my-agenda-files)
+  (setq org-agenda-files my-agenda-file)
   (setq org-directory my-org-directory)
   (setq org-default-notes-file my-todo-file))
 
@@ -2209,7 +2209,7 @@ How to send a bug report:
 (add-hook 'exwm-randr-screen-change-hook
           (lambda ()
             (start-process-shell-command
-             "xrandr" nil "xrandr --output HDMI-1 --auto --right-of eDP-1 --auto")))
+             "xrandr" nil "xrandr --output HDMI-1 --mode 1920x1080 --right-of eDP-1 --auto")))
 (exwm-enable)
 (exwm-randr-enable)
 
