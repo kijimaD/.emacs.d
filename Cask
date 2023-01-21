@@ -93,7 +93,6 @@
 (depends-on "guix")
 (depends-on "haskell-mode")
 (depends-on "helpful")
-(depends-on "highlight-indentation")
 (depends-on "hiwin")
 (depends-on "ht")
 (depends-on "htmlize")

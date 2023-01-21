@@ -866,12 +866,6 @@ How to send a bug report:
      (mapc (lambda (i)
              (define-key magit-mode-map (kbd (format "M-%d" i)) nil))
            (number-sequence 1 4))))
-(eval-after-load "lispy-mode"
-  '(progn
-     (define-key lispy-mode-map (kbd "M-<right>") 'next-buffer)
-     (define-key lispy-mode-map (kbd "M-<left>") 'previous-buffer)
-     (define-key lispy-mode-map (kbd "M-i") 'swiper-thing-at-point)
-     ))
 
 (defadvice isearch-mode (around isearch-mode-default-string (forward &optional regexp op-fun recursive-edit word-p) activate)
     (if (and transient-mark-mode mark-active (not (eq (mark) (point))))
@@ -1548,8 +1542,6 @@ How to send a bug report:
 
 (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
 
-(add-hook 'yaml-mode-hook 'highlight-indentation-mode)
-
 (require 'origami)
 (define-minor-mode origami-view-mode
   "TABにorigamiの折畳みを割り当てる"
@@ -1853,7 +1845,12 @@ How to send a bug report:
 
 ;; (add-hook 'corfu-mode-hook 'corfu-doc-mode)
 
+(require 'lispy)
 (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+
+(define-key lispy-mode-map (kbd "M-<right>") 'next-buffer)
+(define-key lispy-mode-map (kbd "M-<left>") 'previous-buffer)
+(define-key lispy-mode-map (kbd "M-i") 'swiper-thing-at-point)
 
 (when (require 'ivy-hydra nil t)
   (setq ivy-read-action-function #'ivy-hydra-read-action))
@@ -1980,7 +1977,7 @@ How to send a bug report:
 (require 'doom-themes)
 (doom-themes-org-config)
 (setq custom-safe-themes t)
-(setq-default custom-enabled-themes '(modus-operandi))
+(setq-default custom-enabled-themes '(doom-tokyo-night))
 
 (defun reapply-themes ()
   "Forcibly load the themes listed in `custom-enabled-themes'."
@@ -2057,8 +2054,6 @@ How to send a bug report:
 
   (window-divider-mode 0))
 
-(kd/set-modus-face)
-
 (setq my-hidden-minor-modes
       '(
         abbrev-mode
@@ -2115,78 +2110,88 @@ How to send a bug report:
 (defun kd/set-init ()
   "Window Manager関係の各種プログラムを起動する."
   (interactive)
-  (progn
-    (call-process-shell-command "shepherd")
-    (call-process-shell-command "~/dotfiles/.config/polybar/launch.sh")
-    (call-process-shell-command "blueberry")
 
-    (exwm-workspace-switch-create 2)
-    (start-process-shell-command "google-chrome" nil "google-chrome")
-    (start-process-shell-command "firefox" nil "firefox")
-    (start-process-shell-command "spotify" nil "spotify")
+  (kd/set-background)
 
-    (message "please wait...")
-    (sleep-for 2)
+  (call-process-shell-command "shepherd")
+  (call-process-shell-command "~/dotfiles/.config/polybar/launch.sh")
+  (call-process-shell-command "blueberry")
 
-    (exwm-workspace-switch-create 0)
-    (persp-switch "1")
-    (delete-other-windows)
-    (if (file-exists-p org-journal-dir)
-        (org-journal-new-entry nil))
-    (vterm-toggle)
-    (vterm-toggle)
-    (persp-switch "2")
-    (find-file "~/roam")
-    (vterm-toggle)
-    (vterm-toggle)
-    (org-agenda nil "z")
-    (persp-switch "3")
-    (split-window-right)
-    (switch-to-buffer "firefox")
-    (persp-switch "4")
-    (switch-to-buffer "firefox")
-    (vterm-toggle)
-    (vterm-toggle)
-    (persp-switch "5")
-    (find-file "~/dotfiles")
-    (vterm-toggle)
-    (vterm-toggle)
-    (magit-status)
-    (persp-switch "6")
-    (find-file "~/.emacs.d/conf")
-    (vterm-toggle)
-    (vterm-toggle)
-    (magit-status)
-    (persp-switch "7")
-    (find-file "~/ProjectOrg")
-    (persp-switch "8")
-    (find-file "~/Project")
-    (persp-switch "9")
-    (elfeed)
+  (exwm-workspace-switch-create 2)
+  (start-process-shell-command "google-chrome" nil "google-chrome")
+  (sleep-for 1)
+  (start-process-shell-command "firefox" nil "firefox")
+  (sleep-for 1)
+  (start-process-shell-command "spotify" nil "spotify")
+  (sleep-for 1)
 
-    (exwm-workspace-switch-create 1)
-    (persp-switch "1")
-    (persp-switch "2")
-    (find-file "~/roam")
-    (org-agenda nil "z")
-    (persp-switch "4")
-    (switch-to-buffer "Google-chrome")
-    (persp-switch "8")
-    (find-file "~/Project")
+  (exwm-workspace-switch-create 0)
+  (persp-switch "1")
+  (delete-other-windows)
+  (if (file-exists-p org-journal-dir)
+      (org-journal-new-entry nil))
+  (vterm-toggle)
+  (vterm-toggle)
+  (persp-switch "2")
+  (find-file "~/roam")
+  (vterm-toggle)
+  (vterm-toggle)
+  (org-agenda nil "z")
+  (persp-switch "3")
+  (split-window-right)
+  (switch-to-buffer "firefox")
+  (persp-switch "4")
+  (switch-to-buffer "firefox")
+  (vterm-toggle)
+  (vterm-toggle)
+  (persp-switch "5")
+  (find-file "~/dotfiles")
+  (vterm-toggle)
+  (vterm-toggle)
+  (magit-status)
+  (persp-switch "6")
+  (find-file "~/.emacs.d/conf")
+  (vterm-toggle)
+  (vterm-toggle)
+  (magit-status)
+  (persp-switch "7")
+  (find-file "~/ProjectOrg")
+  (persp-switch "8")
+  (find-file "~/Project")
+  (persp-switch "9")
+  (elfeed)
 
-    (exwm-workspace-switch-create 2)
-    (switch-to-buffer "Spotify")
+  (exwm-workspace-switch-create 1)
+  (persp-switch "1")
+  (persp-switch "2")
+  (find-file "~/roam")
+  (org-agenda nil "z")
+  (persp-switch "4")
+  (switch-to-buffer "Google-chrome")
+  (persp-switch "8")
+  (find-file "~/Project")
 
-    (exwm-workspace-switch-create 0)
-    (persp-switch "4")
+  (exwm-workspace-switch-create 2)
+  (switch-to-buffer "Spotify")
 
-    (message "settings done!")))
+  (exwm-workspace-switch-create 0)
+  (persp-switch "4")
+
+  (message "settings done!"))
 
 (defun kd/set-background ()
   "背景をセットする."
   (interactive)
   (start-process-shell-command "compton" nil "compton --config ~/dotfiles/.config/compton/compton.conf")
   (start-process-shell-command "fehbg" nil "~/dotfiles/.fehbg"))
+
+(defvar kd/last-workspace-index 0)
+
+(defun kd/exwm-workspace-switch-last ()
+  (interactive)
+  (let ((old kd/last-workspace-index))
+    (setq kd/last-workspace-index exwm-workspace-current-index)
+    (exwm-workspace-switch old)))
 
 (define-key exwm-mode-map (kbd "C-M-:") 'vterm-toggle)
 (define-key exwm-mode-map (kbd "C-M-<right>") 'persp-next)
@@ -2197,15 +2202,14 @@ How to send a bug report:
   (progn
     (exwm-config-example)
     ;; (kd/set-init)
-    ;; (kd/set-background)
     ))
 
 (require 'exwm-randr)
-(setq exwm-randr-workspace-output-plist '(0 "HDMI-1"))
+(setq exwm-randr-workspace-output-plist '(1 "HDMI-1"))
 (add-hook 'exwm-randr-screen-change-hook
           (lambda ()
             (start-process-shell-command
-             "xrandr" nil "xrandr --output HDMI-1 --right-of eDP-1 --auto --mode 1920x1080")))
+             "xrandr" nil "xrandr --output HDMI-1 --auto --right-of eDP-1 --auto")))
 (exwm-enable)
 (exwm-randr-enable)
 
@@ -2265,8 +2269,7 @@ How to send a bug report:
       ("i" counsel-imenu "imenu")
       ("r" counsel-register "register")
       ("b" counsel-bookmark "bookmark")
-      ("p" persp-ivy-switch-buffer "persp-buffer")
-      ("w" swiper-all-thing-at-point "all"))
+      ("p" persp-ivy-switch-buffer "persp-buffer"))
 
      "Execute"
      (("e" counsel-linux-app "run")
@@ -2294,7 +2297,10 @@ How to send a bug report:
       ("6" (lambda nil (interactive) (persp-switch (int-to-string 6))) "Emacs")
       ("7" (lambda nil (interactive) (persp-switch (int-to-string 7))) "Sub")
       ("8" (lambda nil (interactive) (persp-switch (int-to-string 8))) "Main")
-      ("9" (lambda nil (interactive) (persp-switch (int-to-string 9))) "Blueberry"))))
+      ("9" (lambda nil (interactive) (persp-switch (int-to-string 9))) "Blueberry"))
+
+     "Workspace"
+     (("w" (lambda nil (interactive) (kd/exwm-workspace-switch-last)) "Last"))))
 
   (define-key global-map (kbd "<henkan>") 'pretty-hydra-henkan/body))
 
