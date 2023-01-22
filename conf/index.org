@@ -281,6 +281,189 @@ themeのあとに評価するため、ここでは関数定義だけ。参考 ht
 #+end_src
 
 ** open-junk-file
+#+caption: Cask install が失敗するので取り込んでいる
+#+begin_src emacs-lisp
+;;; open-junk-file.el --- Open a junk (memo) file to try-and-error
+
+;; $Time-stamp: <2016-09-13 10:59:40 rubikitch>$
+
+;; Copyright (C) 2010  rubikitch
+
+;; Author: rubikitch <rubikitch@ruby-lang.org>
+;; Keywords: convenience, tools
+;; Package-Version: 20161210.1114
+;; Package-Commit: 558bec7372b0fed4c4cb6074ab906535fae615bd
+;; URL: http://www.emacswiki.org/cgi-bin/wiki/download/open-junk-file.el
+
+;; This file is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+
+;; This file is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with GNU Emacs; see the file COPYING.  If not, write to
+;; the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+;; Boston, MA 02110-1301, USA.
+
+;;; Commentary:
+;;
+;; M-x `open-junk-file' opens a new file whose filename is derived from
+;; current time.  You can write short program in it.  It helps to
+;; try-and-error programs.
+;;
+;; For example, in Emacs Lisp programming, use M-x `open-junk-file'
+;; instead of *scratch* buffer.  The junk code is SEARCHABLE.
+;;
+;; In Ruby programming, use M-x `open-junk-file' and
+;; write a script with xmpfilter annotations.  It is the FASTEST
+;; methodology to try Ruby methods, Irb is not needed anymore.
+;; Xmpfilter is available at http://eigenclass.org/hiki/rcodetools
+
+;;; Commands:
+;;
+;; Below are complete command list:
+;;
+;;  `open-junk-file'
+;;    Open a new file whose filename is derived from current time.
+;;
+;;; Customizable Options:
+;;
+;; Below are customizable option list:
+;;
+;;  `open-junk-file-format'
+;;    *File format to put junk files with directory.
+;;    default = "~/junk/%Y/%m/%d-%H%M%S."
+;;  `open-junk-file-find-file-function'
+;;    *Function to open junk files.
+;;    default = (quote find-file-other-window)
+
+;;; Installation:
+;;
+;; Put open-junk-file.el to your load-path.
+;; The load-path is usually ~/elisp/.
+;; It's set in your ~/.emacs like this:
+;; (add-to-list 'load-path (expand-file-name "~/elisp"))
+;;
+;; And the following to your ~/.emacs startup file.
+;;
+;; (require 'open-junk-file)
+;;
+;; No need more.
+
+;;; Customize:
+;;
+;;
+;; All of the above can customize by:
+;;      M-x customize-group RET open-junk-file RET
+;;
+
+
+;;; Bug Report:
+;;
+;; If you have problem, send a bug report via M-x open-junk-file-send-bug-report.
+;; The step is:
+;;  0) Setup mail in Emacs, the easiest way is:
+;;       (setq user-mail-address "your@mail.address")
+;;       (setq user-full-name "Your Full Name")
+;;       (setq smtpmail-smtp-server "your.smtp.server.jp")
+;;       (setq mail-user-agent 'message-user-agent)
+;;       (setq message-send-mail-function 'message-smtpmail-send-it)
+;;  1) Be sure to use the LATEST version of open-junk-file.el.
+;;  2) Enable debugger. M-x toggle-debug-on-error or (setq debug-on-error t)
+;;  3) Use Lisp version instead of compiled one: (load "open-junk-file.el")
+;;  4) Do it!
+;;  5) If you got an error, please do not close *Backtrace* buffer.
+;;  6) M-x open-junk-file-send-bug-report and M-x insert-buffer *Backtrace*
+;;  7) Describe the bug using a precise recipe.
+;;  8) Type C-c C-c to send.
+;;  # If you are a Japanese, please write in Japanese:-)
+
+;;; Code:
+
+(eval-when-compile (require 'cl))
+(defgroup open-junk-file nil
+  "open-junk-file"
+  :group 'files)
+(defcustom open-junk-file-format "~/junk/%Y/%m/%d-%H%M%S."
+  "File format to put junk files with directory.
+It can include `format-time-string' format specifications."
+  :type 'string
+  :group 'open-junk-file)
+(defvaralias 'open-junk-file-format 'open-junk-file-directory)
+(defcustom open-junk-file-find-file-function 'find-file-other-window
+  "Function to open junk files."
+  :type 'function
+  :group 'open-junk-file)
+(defcustom open-junk-file-hook nil
+  "List of functions to be called after a buffer is loaded from a `junk' file.
+Whether the file is a JUNK or not is infered by `open-junk-file-format'.")
+
+;;;###autoload
+(defun find-file-hook--open-junk-file ()
+  "Run `open-junk-file-hook' when the file is a JUNK file."
+  (when (string-prefix-p
+         (file-truename (replace-regexp-in-string "%.+$" "" open-junk-file-format))
+         (file-truename buffer-file-name))
+    (run-hooks 'open-junk-file-hook)))
+
+;;;###autoload
+(add-hook 'find-file-hook 'find-file-hook--open-junk-file)
+
+;;;###autoload
+(defun open-junk-file (&optional format find-file-fn)
+  "Open a new file whose filename is derived from current time.
+You can write short program in it.  It helps to try-and-error programs.
+
+For example, in Emacs Lisp programming, use M-x `open-junk-file'
+instead of *scratch* buffer.  The junk code is SEARCHABLE.
+
+FORMAT and FIND-FILE-FN are optional.
+Default value of them are `open-junk-file-format' and
+`open-junk-file-find-file-function'."
+  (interactive)
+  (let* ((file (format-time-string (or format open-junk-file-format) (current-time)))
+         (dir (file-name-directory file)))
+    (make-directory dir t)
+    (funcall (or find-file-fn open-junk-file-find-file-function)
+             (read-string "Junk Code (Enter extension): " file))))
+
+;;;; Bug report
+(defvar open-junk-file-maintainer-mail-address
+  (concat "rubiki" "tch@ru" "by-lang.org"))
+(defvar open-junk-file-bug-report-salutation
+  "Describe bug below, using a precise recipe.
+
+When I executed M-x ...
+
+How to send a bug report:
+  1) Be sure to use the LATEST version of open-junk-file.el.
+  2) Enable debugger. M-x toggle-debug-on-error or (setq debug-on-error t)
+  3) Use Lisp version instead of compiled one: (load \"open-junk-file.el\")
+  4) If you got an error, please paste *Backtrace* buffer.
+  5) Type C-c C-c to send.
+# If you are a Japanese, please write in Japanese:-)")
+(defun open-junk-file-send-bug-report ()
+  (interactive)
+  (reporter-submit-bug-report
+   open-junk-file-maintainer-mail-address
+   "open-junk-file.el"
+   (apropos-internal "^open-junk-file-" 'boundp)
+   nil nil
+   open-junk-file-bug-report-salutation))
+
+(provide 'open-junk-file)
+
+;; How to save (DO NOT REMOVE!!)
+;; (emacswiki-post "open-junk-file.el")
+;;; open-junk-file.el ends here
+
+#+end_src
+
 #+caption: 使い捨てファイルを開く
 #+begin_src emacs-lisp
   (use-package open-junk-file)
@@ -459,7 +642,7 @@ denoteはシンプルなノートパッケージ。
 #+caption: 設定
 #+begin_src emacs-lisp
   (setq denote-directory (expand-file-name "~/roam/denote"))
-  (setq denote-known-keywords '("essay" "code-reading" "book" "hack"))
+  (setq denote-known-keywords '("essay" "code" "book"))
 
   (define-key global-map (kbd "C-c d") 'denote-create-note)
 #+end_src
@@ -510,12 +693,21 @@ org-agendaはorg-modeでtodo管理する機能。
 
 #+caption: agenda対象のディレクトリを指定する
 #+begin_src emacs-lisp
-  (setq my-org-directory (concat "~/Private/junk/diary/org-journal/"))
-  (setq my-todo-file (concat my-org-directory "todo.org"))
-  (if (file-exists-p my-todo-file)
-      (setq org-agenda-files `("~/roam" "~/roam/denote" ,my-todo-file)))
-  (setq org-directory my-org-directory)
-  (setq org-default-notes-file my-todo-file)
+  (let* ((my-org-directory (concat "~/Private/junk/diary/org-journal/"))
+         (my-todo-file (concat my-org-directory "todo.org"))
+         (my-roam-file "~/roam")
+         (my-denote-file "~/roam/denote")
+         (my-agenda-files nil))
+
+    (if (file-exists-p my-todo-file)
+        (setq my-agenda-files (push my-todo-file my-agenda-files)))
+    (if (file-exists-p my-roam-file)
+        (setq my-agenda-files (push my-roam-file my-agenda-files)))
+    (if (file-exists-p my-denote-file)
+        (setq my-agenda-files (push my-denote-file my-agenda-files)))
+    (setq org-agenda-files my-agenda-files)
+    (setq org-directory my-org-directory)
+    (setq org-default-notes-file my-todo-file))
 #+end_src
 
 #+caption: 時刻をデフォルト表示する
@@ -665,8 +857,9 @@ org-pomodoro用の設定。
 
 #+caption: サウンド
 #+begin_src emacs-lisp
-  (setq org-pomodoro-finished-sound "~/.emacs.d/resources/pmd-finished.wav")
-  (setq org-pomodoro-short-break-sound "~/.emacs.d/resources/pmd-short-break.wav")
+  (setq org-pomodoro-finished-sound "~/.emacs.d/resources/atos.wav")
+  (setq org-pomodoro-short-break-sound "~/.emacs.d/resources/atos.wav")
+  (setq org-pomodoro-long-break-sound "~/.emacs.d/resources/atos.wav")
   ;; テスト
   ;; (org-pomodoro-finished)
   ;; (org-pomodoro-short-break-finished)
@@ -685,52 +878,57 @@ org-pomodoro用の設定。
 
 #+caption: polybarにpomodoro情報を表示する
 #+begin_src emacs-lisp
-  (defun kd/org-pomodoro-remain-gauge (max-minutes)
-    "Display remain time gauge."
-    (let* ((display-len 25)
-           (remaining-minutes (/ (org-pomodoro-remaining-seconds) 60))
-           (current-percent (/ remaining-minutes max-minutes))
-           (done (truncate (* (- 1 current-percent) display-len)))
-           (will (truncate (* current-percent display-len))))
-      (concat
-       "%{T2}"
-       ;; (concat "%{F#008000}" (make-string done ?█) "%{F-}")
-       (concat "%{F#008000}" (make-string done ?|) "%{F-}")
-       (concat "%{F#413839}" (make-string will ?|) "%{F-}")
-       "%{T-}")))
+    (defun kd/org-pomodoro-remain-gauge (max-minutes)
+      "Display remain time gauge."
+      (let* ((display-len 25)
+             (remaining-minutes (/ (org-pomodoro-remaining-seconds) 60))
+             (current-percent (/ remaining-minutes max-minutes))
+             (done (truncate (* (- 1 current-percent) display-len)))
+             (will (truncate (* current-percent display-len))))
+        (concat
+         "%{T2}"
+         ;; (concat "%{F#008000}" (make-string done ?█) "%{F-}")
+         (concat "%{F#008000}" (make-string done ?|) "%{F-}")
+         (concat "%{F#413839}" (make-string will ?|) "%{F-}")
+         "%{T-}")))
 
-  (defun kd/org-pomodoro-time ()
-    "Return the remaining pomodoro time. Function for displaying in Polybar."
-    (cond
-     ((org-pomodoro-active-p) (cl-case org-pomodoro-state
-                                (:pomodoro
-                                 (format "%s %dm %s%s%s"
-                                         (kd/org-pomodoro-remain-gauge org-pomodoro-length)
-                                         (/ (org-pomodoro-remaining-seconds) 60)
-                                         "%{F#000000}"
-                                         org-clock-heading
-                                         "%{F-}"
-                                         ))
-                                (:short-break
-                                 (format "%s Short break: %dm"
-                                         (kd/org-pomodoro-remain-gauge org-pomodoro-short-break-length)
-                                         (/ (org-pomodoro-remaining-seconds) 60)))
-                                (:long-break
-                                 (format "%s Long break: %dm"
-                                         (kd/org-pomodoro-remain-gauge org-pomodoro-long-break-length)
-                                         (/ (org-pomodoro-remaining-seconds) 60)))
-                                (:overtime
-                                 (format "Overtime! %dm" (/ (org-pomodoro-remaining-seconds) 60)))
-                                ))
-     ((org-clocking-p) (format "(%s) %s" (org-clock-get-clocked-time) org-clock-heading))
-     (t "Not working...")))
+    (defun kd/org-pomodoro-time ()
+      "Return the remaining pomodoro time. Function for displaying in Polybar."
+      (cond
+       ((org-pomodoro-active-p) (cl-case org-pomodoro-state
+                                  (:pomodoro
+                                   (format "%s %dm %s%s%s"
+                                           (kd/org-pomodoro-remain-gauge org-pomodoro-length)
+                                           (/ (org-pomodoro-remaining-seconds) 60)
+                                           "%{F#FFFFFF}"
+                                           org-clock-heading
+                                           "%{F-}"
+                                           ))
+                                  (:short-break
+                                   (format "%s Short break: %dm"
+                                           (kd/org-pomodoro-remain-gauge org-pomodoro-short-break-length)
+                                           (/ (org-pomodoro-remaining-seconds) 60)))
+                                  (:long-break
+                                   (format "%s Long break: %dm"
+                                           (kd/org-pomodoro-remain-gauge org-pomodoro-long-break-length)
+                                           (/ (org-pomodoro-remaining-seconds) 60)))
+                                  (:overtime
+                                   (format "Overtime! %dm" (/ (org-pomodoro-remaining-seconds) 60)))
+                                  ))
+       ((org-clocking-p) (format "(%s) %s" (org-clock-get-clocked-time) org-clock-heading))
+       (t "OFF")))
 
-  (defun kd/pmd-today-point-display ()
-    ;; (format " [%s]" kd/pmd-today-point)
-    (let* ((all-minute (* kd/pmd-today-point 25))
-           (hour (/ all-minute 60))
-           (minute (% all-minute 60)))
-      (format " %spts/%02dh%02dm" kd/pmd-today-point hour minute)))
+    (defun kd/effort-timer ()
+      (if (and org-clock-effort (or (org-pomodoro-active-p) (org-clocking-p)))
+          (format "[%s/%s]" (org-duration-from-minutes (org-clock-get-clocked-time)) org-clock-effort)
+        ""))
+
+    (defun kd/pmd-today-point-display ()
+      ;; (format " [%s]" kd/pmd-today-point)
+      (let* ((all-minute (* kd/pmd-today-point 25))
+             (hour (/ all-minute 60))
+             (minute (% all-minute 60)))
+        (format " %s %spts/%02dh%02dm" (kd/effort-timer) kd/pmd-today-point hour minute)))
 #+end_src
 
 - https://colekillian.com/posts/org-pomodoro-and-polybar/
@@ -763,6 +961,22 @@ org-pomodoro用の設定。
       (setq kd/pmd-today-point (string-to-number point))))
 #+end_src
 
+** org-effort
+
+- org-clock-effort
+- mode-line-format
+- org-pomodoro-mode-line
+
+** org-tag
+タグを選択できるようにする。
+
+#+caption: タグのプリセット
+#+begin_src emacs-lisp
+  (setq org-tag-alist '(("Write" . ?w)
+                        ("Read" . ?r)
+                        ("DontKnow" . ?d)
+                        ("Train" . ?t)))
+#+end_src
 * Font
 フォント設定。
 
@@ -1059,7 +1273,7 @@ org-pomodoro用の設定。
 
 #+caption: メジャーモードのC-tキーバインドを無効化する
 #+begin_src emacs-lisp
-(eval-after-load "django-mode"
+  (eval-after-load "django-mode"
     '(progn
        (define-key django-mode-map (kbd "C-t") nil)))
   (eval-after-load "dired"
@@ -1697,7 +1911,6 @@ org-pomodoro用の設定。
 #+caption: 正規表現
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-M-%") 'vr/query-replace)
-  (require 'visual-regexp-steroids)
 #+end_src
 
 #+caption: writeroom-mode
@@ -1903,11 +2116,6 @@ org-pomodoro用の設定。
   (add-to-list 'auto-mode-alist '("\\.slim?\\'" . slim-mode))
 #+end_src
 
-#+caption: yaml-mode
-#+begin_src emacs-lisp
-  (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
-#+end_src
-
 #+caption: マジックコメントを挿入しない
 #+begin_src emacs-lisp
   (setq ruby-insert-encoding-magic-comment nil)
@@ -2002,6 +2210,32 @@ haskellの設定。
    '(haskell-indent-offset 4)
    '(haskell-indent-spaces 4))
 #+end_src
+* Yaml
+#+caption: yaml-mode
+#+begin_src emacs-lisp
+  (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
+#+end_src
+
+#+caption: origami
+#+begin_src emacs-lisp
+(require 'origami)
+(define-minor-mode origami-view-mode
+  "TABにorigamiの折畳みを割り当てる"
+  nil "折紙"
+  '(("\C-i" . origami-cycle))
+  (or origami-mode (origami-mode 1)))
+(defun origami-cycle (recursive)
+  "origamiの機能をorg風にまとめる"
+  (interactive "P")
+  (call-interactively
+   (if recursive 'origami-toggle-all-nodes 'origami-toggle-node)))
+(defun yaml-mode-hook--origami ()
+  (when (eq major-mode 'yaml-mode)
+    (origami-view-mode)))
+(add-hook 'yaml-mode-hook 'yaml-mode-hook--origami)
+#+end_src
+
+- http://emacs.rubikitch.com/origami/
 
 * Web
 web-modeはhtmlライクな複数の言語に対応するモード。
@@ -2337,6 +2571,23 @@ corfuはシンプルな補完を提供するパッケージ。
   ;; (add-hook 'corfu-mode-hook 'corfu-doc-mode)
 #+end_src
 
+* Emacs Lisp
+** rispy
+rispyはリストの操作をやりやすくするパッケージ。
+
+#+caption: hook
+#+begin_src emacs-lisp
+  (require 'lispy)
+  (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+#+end_src
+
+#+caption: キーバインド
+#+begin_src emacs-lisp
+  (define-key lispy-mode-map (kbd "M-<right>") 'next-buffer)
+  (define-key lispy-mode-map (kbd "M-<left>") 'previous-buffer)
+  (define-key lispy-mode-map (kbd "M-i") 'swiper-thing-at-point)
+#+end_src
+
 * ivy
 ivyはさまざまなインクリメンタル検索を追加するパッケージ。
 
@@ -2548,7 +2799,7 @@ vtermはCで実装されたシェル。
   (require 'doom-themes)
   (doom-themes-org-config)
   (setq custom-safe-themes t)
-  (setq-default custom-enabled-themes '(modus-operandi))
+  (setq-default custom-enabled-themes '(doom-tokyo-night))
 #+end_src
 
 doom themeはモダンなテーマ集。
@@ -2650,8 +2901,6 @@ doom themeはモダンなテーマ集。
                         :box nil)
 
     (window-divider-mode 0))
-
-  (kd/set-modus-face)
 #+end_src
 
 #+caption: モードラインからマイナーモードを消す
@@ -2666,6 +2915,7 @@ doom themeはモダンなテーマ集。
           command-log-mode
           ctags-auto-update-mode
           eldoc-mode
+          flycheck-mode
           flyspell-mode
           global-whitespace-mode
           google-this-mode
@@ -2685,6 +2935,7 @@ doom themeはモダンなテーマ集。
           (setq minor-mode-alist
                 (cons (list mode "") (assq-delete-all mode minor-mode-alist))))
         my-hidden-minor-modes)
+  (setq minor-mode-alist nil)
 #+end_src
 
 describe-minor-mode-from-indicator で調べられる。
@@ -2734,26 +2985,29 @@ EXWMはEmacs上で動くウィンドウマネージャ。
 
 #+caption: ウィンドウのセットを起動する
 #+begin_src emacs-lisp
-(defun kd/set-init ()
-  "Window Manager関係の各種プログラムを起動する."
-  (interactive)
-  (progn
+  (defun kd/set-init ()
+    "Window Manager関係の各種プログラムを起動する."
+    (interactive)
+
+    (kd/set-background)
+
     (call-process-shell-command "shepherd")
     (call-process-shell-command "~/dotfiles/.config/polybar/launch.sh")
     (call-process-shell-command "blueberry")
 
     (exwm-workspace-switch-create 2)
     (start-process-shell-command "google-chrome" nil "google-chrome")
+    (sleep-for 1)
     (start-process-shell-command "firefox" nil "firefox")
+    (sleep-for 1)
     (start-process-shell-command "spotify" nil "spotify")
-
-    (message "please wait...")
-    (sleep-for 2)
+    (sleep-for 1)
 
     (exwm-workspace-switch-create 0)
     (persp-switch "1")
     (delete-other-windows)
-    (org-journal-new-entry nil)
+    (if (file-exists-p org-journal-dir)
+        (org-journal-new-entry nil))
     (vterm-toggle)
     (vterm-toggle)
     (persp-switch "2")
@@ -2801,7 +3055,7 @@ EXWMはEmacs上で動くウィンドウマネージャ。
     (exwm-workspace-switch-create 0)
     (persp-switch "4")
 
-    (message "settings done!")))
+    (message "settings done!"))
 #+end_src
 
 #+caption: 背景を設定する
@@ -2813,12 +3067,25 @@ EXWMはEmacs上で動くウィンドウマネージャ。
   (start-process-shell-command "fehbg" nil "~/dotfiles/.fehbg"))
 #+end_src
 
+#+caption: 最後のワークスペースに戻る
+#+begin_src emacs-lisp
+(defvar kd/last-workspace-index 0)
+
+(defun kd/exwm-workspace-switch-last ()
+  (interactive)
+  (let ((old kd/last-workspace-index))
+    (setq kd/last-workspace-index exwm-workspace-current-index)
+    (exwm-workspace-switch old)))
+#+end_src
+
+マルチディスプレイ時に簡易にトグルで切り替える用。ワークスペース切り替え時のbefore hookがないので、他のコマンドで切り替えたときに対応してない。
+
 #+caption: キーバインド設定
 #+begin_src emacs-lisp
-(define-key exwm-mode-map (kbd "C-M-:") 'vterm-toggle)
-(define-key exwm-mode-map (kbd "C-M-<right>") 'persp-next)
-(define-key exwm-mode-map (kbd "C-M-<left>") 'persp-prev)
-(define-key exwm-mode-map (kbd "<henkan>") 'pretty-hydra-henkan/body)
+  (define-key exwm-mode-map (kbd "C-M-:") 'vterm-toggle)
+  (define-key exwm-mode-map (kbd "C-M-<right>") 'persp-next)
+  (define-key exwm-mode-map (kbd "C-M-<left>") 'persp-prev)
+  (define-key exwm-mode-map (kbd "<henkan>") 'pretty-hydra-henkan/body)
 #+end_src
 
 #+caption: 設定する
@@ -2827,9 +3094,23 @@ EXWMはEmacs上で動くウィンドウマネージャ。
     (progn
       (exwm-config-example)
       ;; (kd/set-init)
-      ;; (kd/set-background)
       ))
 #+end_src
+
+#+caption: マルチディスプレイ設定
+#+begin_src emacs-lisp
+(require 'exwm-randr)
+(setq exwm-randr-workspace-output-plist '(1 "HDMI-1"))
+(add-hook 'exwm-randr-screen-change-hook
+          (lambda ()
+            (start-process-shell-command
+             "xrandr" nil "xrandr --output HDMI-1 --mode 1920x1080 --right-of eDP-1 --auto")))
+(exwm-enable)
+(exwm-randr-enable)
+#+end_src
+
+randr関係の修正をしたときは、 ~(exwm-randr-refresh)~ を実行して反映する。例えば、画面と対応したワークスペースを変更したとき。
+
 * Polybar
 :PROPERTIES:
 :ID:       31fe46cc-99bc-46e5-bf49-0483fcdd99ed
@@ -2919,27 +3200,27 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
         ("i" counsel-imenu "imenu")
         ("r" counsel-register "register")
         ("b" counsel-bookmark "bookmark")
-        ("p" persp-ivy-switch-buffer "persp-buffer")
-        ("w" swiper-all-thing-at-point "all"))
+        ("p" persp-ivy-switch-buffer "persp-buffer"))
 
        "Execute"
        (("e" counsel-linux-app "run")
         ("c" recompile "recompile")
-        ("s" counsel-search "google"))
+        ("s" counsel-search "google")
+        ("!" org-pomodoro "start pomodoro"))
 
        "Git"
        (("g" magit-blame)
         (">" git-gutter+-next-hunk)
         ("<" git-gutter+-previous-hunk)
-        ("@" git-timemachine)
-        ("l" git-link))
+        ("@" git-timemachine))
 
        "Edit"
        (("q" query-replace "replace")
         ("y" ivy-yasnippet "yas"))
 
        "Window"
-       (("1" (lambda nil (interactive) (persp-switch (int-to-string 1))) "Journal")
+       (("l" (lambda nil (interactive) (persp-switch-last)) "Last")
+        ("1" (lambda nil (interactive) (persp-switch (int-to-string 1))) "Journal")
         ("2" (lambda nil (interactive) (persp-switch (int-to-string 2))) "Roam")
         ("3" (lambda nil (interactive) (persp-switch (int-to-string 3))) "Browser(Half)")
         ("4" (lambda nil (interactive) (persp-switch (int-to-string 4))) "Browser(Full)")
@@ -2947,7 +3228,10 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
         ("6" (lambda nil (interactive) (persp-switch (int-to-string 6))) "Emacs")
         ("7" (lambda nil (interactive) (persp-switch (int-to-string 7))) "Sub")
         ("8" (lambda nil (interactive) (persp-switch (int-to-string 8))) "Main")
-        ("9" (lambda nil (interactive) (persp-switch (int-to-string 9))) "Blueberry"))))
+        ("9" (lambda nil (interactive) (persp-switch (int-to-string 9))) "Blueberry"))
+
+       "Workspace"
+       (("w" (lambda nil (interactive) (kd/exwm-workspace-switch-last)) "Last"))))
 
     (define-key global-map (kbd "<henkan>") 'pretty-hydra-henkan/body))
 #+end_src
@@ -2995,29 +3279,29 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
 
 #+caption: major-mode-hydra
 #+begin_src emacs-lisp
-(global-set-key (kbd "M-SPC") #'major-mode-hydra)
+  (global-set-key (kbd "M-SPC") #'major-mode-hydra)
 
-(with-eval-after-load 'major-mode-hydra
-  (major-mode-hydra-define emacs-lisp-mode nil
-    ("Eval"
-     (("b" eval-buffer "buffer")
-      ("e" eval-defun "defun")
-      ("r" eval-region "region"))
-     "REPL"
-     (("I" ielm "ielm"))
-     "Test"
-     (("t" ert "prompt")
-      ("T" (ert t) "all")
-      ("F" (ert :failed) "failed"))
-     "Doc"
-     (("f" describe-function "function")
-      ("v" describe-variable "variable")
-      ("i" info-lookup-symbol "info lookup")))))
+  (with-eval-after-load 'major-mode-hydra
+    (major-mode-hydra-define emacs-lisp-mode nil
+      ("Eval"
+       (("b" eval-buffer "buffer")
+        ("e" eval-defun "defun"))
+       "REPL"
+       (("I" ielm "ielm"))
+       "Test"
+       (("r" (ert-run-tests-interactively (car ert--selector-history)) "rerun")
+        ("t" ert "prompt")
+        ("T" (ert t) "all")
+        ("F" (ert :failed) "failed"))
+       "Doc"
+       (("f" describe-function "function")
+        ("v" describe-variable "variable")
+        ("i" info-lookup-symbol "info lookup")))))
 
-(with-eval-after-load 'major-mode-hydra
-  (major-mode-hydra-define org-agenda-mode nil
-    ("pomodoro"
-     (("s" org-pomodoro "start org-pomodoro")))))
+  (with-eval-after-load 'major-mode-hydra
+    (major-mode-hydra-define org-agenda-mode nil
+      ("pomodoro"
+       (("s" org-pomodoro "start org-pomodoro")))))
 #+end_src
 
 メジャーモードに対するhydraを設定する。

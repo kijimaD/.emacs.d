@@ -186,6 +186,185 @@
     (setq buf (find-file-noselect file))
     (with-current-buffer buf (if (setq lint (org-lint)) (print (list file lint))))))
 
+;;; open-junk-file.el --- Open a junk (memo) file to try-and-error
+
+;; $Time-stamp: <2016-09-13 10:59:40 rubikitch>$
+
+;; Copyright (C) 2010  rubikitch
+
+;; Author: rubikitch <rubikitch@ruby-lang.org>
+;; Keywords: convenience, tools
+;; Package-Version: 20161210.1114
+;; Package-Commit: 558bec7372b0fed4c4cb6074ab906535fae615bd
+;; URL: http://www.emacswiki.org/cgi-bin/wiki/download/open-junk-file.el
+
+;; This file is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+
+;; This file is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with GNU Emacs; see the file COPYING.  If not, write to
+;; the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+;; Boston, MA 02110-1301, USA.
+
+;;; Commentary:
+;;
+;; M-x `open-junk-file' opens a new file whose filename is derived from
+;; current time.  You can write short program in it.  It helps to
+;; try-and-error programs.
+;;
+;; For example, in Emacs Lisp programming, use M-x `open-junk-file'
+;; instead of *scratch* buffer.  The junk code is SEARCHABLE.
+;;
+;; In Ruby programming, use M-x `open-junk-file' and
+;; write a script with xmpfilter annotations.  It is the FASTEST
+;; methodology to try Ruby methods, Irb is not needed anymore.
+;; Xmpfilter is available at http://eigenclass.org/hiki/rcodetools
+
+;;; Commands:
+;;
+;; Below are complete command list:
+;;
+;;  `open-junk-file'
+;;    Open a new file whose filename is derived from current time.
+;;
+;;; Customizable Options:
+;;
+;; Below are customizable option list:
+;;
+;;  `open-junk-file-format'
+;;    *File format to put junk files with directory.
+;;    default = "~/junk/%Y/%m/%d-%H%M%S."
+;;  `open-junk-file-find-file-function'
+;;    *Function to open junk files.
+;;    default = (quote find-file-other-window)
+
+;;; Installation:
+;;
+;; Put open-junk-file.el to your load-path.
+;; The load-path is usually ~/elisp/.
+;; It's set in your ~/.emacs like this:
+;; (add-to-list 'load-path (expand-file-name "~/elisp"))
+;;
+;; And the following to your ~/.emacs startup file.
+;;
+;; (require 'open-junk-file)
+;;
+;; No need more.
+
+;;; Customize:
+;;
+;;
+;; All of the above can customize by:
+;;      M-x customize-group RET open-junk-file RET
+;;
+
+
+;;; Bug Report:
+;;
+;; If you have problem, send a bug report via M-x open-junk-file-send-bug-report.
+;; The step is:
+;;  0) Setup mail in Emacs, the easiest way is:
+;;       (setq user-mail-address "your@mail.address")
+;;       (setq user-full-name "Your Full Name")
+;;       (setq smtpmail-smtp-server "your.smtp.server.jp")
+;;       (setq mail-user-agent 'message-user-agent)
+;;       (setq message-send-mail-function 'message-smtpmail-send-it)
+;;  1) Be sure to use the LATEST version of open-junk-file.el.
+;;  2) Enable debugger. M-x toggle-debug-on-error or (setq debug-on-error t)
+;;  3) Use Lisp version instead of compiled one: (load "open-junk-file.el")
+;;  4) Do it!
+;;  5) If you got an error, please do not close *Backtrace* buffer.
+;;  6) M-x open-junk-file-send-bug-report and M-x insert-buffer *Backtrace*
+;;  7) Describe the bug using a precise recipe.
+;;  8) Type C-c C-c to send.
+;;  # If you are a Japanese, please write in Japanese:-)
+
+;;; Code:
+
+(eval-when-compile (require 'cl))
+(defgroup open-junk-file nil
+  "open-junk-file"
+  :group 'files)
+(defcustom open-junk-file-format "~/junk/%Y/%m/%d-%H%M%S."
+  "File format to put junk files with directory.
+It can include `format-time-string' format specifications."
+  :type 'string
+  :group 'open-junk-file)
+(defvaralias 'open-junk-file-format 'open-junk-file-directory)
+(defcustom open-junk-file-find-file-function 'find-file-other-window
+  "Function to open junk files."
+  :type 'function
+  :group 'open-junk-file)
+(defcustom open-junk-file-hook nil
+  "List of functions to be called after a buffer is loaded from a `junk' file.
+Whether the file is a JUNK or not is infered by `open-junk-file-format'.")
+
+;;;###autoload
+(defun find-file-hook--open-junk-file ()
+  "Run `open-junk-file-hook' when the file is a JUNK file."
+  (when (string-prefix-p
+         (file-truename (replace-regexp-in-string "%.+$" "" open-junk-file-format))
+         (file-truename buffer-file-name))
+    (run-hooks 'open-junk-file-hook)))
+
+;;;###autoload
+(add-hook 'find-file-hook 'find-file-hook--open-junk-file)
+
+;;;###autoload
+(defun open-junk-file (&optional format find-file-fn)
+  "Open a new file whose filename is derived from current time.
+You can write short program in it.  It helps to try-and-error programs.
+
+For example, in Emacs Lisp programming, use M-x `open-junk-file'
+instead of *scratch* buffer.  The junk code is SEARCHABLE.
+
+FORMAT and FIND-FILE-FN are optional.
+Default value of them are `open-junk-file-format' and
+`open-junk-file-find-file-function'."
+  (interactive)
+  (let* ((file (format-time-string (or format open-junk-file-format) (current-time)))
+         (dir (file-name-directory file)))
+    (make-directory dir t)
+    (funcall (or find-file-fn open-junk-file-find-file-function)
+             (read-string "Junk Code (Enter extension): " file))))
+
+;;;; Bug report
+(defvar open-junk-file-maintainer-mail-address
+  (concat "rubiki" "tch@ru" "by-lang.org"))
+(defvar open-junk-file-bug-report-salutation
+  "Describe bug below, using a precise recipe.
+
+When I executed M-x ...
+
+How to send a bug report:
+  1) Be sure to use the LATEST version of open-junk-file.el.
+  2) Enable debugger. M-x toggle-debug-on-error or (setq debug-on-error t)
+  3) Use Lisp version instead of compiled one: (load \"open-junk-file.el\")
+  4) If you got an error, please paste *Backtrace* buffer.
+  5) Type C-c C-c to send.
+# If you are a Japanese, please write in Japanese:-)")
+(defun open-junk-file-send-bug-report ()
+  (interactive)
+  (reporter-submit-bug-report
+   open-junk-file-maintainer-mail-address
+   "open-junk-file.el"
+   (apropos-internal "^open-junk-file-" 'boundp)
+   nil nil
+   open-junk-file-bug-report-salutation))
+
+(provide 'open-junk-file)
+
+;; How to save (DO NOT REMOVE!!)
+;; (emacswiki-post "open-junk-file.el")
+;;; open-junk-file.el ends here
+
 (use-package open-junk-file)
 (setq open-junk-file-format (concat "~/Private/junk/%Y-%m-%d-%H%M%S."))
 (global-set-key (kbd "C-x C-z") 'open-junk-file)
@@ -282,7 +461,7 @@
 (org-alert-enable)
 
 (setq denote-directory (expand-file-name "~/roam/denote"))
-(setq denote-known-keywords '("essay" "code-reading" "book" "hack"))
+(setq denote-known-keywords '("essay" "code" "book"))
 
 (define-key global-map (kbd "C-c d") 'denote-create-note)
 
@@ -315,12 +494,21 @@
 
 (setq org-log-done t)
 
-(setq my-org-directory (concat "~/Private/junk/diary/org-journal/"))
-(setq my-todo-file (concat my-org-directory "todo.org"))
-(if (file-exists-p my-todo-file)
-    (setq org-agenda-files `("~/roam" "~/roam/denote" ,my-todo-file)))
-(setq org-directory my-org-directory)
-(setq org-default-notes-file my-todo-file)
+(let* ((my-org-directory (concat "~/Private/junk/diary/org-journal/"))
+       (my-todo-file (concat my-org-directory "todo.org"))
+       (my-roam-file "~/roam")
+       (my-denote-file "~/roam/denote")
+       (my-agenda-files nil))
+
+  (if (file-exists-p my-todo-file)
+      (setq my-agenda-files (push my-todo-file my-agenda-files)))
+  (if (file-exists-p my-roam-file)
+      (setq my-agenda-files (push my-roam-file my-agenda-files)))
+  (if (file-exists-p my-denote-file)
+      (setq my-agenda-files (push my-denote-file my-agenda-files)))
+  (setq org-agenda-files my-agenda-files)
+  (setq org-directory my-org-directory)
+  (setq org-default-notes-file my-todo-file))
 
 (setq org-agenda-start-with-log-mode t)
 
@@ -434,8 +622,9 @@
 (setq org-pomodoro-long-break-length 10)
 (setq org-pomodoro-expiry-time 120)
 
-(setq org-pomodoro-finished-sound "~/.emacs.d/resources/pmd-finished.wav")
-(setq org-pomodoro-short-break-sound "~/.emacs.d/resources/pmd-short-break.wav")
+(setq org-pomodoro-finished-sound "~/.emacs.d/resources/atos.wav")
+(setq org-pomodoro-short-break-sound "~/.emacs.d/resources/atos.wav")
+(setq org-pomodoro-long-break-sound "~/.emacs.d/resources/atos.wav")
 ;; テスト
 ;; (org-pomodoro-finished)
 ;; (org-pomodoro-short-break-finished)
@@ -467,7 +656,7 @@
                                (format "%s %dm %s%s%s"
                                        (kd/org-pomodoro-remain-gauge org-pomodoro-length)
                                        (/ (org-pomodoro-remaining-seconds) 60)
-                                       "%{F#000000}"
+                                       "%{F#FFFFFF}"
                                        org-clock-heading
                                        "%{F-}"
                                        ))
@@ -483,14 +672,19 @@
                                (format "Overtime! %dm" (/ (org-pomodoro-remaining-seconds) 60)))
                               ))
    ((org-clocking-p) (format "(%s) %s" (org-clock-get-clocked-time) org-clock-heading))
-   (t "Not working...")))
+   (t "OFF")))
+
+(defun kd/effort-timer ()
+  (if (and org-clock-effort (or (org-pomodoro-active-p) (org-clocking-p)))
+      (format "[%s/%s]" (org-duration-from-minutes (org-clock-get-clocked-time)) org-clock-effort)
+    ""))
 
 (defun kd/pmd-today-point-display ()
   ;; (format " [%s]" kd/pmd-today-point)
   (let* ((all-minute (* kd/pmd-today-point 25))
          (hour (/ all-minute 60))
          (minute (% all-minute 60)))
-    (format " %spts/%02dh%02dm" kd/pmd-today-point hour minute)))
+    (format " %s %spts/%02dh%02dm" (kd/effort-timer) kd/pmd-today-point hour minute)))
 
 (defvar kd/pmd-today-point 0)
 (add-hook 'org-pomodoro-finished-hook
@@ -513,6 +707,11 @@
   (interactive)
   (let ((point (read-from-minibuffer "How much point? ")))
     (setq kd/pmd-today-point (string-to-number point))))
+
+(setq org-tag-alist '(("Write" . ?w)
+                      ("Read" . ?r)
+                      ("DontKnow" . ?d)
+                      ("Train" . ?t)))
 
 (when window-system
   (progn
@@ -656,23 +855,23 @@
 (delete-selection-mode t)
 
 (eval-after-load "django-mode"
-    '(progn
-       (define-key django-mode-map (kbd "C-t") nil)))
-  (eval-after-load "dired"
-    '(progn
-       (define-key dired-mode-map (kbd "C-t") nil)))
-  (eval-after-load "vterm"
-    '(progn
-       (define-key vterm-mode-map (kbd "C-t") nil)
-       (define-key vterm-mode-map (kbd "M-<right>") nil)
-       (define-key vterm-mode-map (kbd "M-<left>") nil)
-       (define-key vterm-mode-map (kbd "<f9>") nil)
-       (define-key vterm-mode-map (kbd "C-<f9>") nil)))
-  (eval-after-load "magit"
-    '(progn
-       (mapc (lambda (i)
-               (define-key magit-mode-map (kbd (format "M-%d" i)) nil))
-             (number-sequence 1 4))))
+  '(progn
+     (define-key django-mode-map (kbd "C-t") nil)))
+(eval-after-load "dired"
+  '(progn
+     (define-key dired-mode-map (kbd "C-t") nil)))
+(eval-after-load "vterm"
+  '(progn
+     (define-key vterm-mode-map (kbd "C-t") nil)
+     (define-key vterm-mode-map (kbd "M-<right>") nil)
+     (define-key vterm-mode-map (kbd "M-<left>") nil)
+     (define-key vterm-mode-map (kbd "<f9>") nil)
+     (define-key vterm-mode-map (kbd "C-<f9>") nil)))
+(eval-after-load "magit"
+  '(progn
+     (mapc (lambda (i)
+             (define-key magit-mode-map (kbd (format "M-%d" i)) nil))
+           (number-sequence 1 4))))
 
 (defadvice isearch-mode (around isearch-mode-default-string (forward &optional regexp op-fun recursive-edit word-p) activate)
     (if (and transient-mark-mode mark-active (not (eq (mark) (point))))
@@ -1151,7 +1350,6 @@
              (flycheck-mode 1)))
 
 (global-set-key (kbd "C-M-%") 'vr/query-replace)
-(require 'visual-regexp-steroids)
 
 (global-set-key [f7] 'writeroom-mode)
 
@@ -1291,8 +1489,6 @@
   (package-refresh-contents) (package-install 'slim-mode))
 (add-to-list 'auto-mode-alist '("\\.slim?\\'" . slim-mode))
 
-(add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
-
 (setq ruby-insert-encoding-magic-comment nil)
 
 (defcustom ruby-block-delay 0
@@ -1349,6 +1545,24 @@
  '(haskell-indent-after-keywords (quote (("where" 4 0) ("of" 4) ("do" 4) ("mdo" 4) ("rec" 4) ("in" 4 0) ("{" 4) "if" "then" "else" "let")))
  '(haskell-indent-offset 4)
  '(haskell-indent-spaces 4))
+
+(add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
+
+(require 'origami)
+(define-minor-mode origami-view-mode
+  "TABにorigamiの折畳みを割り当てる"
+  nil "折紙"
+  '(("\C-i" . origami-cycle))
+  (or origami-mode (origami-mode 1)))
+(defun origami-cycle (recursive)
+  "origamiの機能をorg風にまとめる"
+  (interactive "P")
+  (call-interactively
+   (if recursive 'origami-toggle-all-nodes 'origami-toggle-node)))
+(defun yaml-mode-hook--origami ()
+  (when (eq major-mode 'yaml-mode)
+    (origami-view-mode)))
+(add-hook 'yaml-mode-hook 'yaml-mode-hook--origami)
 
 ;; web-mode
 (require 'web-mode)
@@ -1637,6 +1851,13 @@
 
 ;; (add-hook 'corfu-mode-hook 'corfu-doc-mode)
 
+(require 'lispy)
+(add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+
+(define-key lispy-mode-map (kbd "M-<right>") 'next-buffer)
+(define-key lispy-mode-map (kbd "M-<left>") 'previous-buffer)
+(define-key lispy-mode-map (kbd "M-i") 'swiper-thing-at-point)
+
 (when (require 'ivy-hydra nil t)
   (setq ivy-read-action-function #'ivy-hydra-read-action))
 
@@ -1762,7 +1983,7 @@
 (require 'doom-themes)
 (doom-themes-org-config)
 (setq custom-safe-themes t)
-(setq-default custom-enabled-themes '(modus-operandi))
+(setq-default custom-enabled-themes '(doom-tokyo-night))
 
 (defun reapply-themes ()
   "Forcibly load the themes listed in `custom-enabled-themes'."
@@ -1839,8 +2060,6 @@
 
   (window-divider-mode 0))
 
-(kd/set-modus-face)
-
 (setq my-hidden-minor-modes
       '(
         abbrev-mode
@@ -1851,6 +2070,7 @@
         command-log-mode
         ctags-auto-update-mode
         eldoc-mode
+        flycheck-mode
         flyspell-mode
         global-whitespace-mode
         google-this-mode
@@ -1870,6 +2090,7 @@
         (setq minor-mode-alist
               (cons (list mode "") (assq-delete-all mode minor-mode-alist))))
       my-hidden-minor-modes)
+(setq minor-mode-alist nil)
 
 (require 'exwm)
 (require 'exwm-config)
@@ -1895,77 +2116,88 @@
 (defun kd/set-init ()
   "Window Manager関係の各種プログラムを起動する."
   (interactive)
-  (progn
-    (call-process-shell-command "shepherd")
-    (call-process-shell-command "~/dotfiles/.config/polybar/launch.sh")
-    (call-process-shell-command "blueberry")
 
-    (exwm-workspace-switch-create 2)
-    (start-process-shell-command "google-chrome" nil "google-chrome")
-    (start-process-shell-command "firefox" nil "firefox")
-    (start-process-shell-command "spotify" nil "spotify")
+  (kd/set-background)
 
-    (message "please wait...")
-    (sleep-for 2)
+  (call-process-shell-command "shepherd")
+  (call-process-shell-command "~/dotfiles/.config/polybar/launch.sh")
+  (call-process-shell-command "blueberry")
 
-    (exwm-workspace-switch-create 0)
-    (persp-switch "1")
-    (delete-other-windows)
-    (org-journal-new-entry nil)
-    (vterm-toggle)
-    (vterm-toggle)
-    (persp-switch "2")
-    (find-file "~/roam")
-    (vterm-toggle)
-    (vterm-toggle)
-    (org-agenda nil "z")
-    (persp-switch "3")
-    (split-window-right)
-    (switch-to-buffer "firefox")
-    (persp-switch "4")
-    (switch-to-buffer "firefox")
-    (vterm-toggle)
-    (vterm-toggle)
-    (persp-switch "5")
-    (find-file "~/dotfiles")
-    (vterm-toggle)
-    (vterm-toggle)
-    (magit-status)
-    (persp-switch "6")
-    (find-file "~/.emacs.d/conf")
-    (vterm-toggle)
-    (vterm-toggle)
-    (magit-status)
-    (persp-switch "7")
-    (find-file "~/ProjectOrg")
-    (persp-switch "8")
-    (find-file "~/Project")
-    (persp-switch "9")
-    (elfeed)
+  (exwm-workspace-switch-create 2)
+  (start-process-shell-command "google-chrome" nil "google-chrome")
+  (sleep-for 1)
+  (start-process-shell-command "firefox" nil "firefox")
+  (sleep-for 1)
+  (start-process-shell-command "spotify" nil "spotify")
+  (sleep-for 1)
 
-    (exwm-workspace-switch-create 1)
-    (persp-switch "1")
-    (persp-switch "2")
-    (find-file "~/roam")
-    (org-agenda nil "z")
-    (persp-switch "4")
-    (switch-to-buffer "Google-chrome")
-    (persp-switch "8")
-    (find-file "~/Project")
+  (exwm-workspace-switch-create 0)
+  (persp-switch "1")
+  (delete-other-windows)
+  (if (file-exists-p org-journal-dir)
+      (org-journal-new-entry nil))
+  (vterm-toggle)
+  (vterm-toggle)
+  (persp-switch "2")
+  (find-file "~/roam")
+  (vterm-toggle)
+  (vterm-toggle)
+  (org-agenda nil "z")
+  (persp-switch "3")
+  (split-window-right)
+  (switch-to-buffer "firefox")
+  (persp-switch "4")
+  (switch-to-buffer "firefox")
+  (vterm-toggle)
+  (vterm-toggle)
+  (persp-switch "5")
+  (find-file "~/dotfiles")
+  (vterm-toggle)
+  (vterm-toggle)
+  (magit-status)
+  (persp-switch "6")
+  (find-file "~/.emacs.d/conf")
+  (vterm-toggle)
+  (vterm-toggle)
+  (magit-status)
+  (persp-switch "7")
+  (find-file "~/ProjectOrg")
+  (persp-switch "8")
+  (find-file "~/Project")
+  (persp-switch "9")
+  (elfeed)
 
-    (exwm-workspace-switch-create 2)
-    (switch-to-buffer "Spotify")
+  (exwm-workspace-switch-create 1)
+  (persp-switch "1")
+  (persp-switch "2")
+  (find-file "~/roam")
+  (org-agenda nil "z")
+  (persp-switch "4")
+  (switch-to-buffer "Google-chrome")
+  (persp-switch "8")
+  (find-file "~/Project")
 
-    (exwm-workspace-switch-create 0)
-    (persp-switch "4")
+  (exwm-workspace-switch-create 2)
+  (switch-to-buffer "Spotify")
 
-    (message "settings done!")))
+  (exwm-workspace-switch-create 0)
+  (persp-switch "4")
+
+  (message "settings done!"))
 
 (defun kd/set-background ()
   "背景をセットする."
   (interactive)
   (start-process-shell-command "compton" nil "compton --config ~/dotfiles/.config/compton/compton.conf")
   (start-process-shell-command "fehbg" nil "~/dotfiles/.fehbg"))
+
+(defvar kd/last-workspace-index 0)
+
+(defun kd/exwm-workspace-switch-last ()
+  (interactive)
+  (let ((old kd/last-workspace-index))
+    (setq kd/last-workspace-index exwm-workspace-current-index)
+    (exwm-workspace-switch old)))
 
 (define-key exwm-mode-map (kbd "C-M-:") 'vterm-toggle)
 (define-key exwm-mode-map (kbd "C-M-<right>") 'persp-next)
@@ -1976,8 +2208,16 @@
   (progn
     (exwm-config-example)
     ;; (kd/set-init)
-    ;; (kd/set-background)
     ))
+
+(require 'exwm-randr)
+(setq exwm-randr-workspace-output-plist '(1 "HDMI-1"))
+(add-hook 'exwm-randr-screen-change-hook
+          (lambda ()
+            (start-process-shell-command
+             "xrandr" nil "xrandr --output HDMI-1 --mode 1920x1080 --right-of eDP-1 --auto")))
+(exwm-enable)
+(exwm-randr-enable)
 
 (defvar kd/polybar-process nil
   "Holds the process of the running Polybar instance, if any")
@@ -2035,27 +2275,27 @@
       ("i" counsel-imenu "imenu")
       ("r" counsel-register "register")
       ("b" counsel-bookmark "bookmark")
-      ("p" persp-ivy-switch-buffer "persp-buffer")
-      ("w" swiper-all-thing-at-point "all"))
+      ("p" persp-ivy-switch-buffer "persp-buffer"))
 
      "Execute"
      (("e" counsel-linux-app "run")
       ("c" recompile "recompile")
-      ("s" counsel-search "google"))
+      ("s" counsel-search "google")
+      ("!" org-pomodoro "start pomodoro"))
 
      "Git"
      (("g" magit-blame)
       (">" git-gutter+-next-hunk)
       ("<" git-gutter+-previous-hunk)
-      ("@" git-timemachine)
-      ("l" git-link))
+      ("@" git-timemachine))
 
      "Edit"
      (("q" query-replace "replace")
       ("y" ivy-yasnippet "yas"))
 
      "Window"
-     (("1" (lambda nil (interactive) (persp-switch (int-to-string 1))) "Journal")
+     (("l" (lambda nil (interactive) (persp-switch-last)) "Last")
+      ("1" (lambda nil (interactive) (persp-switch (int-to-string 1))) "Journal")
       ("2" (lambda nil (interactive) (persp-switch (int-to-string 2))) "Roam")
       ("3" (lambda nil (interactive) (persp-switch (int-to-string 3))) "Browser(Half)")
       ("4" (lambda nil (interactive) (persp-switch (int-to-string 4))) "Browser(Full)")
@@ -2063,7 +2303,10 @@
       ("6" (lambda nil (interactive) (persp-switch (int-to-string 6))) "Emacs")
       ("7" (lambda nil (interactive) (persp-switch (int-to-string 7))) "Sub")
       ("8" (lambda nil (interactive) (persp-switch (int-to-string 8))) "Main")
-      ("9" (lambda nil (interactive) (persp-switch (int-to-string 9))) "Blueberry"))))
+      ("9" (lambda nil (interactive) (persp-switch (int-to-string 9))) "Blueberry"))
+
+     "Workspace"
+     (("w" (lambda nil (interactive) (kd/exwm-workspace-switch-last)) "Last"))))
 
   (define-key global-map (kbd "<henkan>") 'pretty-hydra-henkan/body))
 
@@ -2109,12 +2352,12 @@
   (major-mode-hydra-define emacs-lisp-mode nil
     ("Eval"
      (("b" eval-buffer "buffer")
-      ("e" eval-defun "defun")
-      ("r" eval-region "region"))
+      ("e" eval-defun "defun"))
      "REPL"
      (("I" ielm "ielm"))
      "Test"
-     (("t" ert "prompt")
+     (("r" (ert-run-tests-interactively (car ert--selector-history)) "rerun")
+      ("t" ert "prompt")
       ("T" (ert t) "all")
       ("F" (ert :failed) "failed"))
      "Doc"
