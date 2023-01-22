@@ -496,11 +496,17 @@ How to send a bug report:
 
 (let* ((my-org-directory (concat "~/Private/junk/diary/org-journal/"))
        (my-todo-file (concat my-org-directory "todo.org"))
-       (my-agenda-file '("~/roam" "~/roam/denote")))
+       (my-roam-file "~/roam")
+       (my-denote-file "~/roam/denote")
+       (my-agenda-files nil))
 
   (if (file-exists-p my-todo-file)
-      (setq my-agenda-files (add-to-list my-agenda-files my-todo-file)))
-  (setq org-agenda-files my-agenda-file)
+      (setq my-agenda-files (push my-todo-file my-agenda-files)))
+  (if (file-exists-p my-roam-file)
+      (setq my-agenda-files (push my-roam-file my-agenda-files)))
+  (if (file-exists-p my-denote-file)
+      (setq my-agenda-files (push my-denote-file my-agenda-files)))
+  (setq org-agenda-files my-agenda-files)
   (setq org-directory my-org-directory)
   (setq org-default-notes-file my-todo-file))
 
