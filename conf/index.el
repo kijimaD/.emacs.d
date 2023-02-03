@@ -517,42 +517,45 @@ How to send a bug report:
 (setq org-agenda-start-day "7d")
 
 (setq org-agenda-custom-commands
-        '(("z" "Super zaen view"
-           ((agenda "" ((org-agenda-span 'day)
-                        (org-super-agenda-groups
-                         '((:name "🏗️Today"
-                                  :time-grid t
-                                  :date today
-                                  :scheduled today
-                                  :order 1)
-                           (:name "🍵Future"
-                                  :deadline future
-                                  :scheduled future
-                                  :order 10)
-                           (:name "Overdue"
-                                  :deadline past
-                                  :order 10)
-                           (:habit t)
-                           (:log t)
-                           (:discard (:anything))))))
-            (alltodo "" ((org-agenda-overriding-header "")
-                         (org-super-agenda-groups
-                          '((:name "▶️Work In Progress"
-                                   :todo "WIP"
-                                   :order 1)
-                            (:name "✍To write"
-                                   :tag "Write"
-                                   :order 12)
-                            (:name "📕To read"
-                                   :tag "Read"
-                                   :order 14)
-                            (:name "✍Things I Don't Know"
-                                   :tag "DontKnow"
-                                   :order 15)
-                            (:name "🛤️Train"
-                                   :tag "Train"
-                                   :order 18)
-                            (:discard (:anything t))))))))))
+      '(("z" "Super zaen view"
+         ((agenda "" ((org-agenda-span 'day)
+                      (org-super-agenda-groups
+                       '((:name "🏗️Today"
+                                :time-grid t
+                                :date today
+                                :scheduled today
+                                :order 1)
+                         (:name "Overdue"
+                                :deadline past
+                                :scheduled past
+                                :order 3)
+                         (:habit t)
+                         (:log t)
+                         (:discard (:anything))))))
+          (alltodo "" ((org-agenda-overriding-header "")
+                       (org-super-agenda-groups
+                        '((:name "▶️Work In Progress"
+                                 :todo "WIP"
+                                 :order 1)
+                          (:name "🔦Next"
+                                 :effort> "0:01"
+                                 :order 5)
+                          (:name "✍To write"
+                                 :tag "Write"
+                                 :order 12)
+                          (:name "📕To read"
+                                 :tag "Read"
+                                 :order 14)
+                          (:name "✍Things I Don't Know"
+                                 :tag "DontKnow"
+                                 :order 15)
+                          (:name "🛤️Train"
+                                 :tag "Train"
+                                 :order 18)
+                         (:name "🍵Future"
+                                :todo "TODO"
+                                :order 20)
+                          (:discard (:anything t))))))))))
 
 (setq org-clocktable-defaults '(:maxlevel 3 :scope agenda :tags "" :block today :step day :stepskip0 true :fileskip0 true))
 
@@ -571,7 +574,7 @@ How to send a bug report:
 
 (setq org-agenda-prefix-format
       `((agenda . " %i %-12(vulpea-agenda-category)%?-12t% s")
-        (todo . " %i %-12(vulpea-agenda-category) ")
+        (todo . " %i %-12(vulpea-agenda-category)%?-12t%-6e% s")
         (tags . " %i %-12(vulpea-agenda-category) ")
         (search . " %i %-12(vaulpea-agenda-category) ")))
 

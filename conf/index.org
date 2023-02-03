@@ -724,7 +724,7 @@ org-agendaはorg-modeでtodo管理する機能。
 
 #+caption: agendaには、習慣・スケジュール・TODOを表示させる
 #+begin_src emacs-lisp
-(setq org-agenda-custom-commands
+  (setq org-agenda-custom-commands
         '(("z" "Super zaen view"
            ((agenda "" ((org-agenda-span 'day)
                         (org-super-agenda-groups
@@ -733,13 +733,10 @@ org-agendaはorg-modeでtodo管理する機能。
                                   :date today
                                   :scheduled today
                                   :order 1)
-                           (:name "🍵Future"
-                                  :deadline future
-                                  :scheduled future
-                                  :order 10)
                            (:name "Overdue"
                                   :deadline past
-                                  :order 10)
+                                  :scheduled past
+                                  :order 3)
                            (:habit t)
                            (:log t)
                            (:discard (:anything))))))
@@ -748,6 +745,9 @@ org-agendaはorg-modeでtodo管理する機能。
                           '((:name "▶️Work In Progress"
                                    :todo "WIP"
                                    :order 1)
+                            (:name "🔦Next"
+                                   :effort> "0:01"
+                                   :order 5)
                             (:name "✍To write"
                                    :tag "Write"
                                    :order 12)
@@ -760,6 +760,9 @@ org-agendaはorg-modeでtodo管理する機能。
                             (:name "🛤️Train"
                                    :tag "Train"
                                    :order 18)
+                           (:name "🍵Future"
+                                  :todo "TODO"
+                                  :order 20)
                             (:discard (:anything t))))))))))
 #+end_src
 
@@ -784,11 +787,14 @@ org-agendaはorg-modeでtodo管理する機能。
         org-habit-show-habits t)
 #+end_src
 
+- org-roamの長いファイル名が表示されてうざいので省略する
+- フォーマットのeはorg-effort
+
 #+caption: agendaでorg-roamファイルの表示をきれいにする
 #+begin_src emacs-lisp
   (setq org-agenda-prefix-format
         `((agenda . " %i %-12(vulpea-agenda-category)%?-12t% s")
-          (todo . " %i %-12(vulpea-agenda-category) ")
+          (todo . " %i %-12(vulpea-agenda-category)%?-12t%-6e% s")
           (tags . " %i %-12(vulpea-agenda-category) ")
           (search . " %i %-12(vaulpea-agenda-category) ")))
 
@@ -811,7 +817,7 @@ org-agendaはorg-modeでtodo管理する機能。
 ** org-super-agenda
 org-super-agendaは詳細に設定できるagenda表示ができるパッケージ。
 
-#+caption: グループ設定
+#+caption: グループ設定例
 #+begin_src emacs-lisp
   (org-super-agenda-mode)
 
