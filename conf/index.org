@@ -608,6 +608,7 @@ org-roamはorgファイルをsqliteによって管理しやすくしたパッケ
 
 #+caption: テンプレート
 #+begin_src emacs-lisp
+  (setq my-todo-file "~/roam/20230202234553-inbox.org")
   (setq org-roam-capture-templates
         '(("t" "TODO" entry
            (file+headline my-todo-file "Inbox")
@@ -2277,7 +2278,6 @@ web-modeはhtmlライクな複数の言語に対応するモード。
   (add-to-list 'auto-mode-alist '("\\.js[x]?$" . web-mode));; js + jsx
   (add-to-list 'auto-mode-alist '("\\.tsx$" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.[gj]sp\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))

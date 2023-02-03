@@ -437,6 +437,7 @@ How to send a bug report:
 (define-key global-map (kbd "C-c n l") 'org-roam-buffer-toggle)
 (define-key global-map (kbd "C-M-i") 'completion-at-point)
 
+(setq my-todo-file "~/roam/20230202234553-inbox.org")
 (setq org-roam-capture-templates
       '(("t" "TODO" entry
          (file+headline my-todo-file "Inbox")
@@ -1594,7 +1595,6 @@ How to send a bug report:
 (add-to-list 'auto-mode-alist '("\\.js[x]?$" . web-mode));; js + jsx
 (add-to-list 'auto-mode-alist '("\\.tsx$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.[gj]sp\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
