@@ -182,7 +182,8 @@ org-modeはEmacsのキラーアプリの1つ。パッケージ名であり、フ
     (add-to-list 'org-structure-template-alist '("sc" . "src scala"))
     (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
     (add-to-list 'org-structure-template-alist '("sq" . "src sql"))
-    (add-to-list 'org-structure-template-alist '("ts" . "src typescript")))
+    (add-to-list 'org-structure-template-alist '("ts" . "src typescript"))
+    (add-to-list 'org-structure-template-alist '("mm" . "src mermaid")))
 #+end_src
 
 #+caption: 中央寄せ設定
@@ -761,7 +762,7 @@ org-agendaはorg-modeでtodo管理する機能。
                             (:name "🛤️Train"
                                    :tag "Train"
                                    :order 18)
-                           (:name "🍵Future"
+                           (:name "🍵TODO"
                                   :todo "TODO"
                                   :order 20)
                             (:discard (:anything t))))))))))
@@ -1009,6 +1010,66 @@ org-pomodoro用の設定。
                         ("DontKnow" . ?d)
                         ("Train" . ?t)))
 #+end_src
+** Mermaid
+Mermaid JSはテキストから図を描画するライブラリ。
+
+コマンドをインストールすることなく実行するためにDockerを使う設定。
+
+#+begin_src emacs-lisp
+  (require 'mermaid-mode)
+#+end_src
+
+#+begin_src emacs-lisp
+  (setq mermaid-mmdc-location "docker")
+  (setq mermaid-flags '(concat "run -u 1000 -v /tmp:/tmp -v "
+                              default-directory
+                              ":"
+                              default-directory
+                              " ghcr.io/mermaid-js/mermaid-cli/mermaid-cli:9.1.6"))
+#+end_src
+
+#+caption: mermaidをdockerで実行するときの引数指定が間違っているので直す
+#+begin_src emacs-lisp
+(defun org-babel-execute:mermaid (body params)
+  "Execute command with BODY and PARAMS from src block."
+  (let* ((out-file (or (cdr (assoc :file params))
+                       (error "Mermaid requires a \":file\" header argument")))
+         (temp-file (org-babel-temp-file "mermaid-"))
+         (cmd (concat (shell-quote-argument mermaid-mmdc-location)
+                      " " (eval mermaid-flags)
+                      " -o " (org-babel-process-file-name out-file)
+                      " -i " temp-file
+                      )))
+    (with-temp-file temp-file (insert body))
+    (org-babel-eval cmd "")
+    nil))
+#+end_src
+
+#+caption: ファイル名を自動生成するコマンド
+#+begin_src emacs-lisp
+  (defun kd/random-alnum ()
+    (let* ((alnum "abcdefghijklmnopqrstuvwxyz0123456789")
+           (i (% (abs (random)) (length alnum))))
+      (substring alnum i (1+ i))))
+
+  (defun kd/random-letter-string (num)
+    (interactive)
+    (let ((str ""))
+      (dotimes (num num)
+        (setq str (concat str (kd/random-alnum)))
+        )
+      str))
+
+  (defun kd/insert-rand-png ()
+    (interactive)
+    (insert (concat "images/" (kd/random-letter-string 10) ".png")))
+#+end_src
+
+#+caption: 実行したあと画像をインライン表示
+#+begin_src emacs-lisp
+(add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
+#+end_src
+
 * Font
 フォント設定。
 
@@ -3027,6 +3088,7 @@ EXWMはEmacs上で動くウィンドウマネージャ。
     (call-process-shell-command "blueberry")
 
     (exwm-workspace-switch-create 2)
+    (sleep-for 1)
     (start-process-shell-command "google-chrome" nil "google-chrome")
     (sleep-for 1)
     (start-process-shell-command "firefox" nil "firefox")

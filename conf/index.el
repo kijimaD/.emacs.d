@@ -103,7 +103,8 @@
   (add-to-list 'org-structure-template-alist '("sc" . "src scala"))
   (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
   (add-to-list 'org-structure-template-alist '("sq" . "src sql"))
-  (add-to-list 'org-structure-template-alist '("ts" . "src typescript")))
+  (add-to-list 'org-structure-template-alist '("ts" . "src typescript"))
+  (add-to-list 'org-structure-template-alist '("mm" . "src mermaid")))
 
 (require 'visual-fill-column)
 (defun kd/centering-buffer ()
@@ -553,7 +554,7 @@ How to send a bug report:
                           (:name "🛤️Train"
                                  :tag "Train"
                                  :order 18)
-                         (:name "🍵Future"
+                         (:name "🍵TODO"
                                 :todo "TODO"
                                 :order 20)
                           (:discard (:anything t))))))))))
@@ -738,6 +739,48 @@ How to send a bug report:
                       ("Read" . ?r)
                       ("DontKnow" . ?d)
                       ("Train" . ?t)))
+
+(require 'mermaid-mode)
+
+(setq mermaid-mmdc-location "docker")
+(setq mermaid-flags '(concat "run -u 1000 -v /tmp:/tmp -v "
+                            default-directory
+                            ":"
+                            default-directory
+                            " ghcr.io/mermaid-js/mermaid-cli/mermaid-cli:9.1.6"))
+
+(defun org-babel-execute:mermaid (body params)
+  "Execute command with BODY and PARAMS from src block."
+  (let* ((out-file (or (cdr (assoc :file params))
+                       (error "Mermaid requires a \":file\" header argument")))
+         (temp-file (org-babel-temp-file "mermaid-"))
+         (cmd (concat (shell-quote-argument mermaid-mmdc-location)
+                      " " (eval mermaid-flags)
+                      " -o " (org-babel-process-file-name out-file)
+                      " -i " temp-file
+                      )))
+    (with-temp-file temp-file (insert body))
+    (org-babel-eval cmd "")
+    nil))
+
+(defun kd/random-alnum ()
+  (let* ((alnum "abcdefghijklmnopqrstuvwxyz0123456789")
+         (i (% (abs (random)) (length alnum))))
+    (substring alnum i (1+ i))))
+
+(defun kd/random-letter-string (num)
+  (interactive)
+  (let ((str ""))
+    (dotimes (num num)
+      (setq str (concat str (kd/random-alnum)))
+      )
+    str))
+
+(defun kd/insert-rand-png ()
+  (interactive)
+  (insert (concat "images/" (kd/random-letter-string 10) ".png")))
+
+(add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
 
 (when window-system
   (progn
@@ -2149,6 +2192,7 @@ How to send a bug report:
   (call-process-shell-command "blueberry")
 
   (exwm-workspace-switch-create 2)
+  (sleep-for 1)
   (start-process-shell-command "google-chrome" nil "google-chrome")
   (sleep-for 1)
   (start-process-shell-command "firefox" nil "firefox")
