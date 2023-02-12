@@ -659,7 +659,7 @@ How to send a bug report:
 (add-hook 'org-pomodoro-short-break-finished-hook 'org-agenda-default)
 (add-hook 'org-pomodoro-long-break-finished-hook 'org-agenda-default)
 
-(setq org-clock-mode-line-total 'today)
+(setq org-clock-mode-line-total 'all)
 
 (defun kd/org-pomodoro-remain-gauge (max-minutes)
   "Display remain time gauge."
@@ -764,7 +764,7 @@ How to send a bug report:
     nil))
 
 (defun kd/random-alnum ()
-  (let* ((alnum "abcdefghijklmnopqrstuvwxyz0123456789")
+  (let* ((alnum "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
          (i (% (abs (random)) (length alnum))))
     (substring alnum i (1+ i))))
 
@@ -776,9 +776,17 @@ How to send a bug report:
       )
     str))
 
+(defun kd/timestamp ()
+  (let* ((date org-agenda-current-date)
+         (y (nth 2 date))
+         (d (nth 1 date))
+         (m (nth 0 date))
+         (time (format-time-string "%H%M%S" (current-time))))
+    (format "%04d%02d%02d%s" y m d time)))
+
 (defun kd/insert-rand-png ()
   (interactive)
-  (insert (concat "images/" (kd/random-letter-string 10) ".png")))
+  (insert (concat "images/" (kd/timestamp) "-" (kd/random-letter-string 10) ".png")))
 
 (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
 
@@ -1276,7 +1284,8 @@ How to send a bug report:
         ("http://b.hatena.ne.jp/t-wada/rss" Test)
         ("https://cprss.s3.amazonaws.com/rubyweekly.com.xml" Ruby weekly)
         ("https://news.ycombinator.com/rss" Ruby weekly)
-        ("http://pragmaticemacs.com/feed/" Pragmatic Emacs)))
+        ("http://pragmaticemacs.com/feed/" Pragmatic Emacs)
+        ("https://efcl.info/feed/" azu blog)))
 
 ;; default-browser
 (setq browse-url-browser-function 'browse-url-firefox)
@@ -1397,6 +1406,7 @@ How to send a bug report:
 (flycheck-define-checker textlint
   "A linter for Markdown."
   :command ("textlint" "--format" "unix" source)
+  ;; :command ("docker" "run" "-v" "/home/silver/roam:/home/silver/roam" "--rm" "ghcr.io/kijimad/roam_textlint" "textlint" "-c" "/home/silver/roam/.textlintrc" "--format" "unix" source)
   :error-patterns
   ((warning line-start (file-name) ":" line ":" column ": "
             (id (one-or-more (not (any " "))))
