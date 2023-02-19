@@ -474,6 +474,9 @@ How to send a bug report:
 
 (defun org-agenda-default ()
   (interactive)
+  ;; find-fileしてる間にpersp-switchが走ると、プロンプトが残る
+  (when (window-minibuffer-p)
+    (minibuffer-keyboard-quit))
   (persp-switch "2")
   (org-agenda nil "z"))
 (global-set-key (kbd "<f6>") 'org-agenda-default)
@@ -2199,18 +2202,13 @@ How to send a bug report:
 
   (call-process-shell-command "shepherd")
   (call-process-shell-command "~/dotfiles/.config/polybar/launch.sh")
-  (call-process-shell-command "blueberry")
 
-  (exwm-workspace-switch-create 2)
-  (sleep-for 1)
+  (exwm-workspace-switch-create 0)
   (start-process-shell-command "google-chrome" nil "google-chrome")
-  (sleep-for 1)
-  (start-process-shell-command "firefox" nil "firefox")
-  (sleep-for 1)
+  (sleep-for 2)
   (start-process-shell-command "spotify" nil "spotify")
   (sleep-for 1)
 
-  (exwm-workspace-switch-create 0)
   (persp-switch "1")
   (delete-other-windows)
   (if (file-exists-p org-journal-dir)
@@ -2224,9 +2222,9 @@ How to send a bug report:
   (org-agenda nil "z")
   (persp-switch "3")
   (split-window-right)
-  (switch-to-buffer "firefox")
+  (switch-to-buffer "Google-chrome")
   (persp-switch "4")
-  (switch-to-buffer "firefox")
+  (switch-to-buffer "Google-chrome")
   (vterm-toggle)
   (vterm-toggle)
   (persp-switch "5")
