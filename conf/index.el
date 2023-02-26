@@ -474,7 +474,7 @@ How to send a bug report:
 
 (defun org-agenda-default ()
   (interactive)
-  ;; find-fileしてる間にpersp-switchが走ると、プロンプトが残る
+  ;; mini-bufferを開いている間にpersp-switchが走ると、プロンプトが残り続けるのを防ぐ
   (when (window-minibuffer-p)
     (minibuffer-keyboard-quit))
   (persp-switch "2")
@@ -1281,17 +1281,25 @@ How to send a bug report:
       '(mozc-handle-event self-insert-command))
 
 (setq elfeed-feeds
-      '(("https://www.sanityinc.com/feed.xml" sanityinc blog)
-        ("https://sachachua.com/blog/category/weekly/feed/" sachachua blog)
+      '(("https://www.sanityinc.com/feed.xml" Emacs)
+        ("https://github.com/emacs-mirror/emacs/releases.atom" Emacs)
+        ("https://sachachua.com/blog/category/weekly/feed/" Emacs)
+        ("http://pragmaticemacs.com/feed/" Emacs)
         ("https://techracho.bpsinc.jp/feed" Ruby Rails)
-        ("http://b.hatena.ne.jp/t-wada/rss" Test)
-        ("https://cprss.s3.amazonaws.com/rubyweekly.com.xml" Ruby weekly)
-        ("https://news.ycombinator.com/rss" Ruby weekly)
-        ("http://pragmaticemacs.com/feed/" Pragmatic Emacs)
-        ("https://efcl.info/feed/" azu blog)))
+        ;; ("https://cprss.s3.amazonaws.com/rubyweekly.com.xml" Ruby)
+        ("http://b.hatena.ne.jp/t-wada/rss" test)
+        ("https://news.ycombinator.com/rss" news)
+        ("https://efcl.info/feed/" Javascript)
+        ("https://github.com/golang/go/releases.atom" Go)
+        ("https://github.com/moby/moby/releases.atom" Docker)
+        ("https://api.syosetu.com/writernovel/235132.Atom" novel)
+        ))
 
-;; default-browser
-(setq browse-url-browser-function 'browse-url-firefox)
+  (setq elfeed-search-title-max-width 120)
+
+  ;; default-browser
+  (setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "google-chrome")
 
 (require 'google-this)
 (google-this-mode 1)
@@ -2358,10 +2366,11 @@ How to send a bug report:
      (("e" counsel-linux-app "run")
       ("c" recompile "recompile")
       ("s" counsel-search "google")
-      ("!" org-pomodoro "start pomodoro"))
+      ("!" org-pomodoro "start pomodoro")
+      ("n" kd/switch-elfeed "elfeed"))
 
      "Git"
-     (("g" magit-blame)
+     (("g" git-link)
       (">" git-gutter+-next-hunk)
       ("<" git-gutter+-previous-hunk)
       ("@" git-timemachine))
