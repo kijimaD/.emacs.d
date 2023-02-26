@@ -746,10 +746,10 @@ How to send a bug report:
 (require 'mermaid-mode)
 
 (setq mermaid-mmdc-location "docker")
-(setq mermaid-flags '(concat "run -u 1000 -v /tmp:/tmp -v "
-                            default-directory
+(setq mermaid-flags '(concat "run --rm -u 1000 -v /tmp:/tmp -v "
+                            (projectile-project-root)
                             ":"
-                            default-directory
+                            (projectile-project-root)
                             " ghcr.io/mermaid-js/mermaid-cli/mermaid-cli:9.1.6"))
 
 (defun org-babel-execute:mermaid (body params)
