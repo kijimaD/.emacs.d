@@ -914,57 +914,69 @@ org-pomodoro用の設定。
 
 #+caption: polybarにpomodoro情報を表示する
 #+begin_src emacs-lisp
-    (defun kd/org-pomodoro-remain-gauge (max-minutes)
-      "Display remain time gauge."
-      (let* ((display-len 25)
-             (remaining-minutes (/ (org-pomodoro-remaining-seconds) 60))
-             (current-percent (/ remaining-minutes max-minutes))
-             (done (truncate (* (- 1 current-percent) display-len)))
-             (will (truncate (* current-percent display-len))))
-        (concat
-         "%{T2}"
-         ;; (concat "%{F#008000}" (make-string done ?█) "%{F-}")
-         (concat "%{F#008000}" (make-string done ?|) "%{F-}")
-         (concat "%{F#413839}" (make-string will ?|) "%{F-}")
-         "%{T-}")))
+  (defun kd/org-pomodoro-remain-gauge (max-minutes)
+    "Display remain time gauge."
+    (let* ((display-len 25)
+           (remaining-minutes (/ (org-pomodoro-remaining-seconds) 60))
+           (current-percent (/ remaining-minutes max-minutes))
+           (done (truncate (* (- 1 current-percent) display-len)))
+           (will (truncate (* current-percent display-len))))
+      (concat
+       "%{T2}"
+       ;; (concat "%{F#008000}" (make-string done ?█) "%{F-}")
+       (concat "%{F#008000}" (make-string done ?|) "%{F-}")
+       (concat "%{F#413839}" (make-string will ?|) "%{F-}")
+       "%{T-}")))
 
-    (defun kd/org-pomodoro-time ()
-      "Return the remaining pomodoro time. Function for displaying in Polybar."
-      (cond
-       ((org-pomodoro-active-p) (cl-case org-pomodoro-state
-                                  (:pomodoro
-                                   (format "%s %dm %s%s%s"
-                                           (kd/org-pomodoro-remain-gauge org-pomodoro-length)
-                                           (/ (org-pomodoro-remaining-seconds) 60)
-                                           "%{F#FFFFFF}"
-                                           org-clock-heading
-                                           "%{F-}"
-                                           ))
-                                  (:short-break
-                                   (format "%s Short break: %dm"
-                                           (kd/org-pomodoro-remain-gauge org-pomodoro-short-break-length)
-                                           (/ (org-pomodoro-remaining-seconds) 60)))
-                                  (:long-break
-                                   (format "%s Long break: %dm"
-                                           (kd/org-pomodoro-remain-gauge org-pomodoro-long-break-length)
-                                           (/ (org-pomodoro-remaining-seconds) 60)))
-                                  (:overtime
-                                   (format "Overtime! %dm" (/ (org-pomodoro-remaining-seconds) 60)))
-                                  ))
-       ((org-clocking-p) (format "(%s) %s" (org-clock-get-clocked-time) org-clock-heading))
-       (t "OFF")))
+  (defun kd/org-pomodoro-time ()
+    "Return the remaining pomodoro time. Function for displaying in Polybar."
+    (cond
+     ((org-pomodoro-active-p) (cl-case org-pomodoro-state
+                                (:pomodoro
+                                 (format "%s %dm %s%s%s"
+                                         (kd/org-pomodoro-remain-gauge org-pomodoro-length)
+                                         (/ (org-pomodoro-remaining-seconds) 60)
+                                         "%{F#FFFFFF}"
+                                         org-clock-heading
+                                         "%{F-}"
+                                         ))
+                                (:short-break
+                                 (format "%s Short break: %dm"
+                                         (kd/org-pomodoro-remain-gauge org-pomodoro-short-break-length)
+                                         (/ (org-pomodoro-remaining-seconds) 60)))
+                                (:long-break
+                                 (format "%s Long break: %dm"
+                                         (kd/org-pomodoro-remain-gauge org-pomodoro-long-break-length)
+                                         (/ (org-pomodoro-remaining-seconds) 60)))
+                                (:overtime
+                                 (format "Overtime! %dm" (/ (org-pomodoro-remaining-seconds) 60)))
+                                ))
+     ((org-clocking-p) (format "(%s) %s" (org-clock-get-clocked-time) org-clock-heading))
+     (t "OFF")))
 
-    (defun kd/effort-timer ()
-      (if (and org-clock-effort (or (org-pomodoro-active-p) (org-clocking-p)))
-          (format "[%s/%s]" (org-duration-from-minutes (org-clock-get-clocked-time)) org-clock-effort)
-        ""))
+  (defun kd/effort-timer ()
+    (if (and org-clock-effort (or (org-pomodoro-active-p) (org-clocking-p)))
+        (format "[%s/%s]" (org-duration-from-minutes (org-clock-get-clocked-time)) org-clock-effort)
+      ""))
 
-    (defun kd/pmd-today-point-display ()
-      ;; (format " [%s]" kd/pmd-today-point)
-      (let* ((all-minute (* kd/pmd-today-point 25))
-             (hour (/ all-minute 60))
-             (minute (% all-minute 60)))
-        (format " %s %spts/%02dh%02dm" (kd/effort-timer) kd/pmd-today-point hour minute)))
+  (defun kd/pmd-today-point-display ()
+    (let* ((all-minute (* kd/pmd-today-point 25))
+           (hour (/ all-minute 60))
+           (minute (% all-minute 60)))
+      (format
+       ;; " %s %dpts/%02dh%02dm %d"
+       " %s %d ¥%d"
+              (kd/effort-timer)
+              kd/pmd-today-point
+              ;; hour
+              ;; minute
+              (kd/pmd-money 1500 100))))
+#+end_src
+
+#+begin_src emacs-lisp
+    (defun kd/pmd-money (perpts perminute)
+      (let* ((progress (- 25 (/ (org-pomodoro-remaining-seconds) 60))) )
+          (+ (* kd/pmd-today-point perpts) (* progress perminute))))
 #+end_src
 
 - https://colekillian.com/posts/org-pomodoro-and-polybar/
@@ -1863,6 +1875,7 @@ Mermaid JSはテキストから図を描画するライブラリ。
           ("https://github.com/golang/go/releases.atom" Go)
           ("https://github.com/moby/moby/releases.atom" Docker)
           ("https://api.syosetu.com/writernovel/235132.Atom" novel)
+          ("https://hackerstations.com/index.xml" programmer)
           ))
 
     (setq elfeed-search-title-max-width 120)
@@ -3468,6 +3481,11 @@ OS操作の便利関数。
   ;; (use-package ej-dict
   ;;   :straight (:host github :repo "kijimaD/ej-dict"))
   ;; (ej-dict-install-dict)
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package denote-menu
+  :straight (:host github :repo "namilus/denote-menu"))
 #+end_src
 
 あまり使ってないのでコメントアウトしている。

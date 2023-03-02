@@ -710,11 +710,21 @@ How to send a bug report:
     ""))
 
 (defun kd/pmd-today-point-display ()
-  ;; (format " [%s]" kd/pmd-today-point)
   (let* ((all-minute (* kd/pmd-today-point 25))
          (hour (/ all-minute 60))
          (minute (% all-minute 60)))
-    (format " %s %spts/%02dh%02dm" (kd/effort-timer) kd/pmd-today-point hour minute)))
+    (format
+     ;; " %s %dpts/%02dh%02dm %d"
+     " %s %d ¥%d"
+            (kd/effort-timer)
+            kd/pmd-today-point
+            ;; hour
+            ;; minute
+            (kd/pmd-money 1500 100))))
+
+(defun kd/pmd-money (perpts perminute)
+  (let* ((progress (- 25 (/ (org-pomodoro-remaining-seconds) 60))) )
+      (+ (* kd/pmd-today-point perpts) (* progress perminute))))
 
 (defvar kd/pmd-today-point 0)
 (add-hook 'org-pomodoro-finished-hook
@@ -1293,6 +1303,7 @@ How to send a bug report:
         ("https://github.com/golang/go/releases.atom" Go)
         ("https://github.com/moby/moby/releases.atom" Docker)
         ("https://api.syosetu.com/writernovel/235132.Atom" novel)
+        ("https://hackerstations.com/index.xml" programmer)
         ))
 
   (setq elfeed-search-title-max-width 120)
