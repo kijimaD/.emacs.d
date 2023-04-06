@@ -1440,6 +1440,11 @@ Mermaid JSはテキストから図を描画するライブラリ。
       (blink-cursor-mode -1))
 #+end_src
 
+#+caption: upcase-regionを有効化する
+#+begin_src emacs-lisp
+  (put 'upcase-region 'disabled nil)
+#+end_src
+
 * Packages
 未分類の設定。拡張設定。
 
@@ -1876,6 +1881,8 @@ Mermaid JSはテキストから図を描画するライブラリ。
           ("https://github.com/moby/moby/releases.atom" Docker)
           ("https://api.syosetu.com/writernovel/235132.Atom" novel)
           ("https://hackerstations.com/index.xml" programmer)
+          ("https://qiita.com/tenntenn/feed" Go)
+          ("https://go.dev/blog/feed.atom?format=xml" Go)
           ))
 
     (setq elfeed-search-title-max-width 120)
@@ -3067,9 +3074,6 @@ doom themeはモダンなテーマ集。
 describe-minor-mode-from-indicator で調べられる。
 
 * EXWM
-:PROPERTIES:
-:ID:       c99b472b-dd3b-494e-a733-5cbf95781064
-:END:
 EXWMはEmacs上で動くウィンドウマネージャ。
 - https://github.com/daviwil/emacs-from-scratch/blob/39f63fe133cd4c41e13bbd1551c6517162851411/show-notes/Emacs-Desktop-03.org
 
@@ -3234,9 +3238,6 @@ EXWMはEmacs上で動くウィンドウマネージャ。
 randr関係の修正をしたときは、 ~(exwm-randr-refresh)~ を実行して反映する。例えば、画面と対応したワークスペースを変更したとき。
 
 * Polybar
-:PROPERTIES:
-:ID:       31fe46cc-99bc-46e5-bf49-0483fcdd99ed
-:END:
 polybarは柔軟にカスタマイズできるメニューバーを表示するソフトウェア。polybarとの連携を記載する。
 
 #+caption: polybarプロセスを保持する変数
@@ -3301,9 +3302,6 @@ polybarは柔軟にカスタマイズできるメニューバーを表示する�
   (persp-switch "1")
 #+end_src
 * Hydra
-:PROPERTIES:
-:ID:       0e450475-54cf-432d-8a75-d8a55b6c83bf
-:END:
 Hydraはカスタマイズ可能なキー表示を追加するパッケージ。キーバインド空間を制限しつつ、入力のヒントを表示して使いやすくする。
 
 #+caption: グローバルに便利なメニューを追加する
@@ -3329,7 +3327,7 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
         ("c" recompile "recompile")
         ("s" counsel-search "google")
         ("!" org-pomodoro "start pomodoro")
-        ("n" kd/switch-elfeed "elfeed"))
+        ("n" elfeed "elfeed"))
 
        "Git"
        (("g" git-link)
@@ -3430,9 +3428,6 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
 メジャーモードに対するhydraを設定する。
 
 * Display Manager
-:PROPERTIES:
-:ID:       f4b160f4-be75-4af6-a986-b3e097c79e7b
-:END:
 OS操作の便利関数。
 
 #+caption: 音量調整する
@@ -3489,10 +3484,15 @@ OS操作の便利関数。
 #+end_src
 
 あまり使ってないのでコメントアウトしている。
+* gptel
+
+gptelはChatGPTのEmacsクライアント。
+
+#+begin_src emacs-lisp
+(setq gptel-default-mode 'org-mode)
+#+end_src
+
 * Helper
-:PROPERTIES:
-:ID:       5d064781-26b9-451d-86a5-11071e388796
-:END:
 
 その他の便利関数。
 

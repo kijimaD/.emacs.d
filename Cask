@@ -7,6 +7,7 @@
 ;; Try
 (depends-on "smart-newline")
 (depends-on "smartparens")
+(depends-on "gptel")
 
 ;; Install Packages
 (depends-on "ace-jump-mode")

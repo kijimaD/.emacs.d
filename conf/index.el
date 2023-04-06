@@ -985,6 +985,8 @@ How to send a bug report:
 (if (fboundp 'blink-cursor-mode)
       (blink-cursor-mode -1))
 
+(put 'upcase-region 'disabled nil)
+
 (savehist-mode 1)
 
 (push 'compile-command savehist-additional-variables)
@@ -1304,6 +1306,8 @@ How to send a bug report:
         ("https://github.com/moby/moby/releases.atom" Docker)
         ("https://api.syosetu.com/writernovel/235132.Atom" novel)
         ("https://hackerstations.com/index.xml" programmer)
+        ("https://qiita.com/tenntenn/feed" Go)
+        ("https://go.dev/blog/feed.atom?format=xml" Go)
         ))
 
   (setq elfeed-search-title-max-width 120)
@@ -2378,7 +2382,7 @@ How to send a bug report:
       ("c" recompile "recompile")
       ("s" counsel-search "google")
       ("!" org-pomodoro "start pomodoro")
-      ("n" kd/switch-elfeed "elfeed"))
+      ("n" elfeed "elfeed"))
 
      "Git"
      (("g" git-link)
@@ -2502,6 +2506,11 @@ How to send a bug report:
 ;; (use-package ej-dict
 ;;   :straight (:host github :repo "kijimaD/ej-dict"))
 ;; (ej-dict-install-dict)
+
+(use-package denote-menu
+  :straight (:host github :repo "namilus/denote-menu"))
+
+(setq gptel-default-mode 'org-mode)
 
 (defun my-exchange-point-and-mark ()
   (interactive)
