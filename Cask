@@ -7,6 +7,7 @@
 ;; Try
 (depends-on "smart-newline")
 (depends-on "smartparens")
+(depends-on "gptel")
 
 ;; Install Packages
 (depends-on "ace-jump-mode")
@@ -30,7 +31,6 @@
 (depends-on "coffee-mode")
 (depends-on "command-log-mode")
 (depends-on "corfu")
-(depends-on "corfu-doc")
 (depends-on "counsel")
 (depends-on "counsel-gtags")
 (depends-on "counsel-projectile")

@@ -24,10 +24,11 @@
 
 (setq org-startup-with-inline-images t)
 
-(setq org-todo-keywords '((type "TODO" "WIP" "|" "DONE" "CLOSE")))
+(setq org-todo-keywords '((type "TODO" "WIP" "WAIT" "|" "DONE" "CLOSE")))
 (setq org-todo-keyword-faces
       '(("TODO" . (:foreground "orange" :weight bold))
         ("WIP" . (:foreground "DeepSkyBlue" :weight bold))
+        ("WAIT" . (:foreground "yellow" :weight bold))
         ("DONE" . (:foreground "green" :weight bold))
         ("CLOSE" . (:foreground "DarkOrchid" :weight bold))))
 
@@ -102,7 +103,8 @@
   (add-to-list 'org-structure-template-alist '("sc" . "src scala"))
   (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
   (add-to-list 'org-structure-template-alist '("sq" . "src sql"))
-  (add-to-list 'org-structure-template-alist '("ts" . "src typescript")))
+  (add-to-list 'org-structure-template-alist '("ts" . "src typescript"))
+  (add-to-list 'org-structure-template-alist '("mm" . "src mermaid")))
 
 (require 'visual-fill-column)
 (defun kd/centering-buffer ()
@@ -436,6 +438,7 @@ How to send a bug report:
 (define-key global-map (kbd "C-c n l") 'org-roam-buffer-toggle)
 (define-key global-map (kbd "C-M-i") 'completion-at-point)
 
+(setq my-todo-file "~/roam/20230202234553-inbox.org")
 (setq org-roam-capture-templates
       '(("t" "TODO" entry
          (file+headline my-todo-file "Inbox")
@@ -471,6 +474,9 @@ How to send a bug report:
 
 (defun org-agenda-default ()
   (interactive)
+  ;; mini-bufferを開いている間にpersp-switchが走ると、プロンプトが残り続けるのを防ぐ
+  (when (window-minibuffer-p)
+    (minibuffer-keyboard-quit))
   (persp-switch "2")
   (org-agenda nil "z"))
 (global-set-key (kbd "<f6>") 'org-agenda-default)
@@ -516,42 +522,45 @@ How to send a bug report:
 (setq org-agenda-start-day "7d")
 
 (setq org-agenda-custom-commands
-        '(("z" "Super zaen view"
-           ((agenda "" ((org-agenda-span 'day)
-                        (org-super-agenda-groups
-                         '((:name "🏗️Today"
-                                  :time-grid t
-                                  :date today
-                                  :scheduled today
-                                  :order 1)
-                           (:name "🍵Future"
-                                  :deadline future
-                                  :scheduled future
-                                  :order 10)
-                           (:name "Overdue"
-                                  :deadline past
-                                  :order 10)
-                           (:habit t)
-                           (:log t)
-                           (:discard (:anything))))))
-            (alltodo "" ((org-agenda-overriding-header "")
-                         (org-super-agenda-groups
-                          '((:name "▶️Work In Progress"
-                                   :todo "WIP"
-                                   :order 1)
-                            (:name "✍To write"
-                                   :tag "Write"
-                                   :order 12)
-                            (:name "📕To read"
-                                   :tag "Read"
-                                   :order 14)
-                            (:name "✍Things I Don't Know"
-                                   :tag "DontKnow"
-                                   :order 15)
-                            (:name "🛤️Train"
-                                   :tag "Train"
-                                   :order 18)
-                            (:discard (:anything t))))))))))
+      '(("z" "Super zaen view"
+         ((agenda "" ((org-agenda-span 'day)
+                      (org-super-agenda-groups
+                       '((:name "🏗️Today"
+                                :time-grid t
+                                :date today
+                                :scheduled today
+                                :order 1)
+                         (:name "Overdue"
+                                :deadline past
+                                :scheduled past
+                                :order 3)
+                         (:habit t)
+                         (:log t)
+                         (:discard (:anything))))))
+          (alltodo "" ((org-agenda-overriding-header "")
+                       (org-super-agenda-groups
+                        '((:name "▶️Work In Progress"
+                                 :todo "WIP"
+                                 :order 1)
+                          (:name "🔦Next"
+                                 :effort> "0:01"
+                                 :order 5)
+                          (:name "✍To write"
+                                 :tag "Write"
+                                 :order 12)
+                          (:name "📕To read"
+                                 :tag "Read"
+                                 :order 14)
+                          (:name "✍Things I Don't Know"
+                                 :tag "DontKnow"
+                                 :order 15)
+                          (:name "🛤️Train"
+                                 :tag "Train"
+                                 :order 18)
+                         (:name "🍵TODO"
+                                :todo "TODO"
+                                :order 20)
+                          (:discard (:anything t))))))))))
 
 (setq org-clocktable-defaults '(:maxlevel 3 :scope agenda :tags "" :block today :step day :stepskip0 true :fileskip0 true))
 
@@ -567,6 +576,27 @@ How to send a bug report:
       org-habit-preceding-days 10
       org-habit-graph-column 80 ;; 見出しが隠れるため
       org-habit-show-habits t)
+
+(setq org-agenda-prefix-format
+      `((agenda . " %i %-12(vulpea-agenda-category)%?-12t% s")
+        (todo . " %i %-12(vulpea-agenda-category)%?-12t%-6e% s")
+        (tags . " %i %-12(vulpea-agenda-category) ")
+        (search . " %i %-12(vaulpea-agenda-category) ")))
+
+;; original -> https://d12frosted.io/posts/2020-06-24-task-management-with-roam-vol2.html
+(defun vulpea-agenda-category ()
+  (let* ((title (vulpea-buffer-prop-get "title")))
+    title))
+
+(defun vulpea-buffer-prop-get (name)
+  "Get a buffer property called NAME as a string."
+  (org-with-point-at 1
+    (if (re-search-forward (concat "^#\\+" name ": \\(.*\\)")
+                           (point-max) t)
+        (buffer-substring-no-properties
+         (match-beginning 1)
+         (match-end 1))
+      "")))
 
 (org-super-agenda-mode)
 
@@ -632,7 +662,7 @@ How to send a bug report:
 (add-hook 'org-pomodoro-short-break-finished-hook 'org-agenda-default)
 (add-hook 'org-pomodoro-long-break-finished-hook 'org-agenda-default)
 
-(setq org-clock-mode-line-total 'today)
+(setq org-clock-mode-line-total 'all)
 
 (defun kd/org-pomodoro-remain-gauge (max-minutes)
   "Display remain time gauge."
@@ -680,11 +710,21 @@ How to send a bug report:
     ""))
 
 (defun kd/pmd-today-point-display ()
-  ;; (format " [%s]" kd/pmd-today-point)
   (let* ((all-minute (* kd/pmd-today-point 25))
          (hour (/ all-minute 60))
          (minute (% all-minute 60)))
-    (format " %s %spts/%02dh%02dm" (kd/effort-timer) kd/pmd-today-point hour minute)))
+    (format
+     ;; " %s %dpts/%02dh%02dm %d"
+     " %s %d ¥%d"
+            (kd/effort-timer)
+            kd/pmd-today-point
+            ;; hour
+            ;; minute
+            (kd/pmd-money 1500 100))))
+
+(defun kd/pmd-money (perpts perminute)
+  (let* ((progress (- 25 (/ (org-pomodoro-remaining-seconds) 60))) )
+      (+ (* kd/pmd-today-point perpts) (* progress perminute))))
 
 (defvar kd/pmd-today-point 0)
 (add-hook 'org-pomodoro-finished-hook
@@ -712,6 +752,56 @@ How to send a bug report:
                       ("Read" . ?r)
                       ("DontKnow" . ?d)
                       ("Train" . ?t)))
+
+(require 'mermaid-mode)
+
+(setq mermaid-mmdc-location "docker")
+(setq mermaid-flags '(concat "run --rm -u 1000 -v /tmp:/tmp -v "
+                            (projectile-project-root)
+                            ":"
+                            (projectile-project-root)
+                            " ghcr.io/mermaid-js/mermaid-cli/mermaid-cli:9.1.6"))
+
+(defun org-babel-execute:mermaid (body params)
+  "Execute command with BODY and PARAMS from src block."
+  (let* ((out-file (or (cdr (assoc :file params))
+                       (error "Mermaid requires a \":file\" header argument")))
+         (temp-file (org-babel-temp-file "mermaid-"))
+         (cmd (concat (shell-quote-argument mermaid-mmdc-location)
+                      " " (eval mermaid-flags)
+                      " -o " (org-babel-process-file-name out-file)
+                      " -i " temp-file
+                      )))
+    (with-temp-file temp-file (insert body))
+    (org-babel-eval cmd "")
+    nil))
+
+(defun kd/random-alnum ()
+  (let* ((alnum "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
+         (i (% (abs (random)) (length alnum))))
+    (substring alnum i (1+ i))))
+
+(defun kd/random-letter-string (num)
+  (interactive)
+  (let ((str ""))
+    (dotimes (num num)
+      (setq str (concat str (kd/random-alnum)))
+      )
+    str))
+
+(defun kd/timestamp ()
+  (let* ((date org-agenda-current-date)
+         (y (nth 2 date))
+         (d (nth 1 date))
+         (m (nth 0 date))
+         (time (format-time-string "%H%M%S" (current-time))))
+    (format "%04d%02d%02d%s" y m d time)))
+
+(defun kd/insert-rand-png ()
+  (interactive)
+  (insert (concat "images/" (kd/timestamp) "-" (kd/random-letter-string 10) ".png")))
+
+(add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
 
 (when window-system
   (progn
@@ -894,6 +984,8 @@ How to send a bug report:
 
 (if (fboundp 'blink-cursor-mode)
       (blink-cursor-mode -1))
+
+(put 'upcase-region 'disabled nil)
 
 (savehist-mode 1)
 
@@ -1201,16 +1293,28 @@ How to send a bug report:
       '(mozc-handle-event self-insert-command))
 
 (setq elfeed-feeds
-      '(("https://www.sanityinc.com/feed.xml" sanityinc blog)
-        ("https://sachachua.com/blog/category/weekly/feed/" sachachua blog)
+      '(("https://www.sanityinc.com/feed.xml" Emacs)
+        ("https://github.com/emacs-mirror/emacs/releases.atom" Emacs)
+        ("https://sachachua.com/blog/category/weekly/feed/" Emacs)
+        ("http://pragmaticemacs.com/feed/" Emacs)
         ("https://techracho.bpsinc.jp/feed" Ruby Rails)
-        ("http://b.hatena.ne.jp/t-wada/rss" Test)
-        ("https://cprss.s3.amazonaws.com/rubyweekly.com.xml" Ruby weekly)
-        ("https://news.ycombinator.com/rss" Ruby weekly)
-        ("http://pragmaticemacs.com/feed/" Pragmatic Emacs)))
+        ;; ("https://cprss.s3.amazonaws.com/rubyweekly.com.xml" Ruby)
+        ("http://b.hatena.ne.jp/t-wada/rss" test)
+        ("https://news.ycombinator.com/rss" news)
+        ("https://efcl.info/feed/" Javascript)
+        ("https://github.com/golang/go/releases.atom" Go)
+        ("https://github.com/moby/moby/releases.atom" Docker)
+        ("https://api.syosetu.com/writernovel/235132.Atom" novel)
+        ("https://hackerstations.com/index.xml" programmer)
+        ("https://qiita.com/tenntenn/feed" Go)
+        ("https://go.dev/blog/feed.atom?format=xml" Go)
+        ))
 
-;; default-browser
-(setq browse-url-browser-function 'browse-url-firefox)
+  (setq elfeed-search-title-max-width 120)
+
+  ;; default-browser
+  (setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "google-chrome")
 
 (require 'google-this)
 (google-this-mode 1)
@@ -1328,6 +1432,7 @@ How to send a bug report:
 (flycheck-define-checker textlint
   "A linter for Markdown."
   :command ("textlint" "--format" "unix" source)
+  ;; :command ("docker" "run" "-v" "/home/silver/roam:/home/silver/roam" "--rm" "ghcr.io/kijimad/roam_textlint" "textlint" "-c" "/home/silver/roam/.textlintrc" "--format" "unix" source)
   :error-patterns
   ((warning line-start (file-name) ":" line ":" column ": "
             (id (one-or-more (not (any " "))))
@@ -1569,7 +1674,6 @@ How to send a bug report:
 (add-to-list 'auto-mode-alist '("\\.js[x]?$" . web-mode));; js + jsx
 (add-to-list 'auto-mode-alist '("\\.tsx$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.[gj]sp\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
@@ -2121,17 +2225,13 @@ How to send a bug report:
 
   (call-process-shell-command "shepherd")
   (call-process-shell-command "~/dotfiles/.config/polybar/launch.sh")
-  (call-process-shell-command "blueberry")
 
-  (exwm-workspace-switch-create 2)
+  (exwm-workspace-switch-create 0)
   (start-process-shell-command "google-chrome" nil "google-chrome")
-  (sleep-for 1)
-  (start-process-shell-command "firefox" nil "firefox")
-  (sleep-for 1)
+  (sleep-for 2)
   (start-process-shell-command "spotify" nil "spotify")
   (sleep-for 1)
 
-  (exwm-workspace-switch-create 0)
   (persp-switch "1")
   (delete-other-windows)
   (if (file-exists-p org-journal-dir)
@@ -2145,9 +2245,9 @@ How to send a bug report:
   (org-agenda nil "z")
   (persp-switch "3")
   (split-window-right)
-  (switch-to-buffer "firefox")
+  (switch-to-buffer "Google-chrome")
   (persp-switch "4")
-  (switch-to-buffer "firefox")
+  (switch-to-buffer "Google-chrome")
   (vterm-toggle)
   (vterm-toggle)
   (persp-switch "5")
@@ -2281,10 +2381,11 @@ How to send a bug report:
      (("e" counsel-linux-app "run")
       ("c" recompile "recompile")
       ("s" counsel-search "google")
-      ("!" org-pomodoro "start pomodoro"))
+      ("!" org-pomodoro "start pomodoro")
+      ("n" elfeed "elfeed"))
 
      "Git"
-     (("g" magit-blame)
+     (("g" git-link)
       (">" git-gutter+-next-hunk)
       ("<" git-gutter+-previous-hunk)
       ("@" git-timemachine))
@@ -2405,6 +2506,11 @@ How to send a bug report:
 ;; (use-package ej-dict
 ;;   :straight (:host github :repo "kijimaD/ej-dict"))
 ;; (ej-dict-install-dict)
+
+(use-package denote-menu
+  :straight (:host github :repo "namilus/denote-menu"))
+
+(setq gptel-default-mode 'org-mode)
 
 (defun my-exchange-point-and-mark ()
   (interactive)
