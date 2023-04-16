@@ -964,19 +964,12 @@ org-pomodoro用の設定。
            (hour (/ all-minute 60))
            (minute (% all-minute 60)))
       (format
-       ;; " %s %dpts/%02dh%02dm %d"
-       " %s %d ¥%d"
+       " %s %dpts/%02dh%02dm"
               (kd/effort-timer)
               kd/pmd-today-point
-              ;; hour
-              ;; minute
-              (kd/pmd-money 1500 100))))
-#+end_src
-
-#+begin_src emacs-lisp
-    (defun kd/pmd-money (perpts perminute)
-      (let* ((progress (- 25 (/ (org-pomodoro-remaining-seconds) 60))) )
-          (+ (* kd/pmd-today-point perpts) (* progress perminute))))
+              hour
+              minute
+              )))
 #+end_src
 
 - https://colekillian.com/posts/org-pomodoro-and-polybar/

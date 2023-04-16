@@ -714,17 +714,12 @@ How to send a bug report:
          (hour (/ all-minute 60))
          (minute (% all-minute 60)))
     (format
-     ;; " %s %dpts/%02dh%02dm %d"
-     " %s %d ¥%d"
+     " %s %dpts/%02dh%02dm"
             (kd/effort-timer)
             kd/pmd-today-point
-            ;; hour
-            ;; minute
-            (kd/pmd-money 1500 100))))
-
-(defun kd/pmd-money (perpts perminute)
-  (let* ((progress (- 25 (/ (org-pomodoro-remaining-seconds) 60))) )
-      (+ (* kd/pmd-today-point perpts) (* progress perminute))))
+            hour
+            minute
+            )))
 
 (defvar kd/pmd-today-point 0)
 (add-hook 'org-pomodoro-finished-hook
@@ -1869,7 +1864,7 @@ How to send a bug report:
 (global-corfu-mode)
 
 (setq corfu-auto t)
-(setq corfu-auto-prefix 3)
+(setq corfu-auto-prefix 5)
 (setq corfu-count 15)
 (setq corfu-cycle t)
 (setq corfu-preselect-first t) ;; 自動的に最初の候補を選択する
