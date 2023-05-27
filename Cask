@@ -60,6 +60,7 @@
 (depends-on "elm-mode")
 (depends-on "emacsql")
 (depends-on "emacsql-sqlite")
+(depends-on "ement")
 (depends-on "epc")
 (depends-on "epl")
 (depends-on "eradio")

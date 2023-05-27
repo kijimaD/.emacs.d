@@ -1289,26 +1289,45 @@ How to send a bug report:
 
 (setq elfeed-feeds
       '(("https://www.sanityinc.com/feed.xml" Emacs)
-        ("https://github.com/emacs-mirror/emacs/releases.atom" Emacs)
         ("https://sachachua.com/blog/category/weekly/feed/" Emacs)
         ("http://pragmaticemacs.com/feed/" Emacs)
         ("https://techracho.bpsinc.jp/feed" Ruby Rails)
-        ;; ("https://cprss.s3.amazonaws.com/rubyweekly.com.xml" Ruby)
+        ("https://cprss.s3.amazonaws.com/rubyweekly.com.xml" Ruby)
         ("http://b.hatena.ne.jp/t-wada/rss" test)
-        ("https://news.ycombinator.com/rss" news)
         ("https://efcl.info/feed/" Javascript)
-        ("https://github.com/golang/go/releases.atom" Go)
-        ("https://github.com/moby/moby/releases.atom" Docker)
         ("https://api.syosetu.com/writernovel/235132.Atom" novel)
         ("https://hackerstations.com/index.xml" programmer)
-        ("https://qiita.com/tenntenn/feed" Go)
+        ("https://medium.com/feed/a-journey-with-go" Go)
+        ("https://dev.to/feed/go" Go)
         ("https://go.dev/blog/feed.atom?format=xml" Go)
+        ("https://hashnode.com/n/go/rss" Go)
+        ("https://systemcrafters.net/rss/news.xml" Go)
+
+        ("https://github.com/golang/go/releases.atom" Go Release)
+        ("https://github.com/moby/moby/releases.atom" Docker Release)
+        ("https://github.com/emacs-mirror/emacs/releases.atom" Emacs Release)
+        ("https://github.com/org-roam/org-roam/releases.atom" Roam Release)
+        ("https://github.com/bbatsov/projectile/commits/master.atom" Projectile Commits)
+
+        ("https://github.com/golang/go/commits/master.atom" Go Commits)
+        ("https://github.com/moby/moby/commits/master.atom" Docker Commits)
+
+        ("https://rsshub.app/github/issue/golang/go" Go Issue)
+        ("https://rsshub.app/github/pull/golang/go" Go PR)
+
+        ("https://qiita.com/tenntenn/feed" Go)
+        ("https://qiita.com/tags/go/feed" Go)
+        ("https://qiita.com/tags/emacs/feed" Emacs)
+        ("https://qiita.com/tags/docker/feed" Docker)
+
+        ("https://www.google.co.jp/alerts/feeds/18314632660060291493/1974749529968771550" Go)
+        ("https://www.google.co.jp/alerts/feeds/18314632660060291493/16463790002093771130" Emacs)
         ))
 
-  (setq elfeed-search-title-max-width 120)
+(setq elfeed-search-title-max-width 120)
 
-  ;; default-browser
-  (setq browse-url-browser-function 'browse-url-generic
+;; default-browser
+(setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "google-chrome")
 
 (require 'google-this)
@@ -1864,7 +1883,7 @@ How to send a bug report:
 (global-corfu-mode)
 
 (setq corfu-auto t)
-(setq corfu-auto-prefix 5)
+(setq corfu-auto-prefix 3)
 (setq corfu-count 15)
 (setq corfu-cycle t)
 (setq corfu-preselect-first t) ;; 自動的に最初の候補を選択する
@@ -2361,7 +2380,8 @@ How to send a bug report:
     ("Media"
      (("<prior>" kd/mint-volume-up "up")
       ("<next>" kd/mint-volume-down "down")
-      ("<pause>" kd/player-stop "stop"))
+      ("<pause>" kd/player-stop "stop")
+      ("<SPC>" eradio-toggle "stop"))
 
      "Find"
      (("a" counsel-apropos "apropos")
