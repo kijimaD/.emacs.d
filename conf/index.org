@@ -1860,41 +1860,46 @@ Mermaid JSはテキストから図を描画するライブラリ。
 
 #+caption: elfeed
 #+begin_src emacs-lisp
+  (require 'elfeed)
   (setq elfeed-feeds
-        '(("https://www.sanityinc.com/feed.xml" Emacs)
-          ("https://sachachua.com/blog/category/weekly/feed/" Emacs)
-          ("http://pragmaticemacs.com/feed/" Emacs)
-          ("https://techracho.bpsinc.jp/feed" Ruby Rails)
-          ("https://cprss.s3.amazonaws.com/rubyweekly.com.xml" Ruby)
+        '(("https://www.sanityinc.com/feed.xml" emacs)
+          ("https://sachachua.com/blog/category/weekly/feed/" emacs)
+          ("http://pragmaticemacs.com/feed/" emacs)
+          ("https://techracho.bpsinc.jp/feed" ruby rails)
+          ("https://cprss.s3.amazonaws.com/rubyweekly.com.xml" ruby)
           ("http://b.hatena.ne.jp/t-wada/rss" test)
-          ("https://efcl.info/feed/" Javascript)
+          ("https://efcl.info/feed/" javascript)
           ("https://api.syosetu.com/writernovel/235132.Atom" novel)
           ("https://hackerstations.com/index.xml" programmer)
-          ("https://medium.com/feed/a-journey-with-go" Go)
-          ("https://dev.to/feed/go" Go)
-          ("https://go.dev/blog/feed.atom?format=xml" Go)
-          ("https://hashnode.com/n/go/rss" Go)
-          ("https://systemcrafters.net/rss/news.xml" Go)
+          ("https://medium.com/feed/a-journey-with-go" go)
+          ("https://dev.to/feed/go" go)
+          ("https://go.dev/blog/feed.atom?format=xml" go)
+          ("https://hashnode.com/n/go/rss" go)
+          ("https://systemcrafters.net/rss/news.xml" systemcrafters)
 
-          ("https://github.com/golang/go/releases.atom" Go Release)
-          ("https://github.com/moby/moby/releases.atom" Docker Release)
-          ("https://github.com/emacs-mirror/emacs/releases.atom" Emacs Release)
-          ("https://github.com/org-roam/org-roam/releases.atom" Roam Release)
-          ("https://github.com/bbatsov/projectile/commits/master.atom" Projectile Commits)
+          ("https://github.com/golang/go/releases.atom" go release)
+          ("https://github.com/moby/moby/releases.atom" docker release)
+          ("https://github.com/emacs-mirror/emacs/releases.atom" emacs release)
+          ("https://github.com/org-roam/org-roam/releases.atom" roam release)
+          ("https://github.com/bbatsov/projectile/commits/master.atom" projectile commits)
 
-          ("https://github.com/golang/go/commits/master.atom" Go Commits)
-          ("https://github.com/moby/moby/commits/master.atom" Docker Commits)
+          ("https://github.com/golang/go/commits/master.atom" go commits)
+          ("https://github.com/moby/moby/commits/master.atom" docker commits)
 
-          ("https://rsshub.app/github/issue/golang/go" Go Issue)
-          ("https://rsshub.app/github/pull/golang/go" Go PR)
+          ("https://rsshub.app/github/issue/golang/go" go issue)
+          ("https://rsshub.app/github/pull/golang/go" go pr)
+          ("https://rsshub.app/github/issue/moby/moby" docker issue)
+          ("https://rsshub.app/github/pull/moby/moby" docker pr)
+          ("https://rsshub.app/github/issue/emacs-mirror/emacs" emacs issue)
+          ("https://rsshub.app/github/pull/emacs-mirror/emacs" emacs pr)
 
-          ("https://qiita.com/tenntenn/feed" Go)
-          ("https://qiita.com/tags/go/feed" Go)
-          ("https://qiita.com/tags/emacs/feed" Emacs)
-          ("https://qiita.com/tags/docker/feed" Docker)
+          ("https://qiita.com/tenntenn/feed" go)
+          ("https://qiita.com/tags/go/feed" go)
+          ("https://qiita.com/talgs/emacs/feed" emacs)
+          ("https://qiita.com/tags/docker/feed" docker)
 
-          ("https://www.google.co.jp/alerts/feeds/18314632660060291493/1974749529968771550" Go)
-          ("https://www.google.co.jp/alerts/feeds/18314632660060291493/16463790002093771130" Emacs)
+          ("https://www.google.co.jp/alerts/feeds/18314632660060291493/1974749529968771550" go)
+          ("https://www.google.co.jp/alerts/feeds/18314632660060291493/16463790002093771130" emacs)
           ))
 
   (setq elfeed-search-title-max-width 120)
@@ -1902,6 +1907,40 @@ Mermaid JSはテキストから図を描画するライブラリ。
   ;; default-browser
   (setq browse-url-browser-function 'browse-url-generic
         browse-url-generic-program "google-chrome")
+#+end_src
+
+#+caption: 色付け
+#+begin_src emacs-lisp
+  ;; 青
+  (defface elfeed-face-tag-go
+    '((t :foreground "#28f"))
+    "go tag face in Elfeed.")
+  (push '(go elfeed-face-tag-go)
+        elfeed-search-face-alist)
+  ;; 濃青
+  (defface elfeed-face-tag-docker
+    '((t :foreground "#46d"))
+    "docker tag face in Elfeed.")
+  (push '(docker elfeed-face-tag-docker)
+        elfeed-search-face-alist)
+  ;; 赤
+  (defface elfeed-face-tag-ruby
+    '((t :foreground "#d12e59"))
+    "ruby tag face in Elfeed.")
+  (push '(ruby elfeed-face-tag-ruby)
+        elfeed-search-face-alist)
+  ;; 紫
+  (defface elfeed-face-tag-emacs
+    '((t :foreground "#9933ff"))
+    "emacs tag face in Elfeed.")
+  (push '(emacs elfeed-face-tag-emacs)
+        elfeed-search-face-alist)
+  ;; 黄緑
+  (defface elfeed-face-tag-systemcrafters
+    '((t :foreground "#9933ff"))
+    "systemcrafters tag face in Elfeed.")
+  (push '(systemcrafters elfeed-face-tag-systemcrafters)
+        elfeed-search-face-alist)
 #+end_src
 
 #+caption: google-this
