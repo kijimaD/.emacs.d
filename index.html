@@ -3,11 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-05-27 Sat 10:54 -->
+<!-- 2023-06-27 Tue 02:43 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>kijimad Emacs Config</title>
-<meta name="author" content="runner" />
 <meta name="generator" content="Org Mode" />
 <style>
   #content { max-width: 60em; margin: auto; }
@@ -238,65 +237,66 @@ if (typeof HS_STARTUP_FOLDED === 'undefined') {    var HS_STARTUP_FOLDED = false
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orge995047">Emacs</a></li>
-<li><a href="#org2536cef">Org</a>
+<li><a href="#org2b2f671">Emacs</a></li>
+<li><a href="#orgcd3482a">Org</a>
 <ul>
-<li><a href="#org6498abc">open-junk-file</a></li>
-<li><a href="#org5a949ea">org-superstar</a></li>
-<li><a href="#orge5c171f">org-modern</a></li>
-<li><a href="#org7bec97a">org-stickey-header</a></li>
-<li><a href="#orgfca5fd9">org-tree-slide</a></li>
-<li><a href="#org4992698">org-journal</a></li>
-<li><a href="#orgb3234c6">pdf-tools</a></li>
-<li><a href="#org2735a31">org-download</a></li>
-<li><a href="#org371c9e4">org-roam</a></li>
-<li><a href="#org3d6cefc">org-alert</a></li>
-<li><a href="#orgc3fddb4">denote</a></li>
-<li><a href="#org45fe5fc">org-agenda</a></li>
-<li><a href="#org0570288">org-super-agenda</a></li>
-<li><a href="#orgd3e0abe">org-pomodoro</a></li>
-<li><a href="#org473d63e">org-effort</a></li>
-<li><a href="#org62753c3">org-tag</a></li>
-<li><a href="#org06854e1">Mermaid</a></li>
+<li><a href="#orgac906b8">open-junk-file</a></li>
+<li><a href="#org30dd472">org-superstar</a></li>
+<li><a href="#org20b6b87">org-modern</a></li>
+<li><a href="#orgeb17451">org-stickey-header</a></li>
+<li><a href="#orga980cab">org-tree-slide</a></li>
+<li><a href="#org70c47ad">org-journal</a></li>
+<li><a href="#orgd73742e">pdf-tools</a></li>
+<li><a href="#org2c28f14">org-download</a></li>
+<li><a href="#orgd77b66a">org-roam</a></li>
+<li><a href="#org15e04d4">org-alert</a></li>
+<li><a href="#orgde4c330">denote</a></li>
+<li><a href="#orgb1e5181">org-agenda</a></li>
+<li><a href="#orgd064e4b">org-super-agenda</a></li>
+<li><a href="#org74c5a98">org-pomodoro</a></li>
+<li><a href="#org905950e">org-effort</a></li>
+<li><a href="#orgc8623df">org-tag</a></li>
+<li><a href="#orgf13ee28">Mermaid</a></li>
 </ul>
 </li>
-<li><a href="#orgbd3ecc7">Font</a></li>
-<li><a href="#orgfb6b454">Simple</a></li>
-<li><a href="#orgdb544a2">Packages</a></li>
-<li><a href="#org73fb4bd">Rails</a></li>
-<li><a href="#org89b550c">Go</a></li>
-<li><a href="#orgc70d97a">Python</a></li>
-<li><a href="#orgb9081c9">Haskell</a></li>
-<li><a href="#org18a7aaa">Yaml</a></li>
-<li><a href="#org32c1657">Web</a></li>
-<li><a href="#org8a1427f">LSP</a></li>
-<li><a href="#orgd1a7595">corfu</a></li>
-<li><a href="#orgf6c7c1c">Emacs Lisp</a>
+<li><a href="#org3c348e1">Font</a></li>
+<li><a href="#org5f36660">Simple</a></li>
+<li><a href="#orgb9236ec">Packages</a></li>
+<li><a href="#org50de9a3">Rails</a></li>
+<li><a href="#orgdefb72a">Go</a></li>
+<li><a href="#org6bc3c45">Python</a></li>
+<li><a href="#orgd134160">Haskell</a></li>
+<li><a href="#org2d9c754">Yaml</a></li>
+<li><a href="#org729f4fe">Web</a></li>
+<li><a href="#org06dfffb">LSP</a></li>
+<li><a href="#org2754fb0">corfu</a></li>
+<li><a href="#orgcf79575">Emacs Lisp</a>
 <ul>
-<li><a href="#org4c5a0a0">rispy</a></li>
+<li><a href="#orgbacabd1">rispy</a></li>
 </ul>
 </li>
-<li><a href="#orgc44b044">ivy</a></li>
-<li><a href="#orgfe9812b">counsel</a></li>
-<li><a href="#org8729171">ag</a></li>
-<li><a href="#orgebc536c">eldoc</a></li>
-<li><a href="#org2e794bb">eshell</a></li>
-<li><a href="#org53e79fe">Vterm</a></li>
-<li><a href="#org14f1f29">Theme</a></li>
-<li><a href="#orgf9ea3b7">EXWM</a></li>
-<li><a href="#org2d252b8">Polybar</a></li>
-<li><a href="#orgb9d976f">Workspace</a></li>
-<li><a href="#orge671b6c">Hydra</a></li>
-<li><a href="#orgce89b82">Display Manager</a></li>
-<li><a href="#org3524d40">gptel</a></li>
-<li><a href="#org39d1307">Helper</a></li>
+<li><a href="#org53f03d7">ivy</a></li>
+<li><a href="#orgc949e53">counsel</a></li>
+<li><a href="#org22b5494">ag</a></li>
+<li><a href="#org1b5deb3">eldoc</a></li>
+<li><a href="#org4f4244c">eshell</a></li>
+<li><a href="#org9789030">Vterm</a></li>
+<li><a href="#org8335196">Theme</a></li>
+<li><a href="#orgc6f29aa">EXWM</a></li>
+<li><a href="#orgfb7271c">Polybar</a></li>
+<li><a href="#org1b228ff">Workspace</a></li>
+<li><a href="#orgf7c7a1e">Hydra</a></li>
+<li><a href="#org678a66a">Display Manager</a></li>
+<li><a href="#orgcdcf7d2">gptel</a></li>
+<li><a href="#org5365fe7">Helper</a></li>
+<li><a href="#org35477b6">delve-mode</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orge995047" class="outline-2">
-<h2 id="orge995047">Emacs</h2>
-<div class="outline-text-2" id="text-orge995047">
+<div id="outline-container-org2b2f671" class="outline-2">
+<h2 id="org2b2f671">Emacs</h2>
+<div class="outline-text-2" id="text-org2b2f671">
 <p>
 Emacsの文芸的設定。移行作業中。
 </p>
@@ -318,9 +318,9 @@ Emacsの文芸的設定。移行作業中。
 </div>
 </div>
 
-<div id="outline-container-org2536cef" class="outline-2">
-<h2 id="org2536cef">Org</h2>
-<div class="outline-text-2" id="text-org2536cef">
+<div id="outline-container-orgcd3482a" class="outline-2">
+<h2 id="orgcd3482a">Org</h2>
+<div class="outline-text-2" id="text-orgcd3482a">
 <p>
 org-modeはEmacsのキラーアプリの1つ。パッケージ名であり、ファイルの種類の1つ。ドキュメント管理にスケジュール、時間計測、コード評価を含めることができる。このドキュメントもorg-modeで書かれている。
 </p>
@@ -590,9 +590,9 @@ themeのあとに評価するため、ここでは関数定義だけ。参考 <a
 </div>
 </div>
 
-<div id="outline-container-org6498abc" class="outline-3">
-<h3 id="org6498abc">open-junk-file</h3>
-<div class="outline-text-3" id="text-org6498abc">
+<div id="outline-container-orgac906b8" class="outline-3">
+<h3 id="orgac906b8">open-junk-file</h3>
+<div class="outline-text-3" id="text-orgac906b8">
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 28: </span>Cask install が失敗するので取り込んでいる</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;;; </span><span style="font-weight: bold; font-style: italic;">open-junk-file.el --- Open a junk (memo) file to try-and-error</span>
 
@@ -785,9 +785,9 @@ themeのあとに評価するため、ここでは関数定義だけ。参考 <a
 </div>
 </div>
 
-<div id="outline-container-org5a949ea" class="outline-3">
-<h3 id="org5a949ea">org-superstar</h3>
-<div class="outline-text-3" id="text-org5a949ea">
+<div id="outline-container-org30dd472" class="outline-3">
+<h3 id="org30dd472">org-superstar</h3>
+<div class="outline-text-3" id="text-org30dd472">
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 30: </span>見出しをいい感じにする</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">org-superstar</span>)
 (add-hook 'org-mode-hook (<span style="font-weight: bold;">lambda</span> () (org-superstar-mode 1)))
@@ -795,9 +795,9 @@ themeのあとに評価するため、ここでは関数定義だけ。参考 <a
 </div>
 </div>
 </div>
-<div id="outline-container-orge5c171f" class="outline-3">
-<h3 id="orge5c171f">org-modern</h3>
-<div class="outline-text-3" id="text-orge5c171f">
+<div id="outline-container-org20b6b87" class="outline-3">
+<h3 id="org20b6b87">org-modern</h3>
+<div class="outline-text-3" id="text-org20b6b87">
 <p>
 org-modernはorg-modeの外観をいい感じにするパッケージ。
 </p>
@@ -809,9 +809,9 @@ org-modernはorg-modeの外観をいい感じにするパッケージ。
 </div>
 </div>
 </div>
-<div id="outline-container-org7bec97a" class="outline-3">
-<h3 id="org7bec97a">org-stickey-header</h3>
-<div class="outline-text-3" id="text-org7bec97a">
+<div id="outline-container-orgeb17451" class="outline-3">
+<h3 id="orgeb17451">org-stickey-header</h3>
+<div class="outline-text-3" id="text-orgeb17451">
 <p>
 org-stickey-headerは現在の見出し位置を示すヘッダーを表示するパッケージ。
 ヘッダーの記号が*に戻るので、とりあえず無効化している。
@@ -826,9 +826,9 @@ org-stickey-headerは現在の見出し位置を示すヘッダーを表示す�
 </div>
 </div>
 </div>
-<div id="outline-container-orgfca5fd9" class="outline-3">
-<h3 id="orgfca5fd9">org-tree-slide</h3>
-<div class="outline-text-3" id="text-orgfca5fd9">
+<div id="outline-container-orga980cab" class="outline-3">
+<h3 id="orga980cab">org-tree-slide</h3>
+<div class="outline-text-3" id="text-orga980cab">
 <p>
 org-tree-slideはorg-modeでスライド表示するパッケージ。
 </p>
@@ -841,9 +841,9 @@ org-tree-slideはorg-modeでスライド表示するパッケージ。
 </div>
 </div>
 
-<div id="outline-container-org4992698" class="outline-3">
-<h3 id="org4992698">org-journal</h3>
-<div class="outline-text-3" id="text-org4992698">
+<div id="outline-container-org70c47ad" class="outline-3">
+<h3 id="org70c47ad">org-journal</h3>
+<div class="outline-text-3" id="text-org70c47ad">
 <p>
 org-journalは日付ごとのファイルを生成したり、時刻を挿入できるパッケージ。
 </p>
@@ -899,9 +899,9 @@ org-journalは日付ごとのファイルを生成したり、時刻を挿入で
 </div>
 </div>
 
-<div id="outline-container-orgb3234c6" class="outline-3">
-<h3 id="orgb3234c6">pdf-tools</h3>
-<div class="outline-text-3" id="text-orgb3234c6">
+<div id="outline-container-orgd73742e" class="outline-3">
+<h3 id="orgd73742e">pdf-tools</h3>
+<div class="outline-text-3" id="text-orgd73742e">
 <p>
 Emacs上でpdfを扱うためのパッケージ。orgの項目にあるのは微妙な気がする。
 </p>
@@ -919,9 +919,9 @@ Emacs上でpdfを扱うためのパッケージ。orgの項目にあるのは微
 </div>
 </div>
 
-<div id="outline-container-org2735a31" class="outline-3">
-<h3 id="org2735a31">org-download</h3>
-<div class="outline-text-3" id="text-org2735a31">
+<div id="outline-container-org2c28f14" class="outline-3">
+<h3 id="org2c28f14">org-download</h3>
+<div class="outline-text-3" id="text-org2c28f14">
 <p>
 org-downloadはorg上のリンクから画像をダウンロードして指定のディレクトリに保存できるパッケージ。
 </p>
@@ -934,9 +934,9 @@ org-downloadはorg上のリンクから画像をダウンロードして指定�
 </div>
 </div>
 
-<div id="outline-container-org371c9e4" class="outline-3">
-<h3 id="org371c9e4">org-roam</h3>
-<div class="outline-text-3" id="text-org371c9e4">
+<div id="outline-container-orgd77b66a" class="outline-3">
+<h3 id="orgd77b66a">org-roam</h3>
+<div class="outline-text-3" id="text-orgd77b66a">
 <p>
 org-roamはorgファイルをsqliteによって管理しやすくしたパッケージ。orgファイル同士の関連を挿入したり、リンク元のファイルを一覧にする、といったことができる。sqliteに保存されるので、別でクエリを使って取り出してグラフ描画に使ったりも可能。
 </p>
@@ -988,9 +988,9 @@ org-roamはorgファイルをsqliteによって管理しやすくしたパッケ
 </div>
 </div>
 </div>
-<div id="outline-container-org3d6cefc" class="outline-3">
-<h3 id="org3d6cefc">org-alert</h3>
-<div class="outline-text-3" id="text-org3d6cefc">
+<div id="outline-container-org15e04d4" class="outline-3">
+<h3 id="org15e04d4">org-alert</h3>
+<div class="outline-text-3" id="text-org15e04d4">
 <p>
 org-alertはorg scheduleの項目を時間経過で通知してくれるパッケージ。
 </p>
@@ -1005,9 +1005,9 @@ org-alertはorg scheduleの項目を時間経過で通知してくれるパッ�
 </div>
 </div>
 </div>
-<div id="outline-container-orgc3fddb4" class="outline-3">
-<h3 id="orgc3fddb4">denote</h3>
-<div class="outline-text-3" id="text-orgc3fddb4">
+<div id="outline-container-orgde4c330" class="outline-3">
+<h3 id="orgde4c330">denote</h3>
+<div class="outline-text-3" id="text-orgde4c330">
 <p>
 denoteはシンプルなノートパッケージ。
 </p>
@@ -1022,9 +1022,9 @@ denoteはシンプルなノートパッケージ。
 </div>
 </div>
 
-<div id="outline-container-org45fe5fc" class="outline-3">
-<h3 id="org45fe5fc">org-agenda</h3>
-<div class="outline-text-3" id="text-org45fe5fc">
+<div id="outline-container-orgb1e5181" class="outline-3">
+<h3 id="orgb1e5181">org-agenda</h3>
+<div class="outline-text-3" id="text-orgb1e5181">
 <p>
 org-agendaはorg-modeでtodo管理する機能。
 </p>
@@ -1199,9 +1199,9 @@ org-agendaはorg-modeでtodo管理する機能。
 </div>
 </div>
 
-<div id="outline-container-org0570288" class="outline-3">
-<h3 id="org0570288">org-super-agenda</h3>
-<div class="outline-text-3" id="text-org0570288">
+<div id="outline-container-orgd064e4b" class="outline-3">
+<h3 id="orgd064e4b">org-super-agenda</h3>
+<div class="outline-text-3" id="text-orgd064e4b">
 <p>
 org-super-agendaは詳細に設定できるagenda表示ができるパッケージ。
 </p>
@@ -1257,9 +1257,9 @@ org-super-agendaは詳細に設定できるagenda表示ができるパッケー�
 </div>
 </div>
 
-<div id="outline-container-orgd3e0abe" class="outline-3">
-<h3 id="orgd3e0abe">org-pomodoro</h3>
-<div class="outline-text-3" id="text-orgd3e0abe">
+<div id="outline-container-org74c5a98" class="outline-3">
+<h3 id="org74c5a98">org-pomodoro</h3>
+<div class="outline-text-3" id="text-org74c5a98">
 <p>
 org-pomodoro用の設定。
 </p>
@@ -1396,9 +1396,9 @@ org-pomodoro用の設定。
 </div>
 </div>
 
-<div id="outline-container-org473d63e" class="outline-3">
-<h3 id="org473d63e">org-effort</h3>
-<div class="outline-text-3" id="text-org473d63e">
+<div id="outline-container-org905950e" class="outline-3">
+<h3 id="org905950e">org-effort</h3>
+<div class="outline-text-3" id="text-org905950e">
 <ul class="org-ul">
 <li>org-clock-effort</li>
 <li>mode-line-format</li>
@@ -1407,9 +1407,9 @@ org-pomodoro用の設定。
 </div>
 </div>
 
-<div id="outline-container-org62753c3" class="outline-3">
-<h3 id="org62753c3">org-tag</h3>
-<div class="outline-text-3" id="text-org62753c3">
+<div id="outline-container-orgc8623df" class="outline-3">
+<h3 id="orgc8623df">org-tag</h3>
+<div class="outline-text-3" id="text-orgc8623df">
 <p>
 タグを選択できるようにする。
 </p>
@@ -1423,9 +1423,9 @@ org-pomodoro用の設定。
 </div>
 </div>
 </div>
-<div id="outline-container-org06854e1" class="outline-3">
-<h3 id="org06854e1">Mermaid</h3>
-<div class="outline-text-3" id="text-org06854e1">
+<div id="outline-container-orgf13ee28" class="outline-3">
+<h3 id="orgf13ee28">Mermaid</h3>
+<div class="outline-text-3" id="text-orgf13ee28">
 <p>
 Mermaid JSはテキストから図を描画するライブラリ。
 </p>
@@ -1502,9 +1502,9 @@ Mermaid JSはテキストから図を描画するライブラリ。
 </div>
 </div>
 
-<div id="outline-container-orgbd3ecc7" class="outline-2">
-<h2 id="orgbd3ecc7">Font</h2>
-<div class="outline-text-2" id="text-orgbd3ecc7">
+<div id="outline-container-org3c348e1" class="outline-2">
+<h2 id="org3c348e1">Font</h2>
+<div class="outline-text-2" id="text-org3c348e1">
 <p>
 フォント設定。
 </p>
@@ -1610,9 +1610,9 @@ Mermaid JSはテキストから図を描画するライブラリ。
 </div>
 </div>
 
-<div id="outline-container-orgfb6b454" class="outline-2">
-<h2 id="orgfb6b454">Simple</h2>
-<div class="outline-text-2" id="text-orgfb6b454">
+<div id="outline-container-org5f36660" class="outline-2">
+<h2 id="org5f36660">Simple</h2>
+<div class="outline-text-2" id="text-org5f36660">
 <p>
 未分類の設定。最初から入っているものの設定。
 </p>
@@ -1870,9 +1870,9 @@ Mermaid JSはテキストから図を描画するライブラリ。
 </div>
 </div>
 
-<div id="outline-container-orgdb544a2" class="outline-2">
-<h2 id="orgdb544a2">Packages</h2>
-<div class="outline-text-2" id="text-orgdb544a2">
+<div id="outline-container-orgb9236ec" class="outline-2">
+<h2 id="orgb9236ec">Packages</h2>
+<div class="outline-text-2" id="text-orgb9236ec">
 <p>
 未分類の設定。拡張設定。
 </p>
@@ -2295,41 +2295,36 @@ Mermaid JSはテキストから図を描画するライブラリ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 161: </span>elfeed</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> elfeed-feeds
-      '((<span style="font-style: italic;">"https://www.sanityinc.com/feed.xml"</span> Emacs)
-        (<span style="font-style: italic;">"https://sachachua.com/blog/category/weekly/feed/"</span> Emacs)
-        (<span style="font-style: italic;">"http://pragmaticemacs.com/feed/"</span> Emacs)
-        (<span style="font-style: italic;">"https://techracho.bpsinc.jp/feed"</span> Ruby Rails)
-        (<span style="font-style: italic;">"https://cprss.s3.amazonaws.com/rubyweekly.com.xml"</span> Ruby)
+<label class="org-src-name"><span class="listing-number">Listing 161: </span>elfeed</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">elfeed</span>)
+(<span style="font-weight: bold;">setq</span> elfeed-feeds
+      '((<span style="font-style: italic;">"https://www.sanityinc.com/feed.xml"</span> emacs)
+        (<span style="font-style: italic;">"https://sachachua.com/blog/category/weekly/feed/"</span> emacs)
+        (<span style="font-style: italic;">"http://pragmaticemacs.com/feed/"</span> emacs)
+        (<span style="font-style: italic;">"https://techracho.bpsinc.jp/feed"</span> ruby rails)
+        (<span style="font-style: italic;">"https://cprss.s3.amazonaws.com/rubyweekly.com.xml"</span> ruby)
         (<span style="font-style: italic;">"http://b.hatena.ne.jp/t-wada/rss"</span> test)
-        (<span style="font-style: italic;">"https://efcl.info/feed/"</span> Javascript)
+        (<span style="font-style: italic;">"https://efcl.info/feed/"</span> javascript)
         (<span style="font-style: italic;">"https://api.syosetu.com/writernovel/235132.Atom"</span> novel)
         (<span style="font-style: italic;">"https://hackerstations.com/index.xml"</span> programmer)
-        (<span style="font-style: italic;">"https://medium.com/feed/a-journey-with-go"</span> Go)
-        (<span style="font-style: italic;">"https://dev.to/feed/go"</span> Go)
-        (<span style="font-style: italic;">"https://go.dev/blog/feed.atom?format=xml"</span> Go)
-        (<span style="font-style: italic;">"https://hashnode.com/n/go/rss"</span> Go)
-        (<span style="font-style: italic;">"https://systemcrafters.net/rss/news.xml"</span> Go)
+        (<span style="font-style: italic;">"https://medium.com/feed/a-journey-with-go"</span> go)
+        (<span style="font-style: italic;">"https://dev.to/feed/go"</span> go)
+        (<span style="font-style: italic;">"https://go.dev/blog/feed.atom?format=xml"</span> go)
+        (<span style="font-style: italic;">"https://hashnode.com/n/go/rss"</span> go)
+        (<span style="font-style: italic;">"https://mattn.kaoriya.net/index.rss"</span> go)
+        (<span style="font-style: italic;">"https://systemcrafters.net/rss/news.xml"</span> systemcrafters)
 
-        (<span style="font-style: italic;">"https://github.com/golang/go/releases.atom"</span> Go Release)
-        (<span style="font-style: italic;">"https://github.com/moby/moby/releases.atom"</span> Docker Release)
-        (<span style="font-style: italic;">"https://github.com/emacs-mirror/emacs/releases.atom"</span> Emacs Release)
-        (<span style="font-style: italic;">"https://github.com/org-roam/org-roam/releases.atom"</span> Roam Release)
-        (<span style="font-style: italic;">"https://github.com/bbatsov/projectile/commits/master.atom"</span> Projectile Commits)
+        (<span style="font-style: italic;">"https://github.com/golang/go/releases.atom"</span> go release)
+        (<span style="font-style: italic;">"https://github.com/moby/moby/releases.atom"</span> docker release)
+        (<span style="font-style: italic;">"https://github.com/emacs-mirror/emacs/releases.atom"</span> emacs release)
 
-        (<span style="font-style: italic;">"https://github.com/golang/go/commits/master.atom"</span> Go Commits)
-        (<span style="font-style: italic;">"https://github.com/moby/moby/commits/master.atom"</span> Docker Commits)
+        (<span style="font-style: italic;">"https://zenn.dev/hsaki/feed"</span> go)
+        (<span style="font-style: italic;">"https://zenn.dev/topics/go/feed"</span> go)
 
-        (<span style="font-style: italic;">"https://rsshub.app/github/issue/golang/go"</span> Go Issue)
-        (<span style="font-style: italic;">"https://rsshub.app/github/pull/golang/go"</span> Go PR)
+        (<span style="font-style: italic;">"https://qiita.com/tenntenn/feed"</span> go)
+        (<span style="font-style: italic;">"https://qiita.com/tags/go/feed"</span> go)
+        (<span style="font-style: italic;">"https://qiita.com/talgs/emacs/feed"</span> emacs)
 
-        (<span style="font-style: italic;">"https://qiita.com/tenntenn/feed"</span> Go)
-        (<span style="font-style: italic;">"https://qiita.com/tags/go/feed"</span> Go)
-        (<span style="font-style: italic;">"https://qiita.com/tags/emacs/feed"</span> Emacs)
-        (<span style="font-style: italic;">"https://qiita.com/tags/docker/feed"</span> Docker)
-
-        (<span style="font-style: italic;">"https://www.google.co.jp/alerts/feeds/18314632660060291493/1974749529968771550"</span> Go)
-        (<span style="font-style: italic;">"https://www.google.co.jp/alerts/feeds/18314632660060291493/16463790002093771130"</span> Emacs)
+        (<span style="font-style: italic;">"https://www.rfc-editor.org/rfcrss.xml"</span> rfc)
         ))
 
 (<span style="font-weight: bold;">setq</span> elfeed-search-title-max-width 120)
@@ -2341,20 +2336,60 @@ Mermaid JSはテキストから図を描画するライブラリ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 162: </span>google-this</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">google-this</span>)
+<label class="org-src-name"><span class="listing-number">Listing 162: </span>色付け</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#38738;</span>
+(<span style="font-weight: bold;">defface</span> <span style="font-weight: bold; font-style: italic;">elfeed-face-tag-go</span>
+  '((t <span style="font-weight: bold;">:foreground</span> <span style="font-style: italic;">"#28f"</span>))
+  <span style="font-style: italic;">"go tag face in Elfeed."</span>)
+(<span style="font-weight: bold;">push</span> '(go elfeed-face-tag-go)
+      elfeed-search-face-alist)
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#28611;&#38738;</span>
+(<span style="font-weight: bold;">defface</span> <span style="font-weight: bold; font-style: italic;">elfeed-face-tag-docker</span>
+  '((t <span style="font-weight: bold;">:foreground</span> <span style="font-style: italic;">"#46d"</span>))
+  <span style="font-style: italic;">"docker tag face in Elfeed."</span>)
+(<span style="font-weight: bold;">push</span> '(docker elfeed-face-tag-docker)
+      elfeed-search-face-alist)
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#36196;</span>
+(<span style="font-weight: bold;">defface</span> <span style="font-weight: bold; font-style: italic;">elfeed-face-tag-ruby</span>
+  '((t <span style="font-weight: bold;">:foreground</span> <span style="font-style: italic;">"#d12e59"</span>))
+  <span style="font-style: italic;">"ruby tag face in Elfeed."</span>)
+(<span style="font-weight: bold;">push</span> '(ruby elfeed-face-tag-ruby)
+      elfeed-search-face-alist)
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#32043;</span>
+(<span style="font-weight: bold;">defface</span> <span style="font-weight: bold; font-style: italic;">elfeed-face-tag-emacs</span>
+  '((t <span style="font-weight: bold;">:foreground</span> <span style="font-style: italic;">"#9933ff"</span>))
+  <span style="font-style: italic;">"emacs tag face in Elfeed."</span>)
+(<span style="font-weight: bold;">push</span> '(emacs elfeed-face-tag-emacs)
+      elfeed-search-face-alist)
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#40644;&#32209;</span>
+(<span style="font-weight: bold;">defface</span> <span style="font-weight: bold; font-style: italic;">elfeed-face-tag-systemcrafters</span>
+  '((t <span style="font-weight: bold;">:foreground</span> <span style="font-style: italic;">"#9933ff"</span>))
+  <span style="font-style: italic;">"systemcrafters tag face in Elfeed."</span>)
+(<span style="font-weight: bold;">push</span> '(systemcrafters elfeed-face-tag-systemcrafters)
+      elfeed-search-face-alist)
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#32209;</span>
+(<span style="font-weight: bold;">defface</span> <span style="font-weight: bold; font-style: italic;">elfeed-face-tag-rfc</span>
+  '((t <span style="font-weight: bold;">:foreground</span> <span style="font-style: italic;">"#008000"</span>))
+  <span style="font-style: italic;">"rfc tag face in Elfeed."</span>)
+(<span style="font-weight: bold;">push</span> '(rfc elfeed-face-tag-rfc)
+      elfeed-search-face-alist)
+</pre>
+</div>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 163: </span>google-this</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">google-this</span>)
 (google-this-mode 1)
 (<span style="font-weight: bold;">setq</span> google-this-location-suffix <span style="font-style: italic;">"co.jp"</span>)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 163: </span>define-word</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">define-word</span>)
+<label class="org-src-name"><span class="listing-number">Listing 164: </span>define-word</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">define-word</span>)
 (global-set-key (kbd <span style="font-style: italic;">"&lt;end&gt;"</span>) 'define-word-at-point)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 164: </span>eww</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#25913;&#34892;&#12377;&#12427;&#12424;&#12358;&#12395;&#12377;&#12427;</span>
+<label class="org-src-name"><span class="listing-number">Listing 165: </span>eww</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#25913;&#34892;&#12377;&#12427;&#12424;&#12358;&#12395;&#12377;&#12427;</span>
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">shr-insert-document--for-eww</span> (<span style="font-weight: bold; text-decoration: underline;">&amp;rest</span> them)
   (<span style="font-weight: bold;">let</span> ((shr-width 70)) (apply them)))
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">eww-display-html--fill-column</span> (<span style="font-weight: bold; text-decoration: underline;">&amp;rest</span> them)
@@ -2463,7 +2498,7 @@ Mermaid JSはテキストから図を描画するライブラリ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 165: </span>flycheck + textlint</label><pre class="src src-emacs-lisp">(flycheck-define-checker textlint
+<label class="org-src-name"><span class="listing-number">Listing 166: </span>flycheck + textlint</label><pre class="src src-emacs-lisp">(flycheck-define-checker textlint
   <span style="font-style: italic;">"A linter for Markdown."</span>
   <span style="font-weight: bold;">:command</span> (<span style="font-style: italic;">"textlint"</span> <span style="font-style: italic;">"--format"</span> <span style="font-style: italic;">"unix"</span> source)
   <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">:command ("docker" "run" "-v" "/home/silver/roam:/home/silver/roam" "--rm" "ghcr.io/kijimad/roam_textlint" "textlint" "-c" "/home/silver/roam/.textlintrc" "--format" "unix" source)</span>
@@ -2491,29 +2526,29 @@ Mermaid JSはテキストから図を描画するライブラリ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 166: </span>正規表現</label><pre class="src src-emacs-lisp">(global-set-key (kbd <span style="font-style: italic;">"C-M-%"</span>) 'vr/query-replace)
+<label class="org-src-name"><span class="listing-number">Listing 167: </span>正規表現</label><pre class="src src-emacs-lisp">(global-set-key (kbd <span style="font-style: italic;">"C-M-%"</span>) 'vr/query-replace)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 167: </span>writeroom-mode</label><pre class="src src-emacs-lisp">(global-set-key [f7] 'writeroom-mode)
+<label class="org-src-name"><span class="listing-number">Listing 168: </span>writeroom-mode</label><pre class="src src-emacs-lisp">(global-set-key [f7] 'writeroom-mode)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 168: </span>git-link</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> git-link-default-branch <span style="font-style: italic;">"main"</span>)
+<label class="org-src-name"><span class="listing-number">Listing 169: </span>git-link</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> git-link-default-branch <span style="font-style: italic;">"main"</span>)
 (<span style="font-weight: bold;">setq</span> git-link-use-commit t)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 169: </span>undo-tree-mode</label><pre class="src src-emacs-lisp">(global-undo-tree-mode)
+<label class="org-src-name"><span class="listing-number">Listing 170: </span>undo-tree-mode</label><pre class="src src-emacs-lisp">(global-undo-tree-mode)
 (<span style="font-weight: bold;">setq</span> undo-tree-auto-save-history nil)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 170: </span>eradio</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> eradio-channels '((<span style="font-style: italic;">"def con - soma fm"</span> . <span style="font-style: italic;">"https://somafm.com/defcon256.pls"</span>)
+<label class="org-src-name"><span class="listing-number">Listing 171: </span>eradio</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> eradio-channels '((<span style="font-style: italic;">"def con - soma fm"</span> . <span style="font-style: italic;">"https://somafm.com/defcon256.pls"</span>)
                           (<span style="font-style: italic;">"metal - soma fm"</span>   . <span style="font-style: italic;">"https://somafm.com/metal130.pls"</span>)
                           (<span style="font-style: italic;">"cyberia - lainon"</span>  . <span style="font-style: italic;">"https://lainon.life/radio/cyberia.ogg.m3u"</span>)
                           (<span style="font-style: italic;">"cafe - lainon"</span>     . <span style="font-style: italic;">"https://lainon.life/radio/cafe.ogg.m3u"</span>)
@@ -2548,22 +2583,22 @@ Mermaid JSはテキストから図を描画するライブラリ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 171: </span>タイピングゲームの保存ファイル</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> toe-highscore-file <span style="font-style: italic;">"~/.emacs.d/games/.toe-scores"</span>)
+<label class="org-src-name"><span class="listing-number">Listing 172: </span>タイピングゲームの保存ファイル</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> toe-highscore-file <span style="font-style: italic;">"~/.emacs.d/games/.toe-scores"</span>)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 172: </span>create-link</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> create-link-default-format 'create-link-format-org)
+<label class="org-src-name"><span class="listing-number">Listing 173: </span>create-link</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> create-link-default-format 'create-link-format-org)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 173: </span>ripgrep</label><pre class="src src-emacs-lisp">(rg-enable-default-bindings)
+<label class="org-src-name"><span class="listing-number">Listing 174: </span>ripgrep</label><pre class="src src-emacs-lisp">(rg-enable-default-bindings)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 174: </span>paredit</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">paredit</span>)
+<label class="org-src-name"><span class="listing-number">Listing 175: </span>paredit</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">paredit</span>)
 <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)</span>
 <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)</span>
 <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(add-hook 'lisp-mode-hook 'enable-paredit-mode)</span>
@@ -2572,19 +2607,19 @@ Mermaid JSはテキストから図を描画するライブラリ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 175: </span>lispxmp</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">lispxmp</span>)
+<label class="org-src-name"><span class="listing-number">Listing 176: </span>lispxmp</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">lispxmp</span>)
 (define-key emacs-lisp-mode-map (kbd <span style="font-style: italic;">"C-&lt;return&gt;"</span>) 'lispxmp)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 176: </span>graphql</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">graphql-mode</span>)
+<label class="org-src-name"><span class="listing-number">Listing 177: </span>graphql</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">graphql-mode</span>)
 (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">ob-graphql</span>)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 177: </span>smart-newline</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">smart-newline</span>)
+<label class="org-src-name"><span class="listing-number">Listing 178: </span>smart-newline</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">smart-newline</span>)
 (global-set-key (kbd <span style="font-style: italic;">"C-m"</span>) 'newline)
 (add-hook 'ruby-mode-hook 'smart-newline-mode)
 </pre>
@@ -2592,18 +2627,18 @@ Mermaid JSはテキストから図を描画するライブラリ。
 </div>
 </div>
 
-<div id="outline-container-org73fb4bd" class="outline-2">
-<h2 id="org73fb4bd">Rails</h2>
-<div class="outline-text-2" id="text-org73fb4bd">
+<div id="outline-container-org50de9a3" class="outline-2">
+<h2 id="org50de9a3">Rails</h2>
+<div class="outline-text-2" id="text-org50de9a3">
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 178: </span>projectile-rails</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">projectile-rails</span>)
+<label class="org-src-name"><span class="listing-number">Listing 179: </span>projectile-rails</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">projectile-rails</span>)
 (projectile-rails-global-mode)
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 179: </span>rspec</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">rspec-mode</span>)
+<label class="org-src-name"><span class="listing-number">Listing 180: </span>rspec</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">rspec-mode</span>)
 
 <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Rspec&#12398;&#23455;&#34892;&#32080;&#26524;&#12434;&#12473;&#12463;&#12525;&#12540;&#12523;&#12375;&#12390;&#20986;&#21147;&#12377;&#12427;</span>
 (<span style="font-weight: bold;">setq</span> compilation-scroll-output t)
@@ -2617,7 +2652,7 @@ Mermaid JSはテキストから図を描画するライブラリ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 180: </span>RAILS<sub>ENV</sub>=testを追加</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">rspec-runner</span> ()
+<label class="org-src-name"><span class="listing-number">Listing 181: </span>RAILS<sub>ENV</sub>=testを追加</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">rspec-runner</span> ()
   <span style="font-style: italic;">"Return command line to run rspec."</span>
   (<span style="font-weight: bold;">let</span> ((bundle-command (<span style="font-weight: bold;">if</span> (rspec-bundle-p) <span style="font-style: italic;">"RAILS_ENV=test bundle exec "</span> <span style="font-style: italic;">""</span>))
         (zeus-command (<span style="font-weight: bold;">if</span> (rspec-zeus-p) <span style="font-style: italic;">"zeus "</span> nil))
@@ -2630,7 +2665,7 @@ Mermaid JSはテキストから図を描画するライブラリ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 181: </span>springを有効化</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> rspec-use-spring-when-possible t)
+<label class="org-src-name"><span class="listing-number">Listing 182: </span>springを有効化</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> rspec-use-spring-when-possible t)
   (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">rspec-spring-p</span> ()
     (<span style="font-weight: bold;">and</span> rspec-use-spring-when-possible
          (stringp (executable-find <span style="font-style: italic;">"spring"</span>))))
@@ -2638,7 +2673,7 @@ Mermaid JSはテキストから図を描画するライブラリ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 182: </span>rubocopとflycheck連携</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">rubocop</span>)
+<label class="org-src-name"><span class="listing-number">Listing 183: </span>rubocopとflycheck連携</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">rubocop</span>)
 (add-hook 'ruby-mode-hook 'rubocop-mode)
 (add-hook 'ruby-mode-hook
           '(lambda ()
@@ -2661,7 +2696,7 @@ Mermaid JSはテキストから図を描画するライブラリ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 183: </span>rinari</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">when</span> (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">rinari</span> nil 'noerror)
+<label class="org-src-name"><span class="listing-number">Listing 184: </span>rinari</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">when</span> (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">rinari</span> nil 'noerror)
   (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">rinari</span>)
   (add-hook 'ruby-mode-hook 'rinari-minor-mode))
 
@@ -2673,7 +2708,7 @@ Mermaid JSはテキストから図を描画するライブラリ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 184: </span>補完</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">ruby-electric</span>)
+<label class="org-src-name"><span class="listing-number">Listing 185: </span>補完</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">ruby-electric</span>)
 (add-hook 'ruby-mode-hook '(lambda ()
                              (ruby-electric-mode t)))
 
@@ -2681,13 +2716,13 @@ Mermaid JSはテキストから図を描画するライブラリ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 185: </span>quickrun</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">quickrun</span>)
+<label class="org-src-name"><span class="listing-number">Listing 186: </span>quickrun</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">quickrun</span>)
 (global-set-key (kbd <span style="font-style: italic;">"&lt;f8&gt;"</span>) 'quickrun)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 186: </span>inf-ruby</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">inf-ruby</span>)
+<label class="org-src-name"><span class="listing-number">Listing 187: </span>inf-ruby</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">inf-ruby</span>)
 (<span style="font-weight: bold;">setq</span> inf-ruby-default-implementation <span style="font-style: italic;">"pry"</span>)
 (<span style="font-weight: bold;">setq</span> inf-ruby-eval-binding <span style="font-style: italic;">"Pry.toplevel_binding"</span>)
 <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">ri&#12394;&#12393;&#12398;&#12456;&#12473;&#12465;&#12540;&#12503;&#12471;&#12540;&#12465;&#12531;&#12473;&#12434;&#20966;&#29702;&#12375;&#12289;&#33394;&#20184;&#12369;&#12377;&#12427;</span>
@@ -2696,19 +2731,19 @@ Mermaid JSはテキストから図を描画するライブラリ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 187: </span>slim-mode</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">unless</span> (package-installed-p 'slim-mode)
+<label class="org-src-name"><span class="listing-number">Listing 188: </span>slim-mode</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">unless</span> (package-installed-p 'slim-mode)
   (package-refresh-contents) (package-install 'slim-mode))
 (add-to-list 'auto-mode-alist '(<span style="font-style: italic;">"\\.slim?\\'"</span> . slim-mode))
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 188: </span>マジックコメントを挿入しない</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> ruby-insert-encoding-magic-comment nil)
+<label class="org-src-name"><span class="listing-number">Listing 189: </span>マジックコメントを挿入しない</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> ruby-insert-encoding-magic-comment nil)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 189: </span>対応ブロックを光らせる時間を短くする</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defcustom</span> <span style="font-weight: bold; font-style: italic;">ruby-block-delay</span> 0
+<label class="org-src-name"><span class="listing-number">Listing 190: </span>対応ブロックを光らせる時間を短くする</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defcustom</span> <span style="font-weight: bold; font-style: italic;">ruby-block-delay</span> 0
     <span style="font-style: italic;">"*Time in seconds to delay before showing a matching paren."</span>
     <span style="font-weight: bold;">:type</span>  'number
     <span style="font-weight: bold;">:group</span> 'ruby-block)
@@ -2716,13 +2751,13 @@ Mermaid JSはテキストから図を描画するライブラリ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 190: </span>実行結果アノテーション</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">rcodetools</span>)
+<label class="org-src-name"><span class="listing-number">Listing 191: </span>実行結果アノテーション</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">rcodetools</span>)
 (define-key ruby-mode-map (kbd <span style="font-style: italic;">"C-&lt;return&gt;"</span>) 'xmp)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 191: </span>補完</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">when</span> window-system
+<label class="org-src-name"><span class="listing-number">Listing 192: </span>補完</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">when</span> window-system
   (<span style="font-weight: bold;">progn</span>
     <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(inf-ruby)</span>
     <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(robe-start)</span>
@@ -2732,21 +2767,21 @@ Mermaid JSはテキストから図を描画するライブラリ。
 </div>
 </div>
 
-<div id="outline-container-org89b550c" class="outline-2">
-<h2 id="org89b550c">Go</h2>
-<div class="outline-text-2" id="text-org89b550c">
+<div id="outline-container-orgdefb72a" class="outline-2">
+<h2 id="orgdefb72a">Go</h2>
+<div class="outline-text-2" id="text-orgdefb72a">
 <p>
 goの設定。
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 192: </span>require</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">go-mode</span>)
+<label class="org-src-name"><span class="listing-number">Listing 193: </span>require</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">go-mode</span>)
 (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">ob-go</span>)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 193: </span>デバッガ</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">dap-mode</span>
+<label class="org-src-name"><span class="listing-number">Listing 194: </span>デバッガ</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">dap-mode</span>
     <span style="font-weight: bold;">:after</span> lsp-mode
     <span style="font-weight: bold;">:hook</span>
     (lsp-mode . dap-mode)
@@ -2763,28 +2798,28 @@ goの設定。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 194: </span>go-eldoc</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">go-eldoc</span>)
+<label class="org-src-name"><span class="listing-number">Listing 195: </span>go-eldoc</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">go-eldoc</span>)
 (add-hook 'go-mode-hook 'go-eldoc-setup)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 195: </span>go fmt</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> gofmt-command <span style="font-style: italic;">"goimports"</span>)
+<label class="org-src-name"><span class="listing-number">Listing 196: </span>go fmt</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> gofmt-command <span style="font-style: italic;">"goimports"</span>)
 (add-hook 'before-save-hook 'gofmt-before-save)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgc70d97a" class="outline-2">
-<h2 id="orgc70d97a">Python</h2>
-<div class="outline-text-2" id="text-orgc70d97a">
+<div id="outline-container-org6bc3c45" class="outline-2">
+<h2 id="org6bc3c45">Python</h2>
+<div class="outline-text-2" id="text-org6bc3c45">
 <p>
 Pythonの設定。
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 196: </span>基本設定</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(add-hook 'python-mode-hook 'jedi:setup)</span>
+<label class="org-src-name"><span class="listing-number">Listing 197: </span>基本設定</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(add-hook 'python-mode-hook 'jedi:setup)</span>
 <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(setq jedi:complete-on-dot t)</span>
 <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(jedi:setup)</span>
 <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">;; (define-key jedi-mode-map (kbd "&lt;C-tab&gt;") nil) ;;C-tab&#12399;&#12454;&#12451;&#12531;&#12489;&#12454;&#12398;&#31227;&#21205;&#12395;&#29992;&#12356;&#12427;</span>
@@ -2797,15 +2832,15 @@ Pythonの設定。
 </div>
 </div>
 </div>
-<div id="outline-container-orgb9081c9" class="outline-2">
-<h2 id="orgb9081c9">Haskell</h2>
-<div class="outline-text-2" id="text-orgb9081c9">
+<div id="outline-container-orgd134160" class="outline-2">
+<h2 id="orgd134160">Haskell</h2>
+<div class="outline-text-2" id="text-orgd134160">
 <p>
 haskellの設定。
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 197: </span>基本設定</label><pre class="src src-emacs-lisp">(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+<label class="org-src-name"><span class="listing-number">Listing 198: </span>基本設定</label><pre class="src src-emacs-lisp">(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 
 (custom-set-variables
@@ -2816,16 +2851,16 @@ haskellの設定。
 </div>
 </div>
 </div>
-<div id="outline-container-org18a7aaa" class="outline-2">
-<h2 id="org18a7aaa">Yaml</h2>
-<div class="outline-text-2" id="text-org18a7aaa">
+<div id="outline-container-org2d9c754" class="outline-2">
+<h2 id="org2d9c754">Yaml</h2>
+<div class="outline-text-2" id="text-org2d9c754">
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 198: </span>yaml-mode</label><pre class="src src-emacs-lisp">(add-to-list 'auto-mode-alist '(<span style="font-style: italic;">"\\.ya?ml$"</span> . yaml-mode))
+<label class="org-src-name"><span class="listing-number">Listing 199: </span>yaml-mode</label><pre class="src src-emacs-lisp">(add-to-list 'auto-mode-alist '(<span style="font-style: italic;">"\\.ya?ml$"</span> . yaml-mode))
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 199: </span>origami</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">origami</span>)
+<label class="org-src-name"><span class="listing-number">Listing 200: </span>origami</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">origami</span>)
 (<span style="font-weight: bold;">define-minor-mode</span> <span style="font-weight: bold;">origami-view-mode</span>
   <span style="font-style: italic;">"TAB&#12395;origami&#12398;&#25240;&#30067;&#12415;&#12434;&#21106;&#12426;&#24403;&#12390;&#12427;"</span>
   nil <span style="font-style: italic;">"&#25240;&#32025;"</span>
@@ -2849,9 +2884,9 @@ haskellの設定。
 </div>
 </div>
 
-<div id="outline-container-org32c1657" class="outline-2">
-<h2 id="org32c1657">Web</h2>
-<div class="outline-text-2" id="text-org32c1657">
+<div id="outline-container-org729f4fe" class="outline-2">
+<h2 id="org729f4fe">Web</h2>
+<div class="outline-text-2" id="text-org729f4fe">
 <p>
 web-modeはhtmlライクな複数の言語に対応するモード。
 </p>
@@ -2971,20 +3006,20 @@ web-modeはhtmlライクな複数の言語に対応するモード。
 </div>
 </div>
 </div>
-<div id="outline-container-org8a1427f" class="outline-2">
-<h2 id="org8a1427f">LSP</h2>
-<div class="outline-text-2" id="text-org8a1427f">
+<div id="outline-container-org06dfffb" class="outline-2">
+<h2 id="org06dfffb">LSP</h2>
+<div class="outline-text-2" id="text-org06dfffb">
 <p>
 lsp-modeはLSPを使えるようにするパッケージ。
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 200: </span>metalがインストールできないので確認を無効化する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> lsp-verify-signature nil)
+<label class="org-src-name"><span class="listing-number">Listing 201: </span>metalがインストールできないので確認を無効化する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> lsp-verify-signature nil)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 201: </span>言語共通設定</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">flycheck</span>
+<label class="org-src-name"><span class="listing-number">Listing 202: </span>言語共通設定</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">flycheck</span>
   <span style="font-weight: bold;">:init</span> (global-flycheck-mode))
 
 (<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">lsp-mode</span>
@@ -3024,7 +3059,7 @@ lsp-modeはLSPを使えるようにするパッケージ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 202: </span>scala用を設定する</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(use-package scala-mode</span>
+<label class="org-src-name"><span class="listing-number">Listing 203: </span>scala用を設定する</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(use-package scala-mode</span>
 <span style="font-weight: bold; font-style: italic;">;;   </span><span style="font-weight: bold; font-style: italic;">:interpreter</span>
 <span style="font-weight: bold; font-style: italic;">;;   </span><span style="font-weight: bold; font-style: italic;">("scala" . scala-mode))</span>
 
@@ -3058,7 +3093,7 @@ lsp-modeはLSPを使えるようにするパッケージ。
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 203: </span>ドキュメントをホバー表示できるようにする</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">lsp-ui</span>
+<label class="org-src-name"><span class="listing-number">Listing 204: </span>ドキュメントをホバー表示できるようにする</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">lsp-ui</span>
   <span style="font-weight: bold;">:custom</span>
   (lsp-ui-doc-enable t)
   (lsp-ui-doc-header t)
@@ -3070,12 +3105,12 @@ lsp-modeはLSPを使えるようにするパッケージ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 204: </span>snippetを挿入する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">yasnippet</span>)
+<label class="org-src-name"><span class="listing-number">Listing 205: </span>snippetを挿入する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">yasnippet</span>)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 205: </span>DAPデバッガーを使えるようにする</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">posframe</span>
+<label class="org-src-name"><span class="listing-number">Listing 206: </span>DAPデバッガーを使えるようにする</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">posframe</span>
   <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Posframe is a pop-up tool that must be manually installed for dap-mode</span>
   )
 
@@ -3087,9 +3122,9 @@ lsp-modeはLSPを使えるようにするパッケージ。
 </div>
 </div>
 
-<div id="outline-container-orgd1a7595" class="outline-2">
-<h2 id="orgd1a7595">corfu</h2>
-<div class="outline-text-2" id="text-orgd1a7595">
+<div id="outline-container-org2754fb0" class="outline-2">
+<h2 id="org2754fb0">corfu</h2>
+<div class="outline-text-2" id="text-org2754fb0">
 <p>
 corfuはシンプルな補完を提供するパッケージ。
 </p>
@@ -3099,13 +3134,13 @@ corfuはシンプルな補完を提供するパッケージ。
 </ul>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 206: </span>起動する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">corfu</span>)
+<label class="org-src-name"><span class="listing-number">Listing 207: </span>起動する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">corfu</span>)
 (global-corfu-mode)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 207: </span>基本設定</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> corfu-auto t)
+<label class="org-src-name"><span class="listing-number">Listing 208: </span>基本設定</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> corfu-auto t)
 (<span style="font-weight: bold;">setq</span> corfu-auto-prefix 3)
 (<span style="font-weight: bold;">setq</span> corfu-count 15)
 (<span style="font-weight: bold;">setq</span> corfu-cycle t)
@@ -3116,7 +3151,7 @@ corfuはシンプルな補完を提供するパッケージ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 208: </span>候補選択を循環させる</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> completion-cycle-threshold 3)
+<label class="org-src-name"><span class="listing-number">Listing 209: </span>候補選択を循環させる</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> completion-cycle-threshold 3)
 
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">corfu-beginning-of-prompt</span> ()
   <span style="font-style: italic;">"Move to beginning of completion input."</span>
@@ -3136,7 +3171,7 @@ corfuはシンプルな補完を提供するパッケージ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 209: </span>その他の連携パッケージ</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">vertico</span>)
+<label class="org-src-name"><span class="listing-number">Listing 210: </span>その他の連携パッケージ</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">vertico</span>)
 (vertico-mode)
 (<span style="font-weight: bold;">setq</span> vertico-count 20)
 
@@ -3205,25 +3240,25 @@ corfuはシンプルな補完を提供するパッケージ。
 </div>
 </div>
 
-<div id="outline-container-orgf6c7c1c" class="outline-2">
-<h2 id="orgf6c7c1c">Emacs Lisp</h2>
-<div class="outline-text-2" id="text-orgf6c7c1c">
+<div id="outline-container-orgcf79575" class="outline-2">
+<h2 id="orgcf79575">Emacs Lisp</h2>
+<div class="outline-text-2" id="text-orgcf79575">
 </div>
-<div id="outline-container-org4c5a0a0" class="outline-3">
-<h3 id="org4c5a0a0">rispy</h3>
-<div class="outline-text-3" id="text-org4c5a0a0">
+<div id="outline-container-orgbacabd1" class="outline-3">
+<h3 id="orgbacabd1">rispy</h3>
+<div class="outline-text-3" id="text-orgbacabd1">
 <p>
 rispyはリストの操作をやりやすくするパッケージ。
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 211: </span>hook</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">lispy</span>)
+<label class="org-src-name"><span class="listing-number">Listing 212: </span>hook</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">lispy</span>)
 (add-hook 'emacs-lisp-mode-hook (<span style="font-weight: bold;">lambda</span> () (lispy-mode 1)))
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 212: </span>キーバインド</label><pre class="src src-emacs-lisp">(define-key lispy-mode-map (kbd <span style="font-style: italic;">"M-&lt;right&gt;"</span>) 'next-buffer)
+<label class="org-src-name"><span class="listing-number">Listing 213: </span>キーバインド</label><pre class="src src-emacs-lisp">(define-key lispy-mode-map (kbd <span style="font-style: italic;">"M-&lt;right&gt;"</span>) 'next-buffer)
 (define-key lispy-mode-map (kbd <span style="font-style: italic;">"M-&lt;left&gt;"</span>) 'previous-buffer)
 (define-key lispy-mode-map (kbd <span style="font-style: italic;">"M-i"</span>) 'swiper-thing-at-point)
 </pre>
@@ -3232,9 +3267,9 @@ rispyはリストの操作をやりやすくするパッケージ。
 </div>
 </div>
 
-<div id="outline-container-orgc44b044" class="outline-2">
-<h2 id="orgc44b044">ivy</h2>
-<div class="outline-text-2" id="text-orgc44b044">
+<div id="outline-container-org53f03d7" class="outline-2">
+<h2 id="org53f03d7">ivy</h2>
+<div class="outline-text-2" id="text-org53f03d7">
 <p>
 ivyはさまざまなインクリメンタル検索を追加するパッケージ。
 </p>
@@ -3247,55 +3282,55 @@ ivyはさまざまなインクリメンタル検索を追加するパッケー�
 </ul>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 213: </span>M-o をivy-hydra-read-action に割り当てる</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">when</span> (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">ivy-hydra</span> nil t)
+<label class="org-src-name"><span class="listing-number">Listing 214: </span>M-o をivy-hydra-read-action に割り当てる</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">when</span> (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">ivy-hydra</span> nil t)
   (<span style="font-weight: bold;">setq</span> ivy-read-action-function #'ivy-hydra-read-action))
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 214: </span>Magitとの連携</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> magit-completing-read-function 'ivy-completing-read)
+<label class="org-src-name"><span class="listing-number">Listing 215: </span>Magitとの連携</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> magit-completing-read-function 'ivy-completing-read)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 215: </span>ミニバッファでコマンド発行を認める。何階層入ったかプロンプトに表示する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">when</span> (<span style="font-weight: bold;">setq</span> enable-recursive-minibuffers t)
+<label class="org-src-name"><span class="listing-number">Listing 216: </span>ミニバッファでコマンド発行を認める。何階層入ったかプロンプトに表示する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">when</span> (<span style="font-weight: bold;">setq</span> enable-recursive-minibuffers t)
   (minibuffer-depth-indicate-mode 1))
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 216: </span>ESC連打でミニバッファを閉じる</label><pre class="src src-emacs-lisp">(define-key ivy-minibuffer-map (kbd <span style="font-style: italic;">"&lt;escape&gt;"</span>) 'minibuffer-keyboard-quit)
+<label class="org-src-name"><span class="listing-number">Listing 217: </span>ESC連打でミニバッファを閉じる</label><pre class="src src-emacs-lisp">(define-key ivy-minibuffer-map (kbd <span style="font-style: italic;">"&lt;escape&gt;"</span>) 'minibuffer-keyboard-quit)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 217: </span>プロンプトの表示が長い時に折り返す（選択候補も折り返される）</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> ivy-truncate-lines nil)
+<label class="org-src-name"><span class="listing-number">Listing 218: </span>プロンプトの表示が長い時に折り返す（選択候補も折り返される）</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> ivy-truncate-lines nil)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 218: </span>リスト先頭で `C-p' するとき，リストの最後に移動する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> ivy-wrap t)
+<label class="org-src-name"><span class="listing-number">Listing 219: </span>リスト先頭で `C-p' するとき，リストの最後に移動する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> ivy-wrap t)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 219: </span>表示設定する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> ivy-count-format <span style="font-style: italic;">"%d -&gt; %d "</span>)
+<label class="org-src-name"><span class="listing-number">Listing 220: </span>表示設定する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> ivy-count-format <span style="font-style: italic;">"%d -&gt; %d "</span>)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 220: </span>新規作成プロンプトを表示する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> ivy-use-selectable-prompt t)
+<label class="org-src-name"><span class="listing-number">Listing 221: </span>新規作成プロンプトを表示する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> ivy-use-selectable-prompt t)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 221: </span>counsel-mark-ring のリストをソートさせない</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">with-eval-after-load</span> <span style="font-style: italic;">"ivy"</span>
+<label class="org-src-name"><span class="listing-number">Listing 222: </span>counsel-mark-ring のリストをソートさせない</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">with-eval-after-load</span> <span style="font-style: italic;">"ivy"</span>
   (<span style="font-weight: bold;">setf</span> (alist-get 'counsel-mark-ring ivy-sort-functions-alist) nil))
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 222: </span>外観設定する</label><pre class="src src-emacs-lisp">(all-the-icons-ivy-rich-mode 1)
+<label class="org-src-name"><span class="listing-number">Listing 223: </span>外観設定する</label><pre class="src src-emacs-lisp">(all-the-icons-ivy-rich-mode 1)
 (ivy-rich-mode 1)
 
 (custom-set-faces
@@ -3320,27 +3355,27 @@ ivyはさまざまなインクリメンタル検索を追加するパッケー�
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 223: </span>履歴表示する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">when</span> (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">smex</span> nil t)
+<label class="org-src-name"><span class="listing-number">Listing 224: </span>履歴表示する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">when</span> (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">smex</span> nil t)
   (<span style="font-weight: bold;">setq</span> smex-history-length 35)
   (<span style="font-weight: bold;">setq</span> smex-completion-method 'ivy))
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 224: </span>有効化</label><pre class="src src-emacs-lisp">(ivy-mode 1)
+<label class="org-src-name"><span class="listing-number">Listing 225: </span>有効化</label><pre class="src src-emacs-lisp">(ivy-mode 1)
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgfe9812b" class="outline-2">
-<h2 id="orgfe9812b">counsel</h2>
-<div class="outline-text-2" id="text-orgfe9812b">
+<div id="outline-container-orgc949e53" class="outline-2">
+<h2 id="orgc949e53">counsel</h2>
+<div class="outline-text-2" id="text-orgc949e53">
 <p>
 counselはさまざまなインクリメンタル検索を可能にするパッケージ。
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 225: </span>キーバインド</label><pre class="src src-emacs-lisp">(global-set-key (kbd <span style="font-style: italic;">"C-x C-b"</span>) 'counsel-switch-buffer)
+<label class="org-src-name"><span class="listing-number">Listing 226: </span>キーバインド</label><pre class="src src-emacs-lisp">(global-set-key (kbd <span style="font-style: italic;">"C-x C-b"</span>) 'counsel-switch-buffer)
 (global-set-key (kbd <span style="font-style: italic;">"C-x C-f"</span>) 'counsel-find-file)
 (global-set-key (kbd <span style="font-style: italic;">"C-x C-u"</span>) 'ivy-resume)
 (global-set-key (kbd <span style="font-style: italic;">"C-x C-g"</span>) 'counsel-git-grep)
@@ -3351,25 +3386,25 @@ counselはさまざまなインクリメンタル検索を可能にするパッ�
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 226: </span>検索エンジンをGoogleに設定する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> counsel-search-engine 'google)
+<label class="org-src-name"><span class="listing-number">Listing 227: </span>検索エンジンをGoogleに設定する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> counsel-search-engine 'google)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 227: </span>有効化</label><pre class="src src-emacs-lisp">(counsel-mode 1)
+<label class="org-src-name"><span class="listing-number">Listing 228: </span>有効化</label><pre class="src src-emacs-lisp">(counsel-mode 1)
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org8729171" class="outline-2">
-<h2 id="org8729171">ag</h2>
-<div class="outline-text-2" id="text-org8729171">
+<div id="outline-container-org22b5494" class="outline-2">
+<h2 id="org22b5494">ag</h2>
+<div class="outline-text-2" id="text-org22b5494">
 <p>
 agはgrepより高速な検索ツール。
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 228: </span>agのデフォルト入力値をthing-at-pointにする</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">ad:counsel-ag</span> (f <span style="font-weight: bold; text-decoration: underline;">&amp;optional</span> initial-input initial-directory extra-ag-args ag-prompt caller)
+<label class="org-src-name"><span class="listing-number">Listing 229: </span>agのデフォルト入力値をthing-at-pointにする</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">ad:counsel-ag</span> (f <span style="font-weight: bold; text-decoration: underline;">&amp;optional</span> initial-input initial-directory extra-ag-args ag-prompt caller)
   (apply f (<span style="font-weight: bold;">or</span> initial-input (ivy-thing-at-point))
          (<span style="font-weight: bold;">unless</span> current-prefix-arg
            (<span style="font-weight: bold;">or</span> initial-directory default-directory))
@@ -3380,15 +3415,15 @@ agはgrepより高速な検索ツール。
 </div>
 </div>
 </div>
-<div id="outline-container-orgebc536c" class="outline-2">
-<h2 id="orgebc536c">eldoc</h2>
-<div class="outline-text-2" id="text-orgebc536c">
+<div id="outline-container-org1b5deb3" class="outline-2">
+<h2 id="org1b5deb3">eldoc</h2>
+<div class="outline-text-2" id="text-org1b5deb3">
 <p>
 eldocは関数ドキュメントを表示するパッケージ。
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 229: </span>eldocをミニバッファに表示する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">with-eval-after-load</span> <span style="font-style: italic;">"eldoc"</span>
+<label class="org-src-name"><span class="listing-number">Listing 230: </span>eldocをミニバッファに表示する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">with-eval-after-load</span> <span style="font-style: italic;">"eldoc"</span>
   (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">ad:eldoc-message</span> (f <span style="font-weight: bold; text-decoration: underline;">&amp;optional</span> string)
     (<span style="font-weight: bold;">unless</span> (active-minibuffer-window)
       (funcall f string)))
@@ -3397,15 +3432,15 @@ eldocは関数ドキュメントを表示するパッケージ。
 </div>
 </div>
 </div>
-<div id="outline-container-org2e794bb" class="outline-2">
-<h2 id="org2e794bb">eshell</h2>
-<div class="outline-text-2" id="text-org2e794bb">
+<div id="outline-container-org4f4244c" class="outline-2">
+<h2 id="org4f4244c">eshell</h2>
+<div class="outline-text-2" id="text-org4f4244c">
 <p>
 eshellはEmacs Lispで実装されたシェル。
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 230: </span>eshellの設定を追加する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">efs/configure-eshell</span> ()
+<label class="org-src-name"><span class="listing-number">Listing 231: </span>eshellの設定を追加する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">efs/configure-eshell</span> ()
   <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Save command history when commands are entered</span>
   (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
 
@@ -3430,27 +3465,27 @@ eshellはEmacs Lispで実装されたシェル。
 </ul>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 231: </span>キーバインドを設定する</label><pre class="src src-emacs-lisp">(global-set-key (kbd <span style="font-style: italic;">"C-M-;"</span>) 'eshell-toggle)
+<label class="org-src-name"><span class="listing-number">Listing 232: </span>キーバインドを設定する</label><pre class="src src-emacs-lisp">(global-set-key (kbd <span style="font-style: italic;">"C-M-;"</span>) 'eshell-toggle)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 232: </span>eshellのサジェストを設定する</label><pre class="src src-emacs-lisp">(add-hook 'eshell-first-time-mode-hook 'esh-autosuggest-mode)
+<label class="org-src-name"><span class="listing-number">Listing 233: </span>eshellのサジェストを設定する</label><pre class="src src-emacs-lisp">(add-hook 'eshell-first-time-mode-hook 'esh-autosuggest-mode)
 (<span style="font-weight: bold;">setq</span> esh-autosuggest-delay 0.5)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org53e79fe" class="outline-2">
-<h2 id="org53e79fe">Vterm</h2>
-<div class="outline-text-2" id="text-org53e79fe">
+<div id="outline-container-org9789030" class="outline-2">
+<h2 id="org9789030">Vterm</h2>
+<div class="outline-text-2" id="text-org9789030">
 <p>
 vtermはCで実装されたシェル。
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 233: </span>各種設定する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">when</span> window-system
+<label class="org-src-name"><span class="listing-number">Listing 234: </span>各種設定する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">when</span> window-system
   (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">vterm</span>)
   (<span style="font-weight: bold;">setq</span> term-prompt-regexp <span style="font-style: italic;">"^[</span><span style="font-style: italic;">^</span><span style="font-style: italic;">#$%&gt;\n]*[#$%&gt;] *"</span>)
   (<span style="font-weight: bold;">setq</span> vterm-toggle-scope 'project)
@@ -3477,15 +3512,15 @@ vtermはCで実装されたシェル。
 </div>
 </div>
 </div>
-<div id="outline-container-org14f1f29" class="outline-2">
-<h2 id="org14f1f29">Theme</h2>
-<div class="outline-text-2" id="text-org14f1f29">
+<div id="outline-container-org8335196" class="outline-2">
+<h2 id="org8335196">Theme</h2>
+<div class="outline-text-2" id="text-org8335196">
 <p>
 いい感じのテーマを設定する。割と白いテーマと黒いテーマを切り替えるのですぐ切り替えられるようにする。
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 234: </span>doom themeを読み込み</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">doom-themes</span>)
+<label class="org-src-name"><span class="listing-number">Listing 235: </span>doom themeを読み込み</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">doom-themes</span>)
 (doom-themes-org-config)
 (<span style="font-weight: bold;">setq</span> custom-safe-themes t)
 (<span style="font-weight: bold;">setq-default</span> custom-enabled-themes '(doom-tokyo-night))
@@ -3515,7 +3550,7 @@ doom themeはモダンなテーマ集。
 </ul>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 235: </span>再適用する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">reapply-themes</span> ()
+<label class="org-src-name"><span class="listing-number">Listing 236: </span>再適用する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">reapply-themes</span> ()
   <span style="font-style: italic;">"Forcibly load the themes listed in `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">custom-enabled-themes</span><span style="font-style: italic;">'."</span>
   (<span style="font-weight: bold;">dolist</span> (theme custom-enabled-themes)
     (<span style="font-weight: bold;">unless</span> (custom-theme-p theme)
@@ -3537,7 +3572,7 @@ doom themeはモダンなテーマ集。
 </ul>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 236: </span>モードライン設定</label><pre class="src src-emacs-lisp">(doom-modeline-mode)
+<label class="org-src-name"><span class="listing-number">Listing 237: </span>モードライン設定</label><pre class="src src-emacs-lisp">(doom-modeline-mode)
 
 <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#34920;&#31034;&#38917;&#30446;&#12398;&#35373;&#23450;</span>
 (<span style="font-weight: bold;">setq</span> doom-modeline-buffer-file-name-style 'truncate-with-project)
@@ -3567,7 +3602,7 @@ doom themeはモダンなテーマ集。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 237: </span>modus themeのカスタマイズ設定</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/set-modus-face</span> ()
+<label class="org-src-name"><span class="listing-number">Listing 238: </span>modus themeのカスタマイズ設定</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/set-modus-face</span> ()
   (<span style="font-weight: bold;">setq</span> modus-themes-slanted-constructs t
         modus-themes-bold-constructs t
         modus-themes-no-mixed-fonts t
@@ -3606,7 +3641,7 @@ doom themeはモダンなテーマ集。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 238: </span>モードラインからマイナーモードを消す</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> my-hidden-minor-modes
+<label class="org-src-name"><span class="listing-number">Listing 239: </span>モードラインからマイナーモードを消す</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> my-hidden-minor-modes
       '(
         abbrev-mode
         auto-highlight-symbol-mode
@@ -3646,9 +3681,9 @@ describe-minor-mode-from-indicator で調べられる。
 </div>
 </div>
 
-<div id="outline-container-orgf9ea3b7" class="outline-2">
-<h2 id="orgf9ea3b7">EXWM</h2>
-<div class="outline-text-2" id="text-orgf9ea3b7">
+<div id="outline-container-orgc6f29aa" class="outline-2">
+<h2 id="orgc6f29aa">EXWM</h2>
+<div class="outline-text-2" id="text-orgc6f29aa">
 <p>
 EXWMはEmacs上で動くウィンドウマネージャ。
 </p>
@@ -3657,23 +3692,23 @@ EXWMはEmacs上で動くウィンドウマネージャ。
 </ul>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 239: </span>require</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">exwm</span>)
+<label class="org-src-name"><span class="listing-number">Listing 240: </span>require</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">exwm</span>)
 (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">exwm-config</span>)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 240: </span>ほかのウィンドウマネージャを置き換えて起動する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> exwm-replace t)
+<label class="org-src-name"><span class="listing-number">Listing 241: </span>ほかのウィンドウマネージャを置き換えて起動する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> exwm-replace t)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 241: </span>ほかのワークスペースのバッファに移動できるようにする</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> exwm-layout-show-all-buffers t)
+<label class="org-src-name"><span class="listing-number">Listing 242: </span>ほかのワークスペースのバッファに移動できるようにする</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> exwm-layout-show-all-buffers t)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 242: </span>マウス設定</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> mouse-autoselect-window nil
+<label class="org-src-name"><span class="listing-number">Listing 243: </span>マウス設定</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">setq</span> mouse-autoselect-window nil
         focus-follows-mouse t
         exwm-workspace-warp-cursor t
         exwm-workspace-number 5)
@@ -3681,7 +3716,7 @@ EXWMはEmacs上で動くウィンドウマネージャ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 243: </span>ワークスペースのバッファに名前をつける</label><pre class="src src-emacs-lisp">(add-hook 'exwm-update-class-hook
+<label class="org-src-name"><span class="listing-number">Listing 244: </span>ワークスペースのバッファに名前をつける</label><pre class="src src-emacs-lisp">(add-hook 'exwm-update-class-hook
           (<span style="font-weight: bold;">lambda</span> ()
             (exwm-workspace-rename-buffer exwm-class-name)))
 (add-hook 'exwm-update-title-hook
@@ -3693,7 +3728,7 @@ EXWMはEmacs上で動くウィンドウマネージャ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 244: </span>ウィンドウのセットを起動する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/set-init</span> ()
+<label class="org-src-name"><span class="listing-number">Listing 245: </span>ウィンドウのセットを起動する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/set-init</span> ()
   <span style="font-style: italic;">"Window Manager&#38306;&#20418;&#12398;&#21508;&#31278;&#12503;&#12525;&#12464;&#12521;&#12512;&#12434;&#36215;&#21205;&#12377;&#12427;."</span>
   (<span style="font-weight: bold;">interactive</span>)
 
@@ -3764,7 +3799,7 @@ EXWMはEmacs上で動くウィンドウマネージャ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 245: </span>背景を設定する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/set-background</span> ()
+<label class="org-src-name"><span class="listing-number">Listing 246: </span>背景を設定する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/set-background</span> ()
   <span style="font-style: italic;">"&#32972;&#26223;&#12434;&#12475;&#12483;&#12488;&#12377;&#12427;."</span>
   (<span style="font-weight: bold;">interactive</span>)
   (start-process-shell-command <span style="font-style: italic;">"compton"</span> nil <span style="font-style: italic;">"compton --config ~/dotfiles/.config/compton/compton.conf"</span>)
@@ -3773,7 +3808,7 @@ EXWMはEmacs上で動くウィンドウマネージャ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 246: </span>最後のワークスペースに戻る</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">kd/last-workspace-index</span> 0)
+<label class="org-src-name"><span class="listing-number">Listing 247: </span>最後のワークスペースに戻る</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">kd/last-workspace-index</span> 0)
 
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/exwm-workspace-switch-last</span> ()
   (<span style="font-weight: bold;">interactive</span>)
@@ -3788,7 +3823,7 @@ EXWMはEmacs上で動くウィンドウマネージャ。
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 247: </span>キーバインド設定</label><pre class="src src-emacs-lisp">(define-key exwm-mode-map (kbd <span style="font-style: italic;">"C-M-:"</span>) 'vterm-toggle)
+<label class="org-src-name"><span class="listing-number">Listing 248: </span>キーバインド設定</label><pre class="src src-emacs-lisp">(define-key exwm-mode-map (kbd <span style="font-style: italic;">"C-M-:"</span>) 'vterm-toggle)
 (define-key exwm-mode-map (kbd <span style="font-style: italic;">"C-M-&lt;right&gt;"</span>) 'persp-next)
 (define-key exwm-mode-map (kbd <span style="font-style: italic;">"C-M-&lt;left&gt;"</span>) 'persp-prev)
 (define-key exwm-mode-map (kbd <span style="font-style: italic;">"&lt;henkan&gt;"</span>) 'pretty-hydra-henkan/body)
@@ -3796,7 +3831,7 @@ EXWMはEmacs上で動くウィンドウマネージャ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 248: </span>設定する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">when</span> window-system
+<label class="org-src-name"><span class="listing-number">Listing 249: </span>設定する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">when</span> window-system
   (<span style="font-weight: bold;">progn</span>
     (exwm-config-example)
     <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(kd/set-init)</span>
@@ -3805,7 +3840,7 @@ EXWMはEmacs上で動くウィンドウマネージャ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 249: </span>マルチディスプレイ設定</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">exwm-randr</span>)
+<label class="org-src-name"><span class="listing-number">Listing 250: </span>マルチディスプレイ設定</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">exwm-randr</span>)
 (<span style="font-weight: bold;">setq</span> exwm-randr-workspace-output-plist '(1 <span style="font-style: italic;">"HDMI-1"</span>))
 (add-hook 'exwm-randr-screen-change-hook
           (<span style="font-weight: bold;">lambda</span> ()
@@ -3822,21 +3857,21 @@ randr関係の修正をしたときは、 <code>(exwm-randr-refresh)</code> を�
 </div>
 </div>
 
-<div id="outline-container-org2d252b8" class="outline-2">
-<h2 id="org2d252b8">Polybar</h2>
-<div class="outline-text-2" id="text-org2d252b8">
+<div id="outline-container-orgfb7271c" class="outline-2">
+<h2 id="orgfb7271c">Polybar</h2>
+<div class="outline-text-2" id="text-orgfb7271c">
 <p>
 polybarは柔軟にカスタマイズできるメニューバーを表示するソフトウェア。polybarとの連携を記載する。
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 250: </span>polybarプロセスを保持する変数</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">kd/polybar-process</span> nil
+<label class="org-src-name"><span class="listing-number">Listing 251: </span>polybarプロセスを保持する変数</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">kd/polybar-process</span> nil
   <span style="font-style: italic;">"Holds the process of the running Polybar instance, if any"</span>)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 251: </span>バーを起動する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/start-panel</span> ()
+<label class="org-src-name"><span class="listing-number">Listing 252: </span>バーを起動する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/start-panel</span> ()
   (<span style="font-weight: bold;">interactive</span>)
   (kd/kill-panel)
   (<span style="font-weight: bold;">setq</span> kd/polybar-process (start-process-shell-command <span style="font-style: italic;">"polybar"</span> nil <span style="font-style: italic;">"~/dotfiles/.config/polybar/launch.sh"</span>)))
@@ -3844,7 +3879,7 @@ polybarは柔軟にカスタマイズできるメニューバーを表示する�
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 252: </span>バーを停止する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/kill-panel</span> ()
+<label class="org-src-name"><span class="listing-number">Listing 253: </span>バーを停止する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/kill-panel</span> ()
   (<span style="font-weight: bold;">interactive</span>)
   (<span style="font-weight: bold;">when</span> kd/polybar-process
     (<span style="font-weight: bold;">ignore-errors</span>
@@ -3854,7 +3889,7 @@ polybarは柔軟にカスタマイズできるメニューバーを表示する�
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 253: </span>ワークスペースをpolybarで表示する設定</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/polybar-exwm-workspace</span> ()
+<label class="org-src-name"><span class="listing-number">Listing 254: </span>ワークスペースをpolybarで表示する設定</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/polybar-exwm-workspace</span> ()
   (<span style="font-weight: bold;">pcase</span> exwm-workspace-current-index
     (0 <span style="font-style: italic;">"%{F#797D7F}Work%{F-} Home"</span>)
     (1 <span style="font-style: italic;">"Work %{F#797D7F}Home%{F-}"</span>)
@@ -3874,15 +3909,15 @@ polybarは柔軟にカスタマイズできるメニューバーを表示する�
 </div>
 </div>
 </div>
-<div id="outline-container-orgb9d976f" class="outline-2">
-<h2 id="orgb9d976f">Workspace</h2>
-<div class="outline-text-2" id="text-orgb9d976f">
+<div id="outline-container-org1b228ff" class="outline-2">
+<h2 id="org1b228ff">Workspace</h2>
+<div class="outline-text-2" id="text-org1b228ff">
 <p>
 1~9のワークスペースを作成し、番号で切り替えられるようにする。
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 254: </span>モード初期化</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">perspective</span>)
+<label class="org-src-name"><span class="listing-number">Listing 255: </span>モード初期化</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">perspective</span>)
 (<span style="font-weight: bold;">setq</span> persp-initial-frame-name <span style="font-style: italic;">"1"</span>)
 (<span style="font-weight: bold;">setq</span> persp-modestring-dividers '(<span style="font-style: italic;">""</span> <span style="font-style: italic;">""</span> <span style="font-style: italic;">" "</span>))
 (persp-mode 1)
@@ -3890,7 +3925,7 @@ polybarは柔軟にカスタマイズできるメニューバーを表示する�
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 255: </span>ワークスペースを生成する</label><pre class="src src-emacs-lisp">(mapc (<span style="font-weight: bold;">lambda</span> (i)
+<label class="org-src-name"><span class="listing-number">Listing 256: </span>ワークスペースを生成する</label><pre class="src src-emacs-lisp">(mapc (<span style="font-weight: bold;">lambda</span> (i)
         (persp-switch (int-to-string i)))
       (number-sequence 1 9))
 (persp-switch <span style="font-style: italic;">"1"</span>)
@@ -3898,15 +3933,15 @@ polybarは柔軟にカスタマイズできるメニューバーを表示する�
 </div>
 </div>
 </div>
-<div id="outline-container-orge671b6c" class="outline-2">
-<h2 id="orge671b6c">Hydra</h2>
-<div class="outline-text-2" id="text-orge671b6c">
+<div id="outline-container-orgf7c7a1e" class="outline-2">
+<h2 id="orgf7c7a1e">Hydra</h2>
+<div class="outline-text-2" id="text-orgf7c7a1e">
 <p>
 Hydraはカスタマイズ可能なキー表示を追加するパッケージ。キーバインド空間を制限しつつ、入力のヒントを表示して使いやすくする。
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 256: </span>グローバルに便利なメニューを追加する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">with-eval-after-load</span> 'pretty-hydra
+<label class="org-src-name"><span class="listing-number">Listing 257: </span>グローバルに便利なメニューを追加する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">with-eval-after-load</span> 'pretty-hydra
   (pretty-hydra-define pretty-hydra-henkan (<span style="font-weight: bold;">:color</span> blue <span style="font-weight: bold;">:foreign-keys</span> warn <span style="font-weight: bold;">:title</span> <span style="font-style: italic;">"Convenient Tools"</span>)
     (<span style="font-style: italic;">"Media"</span>
      ((<span style="font-style: italic;">"&lt;prior&gt;"</span> kd/mint-volume-up <span style="font-style: italic;">"up"</span>)
@@ -3924,7 +3959,8 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
       (<span style="font-style: italic;">"p"</span> persp-ivy-switch-buffer <span style="font-style: italic;">"persp-buffer"</span>))
 
      <span style="font-style: italic;">"Execute"</span>
-     ((<span style="font-style: italic;">"e"</span> counsel-linux-app <span style="font-style: italic;">"run"</span>)
+     ((<span style="font-style: italic;">"d"</span> gdb <span style="font-style: italic;">"gdb"</span>)
+      (<span style="font-style: italic;">"e"</span> counsel-linux-app <span style="font-style: italic;">"run"</span>)
       (<span style="font-style: italic;">"c"</span> recompile <span style="font-style: italic;">"recompile"</span>)
       (<span style="font-style: italic;">"s"</span> counsel-search <span style="font-style: italic;">"google"</span>)
       (<span style="font-style: italic;">"!"</span> org-pomodoro <span style="font-style: italic;">"start pomodoro"</span>)
@@ -3960,7 +3996,7 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 257: </span>Railsに便利なメニューを定義する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">with-eval-after-load</span> 'pretty-hydra
+<label class="org-src-name"><span class="listing-number">Listing 258: </span>Railsに便利なメニューを定義する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">with-eval-after-load</span> 'pretty-hydra
   (pretty-hydra-define pretty-hydra-projectile-rails-find (<span style="font-weight: bold;">:color</span> blue <span style="font-weight: bold;">:foreign-keys</span> warn <span style="font-weight: bold;">:title</span> <span style="font-style: italic;">"Projectile Rails"</span>)
     (<span style="font-style: italic;">"Current"</span>
      ((<span style="font-style: italic;">"M"</span> projectile-rails-find-current-model      <span style="font-style: italic;">"Current model"</span>)
@@ -4003,7 +4039,7 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
 </ul>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 258: </span>major-mode-hydra</label><pre class="src src-emacs-lisp">(global-set-key (kbd <span style="font-style: italic;">"M-SPC"</span>) #'major-mode-hydra)
+<label class="org-src-name"><span class="listing-number">Listing 259: </span>major-mode-hydra</label><pre class="src src-emacs-lisp">(global-set-key (kbd <span style="font-style: italic;">"M-SPC"</span>) #'major-mode-hydra)
 
 (<span style="font-weight: bold;">with-eval-after-load</span> 'major-mode-hydra
   (major-mode-hydra-define emacs-lisp-mode nil
@@ -4035,15 +4071,15 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
 </div>
 </div>
 
-<div id="outline-container-orgce89b82" class="outline-2">
-<h2 id="orgce89b82">Display Manager</h2>
-<div class="outline-text-2" id="text-orgce89b82">
+<div id="outline-container-org678a66a" class="outline-2">
+<h2 id="org678a66a">Display Manager</h2>
+<div class="outline-text-2" id="text-org678a66a">
 <p>
 OS操作の便利関数。
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 259: </span>音量調整する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/mint-volume-up</span> ()
+<label class="org-src-name"><span class="listing-number">Listing 260: </span>音量調整する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/mint-volume-up</span> ()
   <span style="font-style: italic;">"Linux Mint&#12391;&#12398;&#38899;&#37327;&#12450;&#12483;&#12503;."</span>
   (<span style="font-weight: bold;">interactive</span>)
   (start-process-shell-command <span style="font-style: italic;">"volume up"</span> nil <span style="font-style: italic;">"pactl set-sink-volume @DEFAULT_SINK@ +5%"</span>))
@@ -4056,7 +4092,7 @@ OS操作の便利関数。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 260: </span>再生を停止する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/player-stop</span> ()
+<label class="org-src-name"><span class="listing-number">Listing 261: </span>再生を停止する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/player-stop</span> ()
   <span style="font-style: italic;">"&#20877;&#29983;&#20572;&#27490;"</span>
   (<span style="font-weight: bold;">interactive</span>)
   (start-process-shell-command <span style="font-style: italic;">"player stop"</span> nil <span style="font-style: italic;">"playerctl stop"</span>))
@@ -4064,7 +4100,7 @@ OS操作の便利関数。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 261: </span>ネットワークを接続・切断する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/up-network</span> ()
+<label class="org-src-name"><span class="listing-number">Listing 262: </span>ネットワークを接続・切断する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/up-network</span> ()
   <span style="font-style: italic;">"&#12493;&#12483;&#12488;&#12527;&#12540;&#12463;&#25509;&#32154;"</span>
   (<span style="font-weight: bold;">interactive</span>)
   (<span style="font-weight: bold;">let</span> ((passwd))
@@ -4084,7 +4120,7 @@ OS操作の便利関数。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 262: </span>英語辞書をインストールする</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(use-package ej-dict</span>
+<label class="org-src-name"><span class="listing-number">Listing 263: </span>英語辞書をインストールする</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(use-package ej-dict</span>
 <span style="font-weight: bold; font-style: italic;">;;   </span><span style="font-weight: bold; font-style: italic;">:straight (:host github :repo "kijimaD/ej-dict"))</span>
 <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(ej-dict-install-dict)</span>
 </pre>
@@ -4101,9 +4137,9 @@ OS操作の便利関数。
 </p>
 </div>
 </div>
-<div id="outline-container-org3524d40" class="outline-2">
-<h2 id="org3524d40">gptel</h2>
-<div class="outline-text-2" id="text-org3524d40">
+<div id="outline-container-orgcdcf7d2" class="outline-2">
+<h2 id="orgcdcf7d2">gptel</h2>
+<div class="outline-text-2" id="text-orgcdcf7d2">
 <p>
 gptelはChatGPTのEmacsクライアント。
 </p>
@@ -4115,15 +4151,15 @@ gptelはChatGPTのEmacsクライアント。
 </div>
 </div>
 
-<div id="outline-container-org39d1307" class="outline-2">
-<h2 id="org39d1307">Helper</h2>
-<div class="outline-text-2" id="text-org39d1307">
+<div id="outline-container-org5365fe7" class="outline-2">
+<h2 id="org5365fe7">Helper</h2>
+<div class="outline-text-2" id="text-org5365fe7">
 <p>
 その他の便利関数。
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 263: </span>前のマークに戻る</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">my-exchange-point-and-mark</span> ()
+<label class="org-src-name"><span class="listing-number">Listing 264: </span>前のマークに戻る</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">my-exchange-point-and-mark</span> ()
   (<span style="font-weight: bold;">interactive</span>)
   (exchange-point-and-mark)
   (deactivate-mark))
@@ -4132,12 +4168,12 @@ gptelはChatGPTのEmacsクライアント。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 264: </span>行全体を削除する</label><pre class="src src-emacs-lisp">(global-set-key (kbd <span style="font-style: italic;">"C-c C-k"</span>) 'kill-whole-line)
+<label class="org-src-name"><span class="listing-number">Listing 265: </span>行全体を削除する</label><pre class="src src-emacs-lisp">(global-set-key (kbd <span style="font-style: italic;">"C-c C-k"</span>) 'kill-whole-line)
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 265: </span>カレントパスを取得する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">current-path</span> ()
+<label class="org-src-name"><span class="listing-number">Listing 266: </span>カレントパスを取得する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">current-path</span> ()
   (<span style="font-weight: bold;">interactive</span>)
   (<span style="font-weight: bold;">let</span> ((file-path buffer-file-name)
         (dir-path default-directory))
@@ -4153,7 +4189,7 @@ gptelはChatGPTのEmacsクライアント。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 266: </span>i-searchで逆側にカーソルをセットする</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">my-isearch-done-opposite</span> (<span style="font-weight: bold; text-decoration: underline;">&amp;optional</span> nopush edit)
+<label class="org-src-name"><span class="listing-number">Listing 267: </span>i-searchで逆側にカーソルをセットする</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">my-isearch-done-opposite</span> (<span style="font-weight: bold; text-decoration: underline;">&amp;optional</span> nopush edit)
   <span style="font-style: italic;">"End current search in the opposite side of the match."</span>
   (<span style="font-weight: bold;">interactive</span>)
   (funcall #'isearch-done nopush edit)
@@ -4162,7 +4198,7 @@ gptelはChatGPTのEmacsクライアント。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 267: </span>カーソルを真ん中に保ちつつ行を1つ移動する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">my-next-line</span> ()
+<label class="org-src-name"><span class="listing-number">Listing 268: </span>カーソルを真ん中に保ちつつ行を1つ移動する</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">my-next-line</span> ()
   (<span style="font-weight: bold;">interactive</span>)
   (next-line)
   (recenter))
@@ -4177,7 +4213,7 @@ gptelはChatGPTのEmacsクライアント。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 268: </span>ewwのキーバインドを設定する</label><pre class="src src-emacs-lisp">(eval-after-load <span style="font-style: italic;">"eww"</span>
+<label class="org-src-name"><span class="listing-number">Listing 269: </span>ewwのキーバインドを設定する</label><pre class="src src-emacs-lisp">(eval-after-load <span style="font-style: italic;">"eww"</span>
   '(progn
      (define-key eww-mode-map (kbd <span style="font-style: italic;">"&lt;mouse-1&gt;"</span>) 'my-next-line)
      (define-key eww-mode-map (kbd <span style="font-style: italic;">"&lt;mouse-2&gt;"</span>) 'define-word-at-point)
@@ -4192,14 +4228,14 @@ gptelはChatGPTのEmacsクライアント。
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 269: </span>最後のタイマーをキャンセルする</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/cancel-last-timer</span> ()
+<label class="org-src-name"><span class="listing-number">Listing 270: </span>最後のタイマーをキャンセルする</label><pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">kd/cancel-last-timer</span> ()
   (<span style="font-weight: bold;">interactive</span>)
   (cancel-timer (car (last timer-list))))
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 270: </span>Cの関数に定義ジャンプできるようにする</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Emacs C source directory</span>
+<label class="org-src-name"><span class="listing-number">Listing 271: </span>Cの関数に定義ジャンプできるようにする</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Emacs C source directory</span>
 (<span style="font-weight: bold;">let</span> ((src-dir <span style="font-style: italic;">"~/ProjectOrg/emacs/emacs/src"</span>))
   (<span style="font-weight: bold;">if</span> (file-directory-p src-dir)
       (<span style="font-weight: bold;">setq</span> source-directory src-dir)))
@@ -4211,10 +4247,213 @@ gptelはChatGPTのEmacsクライアント。
 </p>
 </div>
 </div>
+
+<div id="outline-container-org35477b6" class="outline-2">
+<h2 id="org35477b6">delve-mode</h2>
+<div class="outline-text-2" id="text-org35477b6">
+<p>
+delve-mode は <code>M-x gdb</code> と同じインターフェースで扱えるパッケージ。<a href="https://github.com/benma/go-dlv.el/">benma/go-dlv.el</a>で配布されているものを持ってきた。
+</p>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 272: </span>コピペ</label><pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;;; </span><span style="font-weight: bold; font-style: italic;">go-dlv.el --- Go Delve - Debug Go programs interactively with the GUD.</span>
+
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Copyright (C) 2015, 2019 Marko Bencun</span>
+
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Author: Marko Bencun <a href="mailto:mbencun%40gmail.com">&lt;mbencun@gmail.com&gt;</a></span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">URL: https://github.com/benma/go-dlv.el/</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Version: 0.6</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Package-Requires: ((go-mode "1.3.1"))</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Keywords: Go, debug, debugger, delve, interactive, gud</span>
+
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">This file is part of go-dlv.</span>
+
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">go-dlv is free software: you can redistribute it and/or modify</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">it under the terms of the GNU General Public License as published by</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">the Free Software Foundation, either version 3 of the License, or</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(at your option) any later version.</span>
+
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">go-dlv is distributed in the hope that it will be useful,</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">GNU General Public License for more details.</span>
+
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">You should have received a copy of the GNU General Public License</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">along with go-dlv.  If not, see <a href="http://www.gnu.org/licenses/">&lt;http://www.gnu.org/licenses/&gt;</a>.</span>
+
+<span style="font-weight: bold; font-style: italic;">;;; </span><span style="font-weight: bold; font-style: italic;">Installation</span>
+
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">If you are using Emacs 24 or later, you can get go-dlv from [melpa](https://melpa.org/) with the package manager.</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Add the following code to your init file.</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">----------------------------------------------------------</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(add-to-list 'load-path "folder-in-which-go-dlv-files-are-in/") ;; if the files are not already in the load path</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(require 'go-dlv)</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">----------------------------------------------------------</span>
+
+<span style="font-weight: bold; font-style: italic;">;;; </span><span style="font-weight: bold; font-style: italic;">Code:</span>
+
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">The code below is based on gud's pdb debugger, adapted to dlv:</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">https://github.com/emacs-mirror/emacs/blob/8badbad184c75d6a9b17b72900ca091a1bd11397/lisp/progmodes/gud.el#L1594-1698</span>
+
+(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">gud</span>)
+(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">go-mode</span>)
+
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Sample marker lines:</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&gt; main.main() ./test.go:10 (hits goroutine(5):1 total:1)</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&gt; [unrecovered-panic] runtime.fatalpanic() /usr/lib/golang/src/runtime/panic.go:681 (hits goroutine(16):1 total:1) (PC: 0x435140)</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Frame 2: /usr/lib/golang/src/testing/testing.go:792 (PC: 50fc82)</span>
+(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">go-dlv-marker-regexp</span>
+  <span style="font-style: italic;">"^</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">&gt; .+?(.*?) </span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">Frame [0-9]+: </span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-style: italic;">.+?</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">\\:</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-style: italic;">[0-9]+</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>)
+
+(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">go-dlv-marker-regexp-file-group</span> 1)
+(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">go-dlv-marker-regexp-line-group</span> 2)
+
+(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">go-dlv-marker-regexp-start</span> <span style="font-style: italic;">"^&gt; "</span>)
+
+(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">go-dlv-marker-acc</span> <span style="font-style: italic;">""</span>)
+(make-variable-buffer-local 'go-dlv-marker-acc)
+
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">There's no guarantee that Emacs will hand the filter the entire</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">marker at once; it could be broken up across several strings.  We</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">might even receive a big chunk with several markers in it.  If we</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">receive a chunk of text which looks like it might contain the</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">beginning of a marker, we save it here between calls to the</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">filter.</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">go-dlv-marker-filter</span> (string)
+  (<span style="font-weight: bold;">setq</span> go-dlv-marker-acc (concat go-dlv-marker-acc string))
+  (<span style="font-weight: bold;">let</span> ((output <span style="font-style: italic;">""</span>))
+    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Process all the complete markers in this chunk.</span>
+    (<span style="font-weight: bold;">while</span> (string-match go-dlv-marker-regexp go-dlv-marker-acc)
+      (<span style="font-weight: bold;">setq</span>
+
+       <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Extract the frame position from the marker.</span>
+       gud-last-frame
+       (<span style="font-weight: bold;">let</span> ((file (match-string go-dlv-marker-regexp-file-group
+                                 go-dlv-marker-acc))
+             (line (string-to-number
+                    (match-string go-dlv-marker-regexp-line-group
+                                  go-dlv-marker-acc))))
+         (cons file line))
+
+       <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Output everything instead of the below</span>
+       output (concat output (substring go-dlv-marker-acc 0 (match-end 0)))
+       <span style="font-weight: bold; font-style: italic;">;;</span><span style="font-weight: bold; font-style: italic;">         ;; Append any text before the marker to the output we're going</span>
+       <span style="font-weight: bold; font-style: italic;">;;</span><span style="font-weight: bold; font-style: italic;">         ;; to return - we don't include the marker in this text.</span>
+       <span style="font-weight: bold; font-style: italic;">;;</span><span style="font-weight: bold; font-style: italic;">         output (concat output</span>
+       <span style="font-weight: bold; font-style: italic;">;;</span><span style="font-weight: bold; font-style: italic;">                     (substring go-dlv-marker-acc 0 (match-beginning 0)))</span>
+
+       <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Set the accumulator to the remaining text.</span>
+       go-dlv-marker-acc (substring go-dlv-marker-acc (match-end 0))))
+
+    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Does the remaining text look like it might end with the</span>
+    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">beginning of another marker?  If it does, then keep it in</span>
+    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">go-dlv-marker-acc until we receive the rest of it.  Since we</span>
+    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">know the full marker regexp above failed, it's pretty simple to</span>
+    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">test for marker starts.</span>
+    (<span style="font-weight: bold;">if</span> (string-match go-dlv-marker-regexp-start go-dlv-marker-acc)
+        (<span style="font-weight: bold;">progn</span>
+          <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Everything before the potential marker start can be output.</span>
+          (<span style="font-weight: bold;">setq</span> output (concat output (substring go-dlv-marker-acc
+                                                 0 (match-beginning 0))))
+
+          <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Everything after, we save, to combine with later input.</span>
+          (<span style="font-weight: bold;">setq</span> go-dlv-marker-acc
+                (substring go-dlv-marker-acc (match-beginning 0))))
+
+      (<span style="font-weight: bold;">setq</span> output (concat output go-dlv-marker-acc)
+            go-dlv-marker-acc <span style="font-style: italic;">""</span>))
+
+    output))
+
+(<span style="font-weight: bold;">define-obsolete-variable-alias</span> 'go-dlv-command-name
+  'gud-dlv-command-name
+  <span style="font-style: italic;">"0.4"</span>)
+
+(<span style="font-weight: bold;">defcustom</span> <span style="font-weight: bold; font-style: italic;">gud-dlv-command-name</span> <span style="font-style: italic;">"dlv"</span>
+  <span style="font-style: italic;">"File name for executing the Go Delve debugger.</span>
+<span style="font-style: italic;">This should be an executable on your path, or an absolute file name."</span>
+  <span style="font-weight: bold;">:type</span> 'string
+  <span style="font-weight: bold;">:group</span> 'gud)
+
+<span style="font-weight: bold; font-style: italic;">;;;</span><span style="font-weight: bold; font-style: italic;">###</span><span style="font-weight: bold; font-style: italic;">autoload</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">dlv</span> (command-line)
+  <span style="font-style: italic;">"Run dlv on program FILE in buffer `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">*gud-FILE*</span><span style="font-style: italic;">'.</span>
+<span style="font-style: italic;">The directory containing FILE becomes the initial working directory</span>
+<span style="font-style: italic;">and source-file directory for your debugger."</span>
+  (<span style="font-weight: bold;">interactive</span>
+   (list (gud-query-cmdline 'dlv <span style="font-style: italic;">"debug"</span>)))
+
+  (gud-common-init command-line nil 'go-dlv-marker-filter)
+  (set (make-local-variable 'gud-minor-mode) 'dlv)
+
+  (gud-def gud-break  <span style="font-style: italic;">"break %d%f:%l"</span>    <span style="font-style: italic;">"\C-b"</span> <span style="font-style: italic;">"Set breakpoint at current line."</span>)
+  (gud-def gud-trace  <span style="font-style: italic;">"trace %d%f:%l"</span>    <span style="font-style: italic;">"\C-t"</span> <span style="font-style: italic;">"Set trace at current line."</span>)
+  (gud-def gud-remove <span style="font-style: italic;">"clearall %d%f:%l"</span> <span style="font-style: italic;">"\C-d"</span> <span style="font-style: italic;">"Remove breakpoint at current line"</span>)
+  (gud-def gud-step   <span style="font-style: italic;">"step"</span>             <span style="font-style: italic;">"\C-s"</span> <span style="font-style: italic;">"Step one source line with display."</span>)
+  (gud-def gud-finish <span style="font-style: italic;">"stepout"</span>          <span style="font-style: italic;">"\C-f"</span> <span style="font-style: italic;">"Finish executing current function."</span>)
+  (gud-def gud-next   <span style="font-style: italic;">"next"</span>             <span style="font-style: italic;">"\C-n"</span> <span style="font-style: italic;">"Step one line (skip functions)."</span>)
+  (gud-def gud-cont   <span style="font-style: italic;">"continue"</span>         <span style="font-style: italic;">"\C-r"</span> <span style="font-style: italic;">"Continue running program."</span>)
+  (gud-def gud-until  <span style="font-style: italic;">"continue %d%f:%l"</span> <span style="font-style: italic;">"\C-u"</span> <span style="font-style: italic;">"Continue to current line."</span>)
+  (gud-def gud-print  <span style="font-style: italic;">"print %e"</span>         <span style="font-style: italic;">"\C-p"</span> <span style="font-style: italic;">"Evaluate Go expression at point."</span>)
+  (gud-def gud-watch  <span style="font-style: italic;">"display -a %e"</span>    <span style="font-style: italic;">"\C-w"</span> <span style="font-style: italic;">"Print expression at point on every step."</span>)
+  (gud-def gud-up     <span style="font-style: italic;">"up %p"</span>            <span style="font-style: italic;">"&lt;"</span>    <span style="font-style: italic;">"Up N stack frames (numeric arg)."</span>)
+  (gud-def gud-down   <span style="font-style: italic;">"down %p"</span>          <span style="font-style: italic;">"&gt;"</span>    <span style="font-style: italic;">"Down N stack frames (numeric arg)."</span>)
+
+  (<span style="font-weight: bold;">setq</span> comint-prompt-regexp <span style="font-style: italic;">"^(Dlv) *"</span>)
+  (<span style="font-weight: bold;">setq</span> paragraph-start comint-prompt-regexp)
+  (run-hooks 'go-dlv-mode-hook))
+
+<span style="font-weight: bold; font-style: italic;">;;;</span><span style="font-weight: bold; font-style: italic;">###</span><span style="font-weight: bold; font-style: italic;">autoload</span>
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">dlv-current-func</span> ()
+  <span style="font-style: italic;">"Debug the current program or test stopping at the beginning of the current function."</span>
+  (<span style="font-weight: bold;">interactive</span>)
+  (<span style="font-weight: bold;">let</span> (current-test-name current-bench-name current-func-loc)
+    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">find the location of the current function and (if it is a test function) its name</span>
+    (<span style="font-weight: bold;">save-excursion</span>
+      (<span style="font-weight: bold;">when</span> (go-beginning-of-defun)
+        (<span style="font-weight: bold;">setq</span> current-func-loc (format <span style="font-style: italic;">"%s:%d"</span> buffer-file-name (line-number-at-pos)))
+        <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Check for Test or Benchmark function, set current-test-name/current-bench-name</span>
+        (<span style="font-weight: bold;">when</span> (looking-at go-func-regexp)
+          (<span style="font-weight: bold;">let</span> ((func-name (match-string 1)))
+            (<span style="font-weight: bold;">when</span> (string-match-p <span style="font-style: italic;">"_test</span><span style="font-weight: bold; font-style: italic;">\</span><span style="font-style: italic;">.go$"</span> buffer-file-name)
+              (<span style="font-weight: bold;">cond</span>
+               ((string-match-p <span style="font-style: italic;">"^Test</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">^Example"</span> func-name)
+                (<span style="font-weight: bold;">setq</span> current-test-name func-name))
+               ((string-match-p <span style="font-style: italic;">"^Benchmark"</span> func-name)
+                (<span style="font-weight: bold;">setq</span> current-bench-name func-name))))))))
+
+    (<span style="font-weight: bold;">if</span> current-func-loc
+        (<span style="font-weight: bold;">let</span> (gud-buffer-name dlv-command)
+          (<span style="font-weight: bold;">cond</span>
+           (current-test-name
+            (<span style="font-weight: bold;">setq</span> gud-buffer-name <span style="font-style: italic;">"*gud-test*"</span>)
+            (<span style="font-weight: bold;">setq</span> dlv-command (concat gud-dlv-command-name <span style="font-style: italic;">" test -- -test.run "</span> current-test-name)))
+           (current-bench-name
+            (<span style="font-weight: bold;">setq</span> gud-buffer-name <span style="font-style: italic;">"*gud-test*"</span>)
+            (<span style="font-weight: bold;">setq</span> dlv-command (concat gud-dlv-command-name <span style="font-style: italic;">" test -- -test.run='</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">^$</span><span style="font-style: italic;">' -test.bench="</span> current-bench-name)))
+           (t
+            (<span style="font-weight: bold;">setq</span> gud-buffer-name <span style="font-style: italic;">"*gud-debug*"</span>)
+            (<span style="font-weight: bold;">setq</span> dlv-command (concat gud-dlv-command-name <span style="font-style: italic;">" debug"</span>))))
+
+          <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">stop the current active dlv session if any</span>
+          (<span style="font-weight: bold;">let</span> ((gud-buffer (get-buffer gud-buffer-name)))
+            (<span style="font-weight: bold;">when</span> gud-buffer (kill-buffer gud-buffer)))
+
+          <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">run dlv and stop at the beginning of the current function</span>
+          (dlv dlv-command)
+          (gud-call (format <span style="font-style: italic;">"break %s"</span> current-func-loc))
+          (gud-call <span style="font-style: italic;">"continue"</span>))
+      (<span style="font-weight: bold;">error</span> <span style="font-style: italic;">"Not in function"</span>))))
+
+(<span style="font-weight: bold;">provide</span> '<span style="font-weight: bold; text-decoration: underline;">go-dlv</span>)
+<span style="font-weight: bold; font-style: italic;">;;; </span><span style="font-weight: bold; font-style: italic;">go-dlv.el ends here</span>
+</pre>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
-<p class="author">Author: runner</p>
-<p class="date">Created: 2023-05-27 Sat 10:54</p>
+<p class="date">Created: 2023-06-27 Tue 02:43</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
