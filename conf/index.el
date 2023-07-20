@@ -1919,6 +1919,7 @@ How to send a bug report:
 (setq corfu-count 15)
 (setq corfu-cycle t)
 (setq corfu-preselect-first t) ;; 自動的に最初の候補を選択する
+(setq corfu-preselect 'prompt)
 (setq corfu-quit-at-boundary t) ;; スペースを入れるとquit
 (setq corfu-quit-no-match t)
 
@@ -2557,6 +2558,10 @@ How to send a bug report:
 
 (use-package denote-menu
   :straight (:host github :repo "namilus/denote-menu"))
+
+(setq denote-templates
+      `((entry . ,(f-read-text "~/.emacs.d/resources/entry.org"))
+        (month . ,(f-read-text "~/.emacs.d/resources/month.org"))))
 
 (setq gptel-default-mode 'org-mode)
 

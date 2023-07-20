@@ -2659,6 +2659,7 @@ corfuはシンプルな補完を提供するパッケージ。
   (setq corfu-count 15)
   (setq corfu-cycle t)
   (setq corfu-preselect-first t) ;; 自動的に最初の候補を選択する
+  (setq corfu-preselect 'prompt)
   (setq corfu-quit-at-boundary t) ;; スペースを入れるとquit
   (setq corfu-quit-no-match t)
 #+end_src
@@ -3520,7 +3521,7 @@ OS操作の便利関数。
                               " | sudo -S ifconfig `basename $intf` down; done"))))
 #+end_src
 
-#+caption: 英語辞書をインストールする
+#+caption: 英語辞書をインストールする。あまり使ってないのでコメントアウトしている
 #+begin_src emacs-lisp
   ;; (use-package ej-dict
   ;;   :straight (:host github :repo "kijimaD/ej-dict"))
@@ -3528,11 +3529,17 @@ OS操作の便利関数。
 #+end_src
 
 #+begin_src emacs-lisp
-(use-package denote-menu
-  :straight (:host github :repo "namilus/denote-menu"))
+  (use-package denote-menu
+    :straight (:host github :repo "namilus/denote-menu"))
 #+end_src
 
-あまり使ってないのでコメントアウトしている。
+#+caption: denoteのテンプレートを設定する
+#+begin_src emacs-lisp
+  (setq denote-templates
+        `((entry . ,(f-read-text "~/.emacs.d/resources/entry.org"))
+          (month . ,(f-read-text "~/.emacs.d/resources/month.org"))))
+#+end_src
+
 * gptel
 
 gptelはChatGPTのEmacsクライアント。
