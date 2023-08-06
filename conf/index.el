@@ -2152,7 +2152,6 @@ How to send a bug report:
 
 ;; 表示項目の設定
 (setq doom-modeline-buffer-file-name-style 'truncate-with-project)
-(setq doom-modeline-icon t)
 (setq doom-modeline-major-mode-icon t)
 (setq doom-modeline-minor-modes nil)
 (setq doom-modeline-buffer-encoding nil)
@@ -2441,7 +2440,8 @@ How to send a bug report:
 
      "Edit"
      (("q" query-replace "replace")
-      ("y" ivy-yasnippet "yas"))
+      ("y" ivy-yasnippet "yas")
+      ("R" revert-buffer-no-confirm "reload"))
 
      "Window"
      (("l" (lambda nil (interactive) (persp-switch-last)) "Last")

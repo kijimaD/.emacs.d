@@ -3021,7 +3021,6 @@ doom themeはモダンなテーマ集。
 
   ;; 表示項目の設定
   (setq doom-modeline-buffer-file-name-style 'truncate-with-project)
-  (setq doom-modeline-icon t)
   (setq doom-modeline-major-mode-icon t)
   (setq doom-modeline-minor-modes nil)
   (setq doom-modeline-buffer-encoding nil)
@@ -3387,7 +3386,8 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
 
        "Edit"
        (("q" query-replace "replace")
-        ("y" ivy-yasnippet "yas"))
+        ("y" ivy-yasnippet "yas")
+        ("R" revert-buffer-no-confirm "reload"))
 
        "Window"
        (("l" (lambda nil (interactive) (persp-switch-last)) "Last")
