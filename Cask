@@ -39,7 +39,6 @@
 (depends-on "ctags-update")
 (depends-on "current-word-highlight")
 (depends-on "dap-mode")
-(depends-on "dap-ui")
 (depends-on "dart-mode")
 (depends-on "dash")
 (depends-on "define-word")
