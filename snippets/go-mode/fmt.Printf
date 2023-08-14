@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: fmt.Printf
+# key: fpf
+# --
+
+fmt.Printf("%#v\n", $0)
