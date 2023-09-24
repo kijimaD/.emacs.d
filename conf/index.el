@@ -705,9 +705,10 @@ How to send a bug report:
    (t "OFF")))
 
 (defun kd/effort-timer ()
-  (if (and org-clock-effort (or (org-pomodoro-active-p) (org-clocking-p)))
-      (format "[%s/%s]" (org-duration-from-minutes (org-clock-get-clocked-time)) org-clock-effort)
-    ""))
+  (cond
+   ((and (not org-clock-effort) (or (org-pomodoro-active-p) (org-clocking-p)) "effort not set!"))
+   ((and org-clock-effort (or (org-pomodoro-active-p) (org-clocking-p))) (format "[%s/%s]" (org-duration-from-minutes (org-clock-get-clocked-time)) org-clock-effort))
+   (t "")))
 
 (defun kd/pmd-today-point-display ()
   (let* ((all-minute (* kd/pmd-today-point 25))
@@ -715,11 +716,11 @@ How to send a bug report:
          (minute (% all-minute 60)))
     (format
      " %s %dpts/%02dh%02dm"
-            (kd/effort-timer)
-            kd/pmd-today-point
-            hour
-            minute
-            )))
+     (kd/effort-timer)
+     kd/pmd-today-point
+     hour
+     minute
+     )))
 
 (defvar kd/pmd-today-point 0)
 (add-hook 'org-pomodoro-finished-hook
@@ -2404,7 +2405,7 @@ How to send a bug report:
 
 (mapc (lambda (i)
         (persp-switch (int-to-string i)))
-      (number-sequence 1 9))
+      (number-sequence 0 9))
 (persp-switch "1")
 
 (with-eval-after-load 'pretty-hydra
@@ -2453,7 +2454,8 @@ How to send a bug report:
       ("6" (lambda nil (interactive) (persp-switch (int-to-string 6))) "Emacs")
       ("7" (lambda nil (interactive) (persp-switch (int-to-string 7))) "Sub")
       ("8" (lambda nil (interactive) (persp-switch (int-to-string 8))) "Main")
-      ("9" (lambda nil (interactive) (persp-switch (int-to-string 9))) "Blueberry"))
+      ("9" (lambda nil (interactive) (persp-switch (int-to-string 9))) "Blueberry")
+      ("0" (lambda nil (interactive) (persp-switch (int-to-string 0))) "Sub"))
 
      "Workspace"
      (("w" (lambda nil (interactive) (kd/exwm-workspace-switch-last)) "Last"))))
