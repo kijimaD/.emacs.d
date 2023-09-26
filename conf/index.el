@@ -1168,14 +1168,9 @@ How to send a bug report:
 
 (auto-insert-mode)
 (setq auto-insert-directory "~/.emacs.d/insert/")
-;; (define-auto-insert "\\.rb$" "ruby-template.rb")
-;; (define-auto-insert "\\.md$" "markdown-template.rb")
 (setq auto-insert-alist
       (append '(
-                ("\\.rb$" . "ruby-template.rb")
-                ("\\.js$" . "js-template.js")
-                ("\\.org$" . "org-template.org")
-                ("\\.md$" . "markdown-template.md")
+                ("\\.sh$" . "shell-template.sh")
                 ) auto-insert-alist))
 
 (require 'yasnippet)
