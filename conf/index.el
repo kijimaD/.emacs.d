@@ -463,8 +463,10 @@ How to send a bug report:
 (setq org-alert-notification-title "Reminder")
 (org-alert-enable)
 
+(require 'denote-org-dblock)
+
 (setq denote-directory (expand-file-name "~/roam/denote"))
-(setq denote-known-keywords '("essay" "code" "book"))
+(setq denote-known-keywords '("essay" "code" "book" "term"))
 
 (define-key global-map (kbd "C-c d") 'denote-create-note)
 
