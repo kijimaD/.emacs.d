@@ -466,7 +466,7 @@ How to send a bug report:
 (require 'denote-org-dblock)
 
 (setq denote-directory (expand-file-name "~/roam/denote"))
-(setq denote-known-keywords '("essay" "code" "book" "term"))
+(setq denote-known-keywords '("essay" "code" "book" "term" "memo" "draft"))
 
 (define-key global-map (kbd "C-c d") 'denote-create-note)
 
@@ -1295,6 +1295,7 @@ How to send a bug report:
         ("http://b.hatena.ne.jp/t-wada/rss" test)
         ("https://efcl.info/feed/" javascript)
         ("https://api.syosetu.com/writernovel/235132.Atom" novel)
+        ("https://anchor.fm/s/7cd923f4/podcast/rss" podcast)
         ("https://hackerstations.com/index.xml" programmer)
         ("https://medium.com/feed/a-journey-with-go" go)
         ("https://dev.to/feed/go" go)
