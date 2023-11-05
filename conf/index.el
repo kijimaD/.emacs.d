@@ -377,11 +377,6 @@ How to send a bug report:
 (add-hook 'org-mode-hook #'org-modern-mode)
 (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
 
-;; (require 'org-sticky-header)
-;; (setq org-sticky-header-full-path 'full)
-;; (setq org-sticky-header-heading-star "◉")
-;; (remove-hook 'org-mode-hook #'org-stickey-header-mode)
-
 (org-tree-slide-presentation-profile)
 (org-tree-slide--hide-slide-header)
 
@@ -416,9 +411,6 @@ How to send a bug report:
 (setq pdf-annot-activate-created-annotations t)
 (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
 (setq pdf-view-resize-factor 1.1)
-
-(require 'org-download)
-(setq-default org-download-image-dir "~/roam/images")
 
 (require 'org-roam)
 (add-hook 'after-init-hook 'org-roam-mode)
@@ -1655,16 +1647,6 @@ How to send a bug report:
 
 (setq gofmt-command "goimports")
 (add-hook 'before-save-hook 'gofmt-before-save)
-
-;; (add-hook 'python-mode-hook 'jedi:setup)
-;; (setq jedi:complete-on-dot t)
-;; (jedi:setup)
-;; ;; (define-key jedi-mode-map (kbd "<C-tab>") nil) ;;C-tabはウィンドウの移動に用いる
-;; (setq jedi:complete-on-dot t)
-;; (setq ac-sources
-;;       (delete 'ac-source-words-in-same-mode-buffers ac-sources)) ;;jediの補完候補だけでいい
-;; (add-to-list 'ac-sources 'ac-source-filename)
-;; (add-to-list 'ac-sources 'ac-source-jedi-direct)
 
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
