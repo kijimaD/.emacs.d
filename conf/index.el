@@ -1515,8 +1515,6 @@ How to send a bug report:
 
 (setq create-link-default-format 'create-link-format-org)
 
-(rg-enable-default-bindings)
-
 (require 'lispxmp)
 (define-key emacs-lisp-mode-map (kbd "C-<return>") 'lispxmp)
 
@@ -1585,9 +1583,6 @@ How to send a bug report:
 (require 'ruby-electric)
 (add-hook 'ruby-mode-hook '(lambda ()
                              (ruby-electric-mode t)))
-
-(require 'quickrun)
-(global-set-key (kbd "<f8>") 'quickrun)
 
 (require 'inf-ruby)
 (setq inf-ruby-default-implementation "pry")

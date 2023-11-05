@@ -2106,11 +2106,6 @@ Mermaid JSはテキストから図を描画するライブラリ。
   (setq create-link-default-format 'create-link-format-org)
 #+end_src
 
-#+caption: ripgrep
-#+begin_src emacs-lisp
-  (rg-enable-default-bindings)
-#+end_src
-
 #+caption: lispxmp
 #+begin_src emacs-lisp
   (require 'lispxmp)
@@ -2207,12 +2202,6 @@ Mermaid JSはテキストから図を描画するライブラリ。
   (add-hook 'ruby-mode-hook '(lambda ()
                                (ruby-electric-mode t)))
 
-#+end_src
-
-#+caption: quickrun
-#+begin_src emacs-lisp
-  (require 'quickrun)
-  (global-set-key (kbd "<f8>") 'quickrun)
 #+end_src
 
 #+caption: inf-ruby
