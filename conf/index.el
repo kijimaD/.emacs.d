@@ -402,14 +402,6 @@ How to send a bug report:
         (insert-file-contents template-file)))))
 (add-hook 'org-journal-after-entry-create-hook #'kd/insert-journal-template)
 
-;; (pdf-tools-install t)
-(require 'pdf-tools)
-(add-hook 'pdf-tools-enabled-hook 'pdf-view-midnight-minor-mode)
-(setq-default pdf-view-display-size 'fit-page)
-(setq pdf-annot-activate-created-annotations t)
-(define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
-(setq pdf-view-resize-factor 1.1)
-
 (require 'org-roam)
 (add-hook 'after-init-hook 'org-roam-mode)
 (make-directory "~/roam" t)

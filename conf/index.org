@@ -546,20 +546,6 @@ org-journalは日付ごとのファイルを生成したり、時刻を挿入で
 
 - https://emacs.stackexchange.com/questions/17897/create-an-org-journal-template-for-daily-journal-entry/32655#32655?newreg=7c9543fa39e342cfb438c4168020447d
 
-** pdf-tools
-Emacs上でpdfを扱うためのパッケージ。orgの項目にあるのは微妙な気がする。
-
-#+caption: 設定。インストールが必要
-#+begin_src emacs-lisp
-  ;; (pdf-tools-install t)
-  (require 'pdf-tools)
-  (add-hook 'pdf-tools-enabled-hook 'pdf-view-midnight-minor-mode)
-  (setq-default pdf-view-display-size 'fit-page)
-  (setq pdf-annot-activate-created-annotations t)
-  (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
-  (setq pdf-view-resize-factor 1.1)
-#+end_src
-
 ** org-roam
 org-roamはorgファイルをsqliteによって管理しやすくしたパッケージ。orgファイル同士の関連を挿入したり、リンク元のファイルを一覧にする、といったことができる。sqliteに保存されるので、別でクエリを使って取り出してグラフ描画に使ったりも可能。
 
