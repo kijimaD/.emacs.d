@@ -1559,10 +1559,6 @@ How to send a bug report:
 (require 'graphql-mode)
 (require 'ob-graphql)
 
-(require 'smart-newline)
-(global-set-key (kbd "C-m") 'newline)
-(add-hook 'ruby-mode-hook 'smart-newline-mode)
-
 (require 'projectile-rails)
 (projectile-rails-global-mode)
 (add-hook 'projectile-mode-hook 'projectile-rails-on)

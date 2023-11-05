@@ -1,11 +1,10 @@
-(package "kijimad-config" "0.1.0" "Kijimad Emacs")
+(package "kijimad-config" "0.1.0" "Kijimad Emacs Config")
 
 ;; Package repository
 (source gnu)
 (source melpa)
 
 ;; Try
-(depends-on "smart-newline")
 (depends-on "smartparens")
 (depends-on "gptel")
 

@@ -2181,13 +2181,6 @@ Mermaid JSはテキストから図を描画するライブラリ。
   (require 'ob-graphql)
 #+end_src
 
-#+caption: smart-newline
-#+begin_src emacs-lisp
-  (require 'smart-newline)
-  (global-set-key (kbd "C-m") 'newline)
-  (add-hook 'ruby-mode-hook 'smart-newline-mode)
-#+end_src
-
 * Rails
 #+caption: projectile-rails
 #+begin_src emacs-lisp
