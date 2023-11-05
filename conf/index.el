@@ -463,8 +463,10 @@ How to send a bug report:
 (setq org-alert-notification-title "Reminder")
 (org-alert-enable)
 
+(require 'denote-org-dblock)
+
 (setq denote-directory (expand-file-name "~/roam/denote"))
-(setq denote-known-keywords '("essay" "code" "book"))
+(setq denote-known-keywords '("essay" "code" "book" "term" "memo" "draft"))
 
 (define-key global-map (kbd "C-c d") 'denote-create-note)
 
@@ -705,9 +707,10 @@ How to send a bug report:
    (t "OFF")))
 
 (defun kd/effort-timer ()
-  (if (and org-clock-effort (or (org-pomodoro-active-p) (org-clocking-p)))
-      (format "[%s/%s]" (org-duration-from-minutes (org-clock-get-clocked-time)) org-clock-effort)
-    ""))
+  (cond
+   ((and (not org-clock-effort) (or (org-pomodoro-active-p) (org-clocking-p)) "effort not set!"))
+   ((and org-clock-effort (or (org-pomodoro-active-p) (org-clocking-p))) (format "[%s/%s]" (org-duration-from-minutes (org-clock-get-clocked-time)) org-clock-effort))
+   (t "")))
 
 (defun kd/pmd-today-point-display ()
   (let* ((all-minute (* kd/pmd-today-point 25))
@@ -715,11 +718,11 @@ How to send a bug report:
          (minute (% all-minute 60)))
     (format
      " %s %dpts/%02dh%02dm"
-            (kd/effort-timer)
-            kd/pmd-today-point
-            hour
-            minute
-            )))
+     (kd/effort-timer)
+     kd/pmd-today-point
+     hour
+     minute
+     )))
 
 (defvar kd/pmd-today-point 0)
 (add-hook 'org-pomodoro-finished-hook
@@ -1167,14 +1170,9 @@ How to send a bug report:
 
 (auto-insert-mode)
 (setq auto-insert-directory "~/.emacs.d/insert/")
-;; (define-auto-insert "\\.rb$" "ruby-template.rb")
-;; (define-auto-insert "\\.md$" "markdown-template.rb")
 (setq auto-insert-alist
       (append '(
-                ("\\.rb$" . "ruby-template.rb")
-                ("\\.js$" . "js-template.js")
-                ("\\.org$" . "org-template.org")
-                ("\\.md$" . "markdown-template.md")
+                ("\\.sh$" . "shell-template.sh")
                 ) auto-insert-alist))
 
 (require 'yasnippet)
@@ -1297,6 +1295,7 @@ How to send a bug report:
         ("http://b.hatena.ne.jp/t-wada/rss" test)
         ("https://efcl.info/feed/" javascript)
         ("https://api.syosetu.com/writernovel/235132.Atom" novel)
+        ("https://anchor.fm/s/7cd923f4/podcast/rss" podcast)
         ("https://hackerstations.com/index.xml" programmer)
         ("https://medium.com/feed/a-journey-with-go" go)
         ("https://dev.to/feed/go" go)
@@ -2404,7 +2403,7 @@ How to send a bug report:
 
 (mapc (lambda (i)
         (persp-switch (int-to-string i)))
-      (number-sequence 1 9))
+      (number-sequence 0 9))
 (persp-switch "1")
 
 (with-eval-after-load 'pretty-hydra
@@ -2453,7 +2452,8 @@ How to send a bug report:
       ("6" (lambda nil (interactive) (persp-switch (int-to-string 6))) "Emacs")
       ("7" (lambda nil (interactive) (persp-switch (int-to-string 7))) "Sub")
       ("8" (lambda nil (interactive) (persp-switch (int-to-string 8))) "Main")
-      ("9" (lambda nil (interactive) (persp-switch (int-to-string 9))) "Blueberry"))
+      ("9" (lambda nil (interactive) (persp-switch (int-to-string 9))) "Blueberry")
+      ("0" (lambda nil (interactive) (persp-switch (int-to-string 0))) "Sub"))
 
      "Workspace"
      (("w" (lambda nil (interactive) (kd/exwm-workspace-switch-last)) "Last"))))
