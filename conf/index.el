@@ -1422,7 +1422,6 @@ How to send a bug report:
                 (clojure clojure-mode lisp-mode)
                 (csharp csharp-mode java-mode)
                 (css css-mode)
-                (dart dart-mode)
                 (delphi delphi-mode)
                 (emacslisp emacs-lisp-mode)
                 (erlang erlang-mode)

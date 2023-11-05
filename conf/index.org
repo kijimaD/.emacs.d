@@ -2004,7 +2004,6 @@ Mermaid JSはテキストから図を描画するライブラリ。
                   (clojure clojure-mode lisp-mode)
                   (csharp csharp-mode java-mode)
                   (css css-mode)
-                  (dart dart-mode)
                   (delphi delphi-mode)
                   (emacslisp emacs-lisp-mode)
                   (erlang erlang-mode)
