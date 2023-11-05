@@ -2239,15 +2239,6 @@ Mermaid JSはテキストから図を描画するライブラリ。
   (define-key ruby-mode-map (kbd "C-<return>") 'xmp)
 #+end_src
 
-#+caption: 補完
-#+begin_src emacs-lisp
-  (when window-system
-    (progn
-      ;; (inf-ruby)
-      ;; (robe-start)
-      ))
-#+end_src
-
 * Go
 goの設定。
 
@@ -3012,7 +3003,6 @@ doom themeはモダンなテーマ集。
           projectile-mode
           projectile-rails-mode
           rinari-minor-mode
-          robe-mode
           rubocop-mode
           ruby-electric-mode
           undo-tree-mode

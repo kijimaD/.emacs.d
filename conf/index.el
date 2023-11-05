@@ -1604,12 +1604,6 @@ How to send a bug report:
 (require 'rcodetools)
 (define-key ruby-mode-map (kbd "C-<return>") 'xmp)
 
-(when window-system
-  (progn
-    ;; (inf-ruby)
-    ;; (robe-start)
-    ))
-
 (require 'go-mode)
 (require 'ob-go)
 
@@ -2173,7 +2167,6 @@ How to send a bug report:
         projectile-mode
         projectile-rails-mode
         rinari-minor-mode
-        robe-mode
         rubocop-mode
         ruby-electric-mode
         undo-tree-mode
