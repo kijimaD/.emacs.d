@@ -123,13 +123,6 @@
     ;;                         '(("^ *\\([-]\\) "
     ;;                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "✦"))))))
 
-    ;; (setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
-    (setq org-superstar-headline-bullets-list '("◉" "○" "●" "✿" "✸"))
-
-    (setq org-superstar-item-bullet-alist '((?* . ?•)
-                                            (?+ . ?»)
-                                            (?- . ?➤)))
-
     (dolist (face '((org-level-1 . 1.0)
                     (org-level-2 . 1.0)
                     (org-level-3 . 1.0)
@@ -372,7 +365,12 @@ How to send a bug report:
 (global-set-key (kbd "C-x C-z") 'open-junk-file)
 
 (require 'org-superstar)
-(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+;; (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+;; (setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
+;; (setq org-superstar-headline-bullets-list '("◉" "○" "●" "✿" "✸"))
+;; (setq org-superstar-item-bullet-alist '((?* . ?•)
+;;                                         (?+ . ?»)
+;;                                         (?- . ?➤)))
 
 (add-hook 'org-mode-hook #'org-modern-mode)
 (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)

@@ -208,13 +208,6 @@ org-modeはEmacsのキラーアプリの1つ。パッケージ名であり、フ
     ;;                         '(("^ *\\([-]\\) "
     ;;                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "✦"))))))
 
-    ;; (setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
-    (setq org-superstar-headline-bullets-list '("◉" "○" "●" "✿" "✸"))
-
-    (setq org-superstar-item-bullet-alist '((?* . ?•)
-                                            (?+ . ?»)
-                                            (?- . ?➤)))
-
     (dolist (face '((org-level-1 . 1.0)
                     (org-level-2 . 1.0)
                     (org-level-3 . 1.0)
@@ -474,10 +467,17 @@ How to send a bug report:
 #+end_src
 
 ** org-superstar
+見出しをいい感じにするパッケージ。だが、org-modernに上書きされてしまうので使ってない。
+
 #+caption: 見出しをいい感じにする
 #+begin_src emacs-lisp
   (require 'org-superstar)
-  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+  ;; (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+  ;; (setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
+  ;; (setq org-superstar-headline-bullets-list '("◉" "○" "●" "✿" "✸"))
+  ;; (setq org-superstar-item-bullet-alist '((?* . ?•)
+  ;;                                         (?+ . ?»)
+  ;;                                         (?- . ?➤)))
 #+end_src
 ** org-modern
 org-modernはorg-modeの外観をいい感じにするパッケージ。
