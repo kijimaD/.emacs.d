@@ -1135,7 +1135,7 @@ How to send a bug report:
 
 (add-hook 'input-method-activate-hook
           (lambda() (set-cursor-color "Magenta")))
-(add-hook 'input-method-inactivate-hook
+(add-hook 'input-method-deactivate-hook
           (lambda() (set-cursor-color "grey")))
 
 (require 'mozc-popup)
