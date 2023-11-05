@@ -1471,8 +1471,6 @@ How to send a bug report:
 
 (global-set-key (kbd "C-M-%") 'vr/query-replace)
 
-(global-set-key [f7] 'writeroom-mode)
-
 (setq git-link-default-branch "main")
 (setq git-link-use-commit t)
 

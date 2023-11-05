@@ -163,8 +163,6 @@
 (depends-on "vue-mode")
 (depends-on "web-mode")
 (depends-on "which-key")
-(depends-on "with-editor")
-(depends-on "writeroom-mode")
 (depends-on "yaml-mode")
 (depends-on "yasnippet")
 (depends-on "yasnippet-snippets")
