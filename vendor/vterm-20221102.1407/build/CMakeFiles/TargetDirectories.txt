@@ -1,0 +1,5 @@
+/home/kijimad/.emacs.d/.cask/28.1/elpa/vterm-20221102.1407/build/CMakeFiles/vterm-module.dir
+/home/kijimad/.emacs.d/.cask/28.1/elpa/vterm-20221102.1407/build/CMakeFiles/libvterm.dir
+/home/kijimad/.emacs.d/.cask/28.1/elpa/vterm-20221102.1407/build/CMakeFiles/run.dir
+/home/kijimad/.emacs.d/.cask/28.1/elpa/vterm-20221102.1407/build/CMakeFiles/edit_cache.dir
+/home/kijimad/.emacs.d/.cask/28.1/elpa/vterm-20221102.1407/build/CMakeFiles/rebuild_cache.dir
