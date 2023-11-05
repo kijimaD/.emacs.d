@@ -26,8 +26,6 @@
 (depends-on "command-log-mode")
 (depends-on "corfu")
 (depends-on "counsel")
-(depends-on "counsel-gtags")
-(depends-on "counsel-projectile")
 (depends-on "create-link")
 (depends-on "current-word-highlight")
 (depends-on "dap-mode")

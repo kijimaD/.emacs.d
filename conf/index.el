@@ -1165,7 +1165,6 @@ How to send a bug report:
 (require 'projectile)
 (projectile-global-mode)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-(counsel-projectile-mode)
 
 (defun revert-buffer-no-confirm (&optional force-reverting)
   "Interactive call to revert-buffer. Ignoring the auto-save
@@ -1958,14 +1957,6 @@ How to send a bug report:
 (define-key lispy-mode-map (kbd "M-<left>") 'previous-buffer)
 (define-key lispy-mode-map (kbd "M-i") 'swiper-thing-at-point)
 
-(defun ad:counsel-ag (f &optional initial-input initial-directory extra-ag-args ag-prompt caller)
-  (apply f (or initial-input (ivy-thing-at-point))
-         (unless current-prefix-arg
-           (or initial-directory default-directory))
-         extra-ag-args ag-prompt caller))
-
-(advice-add 'counsel-ag :around #'ad:counsel-ag)
-
 (with-eval-after-load "eldoc"
   (defun ad:eldoc-message (f &optional string)
     (unless (active-minibuffer-window)
@@ -2304,18 +2295,13 @@ How to send a bug report:
 
      "Find"
      (("a" counsel-apropos "apropos")
-      ("f" counsel-ag "ag")
-      ("h" counsel-find-library "lib")
-      ("i" counsel-imenu "imenu")
-      ("r" counsel-register "register")
-      ("b" counsel-bookmark "bookmark")
-      ("p" persp-ivy-switch-buffer "persp-buffer"))
+      ("f" consult-find "find")
+      ("p" consult-project-buffer "project-buffer"))
 
      "Execute"
      (("d" gdb "gdb")
       ("e" counsel-linux-app "run")
       ("c" recompile "recompile")
-      ("s" counsel-search "google")
       ("!" org-pomodoro "start pomodoro")
       ("n" elfeed "elfeed"))
 
@@ -2340,7 +2326,7 @@ How to send a bug report:
       ("6" (lambda nil (interactive) (persp-switch (int-to-string 6))) "Emacs")
       ("7" (lambda nil (interactive) (persp-switch (int-to-string 7))) "Sub")
       ("8" (lambda nil (interactive) (persp-switch (int-to-string 8))) "Main")
-      ("9" (lambda nil (interactive) (persp-switch (int-to-string 9))) "Blueberry")
+      ("9" (lambda nil (interactive) (persp-switch (int-to-string 9))) "Elfeed")
       ("0" (lambda nil (interactive) (persp-switch (int-to-string 0))) "Sub"))
 
      "Workspace"
