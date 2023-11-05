@@ -2540,6 +2540,12 @@ corfuはシンプルな補完を提供するパッケージ。
 
 - [[https://tam5917.hatenablog.com/entry/2022/02/05/141115][corfuまわりの設定（vertico, marginalia, orderless, cape, kind-icon, affe） - 備忘録]]
 
+#+caption: find-fileを邪魔するのでido-modeはオフにしておく
+#+begin_src emacs-lisp
+  (ido-mode 0)
+  (setq ido-auto-merge-work-directories-length -1)
+#+end_src
+
 #+caption: 起動する
 #+begin_src emacs-lisp
   (require 'corfu)
@@ -2622,7 +2628,7 @@ corfuはシンプルな補完を提供するパッケージ。
   (add-to-list 'completion-at-point-functions #'cape-symbol)
 #+end_src
 
-#+caption:
+#+caption: kind-icon
 #+begin_src emacs-lisp
   ;; EmacsのSVG対応コンパイルが必要
   (require 'kind-icon)
@@ -2646,7 +2652,24 @@ corfuはシンプルな補完を提供するパッケージ。
   ;; (add-hook 'corfu-mode-hook 'corfu-doc-mode)
 #+end_src
 
-* Emacs Lisp
+#+caption: キーバインドを設定する
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-x C-b") 'consult-buffer)
+  ;; (global-set-key (kbd "C-x C-u") 'ivy-resume) ;; consultで前の画面に復帰する関数がわからない
+  (global-set-key (kbd "C-x C-g") 'consult-git-grep)
+  (global-set-key (kbd "M-y") 'consult-yank-pop)
+  (global-set-key (kbd "M-i") 'consult-imenu)
+  (global-set-key (kbd "M-l") 'consult-line)
+#+end_src
+
+#+caption: idoが有効化されているとfind-fileが縦に表示されないので無効化する。最後に実行しないと反映されない
+#+begin_src emacs-lisp
+(add-hook 'after-init-hook '(lambda ()
+                              (ido-mode 0)
+                              (ido-everywhere 0)))
+#+end_src
+
+* emacs Lisp
 ** rispy
 rispyはリストの操作をやりやすくするパッケージ。
 
@@ -2669,113 +2692,7 @@ ivyはさまざまなインクリメンタル検索を追加するパッケー�
 - 参考設定
   - https://qiita.com/takaxp/items/2fde2c119e419713342b
 
-#+caption: M-o をivy-hydra-read-action に割り当てる
-#+begin_src emacs-lisp
-  (when (require 'ivy-hydra nil t)
-    (setq ivy-read-action-function #'ivy-hydra-read-action))
-#+end_src
-
-#+caption: Magitとの連携
-#+begin_src emacs-lisp
-  (setq magit-completing-read-function 'ivy-completing-read)
-#+end_src
-
-#+caption: ミニバッファでコマンド発行を認める。何階層入ったかプロンプトに表示する
-#+begin_src emacs-lisp
-  (when (setq enable-recursive-minibuffers t)
-    (minibuffer-depth-indicate-mode 1))
-#+end_src
-
-#+caption: ESC連打でミニバッファを閉じる
-#+begin_src emacs-lisp
-  (define-key ivy-minibuffer-map (kbd "<escape>") 'minibuffer-keyboard-quit)
-#+end_src
-
-#+caption: プロンプトの表示が長い時に折り返す（選択候補も折り返される）
-#+begin_src emacs-lisp
-  (setq ivy-truncate-lines nil)
-#+end_src
-
-#+caption: リスト先頭で `C-p' するとき，リストの最後に移動する
-#+begin_src emacs-lisp
-  (setq ivy-wrap t)
-#+end_src
-
-#+caption: 表示設定する
-#+begin_src emacs-lisp
-  (setq ivy-count-format "%d -> %d ")
-#+end_src
-
-#+caption: 新規作成プロンプトを表示する
-#+begin_src emacs-lisp
-  (setq ivy-use-selectable-prompt t)
-#+end_src
-
-#+caption: counsel-mark-ring のリストをソートさせない
-#+begin_src emacs-lisp
-  (with-eval-after-load "ivy"
-    (setf (alist-get 'counsel-mark-ring ivy-sort-functions-alist) nil))
-#+end_src
-
-#+caption: 外観設定する
-#+begin_src emacs-lisp
-  (all-the-icons-ivy-rich-mode 1)
-  (ivy-rich-mode 1)
-
-  (custom-set-faces
-   '(ivy-current-match
-     ((((class color) (background light))
-       :background "#FFF3F3" :distant-foreground "#000000")
-      (((class color) (background dark))
-       :background "#404040" :distant-foreground "#abb2bf")))
-   '(ivy-minibuffer-match-face-1
-     ((((class color) (background light)) :foreground "#666666")
-      (((class color) (background dark)) :foreground "#999999")))
-   '(ivy-minibuffer-match-face-2
-     ((((class color) (background light)) :foreground "#c03333" :underline t)
-      (((class color) (background dark)) :foreground "#e04444" :underline t)))
-   '(ivy-minibuffer-match-face-3
-     ((((class color) (background light)) :foreground "#8585ff" :underline t)
-      (((class color) (background dark)) :foreground "#7777ff" :underline t)))
-   '(ivy-minibuffer-match-face-4
-     ((((class color) (background light)) :foreground "#439943" :underline t)
-      (((class color) (background dark)) :foreground "#33bb33" :underline t))))
-#+end_src
-
-#+caption: 履歴表示する
-#+begin_src emacs-lisp
-(when (require 'smex nil t)
-  (setq smex-history-length 35)
-  (setq smex-completion-method 'ivy))
-#+end_src
-
-#+caption: 有効化
-#+begin_src emacs-lisp
-  (ivy-mode 1)
-#+end_src
 * counsel
-counselはさまざまなインクリメンタル検索を可能にするパッケージ。
-
-#+caption: キーバインド
-#+begin_src emacs-lisp
-  (global-set-key (kbd "C-x C-b") 'counsel-switch-buffer)
-  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-  (global-set-key (kbd "C-x C-u") 'ivy-resume)
-  (global-set-key (kbd "C-x C-g") 'counsel-git-grep)
-  (global-set-key (kbd "C-x r i") 'counsel-register)
-  (global-set-key (kbd "M-y") 'counsel-yank-pop)
-  (global-set-key (kbd "M-i") 'swiper-thing-at-point)
-#+end_src
-
-#+caption: 検索エンジンをGoogleに設定する
-#+begin_src emacs-lisp
-  (setq counsel-search-engine 'google)
-#+end_src
-
-#+caption: 有効化
-#+begin_src emacs-lisp
-  (counsel-mode 1)
-#+end_src
 * ag
 agはgrepより高速な検索ツール。
 
