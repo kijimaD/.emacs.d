@@ -1820,10 +1820,6 @@ Mermaid JSはテキストから図を描画するライブラリ。
   ;; replacement for `zap-to-char'.
   (global-set-key [remap zap-to-char] 'easy-mark-to-char)
 
-  ;; Integrate `expand-region' functionality with easy-kill
-  (define-key easy-kill-base-map (kbd "o") 'easy-kill-er-expand)
-  (define-key easy-kill-base-map (kbd "i") 'easy-kill-er-unexpand)
-
   ;; Add the following tuples to `easy-kill-alist', preferrably by
   ;; using `customize-variable'.
   (add-to-list 'easy-kill-alist '(?^ backward-line-edge ""))
@@ -2147,15 +2143,6 @@ Mermaid JSはテキストから図を描画するライブラリ。
 #+caption: ripgrep
 #+begin_src emacs-lisp
   (rg-enable-default-bindings)
-#+end_src
-
-#+caption: paredit
-#+begin_src emacs-lisp
-  (require 'paredit)
-  ;; (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
-  ;; (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
-  ;; (add-hook 'lisp-mode-hook 'enable-paredit-mode)
-  ;; (add-hook 'ielm-mode-hook 'enable-paredit-mode)
 #+end_src
 
 #+caption: lispxmp

@@ -1256,10 +1256,6 @@ How to send a bug report:
 ;; replacement for `zap-to-char'.
 (global-set-key [remap zap-to-char] 'easy-mark-to-char)
 
-;; Integrate `expand-region' functionality with easy-kill
-(define-key easy-kill-base-map (kbd "o") 'easy-kill-er-expand)
-(define-key easy-kill-base-map (kbd "i") 'easy-kill-er-unexpand)
-
 ;; Add the following tuples to `easy-kill-alist', preferrably by
 ;; using `customize-variable'.
 (add-to-list 'easy-kill-alist '(?^ backward-line-edge ""))
@@ -1538,12 +1534,6 @@ How to send a bug report:
 (setq create-link-default-format 'create-link-format-org)
 
 (rg-enable-default-bindings)
-
-(require 'paredit)
-;; (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
-;; (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
-;; (add-hook 'lisp-mode-hook 'enable-paredit-mode)
-;; (add-hook 'ielm-mode-hook 'enable-paredit-mode)
 
 (require 'lispxmp)
 (define-key emacs-lisp-mode-map (kbd "C-<return>") 'lispxmp)
