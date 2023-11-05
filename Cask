@@ -155,6 +155,7 @@
 (depends-on "undo-tree")
 (depends-on "unicode-fonts")
 (depends-on "vertico")
+(depends-on "visual-fill-column") ;; centering
 (depends-on "visual-regexp")
 (depends-on "vterm")
 (depends-on "vterm-toggle")
