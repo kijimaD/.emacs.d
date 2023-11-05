@@ -1407,6 +1407,11 @@ Mermaid JSはテキストから図を描画するライブラリ。
   (put 'upcase-region 'disabled nil)
 #+end_src
 
+#+caption: 非同期でwarningが出てくるのを抑制する
+#+begin_src emacs-lisp
+  (setq native-comp-async-report-warnings-errors nil)
+#+end_src
+
 * Packages
 未分類の設定。拡張設定。
 
@@ -2539,12 +2544,6 @@ lsp-modeはLSPを使えるようにするパッケージ。
 corfuはシンプルな補完を提供するパッケージ。
 
 - [[https://tam5917.hatenablog.com/entry/2022/02/05/141115][corfuまわりの設定（vertico, marginalia, orderless, cape, kind-icon, affe） - 備忘録]]
-
-#+caption: find-fileを邪魔するのでido-modeはオフにしておく
-#+begin_src emacs-lisp
-  (ido-mode 0)
-  (setq ido-auto-merge-work-directories-length -1)
-#+end_src
 
 #+caption: 起動する
 #+begin_src emacs-lisp

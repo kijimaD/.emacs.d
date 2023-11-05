@@ -967,6 +967,8 @@ How to send a bug report:
 
 (put 'upcase-region 'disabled nil)
 
+(setq native-comp-async-report-warnings-errors nil)
+
 (savehist-mode 1)
 
 (push 'compile-command savehist-additional-variables)
