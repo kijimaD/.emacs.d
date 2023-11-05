@@ -1603,16 +1603,6 @@ Mermaid JSはテキストから図を描画するライブラリ。
   (global-set-key (kbd "C-M-j") 'avy-goto-whitespace-end)
 #+end_src
 
-#+caption: back-button
-#+begin_src emacs-lisp
-  (back-button-mode 1)
-  (global-set-key (kbd "C-c <left>") 'goto-last-change)
-  (global-set-key (kbd "C-c <right>") 'goto-last-change-reverse)
-
-  ;; 矩形選択で使うため無効化する
-  (define-key back-button-mode-map (kbd "C-x SPC") nil)
-#+end_src
-
 #+caption: migemo
 #+begin_src emacs-lisp
   (require 'migemo)
@@ -3531,14 +3521,6 @@ OS操作の便利関数。
   (setq denote-templates
         `((entry . ,(f-read-text "~/.emacs.d/resources/entry.org"))
           (month . ,(f-read-text "~/.emacs.d/resources/month.org"))))
-#+end_src
-
-* gptel
-
-gptelはChatGPTのEmacsクライアント。
-
-#+begin_src emacs-lisp
-(setq gptel-default-mode 'org-mode)
 #+end_src
 
 * Helper

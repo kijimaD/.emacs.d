@@ -1096,13 +1096,6 @@ How to send a bug report:
 (global-set-key (kbd "M-j") 'avy-goto-line)
 (global-set-key (kbd "C-M-j") 'avy-goto-whitespace-end)
 
-(back-button-mode 1)
-(global-set-key (kbd "C-c <left>") 'goto-last-change)
-(global-set-key (kbd "C-c <right>") 'goto-last-change-reverse)
-
-;; 矩形選択で使うため無効化する
-(define-key back-button-mode-map (kbd "C-x SPC") nil)
-
 (require 'migemo)
 (when (and (executable-find "cmigemo")
            (require 'migemo nil t))
@@ -2558,8 +2551,6 @@ How to send a bug report:
 (setq denote-templates
       `((entry . ,(f-read-text "~/.emacs.d/resources/entry.org"))
         (month . ,(f-read-text "~/.emacs.d/resources/month.org"))))
-
-(setq gptel-default-mode 'org-mode)
 
 (defun my-exchange-point-and-mark ()
   (interactive)

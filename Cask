@@ -6,7 +6,6 @@
 
 ;; Try
 (depends-on "smartparens")
-(depends-on "gptel")
 
 ;; Install Packages
 (depends-on "ace-jump-mode")
@@ -23,7 +22,6 @@
 (depends-on "auto-complete")
 (depends-on "auto-highlight-symbol")
 (depends-on "avy")
-(depends-on "back-button")
 (depends-on "beacon")
 (depends-on "bm")
 (depends-on "cape")
