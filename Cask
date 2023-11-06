@@ -154,6 +154,7 @@
 (depends-on "typescript-mode")
 (depends-on "undo-tree")
 (depends-on "unicode-fonts")
+(depends-on "use-package")
 (depends-on "vertico")
 (depends-on "visual-fill-column") ;; centering
 (depends-on "visual-regexp")
