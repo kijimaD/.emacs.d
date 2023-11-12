@@ -123,13 +123,6 @@
     ;;                         '(("^ *\\([-]\\) "
     ;;                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "✦"))))))
 
-    ;; (setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
-    (setq org-superstar-headline-bullets-list '("◉" "○" "●" "✿" "✸"))
-
-    (setq org-superstar-item-bullet-alist '((?* . ?•)
-                                            (?+ . ?»)
-                                            (?- . ?➤)))
-
     (dolist (face '((org-level-1 . 1.0)
                     (org-level-2 . 1.0)
                     (org-level-3 . 1.0)
@@ -187,6 +180,8 @@
         (lint))
     (setq buf (find-file-noselect file))
     (with-current-buffer buf (if (setq lint (org-lint)) (print (list file lint))))))
+
+(setq org-babel-default-header-args '((:session . "none") (:results . "replace") (:exports . "code") (:cache . "no") (:noweb . "no") (:hlines . "no") (:tangle . "no")(:wrap . "results")))
 
 ;;; open-junk-file.el --- Open a junk (memo) file to try-and-error
 
@@ -372,15 +367,15 @@ How to send a bug report:
 (global-set-key (kbd "C-x C-z") 'open-junk-file)
 
 (require 'org-superstar)
-(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+;; (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+;; (setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
+;; (setq org-superstar-headline-bullets-list '("◉" "○" "●" "✿" "✸"))
+;; (setq org-superstar-item-bullet-alist '((?* . ?•)
+;;                                         (?+ . ?»)
+;;                                         (?- . ?➤)))
 
 (add-hook 'org-mode-hook #'org-modern-mode)
 (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
-
-;; (require 'org-sticky-header)
-;; (setq org-sticky-header-full-path 'full)
-;; (setq org-sticky-header-heading-star "◉")
-;; (remove-hook 'org-mode-hook #'org-stickey-header-mode)
 
 (org-tree-slide-presentation-profile)
 (org-tree-slide--hide-slide-header)
@@ -408,17 +403,6 @@ How to send a bug report:
         (goto-char (point-min))
         (insert-file-contents template-file)))))
 (add-hook 'org-journal-after-entry-create-hook #'kd/insert-journal-template)
-
-;; (pdf-tools-install t)
-(require 'pdf-tools)
-(add-hook 'pdf-tools-enabled-hook 'pdf-view-midnight-minor-mode)
-(setq-default pdf-view-display-size 'fit-page)
-(setq pdf-annot-activate-created-annotations t)
-(define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
-(setq pdf-view-resize-factor 1.1)
-
-(require 'org-download)
-(setq-default org-download-image-dir "~/roam/images")
 
 (require 'org-roam)
 (add-hook 'after-init-hook 'org-roam-mode)
@@ -985,6 +969,8 @@ How to send a bug report:
 
 (put 'upcase-region 'disabled nil)
 
+(setq native-comp-async-report-warnings-errors nil)
+
 (savehist-mode 1)
 
 (push 'compile-command savehist-additional-variables)
@@ -1096,13 +1082,6 @@ How to send a bug report:
 (global-set-key (kbd "M-j") 'avy-goto-line)
 (global-set-key (kbd "C-M-j") 'avy-goto-whitespace-end)
 
-(back-button-mode 1)
-(global-set-key (kbd "C-c <left>") 'goto-last-change)
-(global-set-key (kbd "C-c <right>") 'goto-last-change-reverse)
-
-;; 矩形選択で使うため無効化する
-(define-key back-button-mode-map (kbd "C-x SPC") nil)
-
 (require 'migemo)
 (when (and (executable-find "cmigemo")
            (require 'migemo nil t))
@@ -1158,7 +1137,7 @@ How to send a bug report:
 
 (add-hook 'input-method-activate-hook
           (lambda() (set-cursor-color "Magenta")))
-(add-hook 'input-method-inactivate-hook
+(add-hook 'input-method-deactivate-hook
           (lambda() (set-cursor-color "grey")))
 
 (require 'mozc-popup)
@@ -1188,7 +1167,6 @@ How to send a bug report:
 (require 'projectile)
 (projectile-global-mode)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-(counsel-projectile-mode)
 
 (defun revert-buffer-no-confirm (&optional force-reverting)
   "Interactive call to revert-buffer. Ignoring the auto-save
@@ -1262,10 +1240,6 @@ How to send a bug report:
 ;; `easy-mark-to-char' or `easy-mark-up-to-char' could be a good
 ;; replacement for `zap-to-char'.
 (global-set-key [remap zap-to-char] 'easy-mark-to-char)
-
-;; Integrate `expand-region' functionality with easy-kill
-(define-key easy-kill-base-map (kbd "o") 'easy-kill-er-expand)
-(define-key easy-kill-base-map (kbd "i") 'easy-kill-er-unexpand)
 
 ;; Add the following tuples to `easy-kill-alist', preferrably by
 ;; using `customize-variable'.
@@ -1429,7 +1403,6 @@ How to send a bug report:
                 (clojure clojure-mode lisp-mode)
                 (csharp csharp-mode java-mode)
                 (css css-mode)
-                (dart dart-mode)
                 (delphi delphi-mode)
                 (emacslisp emacs-lisp-mode)
                 (erlang erlang-mode)
@@ -1501,8 +1474,6 @@ How to send a bug report:
 
 (global-set-key (kbd "C-M-%") 'vr/query-replace)
 
-(global-set-key [f7] 'writeroom-mode)
-
 (setq git-link-default-branch "main")
 (setq git-link-use-commit t)
 
@@ -1545,23 +1516,11 @@ How to send a bug report:
 
 (setq create-link-default-format 'create-link-format-org)
 
-(rg-enable-default-bindings)
-
-(require 'paredit)
-;; (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
-;; (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
-;; (add-hook 'lisp-mode-hook 'enable-paredit-mode)
-;; (add-hook 'ielm-mode-hook 'enable-paredit-mode)
-
 (require 'lispxmp)
 (define-key emacs-lisp-mode-map (kbd "C-<return>") 'lispxmp)
 
 (require 'graphql-mode)
 (require 'ob-graphql)
-
-(require 'smart-newline)
-(global-set-key (kbd "C-m") 'newline)
-(add-hook 'ruby-mode-hook 'smart-newline-mode)
 
 (require 'projectile-rails)
 (projectile-rails-global-mode)
@@ -1626,9 +1585,6 @@ How to send a bug report:
 (add-hook 'ruby-mode-hook '(lambda ()
                              (ruby-electric-mode t)))
 
-(require 'quickrun)
-(global-set-key (kbd "<f8>") 'quickrun)
-
 (require 'inf-ruby)
 (setq inf-ruby-default-implementation "pry")
 (setq inf-ruby-eval-binding "Pry.toplevel_binding")
@@ -1648,12 +1604,6 @@ How to send a bug report:
 
 (require 'rcodetools)
 (define-key ruby-mode-map (kbd "C-<return>") 'xmp)
-
-(when window-system
-  (progn
-    ;; (inf-ruby)
-    ;; (robe-start)
-    ))
 
 (require 'go-mode)
 (require 'ob-go)
@@ -1677,16 +1627,6 @@ How to send a bug report:
 
 (setq gofmt-command "goimports")
 (add-hook 'before-save-hook 'gofmt-before-save)
-
-;; (add-hook 'python-mode-hook 'jedi:setup)
-;; (setq jedi:complete-on-dot t)
-;; (jedi:setup)
-;; ;; (define-key jedi-mode-map (kbd "<C-tab>") nil) ;;C-tabはウィンドウの移動に用いる
-;; (setq jedi:complete-on-dot t)
-;; (setq ac-sources
-;;       (delete 'ac-source-words-in-same-mode-buffers ac-sources)) ;;jediの補完候補だけでいい
-;; (add-to-list 'ac-sources 'ac-source-filename)
-;; (add-to-list 'ac-sources 'ac-source-jedi-direct)
 
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
@@ -1917,7 +1857,7 @@ How to send a bug report:
 (setq corfu-auto-prefix 3)
 (setq corfu-count 15)
 (setq corfu-cycle t)
-(setq corfu-preselect-first t) ;; 自動的に最初の候補を選択する
+(setq corfu-preselect-first nil) ;; 自動的に最初の候補を選択する
 (setq corfu-preselect 'prompt)
 (setq corfu-quit-at-boundary t) ;; スペースを入れるとquit
 (setq corfu-quit-no-match t)
@@ -1938,6 +1878,10 @@ How to send a bug report:
 
 (define-key corfu-map [remap move-beginning-of-line] #'corfu-beginning-of-prompt)
 (define-key corfu-map [remap move-end-of-line] #'corfu-end-of-prompt)
+
+(use-package vertico-repeat
+  :after vertico
+  :hook (minibuffer-setup . vertico-repeat-save))
 
 (require 'vertico)
 (vertico-mode)
@@ -1984,8 +1928,8 @@ How to send a bug report:
 (require 'kind-icon)
 (setq kind-icon-default-face 'corfu-default)
 ;; If 4k, big size icon displayed.
-;; (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
-;; (pop corfu-margin-formatters)
+(add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
+(pop corfu-margin-formatters)
 
 ;; Available commands
 ;; affe-grep: Filters the content of all text files in the current directory
@@ -1999,7 +1943,22 @@ How to send a bug report:
         (lambda (str) (orderless--highlight affe-orderless-regexp str))))
 (setq affe-regexp-compiler #'affe-orderless-regexp-compiler)
 
-;; (add-hook 'corfu-mode-hook 'corfu-doc-mode)
+(global-set-key (kbd "C-x C-b") 'consult-buffer)
+(global-set-key (kbd "C-x C-u") 'vertico-repeat)
+(global-set-key (kbd "C-x C-g") 'consult-git-grep)
+(global-set-key (kbd "M-y") 'consult-yank-pop)
+(global-set-key (kbd "M-i") 'consult-imenu)
+(global-set-key (kbd "M-l") 'consult-line)
+
+(add-hook 'after-init-hook '(lambda ()
+                              (ido-mode 0)
+                              (ido-everywhere 0)))
+
+(use-package all-the-icons-completion
+  :straight t
+  :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
+  :init
+  (all-the-icons-completion-mode +1))
 
 (require 'lispy)
 (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
@@ -2007,75 +1966,6 @@ How to send a bug report:
 (define-key lispy-mode-map (kbd "M-<right>") 'next-buffer)
 (define-key lispy-mode-map (kbd "M-<left>") 'previous-buffer)
 (define-key lispy-mode-map (kbd "M-i") 'swiper-thing-at-point)
-
-(when (require 'ivy-hydra nil t)
-  (setq ivy-read-action-function #'ivy-hydra-read-action))
-
-(setq magit-completing-read-function 'ivy-completing-read)
-
-(when (setq enable-recursive-minibuffers t)
-  (minibuffer-depth-indicate-mode 1))
-
-(define-key ivy-minibuffer-map (kbd "<escape>") 'minibuffer-keyboard-quit)
-
-(setq ivy-truncate-lines nil)
-
-(setq ivy-wrap t)
-
-(setq ivy-count-format "%d -> %d ")
-
-(setq ivy-use-selectable-prompt t)
-
-(with-eval-after-load "ivy"
-  (setf (alist-get 'counsel-mark-ring ivy-sort-functions-alist) nil))
-
-(all-the-icons-ivy-rich-mode 1)
-(ivy-rich-mode 1)
-
-(custom-set-faces
- '(ivy-current-match
-   ((((class color) (background light))
-     :background "#FFF3F3" :distant-foreground "#000000")
-    (((class color) (background dark))
-     :background "#404040" :distant-foreground "#abb2bf")))
- '(ivy-minibuffer-match-face-1
-   ((((class color) (background light)) :foreground "#666666")
-    (((class color) (background dark)) :foreground "#999999")))
- '(ivy-minibuffer-match-face-2
-   ((((class color) (background light)) :foreground "#c03333" :underline t)
-    (((class color) (background dark)) :foreground "#e04444" :underline t)))
- '(ivy-minibuffer-match-face-3
-   ((((class color) (background light)) :foreground "#8585ff" :underline t)
-    (((class color) (background dark)) :foreground "#7777ff" :underline t)))
- '(ivy-minibuffer-match-face-4
-   ((((class color) (background light)) :foreground "#439943" :underline t)
-    (((class color) (background dark)) :foreground "#33bb33" :underline t))))
-
-(when (require 'smex nil t)
-  (setq smex-history-length 35)
-  (setq smex-completion-method 'ivy))
-
-(ivy-mode 1)
-
-(global-set-key (kbd "C-x C-b") 'counsel-switch-buffer)
-(global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key (kbd "C-x C-u") 'ivy-resume)
-(global-set-key (kbd "C-x C-g") 'counsel-git-grep)
-(global-set-key (kbd "C-x r i") 'counsel-register)
-(global-set-key (kbd "M-y") 'counsel-yank-pop)
-(global-set-key (kbd "M-i") 'swiper-thing-at-point)
-
-(setq counsel-search-engine 'google)
-
-(counsel-mode 1)
-
-(defun ad:counsel-ag (f &optional initial-input initial-directory extra-ag-args ag-prompt caller)
-  (apply f (or initial-input (ivy-thing-at-point))
-         (unless current-prefix-arg
-           (or initial-directory default-directory))
-         extra-ag-args ag-prompt caller))
-
-(advice-add 'counsel-ag :around #'ad:counsel-ag)
 
 (with-eval-after-load "eldoc"
   (defun ad:eldoc-message (f &optional string)
@@ -2228,7 +2118,6 @@ How to send a bug report:
         projectile-mode
         projectile-rails-mode
         rinari-minor-mode
-        robe-mode
         rubocop-mode
         ruby-electric-mode
         undo-tree-mode
@@ -2416,18 +2305,15 @@ How to send a bug report:
 
      "Find"
      (("a" counsel-apropos "apropos")
-      ("f" counsel-ag "ag")
-      ("h" counsel-find-library "lib")
-      ("i" counsel-imenu "imenu")
-      ("r" counsel-register "register")
-      ("b" counsel-bookmark "bookmark")
-      ("p" persp-ivy-switch-buffer "persp-buffer"))
+      ("f" consult-find "find")
+      ("p" consult-project-buffer "project-buffer")
+      ("r" consult-register "list register")
+      ("s" consult-register-store "store register"))
 
      "Execute"
      (("d" gdb "gdb")
       ("e" counsel-linux-app "run")
       ("c" recompile "recompile")
-      ("s" counsel-search "google")
       ("!" org-pomodoro "start pomodoro")
       ("n" elfeed "elfeed"))
 
@@ -2452,7 +2338,7 @@ How to send a bug report:
       ("6" (lambda nil (interactive) (persp-switch (int-to-string 6))) "Emacs")
       ("7" (lambda nil (interactive) (persp-switch (int-to-string 7))) "Sub")
       ("8" (lambda nil (interactive) (persp-switch (int-to-string 8))) "Main")
-      ("9" (lambda nil (interactive) (persp-switch (int-to-string 9))) "Blueberry")
+      ("9" (lambda nil (interactive) (persp-switch (int-to-string 9))) "Elfeed")
       ("0" (lambda nil (interactive) (persp-switch (int-to-string 0))) "Sub"))
 
      "Workspace"
@@ -2562,8 +2448,6 @@ How to send a bug report:
 (setq denote-templates
       `((entry . ,(f-read-text "~/.emacs.d/resources/entry.org"))
         (month . ,(f-read-text "~/.emacs.d/resources/month.org"))))
-
-(setq gptel-default-mode 'org-mode)
 
 (defun my-exchange-point-and-mark ()
   (interactive)

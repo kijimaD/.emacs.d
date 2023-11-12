@@ -2,7 +2,7 @@
 #+SETUPFILE: https://gitlab.com/OlMon/org-themes/-/raw/master/src/bigblow_inline/bigblow_inline.theme
 
 * Emacs
-Emacsの文芸的設定。移行作業中。
+Emacsの文芸的設定。
 
 - [[https://github.com/kijimaD/.emacs.d][Repository]]
 
@@ -20,6 +20,7 @@ Emacsの文芸的設定。移行作業中。
 * Org
 org-modeはEmacsのキラーアプリの1つ。パッケージ名であり、ファイルの種類の1つ。ドキュメント管理にスケジュール、時間計測、コード評価を含めることができる。このドキュメントもorg-modeで書かれている。
 
+** base
 #+caption: 読み込み
 #+begin_src emacs-lisp
   (require 'org)
@@ -208,13 +209,6 @@ org-modeはEmacsのキラーアプリの1つ。パッケージ名であり、フ
     ;;                         '(("^ *\\([-]\\) "
     ;;                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "✦"))))))
 
-    ;; (setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
-    (setq org-superstar-headline-bullets-list '("◉" "○" "●" "✿" "✸"))
-
-    (setq org-superstar-item-bullet-alist '((?* . ?•)
-                                            (?+ . ?»)
-                                            (?- . ?➤)))
-
     (dolist (face '((org-level-1 . 1.0)
                     (org-level-2 . 1.0)
                     (org-level-3 . 1.0)
@@ -280,6 +274,13 @@ themeのあとに評価するため、ここでは関数定義だけ。参考 ht
           (lint))
       (setq buf (find-file-noselect file))
       (with-current-buffer buf (if (setq lint (org-lint)) (print (list file lint))))))
+#+end_src
+
+babelで出力した結果はラップしないとtextlintでエラーになる。なのでデフォルトの設定に追加する。
+
+#+caption: :wrapを設定する
+#+begin_src emacs-lisp
+(setq org-babel-default-header-args '((:session . "none") (:results . "replace") (:exports . "code") (:cache . "no") (:noweb . "no") (:hlines . "no") (:tangle . "no")(:wrap . "results")))
 #+end_src
 
 ** open-junk-file
@@ -473,11 +474,18 @@ How to send a bug report:
   (global-set-key (kbd "C-x C-z") 'open-junk-file)
 #+end_src
 
+見出しをいい感じにするパッケージ。だが、org-modernに上書きされてしまうので使ってない。
 ** org-superstar
+
 #+caption: 見出しをいい感じにする
 #+begin_src emacs-lisp
   (require 'org-superstar)
-  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+  ;; (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+  ;; (setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
+  ;; (setq org-superstar-headline-bullets-list '("◉" "○" "●" "✿" "✸"))
+  ;; (setq org-superstar-item-bullet-alist '((?* . ?•)
+  ;;                                         (?+ . ?»)
+  ;;                                         (?- . ?➤)))
 #+end_src
 ** org-modern
 org-modernはorg-modeの外観をいい感じにするパッケージ。
@@ -486,17 +494,6 @@ org-modernはorg-modeの外観をいい感じにするパッケージ。
 #+begin_src emacs-lisp
   (add-hook 'org-mode-hook #'org-modern-mode)
   (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
-#+end_src
-** org-stickey-header
-org-stickey-headerは現在の見出し位置を示すヘッダーを表示するパッケージ。
-ヘッダーの記号が*に戻るので、とりあえず無効化している。
-
-#+caption: org-stickey-headerを有効化する
-#+begin_src emacs-lisp
-  ;; (require 'org-sticky-header)
-  ;; (setq org-sticky-header-full-path 'full)
-  ;; (setq org-sticky-header-heading-star "◉")
-  ;; (remove-hook 'org-mode-hook #'org-stickey-header-mode)
 #+end_src
 ** org-tree-slide
 org-tree-slideはorg-modeでスライド表示するパッケージ。
@@ -556,29 +553,6 @@ org-journalは日付ごとのファイルを生成したり、時刻を挿入で
 #+end_src
 
 - https://emacs.stackexchange.com/questions/17897/create-an-org-journal-template-for-daily-journal-entry/32655#32655?newreg=7c9543fa39e342cfb438c4168020447d
-
-** pdf-tools
-Emacs上でpdfを扱うためのパッケージ。orgの項目にあるのは微妙な気がする。
-
-#+caption: 設定。インストールが必要
-#+begin_src emacs-lisp
-  ;; (pdf-tools-install t)
-  (require 'pdf-tools)
-  (add-hook 'pdf-tools-enabled-hook 'pdf-view-midnight-minor-mode)
-  (setq-default pdf-view-display-size 'fit-page)
-  (setq pdf-annot-activate-created-annotations t)
-  (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
-  (setq pdf-view-resize-factor 1.1)
-#+end_src
-
-** org-download
-org-downloadはorg上のリンクから画像をダウンロードして指定のディレクトリに保存できるパッケージ。
-
-#+caption: 設定
-#+begin_src emacs-lisp
-  (require 'org-download)
-  (setq-default org-download-image-dir "~/roam/images")
-#+end_src
 
 ** org-roam
 org-roamはorgファイルをsqliteによって管理しやすくしたパッケージ。orgファイル同士の関連を挿入したり、リンク元のファイルを一覧にする、といったことができる。sqliteに保存されるので、別でクエリを使って取り出してグラフ描画に使ったりも可能。
@@ -1441,6 +1415,11 @@ Mermaid JSはテキストから図を描画するライブラリ。
   (put 'upcase-region 'disabled nil)
 #+end_src
 
+#+caption: 非同期でwarningが出てくるのを抑制する
+#+begin_src emacs-lisp
+  (setq native-comp-async-report-warnings-errors nil)
+#+end_src
+
 * Packages
 未分類の設定。拡張設定。
 
@@ -1603,16 +1582,6 @@ Mermaid JSはテキストから図を描画するライブラリ。
   (global-set-key (kbd "C-M-j") 'avy-goto-whitespace-end)
 #+end_src
 
-#+caption: back-button
-#+begin_src emacs-lisp
-  (back-button-mode 1)
-  (global-set-key (kbd "C-c <left>") 'goto-last-change)
-  (global-set-key (kbd "C-c <right>") 'goto-last-change-reverse)
-
-  ;; 矩形選択で使うため無効化する
-  (define-key back-button-mode-map (kbd "C-x SPC") nil)
-#+end_src
-
 #+caption: migemo
 #+begin_src emacs-lisp
   (require 'migemo)
@@ -1686,7 +1655,7 @@ Mermaid JSはテキストから図を描画するライブラリ。
 
   (add-hook 'input-method-activate-hook
             (lambda() (set-cursor-color "Magenta")))
-  (add-hook 'input-method-inactivate-hook
+  (add-hook 'input-method-deactivate-hook
             (lambda() (set-cursor-color "grey")))
 #+end_src
 
@@ -1734,7 +1703,6 @@ Mermaid JSはテキストから図を描画するライブラリ。
   (require 'projectile)
   (projectile-global-mode)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (counsel-projectile-mode)
 #+end_src
 
 #+caption: バッファ再読込
@@ -1829,10 +1797,6 @@ Mermaid JSはテキストから図を描画するライブラリ。
   ;; `easy-mark-to-char' or `easy-mark-up-to-char' could be a good
   ;; replacement for `zap-to-char'.
   (global-set-key [remap zap-to-char] 'easy-mark-to-char)
-
-  ;; Integrate `expand-region' functionality with easy-kill
-  (define-key easy-kill-base-map (kbd "o") 'easy-kill-er-expand)
-  (define-key easy-kill-base-map (kbd "i") 'easy-kill-er-unexpand)
 
   ;; Add the following tuples to `easy-kill-alist', preferrably by
   ;; using `customize-variable'.
@@ -2014,7 +1978,6 @@ Mermaid JSはテキストから図を描画するライブラリ。
                   (clojure clojure-mode lisp-mode)
                   (csharp csharp-mode java-mode)
                   (css css-mode)
-                  (dart dart-mode)
                   (delphi delphi-mode)
                   (emacslisp emacs-lisp-mode)
                   (erlang erlang-mode)
@@ -2093,11 +2056,6 @@ Mermaid JSはテキストから図を描画するライブラリ。
   (global-set-key (kbd "C-M-%") 'vr/query-replace)
 #+end_src
 
-#+caption: writeroom-mode
-#+begin_src emacs-lisp
-  (global-set-key [f7] 'writeroom-mode)
-#+end_src
-
 #+caption: git-link
 #+begin_src emacs-lisp
   (setq git-link-default-branch "main")
@@ -2155,20 +2113,6 @@ Mermaid JSはテキストから図を描画するライブラリ。
   (setq create-link-default-format 'create-link-format-org)
 #+end_src
 
-#+caption: ripgrep
-#+begin_src emacs-lisp
-  (rg-enable-default-bindings)
-#+end_src
-
-#+caption: paredit
-#+begin_src emacs-lisp
-  (require 'paredit)
-  ;; (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
-  ;; (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
-  ;; (add-hook 'lisp-mode-hook 'enable-paredit-mode)
-  ;; (add-hook 'ielm-mode-hook 'enable-paredit-mode)
-#+end_src
-
 #+caption: lispxmp
 #+begin_src emacs-lisp
   (require 'lispxmp)
@@ -2179,13 +2123,6 @@ Mermaid JSはテキストから図を描画するライブラリ。
 #+begin_src emacs-lisp
   (require 'graphql-mode)
   (require 'ob-graphql)
-#+end_src
-
-#+caption: smart-newline
-#+begin_src emacs-lisp
-  (require 'smart-newline)
-  (global-set-key (kbd "C-m") 'newline)
-  (add-hook 'ruby-mode-hook 'smart-newline-mode)
 #+end_src
 
 * Rails
@@ -2274,12 +2211,6 @@ Mermaid JSはテキストから図を描画するライブラリ。
 
 #+end_src
 
-#+caption: quickrun
-#+begin_src emacs-lisp
-  (require 'quickrun)
-  (global-set-key (kbd "<f8>") 'quickrun)
-#+end_src
-
 #+caption: inf-ruby
 #+begin_src emacs-lisp
   (require 'inf-ruby)
@@ -2313,15 +2244,6 @@ Mermaid JSはテキストから図を描画するライブラリ。
 #+begin_src emacs-lisp
   (require 'rcodetools)
   (define-key ruby-mode-map (kbd "C-<return>") 'xmp)
-#+end_src
-
-#+caption: 補完
-#+begin_src emacs-lisp
-  (when window-system
-    (progn
-      ;; (inf-ruby)
-      ;; (robe-start)
-      ))
 #+end_src
 
 * Go
@@ -2362,21 +2284,6 @@ goの設定。
   (add-hook 'before-save-hook 'gofmt-before-save)
 #+end_src
 
-* Python
-Pythonの設定。
-
-#+caption: 基本設定
-#+begin_src emacs-lisp
-  ;; (add-hook 'python-mode-hook 'jedi:setup)
-  ;; (setq jedi:complete-on-dot t)
-  ;; (jedi:setup)
-  ;; ;; (define-key jedi-mode-map (kbd "<C-tab>") nil) ;;C-tabはウィンドウの移動に用いる
-  ;; (setq jedi:complete-on-dot t)
-  ;; (setq ac-sources
-  ;;       (delete 'ac-source-words-in-same-mode-buffers ac-sources)) ;;jediの補完候補だけでいい
-  ;; (add-to-list 'ac-sources 'ac-source-filename)
-  ;; (add-to-list 'ac-sources 'ac-source-jedi-direct)
-#+end_src
 * Haskell
 haskellの設定。
 
@@ -2657,7 +2564,7 @@ corfuはシンプルな補完を提供するパッケージ。
   (setq corfu-auto-prefix 3)
   (setq corfu-count 15)
   (setq corfu-cycle t)
-  (setq corfu-preselect-first t) ;; 自動的に最初の候補を選択する
+  (setq corfu-preselect-first nil) ;; 自動的に最初の候補を選択する
   (setq corfu-preselect 'prompt)
   (setq corfu-quit-at-boundary t) ;; スペースを入れるとquit
   (setq corfu-quit-no-match t)
@@ -2681,6 +2588,16 @@ corfuはシンプルな補完を提供するパッケージ。
 
   (define-key corfu-map [remap move-beginning-of-line] #'corfu-beginning-of-prompt)
   (define-key corfu-map [remap move-end-of-line] #'corfu-end-of-prompt)
+#+end_src
+
+* vertico
+verticoは検索UIを提供するパッケージ。
+
+#+caption: 前の画面に復帰する
+#+begin_src emacs-lisp
+(use-package vertico-repeat
+  :after vertico
+  :hook (minibuffer-setup . vertico-repeat-save))
 #+end_src
 
 #+caption: その他の連携パッケージ
@@ -2727,14 +2644,14 @@ corfuはシンプルな補完を提供するパッケージ。
   (add-to-list 'completion-at-point-functions #'cape-symbol)
 #+end_src
 
-#+caption:
+#+caption: kind-icon
 #+begin_src emacs-lisp
   ;; EmacsのSVG対応コンパイルが必要
   (require 'kind-icon)
   (setq kind-icon-default-face 'corfu-default)
   ;; If 4k, big size icon displayed.
-  ;; (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
-  ;; (pop corfu-margin-formatters)
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
+  (pop corfu-margin-formatters)
 
   ;; Available commands
   ;; affe-grep: Filters the content of all text files in the current directory
@@ -2747,11 +2664,35 @@ corfuはシンプルな補完を提供するパッケージ。
     (cons affe-orderless-regexp
           (lambda (str) (orderless--highlight affe-orderless-regexp str))))
   (setq affe-regexp-compiler #'affe-orderless-regexp-compiler)
-
-  ;; (add-hook 'corfu-mode-hook 'corfu-doc-mode)
 #+end_src
 
-* Emacs Lisp
+#+caption: キーバインドを設定する
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-x C-b") 'consult-buffer)
+  (global-set-key (kbd "C-x C-u") 'vertico-repeat)
+  (global-set-key (kbd "C-x C-g") 'consult-git-grep)
+  (global-set-key (kbd "M-y") 'consult-yank-pop)
+  (global-set-key (kbd "M-i") 'consult-imenu)
+  (global-set-key (kbd "M-l") 'consult-line)
+#+end_src
+
+#+caption: idoが有効化されているとfind-fileが縦に表示されないので無効化する。最後に実行しないと反映されない
+#+begin_src emacs-lisp
+(add-hook 'after-init-hook '(lambda ()
+                              (ido-mode 0)
+                              (ido-everywhere 0)))
+#+end_src
+
+#+caption: 補完にアイコンを表示させる
+#+begin_src emacs-lisp
+(use-package all-the-icons-completion
+  :straight t
+  :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
+  :init
+  (all-the-icons-completion-mode +1))
+#+end_src
+
+* emacs Lisp
 ** rispy
 rispyはリストの操作をやりやすくするパッケージ。
 
@@ -2768,132 +2709,6 @@ rispyはリストの操作をやりやすくするパッケージ。
   (define-key lispy-mode-map (kbd "M-i") 'swiper-thing-at-point)
 #+end_src
 
-* ivy
-ivyはさまざまなインクリメンタル検索を追加するパッケージ。
-
-- 参考設定
-  - https://qiita.com/takaxp/items/2fde2c119e419713342b
-
-#+caption: M-o をivy-hydra-read-action に割り当てる
-#+begin_src emacs-lisp
-  (when (require 'ivy-hydra nil t)
-    (setq ivy-read-action-function #'ivy-hydra-read-action))
-#+end_src
-
-#+caption: Magitとの連携
-#+begin_src emacs-lisp
-  (setq magit-completing-read-function 'ivy-completing-read)
-#+end_src
-
-#+caption: ミニバッファでコマンド発行を認める。何階層入ったかプロンプトに表示する
-#+begin_src emacs-lisp
-  (when (setq enable-recursive-minibuffers t)
-    (minibuffer-depth-indicate-mode 1))
-#+end_src
-
-#+caption: ESC連打でミニバッファを閉じる
-#+begin_src emacs-lisp
-  (define-key ivy-minibuffer-map (kbd "<escape>") 'minibuffer-keyboard-quit)
-#+end_src
-
-#+caption: プロンプトの表示が長い時に折り返す（選択候補も折り返される）
-#+begin_src emacs-lisp
-  (setq ivy-truncate-lines nil)
-#+end_src
-
-#+caption: リスト先頭で `C-p' するとき，リストの最後に移動する
-#+begin_src emacs-lisp
-  (setq ivy-wrap t)
-#+end_src
-
-#+caption: 表示設定する
-#+begin_src emacs-lisp
-  (setq ivy-count-format "%d -> %d ")
-#+end_src
-
-#+caption: 新規作成プロンプトを表示する
-#+begin_src emacs-lisp
-  (setq ivy-use-selectable-prompt t)
-#+end_src
-
-#+caption: counsel-mark-ring のリストをソートさせない
-#+begin_src emacs-lisp
-  (with-eval-after-load "ivy"
-    (setf (alist-get 'counsel-mark-ring ivy-sort-functions-alist) nil))
-#+end_src
-
-#+caption: 外観設定する
-#+begin_src emacs-lisp
-  (all-the-icons-ivy-rich-mode 1)
-  (ivy-rich-mode 1)
-
-  (custom-set-faces
-   '(ivy-current-match
-     ((((class color) (background light))
-       :background "#FFF3F3" :distant-foreground "#000000")
-      (((class color) (background dark))
-       :background "#404040" :distant-foreground "#abb2bf")))
-   '(ivy-minibuffer-match-face-1
-     ((((class color) (background light)) :foreground "#666666")
-      (((class color) (background dark)) :foreground "#999999")))
-   '(ivy-minibuffer-match-face-2
-     ((((class color) (background light)) :foreground "#c03333" :underline t)
-      (((class color) (background dark)) :foreground "#e04444" :underline t)))
-   '(ivy-minibuffer-match-face-3
-     ((((class color) (background light)) :foreground "#8585ff" :underline t)
-      (((class color) (background dark)) :foreground "#7777ff" :underline t)))
-   '(ivy-minibuffer-match-face-4
-     ((((class color) (background light)) :foreground "#439943" :underline t)
-      (((class color) (background dark)) :foreground "#33bb33" :underline t))))
-#+end_src
-
-#+caption: 履歴表示する
-#+begin_src emacs-lisp
-(when (require 'smex nil t)
-  (setq smex-history-length 35)
-  (setq smex-completion-method 'ivy))
-#+end_src
-
-#+caption: 有効化
-#+begin_src emacs-lisp
-  (ivy-mode 1)
-#+end_src
-* counsel
-counselはさまざまなインクリメンタル検索を可能にするパッケージ。
-
-#+caption: キーバインド
-#+begin_src emacs-lisp
-  (global-set-key (kbd "C-x C-b") 'counsel-switch-buffer)
-  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-  (global-set-key (kbd "C-x C-u") 'ivy-resume)
-  (global-set-key (kbd "C-x C-g") 'counsel-git-grep)
-  (global-set-key (kbd "C-x r i") 'counsel-register)
-  (global-set-key (kbd "M-y") 'counsel-yank-pop)
-  (global-set-key (kbd "M-i") 'swiper-thing-at-point)
-#+end_src
-
-#+caption: 検索エンジンをGoogleに設定する
-#+begin_src emacs-lisp
-  (setq counsel-search-engine 'google)
-#+end_src
-
-#+caption: 有効化
-#+begin_src emacs-lisp
-  (counsel-mode 1)
-#+end_src
-* ag
-agはgrepより高速な検索ツール。
-
-#+caption: agのデフォルト入力値をthing-at-pointにする
-#+begin_src emacs-lisp
-  (defun ad:counsel-ag (f &optional initial-input initial-directory extra-ag-args ag-prompt caller)
-    (apply f (or initial-input (ivy-thing-at-point))
-           (unless current-prefix-arg
-             (or initial-directory default-directory))
-           extra-ag-args ag-prompt caller))
-
-  (advice-add 'counsel-ag :around #'ad:counsel-ag)
-#+end_src
 * eldoc
 eldocは関数ドキュメントを表示するパッケージ。
 
@@ -3103,7 +2918,6 @@ doom themeはモダンなテーマ集。
           projectile-mode
           projectile-rails-mode
           rinari-minor-mode
-          robe-mode
           rubocop-mode
           ruby-electric-mode
           undo-tree-mode
@@ -3362,18 +3176,15 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
 
        "Find"
        (("a" counsel-apropos "apropos")
-        ("f" counsel-ag "ag")
-        ("h" counsel-find-library "lib")
-        ("i" counsel-imenu "imenu")
-        ("r" counsel-register "register")
-        ("b" counsel-bookmark "bookmark")
-        ("p" persp-ivy-switch-buffer "persp-buffer"))
+        ("f" consult-find "find")
+        ("p" consult-project-buffer "project-buffer")
+        ("r" consult-register "list register")
+        ("s" consult-register-store "store register"))
 
        "Execute"
        (("d" gdb "gdb")
         ("e" counsel-linux-app "run")
         ("c" recompile "recompile")
-        ("s" counsel-search "google")
         ("!" org-pomodoro "start pomodoro")
         ("n" elfeed "elfeed"))
 
@@ -3398,7 +3209,7 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
         ("6" (lambda nil (interactive) (persp-switch (int-to-string 6))) "Emacs")
         ("7" (lambda nil (interactive) (persp-switch (int-to-string 7))) "Sub")
         ("8" (lambda nil (interactive) (persp-switch (int-to-string 8))) "Main")
-        ("9" (lambda nil (interactive) (persp-switch (int-to-string 9))) "Blueberry")
+        ("9" (lambda nil (interactive) (persp-switch (int-to-string 9))) "Elfeed")
         ("0" (lambda nil (interactive) (persp-switch (int-to-string 0))) "Sub"))
 
        "Workspace"
@@ -3538,14 +3349,6 @@ OS操作の便利関数。
   (setq denote-templates
         `((entry . ,(f-read-text "~/.emacs.d/resources/entry.org"))
           (month . ,(f-read-text "~/.emacs.d/resources/month.org"))))
-#+end_src
-
-* gptel
-
-gptelはChatGPTのEmacsクライアント。
-
-#+begin_src emacs-lisp
-(setq gptel-default-mode 'org-mode)
 #+end_src
 
 * Helper
