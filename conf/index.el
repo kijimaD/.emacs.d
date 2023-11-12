@@ -181,6 +181,8 @@
     (setq buf (find-file-noselect file))
     (with-current-buffer buf (if (setq lint (org-lint)) (print (list file lint))))))
 
+(setq org-babel-default-header-args '((:session . "none") (:results . "replace") (:exports . "code") (:cache . "no") (:noweb . "no") (:hlines . "no") (:tangle . "no")(:wrap . "results")))
+
 ;;; open-junk-file.el --- Open a junk (memo) file to try-and-error
 
 ;; $Time-stamp: <2016-09-13 10:59:40 rubikitch>$
@@ -1855,7 +1857,7 @@ How to send a bug report:
 (setq corfu-auto-prefix 3)
 (setq corfu-count 15)
 (setq corfu-cycle t)
-(setq corfu-preselect-first t) ;; 自動的に最初の候補を選択する
+(setq corfu-preselect-first nil) ;; 自動的に最初の候補を選択する
 (setq corfu-preselect 'prompt)
 (setq corfu-quit-at-boundary t) ;; スペースを入れるとquit
 (setq corfu-quit-no-match t)
@@ -1876,6 +1878,10 @@ How to send a bug report:
 
 (define-key corfu-map [remap move-beginning-of-line] #'corfu-beginning-of-prompt)
 (define-key corfu-map [remap move-end-of-line] #'corfu-end-of-prompt)
+
+(use-package vertico-repeat
+  :after vertico
+  :hook (minibuffer-setup . vertico-repeat-save))
 
 (require 'vertico)
 (vertico-mode)
@@ -1922,8 +1928,8 @@ How to send a bug report:
 (require 'kind-icon)
 (setq kind-icon-default-face 'corfu-default)
 ;; If 4k, big size icon displayed.
-;; (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
-;; (pop corfu-margin-formatters)
+(add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
+(pop corfu-margin-formatters)
 
 ;; Available commands
 ;; affe-grep: Filters the content of all text files in the current directory
@@ -1937,10 +1943,8 @@ How to send a bug report:
         (lambda (str) (orderless--highlight affe-orderless-regexp str))))
 (setq affe-regexp-compiler #'affe-orderless-regexp-compiler)
 
-;; (add-hook 'corfu-mode-hook 'corfu-doc-mode)
-
 (global-set-key (kbd "C-x C-b") 'consult-buffer)
-;; (global-set-key (kbd "C-x C-u") 'ivy-resume) ;; consultで前の画面に復帰する関数がわからない
+(global-set-key (kbd "C-x C-u") 'vertico-repeat)
 (global-set-key (kbd "C-x C-g") 'consult-git-grep)
 (global-set-key (kbd "M-y") 'consult-yank-pop)
 (global-set-key (kbd "M-i") 'consult-imenu)
@@ -1949,6 +1953,12 @@ How to send a bug report:
 (add-hook 'after-init-hook '(lambda ()
                               (ido-mode 0)
                               (ido-everywhere 0)))
+
+(use-package all-the-icons-completion
+  :straight t
+  :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
+  :init
+  (all-the-icons-completion-mode +1))
 
 (require 'lispy)
 (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
@@ -2296,7 +2306,9 @@ How to send a bug report:
      "Find"
      (("a" counsel-apropos "apropos")
       ("f" consult-find "find")
-      ("p" consult-project-buffer "project-buffer"))
+      ("p" consult-project-buffer "project-buffer")
+      ("r" consult-register "list register")
+      ("s" consult-register-store "store register"))
 
      "Execute"
      (("d" gdb "gdb")

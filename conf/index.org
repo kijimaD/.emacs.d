@@ -2,7 +2,7 @@
 #+SETUPFILE: https://gitlab.com/OlMon/org-themes/-/raw/master/src/bigblow_inline/bigblow_inline.theme
 
 * Emacs
-Emacsの文芸的設定。移行作業中。
+Emacsの文芸的設定。
 
 - [[https://github.com/kijimaD/.emacs.d][Repository]]
 
@@ -20,6 +20,7 @@ Emacsの文芸的設定。移行作業中。
 * Org
 org-modeはEmacsのキラーアプリの1つ。パッケージ名であり、ファイルの種類の1つ。ドキュメント管理にスケジュール、時間計測、コード評価を含めることができる。このドキュメントもorg-modeで書かれている。
 
+** base
 #+caption: 読み込み
 #+begin_src emacs-lisp
   (require 'org)
@@ -275,6 +276,13 @@ themeのあとに評価するため、ここでは関数定義だけ。参考 ht
       (with-current-buffer buf (if (setq lint (org-lint)) (print (list file lint))))))
 #+end_src
 
+babelで出力した結果はラップしないとtextlintでエラーになる。なのでデフォルトの設定に追加する。
+
+#+caption: :wrapを設定する
+#+begin_src emacs-lisp
+(setq org-babel-default-header-args '((:session . "none") (:results . "replace") (:exports . "code") (:cache . "no") (:noweb . "no") (:hlines . "no") (:tangle . "no")(:wrap . "results")))
+#+end_src
+
 ** open-junk-file
 #+caption: Cask install が失敗するので取り込んでいる
 #+begin_src emacs-lisp
@@ -466,8 +474,8 @@ How to send a bug report:
   (global-set-key (kbd "C-x C-z") 'open-junk-file)
 #+end_src
 
-** org-superstar
 見出しをいい感じにするパッケージ。だが、org-modernに上書きされてしまうので使ってない。
+** org-superstar
 
 #+caption: 見出しをいい感じにする
 #+begin_src emacs-lisp
@@ -2556,7 +2564,7 @@ corfuはシンプルな補完を提供するパッケージ。
   (setq corfu-auto-prefix 3)
   (setq corfu-count 15)
   (setq corfu-cycle t)
-  (setq corfu-preselect-first t) ;; 自動的に最初の候補を選択する
+  (setq corfu-preselect-first nil) ;; 自動的に最初の候補を選択する
   (setq corfu-preselect 'prompt)
   (setq corfu-quit-at-boundary t) ;; スペースを入れるとquit
   (setq corfu-quit-no-match t)
@@ -2580,6 +2588,16 @@ corfuはシンプルな補完を提供するパッケージ。
 
   (define-key corfu-map [remap move-beginning-of-line] #'corfu-beginning-of-prompt)
   (define-key corfu-map [remap move-end-of-line] #'corfu-end-of-prompt)
+#+end_src
+
+* vertico
+verticoは検索UIを提供するパッケージ。
+
+#+caption: 前の画面に復帰する
+#+begin_src emacs-lisp
+(use-package vertico-repeat
+  :after vertico
+  :hook (minibuffer-setup . vertico-repeat-save))
 #+end_src
 
 #+caption: その他の連携パッケージ
@@ -2632,8 +2650,8 @@ corfuはシンプルな補完を提供するパッケージ。
   (require 'kind-icon)
   (setq kind-icon-default-face 'corfu-default)
   ;; If 4k, big size icon displayed.
-  ;; (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
-  ;; (pop corfu-margin-formatters)
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
+  (pop corfu-margin-formatters)
 
   ;; Available commands
   ;; affe-grep: Filters the content of all text files in the current directory
@@ -2646,14 +2664,12 @@ corfuはシンプルな補完を提供するパッケージ。
     (cons affe-orderless-regexp
           (lambda (str) (orderless--highlight affe-orderless-regexp str))))
   (setq affe-regexp-compiler #'affe-orderless-regexp-compiler)
-
-  ;; (add-hook 'corfu-mode-hook 'corfu-doc-mode)
 #+end_src
 
 #+caption: キーバインドを設定する
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-x C-b") 'consult-buffer)
-  ;; (global-set-key (kbd "C-x C-u") 'ivy-resume) ;; consultで前の画面に復帰する関数がわからない
+  (global-set-key (kbd "C-x C-u") 'vertico-repeat)
   (global-set-key (kbd "C-x C-g") 'consult-git-grep)
   (global-set-key (kbd "M-y") 'consult-yank-pop)
   (global-set-key (kbd "M-i") 'consult-imenu)
@@ -2665,6 +2681,15 @@ corfuはシンプルな補完を提供するパッケージ。
 (add-hook 'after-init-hook '(lambda ()
                               (ido-mode 0)
                               (ido-everywhere 0)))
+#+end_src
+
+#+caption: 補完にアイコンを表示させる
+#+begin_src emacs-lisp
+(use-package all-the-icons-completion
+  :straight t
+  :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
+  :init
+  (all-the-icons-completion-mode +1))
 #+end_src
 
 * emacs Lisp
@@ -3152,7 +3177,9 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
        "Find"
        (("a" counsel-apropos "apropos")
         ("f" consult-find "find")
-        ("p" consult-project-buffer "project-buffer"))
+        ("p" consult-project-buffer "project-buffer")
+        ("r" consult-register "list register")
+        ("s" consult-register-store "store register"))
 
        "Execute"
        (("d" gdb "gdb")
