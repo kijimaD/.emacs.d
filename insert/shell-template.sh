@@ -2,5 +2,7 @@
 set -eux
 
 ###########
-# comment #
+# comment
 ###########
+
+cd `dirname $0`
