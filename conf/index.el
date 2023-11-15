@@ -1628,6 +1628,9 @@ How to send a bug report:
 (setq gofmt-command "goimports")
 (add-hook 'before-save-hook 'gofmt-before-save)
 
+(use-package ob-go-asm
+  :straight (:host github :repo "kijimaD/ob-go-asm"))
+
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 
