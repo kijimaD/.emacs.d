@@ -1801,10 +1801,10 @@ How to send a bug report:
   :config
   ;; Uncomment following section if you would like to tune lsp-mode performance according to
   ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
-  ;;       (setq gc-cons-threshold 100000000) ;; 100mb
-  ;;       (setq read-process-output-max (* 1024 1024)) ;; 1mb
-  ;;       (setq lsp-idle-delay 0.500)
-  ;;       (setq lsp-log-io nil)
+        (setq gc-cons-threshold 100000000) ;; 100mb
+        (setq read-process-output-max (* 1024 1024)) ;; 1mb
+        (setq lsp-idle-delay 0.500)
+        (setq lsp-log-io nil)
   )
 
 ;; (use-package scala-mode
@@ -1950,8 +1950,7 @@ How to send a bug report:
 (global-set-key (kbd "C-x C-u") 'vertico-repeat)
 (global-set-key (kbd "C-x C-g") 'consult-git-grep)
 (global-set-key (kbd "M-y") 'consult-yank-pop)
-(global-set-key (kbd "M-i") 'consult-imenu)
-(global-set-key (kbd "M-l") 'consult-line)
+(global-set-key (kbd "M-i") 'consult-line)
 
 (add-hook 'after-init-hook '(lambda ()
                               (ido-mode 0)
