@@ -454,6 +454,18 @@ How to send a bug report:
 
 (define-key global-map (kbd "C-c d") 'denote-create-note)
 
+;; カスタムテンプレート
+;; roamで表示できるIDを追加
+(setq denote-org-front-matter
+      ":properties:
+:ID: %4$s
+:end:
+#+title:      KDOC n: %1$s
+#+date:       %2$s
+#+filetags:   :draft%3$s
+#+identifier: %4$s
+\n")
+
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (define-key global-map "\C-cc" 'org-capture)
