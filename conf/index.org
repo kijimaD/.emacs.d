@@ -280,7 +280,7 @@ babelで出力した結果はラップしないとtextlintでエラーになる�
 
 #+caption: :wrapを設定する
 #+begin_src emacs-lisp
-(setq org-babel-default-header-args '((:session . "none") (:results . "replace") (:exports . "code") (:cache . "no") (:noweb . "no") (:hlines . "no") (:tangle . "no")(:wrap . "results")))
+(setq org-babel-default-header-args '((:session . "none") (:results . "replace") (:exports . "code") (:cache . "no") (:noweb . "no") (:hlines . "no") (:tangle . "no")(:wrap . "src")))
 #+end_src
 
 ** open-junk-file
