@@ -620,7 +620,7 @@ denoteはシンプルなノートパッケージ。
 #+begin_src emacs-lisp
   (require 'denote-org-dblock)
 
-  (setq denote-directory (expand-file-name "~/roam/denote"))
+  (setq denote-directory (expand-file-name "~/roam"))
   (setq denote-known-keywords '("essay" "code" "book" "term" "memo" "draft"))
 
   (define-key global-map (kbd "C-c d") 'denote-create-note)
@@ -678,15 +678,12 @@ org-agendaはorg-modeでtodo管理する機能。
   (let* ((my-org-directory (concat "~/Private/junk/diary/org-journal/"))
          (my-todo-file (concat my-org-directory "todo.org"))
          (my-roam-file "~/roam")
-         (my-denote-file "~/roam/denote")
          (my-agenda-files nil))
 
     (if (file-exists-p my-todo-file)
         (setq my-agenda-files (push my-todo-file my-agenda-files)))
     (if (file-exists-p my-roam-file)
         (setq my-agenda-files (push my-roam-file my-agenda-files)))
-    (if (file-exists-p my-denote-file)
-        (setq my-agenda-files (push my-denote-file my-agenda-files)))
     (setq org-agenda-files my-agenda-files)
     (setq org-directory my-org-directory)
     (setq org-default-notes-file my-todo-file))
