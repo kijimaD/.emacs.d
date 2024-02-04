@@ -466,6 +466,12 @@ How to send a bug report:
 #+identifier: %4$s
 \n")
 
+(use-package denote-menu
+  :straight (:host github :repo "namilus/denote-menu"))
+
+(setq denote-templates
+      `((entry . ,(f-read-text "~/.emacs.d/resources/entry.org"))))
+
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (define-key global-map "\C-cc" 'org-capture)
@@ -1286,6 +1292,7 @@ How to send a bug report:
         ("https://hashnode.com/n/go/rss" go)
         ("https://mattn.kaoriya.net/index.rss" go)
         ("https://systemcrafters.net/rss/news.xml" systemcrafters)
+        ("http://benedict.co.jp/feed/" benedict)
 
         ("https://github.com/golang/go/releases.atom" go release)
         ("https://github.com/moby/moby/releases.atom" docker release)
@@ -2452,13 +2459,6 @@ How to send a bug report:
 ;; (use-package ej-dict
 ;;   :straight (:host github :repo "kijimaD/ej-dict"))
 ;; (ej-dict-install-dict)
-
-(use-package denote-menu
-  :straight (:host github :repo "namilus/denote-menu"))
-
-(setq denote-templates
-      `((entry . ,(f-read-text "~/.emacs.d/resources/entry.org"))
-        (month . ,(f-read-text "~/.emacs.d/resources/month.org"))))
 
 (defun my-exchange-point-and-mark ()
   (interactive)

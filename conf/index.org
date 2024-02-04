@@ -638,6 +638,16 @@ denoteはシンプルなノートパッケージ。
   \n")
 #+end_src
 
+#+caption: denoteのメニュー表示する
+#+begin_src emacs-lisp
+  (use-package denote-menu
+    :straight (:host github :repo "namilus/denote-menu"))
+#+end_src
+
+#+caption: denoteのテンプレートを設定する
+#+begin_src emacs-lisp
+  (setq denote-templates
+        `((entry . ,(f-read-text "~/.emacs.d/resources/entry.org"))))
 #+end_src
 
 ** org-agenda
@@ -1851,6 +1861,7 @@ Mermaid JSはテキストから図を描画するライブラリ。
           ("https://hashnode.com/n/go/rss" go)
           ("https://mattn.kaoriya.net/index.rss" go)
           ("https://systemcrafters.net/rss/news.xml" systemcrafters)
+          ("http://benedict.co.jp/feed/" benedict)
 
           ("https://github.com/golang/go/releases.atom" go release)
           ("https://github.com/moby/moby/releases.atom" docker release)
@@ -3354,19 +3365,6 @@ OS操作の便利関数。
   ;;   :straight (:host github :repo "kijimaD/ej-dict"))
   ;; (ej-dict-install-dict)
 #+end_src
-
-#+begin_src emacs-lisp
-  (use-package denote-menu
-    :straight (:host github :repo "namilus/denote-menu"))
-#+end_src
-
-#+caption: denoteのテンプレートを設定する
-#+begin_src emacs-lisp
-  (setq denote-templates
-        `((entry . ,(f-read-text "~/.emacs.d/resources/entry.org"))
-          (month . ,(f-read-text "~/.emacs.d/resources/month.org"))))
-#+end_src
-
 * Helper
 
 その他の便利関数。
