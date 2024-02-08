@@ -1,10 +1,9 @@
 (require 'package)
 
-(setq package-archives
-      '(("elpy" . "https://jorgenschaefer.github.io/packages/")
-        ("melpa" . "https://melpa.org/packages/")
-        ("gnu" . "https://elpa.gnu.org/packages/")
-        ("org" . "http://orgmode.org/elpa/")))
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("gnu" . "https://elpa.gnu.org/packages/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")
+                         ("org" . "http://orgmode.org/elpa/")))
 
 (require 'org)
 (require 'org-protocol)
@@ -449,15 +448,15 @@ How to send a bug report:
 
 (require 'denote-org-dblock)
 
-(setq denote-directory (expand-file-name "~/roam"))
-(setq denote-known-keywords '("essay" "code" "book" "term" "memo" "draft"))
+  (setq denote-directory (expand-file-name "~/roam"))
+  (setq denote-known-keywords '("essay" "code" "book" "term" "memo" "draft"))
 
-(define-key global-map (kbd "C-c d") 'denote-create-note)
+  (define-key global-map (kbd "C-c d") 'denote-create-note)
 
-;; カスタムテンプレート
-;; roamで表示できるIDを追加
-(setq denote-org-front-matter
-      ":properties:
+  ;; カスタムテンプレート
+  ;; roamで表示できるIDを追加
+  (setq denote-org-front-matter
+        ":properties:
 :ID: %4$s
 :end:
 #+title:      KDOC n: %1$s
@@ -1818,7 +1817,7 @@ How to send a bug report:
   ;; Uncomment following section if you would like to tune lsp-mode performance according to
   ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
         (setq gc-cons-threshold 100000000) ;; 100mb
-        (setq read-process-output-max (* 1024 1024)) ;; 1mb
+        (setq read-process-output-max (* 1024 1024 10)) ;; 10mb
         (setq lsp-idle-delay 0.500)
         (setq lsp-log-io nil)
   )
@@ -2329,7 +2328,7 @@ How to send a bug report:
       ("s" consult-register-store "store register"))
 
      "Execute"
-     (("d" gdb "gdb")
+     (("d" denote-template "denote-template")
       ("e" counsel-linux-app "run")
       ("c" recompile "recompile")
       ("!" org-pomodoro "start pomodoro")

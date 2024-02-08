@@ -10,11 +10,10 @@ Emacsの文芸的設定。
 #+begin_src emacs-lisp
   (require 'package)
 
-  (setq package-archives
-        '(("elpy" . "https://jorgenschaefer.github.io/packages/")
-          ("melpa" . "https://melpa.org/packages/")
-          ("gnu" . "https://elpa.gnu.org/packages/")
-          ("org" . "http://orgmode.org/elpa/")))
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                           ("gnu" . "https://elpa.gnu.org/packages/")
+                           ("elpa" . "https://elpa.gnu.org/packages/")
+                           ("org" . "http://orgmode.org/elpa/")))
 #+end_src
 
 * Org
@@ -629,13 +628,13 @@ denoteはシンプルなノートパッケージ。
   ;; roamで表示できるIDを追加
   (setq denote-org-front-matter
         ":properties:
-  :ID: %4$s
-  :end:
-  ,#+title:      KDOC n: %1$s
-  ,#+date:       %2$s
-  ,#+filetags:   :draft%3$s
-  ,#+identifier: %4$s
-  \n")
+:ID: %4$s
+:end:
+#+title:      KDOC n: %1$s
+#+date:       %2$s
+#+filetags:   :draft%3$s
+#+identifier: %4$s
+\n")
 #+end_src
 
 #+caption: denoteのメニュー表示する
@@ -3209,7 +3208,7 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
         ("s" consult-register-store "store register"))
 
        "Execute"
-       (("d" gdb "gdb")
+       (("d" denote-template "denote-template")
         ("e" counsel-linux-app "run")
         ("c" recompile "recompile")
         ("!" org-pomodoro "start pomodoro")
