@@ -2172,7 +2172,7 @@ How to send a bug report:
   "Window Manager関係の各種プログラムを起動する."
   (interactive)
 
-  (kd/set-background)
+  ;; (kd/set-background)
 
   (call-process-shell-command "shepherd")
   (call-process-shell-command "~/dotfiles/.config/polybar/launch.sh")
@@ -2454,6 +2454,11 @@ How to send a bug report:
     (shell-command  (concat "for intf in /sys/class/net/*; do echo "
                             (shell-quote-argument passwd)
                             " | sudo -S ifconfig `basename $intf` down; done"))))
+
+(defun kd/set-proxy-mode-manual ()
+  "プロキシをmanual modeにする"
+  (interactive)
+  (shell-command "gsettings set org.gnome.system.proxy mode 'manual'"))
 
 ;; (use-package ej-dict
 ;;   :straight (:host github :repo "kijimaD/ej-dict"))

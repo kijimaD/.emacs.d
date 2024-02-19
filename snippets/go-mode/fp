@@ -3,4 +3,4 @@
 # key: fp
 # --
 
-fmt.Println($0)
+fmt.Println("$0")

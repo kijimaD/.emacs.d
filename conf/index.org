@@ -3005,7 +3005,7 @@ EXWMはEmacs上で動くウィンドウマネージャ。
     "Window Manager関係の各種プログラムを起動する."
     (interactive)
 
-    (kd/set-background)
+    ;; (kd/set-background)
 
     (call-process-shell-command "shepherd")
     (call-process-shell-command "~/dotfiles/.config/polybar/launch.sh")
@@ -3356,6 +3356,14 @@ OS操作の便利関数。
       (shell-command  (concat "for intf in /sys/class/net/*; do echo "
                               (shell-quote-argument passwd)
                               " | sudo -S ifconfig `basename $intf` down; done"))))
+#+end_src
+
+#+caption: プロキシ設定を変更する(Ubuntu)
+#+begin_src emacs-lisp
+  (defun kd/set-proxy-mode-manual ()
+    "プロキシをmanual modeにする"
+    (interactive)
+    (shell-command "gsettings set org.gnome.system.proxy mode 'manual'"))
 #+end_src
 
 #+caption: 英語辞書をインストールする。あまり使ってないのでコメントアウトしている
