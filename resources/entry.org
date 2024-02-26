@@ -30,16 +30,19 @@
 
 * この文書のステータス
 - 作成
-  - [ ] 2024-mm-dd <署名> (progn (kill-line 0) (insert (format "  - [X] %s 貴島" (format-time-string "%Y-%m-%d"))))
+  - [ ] <署名>
+# (progn (kill-line -1) (insert (format "  - [X] %s 貴島" (format-time-string "%Y-%m-%d"))))
 - レビュー
-  - [ ] 2024-mm-dd <署名> (progn (kill-line 0) (insert (format "  - [X] %s 貴島" (format-time-string "%Y-%m-%d"))))
+  - [ ] <署名>
+# (progn (kill-line -1) (insert (format "  - [X] %s 貴島" (format-time-string "%Y-%m-%d"))))
+
 # 関連をつけた。
 # タイトルがフォーマット通りにつけられている。
 # 内容をブラウザに表示して読んだ(作成とレビューのチェックは同時にしない)。
 # 文脈なく読めるのを確認した。
 # おばあちゃんに説明できる。
 # いらない見出しを削除した。
-# タグを適切にした。(org-roam-tag-remove)。
+# タグを適切にした。
 # すべてのコメントを削除した。
 * 概要
 # 文書の短いまとめ。
