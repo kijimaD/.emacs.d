@@ -2332,7 +2332,8 @@ How to send a bug report:
       ("e" counsel-linux-app "run")
       ("c" recompile "recompile")
       ("!" org-pomodoro "start pomodoro")
-      ("n" elfeed "elfeed"))
+      ("n" elfeed "elfeed")
+      ("u" kd/set-proxy-mode-manual "use proxy"))
 
      "Git"
      (("g" git-link)
@@ -2458,7 +2459,8 @@ How to send a bug report:
 (defun kd/set-proxy-mode-manual ()
   "プロキシをmanual modeにする"
   (interactive)
-  (shell-command "gsettings set org.gnome.system.proxy mode 'manual'"))
+  (shell-command "gsettings set org.gnome.system.proxy mode 'manual'")
+  (message "use proxy..."))
 
 ;; (use-package ej-dict
 ;;   :straight (:host github :repo "kijimaD/ej-dict"))
