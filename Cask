@@ -8,6 +8,7 @@
 (depends-on "smartparens")
 
 ;; Install Packages
+(depends-on "spacious-padding")
 (depends-on "ace-jump-mode")
 (depends-on "ace-link")
 (depends-on "add-node-modules-path")

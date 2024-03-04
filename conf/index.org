@@ -932,7 +932,7 @@ org-pomodoro用の設定。
                                  (format "%s %dm %s%s%s"
                                          (kd/org-pomodoro-remain-gauge org-pomodoro-length)
                                          (/ (org-pomodoro-remaining-seconds) 60)
-                                         "%{F#FFFFFF}"
+                                         "%{F#000000}"
                                          org-clock-heading
                                          "%{F-}"
                                          ))
@@ -952,7 +952,7 @@ org-pomodoro用の設定。
 
   (defun kd/effort-timer ()
     (cond
-     ((and (not org-clock-effort) (or (org-pomodoro-active-p) (org-clocking-p)) "effort not set!"))
+     ((and (not org-clock-effort) (or (org-pomodoro-active-p) (org-clocking-p)) "[effort not set]"))
      ((and org-clock-effort (or (org-pomodoro-active-p) (org-clocking-p))) (format "[%s/%s]" (org-duration-from-minutes (org-clock-get-clocked-time)) org-clock-effort))
      (t "")))
 
@@ -2820,7 +2820,7 @@ vtermはCで実装されたシェル。
   (require 'doom-themes)
   (doom-themes-org-config)
   (setq custom-safe-themes t)
-  (setq-default custom-enabled-themes '(doom-tokyo-night))
+  (setq-default custom-enabled-themes '(modus-operandi))
 #+end_src
 
 doom themeはモダンなテーマ集。
@@ -2923,6 +2923,8 @@ doom themeはモダンなテーマ集。
     (window-divider-mode 0))
 #+end_src
 
+マイナーモードは describe-minor-mode-from-indicator で調べられる。
+
 #+caption: モードラインからマイナーモードを消す
 #+begin_src emacs-lisp
   (setq my-hidden-minor-modes
@@ -2957,7 +2959,26 @@ doom themeはモダンなテーマ集。
   (setq minor-mode-alist nil)
 #+end_src
 
-describe-minor-mode-from-indicator で調べられる。
+#+caption: モードラインやウィンドウのpaddingをいい感じにする
+#+begin_src emacs-lisp
+  (require 'spacious-padding)
+
+  ;; These is the default value, but I keep it here for visiibility.
+  (setq spacious-padding-widths
+        '( :internal-border-width 10
+           :header-line-width 4
+           :mode-line-width 6
+           :tab-width 4
+           :right-divider-width 30
+           :fringe-width 8))
+
+  ;; Read the doc string of `spacious-padding-subtle-mode-line' as it
+  ;; is very flexible and provides several examples.
+  (setq spacious-padding-subtle-mode-line
+        `( :mode-line-active 'default
+           :mode-line-inactive vertical-border))
+  (spacious-padding-mode)
+#+end_src
 
 * EXWM
 EXWMはEmacs上で動くウィンドウマネージャ。

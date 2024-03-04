@@ -686,7 +686,7 @@ How to send a bug report:
                                (format "%s %dm %s%s%s"
                                        (kd/org-pomodoro-remain-gauge org-pomodoro-length)
                                        (/ (org-pomodoro-remaining-seconds) 60)
-                                       "%{F#FFFFFF}"
+                                       "%{F#000000}"
                                        org-clock-heading
                                        "%{F-}"
                                        ))
@@ -706,7 +706,7 @@ How to send a bug report:
 
 (defun kd/effort-timer ()
   (cond
-   ((and (not org-clock-effort) (or (org-pomodoro-active-p) (org-clocking-p)) "effort not set!"))
+   ((and (not org-clock-effort) (or (org-pomodoro-active-p) (org-clocking-p)) "[effort not set]"))
    ((and org-clock-effort (or (org-pomodoro-active-p) (org-clocking-p))) (format "[%s/%s]" (org-duration-from-minutes (org-clock-get-clocked-time)) org-clock-effort))
    (t "")))
 
@@ -2040,7 +2040,7 @@ How to send a bug report:
 (require 'doom-themes)
 (doom-themes-org-config)
 (setq custom-safe-themes t)
-(setq-default custom-enabled-themes '(doom-tokyo-night))
+(setq-default custom-enabled-themes '(modus-operandi))
 
 (defun reapply-themes ()
   "Forcibly load the themes listed in `custom-enabled-themes'."
@@ -2146,6 +2146,24 @@ How to send a bug report:
               (cons (list mode "") (assq-delete-all mode minor-mode-alist))))
       my-hidden-minor-modes)
 (setq minor-mode-alist nil)
+
+(require 'spacious-padding)
+
+;; These is the default value, but I keep it here for visiibility.
+(setq spacious-padding-widths
+      '( :internal-border-width 10
+         :header-line-width 4
+         :mode-line-width 6
+         :tab-width 4
+         :right-divider-width 30
+         :fringe-width 8))
+
+;; Read the doc string of `spacious-padding-subtle-mode-line' as it
+;; is very flexible and provides several examples.
+(setq spacious-padding-subtle-mode-line
+      `( :mode-line-active 'default
+         :mode-line-inactive vertical-border))
+(spacious-padding-mode)
 
 (require 'exwm)
 (require 'exwm-config)
