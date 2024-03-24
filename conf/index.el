@@ -1298,11 +1298,9 @@ How to send a bug report:
         ("https://github.com/emacs-mirror/emacs/releases.atom" emacs release)
 
         ("https://zenn.dev/hsaki/feed" go)
-        ("https://zenn.dev/topics/go/feed" go)
+        ("https://zenn.dev/satoru_takeuchi/feed" linux)
 
         ("https://qiita.com/tenntenn/feed" go)
-        ("https://qiita.com/tags/go/feed" go)
-        ("https://qiita.com/talgs/emacs/feed" emacs)
 
         ("https://www.rfc-editor.org/rfcrss.xml" rfc)
         ))
@@ -2284,7 +2282,7 @@ How to send a bug report:
 (add-hook 'exwm-randr-screen-change-hook
           (lambda ()
             (start-process-shell-command
-             "xrandr" nil "xrandr --output HDMI-1 --mode 1920x1080 --right-of eDP-1 --auto")))
+             "xrandr" nil "xrandr --output HDMI-1 --mode 1920x1080 --same-as eDP-1 --auto")))
 (exwm-enable)
 (exwm-randr-enable)
 
