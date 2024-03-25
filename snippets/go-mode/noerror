@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: assert.NoError(t, err)
+# key: an
+# --
+
+assert.NoError(t, err)

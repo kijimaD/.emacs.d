@@ -8,6 +8,7 @@
 (depends-on "smartparens")
 
 ;; Install Packages
+(depends-on "spacious-padding")
 (depends-on "ace-jump-mode")
 (depends-on "ace-link")
 (depends-on "add-node-modules-path")
@@ -65,6 +66,7 @@
 (depends-on "git-timemachine")
 (depends-on "go-eldoc")
 (depends-on "go-mode")
+(depends-on "go-playground")
 (depends-on "google-this")
 (depends-on "graphql-mode")
 (depends-on "guix")
