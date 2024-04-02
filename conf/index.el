@@ -1289,9 +1289,13 @@ How to send a bug report:
         ("https://dev.to/feed/go" go)
         ("https://go.dev/blog/feed.atom?format=xml" go)
         ("https://hashnode.com/n/go/rss" go)
-        ("https://mattn.kaoriya.net/index.rss" go)
         ("https://systemcrafters.net/rss/news.xml" systemcrafters)
         ("http://benedict.co.jp/feed/" benedict)
+
+        ("https://mattn.kaoriya.net/index.rss" blog)
+        ("https://www.ryokatsu.dev/posts-feed.xml" blog)
+        ("https://blog.jnito.com/feed" blog)
+        ("https://blog.masterka.net/feed" blog)
 
         ("https://github.com/golang/go/releases.atom" go release)
         ("https://github.com/moby/moby/releases.atom" docker release)
@@ -2279,10 +2283,11 @@ How to send a bug report:
 
 (require 'exwm-randr)
 (setq exwm-randr-workspace-output-plist '(1 "HDMI-1"))
-(add-hook 'exwm-randr-screen-change-hook
-          (lambda ()
-            (start-process-shell-command
-             "xrandr" nil "xrandr --output HDMI-1 --mode 1920x1080 --same-as eDP-1 --auto")))
+;; arandrで設定せよ
+;; (remove-hook 'exwm-randr-screen-change-hook
+;;           (lambda ()
+;;             (start-process-shell-command
+;;              "xrandr" nil "xrandr --output HDMI-1 --mode 1920x1080 --same-as eDP-1 --auto")))
 (exwm-enable)
 (exwm-randr-enable)
 
@@ -2333,8 +2338,8 @@ How to send a bug report:
     ("Media"
      (("<prior>" kd/mint-volume-up "up")
       ("<next>" kd/mint-volume-down "down")
-      ("<pause>" kd/player-stop "stop")
-      ("<SPC>" eradio-toggle "stop"))
+      ("<home>" kd/player-toggle "media toggle")
+      ("<SPC>" eradio-toggle "eradio"))
 
      "Find"
      (("a" counsel-apropos "apropos")
@@ -2450,10 +2455,10 @@ How to send a bug report:
   (interactive)
   (start-process-shell-command "volume up" nil "pactl set-sink-volume @DEFAULT_SINK@ -5%"))
 
-(defun kd/player-stop ()
+(defun kd/player-toggle ()
   "再生停止"
   (interactive)
-  (start-process-shell-command "player stop" nil "playerctl stop"))
+  (start-process-shell-command "player stop" nil "playerctl play-pause"))
 
 (defun kd/up-network ()
   "ネットワーク接続"

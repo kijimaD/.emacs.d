@@ -1858,9 +1858,13 @@ Mermaid JSはテキストから図を描画するライブラリ。
           ("https://dev.to/feed/go" go)
           ("https://go.dev/blog/feed.atom?format=xml" go)
           ("https://hashnode.com/n/go/rss" go)
-          ("https://mattn.kaoriya.net/index.rss" go)
           ("https://systemcrafters.net/rss/news.xml" systemcrafters)
           ("http://benedict.co.jp/feed/" benedict)
+
+          ("https://mattn.kaoriya.net/index.rss" blog)
+          ("https://www.ryokatsu.dev/posts-feed.xml" blog)
+          ("https://blog.jnito.com/feed" blog)
+          ("https://blog.masterka.net/feed" blog)
 
           ("https://github.com/golang/go/releases.atom" go release)
           ("https://github.com/moby/moby/releases.atom" docker release)
@@ -3130,14 +3134,15 @@ EXWMはEmacs上で動くウィンドウマネージャ。
 
 #+caption: マルチディスプレイ設定
 #+begin_src emacs-lisp
-(require 'exwm-randr)
-(setq exwm-randr-workspace-output-plist '(1 "HDMI-1"))
-(add-hook 'exwm-randr-screen-change-hook
-          (lambda ()
-            (start-process-shell-command
-             "xrandr" nil "xrandr --output HDMI-1 --mode 1920x1080 --same-as eDP-1 --auto")))
-(exwm-enable)
-(exwm-randr-enable)
+  (require 'exwm-randr)
+  (setq exwm-randr-workspace-output-plist '(1 "HDMI-1"))
+  ;; arandrで設定せよ
+  ;; (remove-hook 'exwm-randr-screen-change-hook
+  ;;           (lambda ()
+  ;;             (start-process-shell-command
+  ;;              "xrandr" nil "xrandr --output HDMI-1 --mode 1920x1080 --same-as eDP-1 --auto")))
+  (exwm-enable)
+  (exwm-randr-enable)
 #+end_src
 
 randr関係の修正をしたときは、 ~(exwm-randr-refresh)~ を実行して反映する。例えば、画面と対応したワークスペースを変更したとき。
@@ -3216,8 +3221,8 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
       ("Media"
        (("<prior>" kd/mint-volume-up "up")
         ("<next>" kd/mint-volume-down "down")
-        ("<pause>" kd/player-stop "stop")
-        ("<SPC>" eradio-toggle "stop"))
+        ("<home>" kd/player-toggle "media toggle")
+        ("<SPC>" eradio-toggle "eradio"))
 
        "Find"
        (("a" counsel-apropos "apropos")
@@ -3350,12 +3355,12 @@ OS操作の便利関数。
     (start-process-shell-command "volume up" nil "pactl set-sink-volume @DEFAULT_SINK@ -5%"))
 #+end_src
 
-#+caption: 再生を停止する
+#+caption: 再生を切り替える
 #+begin_src emacs-lisp
-(defun kd/player-stop ()
+(defun kd/player-toggle ()
   "再生停止"
   (interactive)
-  (start-process-shell-command "player stop" nil "playerctl stop"))
+  (start-process-shell-command "player stop" nil "playerctl play-pause"))
 #+end_src
 
 #+caption: ネットワークを接続・切断する
