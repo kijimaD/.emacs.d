@@ -3102,15 +3102,14 @@ EXWMはEmacs上で動くウィンドウマネージャ。
   (start-process-shell-command "fehbg" nil "~/dotfiles/.fehbg"))
 #+end_src
 
-#+caption: 最後のワークスペースに戻る
+#+caption: ワークスペースをトグルする。ワークスペースは0,1しかない想定
 #+begin_src emacs-lisp
-(defvar kd/last-workspace-index 0)
-
-(defun kd/exwm-workspace-switch-last ()
-  (interactive)
-  (let ((old kd/last-workspace-index))
-    (setq kd/last-workspace-index exwm-workspace-current-index)
-    (exwm-workspace-switch old)))
+  (defun kd/exwm-workspace-switch-last ()
+    (interactive)
+    (let ((dest 0))
+      (cond ((= exwm-workspace-current-index 0) (setq dest 1))
+            ((= exwm-workspace-current-index 1) (setq dest 0)))
+      (exwm-workspace-switch dest)))
 #+end_src
 
 マルチディスプレイ時に簡易にトグルで切り替える用。ワークスペース切り替え時のbefore hookがないので、他のコマンドで切り替えたときに対応してない。

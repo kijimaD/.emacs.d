@@ -2262,13 +2262,12 @@ How to send a bug report:
   (start-process-shell-command "compton" nil "compton --config ~/dotfiles/.config/compton/compton.conf")
   (start-process-shell-command "fehbg" nil "~/dotfiles/.fehbg"))
 
-(defvar kd/last-workspace-index 0)
-
 (defun kd/exwm-workspace-switch-last ()
   (interactive)
-  (let ((old kd/last-workspace-index))
-    (setq kd/last-workspace-index exwm-workspace-current-index)
-    (exwm-workspace-switch old)))
+  (let ((dest 0))
+    (cond ((= exwm-workspace-current-index 0) (setq dest 1))
+          ((= exwm-workspace-current-index 1) (setq dest 0)))
+    (exwm-workspace-switch dest)))
 
 (define-key exwm-mode-map (kbd "C-M-:") 'vterm-toggle)
 (define-key exwm-mode-map (kbd "C-M-<right>") 'persp-next)
