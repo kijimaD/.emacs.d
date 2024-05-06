@@ -1303,6 +1303,7 @@ How to send a bug report:
 
         ("https://zenn.dev/hsaki/feed" go)
         ("https://zenn.dev/satoru_takeuchi/feed" linux)
+        ("https://oraccha.hatenadiary.org/feed" plan9)
 
         ("https://qiita.com/tenntenn/feed" go)
 
