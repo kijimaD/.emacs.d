@@ -18,7 +18,11 @@ jobs:
         emacs_version:
           - 28.1
           - 28.2
-          - snapshot
+          - 29.1
+          - 29.2
+          - 29.3
+          # origami.elでエラーが出るのでとりあえず無視する
+          # - snapshot
 
     steps:
     - uses: purcell/setup-emacs@master

@@ -1,10 +1,9 @@
 (require 'package)
 
-(setq package-archives
-      '(("elpy" . "https://jorgenschaefer.github.io/packages/")
-        ("melpa" . "https://melpa.org/packages/")
-        ("gnu" . "https://elpa.gnu.org/packages/")
-        ("org" . "http://orgmode.org/elpa/")))
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("gnu" . "https://elpa.gnu.org/packages/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")
+                         ("org" . "http://orgmode.org/elpa/")))
 
 (require 'org)
 (require 'org-protocol)
@@ -181,7 +180,7 @@
     (setq buf (find-file-noselect file))
     (with-current-buffer buf (if (setq lint (org-lint)) (print (list file lint))))))
 
-(setq org-babel-default-header-args '((:session . "none") (:results . "replace") (:exports . "code") (:cache . "no") (:noweb . "no") (:hlines . "no") (:tangle . "no")(:wrap . "results")))
+(setq org-babel-default-header-args '((:session . "none") (:results . "replace") (:exports . "code") (:cache . "no") (:noweb . "no") (:hlines . "no") (:tangle . "no")(:wrap . "src")))
 
 ;;; open-junk-file.el --- Open a junk (memo) file to try-and-error
 
@@ -449,10 +448,28 @@ How to send a bug report:
 
 (require 'denote-org-dblock)
 
-(setq denote-directory (expand-file-name "~/roam/denote"))
-(setq denote-known-keywords '("essay" "code" "book" "term" "memo" "draft"))
+  (setq denote-directory (expand-file-name "~/roam"))
+  (setq denote-known-keywords '("essay" "code" "book" "term" "memo" "draft"))
 
-(define-key global-map (kbd "C-c d") 'denote-create-note)
+  (define-key global-map (kbd "C-c d") 'denote-create-note)
+
+  ;; カスタムテンプレート
+  ;; roamで表示できるIDを追加
+  (setq denote-org-front-matter
+        ":properties:
+:ID: %4$s
+:end:
+#+title:      KDOC n: %1$s
+#+date:       %2$s
+#+filetags:   :draft%3$s
+#+identifier: %4$s
+\n")
+
+(use-package denote-menu
+  :straight (:host github :repo "namilus/denote-menu"))
+
+(setq denote-templates
+      `((entry . ,(f-read-text "~/.emacs.d/resources/entry.org"))))
 
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
@@ -489,15 +506,12 @@ How to send a bug report:
 (let* ((my-org-directory (concat "~/Private/junk/diary/org-journal/"))
        (my-todo-file (concat my-org-directory "todo.org"))
        (my-roam-file "~/roam")
-       (my-denote-file "~/roam/denote")
        (my-agenda-files nil))
 
   (if (file-exists-p my-todo-file)
       (setq my-agenda-files (push my-todo-file my-agenda-files)))
   (if (file-exists-p my-roam-file)
       (setq my-agenda-files (push my-roam-file my-agenda-files)))
-  (if (file-exists-p my-denote-file)
-      (setq my-agenda-files (push my-denote-file my-agenda-files)))
   (setq org-agenda-files my-agenda-files)
   (setq org-directory my-org-directory)
   (setq org-default-notes-file my-todo-file))
@@ -672,7 +686,7 @@ How to send a bug report:
                                (format "%s %dm %s%s%s"
                                        (kd/org-pomodoro-remain-gauge org-pomodoro-length)
                                        (/ (org-pomodoro-remaining-seconds) 60)
-                                       "%{F#FFFFFF}"
+                                       "%{F#000000}"
                                        org-clock-heading
                                        "%{F-}"
                                        ))
@@ -692,7 +706,7 @@ How to send a bug report:
 
 (defun kd/effort-timer ()
   (cond
-   ((and (not org-clock-effort) (or (org-pomodoro-active-p) (org-clocking-p)) "effort not set!"))
+   ((and (not org-clock-effort) (or (org-pomodoro-active-p) (org-clocking-p)) "[effort not set]"))
    ((and org-clock-effort (or (org-pomodoro-active-p) (org-clocking-p))) (format "[%s/%s]" (org-duration-from-minutes (org-clock-get-clocked-time)) org-clock-effort))
    (t "")))
 
@@ -1274,22 +1288,27 @@ How to send a bug report:
         ("https://medium.com/feed/a-journey-with-go" go)
         ("https://dev.to/feed/go" go)
         ("https://go.dev/blog/feed.atom?format=xml" go)
-        ("https://hashnode.com/n/go/rss" go)
-        ("https://mattn.kaoriya.net/index.rss" go)
         ("https://systemcrafters.net/rss/news.xml" systemcrafters)
+        ("http://benedict.co.jp/feed/" benedict)
+
+        ("https://mattn.kaoriya.net/index.rss" blog)
+        ("https://www.ryokatsu.dev/posts-feed.xml" blog)
+        ("https://blog.jnito.com/feed" blog)
+        ("https://blog.masterka.net/feed" blog)
+        ("https://sazak.io/rss.xml" blog go)
 
         ("https://github.com/golang/go/releases.atom" go release)
         ("https://github.com/moby/moby/releases.atom" docker release)
         ("https://github.com/emacs-mirror/emacs/releases.atom" emacs release)
 
         ("https://zenn.dev/hsaki/feed" go)
-        ("https://zenn.dev/topics/go/feed" go)
+        ("https://zenn.dev/satoru_takeuchi/feed" linux)
+        ("https://oraccha.hatenadiary.org/feed" plan9)
 
         ("https://qiita.com/tenntenn/feed" go)
-        ("https://qiita.com/tags/go/feed" go)
-        ("https://qiita.com/talgs/emacs/feed" emacs)
 
         ("https://www.rfc-editor.org/rfcrss.xml" rfc)
+        ("https://www.docker.com/feed/" docker)
         ))
 
 (setq elfeed-search-title-max-width 120)
@@ -1628,6 +1647,9 @@ How to send a bug report:
 (setq gofmt-command "goimports")
 (add-hook 'before-save-hook 'gofmt-before-save)
 
+(use-package ob-go-asm
+  :straight (:host github :repo "kijimaD/ob-go-asm"))
+
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 
@@ -1798,10 +1820,10 @@ How to send a bug report:
   :config
   ;; Uncomment following section if you would like to tune lsp-mode performance according to
   ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
-  ;;       (setq gc-cons-threshold 100000000) ;; 100mb
-  ;;       (setq read-process-output-max (* 1024 1024)) ;; 1mb
-  ;;       (setq lsp-idle-delay 0.500)
-  ;;       (setq lsp-log-io nil)
+        (setq gc-cons-threshold 100000000) ;; 100mb
+        (setq read-process-output-max (* 1024 1024 10)) ;; 10mb
+        (setq lsp-idle-delay 0.500)
+        (setq lsp-log-io nil)
   )
 
 ;; (use-package scala-mode
@@ -1947,8 +1969,7 @@ How to send a bug report:
 (global-set-key (kbd "C-x C-u") 'vertico-repeat)
 (global-set-key (kbd "C-x C-g") 'consult-git-grep)
 (global-set-key (kbd "M-y") 'consult-yank-pop)
-(global-set-key (kbd "M-i") 'consult-imenu)
-(global-set-key (kbd "M-l") 'consult-line)
+(global-set-key (kbd "M-i") 'consult-line)
 
 (add-hook 'after-init-hook '(lambda ()
                               (ido-mode 0)
@@ -2023,7 +2044,7 @@ How to send a bug report:
 (require 'doom-themes)
 (doom-themes-org-config)
 (setq custom-safe-themes t)
-(setq-default custom-enabled-themes '(doom-tokyo-night))
+(setq-default custom-enabled-themes '(modus-operandi))
 
 (defun reapply-themes ()
   "Forcibly load the themes listed in `custom-enabled-themes'."
@@ -2049,7 +2070,7 @@ How to send a bug report:
 (doom-modeline-def-modeline
   'my-simple-line
   '(bar matches buffer-info remote-host input-method major-mode process buffer-position)
-  '(misc-info vcs checker))
+  '(misc-info vcs))
 
 ;; 縦調整
 (defun my-doom-modeline--font-height ()
@@ -2130,6 +2151,24 @@ How to send a bug report:
       my-hidden-minor-modes)
 (setq minor-mode-alist nil)
 
+(require 'spacious-padding)
+
+;; These is the default value, but I keep it here for visiibility.
+(setq spacious-padding-widths
+      '( :internal-border-width 10
+         :header-line-width 4
+         :mode-line-width 6
+         :tab-width 4
+         :right-divider-width 30
+         :fringe-width 8))
+
+;; Read the doc string of `spacious-padding-subtle-mode-line' as it
+;; is very flexible and provides several examples.
+(setq spacious-padding-subtle-mode-line
+      `( :mode-line-active 'default
+         :mode-line-inactive vertical-border))
+(spacious-padding-mode)
+
 (require 'exwm)
 (require 'exwm-config)
 
@@ -2155,7 +2194,7 @@ How to send a bug report:
   "Window Manager関係の各種プログラムを起動する."
   (interactive)
 
-  (kd/set-background)
+  ;; (kd/set-background)
 
   (call-process-shell-command "shepherd")
   (call-process-shell-command "~/dotfiles/.config/polybar/launch.sh")
@@ -2225,13 +2264,12 @@ How to send a bug report:
   (start-process-shell-command "compton" nil "compton --config ~/dotfiles/.config/compton/compton.conf")
   (start-process-shell-command "fehbg" nil "~/dotfiles/.fehbg"))
 
-(defvar kd/last-workspace-index 0)
-
 (defun kd/exwm-workspace-switch-last ()
   (interactive)
-  (let ((old kd/last-workspace-index))
-    (setq kd/last-workspace-index exwm-workspace-current-index)
-    (exwm-workspace-switch old)))
+  (let ((dest 0))
+    (cond ((= exwm-workspace-current-index 0) (setq dest 1))
+          ((= exwm-workspace-current-index 1) (setq dest 0)))
+    (exwm-workspace-switch dest)))
 
 (define-key exwm-mode-map (kbd "C-M-:") 'vterm-toggle)
 (define-key exwm-mode-map (kbd "C-M-<right>") 'persp-next)
@@ -2246,10 +2284,11 @@ How to send a bug report:
 
 (require 'exwm-randr)
 (setq exwm-randr-workspace-output-plist '(1 "HDMI-1"))
-(add-hook 'exwm-randr-screen-change-hook
-          (lambda ()
-            (start-process-shell-command
-             "xrandr" nil "xrandr --output HDMI-1 --mode 1920x1080 --right-of eDP-1 --auto")))
+;; arandrで設定せよ
+;; (remove-hook 'exwm-randr-screen-change-hook
+;;           (lambda ()
+;;             (start-process-shell-command
+;;              "xrandr" nil "xrandr --output HDMI-1 --mode 1920x1080 --same-as eDP-1 --auto")))
 (exwm-enable)
 (exwm-randr-enable)
 
@@ -2300,8 +2339,8 @@ How to send a bug report:
     ("Media"
      (("<prior>" kd/mint-volume-up "up")
       ("<next>" kd/mint-volume-down "down")
-      ("<pause>" kd/player-stop "stop")
-      ("<SPC>" eradio-toggle "stop"))
+      ("<home>" kd/player-toggle "media toggle")
+      ("<SPC>" eradio-toggle "eradio"))
 
      "Find"
      (("a" counsel-apropos "apropos")
@@ -2311,11 +2350,12 @@ How to send a bug report:
       ("s" consult-register-store "store register"))
 
      "Execute"
-     (("d" gdb "gdb")
+     (("d" denote-template "denote-template")
       ("e" counsel-linux-app "run")
       ("c" recompile "recompile")
       ("!" org-pomodoro "start pomodoro")
-      ("n" elfeed "elfeed"))
+      ("n" elfeed "elfeed")
+      ("u" kd/set-proxy-mode-manual "use proxy"))
 
      "Git"
      (("g" git-link)
@@ -2416,10 +2456,10 @@ How to send a bug report:
   (interactive)
   (start-process-shell-command "volume up" nil "pactl set-sink-volume @DEFAULT_SINK@ -5%"))
 
-(defun kd/player-stop ()
+(defun kd/player-toggle ()
   "再生停止"
   (interactive)
-  (start-process-shell-command "player stop" nil "playerctl stop"))
+  (start-process-shell-command "player stop" nil "playerctl play-pause"))
 
 (defun kd/up-network ()
   "ネットワーク接続"
@@ -2438,16 +2478,15 @@ How to send a bug report:
                             (shell-quote-argument passwd)
                             " | sudo -S ifconfig `basename $intf` down; done"))))
 
+(defun kd/set-proxy-mode-manual ()
+  "プロキシをmanual modeにする"
+  (interactive)
+  (shell-command "gsettings set org.gnome.system.proxy mode 'manual'")
+  (message "use proxy..."))
+
 ;; (use-package ej-dict
 ;;   :straight (:host github :repo "kijimaD/ej-dict"))
 ;; (ej-dict-install-dict)
-
-(use-package denote-menu
-  :straight (:host github :repo "namilus/denote-menu"))
-
-(setq denote-templates
-      `((entry . ,(f-read-text "~/.emacs.d/resources/entry.org"))
-        (month . ,(f-read-text "~/.emacs.d/resources/month.org"))))
 
 (defun my-exchange-point-and-mark ()
   (interactive)
@@ -2508,6 +2547,13 @@ How to send a bug report:
 (let ((src-dir "~/ProjectOrg/emacs/emacs/src"))
   (if (file-directory-p src-dir)
       (setq source-directory src-dir)))
+
+(defun kd/junk-image ()
+  (interactive)
+  (let* ((date-string (format-time-string "%Y%m%d"))
+         (name (read-from-minibuffer "filename? "))
+         (format-string (format "%s-%s.drawio.svg" date-string name)))
+    (kill-new format-string)))
 
 ;;; go-dlv.el --- Go Delve - Debug Go programs interactively with the GUD.
 

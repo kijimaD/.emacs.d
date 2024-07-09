@@ -10,11 +10,10 @@ Emacsの文芸的設定。
 #+begin_src emacs-lisp
   (require 'package)
 
-  (setq package-archives
-        '(("elpy" . "https://jorgenschaefer.github.io/packages/")
-          ("melpa" . "https://melpa.org/packages/")
-          ("gnu" . "https://elpa.gnu.org/packages/")
-          ("org" . "http://orgmode.org/elpa/")))
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                           ("gnu" . "https://elpa.gnu.org/packages/")
+                           ("elpa" . "https://elpa.gnu.org/packages/")
+                           ("org" . "http://orgmode.org/elpa/")))
 #+end_src
 
 * Org
@@ -280,7 +279,7 @@ babelで出力した結果はラップしないとtextlintでエラーになる�
 
 #+caption: :wrapを設定する
 #+begin_src emacs-lisp
-(setq org-babel-default-header-args '((:session . "none") (:results . "replace") (:exports . "code") (:cache . "no") (:noweb . "no") (:hlines . "no") (:tangle . "no")(:wrap . "results")))
+(setq org-babel-default-header-args '((:session . "none") (:results . "replace") (:exports . "code") (:cache . "no") (:noweb . "no") (:hlines . "no") (:tangle . "no")(:wrap . "src")))
 #+end_src
 
 ** open-junk-file
@@ -620,10 +619,34 @@ denoteはシンプルなノートパッケージ。
 #+begin_src emacs-lisp
   (require 'denote-org-dblock)
 
-  (setq denote-directory (expand-file-name "~/roam/denote"))
+  (setq denote-directory (expand-file-name "~/roam"))
   (setq denote-known-keywords '("essay" "code" "book" "term" "memo" "draft"))
 
   (define-key global-map (kbd "C-c d") 'denote-create-note)
+
+  ;; カスタムテンプレート
+  ;; roamで表示できるIDを追加
+  (setq denote-org-front-matter
+        ":properties:
+:ID: %4$s
+:end:
+#+title:      KDOC n: %1$s
+#+date:       %2$s
+#+filetags:   :draft%3$s
+#+identifier: %4$s
+\n")
+#+end_src
+
+#+caption: denoteのメニュー表示する
+#+begin_src emacs-lisp
+  (use-package denote-menu
+    :straight (:host github :repo "namilus/denote-menu"))
+#+end_src
+
+#+caption: denoteのテンプレートを設定する
+#+begin_src emacs-lisp
+  (setq denote-templates
+        `((entry . ,(f-read-text "~/.emacs.d/resources/entry.org"))))
 #+end_src
 
 ** org-agenda
@@ -678,15 +701,12 @@ org-agendaはorg-modeでtodo管理する機能。
   (let* ((my-org-directory (concat "~/Private/junk/diary/org-journal/"))
          (my-todo-file (concat my-org-directory "todo.org"))
          (my-roam-file "~/roam")
-         (my-denote-file "~/roam/denote")
          (my-agenda-files nil))
 
     (if (file-exists-p my-todo-file)
         (setq my-agenda-files (push my-todo-file my-agenda-files)))
     (if (file-exists-p my-roam-file)
         (setq my-agenda-files (push my-roam-file my-agenda-files)))
-    (if (file-exists-p my-denote-file)
-        (setq my-agenda-files (push my-denote-file my-agenda-files)))
     (setq org-agenda-files my-agenda-files)
     (setq org-directory my-org-directory)
     (setq org-default-notes-file my-todo-file))
@@ -912,7 +932,7 @@ org-pomodoro用の設定。
                                  (format "%s %dm %s%s%s"
                                          (kd/org-pomodoro-remain-gauge org-pomodoro-length)
                                          (/ (org-pomodoro-remaining-seconds) 60)
-                                         "%{F#FFFFFF}"
+                                         "%{F#000000}"
                                          org-clock-heading
                                          "%{F-}"
                                          ))
@@ -932,7 +952,7 @@ org-pomodoro用の設定。
 
   (defun kd/effort-timer ()
     (cond
-     ((and (not org-clock-effort) (or (org-pomodoro-active-p) (org-clocking-p)) "effort not set!"))
+     ((and (not org-clock-effort) (or (org-pomodoro-active-p) (org-clocking-p)) "[effort not set]"))
      ((and org-clock-effort (or (org-pomodoro-active-p) (org-clocking-p))) (format "[%s/%s]" (org-duration-from-minutes (org-clock-get-clocked-time)) org-clock-effort))
      (t "")))
 
@@ -1837,22 +1857,27 @@ Mermaid JSはテキストから図を描画するライブラリ。
           ("https://medium.com/feed/a-journey-with-go" go)
           ("https://dev.to/feed/go" go)
           ("https://go.dev/blog/feed.atom?format=xml" go)
-          ("https://hashnode.com/n/go/rss" go)
-          ("https://mattn.kaoriya.net/index.rss" go)
           ("https://systemcrafters.net/rss/news.xml" systemcrafters)
+          ("http://benedict.co.jp/feed/" benedict)
+
+          ("https://mattn.kaoriya.net/index.rss" blog)
+          ("https://www.ryokatsu.dev/posts-feed.xml" blog)
+          ("https://blog.jnito.com/feed" blog)
+          ("https://blog.masterka.net/feed" blog)
+          ("https://sazak.io/rss.xml" blog go)
 
           ("https://github.com/golang/go/releases.atom" go release)
           ("https://github.com/moby/moby/releases.atom" docker release)
           ("https://github.com/emacs-mirror/emacs/releases.atom" emacs release)
 
           ("https://zenn.dev/hsaki/feed" go)
-          ("https://zenn.dev/topics/go/feed" go)
+          ("https://zenn.dev/satoru_takeuchi/feed" linux)
+          ("https://oraccha.hatenadiary.org/feed" plan9)
 
           ("https://qiita.com/tenntenn/feed" go)
-          ("https://qiita.com/tags/go/feed" go)
-          ("https://qiita.com/talgs/emacs/feed" emacs)
 
           ("https://www.rfc-editor.org/rfcrss.xml" rfc)
+          ("https://www.docker.com/feed/" docker)
           ))
 
   (setq elfeed-search-title-max-width 120)
@@ -2284,6 +2309,12 @@ goの設定。
   (add-hook 'before-save-hook 'gofmt-before-save)
 #+end_src
 
+#+caption: Goアセンブリを表示するorg-babel
+#+begin_src emacs-lisp
+  (use-package ob-go-asm
+    :straight (:host github :repo "kijimaD/ob-go-asm"))
+#+end_src
+
 * Haskell
 haskellの設定。
 
@@ -2480,10 +2511,10 @@ lsp-modeはLSPを使えるようにするパッケージ。
     :config
     ;; Uncomment following section if you would like to tune lsp-mode performance according to
     ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
-    ;;       (setq gc-cons-threshold 100000000) ;; 100mb
-    ;;       (setq read-process-output-max (* 1024 1024)) ;; 1mb
-    ;;       (setq lsp-idle-delay 0.500)
-    ;;       (setq lsp-log-io nil)
+          (setq gc-cons-threshold 100000000) ;; 100mb
+          (setq read-process-output-max (* 1024 1024 10)) ;; 10mb
+          (setq lsp-idle-delay 0.500)
+          (setq lsp-log-io nil)
     )
 #+end_src
 
@@ -2672,8 +2703,7 @@ verticoは検索UIを提供するパッケージ。
   (global-set-key (kbd "C-x C-u") 'vertico-repeat)
   (global-set-key (kbd "C-x C-g") 'consult-git-grep)
   (global-set-key (kbd "M-y") 'consult-yank-pop)
-  (global-set-key (kbd "M-i") 'consult-imenu)
-  (global-set-key (kbd "M-l") 'consult-line)
+  (global-set-key (kbd "M-i") 'consult-line)
 #+end_src
 
 #+caption: idoが有効化されているとfind-fileが縦に表示されないので無効化する。最後に実行しないと反映されない
@@ -2794,7 +2824,7 @@ vtermはCで実装されたシェル。
   (require 'doom-themes)
   (doom-themes-org-config)
   (setq custom-safe-themes t)
-  (setq-default custom-enabled-themes '(doom-tokyo-night))
+  (setq-default custom-enabled-themes '(modus-operandi))
 #+end_src
 
 doom themeはモダンなテーマ集。
@@ -2843,7 +2873,7 @@ doom themeはモダンなテーマ集。
   (doom-modeline-def-modeline
     'my-simple-line
     '(bar matches buffer-info remote-host input-method major-mode process buffer-position)
-    '(misc-info vcs checker))
+    '(misc-info vcs))
 
   ;; 縦調整
   (defun my-doom-modeline--font-height ()
@@ -2897,6 +2927,8 @@ doom themeはモダンなテーマ集。
     (window-divider-mode 0))
 #+end_src
 
+マイナーモードは describe-minor-mode-from-indicator で調べられる。
+
 #+caption: モードラインからマイナーモードを消す
 #+begin_src emacs-lisp
   (setq my-hidden-minor-modes
@@ -2931,7 +2963,26 @@ doom themeはモダンなテーマ集。
   (setq minor-mode-alist nil)
 #+end_src
 
-describe-minor-mode-from-indicator で調べられる。
+#+caption: モードラインやウィンドウのpaddingをいい感じにする
+#+begin_src emacs-lisp
+  (require 'spacious-padding)
+
+  ;; These is the default value, but I keep it here for visiibility.
+  (setq spacious-padding-widths
+        '( :internal-border-width 10
+           :header-line-width 4
+           :mode-line-width 6
+           :tab-width 4
+           :right-divider-width 30
+           :fringe-width 8))
+
+  ;; Read the doc string of `spacious-padding-subtle-mode-line' as it
+  ;; is very flexible and provides several examples.
+  (setq spacious-padding-subtle-mode-line
+        `( :mode-line-active 'default
+           :mode-line-inactive vertical-border))
+  (spacious-padding-mode)
+#+end_src
 
 * EXWM
 EXWMはEmacs上で動くウィンドウマネージャ。
@@ -2979,7 +3030,7 @@ EXWMはEmacs上で動くウィンドウマネージャ。
     "Window Manager関係の各種プログラムを起動する."
     (interactive)
 
-    (kd/set-background)
+    ;; (kd/set-background)
 
     (call-process-shell-command "shepherd")
     (call-process-shell-command "~/dotfiles/.config/polybar/launch.sh")
@@ -3053,15 +3104,14 @@ EXWMはEmacs上で動くウィンドウマネージャ。
   (start-process-shell-command "fehbg" nil "~/dotfiles/.fehbg"))
 #+end_src
 
-#+caption: 最後のワークスペースに戻る
+#+caption: ワークスペースをトグルする。ワークスペースは0,1しかない想定
 #+begin_src emacs-lisp
-(defvar kd/last-workspace-index 0)
-
-(defun kd/exwm-workspace-switch-last ()
-  (interactive)
-  (let ((old kd/last-workspace-index))
-    (setq kd/last-workspace-index exwm-workspace-current-index)
-    (exwm-workspace-switch old)))
+  (defun kd/exwm-workspace-switch-last ()
+    (interactive)
+    (let ((dest 0))
+      (cond ((= exwm-workspace-current-index 0) (setq dest 1))
+            ((= exwm-workspace-current-index 1) (setq dest 0)))
+      (exwm-workspace-switch dest)))
 #+end_src
 
 マルチディスプレイ時に簡易にトグルで切り替える用。ワークスペース切り替え時のbefore hookがないので、他のコマンドで切り替えたときに対応してない。
@@ -3085,14 +3135,15 @@ EXWMはEmacs上で動くウィンドウマネージャ。
 
 #+caption: マルチディスプレイ設定
 #+begin_src emacs-lisp
-(require 'exwm-randr)
-(setq exwm-randr-workspace-output-plist '(1 "HDMI-1"))
-(add-hook 'exwm-randr-screen-change-hook
-          (lambda ()
-            (start-process-shell-command
-             "xrandr" nil "xrandr --output HDMI-1 --mode 1920x1080 --right-of eDP-1 --auto")))
-(exwm-enable)
-(exwm-randr-enable)
+  (require 'exwm-randr)
+  (setq exwm-randr-workspace-output-plist '(1 "HDMI-1"))
+  ;; arandrで設定せよ
+  ;; (remove-hook 'exwm-randr-screen-change-hook
+  ;;           (lambda ()
+  ;;             (start-process-shell-command
+  ;;              "xrandr" nil "xrandr --output HDMI-1 --mode 1920x1080 --same-as eDP-1 --auto")))
+  (exwm-enable)
+  (exwm-randr-enable)
 #+end_src
 
 randr関係の修正をしたときは、 ~(exwm-randr-refresh)~ を実行して反映する。例えば、画面と対応したワークスペースを変更したとき。
@@ -3171,8 +3222,8 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
       ("Media"
        (("<prior>" kd/mint-volume-up "up")
         ("<next>" kd/mint-volume-down "down")
-        ("<pause>" kd/player-stop "stop")
-        ("<SPC>" eradio-toggle "stop"))
+        ("<home>" kd/player-toggle "media toggle")
+        ("<SPC>" eradio-toggle "eradio"))
 
        "Find"
        (("a" counsel-apropos "apropos")
@@ -3182,11 +3233,12 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
         ("s" consult-register-store "store register"))
 
        "Execute"
-       (("d" gdb "gdb")
+       (("d" denote-template "denote-template")
         ("e" counsel-linux-app "run")
         ("c" recompile "recompile")
         ("!" org-pomodoro "start pomodoro")
-        ("n" elfeed "elfeed"))
+        ("n" elfeed "elfeed")
+        ("u" kd/set-proxy-mode-manual "use proxy"))
 
        "Git"
        (("g" git-link)
@@ -3304,12 +3356,12 @@ OS操作の便利関数。
     (start-process-shell-command "volume up" nil "pactl set-sink-volume @DEFAULT_SINK@ -5%"))
 #+end_src
 
-#+caption: 再生を停止する
+#+caption: 再生を切り替える
 #+begin_src emacs-lisp
-(defun kd/player-stop ()
+(defun kd/player-toggle ()
   "再生停止"
   (interactive)
-  (start-process-shell-command "player stop" nil "playerctl stop"))
+  (start-process-shell-command "player stop" nil "playerctl play-pause"))
 #+end_src
 
 #+caption: ネットワークを接続・切断する
@@ -3332,25 +3384,21 @@ OS操作の便利関数。
                               " | sudo -S ifconfig `basename $intf` down; done"))))
 #+end_src
 
+#+caption: プロキシ設定を変更する(Ubuntu)
+#+begin_src emacs-lisp
+  (defun kd/set-proxy-mode-manual ()
+    "プロキシをmanual modeにする"
+    (interactive)
+    (shell-command "gsettings set org.gnome.system.proxy mode 'manual'")
+    (message "use proxy..."))
+#+end_src
+
 #+caption: 英語辞書をインストールする。あまり使ってないのでコメントアウトしている
 #+begin_src emacs-lisp
   ;; (use-package ej-dict
   ;;   :straight (:host github :repo "kijimaD/ej-dict"))
   ;; (ej-dict-install-dict)
 #+end_src
-
-#+begin_src emacs-lisp
-  (use-package denote-menu
-    :straight (:host github :repo "namilus/denote-menu"))
-#+end_src
-
-#+caption: denoteのテンプレートを設定する
-#+begin_src emacs-lisp
-  (setq denote-templates
-        `((entry . ,(f-read-text "~/.emacs.d/resources/entry.org"))
-          (month . ,(f-read-text "~/.emacs.d/resources/month.org"))))
-#+end_src
-
 * Helper
 
 その他の便利関数。
@@ -3440,6 +3488,15 @@ OS操作の便利関数。
 #+end_src
 
 前提: ~~/ProjectOrg/emacs~ にEmacsのソースコードを配置しておく。
+
+#+begin_src emacs-lisp
+  (defun kd/junk-image ()
+    (interactive)
+    (let* ((date-string (format-time-string "%Y%m%d"))
+           (name (read-from-minibuffer "filename? "))
+           (format-string (format "%s-%s.drawio.svg" date-string name)))
+      (kill-new format-string)))
+#+end_src
 
 * delve-mode
 delve-mode は ~M-x gdb~ と同じインターフェースで扱えるパッケージ。[[https://github.com/benma/go-dlv.el/][benma/go-dlv.el]]で配布されているものを持ってきた。
