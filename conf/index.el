@@ -2547,6 +2547,13 @@ How to send a bug report:
   (if (file-directory-p src-dir)
       (setq source-directory src-dir)))
 
+(defun kd/junk-image ()
+  (interactive)
+  (let* ((date-string (format-time-string "%Y%m%d"))
+         (name (read-from-minibuffer "filename? "))
+         (format-string (format "%s-%s.drawio.svg" date-string name)))
+    format-string))
+
 ;;; go-dlv.el --- Go Delve - Debug Go programs interactively with the GUD.
 
 ;; Copyright (C) 2015, 2019 Marko Bencun
