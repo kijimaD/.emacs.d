@@ -1288,7 +1288,6 @@ How to send a bug report:
         ("https://medium.com/feed/a-journey-with-go" go)
         ("https://dev.to/feed/go" go)
         ("https://go.dev/blog/feed.atom?format=xml" go)
-        ("https://hashnode.com/n/go/rss" go)
         ("https://systemcrafters.net/rss/news.xml" systemcrafters)
         ("http://benedict.co.jp/feed/" benedict)
 
@@ -1296,6 +1295,7 @@ How to send a bug report:
         ("https://www.ryokatsu.dev/posts-feed.xml" blog)
         ("https://blog.jnito.com/feed" blog)
         ("https://blog.masterka.net/feed" blog)
+        ("https://sazak.io/rss.xml" blog go)
 
         ("https://github.com/golang/go/releases.atom" go release)
         ("https://github.com/moby/moby/releases.atom" docker release)
@@ -1308,6 +1308,7 @@ How to send a bug report:
         ("https://qiita.com/tenntenn/feed" go)
 
         ("https://www.rfc-editor.org/rfcrss.xml" rfc)
+        ("https://www.docker.com/feed/" docker)
         ))
 
 (setq elfeed-search-title-max-width 120)
@@ -2552,7 +2553,7 @@ How to send a bug report:
   (let* ((date-string (format-time-string "%Y%m%d"))
          (name (read-from-minibuffer "filename? "))
          (format-string (format "%s-%s.drawio.svg" date-string name)))
-    format-string))
+    (kill-new format-string)))
 
 ;;; go-dlv.el --- Go Delve - Debug Go programs interactively with the GUD.
 

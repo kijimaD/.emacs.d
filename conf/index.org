@@ -1857,7 +1857,6 @@ Mermaid JSはテキストから図を描画するライブラリ。
           ("https://medium.com/feed/a-journey-with-go" go)
           ("https://dev.to/feed/go" go)
           ("https://go.dev/blog/feed.atom?format=xml" go)
-          ("https://hashnode.com/n/go/rss" go)
           ("https://systemcrafters.net/rss/news.xml" systemcrafters)
           ("http://benedict.co.jp/feed/" benedict)
 
@@ -1865,6 +1864,7 @@ Mermaid JSはテキストから図を描画するライブラリ。
           ("https://www.ryokatsu.dev/posts-feed.xml" blog)
           ("https://blog.jnito.com/feed" blog)
           ("https://blog.masterka.net/feed" blog)
+          ("https://sazak.io/rss.xml" blog go)
 
           ("https://github.com/golang/go/releases.atom" go release)
           ("https://github.com/moby/moby/releases.atom" docker release)
@@ -1877,6 +1877,7 @@ Mermaid JSはテキストから図を描画するライブラリ。
           ("https://qiita.com/tenntenn/feed" go)
 
           ("https://www.rfc-editor.org/rfcrss.xml" rfc)
+          ("https://www.docker.com/feed/" docker)
           ))
 
   (setq elfeed-search-title-max-width 120)
