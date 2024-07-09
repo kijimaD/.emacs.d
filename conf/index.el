@@ -2070,7 +2070,7 @@ How to send a bug report:
 (doom-modeline-def-modeline
   'my-simple-line
   '(bar matches buffer-info remote-host input-method major-mode process buffer-position)
-  '(misc-info vcs checker))
+  '(misc-info vcs))
 
 ;; 縦調整
 (defun my-doom-modeline--font-height ()
