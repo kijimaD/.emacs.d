@@ -157,6 +157,11 @@ org-modeはEmacsのキラーアプリの1つ。パッケージ名であり、フ
   (add-hook 'sql-mode-org-src-hook #'sqlind-minor-mode)
 #+end_src
 
+#+caption: python設定
+#+begin_src emacs-lisp
+  (setq org-babel-python-command "python3")
+#+end_src
+
 #+caption: 評価するときに確認プロンプトを出さない
 #+begin_src emacs-lisp
   (setq org-confirm-babel-evaluate nil)
@@ -279,7 +284,17 @@ babelで出力した結果はラップしないとtextlintでエラーになる�
 
 #+caption: :wrapを設定する
 #+begin_src emacs-lisp
-(setq org-babel-default-header-args '((:session . "none") (:results . "replace") (:exports . "code") (:cache . "no") (:noweb . "no") (:hlines . "no") (:tangle . "no")(:wrap . "src")))
+  (setq org-babel-default-header-args '(
+                                        (:session . "none")
+                                        (:results . "replace")
+                                        (:results . "raw")
+                                        (:exports . "code")
+                                        (:cache . "no")
+                                        (:noweb . "no")
+                                        (:hlines . "no")
+                                        (:tangle . "no")
+                                        (:wrap . "src"))
+        )
 #+end_src
 
 ** open-junk-file
@@ -620,7 +635,7 @@ denoteはシンプルなノートパッケージ。
   (require 'denote-org-dblock)
 
   (setq denote-directory (expand-file-name "~/roam"))
-  (setq denote-known-keywords '("essay" "code" "book" "term" "memo" "draft"))
+  (setq denote-known-keywords '("essay" "code" "book" "project" "draft"))
 
   (define-key global-map (kbd "C-c d") 'denote-create-note)
 

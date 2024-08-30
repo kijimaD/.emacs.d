@@ -82,6 +82,8 @@
 
 (add-hook 'sql-mode-org-src-hook #'sqlind-minor-mode)
 
+(setq org-babel-python-command "python3")
+
 (setq org-confirm-babel-evaluate nil)
 
 (with-eval-after-load 'org
@@ -180,7 +182,17 @@
     (setq buf (find-file-noselect file))
     (with-current-buffer buf (if (setq lint (org-lint)) (print (list file lint))))))
 
-(setq org-babel-default-header-args '((:session . "none") (:results . "replace") (:exports . "code") (:cache . "no") (:noweb . "no") (:hlines . "no") (:tangle . "no")(:wrap . "src")))
+(setq org-babel-default-header-args '(
+                                      (:session . "none")
+                                      (:results . "replace")
+                                      (:results . "raw")
+                                      (:exports . "code")
+                                      (:cache . "no")
+                                      (:noweb . "no")
+                                      (:hlines . "no")
+                                      (:tangle . "no")
+                                      (:wrap . "src"))
+      )
 
 ;;; open-junk-file.el --- Open a junk (memo) file to try-and-error
 
@@ -449,7 +461,7 @@ How to send a bug report:
 (require 'denote-org-dblock)
 
   (setq denote-directory (expand-file-name "~/roam"))
-  (setq denote-known-keywords '("essay" "code" "book" "term" "memo" "draft"))
+  (setq denote-known-keywords '("essay" "code" "book" "project" "draft"))
 
   (define-key global-map (kbd "C-c d") 'denote-create-note)
 

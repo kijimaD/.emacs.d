@@ -48,7 +48,6 @@
 (depends-on "elfeed")
 (depends-on "elisp-refs")
 (depends-on "emacsql")
-(depends-on "emacsql-sqlite")
 (depends-on "ement") ;; IRC Client
 (depends-on "eradio")
 (depends-on "ert")
