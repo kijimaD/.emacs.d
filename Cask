@@ -108,6 +108,7 @@
 (depends-on "org-modern")
 (depends-on "org-pomodoro")
 (depends-on "org-roam")
+(depends-on "org-roam-timestamps")
 (depends-on "org-super-agenda")
 (depends-on "org-superstar")
 (depends-on "org-tree-slide")

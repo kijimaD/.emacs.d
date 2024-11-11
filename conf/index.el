@@ -426,6 +426,8 @@ How to send a bug report:
 (setq org-id-extra-files (org-roam--list-files org-roam-directory))
 (org-roam-setup)
 
+(org-roam-db-autosync-enable)
+
 (define-key global-map (kbd "C-c n f") 'org-roam-node-find)
 (define-key global-map (kbd "C-c n g") 'org-roam-graph)
 (define-key global-map (kbd "C-c n i") 'org-roam-node-insert)
@@ -452,6 +454,12 @@ How to send a bug report:
          (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Project"))
         ))
 
+(require 'org-roam-ui)
+
+(require 'org-roam-timestamps)
+(setq org-roam-timestamps-remember-timestamps nil)
+(add-hook 'org-mode-hook 'org-roam-timestamps-mode)
+
 (require 'org-alert)
 (setq alert-default-style 'notifications)
 (setq org-alert-interval 300)
@@ -460,22 +468,22 @@ How to send a bug report:
 
 (require 'denote-org-dblock)
 
-  (setq denote-directory (expand-file-name "~/roam"))
-  (setq denote-known-keywords '("essay" "code" "book" "project" "draft"))
+(setq denote-directory (expand-file-name "~/roam"))
+(setq denote-known-keywords '("permanent" "book" "structure" "project" "wiki" "essay"))
 
-  (define-key global-map (kbd "C-c d") 'denote-create-note)
+(define-key global-map (kbd "C-c d") 'denote-create-note)
 
-  ;; カスタムテンプレート
-  ;; roamで表示できるIDを追加
-  (setq denote-org-front-matter
-        ":properties:
-:ID: %4$s
-:end:
-#+title:      KDOC n: %1$s
-#+date:       %2$s
-#+filetags:   :draft%3$s
-#+identifier: %4$s
-\n")
+;; カスタムテンプレート
+;; roamで表示できるIDを追加
+(setq denote-org-front-matter
+      ":properties:
+  :ID: %4$s
+  :end:
+  #+title:      KDOC n: %1$s
+  #+date:       %2$s
+  #+filetags:   :draft%3$s
+  #+identifier: %4$s
+  \n")
 
 (use-package denote-menu
   :straight (:host github :repo "namilus/denote-menu"))
@@ -1234,6 +1242,7 @@ How to send a bug report:
 ;; diredバッファを乱立させない
 (setq dired-kill-when-opening-new-dired-buffer t)
 
+(require 'all-the-icons)
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 (add-hook 'dired-mode-hook 'dired-hide-details-mode)
 
@@ -2049,8 +2058,7 @@ How to send a bug report:
       (load-theme theme)))
   (custom-set-variables `(custom-enabled-themes (quote ,custom-enabled-themes)))
   (efs/org-font-setup)
-  ;; (kd/set-modus-face)
-  )
+  (kd/set-modus-face))
 
 (add-hook 'after-init-hook 'reapply-themes)
 
@@ -2100,7 +2108,7 @@ How to send a bug report:
         modus-themes-scale-4 1.27
         modus-themes-scale-title 1.33)
 
-  (set-face-foreground 'vertical-border "gray")
+  (set-face-foreground 'vertical-border "white")
 
   (set-face-attribute 'mode-line nil
                       :background nil

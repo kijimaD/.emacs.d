@@ -583,6 +583,8 @@ org-roamはorgファイルをsqliteによって管理しやすくしたパッケ
   (setq org-id-link-to-org-use-id t)
   (setq org-id-extra-files (org-roam--list-files org-roam-directory))
   (org-roam-setup)
+
+  (org-roam-db-autosync-enable)
 #+end_src
 
 #+caption: キーバインド
@@ -616,6 +618,21 @@ org-roamはorgファイルをsqliteによって管理しやすくしたパッケ
            (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Project"))
           ))
 #+end_src
+
+** org-roam-ui
+org-roam-uiは関係グラフを表示するパッケージ。
+
+#+caption: org-roam-ui
+#+begin_src emacs-lisp
+  (require 'org-roam-ui)
+#+end_src
+
+#+caption: 更新日時を設定する
+#+begin_src emacs-lisp
+  (require 'org-roam-timestamps)
+  (setq org-roam-timestamps-remember-timestamps nil)
+  (add-hook 'org-mode-hook 'org-roam-timestamps-mode)
+#+end_src
 ** org-alert
 org-alertはorg scheduleの項目を時間経過で通知してくれるパッケージ。
 
@@ -635,7 +652,7 @@ denoteはシンプルなノートパッケージ。
   (require 'denote-org-dblock)
 
   (setq denote-directory (expand-file-name "~/roam"))
-  (setq denote-known-keywords '("essay" "code" "book" "project" "draft"))
+  (setq denote-known-keywords '("permanent" "book" "structure" "project" "wiki" "essay"))
 
   (define-key global-map (kbd "C-c d") 'denote-create-note)
 
@@ -643,13 +660,13 @@ denoteはシンプルなノートパッケージ。
   ;; roamで表示できるIDを追加
   (setq denote-org-front-matter
         ":properties:
-:ID: %4$s
-:end:
-#+title:      KDOC n: %1$s
-#+date:       %2$s
-#+filetags:   :draft%3$s
-#+identifier: %4$s
-\n")
+    :ID: %4$s
+    :end:
+    ,#+title:      KDOC n: %1$s
+    ,#+date:       %2$s
+    ,#+filetags:   :draft%3$s
+    ,#+identifier: %4$s
+    \n")
 #+end_src
 
 #+caption: denoteのメニュー表示する
@@ -1797,6 +1814,7 @@ Mermaid JSはテキストから図を描画するライブラリ。
   ;; diredバッファを乱立させない
   (setq dired-kill-when-opening-new-dired-buffer t)
 
+  (require 'all-the-icons)
   (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
   (add-hook 'dired-mode-hook 'dired-hide-details-mode)
 #+end_src
@@ -2849,8 +2867,7 @@ doom themeはモダンなテーマ集。
         (load-theme theme)))
     (custom-set-variables `(custom-enabled-themes (quote ,custom-enabled-themes)))
     (efs/org-font-setup)
-    ;; (kd/set-modus-face)
-    )
+    (kd/set-modus-face))
 
   (add-hook 'after-init-hook 'reapply-themes)
 #+end_src
@@ -2909,7 +2926,7 @@ doom themeはモダンなテーマ集。
           modus-themes-scale-4 1.27
           modus-themes-scale-title 1.33)
 
-    (set-face-foreground 'vertical-border "gray")
+    (set-face-foreground 'vertical-border "white")
 
     (set-face-attribute 'mode-line nil
                         :background nil
