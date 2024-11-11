@@ -33,7 +33,6 @@
 (depends-on "define-word")
 (depends-on "denote")
 (depends-on "devdocs")
-(depends-on "dired-single")
 (depends-on "django-mode")
 (depends-on "docker")
 (depends-on "docker-compose-mode")
