@@ -468,22 +468,22 @@ How to send a bug report:
 
 (require 'denote-org-dblock)
 
-(setq denote-directory (expand-file-name "~/roam"))
-(setq denote-known-keywords '("permanent" "book" "structure" "project" "wiki" "essay"))
+  (setq denote-directory (expand-file-name "~/roam"))
+  (setq denote-known-keywords '("permanent" "book" "structure" "project" "wiki" "essay"))
 
-(define-key global-map (kbd "C-c d") 'denote-create-note)
+  (define-key global-map (kbd "C-c d") 'denote-create-note)
 
-;; カスタムテンプレート
-;; roamで表示できるIDを追加
-(setq denote-org-front-matter
-      ":properties:
-  :ID: %4$s
-  :end:
-  #+title:      KDOC n: %1$s
-  #+date:       %2$s
-  #+filetags:   :draft%3$s
-  #+identifier: %4$s
-  \n")
+  ;; カスタムテンプレート
+  ;; roamで表示できるIDを追加
+  (setq denote-org-front-matter
+        ":properties:
+:ID: %4$s
+:end:
+#+title:      KDOC n: %1$s
+#+date:       %2$s
+#+filetags:   :draft%3$s
+#+identifier: %4$s
+\n")
 
 (use-package denote-menu
   :straight (:host github :repo "namilus/denote-menu"))
