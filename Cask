@@ -8,7 +8,6 @@
 (depends-on "smartparens")
 
 ;; Install Packages
-(depends-on "spacious-padding")
 (depends-on "ace-jump-mode")
 (depends-on "ace-link")
 (depends-on "add-node-modules-path")
@@ -145,6 +144,7 @@
 (depends-on "smartparens")
 (depends-on "smex")
 (depends-on "spacemacs-theme")
+(depends-on "spacious-padding")
 (depends-on "sql-indent")
 (depends-on "sqlup-mode")
 (depends-on "swiper")
