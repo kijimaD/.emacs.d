@@ -4,8 +4,6 @@
 (source gnu)
 (source melpa)
 
-;; Try
-(depends-on "smartparens")
 
 ;; Install Packages
 (depends-on "ace-jump-mode")
@@ -109,6 +107,7 @@
 (depends-on "org-pomodoro")
 (depends-on "org-roam")
 (depends-on "org-roam-timestamps")
+(depends-on "org-roam-ui")
 (depends-on "org-super-agenda")
 (depends-on "org-superstar")
 (depends-on "org-tree-slide")
@@ -141,6 +140,7 @@
 (depends-on "slime")
 (depends-on "smart-mode-line")
 (depends-on "smart-mode-line-atom-one-dark-theme")
+(depends-on "smartparens")
 (depends-on "smartparens")
 (depends-on "smex")
 (depends-on "spacemacs-theme")
