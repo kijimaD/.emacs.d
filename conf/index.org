@@ -2990,7 +2990,6 @@ EXWMはEmacs上で動くウィンドウマネージャ。
 #+caption: require
 #+begin_src emacs-lisp
   (require 'exwm)
-  (require 'exwm-config)
 #+end_src
 
 #+caption: ほかのウィンドウマネージャを置き換えて起動する

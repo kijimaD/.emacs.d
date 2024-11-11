@@ -2166,7 +2166,6 @@ How to send a bug report:
 (spacious-padding-mode)
 
 (require 'exwm)
-(require 'exwm-config)
 
 (setq exwm-replace t)
 
