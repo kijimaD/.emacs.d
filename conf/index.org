@@ -157,6 +157,11 @@ org-modeはEmacsのキラーアプリの1つ。パッケージ名であり、フ
   (add-hook 'sql-mode-org-src-hook #'sqlind-minor-mode)
 #+end_src
 
+#+caption: python設定
+#+begin_src emacs-lisp
+  (setq org-babel-python-command "python3")
+#+end_src
+
 #+caption: 評価するときに確認プロンプトを出さない
 #+begin_src emacs-lisp
   (setq org-confirm-babel-evaluate nil)
@@ -279,7 +284,17 @@ babelで出力した結果はラップしないとtextlintでエラーになる�
 
 #+caption: :wrapを設定する
 #+begin_src emacs-lisp
-(setq org-babel-default-header-args '((:session . "none") (:results . "replace") (:exports . "code") (:cache . "no") (:noweb . "no") (:hlines . "no") (:tangle . "no")(:wrap . "src")))
+  (setq org-babel-default-header-args '(
+                                        (:session . "none")
+                                        (:results . "replace")
+                                        (:results . "raw")
+                                        (:exports . "code")
+                                        (:cache . "no")
+                                        (:noweb . "no")
+                                        (:hlines . "no")
+                                        (:tangle . "no")
+                                        (:wrap . "src"))
+        )
 #+end_src
 
 ** open-junk-file
@@ -568,6 +583,8 @@ org-roamはorgファイルをsqliteによって管理しやすくしたパッケ
   (setq org-id-link-to-org-use-id t)
   (setq org-id-extra-files (org-roam--list-files org-roam-directory))
   (org-roam-setup)
+
+  (org-roam-db-autosync-enable)
 #+end_src
 
 #+caption: キーバインド
@@ -601,6 +618,21 @@ org-roamはorgファイルをsqliteによって管理しやすくしたパッケ
            (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Project"))
           ))
 #+end_src
+
+** org-roam-ui
+org-roam-uiは関係グラフを表示するパッケージ。
+
+#+caption: org-roam-ui
+#+begin_src emacs-lisp
+  (require 'org-roam-ui)
+#+end_src
+
+#+caption: 更新日時を設定する
+#+begin_src emacs-lisp
+  (require 'org-roam-timestamps)
+  (setq org-roam-timestamps-remember-timestamps nil)
+  (add-hook 'org-mode-hook 'org-roam-timestamps-mode)
+#+end_src
 ** org-alert
 org-alertはorg scheduleの項目を時間経過で通知してくれるパッケージ。
 
@@ -620,7 +652,7 @@ denoteはシンプルなノートパッケージ。
   (require 'denote-org-dblock)
 
   (setq denote-directory (expand-file-name "~/roam"))
-  (setq denote-known-keywords '("essay" "code" "book" "term" "memo" "draft"))
+  (setq denote-known-keywords '("permanent" "book" "structure" "project" "wiki" "essay"))
 
   (define-key global-map (kbd "C-c d") 'denote-create-note)
 
@@ -1779,25 +1811,10 @@ Mermaid JSはテキストから図を描画するライブラリ。
 
 #+caption: dired
 #+begin_src emacs-lisp
-  (require 'dired-single)
-  (defun my-dired-init ()
-    "Bunch of stuff to run for dired, either immediately or when it's
-     loaded."
-    ;; <add other stuff here>
-    (define-key dired-mode-map [remap dired-find-file]
-      'dired-single-buffer)
-    (define-key dired-mode-map [remap dired-mouse-find-file-other-window]
-      'dired-single-buffer-mouse)
-    (define-key dired-mode-map [remap dired-up-directory]
-      'dired-single-up-directory))
+  ;; diredバッファを乱立させない
+  (setq dired-kill-when-opening-new-dired-buffer t)
 
-  ;; if dired's already loaded, then the keymap will be bound
-  (if (boundp 'dired-mode-map)
-      ;; we're good to go; just add our bindings
-      (my-dired-init)
-    ;; it's not loaded yet, so add our bindings to the load-hook
-    (add-hook 'dired-load-hook 'my-dired-init))
-
+  (require 'all-the-icons)
   (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
   (add-hook 'dired-mode-hook 'dired-hide-details-mode)
 #+end_src
@@ -2850,8 +2867,7 @@ doom themeはモダンなテーマ集。
         (load-theme theme)))
     (custom-set-variables `(custom-enabled-themes (quote ,custom-enabled-themes)))
     (efs/org-font-setup)
-    ;; (kd/set-modus-face)
-    )
+    (kd/set-modus-face))
 
   (add-hook 'after-init-hook 'reapply-themes)
 #+end_src
@@ -2910,7 +2926,7 @@ doom themeはモダンなテーマ集。
           modus-themes-scale-4 1.27
           modus-themes-scale-title 1.33)
 
-    (set-face-foreground 'vertical-border "gray")
+    (set-face-foreground 'vertical-border "white")
 
     (set-face-attribute 'mode-line nil
                         :background nil
@@ -2991,7 +3007,6 @@ EXWMはEmacs上で動くウィンドウマネージャ。
 #+caption: require
 #+begin_src emacs-lisp
   (require 'exwm)
-  (require 'exwm-config)
 #+end_src
 
 #+caption: ほかのウィンドウマネージャを置き換えて起動する

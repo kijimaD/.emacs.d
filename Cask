@@ -4,11 +4,8 @@
 (source gnu)
 (source melpa)
 
-;; Try
-(depends-on "smartparens")
 
 ;; Install Packages
-(depends-on "spacious-padding")
 (depends-on "ace-jump-mode")
 (depends-on "ace-link")
 (depends-on "add-node-modules-path")
@@ -34,7 +31,6 @@
 (depends-on "define-word")
 (depends-on "denote")
 (depends-on "devdocs")
-(depends-on "dired-single")
 (depends-on "django-mode")
 (depends-on "docker")
 (depends-on "docker-compose-mode")
@@ -48,7 +44,6 @@
 (depends-on "elfeed")
 (depends-on "elisp-refs")
 (depends-on "emacsql")
-(depends-on "emacsql-sqlite")
 (depends-on "ement") ;; IRC Client
 (depends-on "eradio")
 (depends-on "ert")
@@ -111,6 +106,8 @@
 (depends-on "org-modern")
 (depends-on "org-pomodoro")
 (depends-on "org-roam")
+(depends-on "org-roam-timestamps")
+(depends-on "org-roam-ui")
 (depends-on "org-super-agenda")
 (depends-on "org-superstar")
 (depends-on "org-tree-slide")
@@ -144,8 +141,10 @@
 (depends-on "smart-mode-line")
 (depends-on "smart-mode-line-atom-one-dark-theme")
 (depends-on "smartparens")
+(depends-on "smartparens")
 (depends-on "smex")
 (depends-on "spacemacs-theme")
+(depends-on "spacious-padding")
 (depends-on "sql-indent")
 (depends-on "sqlup-mode")
 (depends-on "swiper")

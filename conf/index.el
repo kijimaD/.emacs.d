@@ -82,6 +82,8 @@
 
 (add-hook 'sql-mode-org-src-hook #'sqlind-minor-mode)
 
+(setq org-babel-python-command "python3")
+
 (setq org-confirm-babel-evaluate nil)
 
 (with-eval-after-load 'org
@@ -180,7 +182,17 @@
     (setq buf (find-file-noselect file))
     (with-current-buffer buf (if (setq lint (org-lint)) (print (list file lint))))))
 
-(setq org-babel-default-header-args '((:session . "none") (:results . "replace") (:exports . "code") (:cache . "no") (:noweb . "no") (:hlines . "no") (:tangle . "no")(:wrap . "src")))
+(setq org-babel-default-header-args '(
+                                      (:session . "none")
+                                      (:results . "replace")
+                                      (:results . "raw")
+                                      (:exports . "code")
+                                      (:cache . "no")
+                                      (:noweb . "no")
+                                      (:hlines . "no")
+                                      (:tangle . "no")
+                                      (:wrap . "src"))
+      )
 
 ;;; open-junk-file.el --- Open a junk (memo) file to try-and-error
 
@@ -414,6 +426,8 @@ How to send a bug report:
 (setq org-id-extra-files (org-roam--list-files org-roam-directory))
 (org-roam-setup)
 
+(org-roam-db-autosync-enable)
+
 (define-key global-map (kbd "C-c n f") 'org-roam-node-find)
 (define-key global-map (kbd "C-c n g") 'org-roam-graph)
 (define-key global-map (kbd "C-c n i") 'org-roam-node-insert)
@@ -440,6 +454,12 @@ How to send a bug report:
          (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Project"))
         ))
 
+(require 'org-roam-ui)
+
+(require 'org-roam-timestamps)
+(setq org-roam-timestamps-remember-timestamps nil)
+(add-hook 'org-mode-hook 'org-roam-timestamps-mode)
+
 (require 'org-alert)
 (setq alert-default-style 'notifications)
 (setq org-alert-interval 300)
@@ -449,7 +469,7 @@ How to send a bug report:
 (require 'denote-org-dblock)
 
   (setq denote-directory (expand-file-name "~/roam"))
-  (setq denote-known-keywords '("essay" "code" "book" "term" "memo" "draft"))
+  (setq denote-known-keywords '("permanent" "book" "structure" "project" "wiki" "essay"))
 
   (define-key global-map (kbd "C-c d") 'denote-create-note)
 
@@ -1219,25 +1239,10 @@ How to send a bug report:
 (which-key-mode)
 (which-key-setup-side-window-bottom)
 
-(require 'dired-single)
-(defun my-dired-init ()
-  "Bunch of stuff to run for dired, either immediately or when it's
-   loaded."
-  ;; <add other stuff here>
-  (define-key dired-mode-map [remap dired-find-file]
-    'dired-single-buffer)
-  (define-key dired-mode-map [remap dired-mouse-find-file-other-window]
-    'dired-single-buffer-mouse)
-  (define-key dired-mode-map [remap dired-up-directory]
-    'dired-single-up-directory))
+;; diredバッファを乱立させない
+(setq dired-kill-when-opening-new-dired-buffer t)
 
-;; if dired's already loaded, then the keymap will be bound
-(if (boundp 'dired-mode-map)
-    ;; we're good to go; just add our bindings
-    (my-dired-init)
-  ;; it's not loaded yet, so add our bindings to the load-hook
-  (add-hook 'dired-load-hook 'my-dired-init))
-
+(require 'all-the-icons)
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 (add-hook 'dired-mode-hook 'dired-hide-details-mode)
 
@@ -2053,8 +2058,7 @@ How to send a bug report:
       (load-theme theme)))
   (custom-set-variables `(custom-enabled-themes (quote ,custom-enabled-themes)))
   (efs/org-font-setup)
-  ;; (kd/set-modus-face)
-  )
+  (kd/set-modus-face))
 
 (add-hook 'after-init-hook 'reapply-themes)
 
@@ -2104,7 +2108,7 @@ How to send a bug report:
         modus-themes-scale-4 1.27
         modus-themes-scale-title 1.33)
 
-  (set-face-foreground 'vertical-border "gray")
+  (set-face-foreground 'vertical-border "white")
 
   (set-face-attribute 'mode-line nil
                       :background nil
@@ -2170,7 +2174,6 @@ How to send a bug report:
 (spacious-padding-mode)
 
 (require 'exwm)
-(require 'exwm-config)
 
 (setq exwm-replace t)
 
