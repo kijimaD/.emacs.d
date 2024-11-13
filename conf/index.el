@@ -159,7 +159,7 @@
      '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
      '(org-property-value ((t (:inherit fixed-pitch))) t)
      '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-     '(org-table ((t (:inherit fixed-pitch :foreground "#f5f5f5"))))
+     '(org-table ((t (:inherit fixed-pitch))))
      '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
      '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
      '(org-block-begin-line ((t (:inherit org-block))))))
@@ -2174,6 +2174,82 @@ How to send a bug report:
 (spacious-padding-mode)
 
 (require 'exwm)
+
+;;; exwm-config.el --- Predefined configurations  -*- lexical-binding: t -*-
+
+;; Copyright (C) 2015-2024 Free Software Foundation, Inc.
+
+;; Author: Chris Feng <chris.w.feng@gmail.com>
+
+;; This file is part of GNU Emacs.
+
+;; GNU Emacs is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; GNU Emacs is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
+
+;;; Commentary:
+
+;; This module contains an example configuration of EXWM.  Do not require this
+;; file directly in your user configuration.  Instead take it as inspiration and
+;; copy the relevant settings to your user configuration.
+
+;;; Code:
+
+(require 'exwm)
+
+(defun exwm-config-example ()
+  "Default configuration of EXWM."
+  ;; Set the initial workspace number.
+  (unless (get 'exwm-workspace-number 'saved-value)
+    (setq exwm-workspace-number 4))
+  ;; Make class name the buffer name
+  (add-hook 'exwm-update-class-hook
+            (lambda ()
+              (exwm-workspace-rename-buffer exwm-class-name)))
+  ;; Global keybindings.
+  (unless (get 'exwm-input-global-keys 'saved-value)
+    (setq exwm-input-global-keys
+          `(
+            ;; 's-r': Reset (to line-mode).
+            ([?\s-r] . exwm-reset)
+            ;; 's-w': Switch workspace.
+            ([?\s-w] . exwm-workspace-switch)
+            ;; 's-&': Launch application.
+            ([?\s-&] . (lambda (command)
+                         (interactive (list (read-shell-command "$ ")))
+                         (start-process-shell-command command nil command)))
+            ;; 's-N': Switch to certain workspace.
+            ,@(mapcar (lambda (i)
+                        `(,(kbd (format "s-%d" i)) .
+                          (lambda ()
+                            (interactive)
+                            (exwm-workspace-switch-create ,i))))
+                      (number-sequence 0 9)))))
+  ;; Line-editing shortcuts
+  (unless (get 'exwm-input-simulation-keys 'saved-value)
+    (setq exwm-input-simulation-keys
+          '(([?\C-b] . [left])
+            ([?\C-f] . [right])
+            ([?\C-p] . [up])
+            ([?\C-n] . [down])
+            ([?\C-a] . [home])
+            ([?\C-e] . [end])
+            ([?\M-v] . [prior])
+            ([?\C-v] . [next])
+            ([?\C-d] . [delete])
+            ([?\C-k] . [S-end delete]))))
+  ;; Enable EXWM
+  (exwm-enable)
+  )
 
 (setq exwm-replace t)
 
