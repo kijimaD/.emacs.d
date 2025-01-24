@@ -1138,8 +1138,8 @@ How to send a bug report:
 (with-eval-after-load 'magit
   (require 'forge))
 
-(global-git-gutter+-mode 1)
-(global-set-key (kbd "C-c C-v") 'git-gutter+-show-hunk-inline-at-point)
+(global-git-gutter-mode 1)
+(global-set-key (kbd "C-c C-v") 'git-gutter-show-hunk-inline-at-point)
 
 ;; http://www.modernemacs.com/post/pretty-magit/
 (defun kd/magit-commit-prompt ()
@@ -2362,8 +2362,8 @@ How to send a bug report:
 
      "Git"
      (("g" git-link)
-      (">" git-gutter+-next-hunk)
-      ("<" git-gutter+-previous-hunk)
+      (">" git-gutter-next-hunk)
+      ("<" git-gutter-previous-hunk)
       ("@" git-timemachine))
 
      "Edit"
