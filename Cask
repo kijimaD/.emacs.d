@@ -56,7 +56,7 @@
 (depends-on "flycheck")
 (depends-on "flycheck-cask")
 (depends-on "forge")
-(depends-on "git-gutter+")
+(depends-on "git-gutter")
 (depends-on "git-link")
 (depends-on "git-timemachine")
 (depends-on "go-eldoc")
