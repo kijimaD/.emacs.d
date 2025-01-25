@@ -1880,6 +1880,8 @@ How to send a bug report:
 (require 'corfu)
 (global-corfu-mode)
 
+(corfu-popupinfo-mode)
+
 (setq corfu-auto t)
 (setq corfu-auto-prefix 3)
 (setq corfu-count 15)

@@ -2606,6 +2606,11 @@ corfuはシンプルな補完を提供するパッケージ。
   (global-corfu-mode)
 #+end_src
 
+#+caption: 補完の隣にドキュメント表示する
+#+begin_src emacs-lisp
+  (corfu-popupinfo-mode)
+#+end_src
+
 #+caption: 基本設定
 #+begin_src emacs-lisp
   (setq corfu-auto t)
