@@ -1924,8 +1924,6 @@ How to send a bug report:
   (tabnine-wait 1)
   (tabnine-minimum-prefix-length 0)
   :hook (kill-emacs . tabnine-kill-process)
-  :config
-  (tabnine-start-process)
   :bind
   (:map  tabnine-completion-map
 	 ("<tab>" . tabnine-accept-completion)
@@ -2198,8 +2196,7 @@ How to send a bug report:
             ([?\C-d] . [delete])
             ([?\C-k] . [S-end delete]))))
   ;; Enable EXWM
-  (exwm-enable)
-  )
+  (exwm-enable))
 
 (setq exwm-replace t)
 
@@ -2308,6 +2305,8 @@ How to send a bug report:
 (when window-system
   (progn
     (exwm-config-example)
+
+    (tabnine-start-process)
     ;; (kd/set-init)
     ))
 

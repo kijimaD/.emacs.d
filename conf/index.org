@@ -2663,8 +2663,6 @@ verticoは検索UIを提供するパッケージ。
   (tabnine-wait 1)
   (tabnine-minimum-prefix-length 0)
   :hook (kill-emacs . tabnine-kill-process)
-  :config
-  (tabnine-start-process)
   :bind
   (:map  tabnine-completion-map
 	 ("<tab>" . tabnine-accept-completion)
@@ -3021,8 +3019,7 @@ EXWMはEmacs上で動くウィンドウマネージャ。
               ([?\C-d] . [delete])
               ([?\C-k] . [S-end delete]))))
     ;; Enable EXWM
-    (exwm-enable)
-    )
+    (exwm-enable))
 #+end_src
 
 #+caption: ほかのウィンドウマネージャを置き換えて起動する
@@ -3160,6 +3157,8 @@ EXWMはEmacs上で動くウィンドウマネージャ。
   (when window-system
     (progn
       (exwm-config-example)
+
+      (tabnine-start-process)
       ;; (kd/set-init)
       ))
 #+end_src
