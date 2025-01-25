@@ -1633,18 +1633,20 @@ How to send a bug report:
 (require 'ob-go)
 
 (use-package dap-mode
-    :after lsp-mode
-    :hook
-    (lsp-mode . dap-mode)
-    (lsp-mode . dap-ui-mode)
-    :config
-    (dap-mode 1)
-    (require 'dap-hydra)
-    (require 'dap-dlv-go))
-
+  :config
+  (dap-mode 1)
+  (require 'dap-hydra)
+  (require 'dap-dlv-go))
 (setq dap-print-io t)
-(setq lsp-gopls-server-path "~/go/bin/gopls")
 (setq dap-dlv-go-delve-path "~/go/bin/dlv")
+
+(use-package posframe
+  ;; Posframe is a pop-up tool that must be manually installed for dap-mode
+  )
+
+(use-package dap-ui
+  :config
+  (dap-ui-mode 1))
 
 (require 'go-eldoc)
 (add-hook 'go-mode-hook 'go-eldoc-setup)
@@ -1792,91 +1794,6 @@ How to send a bug report:
 (require 'typescript-mode)
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
 
-(setq lsp-verify-signature nil)
-
-(use-package flycheck
-  :init (global-flycheck-mode))
-
-(use-package lsp-mode
-  :custom
-  (lsp-completion-provider :none)
-  (lsp-prefer-flymake nil)
-  (lsp-print-io nil)
-  (lsp-trace nil)
-  (lsp-print-performance nil)
-  (lsp-auto-guess-root t)
-  (lsp-document-sync-method 'incremental)
-  (lsp-response-timeout 5)
-  :init
-  (defun my/lsp-mode-setup-completion ()
-    (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
-          '(orderless))) ;; Configure orderless
-  :hook
-  (scala-mode . lsp)
-  (clojure-mode . lsp)
-  (c-mode . lsp)
-  (c++-mode . lsp)
-  (rust-mode . lsp)
-  (go-mode . lsp)
-  (lsp-mode . lsp-lens-mode)
-  (lsp-mode . lsp-completion-mode)
-  (lsp-mode . lsp-ui-mode)
-  (lsp-completion-mode . my/lsp-mode-setup-completion)
-  :config
-  ;; Uncomment following section if you would like to tune lsp-mode performance according to
-  ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
-        (setq gc-cons-threshold 100000000) ;; 100mb
-        (setq read-process-output-max (* 1024 1024 10)) ;; 10mb
-        (setq lsp-idle-delay 0.500)
-        (setq lsp-log-io nil)
-  )
-
-;; (use-package scala-mode
-;;   :interpreter
-;;   ("scala" . scala-mode))
-
-;; ;; Enable sbt mode for executing sbt commands
-;; (use-package sbt-mode
-;;   :commands sbt-start sbt-command
-;;   :config
-;;   ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
-;;   ;; allows using SPACE when in the minibuffer
-;;   (substitute-key-definition
-;;    'minibuffer-complete-word
-;;    'self-insert-command
-;;    minibuffer-local-completion-map)
-;;   ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
-;;   (setq sbt:program-options '("-Dsbt.supershell=false"))
-;;   )
-
-;; (use-package lsp-metals
-;;   :ensure t
-;;   :custom
-;;   ;; Metals claims to support range formatting by default but it supports range
-;;   ;; formatting of multiline strings only. You might want to disable it so that
-;;   ;; emacs can use indentation provided by scala-mode.
-;;   (lsp-metals-server-args '("-J-Dmetals.allow-multiline-string-formatting=off"))
-;;   :hook (scala-mode . lsp))
-
-(use-package lsp-ui
-  :custom
-  (lsp-ui-doc-enable t)
-  (lsp-ui-doc-header t)
-  (lsp-ui-doc-include-signature t)
-  (lsp-ui-doc-max-width 150)
-  (lsp-ui-doc-max-height 30)
-  (lsp-ui-peek-enable t))
-
-(use-package yasnippet)
-
-(use-package posframe
-  ;; Posframe is a pop-up tool that must be manually installed for dap-mode
-  )
-
-(use-package dap-ui
-  :config
-  (dap-ui-mode 1))
-
 (require 'corfu)
 (global-corfu-mode)
 
@@ -1912,46 +1829,56 @@ How to send a bug report:
   :after vertico
   :hook (minibuffer-setup . vertico-repeat-save))
 
+;; 補完インターフェース
 (require 'vertico)
 (vertico-mode)
 (setq vertico-count 20)
 
+;; 上ディレクトリに移動できるようにする
 (require 'vertico-directory)
 (define-key vertico-map (kbd "C-l") #'vertico-directory-up)
 (define-key vertico-map "\r" #'vertico-directory-enter)  ;; enter dired
 (define-key vertico-map "\d" #'vertico-directory-delete-char)
 
+;; verticoに情報追加する
 (require 'marginalia)
 (marginalia-mode +1)
 ;; marginalia-annotatorsをサイクルする
 (define-key minibuffer-local-map (kbd "C-M-a") #'marginalia-cycle)
 
+;; 絞り込みロジック
 (require 'orderless)
 (setq completion-styles '(orderless partial-completion))
-(setq completion-category-defaults nil)
-(setq completion-category-overrides nil)
-
 (orderless-define-completion-style orderless+initialism
   (orderless-matching-styles '(orderless-initialism ;;一番最初にinitializm
                                orderless-literal  ;;次にリテラルマッチ
                                orderless-regexp)))
-
-;; (setq completion-category-defaults nil)
-(setq completion-category-overrides
-      '((eglot (styles orderless+initialism))
-        (command (styles orderless+initialism))
-        (symbol (styles orderless+initialism))
-        (variable (styles orderless+initialism))))
-(setq orderless-component-separator #'orderless-escapable-split-on-space)
+;; (setq completion-category-overrides
+;;       '((eglot (styles orderless+initialism))
+;;         (command (styles orderless+initialism))
+;;         (symbol (styles orderless+initialism))
+;;         (variable (styles orderless+initialism))))
+;; (setq orderless-component-separator #'orderless-escapable-split-on-space)
 
 (require 'cape)
-(add-to-list 'completion-at-point-functions #'cape-file)
-(add-to-list 'completion-at-point-functions #'cape-tex)
-(add-to-list 'completion-at-point-functions #'cape-dabbrev)
-(add-to-list 'completion-at-point-functions #'cape-keyword)
-(add-to-list 'completion-at-point-functions #'cape-abbrev)
-(add-to-list 'completion-at-point-functions #'cape-ispell)
-(add-to-list 'completion-at-point-functions #'cape-symbol)
+
+(use-package eglot
+  :bind (nil
+         :map eglot-mode-map
+         ("C-c a" . eglot-code-actions))
+  :hook
+  (go-mode . eglot-ensure)
+  :config
+  (defun my/eglot-capf ()
+    (setq-local completion-at-point-functions
+                (list (cape-super-capf
+                      #'tempel-complete
+                      #'eglot-completion-at-point)
+                      #'cape-keyword
+                      #'cape-dabbrev
+                      #'cape-file)
+                ))
+  (add-hook 'eglot-managed-mode-hook #'my/eglot-capf))
 
 ;; EmacsのSVG対応コンパイルが必要
 (require 'kind-icon)
@@ -2370,7 +2297,6 @@ How to send a bug report:
 ;;           (lambda ()
 ;;             (start-process-shell-command
 ;;              "xrandr" nil "xrandr --output HDMI-1 --mode 1920x1080 --same-as eDP-1 --auto")))
-(exwm-enable)
 (exwm-randr-enable)
 
 (defvar kd/polybar-process nil
