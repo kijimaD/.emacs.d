@@ -2382,7 +2382,8 @@ How to send a bug report:
       ("c" recompile "recompile")
       ("!" org-pomodoro "start pomodoro")
       ("n" elfeed "elfeed")
-      ("u" kd/set-proxy-mode-manual "use proxy"))
+      ("u" kd/set-proxy-mode-manual "use proxy")
+      ("h" eldoc-doc-buffer "eldoc at pos"))
 
      "Git"
      (("g" git-link)
