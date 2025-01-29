@@ -1669,7 +1669,7 @@ Mermaid JSはテキストから図を描画するライブラリ。
 #+caption: git-gutter-mode
 #+begin_src emacs-lisp
   (global-git-gutter-mode 1)
-  (global-set-key (kbd "C-c C-v") 'git-gutter-show-hunk-inline-at-point)
+  (global-set-key (kbd "C-c C-v") 'git-gutter:popup-hunk)
 #+end_src
 
 #+caption: commit時にconvential commitを選択する
@@ -3272,8 +3272,8 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
 
        "Git"
        (("g" git-link)
-        (">" git-gutter-next-hunk)
-        ("<" git-gutter-previous-hunk)
+        (">" git-gutter:next-hunk)
+        ("<" git-gutter:previous-hunk)
         ("@" git-timemachine))
 
        "Edit"
