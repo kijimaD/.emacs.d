@@ -2774,3 +2774,6 @@ and source-file directory for your debugger."
 
 (provide 'go-dlv)
 ;;; go-dlv.el ends here
+
+(require 'spray)
+(setq spray-wpm 200)

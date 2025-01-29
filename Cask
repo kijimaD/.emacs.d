@@ -145,6 +145,7 @@
 (depends-on "smex")
 (depends-on "spacemacs-theme")
 (depends-on "spacious-padding")
+(depends-on "spray")
 (depends-on "sql-indent")
 (depends-on "sqlup-mode")
 (depends-on "swiper")

@@ -3725,3 +3725,11 @@ and source-file directory for your debugger."
 (provide 'go-dlv)
 ;;; go-dlv.el ends here
 #+end_src
+* spray
+
+sprayは速読表示してくれる拡張。
+
+#+begin_src emacs-lisp
+  (require 'spray)
+  (setq spray-wpm 200)
+#+end_src
