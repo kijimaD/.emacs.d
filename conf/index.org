@@ -248,7 +248,7 @@ org-modeはEmacsのキラーアプリの1つ。パッケージ名であり、フ
      '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
      '(org-property-value ((t (:inherit fixed-pitch))) t)
      '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-     '(org-table ((t (:inherit fixed-pitch :foreground "#f5f5f5"))))
+     '(org-table ((t (:inherit fixed-pitch))))
      '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
      '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
      '(org-block-begin-line ((t (:inherit org-block))))))
@@ -1669,7 +1669,7 @@ Mermaid JSはテキストから図を描画するライブラリ。
 #+caption: git-gutter-mode
 #+begin_src emacs-lisp
   (global-git-gutter-mode 1)
-  (global-set-key (kbd "C-c C-v") 'git-gutter-show-hunk-inline-at-point)
+  (global-set-key (kbd "C-c C-v") 'git-gutter:popup-hunk)
 #+end_src
 
 #+caption: commit時にconvential commitを選択する
@@ -2300,18 +2300,20 @@ goの設定。
 #+caption: デバッガ
 #+begin_src emacs-lisp
   (use-package dap-mode
-      :after lsp-mode
-      :hook
-      (lsp-mode . dap-mode)
-      (lsp-mode . dap-ui-mode)
-      :config
-      (dap-mode 1)
-      (require 'dap-hydra)
-      (require 'dap-dlv-go))
-
+    :config
+    (dap-mode 1)
+    (require 'dap-hydra)
+    (require 'dap-dlv-go))
   (setq dap-print-io t)
-  (setq lsp-gopls-server-path "~/go/bin/gopls")
   (setq dap-dlv-go-delve-path "~/go/bin/dlv")
+
+  (use-package posframe
+    ;; Posframe is a pop-up tool that must be manually installed for dap-mode
+    )
+
+  (use-package dap-ui
+    :config
+    (dap-ui-mode 1))
 #+end_src
 
 #+caption: go-eldoc
@@ -2487,114 +2489,6 @@ web-modeはhtmlライクな複数の言語に対応するモード。
   (require 'typescript-mode)
   (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
 #+end_src
-* LSP
-lsp-modeはLSPを使えるようにするパッケージ。
-
-#+caption: metalがインストールできないので確認を無効化する
-#+begin_src emacs-lisp
-  (setq lsp-verify-signature nil)
-#+end_src
-
-#+caption: 言語共通設定
-#+begin_src emacs-lisp
-  (use-package flycheck
-    :init (global-flycheck-mode))
-
-  (use-package lsp-mode
-    :custom
-    (lsp-completion-provider :none)
-    (lsp-prefer-flymake nil)
-    (lsp-print-io nil)
-    (lsp-trace nil)
-    (lsp-print-performance nil)
-    (lsp-auto-guess-root t)
-    (lsp-document-sync-method 'incremental)
-    (lsp-response-timeout 5)
-    :init
-    (defun my/lsp-mode-setup-completion ()
-      (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
-            '(orderless))) ;; Configure orderless
-    :hook
-    (scala-mode . lsp)
-    (clojure-mode . lsp)
-    (c-mode . lsp)
-    (c++-mode . lsp)
-    (rust-mode . lsp)
-    (go-mode . lsp)
-    (lsp-mode . lsp-lens-mode)
-    (lsp-mode . lsp-completion-mode)
-    (lsp-mode . lsp-ui-mode)
-    (lsp-completion-mode . my/lsp-mode-setup-completion)
-    :config
-    ;; Uncomment following section if you would like to tune lsp-mode performance according to
-    ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
-          (setq gc-cons-threshold 100000000) ;; 100mb
-          (setq read-process-output-max (* 1024 1024 10)) ;; 10mb
-          (setq lsp-idle-delay 0.500)
-          (setq lsp-log-io nil)
-    )
-#+end_src
-
-#+caption: scala用を設定する
-#+begin_src emacs-lisp
-  ;; (use-package scala-mode
-  ;;   :interpreter
-  ;;   ("scala" . scala-mode))
-
-  ;; ;; Enable sbt mode for executing sbt commands
-  ;; (use-package sbt-mode
-  ;;   :commands sbt-start sbt-command
-  ;;   :config
-  ;;   ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
-  ;;   ;; allows using SPACE when in the minibuffer
-  ;;   (substitute-key-definition
-  ;;    'minibuffer-complete-word
-  ;;    'self-insert-command
-  ;;    minibuffer-local-completion-map)
-  ;;   ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
-  ;;   (setq sbt:program-options '("-Dsbt.supershell=false"))
-  ;;   )
-
-  ;; (use-package lsp-metals
-  ;;   :ensure t
-  ;;   :custom
-  ;;   ;; Metals claims to support range formatting by default but it supports range
-  ;;   ;; formatting of multiline strings only. You might want to disable it so that
-  ;;   ;; emacs can use indentation provided by scala-mode.
-  ;;   (lsp-metals-server-args '("-J-Dmetals.allow-multiline-string-formatting=off"))
-  ;;   :hook (scala-mode . lsp))
-#+end_src
-
-使ってない。
-
-#+caption: ドキュメントをホバー表示できるようにする
-#+begin_src emacs-lisp
-  (use-package lsp-ui
-    :custom
-    (lsp-ui-doc-enable t)
-    (lsp-ui-doc-header t)
-    (lsp-ui-doc-include-signature t)
-    (lsp-ui-doc-max-width 150)
-    (lsp-ui-doc-max-height 30)
-    (lsp-ui-peek-enable t))
-#+end_src
-
-#+caption: snippetを挿入する
-#+begin_src emacs-lisp
-  (use-package yasnippet)
-#+end_src
-
-#+caption: DAPデバッガーを使えるようにする
-#+begin_src emacs-lisp
-  (use-package posframe
-    ;; Posframe is a pop-up tool that must be manually installed for dap-mode
-    )
-
-  (use-package dap-ui
-    :config
-    (dap-ui-mode 1))
-#+end_src
-
 * corfu
 corfuはシンプルな補完を提供するパッケージ。
 
@@ -2604,6 +2498,11 @@ corfuはシンプルな補完を提供するパッケージ。
 #+begin_src emacs-lisp
   (require 'corfu)
   (global-corfu-mode)
+#+end_src
+
+#+caption: 補完の隣にドキュメント表示する
+#+begin_src emacs-lisp
+  (corfu-popupinfo-mode)
 #+end_src
 
 #+caption: 基本設定
@@ -2650,46 +2549,59 @@ verticoは検索UIを提供するパッケージ。
 
 #+caption: その他の連携パッケージ
 #+begin_src emacs-lisp
+  ;; 補完インターフェース
   (require 'vertico)
   (vertico-mode)
   (setq vertico-count 20)
 
+  ;; 上ディレクトリに移動できるようにする
   (require 'vertico-directory)
   (define-key vertico-map (kbd "C-l") #'vertico-directory-up)
   (define-key vertico-map "\r" #'vertico-directory-enter)  ;; enter dired
   (define-key vertico-map "\d" #'vertico-directory-delete-char)
 
+  ;; verticoに情報追加する
   (require 'marginalia)
   (marginalia-mode +1)
   ;; marginalia-annotatorsをサイクルする
   (define-key minibuffer-local-map (kbd "C-M-a") #'marginalia-cycle)
 
+  ;; 絞り込みロジック
   (require 'orderless)
   (setq completion-styles '(orderless partial-completion))
-  (setq completion-category-defaults nil)
-  (setq completion-category-overrides nil)
-
   (orderless-define-completion-style orderless+initialism
     (orderless-matching-styles '(orderless-initialism ;;一番最初にinitializm
                                  orderless-literal  ;;次にリテラルマッチ
                                  orderless-regexp)))
-
-  ;; (setq completion-category-defaults nil)
-  (setq completion-category-overrides
-        '((eglot (styles orderless+initialism))
-          (command (styles orderless+initialism))
-          (symbol (styles orderless+initialism))
-          (variable (styles orderless+initialism))))
-  (setq orderless-component-separator #'orderless-escapable-split-on-space)
+  ;; (setq completion-category-overrides
+  ;;       '((eglot (styles orderless+initialism))
+  ;;         (command (styles orderless+initialism))
+  ;;         (symbol (styles orderless+initialism))
+  ;;         (variable (styles orderless+initialism))))
+  ;; (setq orderless-component-separator #'orderless-escapable-split-on-space)
 
   (require 'cape)
-  (add-to-list 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-tex)
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-keyword)
-  (add-to-list 'completion-at-point-functions #'cape-abbrev)
-  (add-to-list 'completion-at-point-functions #'cape-ispell)
-  (add-to-list 'completion-at-point-functions #'cape-symbol)
+#+end_src
+
+#+caption: eglot
+#+begin_src emacs-lisp
+  (use-package eglot
+    :bind (nil
+           :map eglot-mode-map
+           ("C-c a" . eglot-code-actions))
+    :hook
+    (go-mode . eglot-ensure)
+    :config
+    (defun my/eglot-capf ()
+      (setq-local completion-at-point-functions
+                  (list (cape-super-capf
+                        #'tempel-complete
+                        #'eglot-completion-at-point)
+                        #'cape-keyword
+                        #'cape-dabbrev
+                        #'cape-file)
+                  ))
+    (add-hook 'eglot-managed-mode-hook #'my/eglot-capf))
 #+end_src
 
 #+caption: kind-icon
@@ -2737,6 +2649,29 @@ verticoは検索UIを提供するパッケージ。
   :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
   :init
   (all-the-icons-completion-mode +1))
+#+end_src
+
+* tabnine
+
+#+begin_src emacs-lisp
+(use-package tabnine
+  :commands (tabnine-start-process)
+  :hook (prog-mode . tabnine-mode)
+  :straight t
+  :diminish "⌬"
+  :custom
+  (tabnine-wait 1)
+  (tabnine-minimum-prefix-length 0)
+  :hook (kill-emacs . tabnine-kill-process)
+  :bind
+  (:map  tabnine-completion-map
+	 ("<tab>" . tabnine-accept-completion)
+	 ("TAB" . tabnine-accept-completion)
+	 ("M-f" . tabnine-accept-completion-by-word)
+	 ("M-<return>" . tabnine-accept-completion-by-line)
+	 ("C-g" . tabnine-clear-overlay)
+	 ("M-[" . tabnine-previous-completion)
+	 ("M-]" . tabnine-next-completion)))
 #+end_src
 
 * emacs Lisp
@@ -3009,6 +2944,84 @@ EXWMはEmacs上で動くウィンドウマネージャ。
   (require 'exwm)
 #+end_src
 
+#+caption: ライブラリから外されたのでコピーが推奨されている。https://github.com/emacs-exwm/exwm/blob/fa3393806c3e7e3d6dc767cd7c0e29b8d4d0a716/exwm-config.el
+#+begin_src emacs-lisp
+  ;;; exwm-config.el --- Predefined configurations  -*- lexical-binding: t -*-
+
+  ;; Copyright (C) 2015-2024 Free Software Foundation, Inc.
+
+  ;; Author: Chris Feng <chris.w.feng@gmail.com>
+
+  ;; This file is part of GNU Emacs.
+
+  ;; GNU Emacs is free software: you can redistribute it and/or modify
+  ;; it under the terms of the GNU General Public License as published by
+  ;; the Free Software Foundation, either version 3 of the License, or
+  ;; (at your option) any later version.
+
+  ;; GNU Emacs is distributed in the hope that it will be useful,
+  ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ;; GNU General Public License for more details.
+
+  ;; You should have received a copy of the GNU General Public License
+  ;; along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
+
+  ;;; Commentary:
+
+  ;; This module contains an example configuration of EXWM.  Do not require this
+  ;; file directly in your user configuration.  Instead take it as inspiration and
+  ;; copy the relevant settings to your user configuration.
+
+  ;;; Code:
+
+  (require 'exwm)
+
+  (defun exwm-config-example ()
+    "Default configuration of EXWM."
+    ;; Set the initial workspace number.
+    (unless (get 'exwm-workspace-number 'saved-value)
+      (setq exwm-workspace-number 4))
+    ;; Make class name the buffer name
+    (add-hook 'exwm-update-class-hook
+              (lambda ()
+                (exwm-workspace-rename-buffer exwm-class-name)))
+    ;; Global keybindings.
+    (unless (get 'exwm-input-global-keys 'saved-value)
+      (setq exwm-input-global-keys
+            `(
+              ;; 's-r': Reset (to line-mode).
+              ([?\s-r] . exwm-reset)
+              ;; 's-w': Switch workspace.
+              ([?\s-w] . exwm-workspace-switch)
+              ;; 's-&': Launch application.
+              ([?\s-&] . (lambda (command)
+                           (interactive (list (read-shell-command "$ ")))
+                           (start-process-shell-command command nil command)))
+              ;; 's-N': Switch to certain workspace.
+              ,@(mapcar (lambda (i)
+                          `(,(kbd (format "s-%d" i)) .
+                            (lambda ()
+                              (interactive)
+                              (exwm-workspace-switch-create ,i))))
+                        (number-sequence 0 9)))))
+    ;; Line-editing shortcuts
+    (unless (get 'exwm-input-simulation-keys 'saved-value)
+      (setq exwm-input-simulation-keys
+            '(([?\C-b] . [left])
+              ([?\C-f] . [right])
+              ([?\C-p] . [up])
+              ([?\C-n] . [down])
+              ([?\C-a] . [home])
+              ([?\C-e] . [end])
+              ([?\M-v] . [prior])
+              ([?\C-v] . [next])
+              ([?\C-d] . [delete])
+              ([?\C-k] . [S-end delete]))))
+    ;; Enable EXWM
+    (exwm-enable))
+#+end_src
+
 #+caption: ほかのウィンドウマネージャを置き換えて起動する
 #+begin_src emacs-lisp
   (setq exwm-replace t)
@@ -3144,6 +3157,8 @@ EXWMはEmacs上で動くウィンドウマネージャ。
   (when window-system
     (progn
       (exwm-config-example)
+
+      (tabnine-start-process)
       ;; (kd/set-init)
       ))
 #+end_src
@@ -3157,7 +3172,6 @@ EXWMはEmacs上で動くウィンドウマネージャ。
   ;;           (lambda ()
   ;;             (start-process-shell-command
   ;;              "xrandr" nil "xrandr --output HDMI-1 --mode 1920x1080 --same-as eDP-1 --auto")))
-  (exwm-enable)
   (exwm-randr-enable)
 #+end_src
 
@@ -3253,12 +3267,13 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
         ("c" recompile "recompile")
         ("!" org-pomodoro "start pomodoro")
         ("n" elfeed "elfeed")
-        ("u" kd/set-proxy-mode-manual "use proxy"))
+        ("u" kd/set-proxy-mode-manual "use proxy")
+        ("h" eldoc-doc-buffer "eldoc at pos"))
 
        "Git"
        (("g" git-link)
-        (">" git-gutter-next-hunk)
-        ("<" git-gutter-previous-hunk)
+        (">" git-gutter:next-hunk)
+        ("<" git-gutter:previous-hunk)
         ("@" git-timemachine))
 
        "Edit"
