@@ -494,7 +494,7 @@ How to send a bug report:
 #+caption: 見出しをいい感じにする
 #+begin_src emacs-lisp
   (require 'org-superstar)
-  ;; (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
   ;; (setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
   ;; (setq org-superstar-headline-bullets-list '("◉" "○" "●" "✿" "✸"))
   ;; (setq org-superstar-item-bullet-alist '((?* . ?•)
@@ -647,19 +647,25 @@ org-alertはorg scheduleの項目を時間経過で通知してくれるパッ�
 ** denote
 denoteはシンプルなノートパッケージ。
 
+#+caption: v3に追従できてないのでv2に固定する
+#+begin_src emacs-lisp
+  (add-to-list 'load-path "~/.emacs.d/vendor/denote-2.0.0")
+  (require 'denote)
+  (require 'denote-org-dblock)
+#+end_src
+
 #+caption: 設定
 #+begin_src emacs-lisp
-  (require 'denote-org-dblock)
-
   (setq denote-directory (expand-file-name "~/roam"))
   (setq denote-known-keywords '("permanent" "book" "structure" "project" "wiki" "essay"))
-
   (define-key global-map (kbd "C-c d") 'denote-create-note)
+#+end_src
 
+#+begin_src emacs-lisp
   ;; カスタムテンプレート
   ;; roamで表示できるIDを追加
   (setq denote-org-front-matter
-        ":properties:
+              ":properties:
 :ID: %4$s
 :end:
 #+title:      KDOC n: %1$s
@@ -669,16 +675,20 @@ denoteはシンプルなノートパッケージ。
 \n")
 #+end_src
 
-#+caption: denoteのメニュー表示する
-#+begin_src emacs-lisp
-  (use-package denote-menu
-    :straight (:host github :repo "namilus/denote-menu"))
-#+end_src
-
 #+caption: denoteのテンプレートを設定する
 #+begin_src emacs-lisp
   (setq denote-templates
         `((entry . ,(f-read-text "~/.emacs.d/resources/entry.org"))))
+#+end_src
+
+#+caption: 候補に出ないようにする
+#+begin_src emacs-lisp
+  (setq denote-excluded-files-regexp ".*html$")
+#+end_src
+
+#+caption: 確認を非表示にする
+#+begin_src emacs-lisp
+  (setq denote-rename-confirmations nil)
 #+end_src
 
 ** org-agenda
@@ -2594,8 +2604,7 @@ verticoは検索UIを提供するパッケージ。
     :config
     (defun my/eglot-capf ()
       (setq-local completion-at-point-functions
-                  (list (cape-super-capf
-                        #'tempel-complete
+                  (list (cape-capf-super
                         #'eglot-completion-at-point)
                         #'cape-keyword
                         #'cape-dabbrev

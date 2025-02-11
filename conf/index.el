@@ -378,7 +378,7 @@ How to send a bug report:
 (global-set-key (kbd "C-x C-z") 'open-junk-file)
 
 (require 'org-superstar)
-;; (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
 ;; (setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
 ;; (setq org-superstar-headline-bullets-list '("◉" "○" "●" "✿" "✸"))
 ;; (setq org-superstar-item-bullet-alist '((?* . ?•)
@@ -466,17 +466,18 @@ How to send a bug report:
 (setq org-alert-notification-title "Reminder")
 (org-alert-enable)
 
+(add-to-list 'load-path "~/.emacs.d/vendor/denote-2.0.0")
+(require 'denote)
 (require 'denote-org-dblock)
 
-  (setq denote-directory (expand-file-name "~/roam"))
-  (setq denote-known-keywords '("permanent" "book" "structure" "project" "wiki" "essay"))
+(setq denote-directory (expand-file-name "~/roam"))
+(setq denote-known-keywords '("permanent" "book" "structure" "project" "wiki" "essay"))
+(define-key global-map (kbd "C-c d") 'denote-create-note)
 
-  (define-key global-map (kbd "C-c d") 'denote-create-note)
-
-  ;; カスタムテンプレート
+;; カスタムテンプレート
   ;; roamで表示できるIDを追加
   (setq denote-org-front-matter
-        ":properties:
+              ":properties:
 :ID: %4$s
 :end:
 #+title:      KDOC n: %1$s
@@ -485,11 +486,12 @@ How to send a bug report:
 #+identifier: %4$s
 \n")
 
-(use-package denote-menu
-  :straight (:host github :repo "namilus/denote-menu"))
-
 (setq denote-templates
       `((entry . ,(f-read-text "~/.emacs.d/resources/entry.org"))))
+
+(setq denote-excluded-files-regexp ".*html$")
+
+(setq denote-rename-confirmations nil)
 
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
@@ -1871,8 +1873,7 @@ How to send a bug report:
   :config
   (defun my/eglot-capf ()
     (setq-local completion-at-point-functions
-                (list (cape-super-capf
-                      #'tempel-complete
+                (list (cape-capf-super
                       #'eglot-completion-at-point)
                       #'cape-keyword
                       #'cape-dabbrev
@@ -2760,7 +2761,7 @@ and source-file directory for your debugger."
             (setq dlv-command (concat gud-dlv-command-name " test -- -test.run='^$' -test.bench=" current-bench-name)))
            (t
             (setq gud-buffer-name "*gud-debug*")
-            (setq dlv-command (concat gud-dlv-command-name " debug"))))
+            (setq dlv-command (concat gud-dlv-command-name " debug -- /home/orange/Project/test"))))
 
           ;; stop the current active dlv session if any
           (let ((gud-buffer (get-buffer gud-buffer-name)))
