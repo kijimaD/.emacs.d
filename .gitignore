@@ -25,7 +25,6 @@ var/pcache/
 /async-bytecomp.log
 /bookmarks
 /conf/local-init.el
-/forge-database.sqlite
 /history
 /network-security.data
 /org-recent-headings

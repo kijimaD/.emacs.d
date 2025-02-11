@@ -159,7 +159,7 @@
      '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
      '(org-property-value ((t (:inherit fixed-pitch))) t)
      '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-     '(org-table ((t (:inherit fixed-pitch :foreground "#f5f5f5"))))
+     '(org-table ((t (:inherit fixed-pitch))))
      '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
      '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
      '(org-block-begin-line ((t (:inherit org-block))))))
@@ -378,7 +378,7 @@ How to send a bug report:
 (global-set-key (kbd "C-x C-z") 'open-junk-file)
 
 (require 'org-superstar)
-;; (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
 ;; (setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
 ;; (setq org-superstar-headline-bullets-list '("◉" "○" "●" "✿" "✸"))
 ;; (setq org-superstar-item-bullet-alist '((?* . ?•)
@@ -466,17 +466,18 @@ How to send a bug report:
 (setq org-alert-notification-title "Reminder")
 (org-alert-enable)
 
+(add-to-list 'load-path "~/.emacs.d/vendor/denote-2.0.0")
+(require 'denote)
 (require 'denote-org-dblock)
 
-  (setq denote-directory (expand-file-name "~/roam"))
-  (setq denote-known-keywords '("permanent" "book" "structure" "project" "wiki" "essay"))
+(setq denote-directory (expand-file-name "~/roam"))
+(setq denote-known-keywords '("permanent" "book" "structure" "project" "wiki" "essay"))
+(define-key global-map (kbd "C-c d") 'denote-create-note)
 
-  (define-key global-map (kbd "C-c d") 'denote-create-note)
-
-  ;; カスタムテンプレート
+;; カスタムテンプレート
   ;; roamで表示できるIDを追加
   (setq denote-org-front-matter
-        ":properties:
+              ":properties:
 :ID: %4$s
 :end:
 #+title:      KDOC n: %1$s
@@ -485,11 +486,12 @@ How to send a bug report:
 #+identifier: %4$s
 \n")
 
-(use-package denote-menu
-  :straight (:host github :repo "namilus/denote-menu"))
-
 (setq denote-templates
       `((entry . ,(f-read-text "~/.emacs.d/resources/entry.org"))))
+
+(setq denote-excluded-files-regexp ".*html$")
+
+(setq denote-rename-confirmations nil)
 
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
@@ -1135,11 +1137,8 @@ How to send a bug report:
 (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
 
-(with-eval-after-load 'magit
-  (require 'forge))
-
 (global-git-gutter-mode 1)
-(global-set-key (kbd "C-c C-v") 'git-gutter-show-hunk-inline-at-point)
+(global-set-key (kbd "C-c C-v") 'git-gutter:popup-hunk)
 
 ;; http://www.modernemacs.com/post/pretty-magit/
 (defun kd/magit-commit-prompt ()
@@ -1633,18 +1632,20 @@ How to send a bug report:
 (require 'ob-go)
 
 (use-package dap-mode
-    :after lsp-mode
-    :hook
-    (lsp-mode . dap-mode)
-    (lsp-mode . dap-ui-mode)
-    :config
-    (dap-mode 1)
-    (require 'dap-hydra)
-    (require 'dap-dlv-go))
-
+  :config
+  (dap-mode 1)
+  (require 'dap-hydra)
+  (require 'dap-dlv-go))
 (setq dap-print-io t)
-(setq lsp-gopls-server-path "~/go/bin/gopls")
 (setq dap-dlv-go-delve-path "~/go/bin/dlv")
+
+(use-package posframe
+  ;; Posframe is a pop-up tool that must be manually installed for dap-mode
+  )
+
+(use-package dap-ui
+  :config
+  (dap-ui-mode 1))
 
 (require 'go-eldoc)
 (add-hook 'go-mode-hook 'go-eldoc-setup)
@@ -1792,93 +1793,10 @@ How to send a bug report:
 (require 'typescript-mode)
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
 
-(setq lsp-verify-signature nil)
-
-(use-package flycheck
-  :init (global-flycheck-mode))
-
-(use-package lsp-mode
-  :custom
-  (lsp-completion-provider :none)
-  (lsp-prefer-flymake nil)
-  (lsp-print-io nil)
-  (lsp-trace nil)
-  (lsp-print-performance nil)
-  (lsp-auto-guess-root t)
-  (lsp-document-sync-method 'incremental)
-  (lsp-response-timeout 5)
-  :init
-  (defun my/lsp-mode-setup-completion ()
-    (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
-          '(orderless))) ;; Configure orderless
-  :hook
-  (scala-mode . lsp)
-  (clojure-mode . lsp)
-  (c-mode . lsp)
-  (c++-mode . lsp)
-  (rust-mode . lsp)
-  (go-mode . lsp)
-  (lsp-mode . lsp-lens-mode)
-  (lsp-mode . lsp-completion-mode)
-  (lsp-mode . lsp-ui-mode)
-  (lsp-completion-mode . my/lsp-mode-setup-completion)
-  :config
-  ;; Uncomment following section if you would like to tune lsp-mode performance according to
-  ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
-        (setq gc-cons-threshold 100000000) ;; 100mb
-        (setq read-process-output-max (* 1024 1024 10)) ;; 10mb
-        (setq lsp-idle-delay 0.500)
-        (setq lsp-log-io nil)
-  )
-
-;; (use-package scala-mode
-;;   :interpreter
-;;   ("scala" . scala-mode))
-
-;; ;; Enable sbt mode for executing sbt commands
-;; (use-package sbt-mode
-;;   :commands sbt-start sbt-command
-;;   :config
-;;   ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
-;;   ;; allows using SPACE when in the minibuffer
-;;   (substitute-key-definition
-;;    'minibuffer-complete-word
-;;    'self-insert-command
-;;    minibuffer-local-completion-map)
-;;   ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
-;;   (setq sbt:program-options '("-Dsbt.supershell=false"))
-;;   )
-
-;; (use-package lsp-metals
-;;   :ensure t
-;;   :custom
-;;   ;; Metals claims to support range formatting by default but it supports range
-;;   ;; formatting of multiline strings only. You might want to disable it so that
-;;   ;; emacs can use indentation provided by scala-mode.
-;;   (lsp-metals-server-args '("-J-Dmetals.allow-multiline-string-formatting=off"))
-;;   :hook (scala-mode . lsp))
-
-(use-package lsp-ui
-  :custom
-  (lsp-ui-doc-enable t)
-  (lsp-ui-doc-header t)
-  (lsp-ui-doc-include-signature t)
-  (lsp-ui-doc-max-width 150)
-  (lsp-ui-doc-max-height 30)
-  (lsp-ui-peek-enable t))
-
-(use-package yasnippet)
-
-(use-package posframe
-  ;; Posframe is a pop-up tool that must be manually installed for dap-mode
-  )
-
-(use-package dap-ui
-  :config
-  (dap-ui-mode 1))
-
 (require 'corfu)
 (global-corfu-mode)
+
+(corfu-popupinfo-mode)
 
 (setq corfu-auto t)
 (setq corfu-auto-prefix 3)
@@ -1910,46 +1828,55 @@ How to send a bug report:
   :after vertico
   :hook (minibuffer-setup . vertico-repeat-save))
 
+;; 補完インターフェース
 (require 'vertico)
 (vertico-mode)
 (setq vertico-count 20)
 
+;; 上ディレクトリに移動できるようにする
 (require 'vertico-directory)
 (define-key vertico-map (kbd "C-l") #'vertico-directory-up)
 (define-key vertico-map "\r" #'vertico-directory-enter)  ;; enter dired
 (define-key vertico-map "\d" #'vertico-directory-delete-char)
 
+;; verticoに情報追加する
 (require 'marginalia)
 (marginalia-mode +1)
 ;; marginalia-annotatorsをサイクルする
 (define-key minibuffer-local-map (kbd "C-M-a") #'marginalia-cycle)
 
+;; 絞り込みロジック
 (require 'orderless)
 (setq completion-styles '(orderless partial-completion))
-(setq completion-category-defaults nil)
-(setq completion-category-overrides nil)
-
 (orderless-define-completion-style orderless+initialism
   (orderless-matching-styles '(orderless-initialism ;;一番最初にinitializm
                                orderless-literal  ;;次にリテラルマッチ
                                orderless-regexp)))
-
-;; (setq completion-category-defaults nil)
-(setq completion-category-overrides
-      '((eglot (styles orderless+initialism))
-        (command (styles orderless+initialism))
-        (symbol (styles orderless+initialism))
-        (variable (styles orderless+initialism))))
-(setq orderless-component-separator #'orderless-escapable-split-on-space)
+;; (setq completion-category-overrides
+;;       '((eglot (styles orderless+initialism))
+;;         (command (styles orderless+initialism))
+;;         (symbol (styles orderless+initialism))
+;;         (variable (styles orderless+initialism))))
+;; (setq orderless-component-separator #'orderless-escapable-split-on-space)
 
 (require 'cape)
-(add-to-list 'completion-at-point-functions #'cape-file)
-(add-to-list 'completion-at-point-functions #'cape-tex)
-(add-to-list 'completion-at-point-functions #'cape-dabbrev)
-(add-to-list 'completion-at-point-functions #'cape-keyword)
-(add-to-list 'completion-at-point-functions #'cape-abbrev)
-(add-to-list 'completion-at-point-functions #'cape-ispell)
-(add-to-list 'completion-at-point-functions #'cape-symbol)
+
+(use-package eglot
+  :bind (nil
+         :map eglot-mode-map
+         ("C-c a" . eglot-code-actions))
+  :hook
+  (go-mode . eglot-ensure)
+  :config
+  (defun my/eglot-capf ()
+    (setq-local completion-at-point-functions
+                (list (cape-capf-super
+                      #'eglot-completion-at-point)
+                      #'cape-keyword
+                      #'cape-dabbrev
+                      #'cape-file)
+                ))
+  (add-hook 'eglot-managed-mode-hook #'my/eglot-capf))
 
 ;; EmacsのSVG対応コンパイルが必要
 (require 'kind-icon)
@@ -1985,6 +1912,25 @@ How to send a bug report:
   :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
   :init
   (all-the-icons-completion-mode +1))
+
+(use-package tabnine
+  :commands (tabnine-start-process)
+  :hook (prog-mode . tabnine-mode)
+  :straight t
+  :diminish "⌬"
+  :custom
+  (tabnine-wait 1)
+  (tabnine-minimum-prefix-length 0)
+  :hook (kill-emacs . tabnine-kill-process)
+  :bind
+  (:map  tabnine-completion-map
+	 ("<tab>" . tabnine-accept-completion)
+	 ("TAB" . tabnine-accept-completion)
+	 ("M-f" . tabnine-accept-completion-by-word)
+	 ("M-<return>" . tabnine-accept-completion-by-line)
+	 ("C-g" . tabnine-clear-overlay)
+	 ("M-[" . tabnine-previous-completion)
+	 ("M-]" . tabnine-next-completion)))
 
 (require 'lispy)
 (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
@@ -2175,6 +2121,81 @@ How to send a bug report:
 
 (require 'exwm)
 
+;;; exwm-config.el --- Predefined configurations  -*- lexical-binding: t -*-
+
+;; Copyright (C) 2015-2024 Free Software Foundation, Inc.
+
+;; Author: Chris Feng <chris.w.feng@gmail.com>
+
+;; This file is part of GNU Emacs.
+
+;; GNU Emacs is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; GNU Emacs is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
+
+;;; Commentary:
+
+;; This module contains an example configuration of EXWM.  Do not require this
+;; file directly in your user configuration.  Instead take it as inspiration and
+;; copy the relevant settings to your user configuration.
+
+;;; Code:
+
+(require 'exwm)
+
+(defun exwm-config-example ()
+  "Default configuration of EXWM."
+  ;; Set the initial workspace number.
+  (unless (get 'exwm-workspace-number 'saved-value)
+    (setq exwm-workspace-number 4))
+  ;; Make class name the buffer name
+  (add-hook 'exwm-update-class-hook
+            (lambda ()
+              (exwm-workspace-rename-buffer exwm-class-name)))
+  ;; Global keybindings.
+  (unless (get 'exwm-input-global-keys 'saved-value)
+    (setq exwm-input-global-keys
+          `(
+            ;; 's-r': Reset (to line-mode).
+            ([?\s-r] . exwm-reset)
+            ;; 's-w': Switch workspace.
+            ([?\s-w] . exwm-workspace-switch)
+            ;; 's-&': Launch application.
+            ([?\s-&] . (lambda (command)
+                         (interactive (list (read-shell-command "$ ")))
+                         (start-process-shell-command command nil command)))
+            ;; 's-N': Switch to certain workspace.
+            ,@(mapcar (lambda (i)
+                        `(,(kbd (format "s-%d" i)) .
+                          (lambda ()
+                            (interactive)
+                            (exwm-workspace-switch-create ,i))))
+                      (number-sequence 0 9)))))
+  ;; Line-editing shortcuts
+  (unless (get 'exwm-input-simulation-keys 'saved-value)
+    (setq exwm-input-simulation-keys
+          '(([?\C-b] . [left])
+            ([?\C-f] . [right])
+            ([?\C-p] . [up])
+            ([?\C-n] . [down])
+            ([?\C-a] . [home])
+            ([?\C-e] . [end])
+            ([?\M-v] . [prior])
+            ([?\C-v] . [next])
+            ([?\C-d] . [delete])
+            ([?\C-k] . [S-end delete]))))
+  ;; Enable EXWM
+  (exwm-enable))
+
 (setq exwm-replace t)
 
 (setq exwm-layout-show-all-buffers t)
@@ -2282,6 +2303,8 @@ How to send a bug report:
 (when window-system
   (progn
     (exwm-config-example)
+
+    (tabnine-start-process)
     ;; (kd/set-init)
     ))
 
@@ -2292,8 +2315,7 @@ How to send a bug report:
 ;;           (lambda ()
 ;;             (start-process-shell-command
 ;;              "xrandr" nil "xrandr --output HDMI-1 --mode 1920x1080 --same-as eDP-1 --auto")))
-(exwm-enable)
-(exwm-randr-enable)
+;; (exwm-randr-enable)
 
 (defvar kd/polybar-process nil
   "Holds the process of the running Polybar instance, if any")
@@ -2358,12 +2380,13 @@ How to send a bug report:
       ("c" recompile "recompile")
       ("!" org-pomodoro "start pomodoro")
       ("n" elfeed "elfeed")
-      ("u" kd/set-proxy-mode-manual "use proxy"))
+      ("u" kd/set-proxy-mode-manual "use proxy")
+      ("h" eldoc-doc-buffer "eldoc at pos"))
 
      "Git"
      (("g" git-link)
-      (">" git-gutter-next-hunk)
-      ("<" git-gutter-previous-hunk)
+      (">" git-gutter:next-hunk)
+      ("<" git-gutter:previous-hunk)
       ("@" git-timemachine))
 
      "Edit"
@@ -2735,7 +2758,7 @@ and source-file directory for your debugger."
             (setq dlv-command (concat gud-dlv-command-name " test -- -test.run='^$' -test.bench=" current-bench-name)))
            (t
             (setq gud-buffer-name "*gud-debug*")
-            (setq dlv-command (concat gud-dlv-command-name " debug"))))
+            (setq dlv-command (concat gud-dlv-command-name " debug -- /home/orange/Project/test"))))
 
           ;; stop the current active dlv session if any
           (let ((gud-buffer (get-buffer gud-buffer-name)))
@@ -2749,3 +2772,6 @@ and source-file directory for your debugger."
 
 (provide 'go-dlv)
 ;;; go-dlv.el ends here
+
+(require 'spray)
+(setq spray-wpm 200)

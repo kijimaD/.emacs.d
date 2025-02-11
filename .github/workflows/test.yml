@@ -16,8 +16,6 @@ jobs:
           - ubuntu-latest
           - macos-latest
         emacs_version:
-          - 28.1
-          - 28.2
           - 29.1
           - 29.2
           - 29.3
