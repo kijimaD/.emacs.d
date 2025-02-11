@@ -3181,7 +3181,7 @@ EXWMはEmacs上で動くウィンドウマネージャ。
   ;;           (lambda ()
   ;;             (start-process-shell-command
   ;;              "xrandr" nil "xrandr --output HDMI-1 --mode 1920x1080 --same-as eDP-1 --auto")))
-  (exwm-randr-enable)
+  ;; (exwm-randr-enable)
 #+end_src
 
 randr関係の修正をしたときは、 ~(exwm-randr-refresh)~ を実行して反映する。例えば、画面と対応したワークスペースを変更したとき。

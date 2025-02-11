@@ -2318,7 +2318,7 @@ How to send a bug report:
 ;;           (lambda ()
 ;;             (start-process-shell-command
 ;;              "xrandr" nil "xrandr --output HDMI-1 --mode 1920x1080 --same-as eDP-1 --auto")))
-(exwm-randr-enable)
+;; (exwm-randr-enable)
 
 (defvar kd/polybar-process nil
   "Holds the process of the running Polybar instance, if any")
