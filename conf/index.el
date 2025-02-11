@@ -1137,9 +1137,6 @@ How to send a bug report:
 (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
 
-(with-eval-after-load 'magit
-  (require 'forge))
-
 (global-git-gutter-mode 1)
 (global-set-key (kbd "C-c C-v") 'git-gutter:popup-hunk)
 

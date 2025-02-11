@@ -55,7 +55,6 @@
 (depends-on "fish-mode")
 (depends-on "flycheck")
 (depends-on "flycheck-cask")
-(depends-on "forge")
 (depends-on "git-gutter")
 (depends-on "git-link")
 (depends-on "git-timemachine")

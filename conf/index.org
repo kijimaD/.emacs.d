@@ -1670,9 +1670,6 @@ Mermaid JSはテキストから図を描画するライブラリ。
 #+begin_src emacs-lisp
   (require 'magit)
   (global-set-key (kbd "C-x g") 'magit-status)
-
-  (with-eval-after-load 'magit
-    (require 'forge))
 #+end_src
 
 
