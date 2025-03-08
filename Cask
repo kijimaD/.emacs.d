@@ -37,7 +37,6 @@
 (depends-on "dockerfile-mode")
 (depends-on "doom-modeline")
 (depends-on "doom-themes")
-(depends-on "dumb-jump")
 (depends-on "easy-kill")
 (depends-on "easy-kill-extras")
 (depends-on "ejc-sql")

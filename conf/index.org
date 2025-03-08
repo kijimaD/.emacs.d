@@ -17,7 +17,7 @@ Emacsの文芸的設定。
 #+end_src
 
 * Org
-org-modeはEmacsのキラーアプリの1つ。パッケージ名であり、ファイルの種類の1つ。ドキュメント管理にスケジュール、時間計測、コード評価を含めることができる。このドキュメントもorg-modeで書かれている。
+org-modeはEmacsのキラーアプリの1つ。標準パッケージ名であり、プレーンテキストファイルの種類の1つ。ドキュメント管理にスケジュール、時間計測、コード評価を含めることができる。このドキュメントもorg-modeで書かれている。
 
 ** base
 #+caption: 読み込み
@@ -1819,7 +1819,8 @@ Mermaid JSはテキストから図を描画するライブラリ。
 #+caption: dired
 #+begin_src emacs-lisp
   ;; diredバッファを乱立させない
-  (setq dired-kill-when-opening-new-dired-buffer t)
+  ;; なぜか重いのでオフにしておく
+  ;; (setq dired-kill-when-opening-new-dired-buffer t)
 
   (require 'all-the-icons)
   (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)

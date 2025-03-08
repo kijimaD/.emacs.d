@@ -1239,7 +1239,8 @@ How to send a bug report:
 (which-key-setup-side-window-bottom)
 
 ;; diredバッファを乱立させない
-(setq dired-kill-when-opening-new-dired-buffer t)
+;; なぜか重いのでオフにしておく
+;; (setq dired-kill-when-opening-new-dired-buffer t)
 
 (require 'all-the-icons)
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
@@ -2758,7 +2759,7 @@ and source-file directory for your debugger."
             (setq dlv-command (concat gud-dlv-command-name " test -- -test.run='^$' -test.bench=" current-bench-name)))
            (t
             (setq gud-buffer-name "*gud-debug*")
-            (setq dlv-command (concat gud-dlv-command-name " debug -- /home/orange/Project/test"))))
+            (setq dlv-command (concat gud-dlv-command-name " debug"))))
 
           ;; stop the current active dlv session if any
           (let ((gud-buffer (get-buffer gud-buffer-name)))
