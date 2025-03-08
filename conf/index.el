@@ -154,7 +154,7 @@
      '(org-code ((t (:inherit (shadow fixed-pitch)))))
      '(org-document-info ((t (:foreground "dark orange"))))
      '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
-     '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
+     '(org-indent ((t (:inherit (body fixed-pitch)))))
      '(org-link ((t (:foreground "royal blue" :underline t))))
      '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
      '(org-property-value ((t (:inherit fixed-pitch))) t)
