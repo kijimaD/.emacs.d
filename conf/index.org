@@ -925,8 +925,8 @@ org-pomodoro用の設定。
 #+caption: 時間の長さ
 #+begin_src emacs-lisp
   (setq org-pomodoro-short-break-length 0)
-  (setq org-pomodoro-long-break-length 10)
-  (setq org-pomodoro-expiry-time 120)
+  (setq org-pomodoro-long-break-length 0)
+  (setq org-pomodoro-expiry-time 720)
 #+end_src
 
 #+caption: サウンド

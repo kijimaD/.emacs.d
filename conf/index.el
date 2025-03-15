@@ -671,8 +671,8 @@ How to send a bug report:
 (define-key global-map [insert] 'org-pomodoro)
 
 (setq org-pomodoro-short-break-length 0)
-(setq org-pomodoro-long-break-length 10)
-(setq org-pomodoro-expiry-time 120)
+(setq org-pomodoro-long-break-length 0)
+(setq org-pomodoro-expiry-time 720)
 
 (setq org-pomodoro-finished-sound "~/.emacs.d/resources/atos.wav")
 (setq org-pomodoro-short-break-sound "~/.emacs.d/resources/atos.wav")
