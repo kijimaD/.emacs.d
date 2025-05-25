@@ -486,8 +486,18 @@ How to send a bug report:
 #+identifier: %4$s
 \n")
 
-(setq denote-templates
-      `((entry . ,(f-read-text "~/.emacs.d/resources/entry.org"))))
+(let* (
+       ;; 共通
+       (head (f-read-text "~/.emacs.d/resources/head.org"))
+       ;; 通常エントリ
+       (entry (f-read-text "~/.emacs.d/resources/entry.org"))
+       ;; 通常エントリ
+       (project (f-read-text "~/.emacs.d/resources/project.org")))
+  (setq denote-templates
+        `((entry . ,(format "%s%s" head entry))
+          (project . ,(format "%s%s" head project))
+          ))
+  )
 
 (setq denote-excluded-files-regexp ".*html$")
 
