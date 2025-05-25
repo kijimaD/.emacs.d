@@ -503,6 +503,20 @@ How to send a bug report:
 
 (setq denote-rename-confirmations nil)
 
+(defun kd/denote-kdoc-rename ()
+  (interactive)
+  (let* ((max 0)
+         (files (directory-files "." nil ".*--kdoc-\\([0-9].+?\\)$"))
+         (numbers (mapcar (lambda (name)
+                            (if (nth 3 (split-string name "-"))
+                                (setq max (string-to-number (nth 3 (split-string name "-")))))
+                            ) files)))
+    (save-excursion
+      (beginning-of-buffer)
+      (if (search-forward "KDOC n" nil t)
+          (replace-match (format "KDOC %d" (+ max 1)))))
+    (denote-rename-file-using-front-matter (buffer-file-name) 0)))
+
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (define-key global-map "\C-cc" 'org-capture)
