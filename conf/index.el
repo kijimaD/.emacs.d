@@ -194,6 +194,19 @@
                                       (:wrap . "src"))
       )
 
+(add-hook 'org-timer-done-hook
+          (lambda ()
+            (start-process-shell-command "" nil "aplay ~/dotfiles/sounds/suzu.wav")))
+
+;; effortが設定されていると、なぜかorg-timer-set-timerが使えないのでしょうがなく...
+(defun kd/minitask-timer ()
+  "5分タイマーでタスク開始する"
+  (interactive)
+  ;; 終了時にカウントが進んでしまうので、先に引いておく...
+  (setq kd/pmd-today-point (- kd/pmd-today-point 1))
+  (let* ((org-pomodoro-length 5))
+    (org-pomodoro)))
+
 ;;; open-junk-file.el --- Open a junk (memo) file to try-and-error
 
 ;; $Time-stamp: <2016-09-13 10:59:40 rubikitch>$

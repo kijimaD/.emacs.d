@@ -297,6 +297,25 @@ babelで出力した結果はラップしないとtextlintでエラーになる�
         )
 #+end_src
 
+#+caption: タイマー完了時に音を鳴らす
+#+begin_src emacs-lisp
+  (add-hook 'org-timer-done-hook
+            (lambda ()
+              (start-process-shell-command "" nil "aplay ~/dotfiles/sounds/suzu.wav")))
+#+end_src
+
+#+caption: ミニタイマー
+#+begin_src emacs-lisp
+  ;; effortが設定されていると、なぜかorg-timer-set-timerが使えないのでしょうがなく...
+  (defun kd/minitask-timer ()
+    "5分タイマーでタスク開始する"
+    (interactive)
+    ;; 終了時にカウントが進んでしまうので、先に引いておく...
+    (setq kd/pmd-today-point (- kd/pmd-today-point 1))
+    (let* ((org-pomodoro-length 5))
+      (org-pomodoro)))
+#+end_src
+
 ** open-junk-file
 #+caption: Cask install が失敗するので取り込んでいる
 #+begin_src emacs-lisp
