@@ -1878,8 +1878,7 @@ Mermaid JSはテキストから図を描画するライブラリ。
 #+caption: dired
 #+begin_src emacs-lisp
   ;; diredバッファを乱立させない
-  ;; なぜか重いのでオフにしておく
-  ;; (setq dired-kill-when-opening-new-dired-buffer t)
+  (setq dired-kill-when-opening-new-dired-buffer t)
 
   (require 'all-the-icons)
   (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)

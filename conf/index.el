@@ -1283,8 +1283,7 @@ How to send a bug report:
 (which-key-setup-side-window-bottom)
 
 ;; diredバッファを乱立させない
-;; なぜか重いのでオフにしておく
-;; (setq dired-kill-when-opening-new-dired-buffer t)
+(setq dired-kill-when-opening-new-dired-buffer t)
 
 (require 'all-the-icons)
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
