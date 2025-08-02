@@ -390,6 +390,8 @@ How to send a bug report:
 (setq open-junk-file-format (concat "~/Private/junk/%Y-%m-%d-%H%M%S."))
 (global-set-key (kbd "C-x C-z") 'open-junk-file)
 
+(setq org-drill-question-tag "Drill")
+
 (require 'org-superstar)
 (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
 ;; (setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
