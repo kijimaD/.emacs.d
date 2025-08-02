@@ -17,7 +17,7 @@ Emacsの文芸的設定。
 #+end_src
 
 * Org
-org-modeはEmacsのキラーアプリの1つ。標準パッケージ名であり、プレーンテキストファイルの種類の1つ。ドキュメント管理にスケジュール、時間計測、コード評価を含めることができる。このドキュメントもorg-modeで書かれている。
+org-modeはEmacsのキラーアプリの1つ。パッケージ名であり、ファイルの種類の1つ。ドキュメント管理にスケジュール、時間計測、コード評価を含めることができる。このドキュメントもorg-modeで書かれている。
 
 ** base
 #+caption: 読み込み
@@ -207,51 +207,51 @@ org-modeはEmacsのキラーアプリの1つ。標準パッケージ名であり
 
 #+caption: よりよい外観
 #+begin_src emacs-lisp
-(defun efs/org-font-setup ()
-    ;; Replace list hyphen with dot
-    ;; (font-lock-add-keywords 'org-mode
-    ;;                         '(("^ *\\([-]\\) "
-    ;;                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "✦"))))))
+  (defun efs/org-font-setup ()
+      ;; Replace list hyphen with dot
+      ;; (font-lock-add-keywords 'org-mode
+      ;;                         '(("^ *\\([-]\\) "
+      ;;                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "✦"))))))
 
-    (dolist (face '((org-level-1 . 1.0)
-                    (org-level-2 . 1.0)
-                    (org-level-3 . 1.0)
-                    (org-level-4 . 1.0)
-                    (org-level-5 . 1.0)
-                    (org-level-6 . 1.0)
-                    (org-level-7 . 1.0)
-                    (org-level-8 . 1.0)))
-      (set-face-attribute (car face) nil :font "Hiragino Sans" :height (cdr face) :weight 'bold))
+      (dolist (face '((org-level-1 . 1.0)
+                      (org-level-2 . 1.0)
+                      (org-level-3 . 1.0)
+                      (org-level-4 . 1.0)
+                      (org-level-5 . 1.0)
+                      (org-level-6 . 1.0)
+                      (org-level-7 . 1.0)
+                      (org-level-8 . 1.0)))
+        (set-face-attribute (car face) nil :font "Hiragino Sans" :height (cdr face) :weight 'bold))
 
-    (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
-    (set-face-attribute 'org-table nil    :inherit 'fixed-pitch)
-    (set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
-    (set-face-attribute 'org-code nil     :inherit '(shadow fixed-pitch))
-    (set-face-attribute 'org-table nil    :inherit '(shadow fixed-pitch))
-    (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-    (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-    (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-    (set-face-attribute 'org-checkbox nil  :inherit 'fixed-pitch)
-    (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
-    (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch)
+      (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
+      (set-face-attribute 'org-table nil    :inherit 'fixed-pitch)
+      (set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
+      (set-face-attribute 'org-code nil     :inherit '(shadow fixed-pitch))
+      (set-face-attribute 'org-table nil    :inherit '(shadow fixed-pitch))
+      (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+      (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+      (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+      (set-face-attribute 'org-checkbox nil  :inherit 'fixed-pitch)
+      (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
+      (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch)
 
-    (custom-theme-set-faces
-     'user
-     '(variable-pitch ((t (:family "Helvetica Neue" :height 1.0 :weight regular))))
-     '(fixed-pitch ((t (:family "Fira Mono" :height 1.0))))
-     '(org-block ((t (:inherit fixed-pitch))))
-     '(org-code ((t (:inherit (shadow fixed-pitch)))))
-     '(org-document-info ((t (:foreground "dark orange"))))
-     '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
-     '(org-indent ((t (:inherit (body fixed-pitch)))))
-     '(org-link ((t (:foreground "royal blue" :underline t))))
-     '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-     '(org-property-value ((t (:inherit fixed-pitch))) t)
-     '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-     '(org-table ((t (:inherit fixed-pitch))))
-     '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
-     '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
-     '(org-block-begin-line ((t (:inherit org-block))))))
+      (custom-theme-set-faces
+       'user
+       '(variable-pitch ((t (:family "Helvetica Neue" :height 1.0 :weight regular))))
+       '(fixed-pitch ((t (:family "Fira Mono" :height 1.0))))
+       '(org-block ((t (:inherit fixed-pitch))))
+       '(org-code ((t (:inherit (shadow fixed-pitch)))))
+       '(org-document-info ((t (:foreground "dark orange"))))
+       '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
+       '(org-indent ((t (:inherit (shadow fixed-pitch)))))
+       '(org-link ((t (:foreground "royal blue" :underline t))))
+       '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+       '(org-property-value ((t (:inherit fixed-pitch))) t)
+       '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+       '(org-table ((t (:inherit fixed-pitch))))
+       '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
+       '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
+       '(org-block-begin-line ((t (:inherit org-block))))))
 #+end_src
 
 themeのあとに評価するため、ここでは関数定義だけ。参考 https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.org
