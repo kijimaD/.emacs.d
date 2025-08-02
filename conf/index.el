@@ -1323,27 +1323,37 @@ How to send a bug report:
 
 (require 'elfeed)
 (setq elfeed-feeds
-      '(("https://www.sanityinc.com/feed.xml" emacs)
+      '(
+        ;; Emacs関係のブログ
+        ("https://www.sanityinc.com/feed.xml" emacs)
+        ;; Emacs関係のブログ
         ("https://sachachua.com/blog/category/weekly/feed/" emacs)
+        ;; Emacs関係のブログ
         ("http://pragmaticemacs.com/feed/" emacs)
+        ;; Rails関係のブログ
         ("https://techracho.bpsinc.jp/feed" ruby rails)
+        ;; Ruby公式ニュースレター
         ("https://cprss.s3.amazonaws.com/rubyweekly.com.xml" ruby)
+        ;; ソフトウェア開発の有名人のはてなブックマーク
         ("http://b.hatena.ne.jp/t-wada/rss" test)
         ("https://efcl.info/feed/" javascript)
         ("https://api.syosetu.com/writernovel/235132.Atom" novel)
-        ("https://anchor.fm/s/7cd923f4/podcast/rss" podcast)
         ("https://hackerstations.com/index.xml" programmer)
         ("https://medium.com/feed/a-journey-with-go" go)
         ("https://dev.to/feed/go" go)
         ("https://go.dev/blog/feed.atom?format=xml" go)
+        ("https://research.swtch.com/feed.atom" go)
         ("https://systemcrafters.net/rss/news.xml" systemcrafters)
-        ("http://benedict.co.jp/feed/" benedict)
+
+        ;; 開発に関する話題
+        ("https://syu-m-5151.hatenablog.com/rss" blog)
 
         ("https://mattn.kaoriya.net/index.rss" blog)
         ("https://www.ryokatsu.dev/posts-feed.xml" blog)
         ("https://blog.jnito.com/feed" blog)
         ("https://blog.masterka.net/feed" blog)
         ("https://sazak.io/rss.xml" blog go)
+        ("https://kijimad.github.io/roam/atom.xml" blog)
 
         ("https://github.com/golang/go/releases.atom" go release)
         ("https://github.com/moby/moby/releases.atom" docker release)
@@ -1837,6 +1847,8 @@ How to send a bug report:
 (require 'typescript-mode)
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
 
+(put 'typescript-tsx-mode 'eglot-language-id "typescriptreact")
+
 (require 'corfu)
 (global-corfu-mode)
 
@@ -1910,7 +1922,10 @@ How to send a bug report:
          :map eglot-mode-map
          ("C-c a" . eglot-code-actions))
   :hook
-  (go-mode . eglot-ensure)
+  ((go-mode . eglot-ensure)
+   (js-ts-mode . eglot-ensure)
+   (tsx-ts-mode . eglot-ensure)
+   (typescript-ts-mode . eglot-ensure))
   :config
   (defun my/eglot-capf ()
     (setq-local completion-at-point-functions
@@ -1964,7 +1979,7 @@ How to send a bug report:
   :diminish "⌬"
   :custom
   (tabnine-wait 1)
-  (tabnine-minimum-prefix-length 0)
+  (tabnine-minimum-prefix-length 2)
   :hook (kill-emacs . tabnine-kill-process)
   :bind
   (:map  tabnine-completion-map
