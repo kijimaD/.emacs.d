@@ -207,6 +207,11 @@
   (let* ((org-pomodoro-length 5))
     (org-pomodoro)))
 
+(global-set-key (kbd "S-<left>")  'windmove-left)
+(global-set-key (kbd "S-<down>")  'windmove-down)
+(global-set-key (kbd "S-<up>")    'windmove-up)
+(global-set-key (kbd "S-<right>") 'windmove-right)
+
 ;;; open-junk-file.el --- Open a junk (memo) file to try-and-error
 
 ;; $Time-stamp: <2016-09-13 10:59:40 rubikitch>$
@@ -714,8 +719,8 @@ How to send a bug report:
 (setq org-pomodoro-expiry-time 720)
 
 (setq org-pomodoro-finished-sound "~/.emacs.d/resources/atos.wav")
-(setq org-pomodoro-short-break-sound "~/.emacs.d/resources/atos.wav")
-(setq org-pomodoro-long-break-sound "~/.emacs.d/resources/atos.wav")
+(setq org-pomodoro-short-break-sound "~/.emacs.d/resources/suzu.wav")
+(setq org-pomodoro-long-break-sound "~/.emacs.d/resources/suzu.wav")
 ;; テスト
 ;; (org-pomodoro-finished)
 ;; (org-pomodoro-short-break-finished)
@@ -2418,7 +2423,8 @@ How to send a bug report:
      (("d" denote-template "denote-template")
       ("e" counsel-linux-app "run")
       ("c" recompile "recompile")
-      ("!" org-pomodoro "start pomodoro")
+      ("j" org-pomodoro "start pomodoro")
+      ("k" kd/minitask-timer "start mini timer")
       ("n" elfeed "elfeed")
       ("u" kd/set-proxy-mode-manual "use proxy")
       ("h" eldoc-doc-buffer "eldoc at pos"))

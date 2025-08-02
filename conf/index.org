@@ -991,8 +991,8 @@ org-pomodoro用の設定。
 #+caption: サウンド
 #+begin_src emacs-lisp
   (setq org-pomodoro-finished-sound "~/.emacs.d/resources/atos.wav")
-  (setq org-pomodoro-short-break-sound "~/.emacs.d/resources/atos.wav")
-  (setq org-pomodoro-long-break-sound "~/.emacs.d/resources/atos.wav")
+  (setq org-pomodoro-short-break-sound "~/.emacs.d/resources/suzu.wav")
+  (setq org-pomodoro-long-break-sound "~/.emacs.d/resources/suzu.wav")
   ;; テスト
   ;; (org-pomodoro-finished)
   ;; (org-pomodoro-short-break-finished)
@@ -3331,7 +3331,8 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
        (("d" denote-template "denote-template")
         ("e" counsel-linux-app "run")
         ("c" recompile "recompile")
-        ("!" org-pomodoro "start pomodoro")
+        ("j" org-pomodoro "start pomodoro")
+        ("k" kd/minitask-timer "start mini timer")
         ("n" elfeed "elfeed")
         ("u" kd/set-proxy-mode-manual "use proxy")
         ("h" eldoc-doc-buffer "eldoc at pos"))
