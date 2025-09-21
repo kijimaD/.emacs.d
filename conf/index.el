@@ -476,9 +476,9 @@ How to send a bug report:
 
 (require 'org-roam-ui)
 
-(require 'org-roam-timestamps)
-(setq org-roam-timestamps-remember-timestamps nil)
-(add-hook 'org-mode-hook 'org-roam-timestamps-mode)
+;; (require 'org-roam-timestamps)
+;; (setq org-roam-timestamps-remember-timestamps nil)
+;; (add-hook 'org-mode-hook 'org-roam-timestamps-mode)
 
 (require 'org-alert)
 (setq alert-default-style 'notifications)
@@ -522,20 +522,6 @@ How to send a bug report:
 (setq denote-excluded-files-regexp ".*html$")
 
 (setq denote-rename-confirmations nil)
-
-(defun kd/denote-kdoc-rename ()
-  (interactive)
-  (let* ((max 0)
-         (files (directory-files "." nil ".*--kdoc-\\([0-9].+?\\)$"))
-         (numbers (mapcar (lambda (name)
-                            (if (nth 3 (split-string name "-"))
-                                (setq max (string-to-number (nth 3 (split-string name "-")))))
-                            ) files)))
-    (save-excursion
-      (beginning-of-buffer)
-      (if (search-forward "KDOC n" nil t)
-          (replace-match (format "KDOC %d" (+ max 1)))))
-    (denote-rename-file-using-front-matter (buffer-file-name) 0)))
 
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
@@ -1972,24 +1958,24 @@ How to send a bug report:
   :init
   (all-the-icons-completion-mode +1))
 
-(use-package tabnine
-  :commands (tabnine-start-process)
-  :hook (prog-mode . tabnine-mode)
-  :straight t
-  :diminish "⌬"
-  :custom
-  (tabnine-wait 1)
-  (tabnine-minimum-prefix-length 2)
-  :hook (kill-emacs . tabnine-kill-process)
-  :bind
-  (:map  tabnine-completion-map
-	 ("<tab>" . tabnine-accept-completion)
-	 ("TAB" . tabnine-accept-completion)
-	 ("M-f" . tabnine-accept-completion-by-word)
-	 ("M-<return>" . tabnine-accept-completion-by-line)
-	 ("C-g" . tabnine-clear-overlay)
-	 ("M-[" . tabnine-previous-completion)
-	 ("M-]" . tabnine-next-completion)))
+;; (use-package tabnine
+;;   :commands (tabnine-start-process)
+;;   :hook (prog-mode . tabnine-mode)
+;;   :straight t
+;;   :diminish "⌬"
+;;   :custom
+;;   (tabnine-wait 1)
+;;   (tabnine-minimum-prefix-length 2)
+;;   :hook (kill-emacs . tabnine-kill-process)
+;;   :bind
+;;   (:map  tabnine-completion-map
+;; 	 ("<tab>" . tabnine-accept-completion)
+;; 	 ("TAB" . tabnine-accept-completion)
+;; 	 ("M-f" . tabnine-accept-completion-by-word)
+;; 	 ("M-<return>" . tabnine-accept-completion-by-line)
+;; 	 ("C-g" . tabnine-clear-overlay)
+;; 	 ("M-[" . tabnine-previous-completion)
+;; 	 ("M-]" . tabnine-next-completion)))
 
 (require 'lispy)
 (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
@@ -2363,7 +2349,7 @@ How to send a bug report:
   (progn
     (exwm-config-example)
 
-    (tabnine-start-process)
+    ;; (tabnine-start-process)
     ;; (kd/set-init)
     ))
 

@@ -661,9 +661,9 @@ org-roam-uiは関係グラフを表示するパッケージ。
 
 #+caption: 更新日時を設定する
 #+begin_src emacs-lisp
-  (require 'org-roam-timestamps)
-  (setq org-roam-timestamps-remember-timestamps nil)
-  (add-hook 'org-mode-hook 'org-roam-timestamps-mode)
+  ;; (require 'org-roam-timestamps)
+  ;; (setq org-roam-timestamps-remember-timestamps nil)
+  ;; (add-hook 'org-mode-hook 'org-roam-timestamps-mode)
 #+end_src
 ** org-alert
 org-alertはorg scheduleの項目を時間経過で通知してくれるパッケージ。
@@ -731,23 +731,6 @@ denoteはシンプルなノートパッケージ。
 #+caption: 確認を非表示にする
 #+begin_src emacs-lisp
   (setq denote-rename-confirmations nil)
-#+end_src
-
-#+caption: 自動採番
-#+begin_src emacs-lisp
-  (defun kd/denote-kdoc-rename ()
-    (interactive)
-    (let* ((max 0)
-           (files (directory-files "." nil ".*--kdoc-\\([0-9].+?\\)$"))
-           (numbers (mapcar (lambda (name)
-                              (if (nth 3 (split-string name "-"))
-                                  (setq max (string-to-number (nth 3 (split-string name "-")))))
-                              ) files)))
-      (save-excursion
-        (beginning-of-buffer)
-        (if (search-forward "KDOC n" nil t)
-            (replace-match (format "KDOC %d" (+ max 1)))))
-      (denote-rename-file-using-front-matter (buffer-file-name) 0)))
 #+end_src
 
 ** org-agenda
@@ -2735,24 +2718,24 @@ verticoは検索UIを提供するパッケージ。
 * tabnine
 
 #+begin_src emacs-lisp
-(use-package tabnine
-  :commands (tabnine-start-process)
-  :hook (prog-mode . tabnine-mode)
-  :straight t
-  :diminish "⌬"
-  :custom
-  (tabnine-wait 1)
-  (tabnine-minimum-prefix-length 2)
-  :hook (kill-emacs . tabnine-kill-process)
-  :bind
-  (:map  tabnine-completion-map
-	 ("<tab>" . tabnine-accept-completion)
-	 ("TAB" . tabnine-accept-completion)
-	 ("M-f" . tabnine-accept-completion-by-word)
-	 ("M-<return>" . tabnine-accept-completion-by-line)
-	 ("C-g" . tabnine-clear-overlay)
-	 ("M-[" . tabnine-previous-completion)
-	 ("M-]" . tabnine-next-completion)))
+  ;; (use-package tabnine
+  ;;   :commands (tabnine-start-process)
+  ;;   :hook (prog-mode . tabnine-mode)
+  ;;   :straight t
+  ;;   :diminish "⌬"
+  ;;   :custom
+  ;;   (tabnine-wait 1)
+  ;;   (tabnine-minimum-prefix-length 2)
+  ;;   :hook (kill-emacs . tabnine-kill-process)
+  ;;   :bind
+  ;;   (:map  tabnine-completion-map
+  ;; 	 ("<tab>" . tabnine-accept-completion)
+  ;; 	 ("TAB" . tabnine-accept-completion)
+  ;; 	 ("M-f" . tabnine-accept-completion-by-word)
+  ;; 	 ("M-<return>" . tabnine-accept-completion-by-line)
+  ;; 	 ("C-g" . tabnine-clear-overlay)
+  ;; 	 ("M-[" . tabnine-previous-completion)
+  ;; 	 ("M-]" . tabnine-next-completion)))
 #+end_src
 
 * emacs Lisp
@@ -3239,7 +3222,7 @@ EXWMはEmacs上で動くウィンドウマネージャ。
     (progn
       (exwm-config-example)
 
-      (tabnine-start-process)
+      ;; (tabnine-start-process)
       ;; (kd/set-init)
       ))
 #+end_src
