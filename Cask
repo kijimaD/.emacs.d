@@ -99,6 +99,7 @@
 (depends-on "ob-rust")
 (depends-on "orderless")
 (depends-on "org-alert")
+(depends-on "org-drill")
 (depends-on "org-journal")
 (depends-on "org-journal-list")
 (depends-on "org-modern")

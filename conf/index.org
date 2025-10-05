@@ -17,7 +17,7 @@ Emacsの文芸的設定。
 #+end_src
 
 * Org
-org-modeはEmacsのキラーアプリの1つ。標準パッケージ名であり、プレーンテキストファイルの種類の1つ。ドキュメント管理にスケジュール、時間計測、コード評価を含めることができる。このドキュメントもorg-modeで書かれている。
+org-modeはEmacsのキラーアプリの1つ。パッケージ名であり、ファイルの種類の1つ。ドキュメント管理にスケジュール、時間計測、コード評価を含めることができる。このドキュメントもorg-modeで書かれている。
 
 ** base
 #+caption: 読み込み
@@ -207,51 +207,51 @@ org-modeはEmacsのキラーアプリの1つ。標準パッケージ名であり
 
 #+caption: よりよい外観
 #+begin_src emacs-lisp
-(defun efs/org-font-setup ()
-    ;; Replace list hyphen with dot
-    ;; (font-lock-add-keywords 'org-mode
-    ;;                         '(("^ *\\([-]\\) "
-    ;;                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "✦"))))))
+  (defun efs/org-font-setup ()
+      ;; Replace list hyphen with dot
+      ;; (font-lock-add-keywords 'org-mode
+      ;;                         '(("^ *\\([-]\\) "
+      ;;                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "✦"))))))
 
-    (dolist (face '((org-level-1 . 1.0)
-                    (org-level-2 . 1.0)
-                    (org-level-3 . 1.0)
-                    (org-level-4 . 1.0)
-                    (org-level-5 . 1.0)
-                    (org-level-6 . 1.0)
-                    (org-level-7 . 1.0)
-                    (org-level-8 . 1.0)))
-      (set-face-attribute (car face) nil :font "Hiragino Sans" :height (cdr face) :weight 'bold))
+      (dolist (face '((org-level-1 . 1.0)
+                      (org-level-2 . 1.0)
+                      (org-level-3 . 1.0)
+                      (org-level-4 . 1.0)
+                      (org-level-5 . 1.0)
+                      (org-level-6 . 1.0)
+                      (org-level-7 . 1.0)
+                      (org-level-8 . 1.0)))
+        (set-face-attribute (car face) nil :font "Hiragino Sans" :height (cdr face) :weight 'bold))
 
-    (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
-    (set-face-attribute 'org-table nil    :inherit 'fixed-pitch)
-    (set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
-    (set-face-attribute 'org-code nil     :inherit '(shadow fixed-pitch))
-    (set-face-attribute 'org-table nil    :inherit '(shadow fixed-pitch))
-    (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-    (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-    (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-    (set-face-attribute 'org-checkbox nil  :inherit 'fixed-pitch)
-    (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
-    (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch)
+      (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
+      (set-face-attribute 'org-table nil    :inherit 'fixed-pitch)
+      (set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
+      (set-face-attribute 'org-code nil     :inherit '(shadow fixed-pitch))
+      (set-face-attribute 'org-table nil    :inherit '(shadow fixed-pitch))
+      (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+      (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+      (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+      (set-face-attribute 'org-checkbox nil  :inherit 'fixed-pitch)
+      (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
+      (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch)
 
-    (custom-theme-set-faces
-     'user
-     '(variable-pitch ((t (:family "Helvetica Neue" :height 1.0 :weight regular))))
-     '(fixed-pitch ((t (:family "Fira Mono" :height 1.0))))
-     '(org-block ((t (:inherit fixed-pitch))))
-     '(org-code ((t (:inherit (shadow fixed-pitch)))))
-     '(org-document-info ((t (:foreground "dark orange"))))
-     '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
-     '(org-indent ((t (:inherit (body fixed-pitch)))))
-     '(org-link ((t (:foreground "royal blue" :underline t))))
-     '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-     '(org-property-value ((t (:inherit fixed-pitch))) t)
-     '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-     '(org-table ((t (:inherit fixed-pitch))))
-     '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
-     '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
-     '(org-block-begin-line ((t (:inherit org-block))))))
+      (custom-theme-set-faces
+       'user
+       '(variable-pitch ((t (:family "Helvetica Neue" :height 1.0 :weight regular))))
+       '(fixed-pitch ((t (:family "Fira Mono" :height 1.0))))
+       '(org-block ((t (:inherit fixed-pitch))))
+       '(org-code ((t (:inherit (shadow fixed-pitch)))))
+       '(org-document-info ((t (:foreground "dark orange"))))
+       '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
+       '(org-indent ((t (:inherit (shadow fixed-pitch)))))
+       '(org-link ((t (:foreground "royal blue" :underline t))))
+       '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+       '(org-property-value ((t (:inherit fixed-pitch))) t)
+       '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+       '(org-table ((t (:inherit fixed-pitch))))
+       '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
+       '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
+       '(org-block-begin-line ((t (:inherit org-block))))))
 #+end_src
 
 themeのあとに評価するため、ここでは関数定義だけ。参考 https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.org
@@ -295,6 +295,33 @@ babelで出力した結果はラップしないとtextlintでエラーになる�
                                         (:tangle . "no")
                                         (:wrap . "src"))
         )
+#+end_src
+
+#+caption: タイマー完了時に音を鳴らす
+#+begin_src emacs-lisp
+  (add-hook 'org-timer-done-hook
+            (lambda ()
+              (start-process-shell-command "" nil "aplay ~/dotfiles/sounds/suzu.wav")))
+#+end_src
+
+#+caption: ミニタイマー
+#+begin_src emacs-lisp
+  ;; effortが設定されていると、なぜかorg-timer-set-timerが使えないのでしょうがなく...
+  (defun kd/minitask-timer ()
+    "5分タイマーでタスク開始する"
+    (interactive)
+    ;; 終了時にカウントが進んでしまうので、先に引いておく...
+    (setq kd/pmd-today-point (- kd/pmd-today-point 1))
+    (let* ((org-pomodoro-length 5))
+      (org-pomodoro)))
+#+end_src
+
+#+caption: カーソルでウィンドウ移動する
+#+begin_src emacs-lisp
+  (global-set-key (kbd "S-<left>")  'windmove-left)
+  (global-set-key (kbd "S-<down>")  'windmove-down)
+  (global-set-key (kbd "S-<up>")    'windmove-up)
+  (global-set-key (kbd "S-<right>") 'windmove-right)
 #+end_src
 
 ** open-junk-file
@@ -489,6 +516,11 @@ How to send a bug report:
 #+end_src
 
 見出しをいい感じにするパッケージ。だが、org-modernに上書きされてしまうので使ってない。
+** org-drill
+#+begin_src emacs-lisp
+(setq org-drill-question-tag "Drill")
+#+end_src
+
 ** org-superstar
 
 #+caption: 見出しをいい感じにする
@@ -629,9 +661,9 @@ org-roam-uiは関係グラフを表示するパッケージ。
 
 #+caption: 更新日時を設定する
 #+begin_src emacs-lisp
-  (require 'org-roam-timestamps)
-  (setq org-roam-timestamps-remember-timestamps nil)
-  (add-hook 'org-mode-hook 'org-roam-timestamps-mode)
+  ;; (require 'org-roam-timestamps)
+  ;; (setq org-roam-timestamps-remember-timestamps nil)
+  ;; (add-hook 'org-mode-hook 'org-roam-timestamps-mode)
 #+end_src
 ** org-alert
 org-alertはorg scheduleの項目を時間経過で通知してくれるパッケージ。
@@ -677,8 +709,18 @@ denoteはシンプルなノートパッケージ。
 
 #+caption: denoteのテンプレートを設定する
 #+begin_src emacs-lisp
-  (setq denote-templates
-        `((entry . ,(f-read-text "~/.emacs.d/resources/entry.org"))))
+  (let* (
+         ;; 共通
+         (head (f-read-text "~/.emacs.d/resources/head.org"))
+         ;; 通常エントリ
+         (entry (f-read-text "~/.emacs.d/resources/entry.org"))
+         ;; 通常エントリ
+         (project (f-read-text "~/.emacs.d/resources/project.org")))
+    (setq denote-templates
+          `((entry . ,(format "%s%s" head entry))
+            (project . ,(format "%s%s" head project))
+            ))
+    )
 #+end_src
 
 #+caption: 候補に出ないようにする
@@ -925,15 +967,15 @@ org-pomodoro用の設定。
 #+caption: 時間の長さ
 #+begin_src emacs-lisp
   (setq org-pomodoro-short-break-length 0)
-  (setq org-pomodoro-long-break-length 10)
-  (setq org-pomodoro-expiry-time 120)
+  (setq org-pomodoro-long-break-length 0)
+  (setq org-pomodoro-expiry-time 720)
 #+end_src
 
 #+caption: サウンド
 #+begin_src emacs-lisp
   (setq org-pomodoro-finished-sound "~/.emacs.d/resources/atos.wav")
-  (setq org-pomodoro-short-break-sound "~/.emacs.d/resources/atos.wav")
-  (setq org-pomodoro-long-break-sound "~/.emacs.d/resources/atos.wav")
+  (setq org-pomodoro-short-break-sound "~/.emacs.d/resources/suzu.wav")
+  (setq org-pomodoro-long-break-sound "~/.emacs.d/resources/suzu.wav")
   ;; テスト
   ;; (org-pomodoro-finished)
   ;; (org-pomodoro-short-break-finished)
@@ -1819,8 +1861,7 @@ Mermaid JSはテキストから図を描画するライブラリ。
 #+caption: dired
 #+begin_src emacs-lisp
   ;; diredバッファを乱立させない
-  ;; なぜか重いのでオフにしておく
-  ;; (setq dired-kill-when-opening-new-dired-buffer t)
+  (setq dired-kill-when-opening-new-dired-buffer t)
 
   (require 'all-the-icons)
   (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
@@ -1869,27 +1910,37 @@ Mermaid JSはテキストから図を描画するライブラリ。
 #+begin_src emacs-lisp
   (require 'elfeed)
   (setq elfeed-feeds
-        '(("https://www.sanityinc.com/feed.xml" emacs)
+        '(
+          ;; Emacs関係のブログ
+          ("https://www.sanityinc.com/feed.xml" emacs)
+          ;; Emacs関係のブログ
           ("https://sachachua.com/blog/category/weekly/feed/" emacs)
+          ;; Emacs関係のブログ
           ("http://pragmaticemacs.com/feed/" emacs)
+          ;; Rails関係のブログ
           ("https://techracho.bpsinc.jp/feed" ruby rails)
+          ;; Ruby公式ニュースレター
           ("https://cprss.s3.amazonaws.com/rubyweekly.com.xml" ruby)
+          ;; ソフトウェア開発の有名人のはてなブックマーク
           ("http://b.hatena.ne.jp/t-wada/rss" test)
           ("https://efcl.info/feed/" javascript)
           ("https://api.syosetu.com/writernovel/235132.Atom" novel)
-          ("https://anchor.fm/s/7cd923f4/podcast/rss" podcast)
           ("https://hackerstations.com/index.xml" programmer)
           ("https://medium.com/feed/a-journey-with-go" go)
           ("https://dev.to/feed/go" go)
           ("https://go.dev/blog/feed.atom?format=xml" go)
+          ("https://research.swtch.com/feed.atom" go)
           ("https://systemcrafters.net/rss/news.xml" systemcrafters)
-          ("http://benedict.co.jp/feed/" benedict)
+
+          ;; 開発に関する話題
+          ("https://syu-m-5151.hatenablog.com/rss" blog)
 
           ("https://mattn.kaoriya.net/index.rss" blog)
           ("https://www.ryokatsu.dev/posts-feed.xml" blog)
           ("https://blog.jnito.com/feed" blog)
           ("https://blog.masterka.net/feed" blog)
           ("https://sazak.io/rss.xml" blog go)
+          ("https://kijimad.github.io/roam/atom.xml" blog)
 
           ("https://github.com/golang/go/releases.atom" go release)
           ("https://github.com/moby/moby/releases.atom" docker release)
@@ -2496,6 +2547,9 @@ web-modeはhtmlライクな複数の言語に対応するモード。
   ;; Typescript ================
   (require 'typescript-mode)
   (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+
+  (put 'typescript-tsx-mode 'eglot-language-id "typescriptreact")
+
 #+end_src
 * corfu
 corfuはシンプルな補完を提供するパッケージ。
@@ -2598,7 +2652,10 @@ verticoは検索UIを提供するパッケージ。
            :map eglot-mode-map
            ("C-c a" . eglot-code-actions))
     :hook
-    (go-mode . eglot-ensure)
+    ((go-mode . eglot-ensure)
+     (js-ts-mode . eglot-ensure)
+     (tsx-ts-mode . eglot-ensure)
+     (typescript-ts-mode . eglot-ensure))
     :config
     (defun my/eglot-capf ()
       (setq-local completion-at-point-functions
@@ -2661,24 +2718,24 @@ verticoは検索UIを提供するパッケージ。
 * tabnine
 
 #+begin_src emacs-lisp
-(use-package tabnine
-  :commands (tabnine-start-process)
-  :hook (prog-mode . tabnine-mode)
-  :straight t
-  :diminish "⌬"
-  :custom
-  (tabnine-wait 1)
-  (tabnine-minimum-prefix-length 0)
-  :hook (kill-emacs . tabnine-kill-process)
-  :bind
-  (:map  tabnine-completion-map
-	 ("<tab>" . tabnine-accept-completion)
-	 ("TAB" . tabnine-accept-completion)
-	 ("M-f" . tabnine-accept-completion-by-word)
-	 ("M-<return>" . tabnine-accept-completion-by-line)
-	 ("C-g" . tabnine-clear-overlay)
-	 ("M-[" . tabnine-previous-completion)
-	 ("M-]" . tabnine-next-completion)))
+  ;; (use-package tabnine
+  ;;   :commands (tabnine-start-process)
+  ;;   :hook (prog-mode . tabnine-mode)
+  ;;   :straight t
+  ;;   :diminish "⌬"
+  ;;   :custom
+  ;;   (tabnine-wait 1)
+  ;;   (tabnine-minimum-prefix-length 2)
+  ;;   :hook (kill-emacs . tabnine-kill-process)
+  ;;   :bind
+  ;;   (:map  tabnine-completion-map
+  ;; 	 ("<tab>" . tabnine-accept-completion)
+  ;; 	 ("TAB" . tabnine-accept-completion)
+  ;; 	 ("M-f" . tabnine-accept-completion-by-word)
+  ;; 	 ("M-<return>" . tabnine-accept-completion-by-line)
+  ;; 	 ("C-g" . tabnine-clear-overlay)
+  ;; 	 ("M-[" . tabnine-previous-completion)
+  ;; 	 ("M-]" . tabnine-next-completion)))
 #+end_src
 
 * emacs Lisp
@@ -3165,7 +3222,7 @@ EXWMはEmacs上で動くウィンドウマネージャ。
     (progn
       (exwm-config-example)
 
-      (tabnine-start-process)
+      ;; (tabnine-start-process)
       ;; (kd/set-init)
       ))
 #+end_src
@@ -3272,7 +3329,8 @@ Hydraはカスタマイズ可能なキー表示を追加するパッケージ。
        (("d" denote-template "denote-template")
         ("e" counsel-linux-app "run")
         ("c" recompile "recompile")
-        ("!" org-pomodoro "start pomodoro")
+        ("j" org-pomodoro "start pomodoro")
+        ("k" kd/minitask-timer "start mini timer")
         ("n" elfeed "elfeed")
         ("u" kd/set-proxy-mode-manual "use proxy")
         ("h" eldoc-doc-buffer "eldoc at pos"))

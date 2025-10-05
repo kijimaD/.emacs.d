@@ -154,7 +154,7 @@
      '(org-code ((t (:inherit (shadow fixed-pitch)))))
      '(org-document-info ((t (:foreground "dark orange"))))
      '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
-     '(org-indent ((t (:inherit (body fixed-pitch)))))
+     '(org-indent ((t (:inherit (shadow fixed-pitch)))))
      '(org-link ((t (:foreground "royal blue" :underline t))))
      '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
      '(org-property-value ((t (:inherit fixed-pitch))) t)
@@ -193,6 +193,24 @@
                                       (:tangle . "no")
                                       (:wrap . "src"))
       )
+
+(add-hook 'org-timer-done-hook
+          (lambda ()
+            (start-process-shell-command "" nil "aplay ~/dotfiles/sounds/suzu.wav")))
+
+;; effortが設定されていると、なぜかorg-timer-set-timerが使えないのでしょうがなく...
+(defun kd/minitask-timer ()
+  "5分タイマーでタスク開始する"
+  (interactive)
+  ;; 終了時にカウントが進んでしまうので、先に引いておく...
+  (setq kd/pmd-today-point (- kd/pmd-today-point 1))
+  (let* ((org-pomodoro-length 5))
+    (org-pomodoro)))
+
+(global-set-key (kbd "S-<left>")  'windmove-left)
+(global-set-key (kbd "S-<down>")  'windmove-down)
+(global-set-key (kbd "S-<up>")    'windmove-up)
+(global-set-key (kbd "S-<right>") 'windmove-right)
 
 ;;; open-junk-file.el --- Open a junk (memo) file to try-and-error
 
@@ -377,6 +395,8 @@ How to send a bug report:
 (setq open-junk-file-format (concat "~/Private/junk/%Y-%m-%d-%H%M%S."))
 (global-set-key (kbd "C-x C-z") 'open-junk-file)
 
+(setq org-drill-question-tag "Drill")
+
 (require 'org-superstar)
 (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
 ;; (setq org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗"))
@@ -456,9 +476,9 @@ How to send a bug report:
 
 (require 'org-roam-ui)
 
-(require 'org-roam-timestamps)
-(setq org-roam-timestamps-remember-timestamps nil)
-(add-hook 'org-mode-hook 'org-roam-timestamps-mode)
+;; (require 'org-roam-timestamps)
+;; (setq org-roam-timestamps-remember-timestamps nil)
+;; (add-hook 'org-mode-hook 'org-roam-timestamps-mode)
 
 (require 'org-alert)
 (setq alert-default-style 'notifications)
@@ -486,8 +506,18 @@ How to send a bug report:
 #+identifier: %4$s
 \n")
 
-(setq denote-templates
-      `((entry . ,(f-read-text "~/.emacs.d/resources/entry.org"))))
+(let* (
+       ;; 共通
+       (head (f-read-text "~/.emacs.d/resources/head.org"))
+       ;; 通常エントリ
+       (entry (f-read-text "~/.emacs.d/resources/entry.org"))
+       ;; 通常エントリ
+       (project (f-read-text "~/.emacs.d/resources/project.org")))
+  (setq denote-templates
+        `((entry . ,(format "%s%s" head entry))
+          (project . ,(format "%s%s" head project))
+          ))
+  )
 
 (setq denote-excluded-files-regexp ".*html$")
 
@@ -671,12 +701,12 @@ How to send a bug report:
 (define-key global-map [insert] 'org-pomodoro)
 
 (setq org-pomodoro-short-break-length 0)
-(setq org-pomodoro-long-break-length 10)
-(setq org-pomodoro-expiry-time 120)
+(setq org-pomodoro-long-break-length 0)
+(setq org-pomodoro-expiry-time 720)
 
 (setq org-pomodoro-finished-sound "~/.emacs.d/resources/atos.wav")
-(setq org-pomodoro-short-break-sound "~/.emacs.d/resources/atos.wav")
-(setq org-pomodoro-long-break-sound "~/.emacs.d/resources/atos.wav")
+(setq org-pomodoro-short-break-sound "~/.emacs.d/resources/suzu.wav")
+(setq org-pomodoro-long-break-sound "~/.emacs.d/resources/suzu.wav")
 ;; テスト
 ;; (org-pomodoro-finished)
 ;; (org-pomodoro-short-break-finished)
@@ -1239,8 +1269,7 @@ How to send a bug report:
 (which-key-setup-side-window-bottom)
 
 ;; diredバッファを乱立させない
-;; なぜか重いのでオフにしておく
-;; (setq dired-kill-when-opening-new-dired-buffer t)
+(setq dired-kill-when-opening-new-dired-buffer t)
 
 (require 'all-the-icons)
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
@@ -1280,27 +1309,37 @@ How to send a bug report:
 
 (require 'elfeed)
 (setq elfeed-feeds
-      '(("https://www.sanityinc.com/feed.xml" emacs)
+      '(
+        ;; Emacs関係のブログ
+        ("https://www.sanityinc.com/feed.xml" emacs)
+        ;; Emacs関係のブログ
         ("https://sachachua.com/blog/category/weekly/feed/" emacs)
+        ;; Emacs関係のブログ
         ("http://pragmaticemacs.com/feed/" emacs)
+        ;; Rails関係のブログ
         ("https://techracho.bpsinc.jp/feed" ruby rails)
+        ;; Ruby公式ニュースレター
         ("https://cprss.s3.amazonaws.com/rubyweekly.com.xml" ruby)
+        ;; ソフトウェア開発の有名人のはてなブックマーク
         ("http://b.hatena.ne.jp/t-wada/rss" test)
         ("https://efcl.info/feed/" javascript)
         ("https://api.syosetu.com/writernovel/235132.Atom" novel)
-        ("https://anchor.fm/s/7cd923f4/podcast/rss" podcast)
         ("https://hackerstations.com/index.xml" programmer)
         ("https://medium.com/feed/a-journey-with-go" go)
         ("https://dev.to/feed/go" go)
         ("https://go.dev/blog/feed.atom?format=xml" go)
+        ("https://research.swtch.com/feed.atom" go)
         ("https://systemcrafters.net/rss/news.xml" systemcrafters)
-        ("http://benedict.co.jp/feed/" benedict)
+
+        ;; 開発に関する話題
+        ("https://syu-m-5151.hatenablog.com/rss" blog)
 
         ("https://mattn.kaoriya.net/index.rss" blog)
         ("https://www.ryokatsu.dev/posts-feed.xml" blog)
         ("https://blog.jnito.com/feed" blog)
         ("https://blog.masterka.net/feed" blog)
         ("https://sazak.io/rss.xml" blog go)
+        ("https://kijimad.github.io/roam/atom.xml" blog)
 
         ("https://github.com/golang/go/releases.atom" go release)
         ("https://github.com/moby/moby/releases.atom" docker release)
@@ -1794,6 +1833,8 @@ How to send a bug report:
 (require 'typescript-mode)
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
 
+(put 'typescript-tsx-mode 'eglot-language-id "typescriptreact")
+
 (require 'corfu)
 (global-corfu-mode)
 
@@ -1867,7 +1908,10 @@ How to send a bug report:
          :map eglot-mode-map
          ("C-c a" . eglot-code-actions))
   :hook
-  (go-mode . eglot-ensure)
+  ((go-mode . eglot-ensure)
+   (js-ts-mode . eglot-ensure)
+   (tsx-ts-mode . eglot-ensure)
+   (typescript-ts-mode . eglot-ensure))
   :config
   (defun my/eglot-capf ()
     (setq-local completion-at-point-functions
@@ -1914,24 +1958,24 @@ How to send a bug report:
   :init
   (all-the-icons-completion-mode +1))
 
-(use-package tabnine
-  :commands (tabnine-start-process)
-  :hook (prog-mode . tabnine-mode)
-  :straight t
-  :diminish "⌬"
-  :custom
-  (tabnine-wait 1)
-  (tabnine-minimum-prefix-length 0)
-  :hook (kill-emacs . tabnine-kill-process)
-  :bind
-  (:map  tabnine-completion-map
-	 ("<tab>" . tabnine-accept-completion)
-	 ("TAB" . tabnine-accept-completion)
-	 ("M-f" . tabnine-accept-completion-by-word)
-	 ("M-<return>" . tabnine-accept-completion-by-line)
-	 ("C-g" . tabnine-clear-overlay)
-	 ("M-[" . tabnine-previous-completion)
-	 ("M-]" . tabnine-next-completion)))
+;; (use-package tabnine
+;;   :commands (tabnine-start-process)
+;;   :hook (prog-mode . tabnine-mode)
+;;   :straight t
+;;   :diminish "⌬"
+;;   :custom
+;;   (tabnine-wait 1)
+;;   (tabnine-minimum-prefix-length 2)
+;;   :hook (kill-emacs . tabnine-kill-process)
+;;   :bind
+;;   (:map  tabnine-completion-map
+;; 	 ("<tab>" . tabnine-accept-completion)
+;; 	 ("TAB" . tabnine-accept-completion)
+;; 	 ("M-f" . tabnine-accept-completion-by-word)
+;; 	 ("M-<return>" . tabnine-accept-completion-by-line)
+;; 	 ("C-g" . tabnine-clear-overlay)
+;; 	 ("M-[" . tabnine-previous-completion)
+;; 	 ("M-]" . tabnine-next-completion)))
 
 (require 'lispy)
 (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
@@ -2305,7 +2349,7 @@ How to send a bug report:
   (progn
     (exwm-config-example)
 
-    (tabnine-start-process)
+    ;; (tabnine-start-process)
     ;; (kd/set-init)
     ))
 
@@ -2379,7 +2423,8 @@ How to send a bug report:
      (("d" denote-template "denote-template")
       ("e" counsel-linux-app "run")
       ("c" recompile "recompile")
-      ("!" org-pomodoro "start pomodoro")
+      ("j" org-pomodoro "start pomodoro")
+      ("k" kd/minitask-timer "start mini timer")
       ("n" elfeed "elfeed")
       ("u" kd/set-proxy-mode-manual "use proxy")
       ("h" eldoc-doc-buffer "eldoc at pos"))
