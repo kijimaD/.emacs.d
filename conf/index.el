@@ -1707,6 +1707,11 @@ How to send a bug report:
 (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
 
 (require 'origami)
+;; Emacs 30.2 互換性: origami の face を修正
+(with-eval-after-load 'origami
+  (custom-set-faces
+   '(origami-fold-header-face ((t (:box (:line-width 1) :background unspecified))))))
+
 (define-minor-mode origami-view-mode
   "TABにorigamiの折畳みを割り当てる"
   nil "折紙"
@@ -2265,8 +2270,8 @@ How to send a bug report:
 
   ;; (kd/set-background)
 
-  (call-process-shell-command "shepherd")
-  (call-process-shell-command "~/dotfiles/.config/polybar/launch.sh")
+  ;; (call-process-shell-command "shepherd")
+  ;; (call-process-shell-command "~/dotfiles/.config/polybar/launch.sh")
 
   (exwm-workspace-switch-create 0)
   (start-process-shell-command "google-chrome" nil "google-chrome")

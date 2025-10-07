@@ -2414,21 +2414,26 @@ haskellの設定。
 
 #+caption: origami
 #+begin_src emacs-lisp
-(require 'origami)
-(define-minor-mode origami-view-mode
-  "TABにorigamiの折畳みを割り当てる"
-  nil "折紙"
-  '(("\C-i" . origami-cycle))
-  (or origami-mode (origami-mode 1)))
-(defun origami-cycle (recursive)
-  "origamiの機能をorg風にまとめる"
-  (interactive "P")
-  (call-interactively
-   (if recursive 'origami-toggle-all-nodes 'origami-toggle-node)))
-(defun yaml-mode-hook--origami ()
-  (when (eq major-mode 'yaml-mode)
-    (origami-view-mode)))
-(add-hook 'yaml-mode-hook 'yaml-mode-hook--origami)
+  (require 'origami)
+  ;; Emacs 30.2 互換性: origami の face を修正
+  (with-eval-after-load 'origami
+    (custom-set-faces
+     '(origami-fold-header-face ((t (:box (:line-width 1) :background unspecified))))))
+
+  (define-minor-mode origami-view-mode
+    "TABにorigamiの折畳みを割り当てる"
+    nil "折紙"
+    '(("\C-i" . origami-cycle))
+    (or origami-mode (origami-mode 1)))
+  (defun origami-cycle (recursive)
+    "origamiの機能をorg風にまとめる"
+    (interactive "P")
+    (call-interactively
+     (if recursive 'origami-toggle-all-nodes 'origami-toggle-node)))
+  (defun yaml-mode-hook--origami ()
+    (when (eq major-mode 'yaml-mode)
+      (origami-view-mode)))
+  (add-hook 'yaml-mode-hook 'yaml-mode-hook--origami)
 #+end_src
 
 - http://emacs.rubikitch.com/origami/
@@ -3124,8 +3129,8 @@ EXWMはEmacs上で動くウィンドウマネージャ。
 
     ;; (kd/set-background)
 
-    (call-process-shell-command "shepherd")
-    (call-process-shell-command "~/dotfiles/.config/polybar/launch.sh")
+    ;; (call-process-shell-command "shepherd")
+    ;; (call-process-shell-command "~/dotfiles/.config/polybar/launch.sh")
 
     (exwm-workspace-switch-create 0)
     (start-process-shell-command "google-chrome" nil "google-chrome")
