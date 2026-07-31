@@ -6,6 +6,7 @@
 
 
 ;; Install Packages
+(depends-on "agent-shell")
 (depends-on "ace-jump-mode")
 (depends-on "ace-link")
 (depends-on "add-node-modules-path")
