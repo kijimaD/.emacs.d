@@ -778,15 +778,9 @@ How to send a bug report:
                 (when (>= duration (* 24 60))
                   (setq kd/pmd-today-point (1+ kd/pmd-today-point)))))))
 
-(defun kd/write-pmd (str)
-  (shell-command (format "echo '%s' >> ~/roam/pmd.csv" str)))
-
 ;; reset point
 (run-at-time "23:59pm" (* 24 60 60) (lambda ()
                                       (when (> kd/pmd-today-point 0)
-                                        (kd/write-pmd (concat (format-time-string "%Y-%m-%d")
-                                                              ", "
-                                                              (number-to-string kd/pmd-today-point)))
                                         (setq kd/pmd-today-point 0)
                                         (message "pomodoro count reset!"))))
 
@@ -1355,6 +1349,7 @@ How to send a bug report:
         ("https://github.com/moby/moby/releases.atom" docker release)
         ("https://github.com/emacs-mirror/emacs/releases.atom" emacs release)
 
+        ("https://go-proposal-weekly-digest.mazrean.com/feed.xml" go)
         ("https://zenn.dev/hsaki/feed" go)
         ("https://zenn.dev/satoru_takeuchi/feed" linux)
         ("https://oraccha.hatenadiary.org/feed" plan9)
