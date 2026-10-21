@@ -35,7 +35,6 @@
 (depends-on "diffview")
 (depends-on "django-mode")
 (depends-on "docker")
-(depends-on "docker-compose-mode")
 (depends-on "dockerfile-mode")
 (depends-on "doom-modeline")
 (depends-on "doom-themes")
@@ -70,6 +69,7 @@
 (depends-on "haskell-mode")
 (depends-on "helpful")
 (depends-on "hydra")
+(depends-on "iedit") ;; lispyが依存するが、lispyのpackage-requiresに含まれないため明示的に追加
 (depends-on "imenu-list")
 (depends-on "inf-ruby")
 (depends-on "ivy")
@@ -166,7 +166,6 @@
 (depends-on "vertico")
 (depends-on "visual-fill-column") ;; centering
 (depends-on "visual-regexp")
-(depends-on "vterm")
 (depends-on "vterm-toggle")
 (depends-on "vue-mode")
 (depends-on "web-mode")
@@ -174,3 +173,4 @@
 (depends-on "yaml-mode")
 (depends-on "yasnippet")
 (depends-on "yasnippet-snippets")
+(depends-on "zoutline") ;; lispyが依存するが、lispyのpackage-requiresに含まれないため明示的に追加
